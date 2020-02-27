@@ -1,0 +1,2 @@
+<a class="btn btn-sm btn-primary" href="{{ route('cservicio.editar', [$sis_clinica_id,$id]) }}">Editar</a>
+<a class="btn btn-sm btn-primary" href="{{ route('cservicio.ver', [$sis_clinica_id,$id]) }}">Ver</a>

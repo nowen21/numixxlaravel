@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Models\Dispositivos;
+
+use App\Models\Sistema\SisEsta;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+class Dlote extends Model {
+   protected $fillable = [
+      'fechvenc','dinvima_id','inventar','lotexxxx', 'sis_esta_id','user_crea_id','user_edita_id'
+  ];
+   public function sis_esta() {
+    return $this->belongsTo(SisEsta::class);
+  }
+  public function dinvima(){
+    return $this->belongsTo(Dinvima::class);
+  }
+
+  public static function transaccion($dataxxxx,  $objetoxx)
+  {
+    $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {
+      $dataxxxx['user_edita_id'] = Auth::user()->id;
+      if ($objetoxx != '') {
+        $objetoxx->update($dataxxxx);
+      } else {
+        $dataxxxx['user_crea_id'] = Auth::user()->id;
+        $objetoxx = Dlote::create($dataxxxx);
+      }
+
+      return $objetoxx;
+    }, 5);
+    return $usuariox;
+  }
+}

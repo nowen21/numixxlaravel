@@ -1,18 +1,30 @@
 <?php
 
+use App\Models\Genero;
+use App\Models\Medicamentos\Npt;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Seed the application's database.
      *
      * @return void
      */
     public function run()
     {
-        $this->call(PermissionsTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
-        $this->call(PacientesTableSeeder::class);
+        $this->call(SisEstasSeeder::class);
+        $this->call(RolesYPermisosSeeder::class);
+        $this->call(ClinicasSeeder::class);
+        $this->call(UsersSeeder::class);
+        $this->call(CasasSeeder::class);
+        $this->call(NptsSeeder::class);
+        
+        $this->call(MedicamesSeeder::class);
+        $this->call(MmarcasSeeder::class);
+        $this->call(EpsSeeder::class);
+        $this->call(GenerosSeeder::class);
+        $this->call(DepartamentosSeeder::class);
+        $this->call(MunicipiosSeeder::class);
     }
 }

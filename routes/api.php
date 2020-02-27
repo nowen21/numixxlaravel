@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+include_once('apis/clinica/api_clinica.php');
+include_once('apis/medicame/api_medicame.php');
+include_once('apis/dmedico/api_dmedico.php');
+include_once('apis/administracion/api_admin.php');
+include_once('apis/paciente/api_paciente.php');
+require_once('apis/formulacion/api_cformula.php');
+// include_once('apis/usuarios/api_usuario.php');
