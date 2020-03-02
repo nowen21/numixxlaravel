@@ -1,5 +1,5 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-12">
   <!-- Brand Logo -->
   <a href="{{ route('/') }}" class="brand-link">
     <img src="{{ asset('img/favicon.png') }}" alt="NUMIXX" class="brand-image img-circle elevation-3"
@@ -39,6 +39,15 @@
       @endcan
       @can('dispositivo-modulo')
       @include('layouts.menus.dispositivos')
+      @endcan
+      @can('produccion-modulo')
+      @include('layouts.menus.produccion')
+      @endcan
+      @can('administrar-modulo')
+      @include('layouts.menus.administrar')
+      @endcan
+      @can('reportes-modulo')
+      @include('layouts.menus.reportes')
       @endcan
 
       <!-- FIN TERRITORIO -->

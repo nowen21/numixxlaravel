@@ -22,7 +22,7 @@ class MloteController extends Controller
             'parametr' => [],
             'rutacarp' => 'Medicame.Medicamento.',
             'tituloxx' => 'Crear: Lote',
-            'carpetax' => 'mlote',
+            'carpetax' => 'Mlote',
             'slotxxxx' => 'mlote',
             'indecrea' => false,
             'esindexx' => false

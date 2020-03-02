@@ -50,15 +50,15 @@ class Medicame extends Model {
     return $lista;
   }
 
- 
+
 
   public function estado() {
     return $this->belongsTo(SisEsta::class);
   }
 
-  public function npts() {
-    return $this->belongsToMany(Npt::class);
-  }
+//   public function npts() {
+//     return $this->belongsToMany(Npt::class);
+//   }
 
   public function marcas() {
     return $this->hasMany(Mmarca::class);
@@ -85,7 +85,7 @@ class Medicame extends Model {
         $dataxxxx['user_crea_id'] = Auth::user()->id;
         $objetoxx = Medicame::create($dataxxxx);
       }
-      Medicame::syncnpt($objetoxx, $dataxxxx);
+      //Medicame::syncnpt($objetoxx, $dataxxxx);
       return $objetoxx;
     }, 5);
     return $usuariox;

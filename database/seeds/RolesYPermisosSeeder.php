@@ -49,7 +49,7 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => 'crango-editar',  'descripc' => 'Editar rango clínica']);
         Permission::create(['name' => 'crango-borrar',  'descripc' => 'Inactivar rango clínica']);
 
-       
+
         Permission::create(['name' => 'cremision-leer',  'descripc' => 'Listar rangos clínica']);
         Permission::create(['name' => 'cremision-crear',  'descripc' => 'Asignar rango clínica']);
         Permission::create(['name' => 'cremision-editar',  'descripc' => 'Editar rango clínica']);
@@ -89,6 +89,11 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => 'mlote-crear',  'descripc' => 'Crear lote']);
         Permission::create(['name' => 'mlote-editar',  'descripc' => 'Editar lote']);
         Permission::create(['name' => 'mlote-borrar',  'descripc' => 'Inactivar lote']);
+
+        Permission::create(['name' => 'mnpt-leer',  'descripc' => 'Listar npts']);
+        Permission::create(['name' => 'mnpt-crear',  'descripc' => 'Crear npt']);
+        Permission::create(['name' => 'mnpt-editar',  'descripc' => 'Editar npt']);
+        Permission::create(['name' => 'mnpt-borrar',  'descripc' => 'Inactivar npt']);
 
 
         /**
@@ -130,7 +135,7 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => 'eps-editar',  'descripc' => 'Editar eps']);
         Permission::create(['name' => 'eps-borrar',  'descripc' => 'Inactivar eps']);
 
-        
+
         Permission::create(['name' => 'paciente-modulo',  'descripc' => 'Habilita los permisos para el módulo de pacientes']);
 
         Permission::create(['name' => 'paciente-leer',  'descripc' => 'Listar pacientes']);
@@ -142,6 +147,69 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => 'formular-crear',  'descripc' => 'Crear formulación paciente']);
         Permission::create(['name' => 'formular-editar',  'descripc' => 'Editar formulación paciente']);
         Permission::create(['name' => 'formular-borrar',  'descripc' => 'Inactivar formulación paciente']);
+
+
+        /**
+         * Producción
+         */
+        Permission::create(['name' => 'produccion-modulo',  'descripc' => 'Habilita los permisos para el módulo de producciòn']);
+
+        Permission::create(['name' => 'alistami-leer',  'descripc' => 'Listar alistamientos']);
+        Permission::create(['name' => 'alistami-crear',  'descripc' => 'Crear alistamiento']);
+        Permission::create(['name' => 'alistami-editar',  'descripc' => 'Editar alistamiento']);
+        Permission::create(['name' => 'alistami-borrar',  'descripc' => 'Inactivar alistamiento']);
+
+        Permission::create(['name' => 'preparac-leer',  'descripc' => 'Listar preparaciones']);
+        Permission::create(['name' => 'preparac-crear',  'descripc' => 'Crear preparación']);
+        Permission::create(['name' => 'preparac-editar',  'descripc' => 'Editar preparación']);
+        Permission::create(['name' => 'preparac-borrar',  'descripc' => 'Inactivar preparación']);
+
+        Permission::create(['name' => 'controlp-leer',  'descripc' => 'Listar controles en proceso']);
+        Permission::create(['name' => 'controlp-crear',  'descripc' => 'Crear control es proceso']);
+        Permission::create(['name' => 'controlp-editar',  'descripc' => 'Editar control es proceso']);
+        Permission::create(['name' => 'controlp-borrar',  'descripc' => 'Inactivar control es proceso']);
+
+        Permission::create(['name' => 'controlt-leer',  'descripc' => 'Listar controles de productos terminados']);
+        Permission::create(['name' => 'controlt-crear',  'descripc' => 'Crear control de producto terminado']);
+        Permission::create(['name' => 'controlt-editar',  'descripc' => 'Editar control de producto terminado']);
+        Permission::create(['name' => 'controlt-borrar',  'descripc' => 'Inactivar control de producto terminado']);
+
+        Permission::create(['name' => 'concilia-leer',  'descripc' => 'Listar conciliaciones']);
+        Permission::create(['name' => 'concilia-crear',  'descripc' => 'Crear conciliación']);
+        Permission::create(['name' => 'concilia-editar',  'descripc' => 'Editar conciliación']);
+        Permission::create(['name' => 'concilia-borrar',  'descripc' => 'Inactivar conciliación']);
+
+
+        /**
+         * Administrar
+         */
+        Permission::create(['name' => 'administrar-modulo',  'descripc' => 'Habilita los permisos para el módulo de administración']);
+
+        Permission::create(['name' => 'usuarios-leer',  'descripc' => 'Listar usuarios']);
+        Permission::create(['name' => 'usuarios-crear',  'descripc' => 'Crear usuario']);
+        Permission::create(['name' => 'usuarios-editar',  'descripc' => 'Editar usuario']);
+        Permission::create(['name' => 'usuarios-borrar',  'descripc' => 'Inactivar usuario']);
+
+        Permission::create(['name' => 'roles-leer',  'descripc' => 'Listar roles']);
+        Permission::create(['name' => 'roles-crear',  'descripc' => 'Crear rol']);
+        Permission::create(['name' => 'roles-editar',  'descripc' => 'Editar rol']);
+        Permission::create(['name' => 'roles-borrar',  'descripc' => 'Inactivar rol']);
+
+
+        /**
+         * Reportes
+         */
+        Permission::create(['name' => 'reportes-modulo',  'descripc' => 'Habilita los permisos para el módulo de reportes']);
+
+        Permission::create(['name' => 'contropf-leer',  'descripc' => 'Listar controles en proceso y productos finalizados']);
+        Permission::create(['name' => 'contropf-crear',  'descripc' => 'Crear control en proceso y finalizado']);
+        Permission::create(['name' => 'contropf-editar',  'descripc' => 'Editar control en proceso y finalizado']);
+        Permission::create(['name' => 'contropf-borrar',  'descripc' => 'Inactivar control en proceso y finalizado']);
+
+        Permission::create(['name' => 'ordprodu-leer',  'descripc' => 'Listar órdenes de producción']);
+        Permission::create(['name' => 'ordprodu-crear',  'descripc' => 'Crear órden de prodicción']);
+        Permission::create(['name' => 'ordprodu-editar',  'descripc' => 'Editar órden de prodicción']);
+        Permission::create(['name' => 'ordprodu-borrar',  'descripc' => 'Inactivar órden de prodicción']);
 
 
         Role::create(['name' => 'super-administrador',])->givePermissionTo(Permission::all());

@@ -14,7 +14,7 @@ class CreateMnptsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mnpt', function (Blueprint $table) {
+        Schema::create('mnpts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('medicame_id')->unsigned();
             $table->bigInteger('npt_id')->unsigned();
@@ -25,7 +25,7 @@ class CreateMnptsTable extends Migration
             $table->foreign('npt_id')->references('id')->on('npts');
             $table=CamposMagicos::magicos($table);
         });
-        Schema::create('h_mnpt', function (Blueprint $table) {
+        Schema::create('h_mnpts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('medicame_id');
             $table->integer('npt_id');
@@ -44,7 +44,7 @@ class CreateMnptsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('h_mnpt');
-        Schema::dropIfExists('mnpt');
+        Schema::dropIfExists('h_mnpts');
+        Schema::dropIfExists('mnpts');
     }
 }

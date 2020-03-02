@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\Medicamentos\Medicames;
 use App\Models\Medicamentos\Casa;
 use App\Models\Medicamentos\Medicame;
 use App\Models\Medicamentos\Minvima;
@@ -91,9 +92,16 @@ Route::get('medicame/mlote', function (Request $request) {
 Route::get('medicame/minvimaajax', function (Request $request) {
   if (!$request->ajax())
     return redirect('/');
- 
+
   return response()->json(Minvima::combo([
     'padrexxx' => $request->padrexxx,
     'cabecera' => true, 'esajaxxx' => true
   ]));
 });
+
+Route::get('medicame/mnpt', function (Request $request) {
+    if (!$request->ajax())
+      return redirect('/');
+
+    return Medicames::getNptAsignados($request);
+  });

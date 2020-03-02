@@ -1,28 +1,26 @@
 <?php
-
 namespace App\Http\Controllers\Medicamentos;
 
-
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Medicamentos\MinvimaCrearRequest;
-use App\Http\Requests\Medicamentos\MinvimaEditarRequest;
-use App\Models\Medicamentos\Minvima;
-use App\Models\Medicamentos\Mmarca;
+use App\Http\Requests\Medicamentos\MnptCrearRequest;
+use App\Http\Requests\Medicamentos\MnptEditarRequest;
+use App\Models\Medicamentos\Mnpt;
 use App\Models\Sistema\SisEsta;
 
-class MinvimaController extends Controller
+
+class MnptController extends Controller
 {
     private $opciones;
 
-    public function __construct()
+    public function __construct() //alista las variables para ser usadas próximamente
     {
-        $this->opciones = [
-            'permisox' => 'minvima',
+        $this->opciones = [// un array
+            'permisox' => 'mnpt',
             'parametr' => [],
             'rutacarp' => 'Medicame.Medicamento.',
-            'tituloxx' => 'Crear: Marca',
-            'carpetax' => 'Minvima',
-            'slotxxxx' => 'minvima',
+            'tituloxx' => 'Crear: Npt',
+            'carpetax' => 'Mnpt',
+            'slotxxxx' => 'mnpt',
             'indecrea' => false,
             'esindexx' => false
         ];
@@ -33,13 +31,17 @@ class MinvimaController extends Controller
         $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
 
         $this->opciones['readonly'] = '';
-        $this->opciones['rutaxxxx'] = 'minvima';
-        $this->opciones['routnuev'] = 'minvima';
-        $this->opciones['routxxxx'] = 'minvima';
+        $this->opciones['rutaxxxx'] = 'mnpt';
+        $this->opciones['routnuev'] = 'mnpt';
+        $this->opciones['routxxxx'] = 'mnpt';
 
         $this->opciones['botoform'] = [
             [
                 'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'], []],
+                'formhref' => 2, 'tituloxx' => 'Volver a npts', 'clasexxx' => 'btn btn-sm btn-primary'
+            ],
+            [
+                'mostrars' => true, 'accionxx' => '', 'routingx' => ['minvima', []],
                 'formhref' => 2, 'tituloxx' => 'Volver a Registros Invima', 'clasexxx' => 'btn btn-sm btn-primary'
             ],
             [
@@ -68,8 +70,8 @@ class MinvimaController extends Controller
         $this->opciones['padrexxx'] = $medicame;
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'Nuevo Registro Invima',
-                'titulist' => 'Lista de registros invima',
+                'titunuev' => 'Nuevo npt',
+                'titulist' => 'Lista de npts',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
@@ -77,21 +79,27 @@ class MinvimaController extends Controller
                 ],
                 'accitabl' => true,
                 'vercrear' => true,
-                'urlxxxxx' => 'api/medicame/minvima',
+                'urlxxxxx' => 'api/medicame/mnpt',
                 'cabecera' => [
                     ['td' => 'ID'],
-                    ['td' => 'REGISTRO INVIMA'],
+                    ['td' => 'NPT'],
+                    ['td' => 'RANGO DESDE'],
+                    ['td' => 'RANGO HASTA'],
+                    ['td' => 'RANGO UNIDAD'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
-                    ['data' => 'id', 'name' => 'minvimas.id'],
-                    ['data' => 'reginvim', 'name' => 'minvimas.reginvim'],
+                    ['data' => 'id', 'name' => 'mnpts.id'],
+                    ['data' => 'nombre', 'name' => 'mnpts.nombre'],
+                    ['data' => 'randesde', 'name' => 'mnpts.randesde'],
+                    ['data' => 'ranhasta', 'name' => 'mnpts.ranhasta'],
+                    ['data' => 'rangunid', 'name' => 'mnpts.rangunid'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
-                'tablaxxx' => 'tablaminvima',
-                'permisox' => 'minvima',
-                'routxxxx' => 'minvima',
+                'tablaxxx' => 'tablamnpt',
+                'permisox' => 'mnpt',
+                'routxxxx' => 'mnpt',
                 'parametr' => [$medicame],
             ],
 
@@ -103,15 +111,17 @@ class MinvimaController extends Controller
 
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
     {
-        $this->opciones['marcaxxx'] = Mmarca::combo(['medicame' => $this->opciones['padrexxx'],
-        'cabecera' => true, 'esajaxxx' => false]);
+        $padrexxx=0;
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
         if ($nombobje != '') {
             $this->opciones[$nombobje] = $objetoxx;
-        }
+            $padrexxx=$objetoxx->npt_id;
 
+        }
+        $this->opciones['mnptxxxx'] = Mnpt::combo(['cabecera' => true, 'esajaxxx' => false,
+         "medicame"=>$this->opciones['padrexxx'], "selectxx"=>$padrexxx]);
         // Se arma el titulo de acuerdo al array opciones
         return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }
@@ -125,6 +135,7 @@ class MinvimaController extends Controller
         $this->opciones['padrexxx'] = $medicame;
         $this->opciones['botoform'][0]['routingx'][1] = [$medicame];
         $this->opciones['botoform'][1]['routingx'][1] = [$medicame];
+        $this->opciones['botoform'][2]['routingx'][1] = [$medicame];
         $this->opciones['parametr'] = [$medicame];
         $this->opciones['botoform'][] =
             [
@@ -140,7 +151,7 @@ class MinvimaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($medicame, MinvimaCrearRequest $request)
+    public function store($medicame, MnptCrearRequest $request)
     {
         $dataxxxx = $request->all();
         $dataxxxx['medicame_id'] = $medicame;
@@ -153,11 +164,12 @@ class MinvimaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($medicame, Minvima $objetoxx)
+    public function show($medicame, Mnpt $objetoxx)
     {
-        $this->opciones['tituloxx'] = 'Ver: Registro Invima';
+        $this->opciones['tituloxx'] = 'Ver: Lote';
         $this->opciones['botoform'][0]['routingx'][1] = [$medicame];
         $this->opciones['botoform'][1]['routingx'][1] = [$medicame];
+        $this->opciones['botoform'][2]['routingx'][1] = [$medicame];
         $this->opciones['padrexxx'] = $medicame;
         $this->opciones['parametr'] = [$medicame, $objetoxx->id];
         $this->opciones['readonly'] = 'readonly';
@@ -170,11 +182,12 @@ class MinvimaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($medicame, minvima $objetoxx)
+    public function edit($medicame, Mnpt $objetoxx)
     {
-        $this->opciones['tituloxx'] = 'Editar: Registro Invima';
+        $this->opciones['tituloxx'] = 'Editar: Lote';
         $this->opciones['botoform'][0]['routingx'][1] = [$medicame];
         $this->opciones['botoform'][1]['routingx'][1] = [$medicame];
+        $this->opciones['botoform'][2]['routingx'][1] = [$medicame];
         $this->opciones['padrexxx'] = $medicame;
         $this->opciones['parametr'] = [$medicame, $objetoxx->id];
         $this->opciones['botoform'][] =
@@ -187,9 +200,9 @@ class MinvimaController extends Controller
 
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
-        $medicame = Minvima::transaccion($dataxxxx, $objectx);
+        $medicame = Mnpt::transaccion($dataxxxx, $objectx);
         return redirect()
-            ->route($this->opciones['routxxxx'] . '.editar', [$medicame->mmarca->medicame_id, $medicame->id])
+            ->route($this->opciones['routxxxx'] . '.editar', [$medicame->medicame_id, $medicame->id])
             ->with('info', $infoxxxx);
     }
 
@@ -200,7 +213,7 @@ class MinvimaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($medicame, MinvimaEditarRequest $request, Minvima $objetoxx)
+    public function update($medicame, MnptEditarRequest $request, Mnpt $objetoxx)
     {
         $dataxxxx = $request->all();
         return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
@@ -212,7 +225,7 @@ class MinvimaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(minvima $objetoxx)
+    public function destroy(Mnpt $objetoxx)
     {
         $this->opciones['parametr'] = [$objetoxx->id];
 

@@ -65,7 +65,7 @@ class MedicameController extends Controller
                     ['campoxxx' => 'botonesx', 'dataxxxx' => 'Medicame.Medicamento.Medicame.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
                 ],
-                
+
                 'accitabl' => true,
                 'vercrear' => true,
                 'urlxxxxx' => 'api/medicame/medicame',
@@ -90,6 +90,7 @@ class MedicameController extends Controller
 
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
+    
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
     {
         $this->opciones['casasxx'] = Casa::combo(['cabecera' => true, 'ajaxxxxx' => false]);

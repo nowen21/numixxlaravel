@@ -5,3 +5,4 @@ require_once('web_medicame.php');
 require_once('web_minvima.php');
 require_once('web_mlote.php');
 require_once('web_mmarca.php');
+require_once('web_mnpt.php');
