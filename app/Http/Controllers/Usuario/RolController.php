@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Pacientes;
+namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Pacientes\PacienteCrearRequest;
@@ -16,19 +16,19 @@ use App\Models\Sistema\Municipio;
 use App\Models\Sistema\SisEsta;
 use Illuminate\Support\Facades\Auth;
 
-class PacienteController extends Controller
+class RolController extends Controller
 {
     private $opciones;
 
     public function __construct()
     {
         $this->opciones = [
-            'permisox' => 'paciente',
+            'permisox' => 'roles',
             'parametr' => [],
-            'rutacarp' => 'Pacientes.',
-            'tituloxx' => 'Crear: Paciente',
-            'slotxxxx'=>'paciente',
-            'carpetax'=>'Paciente',
+            'rutacarp' => 'Sistema.',
+            'tituloxx' => 'Crear: Rol',
+            'slotxxxx'=>'rol',
+            'carpetax'=>'Rol',
             'indecrea'=>false,
             'esindexx'=>false
         ];
@@ -39,14 +39,14 @@ class PacienteController extends Controller
         $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
 
         $this->opciones['readonly'] = '';
-        $this->opciones['rutaxxxx'] = 'paciente';
-        $this->opciones['routnuev'] = 'paciente';
-        $this->opciones['routxxxx'] = 'paciente';
+        $this->opciones['rutaxxxx'] = 'rol';
+        $this->opciones['routnuev'] = 'rol';
+        $this->opciones['routxxxx'] = 'rol';
 
         $this->opciones['botoform'] = [
             [
                 'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'], []],
-                'formhref' => 2, 'tituloxx' => 'VOLVER A PACIENTES', 'clasexxx' => 'btn btn-sm btn-primary'
+                'formhref' => 2, 'tituloxx' => 'VOLVER A ROLES', 'clasexxx' => 'btn btn-sm btn-primary'
             ],
         ];
     }
@@ -66,8 +66,8 @@ class PacienteController extends Controller
         $this->opciones['padrexxx'] = $padrexxx;
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'NUEVO PACIENTE',
-                'titulist' => 'LISTA DE PACIENTES',
+                'titunuev' => 'NUEVO ROL',
+                'titulist' => 'LISTA DE ROLES',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
@@ -75,7 +75,7 @@ class PacienteController extends Controller
                 ],
                 'vercrear' => true,
                 'accitabl' => true,
-                'urlxxxxx' => 'api/paciente/paciente',
+                'urlxxxxx' => 'api/usuario/rol',
                 'cabecera' =>[
                     ['td' => 'ID'],
                     ['td' => 'NOMBRES'],
@@ -103,7 +103,7 @@ class PacienteController extends Controller
         $this->opciones['generoxx'] = Genero::combo(['cabecera' => true, 'ajaxxxxx' => false]);
         $this->opciones['epsxxxxx'] = Ep::combo(['cabecera' => true, 'ajaxxxxx' => false]);
         $this->opciones['nptxxxxx'] = Npt::combo(['cabecera' => true, 'ajaxxxxx' => false]);
-        $this->opciones['servicio'] = Servicio::combo(['cabecera' => true, 'ajaxxxxx' => false]); 
+        $this->opciones['servicio'] = Servicio::combo(['cabecera' => true, 'ajaxxxxx' => false]);
         $this->opciones['departam'] = Departamento::combo(['cabecera' => true, 'ajaxxxxx' => false]);
         $departam='';
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
@@ -125,8 +125,8 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { 
-        
+    {
+
         $this->opciones['indecrea']=true;
         $this->opciones['clinicac']=true;
         $this->opciones['botoform'][] =
@@ -224,5 +224,5 @@ class PacienteController extends Controller
         return redirect()->route($this->opciones['routxxxx'])->with('info', 'Registro ' . $activado . ' con éxito');
     }
 
-   
+
 }

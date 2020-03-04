@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Pacientes;
+namespace App\Http\Controllers\Produccion;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Pacientes\PacienteCrearRequest;
@@ -16,7 +16,7 @@ use App\Models\Sistema\Municipio;
 use App\Models\Sistema\SisEsta;
 use Illuminate\Support\Facades\Auth;
 
-class PacienteController extends Controller
+class PreparacionController extends Controller
 {
     private $opciones;
 
@@ -103,7 +103,7 @@ class PacienteController extends Controller
         $this->opciones['generoxx'] = Genero::combo(['cabecera' => true, 'ajaxxxxx' => false]);
         $this->opciones['epsxxxxx'] = Ep::combo(['cabecera' => true, 'ajaxxxxx' => false]);
         $this->opciones['nptxxxxx'] = Npt::combo(['cabecera' => true, 'ajaxxxxx' => false]);
-        $this->opciones['servicio'] = Servicio::combo(['cabecera' => true, 'ajaxxxxx' => false]); 
+        $this->opciones['servicio'] = Servicio::combo(['cabecera' => true, 'ajaxxxxx' => false]);
         $this->opciones['departam'] = Departamento::combo(['cabecera' => true, 'ajaxxxxx' => false]);
         $departam='';
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
@@ -125,8 +125,8 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { 
-        
+    {
+
         $this->opciones['indecrea']=true;
         $this->opciones['clinicac']=true;
         $this->opciones['botoform'][] =
@@ -224,5 +224,5 @@ class PacienteController extends Controller
         return redirect()->route($this->opciones['routxxxx'])->with('info', 'Registro ' . $activado . ' con éxito');
     }
 
-   
+
 }
