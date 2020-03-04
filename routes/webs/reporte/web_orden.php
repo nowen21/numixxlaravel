@@ -1,31 +1,31 @@
 <?php
-Route::group(['prefix' => 'usuarios'], function () {
+Route::group(['prefix' => 'ordenes'], function () {
     Route::get('', [
-	    'uses' => 'Usuarios\UsuarioController@index',
+	    'uses' => 'Reporte\OrdenController@index',
 	    'middleware' => ['permission:usuario-leer|usuario-crear|usuario-editar|usuario-borrar']
-	])->name('usuario');
+	])->name('orden');
 	Route::get('nuevo', [
-	    'uses' => 'Usuarios\UsuarioController@create',
+	    'uses' => 'Reporte\OrdenController@create',
 	    'middleware' => ['permission:usuario-crear']
-	])->name('usuario.nuevo');
+	])->name('orden.nuevo');
 	Route::post('crear', [
-	    'uses' => 'Usuarios\UsuarioController@store',
+	    'uses' => 'Reporte\OrdenController@store',
 	    'middleware' => ['permission:usuario-crear']
-	])->name('usuario.crear');
+	])->name('orden.crear');
 	Route::get('editar/{objetoxx}', [
-	    'uses' => 'Usuarios\UsuarioController@edit',
+	    'uses' => 'Reporte\OrdenController@edit',
 	    'middleware' => ['permission:usuario-editar']
-	])->name('usuario.editar');
+	])->name('orden.editar');
 	Route::put('editar/{objetoxx}', [
-	    'uses' => 'Usuarios\UsuarioController@update',
+	    'uses' => 'Reporte\OrdenController@update',
 	    'middleware' => ['permission:usuario-editar']
-	])->name('usuario.editar');
+	])->name('orden.editar');
 	Route::get('ver/{objetoxx}', [
-	    'uses' => 'Usuarios\UsuarioController@show',
+	    'uses' => 'Reporte\OrdenController@show',
 	    'middleware' => ['permission:usuario-leer']
-	])->name('usuario.ver');
+	])->name('orden.ver');
 	Route::delete('borrar/{objetoxx}', [
-	    'uses' => 'Usuarios\UsuarioController@destroy',
+	    'uses' => 'Reporte\OrdenController@destroy',
 	    'middleware' => ['permission:usuario-borrar']
-	])->name('usuario.borrar');
+	])->name('orden.borrar');
 });

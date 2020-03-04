@@ -183,7 +183,7 @@ class RolesYPermisosSeeder extends Seeder
         /**
          * Administrar
          */
-        Permission::create(['name' => 'administrar-modulo',  'descripc' => 'Habilita los permisos para el módulo de administración']);
+        Permission::create(['name' => 'sistema-modulo',  'descripc' => 'Habilita los permisos para el módulo de administración del sistema']);
 
         Permission::create(['name' => 'usuarios-leer',  'descripc' => 'Listar usuarios']);
         Permission::create(['name' => 'usuarios-crear',  'descripc' => 'Crear usuario']);

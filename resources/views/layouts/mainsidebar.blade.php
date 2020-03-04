@@ -43,11 +43,11 @@
       @can('produccion-modulo')
       @include('layouts.menus.produccion')
       @endcan
-      @can('administrar-modulo')
-      @include('layouts.menus.administrar')
-      @endcan
       @can('reportes-modulo')
       @include('layouts.menus.reportes')
+      @endcan
+      @can('sistema-modulo')
+      @include('layouts.menus.sistema')
       @endcan
 
       <!-- FIN TERRITORIO -->
