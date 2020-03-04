@@ -123,7 +123,6 @@
                     </td>
                     <td id="{{$formulax['campo_id'].'_unid'}}">{{$formulax['unidmedi']}}</td>
                     <td> {{ Form::text($formulax['campo_id'].'_cant', 
-                    //$formulax['valorxxx'],
         $formulax['requerim'],
         ['class'=>'form-control input-number test',
         'id'=>$formulax['campo_id'].'_cant',
@@ -133,7 +132,6 @@
         $readonl
         ]) }} </td>
                     <td>{{ Form::text($formulax['campo_id'].'_volu', 
-                    //$formulax['valorxxx'],
         $formulax['volumenx'],
         ['class'=>'form-control input-number test','style'=>'width: 100px',
         'id'=>$formulax['campo_id'].'_volu',

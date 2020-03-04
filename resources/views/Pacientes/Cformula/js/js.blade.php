@@ -177,7 +177,7 @@
 
       var aguax_id = 0;
 
-      var agua = $('#formnpt').serializeArray()
+      var agua = $('#formulario').serializeArray()
       $.each(agua, function (i, valor) {
         var valido = valor.name.split('_')
         if (valido.length > 1 && valido[1] == 'volu' && valor.value > 0 && valido[0] != 'aguaeste') {
@@ -227,7 +227,7 @@
                     text: 'SI',
                     btnClass: 'btn-red',
                     action: function () {
-                      $("#formnpt").submit();
+                      $("#formulario").submit();
                     }
                   },
                   close: function () {

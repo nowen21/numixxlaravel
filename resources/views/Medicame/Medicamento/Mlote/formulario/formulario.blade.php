@@ -1,3 +1,38 @@
+<?php 
+
+
+
+//codigo php
+
+
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="form-group row">
   <div class="form-group col-md-4">
     {{ Form::label('mmarca_id', 'Marca:', ['class' => 'control-label col-form-label-sm']) }}

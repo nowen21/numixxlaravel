@@ -15,7 +15,7 @@ Proyecto de administración de nutriones parentales para la empresas numixx S.A.
 	
 3	rangos
 
-	* adicionar codigo
+	* adicionar codigo 
 	
 	* importar el excel
 	
@@ -29,6 +29,6 @@ Proyecto de administración de nutriones parentales para la empresas numixx S.A.
 	
 6	formulación
 
-	* velocidad de infusion = volumen total/tiempo de infusion
+	* velocidad de infusion = volumen total/tiempo de infusion. LISTO
 	
 	* mostar todo los medicamentos ofertados pero no dejar hacer descuento de inventario hasta no tenerlo
