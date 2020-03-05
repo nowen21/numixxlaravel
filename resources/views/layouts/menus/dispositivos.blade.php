@@ -15,7 +15,5 @@
                 </a>
             </li>
         @endcanany
-
-
     </ul>
 </li>

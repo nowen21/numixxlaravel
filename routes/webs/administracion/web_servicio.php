@@ -1,7 +1,8 @@
 <?php
-$controll = 'Clinicas\Crango';
-$routexxx = 'crango';
-Route::group(['prefix' => '{clinica}/crango'], function () use ($controll, $routexxx) {
+
+$controll = 'Administracion\Servicio';
+$routexxx = 'cservicio';
+Route::group(['prefix' => 'servicios'], function () use ($controll, $routexxx) {
 
 	Route::get('', [
 		'uses' => $controll . 'Controller@index',

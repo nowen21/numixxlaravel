@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Clinica;
 
 use Illuminate\Foundation\Http\FormRequest;
-class ClinicaRangoCreateRequest extends FormRequest {
+
+class CrangoEditarRequest extends FormRequest {
 
   private $_mensaje;
   private $_reglasx;
 
   public function __construct() {
     $this->_mensaje = [
-        'clinica_id.required' => 'Seleccione una clínica',
+        'condicio_id.required' => 'Seleccione una condición',
         'rango_id.required' => 'Selecciones un rango',
     ];
     $this->_reglasx = [
-        'clinica_id' => ['required'],
+        'condicio_id' => ['required'],
         'rango_id' => ['required']
     ];
   }
@@ -43,7 +44,7 @@ class ClinicaRangoCreateRequest extends FormRequest {
   }
 
   public function validar() {
-    $dataxxxx = $this->toArray();
+    
   }
 
 }

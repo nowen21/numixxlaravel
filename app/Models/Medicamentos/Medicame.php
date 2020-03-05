@@ -85,17 +85,8 @@ class Medicame extends Model {
         $dataxxxx['user_crea_id'] = Auth::user()->id;
         $objetoxx = Medicame::create($dataxxxx);
       }
-      //Medicame::syncnpt($objetoxx, $dataxxxx);
       return $objetoxx;
     }, 5);
     return $usuariox;
-  }
-
-  public static function syncnpt($medicame, $dataxxxx) {
-    $syncxxxx = [];
-    foreach ($dataxxxx['npts'] as $value) {
-      $syncxxxx[$value] = ['sis_esta_id' => 1,'user_crea_id'=>Auth::user()->id,'user_edita_id'=>Auth::user()->id];
-    }
-    $medicame->npts()->sync($syncxxxx);
   }
 }

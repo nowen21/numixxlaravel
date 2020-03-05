@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class Servicio extends Model {
 
   protected $fillable = [
-      'servicio', 'sis_esta_id', 'sis_clinica_id', 'user_crea_id', 'user_edita_id'
+      'servicio', 'sis_esta_id', 'user_crea_id', 'user_edita_id'
   ];
 
   public static function combo($dataxxxx)

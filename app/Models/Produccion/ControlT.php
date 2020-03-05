@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Pacientes;
+namespace App\Models\Produccion;
 
 use App\Models\Administracion\Ep;
 use App\Models\Administracion\Genero;
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class Paciente extends Model {
+class ControlT extends Model {
 
   protected $fillable = [
       'registro',

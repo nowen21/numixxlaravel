@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRangoSisClinicaTable extends Migration
+class CreateCrangosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,17 +14,18 @@ class CreateRangoSisClinicaTable extends Migration
      */
     public function up()
     {
-        Schema::create('rango_sis_clinica', function (Blueprint $table) {
+        Schema::create('crangos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('sis_clinica_id')->unsigned();
-            $table->bigInteger('rango_id')->unsigned();
-            $table->foreign('sis_clinica_id')->references('id')->on('sis_clinicas');
-            $table->foreign('rango_id')->references('id')->on('rangos');
+            $table=CamposMagicos::getForeign($table,'sis_clinica');
+            $table=CamposMagicos::getForeign($table,'condicio');
+            $table=CamposMagicos::getForeign($table,'rango');
             $table=CamposMagicos::magicos($table);
+            $table->unique(['condicio_id','rango_id','sis_clinica_id']);
         });
-        Schema::create('h_rango_sis_clinica', function (Blueprint $table) {
+        Schema::create('h_crangos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('sis_clinica_id');
+            $table->integer('condicio_id');
             $table->integer('rango_id');
             $table=CamposMagicos::h_magicos($table);
         });
@@ -37,7 +38,7 @@ class CreateRangoSisClinicaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('h_sis_clinica_rango');
-        Schema::dropIfExists('sis_clinica_rango');
+        Schema::dropIfExists('h_crangos');
+        Schema::dropIfExists('crangos');
     }
 }

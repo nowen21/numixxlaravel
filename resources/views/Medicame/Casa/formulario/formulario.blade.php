@@ -40,16 +40,16 @@
         @endif
     </div>
     <div class="form-group col-md-6">
-      {{ Form::label('unimedid', 'Unidad de Medida:', ['class' => 'control-label col-form-label-sm']) }}
+      {{ Form::label('unidmedi', 'Unidad de Medida:', ['class' => 'control-label col-form-label-sm']) }}
       @if($todoxxxx['accionxx'] == 'Ver')
-      {{ Form::text('unimedid', $todoxxxx['modeloxx']->unimedid, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
+      {{ Form::text('unidmedi', $todoxxxx['modeloxx']->unidmedi, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
       @else
-      {{ Form::text('unimedid', null, ['class' => $errors->first('unimedid') ? 
+      {{ Form::text('unidmedi', null, ['class' => $errors->first('unidmedi') ? 
       'form-control  is-invalid' : 'form-control', 'placeholder' => 'Unidad de Medida', 'maxlength' => '120', 'autofocus','style'=>'height: 28px']) }}
       @endif
-      @if($errors->has('unimedid'))
+      @if($errors->has('unidmedi'))
       <div class="invalid-feedback d-block">
-          {{ $errors->first('unimedid') }}
+          {{ $errors->first('unidmedi') }}
       </div>
       @endif
   </div>

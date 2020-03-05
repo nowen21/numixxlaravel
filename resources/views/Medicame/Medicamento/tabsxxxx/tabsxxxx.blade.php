@@ -1,9 +1,12 @@
 <div class="card">
+  <div class="card-header">
+    Featured
+  </div>
   <div class="card-header p-2">
     <ul class="nav nav-tabs">
      @canany(['medicamento-leer', 'medicamento-crear', 'medicamento-editar', 'medicamento-borrar'])
       <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='medicame') ?' active' : '' }}
-        text-sm" href="{{ route('medicamento.editar', $todoxxxx['padrexxx']) }}">Medicadddmento</a></li>
+        text-sm" href="{{ route('medicamento.editar', $todoxxxx['padrexxx']) }}">Medicamento</a></li>
       @endcanany
       @canany(['mmarca-leer', 'mmarca-crear', 'mmarca-editar', 'mmarca-borrar'])
       <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='mmarca') ?' active' : '' }}
@@ -19,7 +22,7 @@
       @endcanany
       @canany(['mnpt-leer', 'mnpt-crear', 'mnpt-editar', 'mnpt-borrar'])
       <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='mnpt') ?' active' : '' }}
-        text-sm" href="{{ route('mnpt', $todoxxxx['padrexxx']) }}">Npts</a></li>
+        text-sm" href="{{ route('mnpt', $todoxxxx['padrexxx']) }}">Rango Formulación</a></li>
       @endcanany
     </ul>
   </div>

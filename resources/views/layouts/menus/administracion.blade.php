@@ -16,6 +16,14 @@
             </a>
         </li>
         @endcan
+        @can('cservicio-leer')
+        <li class="nav-item">
+            <a href="{{ route('cservicio') }}" class="nav-link">
+                <i class="fas fa-door-open nav-icon"></i>
+                <p>Servicios</p>
+            </a>
+        </li>
+        @endcan
         @can('eps-leer')
         <li class="nav-item">
             <a href="{{ route('eps') }}" class="nav-link">

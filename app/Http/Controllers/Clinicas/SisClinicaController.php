@@ -16,6 +16,7 @@ class SisClinicaController extends Controller
     public function __construct()
     {
         $this->opciones = [
+            'cardhead' => '',// titulo para las pestañas
             'permisox' => 'clinica',
             'parametr' => [],
             'rutacarp' => 'Clinicas.',
@@ -139,6 +140,7 @@ class SisClinicaController extends Controller
      */
     public function show(SisClinica $objetoxx)
     {
+        $this->opciones['cardhead']='CLINICA: '. $objetoxx->clinica;
         $this->opciones['clinicax'] =$objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
         $this->opciones['botoform'][] =
@@ -158,6 +160,7 @@ class SisClinicaController extends Controller
      */
     public function edit(SisClinica $objetoxx)
     {
+        $this->opciones['cardhead']='CLINICA: '. $objetoxx->clinica;
         $this->opciones['clinicax'] =$objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
         $this->opciones['botoform'][] =

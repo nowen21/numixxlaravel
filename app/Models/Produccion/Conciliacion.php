@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Pacientes;
+namespace App\Models\Produccion;
 
 use App\Models\Administracion\Ep;
 use App\Models\Administracion\Genero;

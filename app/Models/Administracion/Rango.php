@@ -39,4 +39,25 @@ class Rango extends Model
     }, 5);
     return $usuariox;
   }
+  public static function combo($dataxxxx)
+    {
+      $comboxxx = [];
+        if($dataxxxx['cabecera']){
+            if($dataxxxx['esajaxxx']){  
+                $comboxxx[] = ['valuexxx'=>'','optionxx'=>'Seleccione'];
+            }else{
+                $comboxxx = [''=>'Seleccione'];
+            }
+            
+        }   
+        $entidadx=Rango::get();
+        foreach ($entidadx as $entisalu) {
+            if($dataxxxx['esajaxxx']){
+                $comboxxx[] = ['valuexxx'=>$entisalu->id, 'optionxx'=>$entisalu->ranginic.' - '.$entisalu->rangfina];
+            }else{
+                $comboxxx[$entisalu->id] = $entisalu->ranginic.' - '.$entisalu->rangfina;
+            }
+        }
+        return $comboxxx;
+    }
 }

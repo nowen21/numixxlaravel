@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Pacientes;
+namespace App\Models\Usuarios;
 
 use App\Models\Administracion\Ep;
 use App\Models\Administracion\Genero;
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class Paciente extends Model {
+class Rol extends Model {
 
   protected $fillable = [
       'registro',
@@ -77,7 +77,7 @@ class Paciente extends Model {
                 $objetoxx->update($dataxxxx);
             } else {
                 $dataxxxx['user_crea_id'] = Auth::user()->id;
-                $objetoxx = Paciente::create($dataxxxx);
+                $objetoxx = Rol::create($dataxxxx);
             }
             return $objetoxx;
         }, 5);

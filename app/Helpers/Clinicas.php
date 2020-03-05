@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Administracion\Rango;
 use App\Models\Administracion\Servicio;
+use App\Models\Clinica\Crango;
 use App\Models\Clinica\SisClinica;
 use App\Models\Medicamentos\Medicame;
 use App\Models\Pacientes\Paciente;
@@ -89,31 +90,27 @@ class Clinicas
 
     public static function getRangosAsignados($request)
     {
-        $paciente = Rango::select(
-            'rangos.id',
+        $paciente = Crango::select(
+            'crangos.id',
             'rangos.ranginic',
             'rangos.rangfina',
+            'condicios.condicio',
+            'crangos.sis_clinica_id',
             's_estado',
-            'rangos.sis_esta_id'
+            'crangos.sis_esta_id'
         )
-            ->join('rango_sis_clinica', 'rangos.id', '=', 'rango_sis_clinica.rango_id')
+            ->join('rangos', 'crangos.rango_id', '=', 'rangos.id')
+            ->join('condicios', 'crangos.condicio_id', '=', 'condicios.id')
             ->join('sis_estas', 'rangos.sis_esta_id', '=', 'sis_estas.id')
-            ->where('rango_sis_clinica.sis_clinica_id', $request->clinicax);
+            ->where('crangos.sis_clinica_id', $request->clinicax);
         return DatatableHelper::getDatatable($paciente, $request);
     }
 
     public static function getRangos($request)
     {
-        $notinxxx = [];
-        $paciente = Rango::select(['rangos.id'])
-            ->join('rango_sis_clinica', 'rangos.id', '=', 'rango_sis_clinica.rango_id')
-            ->where('rango_sis_clinica.sis_clinica_id', $request->clinicax)->get();
-        foreach ($paciente as $pacientx) {
-            $notinxxx[] = $pacientx->id;
-        }
+        
         $paciente = Rango::select(['rangos.id','rangos.ranginic','rangos.rangfina','rangos.sis_esta_id','sis_estas.s_estado'])
             ->join('sis_estas', 'rangos.sis_esta_id', '=', 'sis_estas.id')
-            ->whereNotIn('rangos.id', $notinxxx)
             ->where('rangos.sis_esta_id', 1);
 
         return DatatableHelper::getDatatable($paciente, $request);
@@ -132,10 +129,8 @@ class Clinicas
             'servicios.id',
             'servicios.servicio',
             's_estado',
-            'servicios.sis_clinica_id',
             'servicios.sis_esta_id')
-            ->join('sis_estas', 'servicios.sis_esta_id', '=', 'sis_estas.id')
-            ->where('servicios.sis_clinica_id', $request->clinicax);
+            ->join('sis_estas', 'servicios.sis_esta_id', '=', 'sis_estas.id');
         return DatatableHelper::getDatatable($paciente, $request);
     }
 }
