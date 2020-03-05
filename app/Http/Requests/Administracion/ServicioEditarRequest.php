@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Clinica;
+namespace App\Http\Requests\Administracion;
 
 use App\Models\Administracion\Servicio;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ServicioCrearRequest extends FormRequest
+class ServicioEditarRequest extends FormRequest
 {
   private $_mensaje;
   private $_reglasx;
@@ -15,15 +15,9 @@ class ServicioCrearRequest extends FormRequest
 
     $this->_mensaje = [
       'servicio.required' => 'Ingrese el nombre del servicio',
+      'servicio.unique' => 'El servicio ya existe',
     ];
-    $this->_reglasx = [
-      'servicio' =>
-      [
-        'required',
-        'string' //y todos las validaciones a que haya lugar separadas por coma
-      ],
-
-    ];
+    
   }
   /**
    * Determine if the user is authorized to make this request.
@@ -54,12 +48,14 @@ class ServicioCrearRequest extends FormRequest
 
   public function validar()
   {
-    $servicio = Servicio::where('sis_clinica_id', $this->segments()[2])
-      ->where('servicio', $this->servicio)
-      ->first();
-    if (isset($servicio->id)) {
-      $this->_mensaje['yaexiste.required'] = 'El nombre del servicio existe';
-      $this->_reglasx['yaexiste']='required';
-    }
+    $this->_reglasx = [
+      'servicio' =>
+      [
+        'unique:servicios,servicio,'.$this->segments()[2],
+        'required',
+        'string' //y todos las validaciones a que haya lugar separadas por coma
+      ],
+
+    ];
   }
 }

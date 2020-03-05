@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Genero;
-use App\Models\Medicamentos\Npt;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,5 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GenerosSeeder::class);
         $this->call(DepartamentosSeeder::class);
         $this->call(MunicipiosSeeder::class);
+        $this->call(ServiciosSeeder::class);
+        $this->call(CondiciosSeeder::class);
     }
 }

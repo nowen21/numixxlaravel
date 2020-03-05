@@ -77,7 +77,7 @@ class ControlPF extends Model {
                 $objetoxx->update($dataxxxx);
             } else {
                 $dataxxxx['user_crea_id'] = Auth::user()->id;
-                $objetoxx = Paciente::create($dataxxxx);
+                $objetoxx = ControlPF::create($dataxxxx);
             }
             return $objetoxx;
         }, 5);

@@ -58,17 +58,7 @@ Route::get('medicame/minvima', function (Request $request) {
   if (!$request->ajax())
     return redirect('/');
 
-  return datatables()
-    ->eloquent(
-      Minvima::select('minvimas.id', 'minvimas.reginvim', 's_estado', 'minvimas.sis_esta_id', 'mmarcas.medicame_id')
-        ->join('mmarcas', 'minvimas.mmarca_id', '=', 'mmarcas.id')
-        ->join('sis_estas', 'minvimas.sis_esta_id', '=', 'sis_estas.id')
-        ->where('mmarcas.medicame_id', $request->medicame)
-    )
-    ->addColumn('botonexx', $request->botonesx)
-    ->addColumn('s_estado', $request->estadoxx)
-    ->rawColumns(['botonexx', 's_estado'])
-    ->toJson();
+  return Medicames::getRInvimas( $request);
 });
 
 Route::get('medicame/mlote', function (Request $request) {

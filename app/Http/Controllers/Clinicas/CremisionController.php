@@ -17,6 +17,7 @@ class CremisionController extends Controller
     public function __construct()
     {
         $this->opciones = [
+            'cardhead' => '',// titulo para las pestañas
             'permisox' => 'crango',
             'parametr' => [],
             'rutacarp' => 'Clinicas.',
@@ -54,11 +55,12 @@ class CremisionController extends Controller
     public function index($clinica)
     {
         $clinicax = SisClinica::where('id', $clinica)->first();
+        $this->opciones['cardhead']='CLINICA: '. $clinicax->clinica;
         $this->opciones['tablasxx'][] =
             [
 
                 'titunuev' => 'NUEVA CLINICA',
-                'titulist' => 'LISTA DE RANGOS PARA LA CLINICA: ' . $clinicax->clinica,
+                'titulist' => 'LISTA DE RANGOS',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => 'Clinicas.Clinica.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],

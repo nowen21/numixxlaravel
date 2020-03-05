@@ -108,13 +108,4 @@
         </div>
         @endif
     </div>
-    <h3>NPTs:</h3>
-    <div class="form-group col-md-12"> 
-      @foreach($todoxxxx['nptsxxxx'] as $nptxxxxx)
-        <label class="checkbox-inline">
-          {{Form::checkbox('npts[]',$nptxxxxx->id,null)}}
-          {{$nptxxxxx->nombre}}
-        </label>
-      @endforeach
-    </div>
 </div>

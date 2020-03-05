@@ -1,2 +1,2 @@
-<a class="btn btn-sm btn-primary" href="{{ route('clinica.editar', $id) }}">Editar</a>
-<a class="btn btn-sm btn-primary" href="{{ route('clinica.ver', $id) }}">Ver</a>
+<a class="btn btn-sm btn-primary" href="{{ route('crango.editar', [$sis_clinica_id,$id]) }}">Editar</a>
+<a class="btn btn-sm btn-primary" href="{{ route('crango.ver', [$sis_clinica_id,$id]) }}">Ver</a>

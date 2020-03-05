@@ -1,22 +1,24 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Clinica;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ClinicaRangoUpdateRequest extends FormRequest {
+class CrangoCrearRequest extends FormRequest
+{
 
   private $_mensaje;
   private $_reglasx;
 
-  public function __construct() {
+  public function __construct()
+  {
     $this->_mensaje = [
-        'clinica_id.required' => 'Seleccione una clínica',
-        'rango_id.required' => 'Selecciones un rango',
+      'condicio_id.required' => 'Seleccione una condición',
+      'rango_id.required' => 'Selecciones un rango',
     ];
     $this->_reglasx = [
-        'clinica_id' => ['required'],
-        'rango_id' => ['required']
+      'condicio_id' => ['required'],
+      'rango_id' => ['required']
     ];
   }
 
@@ -25,11 +27,13 @@ class ClinicaRangoUpdateRequest extends FormRequest {
    *
    * @return bool
    */
-  public function authorize() {
+  public function authorize()
+  {
     return true;
   }
 
-  public function messages() {
+  public function messages()
+  {
     return $this->_mensaje;
   }
 
@@ -38,13 +42,14 @@ class ClinicaRangoUpdateRequest extends FormRequest {
    *
    * @return array
    */
-  public function rules() {
+  public function rules()
+  {
     $this->validar();
     return $this->_reglasx;
   }
 
-  public function validar() {
+  public function validar()
+  {
     $dataxxxx = $this->toArray();
   }
-
 }

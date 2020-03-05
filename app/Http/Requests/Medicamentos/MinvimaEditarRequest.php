@@ -31,7 +31,7 @@ class MinvimaEditarRequest extends FormRequest {
   public function rules() {
     return [
         'mmarca_id' => 'required', 
-        'reginvim' => 'required|unique:minvimas,reginvim,'. $this->segments()[1],         
+        'reginvim' => 'required|unique:minvimas,reginvim,'. $this->segments()[3],         
     ];
   }
 

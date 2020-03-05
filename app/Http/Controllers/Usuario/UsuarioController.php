@@ -16,7 +16,7 @@ use App\Models\Sistema\Municipio;
 use App\Models\Sistema\SisEsta;
 use Illuminate\Support\Facades\Auth;
 
-class UsuarioController extends Controller
+class Paciente9Controller extends Controller
 {
     private $opciones;
 

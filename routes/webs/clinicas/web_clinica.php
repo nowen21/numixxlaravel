@@ -37,5 +37,4 @@ Route::group(['prefix' => 'clinicas'], function () {
 	require_once('web_rango.php');
 
 	require_once('web_remision.php');
-	require_once('web_servicio.php');
 });

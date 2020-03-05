@@ -66,7 +66,9 @@ class Mmarca extends Model {
           }
           
       }   
-      $entidadx=Mmarca::where('medicame_id',$dataxxxx['medicame'])
+      $entidadx=Mmarca::
+      select(['mmarcas.id','mmarcas.nombcome','mmarcas.marcaxxx'])  
+      ->where('medicame_id',$dataxxxx['medicame'])
       ->join('medicames','mmarcas.medicame_id','=','medicames.id')
       ->where('medicames.sis_esta_id',1)
       ->get();

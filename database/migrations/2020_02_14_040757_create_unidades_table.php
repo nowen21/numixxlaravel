@@ -17,7 +17,7 @@ class CreateUnidadesTable extends Migration
         Schema::create('unidades', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('unidad')->unique();
-            $table=CamposMagicos::h_magicos($table);
+            $table=CamposMagicos::magicos($table);
         });
         Schema::create('h_unidades', function (Blueprint $table) {
             $table->bigIncrements('id');
