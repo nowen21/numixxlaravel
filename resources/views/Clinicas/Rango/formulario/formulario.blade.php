@@ -12,6 +12,7 @@
         </div>
         @endif
     </div>
+    
     <div class="form-group col-md-6">
         {{ Form::label('condicio_id', 'Condición:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')

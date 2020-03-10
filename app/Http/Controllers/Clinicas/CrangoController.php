@@ -18,7 +18,7 @@ class CrangoController extends Controller
     public function __construct()
     {
         $this->opciones = [
-            'cardhead' => '',// titulo para las pestañas
+            'cardhead' => '', // titulo para las pestañas
             'permisox' => 'crango',
             'parametr' => [],
             'rutacarp' => 'Clinicas.',
@@ -55,16 +55,16 @@ class CrangoController extends Controller
      */
     public function index($clinica)
     {
-        
+
         $clinicax = SisClinica::where('id', $clinica)->first();
-        $this->opciones['cardhead']='CLINICA: '. $clinicax->clinica;
+        $this->opciones['cardhead'] = 'CLINICA: ' . $clinicax->clinica;
         $this->opciones['tablasxx'][] =
             [
 
                 'titunuev' => 'NUEVO RANGO',
-                'titulist' => 'LISTA DE RANGOS' ,
+                'titulist' => 'LISTA DE RANGOS',
                 'dataxxxx' => [
-                    ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'].$this->opciones['carpetax'].'.botones.botonesapi'],
+                    ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
                     ['campoxxx' => 'clinicax', 'dataxxxx' => $clinica],
                 ],
@@ -91,7 +91,7 @@ class CrangoController extends Controller
                 'routxxxx' => 'crango',
                 'parametr' => [$clinica],
             ];
-       
+
 
         $this->opciones['clinicax'] = $clinica;
 
@@ -100,15 +100,25 @@ class CrangoController extends Controller
     }
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
     {
-        $this->opciones['rangoxxx'] = Rango::combo(['cabecera' => false, 'esajaxxx' => false]);
-        $this->opciones['condicio'] = Condicio::combo(['cabecera' => false, 'ajaxxxxx' => false]);
+        $rangoxxx = 0;
+        $condicio = 0;
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
         if ($nombobje != '') {
             $this->opciones[$nombobje] = $objetoxx;
+            $rangoxxx = $objetoxx->rango_id;
+            $condicio = $objetoxx->condicio_id;
         }
+        $this->opciones['rangoxxx'] = Rango::combo([
+            'cabecera' => true, 'esajaxxx' => false,
+            'clinicax' => $this->opciones['clinicax'], 'crangoxx' => $rangoxxx
+        ]);
 
+        $this->opciones['condicio'] = Condicio::combo([
+            'cabecera' => false, 'ajaxxxxx' => false,
+            'clinicax' => $this->opciones['clinicax'], 'rango_id' => $rangoxxx, 'condicio' => $condicio
+        ]);
         // Se arma el titulo de acuerdo al array opciones
         return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }
@@ -120,7 +130,7 @@ class CrangoController extends Controller
     public function create($padrexxx)
     {
         $clinicax = SisClinica::where('id', $padrexxx)->first();
-        $this->opciones['cardhead']='CLINICA: '. $clinicax->clinica;
+        $this->opciones['cardhead'] = 'CLINICA: ' . $clinicax->clinica;
         $this->opciones['parametr'] = [$padrexxx];
         $this->opciones['clinicax'] = $padrexxx;
         $this->opciones['botoform'][0]['routingx'][1] = $this->opciones['parametr'];
@@ -139,11 +149,11 @@ class CrangoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($padrexxx,CrangoCrearRequest $request)
+    public function store($padrexxx, CrangoCrearRequest $request)
     {
-        
+
         $dataxxxx = $request->all();
-        $dataxxxx['sis_clinica_id']=$padrexxx;
+        $dataxxxx['sis_clinica_id'] = $padrexxx;
         return $this->grabar($dataxxxx, '', 'Registro creado con éxito');
     }
 
@@ -153,11 +163,12 @@ class CrangoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($padrexxx,Crango $objetoxx)
+    public function show($padrexxx, Crango $objetoxx)
     {
+        $this->opciones['tituloxx'] = 'Ver: Rango';
         $this->opciones['indecrea'] = false;
-        $this->opciones['clinicax'] = $objetoxx->id;
-        $this->opciones['parametr'] = [$objetoxx->sis_clinica_id,$objetoxx->id];
+        $this->opciones['clinicax'] = $padrexxx;
+        $this->opciones['parametr'] = [$objetoxx->sis_clinica_id, $objetoxx->id];
         $this->opciones['botoform'][0]['routingx'][1] = $this->opciones['parametr'];
         $this->opciones['botoform'][] =
             [
@@ -174,16 +185,17 @@ class CrangoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($padrexxx,Crango $objetoxx)
+    public function edit($padrexxx, Crango $objetoxx)
     {
+        $this->opciones['tituloxx'] = 'Editar: Rango';
         $this->opciones['indecrea'] = false;
-        $this->opciones['clinicax'] = $objetoxx->id;
-       
-        $this->opciones['parametr'] = [$objetoxx->sis_clinica_id,$objetoxx->id];
-        $this->opciones['botoform'][0]['routingx'][1] =[$objetoxx->sis_clinica_id];
+        $this->opciones['clinicax'] = $padrexxx;
+
+        $this->opciones['parametr'] = [$objetoxx->sis_clinica_id, $objetoxx->id];
+        $this->opciones['botoform'][0]['routingx'][1] = [$objetoxx->sis_clinica_id];
         $this->opciones['botoform'][] =
             [
-                'mostrars' => true, 'accionxx' => 'EDITARdd', 'routingx' => [$this->opciones['routxxxx'] . '.editar', $this->opciones['parametr']],
+                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', $this->opciones['parametr']],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
         return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
@@ -191,9 +203,9 @@ class CrangoController extends Controller
 
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
-        $crangoxx=Crango::transaccion($dataxxxx, $objectx);
+        $crangoxx = Crango::transaccion($dataxxxx, $objectx);
         return redirect()
-            ->route($this->opciones['routxxxx'] . '.editar', [$crangoxx->sis_clinica_id,$crangoxx->id])
+            ->route($this->opciones['routxxxx'] . '.editar', [$crangoxx->sis_clinica_id, $crangoxx->id])
             ->with('info', $infoxxxx);
     }
 
@@ -204,9 +216,9 @@ class CrangoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($padrexxx,CrangoEditarRequest  $request, Crango $objetoxx)
+    public function update($padrexxx, CrangoEditarRequest  $request, Crango $objetoxx)
     {
-        
+
         $dataxxxx = $request->all();
         return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
     }
@@ -217,7 +229,7 @@ class CrangoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($padrexxx,Crango $objetoxx)
+    public function destroy($padrexxx, Crango $objetoxx)
     {
         $this->opciones['parametr'] = [$objetoxx->id];
 

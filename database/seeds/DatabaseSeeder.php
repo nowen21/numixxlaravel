@@ -17,14 +17,15 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersSeeder::class);
         $this->call(CasasSeeder::class);
         $this->call(NptsSeeder::class);
-        
         $this->call(MedicamesSeeder::class);
         $this->call(MmarcasSeeder::class);
+        $this->call(MinvimasSeeder::class);
         $this->call(EpsSeeder::class);
         $this->call(GenerosSeeder::class);
         $this->call(DepartamentosSeeder::class);
         $this->call(MunicipiosSeeder::class);
         $this->call(ServiciosSeeder::class);
         $this->call(CondiciosSeeder::class);
+        $this->call(PacientesSeeder::class);
     }
 }

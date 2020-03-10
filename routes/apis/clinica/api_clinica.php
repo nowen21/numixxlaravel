@@ -76,4 +76,10 @@ Route::get('clinica/servicio', function (Request $request) {
   return Clinicas::getServicios($request);
 });
 
+Route::get('clinica/condicio', function (Request $request) {
+  if (!$request->ajax())
+    return redirect('/');
+  return Clinicas::getCondicio($request);
+});
+
 

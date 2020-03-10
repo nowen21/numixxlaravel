@@ -7,10 +7,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RangoCrearRequest extends FormRequest
 {
-
     private $_mensaje;
     private $_reglasx;
-
     public function __construct()
     {
         $this->_mensaje = [
@@ -22,10 +20,12 @@ class RangoCrearRequest extends FormRequest
             'rangfina.numeric' => 'El rango final debe ser numérico',
             'rangfina.min' => 'El valor mínimo para rango inicial debe ser uno',
             'rangfina.max' => 'El valor máximo para rango final debe estar entre el rango inicial y 9999',
+            'codiword.required' => 'Ingrese el código word office',
         ];
         $this->_reglasx = [
             'ranginic' => ['required', 'numeric', 'min:1', 'max:9999'],
-            'rangfina' => ['required', 'numeric', 'min:1', 'max:9999']
+            'rangfina' => ['required', 'numeric', 'min:1', 'max:9999'],
+            'codiword' => ['required']
         ];
     }
 

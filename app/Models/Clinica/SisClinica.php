@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class SisClinica extends Model
 {
     protected $fillable = [
-        'nitxxxxx', 'clinica', 'telefono', 'sis_esta_id', 'digiveri', 'user_crea_id', 'user_edita_id', 'sis_esta_id'
+        'nitxxxxx', 'clinica', 'telefono', 'sis_esta_id', 'digiveri', 'user_crea_id', 'user_edita_id'
     ];
     public function medicames()
     {

@@ -25,6 +25,7 @@ class Paciente extends Model {
       'ep_id',
       'cama',
       'fechnaci',
+      'departamento_id',
       'municipio_id',
       'npt_id',
       'servicio_id',

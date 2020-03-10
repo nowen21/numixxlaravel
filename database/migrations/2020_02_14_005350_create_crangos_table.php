@@ -16,6 +16,7 @@ class CreateCrangosTable extends Migration
     {
         Schema::create('crangos', function (Blueprint $table) {
             $table->bigIncrements('id');
+           
             $table=CamposMagicos::getForeign($table,'sis_clinica');
             $table=CamposMagicos::getForeign($table,'condicio');
             $table=CamposMagicos::getForeign($table,'rango');
@@ -25,6 +26,7 @@ class CreateCrangosTable extends Migration
         Schema::create('h_crangos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('sis_clinica_id');
+            
             $table->integer('condicio_id');
             $table->integer('rango_id');
             $table=CamposMagicos::h_magicos($table);

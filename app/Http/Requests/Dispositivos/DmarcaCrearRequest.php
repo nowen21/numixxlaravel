@@ -17,14 +17,7 @@ class DmarcaCrearRequest extends FormRequest {
 
   public function messages() {
     return [
-        'nombcome.required' => 'El nombre comercial es requerido',
-        'nombcome.unique' => 'El nombre comercial ya existe',
-        'nombcome.regex' => 'Los caracteres del nombre comercial no son correctos',
-        'nombcome.string' => 'El nombre debe ser un texto',
-        'osmorali.required' => 'Ingrese la osmoralidad',
-        'osmorali.integer' => 'La osmoralidad es numérica',
-        'pesoespe.required' => 'El peso específico es requerido',
-        'formfarm.required' => 'La forma farmaceútica es requerida',
+        'reginvim.required' => 'El registro invima es requerido',
         'marcaxxx.required' => 'Ingrese la marca',
     ];
   }
@@ -36,10 +29,7 @@ class DmarcaCrearRequest extends FormRequest {
    */
   public function rules() {
     return [
-        'nombcome' => 'required|string|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\/ ()%0-9-,Ω.\s]+$/|unique:mmarcas', 
-        'osmorali' => 'required', 
-        'pesoespe' => 'required', 
-        'formfarm' => 'required',
+        'reginvim' => 'required|unique:dmarcas', 
         'marcaxxx' => 'required',
     ];
   }

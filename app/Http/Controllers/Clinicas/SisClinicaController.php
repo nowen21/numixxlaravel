@@ -110,6 +110,7 @@ class SisClinicaController extends Controller
      */
     public function create()
     {
+        $this->opciones['indecrea']=true;
         $this->opciones['clinicax'] =''; 
         $this->opciones['clinicac']=true;
         $this->opciones['botoform'][] =

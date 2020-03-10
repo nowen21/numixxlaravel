@@ -35,6 +35,9 @@
     }
   }
   $(document).ready(function () {
+    $('.select2').select2({
+      language: "es"
+    });
     $("#nombcome,#marcaxxx").keyup(function () {
       $(this).val($(this).val().toUpperCase())
     });
@@ -47,37 +50,7 @@
       yearRange: "+0:+50",
     });
 
-    var f_combo=function(dataxxxx){
-      $('#'+dataxxxx.campoxxx).empty();
-      $.ajax({
-        url : "{{ url('api/medicame/minvimaajax') }}",
-        data : dataxxxx.dataxxxx,
-        type : 'GET',
-        dataType : 'json',
-        success : function(json) {
-            $.each(json,function(i,d){
-              var selected='';
-              if(d.valuexxx==dataxxxx.selected){
-                selected='selected';
-              }
-              $('#'+dataxxxx.campoxxx).append('<option '+selected+' value="'+d.valuexxx+'">'+d.optionxx+'</option>');
-            });
-        },
-        error : function(xhr, status) {
-            alert('Disculpe, existió un problema');
-        },
-      });
-    }
-    @if(old('mmarca_id')!=null)
-    f_combo({dataxxxx:{padrexxx:'{{old("mmarca_id")}}'},
-      campoxxx:'minvima_id',selected:'{{old("minvima_id")}}'
-    })
-    @endif
-  $('#mmarca_id').change(function(){ 
-    f_combo({dataxxxx:{padrexxx:$(this).val()},
-      campoxxx:'minvima_id',selected:''
-    });
-  });
+    
 
 });
 

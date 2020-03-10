@@ -12,6 +12,7 @@ class EpsSeeder extends Seeder
      */
     public function run()
     {
+        Ep::create(['nombre'=>'SIN EPS','sis_esta_id'=>1,'user_crea_id'=>1,'user_edita_id'=>1,]);
         Ep::create(['nombre'=>'Cafesalud','sis_esta_id'=>1,'user_crea_id'=>1,'user_edita_id'=>1,]);
         Ep::create(['nombre'=>'Calisalud','sis_esta_id'=>1,'user_crea_id'=>1,'user_edita_id'=>1,]);
         Ep::create(['nombre'=>'Caprecom','sis_esta_id'=>1,'user_crea_id'=>1,'user_edita_id'=>1,]);

@@ -20,8 +20,8 @@ class DloteEditarRequest extends FormRequest
   public function messages()
   {
     return [
+      'dmarca_id.required'=> 'Seleccione una marca',
       'fechvenc.required' => 'Seleccione una fecha de vencimiento',
-      'minvima_id.required' => 'Seleccione un registro invima',
       'inventar.required' => 'Ingrese la cantidad para el inventario del medicamento',
       'lotexxxx.required' => 'Ingrese el lote del medicamento',
       'lotexxxx.unique' => 'El lote ya existe',
@@ -37,8 +37,8 @@ class DloteEditarRequest extends FormRequest
   {
     return [
       'fechvenc' => 'required',
-      'minvima_id' => 'required',
       'inventar' => 'required',
+      'dmarca_id' => 'required',
       'lotexxxx' => 'required|unique:mlotes,lotexxxx,' . $this->segments()[3],
     ];
   }

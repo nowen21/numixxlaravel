@@ -20,13 +20,7 @@ class DmarcaEditarRequest extends FormRequest
   public function messages()
   {
     return [
-      'nombcome.required' => 'El nombre comercial es requerido',
-      'nombcome.unique' => 'El nombre comercial ya existe',
-      'osmorali.required' => 'Ingrese la osmoralidad',
-      'osmorali.integer' => 'La osmoralidad es numérica',
-      'nombcome.regex' => 'Los caracteres del nombre comercial no son correctos',
-      'pesoespe.required' => 'El peso específico es requerido',
-      'formfarm.required' => 'La forma farmaceútica es requerida',
+      'reginvim.required' => 'El registro invima es requerido',
       'marcaxxx.required' => 'Ingrese la marca',
     ];
   }
@@ -39,10 +33,7 @@ class DmarcaEditarRequest extends FormRequest
   public function rules()
   {
     return [
-      'nombcome' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\/ ()%0-9-,Ω.\s]+$/|unique:mmarcas,nombcome,' . $this->segments()[3],
-      'osmorali' => 'required',
-      'pesoespe' => 'required',
-      'formfarm' => 'required',
+      'reginvim' => 'required|unique:dmarcas,reginvim,' . $this->segments()[3],
       'marcaxxx' => 'required',
       
     ];

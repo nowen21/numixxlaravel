@@ -17,12 +17,14 @@ class CreateRangosTable extends Migration
         Schema::create('rangos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('ranginic');
+            $table->string('codiword')->unique();
             $table->integer('rangfina');
             $table=CamposMagicos::magicos($table);
         });
         Schema::create('h_rangos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('ranginic');
+            $table->string('codiword');
             $table->integer('rangfina');
             $table=CamposMagicos::h_magicos($table);
         });

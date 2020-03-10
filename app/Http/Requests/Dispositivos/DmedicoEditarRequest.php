@@ -13,15 +13,11 @@ class DmedicoEditarRequest extends FormRequest {
 
   public function __construct() {
     $this->_mensaje = [
-        'nombgene.required' => 'El nombre es requerido',
-        'nombgene.string' => 'El nombre genérico debe ser un texto',
-        'nombgene.unique' => 'El nombre genérico ya existe',
-        'concentr.required' => 'Ingrese la concentración',
-        'unidmedi.required' => 'Ingrese la unidad de medida',
+        'nombrexx.required' => 'El nombre es requerido',
+        'nombrexx.string' => 'El nombre genérico debe ser un texto',
+        'nombrexx.unique' => 'El nombre genérico ya existe',
     ];
     $this->_reglasx = [
-        'concentr' => 'required',
-        'unidmedi' => 'required',
     ];
   }
 
@@ -45,8 +41,8 @@ class DmedicoEditarRequest extends FormRequest {
    */
   public function rules() { 
     $this->validar();
-    $this->_mensaje['nombgene.required'] = 'El nombre es requerido';
-    $this->_reglasx['nombgene'] = 'required|string|unique:medicames,nombgene,' . $this->segments()[2];
+    $this->_mensaje['nombrexx.required'] = 'El nombre es requerido';
+    $this->_reglasx['nombrexx'] = 'required|string|unique:dmedicos,nombrexx,' . $this->segments()[2];
     return $this->_reglasx;
   }
 

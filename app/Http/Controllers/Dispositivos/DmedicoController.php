@@ -56,6 +56,7 @@ class DmedicoController extends Controller
         $this->opciones['esindexx'] = true;
         $this->opciones['tablasxx'] = [
             [
+                'accitabl' => true,
                 'titunuev' => 'Nuevo dispositivo médico',
                 'titulist' => 'Lista de dispositivos médicos',
                 'dataxxxx' => [
@@ -72,7 +73,7 @@ class DmedicoController extends Controller
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'dmedicos.id'],
-                    ['data' => 'nombgene', 'name' => 'dmedicos.nombgene'],
+                    ['data' => 'nombrexx', 'name' => 'dmedicos.nombrexx'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'dispositivos',

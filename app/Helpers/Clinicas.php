@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Administracion\Condicio;
 use App\Models\Administracion\Rango;
 use App\Models\Administracion\Servicio;
 use App\Models\Clinica\Crango;
@@ -117,7 +118,6 @@ class Clinicas
     }
     public static function asignarRango($request)
     {
-
         return SisClinica::find($request->clinicax)->rangos()->attach(
             [$request->rangoxxx => ['user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]]
         );
@@ -132,5 +132,11 @@ class Clinicas
             'servicios.sis_esta_id')
             ->join('sis_estas', 'servicios.sis_esta_id', '=', 'sis_estas.id');
         return DatatableHelper::getDatatable($paciente, $request);
+    }
+
+    public static function getCondicio($request)
+    { 
+        return response()->json(Condicio::combo(['cabecera' => false, 'ajaxxxxx' => true,
+        'clinicax' => $request->clinicax, 'rango_id' => $request->crangoxx, 'condicio' => 0]));
     }
 }

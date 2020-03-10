@@ -43,10 +43,6 @@ class DloteController extends Controller
                 'formhref' => 2, 'tituloxx' => 'Volver a lotes', 'clasexxx' => 'btn btn-sm btn-primary'
             ],
             [
-                'mostrars' => true, 'accionxx' => '', 'routingx' => ['dinvima', []],
-                'formhref' => 2, 'tituloxx' => 'Volver a Registros Invima', 'clasexxx' => 'btn btn-sm btn-primary'
-            ],
-            [
                 'mostrars' => true, 'accionxx' => '', 'routingx' => ['dmarca', []],
                 'formhref' => 2, 'tituloxx' => 'Volver a marcas', 'clasexxx' => 'btn btn-sm btn-primary'
             ],
@@ -64,32 +60,32 @@ class DloteController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
-
-
     public function index($padrexxx)
     {
         $this->opciones['padrexxx'] = $padrexxx;
         $this->opciones['tablasxx'] = [
             [
+                'accitabl' => true,
                 'titunuev' => 'Nuevo lote',
                 'titulist' => 'Lista de lotes',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                    ['campoxxx' => 'medicame', 'dataxxxx' => $padrexxx],
+                    ['campoxxx' => 'padrexxx', 'dataxxxx' => $padrexxx],
                 ],
                 'vercrear' => true,
                 'urlxxxxx' => 'api/dmedico/dlote',
                 'cabecera' => [
                     ['td' => 'ID'],
                     ['td' => 'LOTE'],
+                    ['td' => 'MARCA'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'dlotes.id'],
                     ['data' => 'lotexxxx', 'name' => 'dlotes.lotexxxx'],
+                    ['data' => 'marcaxxx', 'name' => 'dmarcas.marcaxxx'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tabladlote',
@@ -106,17 +102,13 @@ class DloteController extends Controller
 
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
     {
-        $padrexxx='';
         $this->opciones['marcaxxx'] = Dmarca::combo(['medicame' => $this->opciones['padrexxx'], 'cabecera' => true, 'esajaxxx' => false]);
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
         if ($nombobje != '') {
-            $objetoxx->mmarca_id=$objetoxx->minvima->mmarca_id;
             $this->opciones[$nombobje] = $objetoxx;
-            $padrexxx=$objetoxx->mmarca_id;
         }
-        $this->opciones['invimaxx'] = Dinvima::combo(['cabecera' => true, 'esajaxxx' => false,'padrexxx'=>$padrexxx]);
         // Se arma el titulo de acuerdo al array opciones
         return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }
@@ -197,7 +189,7 @@ class DloteController extends Controller
     {
         $padrexxx = Dlote::transaccion($dataxxxx, $objectx);
         return redirect()
-            ->route($this->opciones['routxxxx'] . '.editar', [$padrexxx->minvima->mmarca->medicame_id, $padrexxx->id])
+            ->route($this->opciones['routxxxx'] . '.editar', [$padrexxx->dmarca->dmedico_id, $padrexxx->id])
             ->with('info', $infoxxxx);
     }
 

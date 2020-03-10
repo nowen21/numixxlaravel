@@ -18,7 +18,7 @@ class CreateSisClinicasTable extends Migration
             $table->bigIncrements('id');
             $table->string('nitxxxxx', 50)->unique();
             $table->string('clinica', 50)->unique();
-            $table->string('telefono', 50)->unique();
+            $table->string('telefono', 50);
             $table->integer('digiveri');
             $table->bigInteger('user_crea_id')->default(1);
             $table->bigInteger('user_edita_id')->default(1);
@@ -28,9 +28,9 @@ class CreateSisClinicasTable extends Migration
         });
         Schema::create('h_sis_clinicas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nit', 50)->unique();
-            $table->string('nombre', 50)->unique();
-            $table->string('telefono', 50)->unique();
+            $table->string('nit', 50);
+            $table->string('nombre', 50);
+            $table->string('telefono', 50);
             $table->integer('digiveri');
             $table->bigInteger('user_crea_id');
             $table->bigInteger('user_edita_id');

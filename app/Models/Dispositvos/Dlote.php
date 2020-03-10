@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\DB;
 
 class Dlote extends Model {
    protected $fillable = [
-      'fechvenc','dinvima_id','inventar','lotexxxx', 'sis_esta_id','user_crea_id','user_edita_id'
+      'fechvenc','dmarca_id','inventar','lotexxxx', 'sis_esta_id','user_crea_id','user_edita_id'
   ];
    public function sis_esta() {
     return $this->belongsTo(SisEsta::class);
   }
-  public function dinvima(){
-    return $this->belongsTo(Dinvima::class);
+  public function dmarca(){
+    return $this->belongsTo(Dmarca::class);
   }
 
   public static function transaccion($dataxxxx,  $objetoxx)

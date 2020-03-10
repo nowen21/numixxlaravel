@@ -57,24 +57,27 @@ class DmarcaController extends Controller
         $this->opciones['padrexxx'] = $padrexxx;
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'Nuevo dispositivo medico',
-                'titulist' => 'Lista de dispositivos medicos',
+                'accitabl' => true,
+                'titunuev' => 'Nueva Marca',
+                'titulist' => 'Lista de Marcas',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'].$this->opciones['carpetax'].'.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                    ['campoxxx' => 'medicame', 'dataxxxx' => $padrexxx],
+                    ['campoxxx' => 'padrexxx', 'dataxxxx' => $padrexxx],
                 ],
                 'vercrear' => true,
                 'urlxxxxx' => 'api/dmedico/dmarca',
                 'cabecera' => [
                     ['td' => 'ID'],
                     ['td' => 'MARCA'],
+                    ['td' => 'REGISTRO INVIMA'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'dmarcas.id'],
-                    ['data' => 'nombcome', 'name' => 'dmarcas.nombcome'],
+                    ['data' => 'marcaxxx', 'name' => 'dmarcas.marcaxxx'],
+                    ['data' => 'reginvim', 'name' => 'dmarcas.reginvim'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tabladmarca',

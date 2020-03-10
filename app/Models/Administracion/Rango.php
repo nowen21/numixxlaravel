@@ -2,6 +2,7 @@
 
 namespace App\Models\Administracion;
 
+use App\Models\Clinica\Crango;
 use App\Models\Sistema\SisEsta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,7 @@ class Rango extends Model
     'ranginic',
     'rangfina',
     'usercrea',
+    'codiword',
     'usermodi',
     'sis_esta_id',
     'user_crea_id',
@@ -40,24 +42,63 @@ class Rango extends Model
     return $usuariox;
   }
   public static function combo($dataxxxx)
-    {
-      $comboxxx = [];
-        if($dataxxxx['cabecera']){
-            if($dataxxxx['esajaxxx']){  
-                $comboxxx[] = ['valuexxx'=>'','optionxx'=>'Seleccione'];
-            }else{
-                $comboxxx = [''=>'Seleccione'];
-            }
-            
-        }   
-        $entidadx=Rango::get();
-        foreach ($entidadx as $entisalu) {
-            if($dataxxxx['esajaxxx']){
-                $comboxxx[] = ['valuexxx'=>$entisalu->id, 'optionxx'=>$entisalu->ranginic.' - '.$entisalu->rangfina];
-            }else{
-                $comboxxx[$entisalu->id] = $entisalu->ranginic.' - '.$entisalu->rangfina;
-            }
+  {
+
+    /**
+     * buscar los rangos que no se han asignado, por cada rango se debe tener encuenta1 que solo se quita de la
+     * lista si ya tiene todas las condicones.
+     * en caso de que ya cumpla la condicion anterior solo mostrarlo cuando se este editando
+     */
+
+
+    /**
+     * encontrar los rangos que no han sido asignados a la clinica
+     */
+    $notinran = [];
+    $condicio = Crango::where('sis_clinica_id', $dataxxxx['clinicax'])
+      ->groupBy('rango_id')
+      ->get();
+    //echo $dataxxxx['crangoxx'];
+    // ojo por cada rango buscar si ya tiene condicines asignadas
+    foreach ($condicio as $condicix) {
+      $dataxxxx['rango_id'] = $condicix->rango_id;
+      $condiciy = Condicio::getVerificarExistencia($dataxxxx);
+
+      if ($condiciy) { // ya tiene todas las condiciones
+        // echo 'dd';
+        //echo $dataxxxx['crangoxx'].' => '.$condicix->rango_id.'<br>';
+        if ($dataxxxx['crangoxx'] != $condicix->rango_id) { // se excluye el que seleccino
+          $notinran[] = $condicix->rango_id;
+          //echo 'jdjdj';
         }
-        return $comboxxx;
+
+        //echo $dataxxxx['crangoxx'];
+      }
     }
+    
+
+    //ddd(1);
+    /**
+     * econtrar las condiciones faltantes
+     */
+
+
+    $comboxxx = [];
+    if ($dataxxxx['cabecera']) {
+      if ($dataxxxx['esajaxxx']) {
+        $comboxxx[] = ['valuexxx' => '', 'optionxx' => 'Seleccione'];
+      } else {
+        $comboxxx = ['' => 'Seleccione'];
+      }
+    }
+    $entidadx = Rango::whereNotIn('id', $notinran)->get();
+    foreach ($entidadx as $entisalu) {
+      if ($dataxxxx['esajaxxx']) {
+        $comboxxx[] = ['valuexxx' => $entisalu->id, 'optionxx' => $entisalu->ranginic . ' - ' . $entisalu->rangfina];
+      } else {
+        $comboxxx[$entisalu->id] = $entisalu->ranginic . ' - ' . $entisalu->rangfina;
+      }
+    }
+    return $comboxxx;
+  }
 }

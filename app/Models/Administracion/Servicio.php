@@ -26,8 +26,7 @@ class Servicio extends Model {
           }
       }
       $activida = Servicio::
-      where('sis_clinica_id',Auth::user()->sis_clinica_id)
-      ->get();
+      get();
       foreach ($activida as $registro) {
           if ($dataxxxx['ajaxxxxx']) {
               $comboxxx[] = ['valuexxx' => $registro->id, 'optionxx' => $registro->servicio];

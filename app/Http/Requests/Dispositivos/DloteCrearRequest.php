@@ -18,7 +18,6 @@ class DloteCrearRequest extends FormRequest {
   public function messages() {
     return [
         'fechvenc.required' => 'Seleccione una fecha de vencimiento',
-        'minvima_id.required' => 'Seleccione un registro invima',
         'inventar.required' => 'Ingrese la cantidad para el inventario del medicamento',
         'lotexxxx.required' => 'Ingrese el lote del medicamento',
         'lotexxxx.unique' => 'El lote ya existe',
@@ -32,9 +31,9 @@ class DloteCrearRequest extends FormRequest {
    */
   public function rules() {
     return [
-        'fechvenc' => 'required', 
-        'minvima_id' => 'required',         
-        'inventar' => 'required',         
+        'fechvenc' => 'required',        
+        'inventar' => 'required',  
+        'dmarca_id' => 'required',       
         'lotexxxx' => 'required|unique:mlotes',         
     ];
   }

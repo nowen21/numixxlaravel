@@ -17,11 +17,11 @@ class CreateDlotesTable extends Migration
         Schema::create('dlotes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('fechvenc');
-            $table->bigInteger('dinvima_id')->unsigned();
+            $table->bigInteger('dmarca_id')->unsigned();
             $table->double('inventar',6,2);
             $table->string('lotexxxx',15);
 
-            $table->foreign('dinvima_id')->references('id')->on('dinvimas');
+            $table->foreign('dmarca_id')->references('id')->on('dmarcas');
             $table=CamposMagicos::magicos($table);
 
 
@@ -29,7 +29,7 @@ class CreateDlotesTable extends Migration
         Schema::create('h_dlotes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('fechvenc');
-            $table->integer('dinvima_id');
+            $table->integer('dmarca_id');
             $table->double('inventar',6,2);
             $table->string('lotexxxx',15);
 

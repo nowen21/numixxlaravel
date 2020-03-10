@@ -15,5 +15,6 @@ class NptsSeeder extends Seeder
         Npt::create(['nombre'=>'PEDIÁTRICO','user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Npt::create(['nombre'=>'NEONATO','user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Npt::create(['nombre'=>'ADULTO','user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
+        Npt::create(['nombre'=>'OTRO','user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
     }
 }

@@ -11,17 +11,13 @@ class DmedicoCrearRequest extends FormRequest {
 
   public function __construct() {
     $this->_mensaje = [
-        'nombgene.required' => 'El nombre es requerido',
-        'nombgene.string' => 'El nombre genérico debe ser un texto',
-        'nombgene.unique' => 'El nombre genérico ya existe',
-        'concentr.required' => 'Ingrese la concentración',
-        'unidmedi.required' => 'Ingrese la unidad de medida',
+        'nombrexx.required' => 'El nombre es requerido',
+        'nombrexx.string' => 'El nombre genérico debe ser un texto',
+        'nombrexx.unique' => 'El nombre genérico ya existe',
     ];
     $this->_reglasx = [
         
-        'nombgene' => 'required|string|unique:medicames',
-        'concentr' => 'required',
-        'unidmedi' => 'required',
+        'nombrexx' => 'required|string|unique:dmedicos',
     ];
   }
 

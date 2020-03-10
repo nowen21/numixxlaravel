@@ -31,10 +31,12 @@
     } else {
       return false;
     }
-
   }
-  $(document).ready(function () {
-    $("#nombcome,#marcaxxx").keyup(function () {
+  $(function(){
+    $('.select2').select2({
+      language: "es"
+    });
+    $("#nombre").keyup(function () {
       $(this).val($(this).val().toUpperCase())
     });
   });

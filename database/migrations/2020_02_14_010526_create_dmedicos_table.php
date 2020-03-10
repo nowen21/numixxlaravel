@@ -16,16 +16,12 @@ class CreateDmedicosTable extends Migration
     {
         Schema::create('dmedicos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombgene',100);
-            $table->integer('concentr');
-            $table->string('unidmedi',20);
+            $table->string('nombrexx',100);
             $table=CamposMagicos::magicos($table);
         });
         Schema::create('h_dmedicos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombgene',100);
-            $table->integer('concentr');
-            $table->string('unidmedi',20);
+            $table->string('nombrexx',100);
             $table=CamposMagicos::h_magicos($table);
         });
     }

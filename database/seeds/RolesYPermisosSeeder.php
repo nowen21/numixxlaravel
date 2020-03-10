@@ -113,10 +113,7 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => 'dmarca-editar',  'descripc' => 'Editar marca dispositivos médicos']);
         Permission::create(['name' => 'dmarca-borrar',  'descripc' => 'Inactivar marca dispositivos médicos']);
 
-        Permission::create(['name' => 'dinvima-leer',  'descripc' => 'Listar listar registros invima dispositivos médicos']);
-        Permission::create(['name' => 'dinvima-crear',  'descripc' => 'Crear registro invima dispositivos médicos']);
-        Permission::create(['name' => 'dinvima-editar',  'descripc' => 'Editar registro invima dispositivos médicos']);
-        Permission::create(['name' => 'dinvima-borrar',  'descripc' => 'Inactivar registro invima dispositivos médicos']);
+        
 
         Permission::create(['name' => 'dlote-leer',  'descripc' => 'Listar lotes dispositivos médicos']);
         Permission::create(['name' => 'dlote-crear',  'descripc' => 'Crear lote dispositivos médicos']);
@@ -180,6 +177,12 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => 'concilia-borrar',  'descripc' => 'Inactivar conciliación']);
 
 
+
+
+        Permission::create(['name' => 'excel-leer',  'descripc' => 'Listar listar registros invima dispositivos médicos']);
+        Permission::create(['name' => 'excel-crear',  'descripc' => 'Crear registro invima dispositivos médicos']);
+        Permission::create(['name' => 'excel-editar',  'descripc' => 'Editar registro invima dispositivos médicos']);
+        Permission::create(['name' => 'excel-borrar',  'descripc' => 'Inactivar registro invima dispositivos médicos']);
         /**
          * Administrar
          */

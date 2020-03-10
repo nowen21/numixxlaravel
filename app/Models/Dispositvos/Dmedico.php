@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\DB;
 class Dmedico extends Model {
 
   protected $fillable = [
-      'nombgene',
-      'concentr',
-      'unidmedi',
+      'nombrexx',
       'sis_esta_id',
       'user_crea_id',
       'user_edita_id'
@@ -26,7 +24,7 @@ class Dmedico extends Model {
     $lista = ['' => 'Seleccione'];
     $medic = Dmedico::all();
     foreach ($medic as $key => $value) {
-      $lista[$value->id] = $value->nombgene;
+      $lista[$value->id] = $value->nombrexx;
     }
     return $lista;
   }
@@ -37,7 +35,7 @@ class Dmedico extends Model {
   {
     $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {
       $dataxxxx['user_edita_id'] = Auth::user()->id;
-      $dataxxxx['nombgene'] = strtoupper($dataxxxx['nombgene']);
+      $dataxxxx['nombrexx'] = strtoupper($dataxxxx['nombrexx']);
       if ($objetoxx != '') {
         $objetoxx->update($dataxxxx);
       } else {

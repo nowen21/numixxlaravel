@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\DB;
 class Dmarca extends Model
 {
      protected $fillable = [
-      'nombcome', 'osmorali', 'pesoespe', 'formfarm', 'sis_esta_id','dmedico_id','marcaxxx','user_crea_id','user_edita_id'
+      'reginvim',  'sis_esta_id','dmedico_id','marcaxxx','user_crea_id','user_edita_id'
   ];
 
   public static function combo() {
     $lista = ['' => 'Seleccione'];
     foreach (Dmarca::all() as $key => $value) {
-      $lista[$value->id] = $value->nombcome;
+      $lista[$value->id] = $value->marcaxxx;
     }
     return $lista;
   }
@@ -31,7 +31,7 @@ class Dmarca extends Model
     $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {
       $dataxxxx['user_edita_id'] = Auth::user()->id;
       $dataxxxx['marcaxxx'] = strtoupper($dataxxxx['marcaxxx']);
-      $dataxxxx['nombcome'] = strtoupper($dataxxxx['nombcome']);
+      $dataxxxx['reginvim'] = strtoupper($dataxxxx['reginvim']);
       if ($objetoxx != '') {
         $objetoxx->update($dataxxxx);
       } else {

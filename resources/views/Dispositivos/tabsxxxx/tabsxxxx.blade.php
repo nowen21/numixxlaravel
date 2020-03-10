@@ -9,10 +9,6 @@
       <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='dmarca') ?' active' : '' }} 
         text-sm" href="{{ route('dmarca', $todoxxxx['padrexxx']) }}">Marcas</a></li>
       @endcanany
-      @canany(['dinvima-leer', 'dinvima-crear', 'dinvima-editar', 'dinvima-borrar'])
-      <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='dinvima') ?' active' : '' }} 
-        text-sm" href="{{ route('dinvima', $todoxxxx['padrexxx']) }}">Registros Invima</a></li>
-      @endcanany
       @canany(['dlote-leer', 'dlote-crear', 'dlote-editar', 'dlote-borrar'])
       <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='dlote') ?' active' : '' }} 
         text-sm" href="{{ route('dlote', $todoxxxx['padrexxx']) }}">Lotes</a></li>
@@ -27,9 +23,6 @@
       @endif
       @if(isset($dmarca))
       {{ $dmarca }}
-      @endif
-      @if(isset($dinvima))
-      {{ $dinvima }}
       @endif
       @if(isset($dlote))
       {{ $dlote }}
