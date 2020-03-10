@@ -34,41 +34,6 @@ class Orden extends Model {
       'user_edita_id'
   ];
 
-  public function genero() {
-    return $this->belongsTo(Genero::class);
-  }
-
-  public function ep() {
-    return $this->belongsTo(Ep::class);
-  }
-
-  public function servicio() {
-    return $this->belongsTo(Servicio::class);
-  }
-  public function servicios() {
-    return $this->belongsToMany(Servicio::class)->withTimestamps();
-  }
-
-  public function sis_clinicas() {
-    return $this->belongsToMany(SisClinica::class)->withTimestamps();
-  }
-
-  public function municipio() {
-    return $this->belongsTo(Municipio::class);
-  }
-
-  public function npt() {
-    return $this->belongsTo(Npt::class);
-  }
-
-  public function sis_esta() {
-    return $this->belongsTo(SisEsta::class);
-  }
-  public function sis_clinica() {
-    return $this->belongsTo(SisClinica::class);
-  }
-
-
   public static function transaccion($dataxxxx,  $objetoxx)
     {
         $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {

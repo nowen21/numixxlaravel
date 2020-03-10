@@ -9,7 +9,7 @@
     <ul class="nav nav-treeview">
         @canany(['contropf-leer'])
             <li class="nav-item">
-                <a href="{{ route('casa') }}" class="nav-link">
+                <a href="{{ route('controlpf') }}" class="nav-link">
                     <i class="fas fa-child nav-icon"></i>
                     <p>Controles en proceso y productos finalizados</p>
                 </a>
@@ -17,7 +17,7 @@
         @endcanany
         @canany(['ordprodu-leer'])
             <li class="nav-item">
-                <a href="{{ route('casa') }}" class="nav-link">
+                <a href="{{ route('orden') }}" class="nav-link">
                     <i class="fas fa-child nav-icon"></i>
                     <p>Órdenes de producción</p>
                 </a>

@@ -9,7 +9,7 @@
     <ul class="nav nav-treeview">
         @canany(['alistami-leer'])
             <li class="nav-item">
-                <a href="{{ route('casa') }}" class="nav-link">
+                <a href="{{ route('alistami') }}" class="nav-link">
                     <i class="fas fa-child nav-icon"></i>
                     <p>Alistamientos</p>
                 </a>
@@ -17,7 +17,7 @@
         @endcanany
         @canany(['preparac-leer'])
             <li class="nav-item">
-                <a href="{{ route('medicamento') }}" class="nav-link">
+                <a href="{{ route('preparac') }}" class="nav-link">
                     <i class="fas fa-child nav-icon"></i>
                     <p>Preparaciones</p>
                 </a>
@@ -25,7 +25,7 @@
         @endcanany
         @canany(['controlp-leer'])
             <li class="nav-item">
-                <a href="{{ route('medicamento') }}" class="nav-link">
+                <a href="{{ route('controlp') }}" class="nav-link">
                     <i class="fas fa-child nav-icon"></i>
                     <p>Control en proceso</p>
                 </a>
@@ -33,7 +33,7 @@
         @endcanany
         @canany(['controlt-leer'])
             <li class="nav-item">
-                <a href="{{ route('medicamento') }}" class="nav-link">
+                <a href="{{ route('controlt') }}" class="nav-link">
                     <i class="fas fa-child nav-icon"></i>
                     <p>Control productos terminados</p>
                 </a>
@@ -41,7 +41,7 @@
         @endcanany
         @canany(['concilia-leer'])
             <li class="nav-item">
-                <a href="{{ route('medicamento') }}" class="nav-link">
+                <a href="{{ route('concilia') }}" class="nav-link">
                     <i class="fas fa-child nav-icon"></i>
                     <p>Conciliaciones</p>
                 </a>

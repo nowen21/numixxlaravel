@@ -2,30 +2,30 @@
 Route::group(['prefix' => 'alistamientos'], function () {
     Route::get('', [
 	    'uses' => 'Produccion\AlistamientoController@index',
-	    'middleware' => ['permission:usuario-leer|usuario-crear|usuario-editar|usuario-borrar']
+	    'middleware' => ['permission:alistami-leer|alistami-crear|alistami-editar|alistami-borrar']
 	])->name('alistami');
 	Route::get('nuevo', [
 	    'uses' => 'Produccion\AlistamientoController@create',
-	    'middleware' => ['permission:usuario-crear']
+	    'middleware' => ['permission:alistami-crear']
 	])->name('alistami.nuevo');
 	Route::post('crear', [
 	    'uses' => 'Produccion\AlistamientoController@store',
-	    'middleware' => ['permission:usuario-crear']
+	    'middleware' => ['permission:alistami-crear']
 	])->name('alistami.crear');
 	Route::get('editar/{objetoxx}', [
 	    'uses' => 'Produccion\AlistamientoController@edit',
-	    'middleware' => ['permission:usuario-editar']
+	    'middleware' => ['permission:alistami-editar']
 	])->name('alistami.editar');
 	Route::put('editar/{objetoxx}', [
 	    'uses' => 'Produccion\AlistamientoController@update',
-	    'middleware' => ['permission:usuario-editar']
+	    'middleware' => ['permission:alistami-editar']
 	])->name('alistami.editar');
 	Route::get('ver/{objetoxx}', [
 	    'uses' => 'Produccion\AlistamientoController@show',
-	    'middleware' => ['permission:usuario-leer']
+	    'middleware' => ['permission:alistami-leer']
 	])->name('alistami.ver');
 	Route::delete('borrar/{objetoxx}', [
 	    'uses' => 'Produccion\AlistamientoController@destroy',
-	    'middleware' => ['permission:usuario-borrar']
+	    'middleware' => ['permission:alistami-borrar']
 	])->name('alistami.borrar');
 });
