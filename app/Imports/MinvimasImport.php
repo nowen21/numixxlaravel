@@ -15,7 +15,7 @@ class MinvimasImport implements ToModel
     public function model(array $row)
     {
         return new Minvima([
-            'reginvim'=>$row[2], 'mmarca_id'=>$row[1], 'sis_esta_id'=>1, 'user_crea_id'=>1, 'user_edita_id'=>1,
+            'reginvim'=>$row[1], 'mmarca_id'=>$row[0], 'sis_esta_id'=>1, 'user_crea_id'=>1, 'user_edita_id'=>1,
         ]);
     }
 }

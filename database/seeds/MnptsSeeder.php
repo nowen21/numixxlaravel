@@ -12,7 +12,6 @@ class MnptsSeeder extends Seeder
      */
     public function run()
     {
-        
         Mnpt::create(['id' => 1, 'medicame_id' => 1, 'npt_id' => 3, 'sis_esta_id' => 1, 'randesde' => 0.5, 'ranhasta' => 2, 'rangunid' => 'g/kg/día', 'user_crea_id' => 1, 'user_edita_id' => 1,]);
         Mnpt::create(['id' => 2, 'medicame_id' => 2, 'npt_id' => 3, 'sis_esta_id' => 1, 'randesde' => 0.5, 'ranhasta' => 2, 'rangunid' => 'g/kg/día', 'user_crea_id' => 1, 'user_edita_id' => 1,]);
         Mnpt::create(['id' => 3, 'medicame_id' => 4, 'npt_id' => 3, 'sis_esta_id' => 1, 'randesde' => 0.1, 'ranhasta' => 0.5, 'rangunid' => 'g/kg/día', 'user_crea_id' => 1, 'user_edita_id' => 1,]);

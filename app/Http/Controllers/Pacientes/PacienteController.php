@@ -177,6 +177,7 @@ class PacienteController extends Controller
      */
     public function edit(Paciente $objetoxx)
     {
+        //ddd($objetoxx->id);
         $this->opciones['clinicax'] =$objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
         $this->opciones['botoform'][] =

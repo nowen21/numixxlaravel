@@ -20,12 +20,17 @@ class DatabaseSeeder extends Seeder
         $this->call(MedicamesSeeder::class);
         $this->call(MmarcasSeeder::class);
         $this->call(MinvimasSeeder::class);
+        $this->call(MlotesSeeder::class);
         $this->call(EpsSeeder::class);
+        $this->call(MnptsSeeder::class);
         $this->call(GenerosSeeder::class);
         $this->call(DepartamentosSeeder::class);
         $this->call(MunicipiosSeeder::class);
         $this->call(ServiciosSeeder::class);
         $this->call(CondiciosSeeder::class);
-        $this->call(PacientesSeeder::class);
+        $this->call(PacientesSeeder::class); 
+        $this->call(DmedicosSeeder::class);
+        $this->call(DmarcasSeeder::class);
+        $this->call(DlotesSeeder::class);
     }
 }

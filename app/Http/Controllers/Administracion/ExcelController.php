@@ -4,14 +4,23 @@ namespace App\Http\Controllers\Administracion;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Administracion\EpEditarRequest;
+use App\Imports\DlotesImport;
+use App\Imports\DmarcasImport;
+use App\Imports\DmedicosImport;
+use App\Imports\EpsImport;
 use App\Imports\MinvimasImport;
+use App\Imports\MlotesImport;
 use App\Imports\MmarcasImport;
 use App\Imports\MnptsImport;
 use App\Imports\PacientesImport;
 use App\Imports\SisClinicasImport;
 use App\Models\Administracion\Ep;
 use App\Models\Clinica\SisClinica;
+use App\Models\Dispositivos\Dlote;
+use App\Models\Dispositivos\Dmarca;
+use App\Models\Dispositivos\Dmedico;
 use App\Models\Medicamentos\Minvima;
+use App\Models\Medicamentos\Mlote;
 use App\Models\Medicamentos\Mmarca;
 use App\Models\Medicamentos\Mnpt;
 use App\Models\Pacientes\Pacientec;
@@ -116,7 +125,9 @@ class ExcelController extends Controller
      */
     public function create()
     {
-
+        $magicosx = "'user_crea_id'=>1,
+        'user_edita_id'=>1,
+         'sis_esta_id'=>1";
         // foreach (Mmarca::get() as $marcasxx) {
         //  echo    "Mmarca::create(['id' => {$marcasxx->id}, 'nombcome' => '{$marcasxx->nombcome}', 'osmorali' => {$marcasxx->osmorali}, 'pesoespe' => {$marcasxx->pesoespe}, 
         // 'formfarm' => '{$marcasxx->formfarm}', 'medicame_id' => {$marcasxx->medicame_id}, 'marcaxxx' => '{$marcasxx->marcaxxx}', 'user_crea_id' => {$marcasxx->user_crea_id}, 
@@ -128,6 +139,16 @@ class ExcelController extends Controller
         //     echo    "Minvima::create(['id'=>{$marcasxx->id},'reginvim'=>'{$marcasxx->reginvim}', 'mmarca_id'=>{$marcasxx->mmarca_id}, 
         //     'sis_esta_id'=>{$marcasxx->sis_esta_id}, 'user_crea_id'=>{$marcasxx->user_crea_id}, 'user_edita_id'=>{$marcasxx->user_edita_id}]); <br>";
         // }
+
+        foreach (Mlote::get() as $marcasxx) {
+            echo    "
+            Mlote::create([
+                'id'=>{$marcasxx->id},
+                'fechvenc'=>'{$marcasxx->fechvenc}', 'minvima_id'=>{$marcasxx->minvima_id}, 
+                'inventar'=>{$marcasxx->inventar}, 'lotexxxx'=>'{$marcasxx->lotexxxx}',
+                {$magicosx}
+            ]); <br>";
+        }
 
         // foreach (SisClinica::get() as $marcasxx) {
         //    echo "SisClinica::create([
@@ -166,18 +187,35 @@ class ExcelController extends Controller
         //     ]); <br>";
         // }
 
-        foreach (Mnpt::get() as $marcasxx) {
-            echo    "
-            Mnpt::create([
-                'id'=>{$marcasxx->id},
-                'medicame_id' => {$marcasxx->medicame_id},
-                'npt_id' => {$marcasxx->npt_id},
-                'sis_esta_id' => 1, 'randesde' =>{$marcasxx->randesde}, 'ranhasta' => {$marcasxx->ranhasta}, 
-                'rangunid' => '{$marcasxx->rangunid}', 'user_crea_id' => 1, 'user_edita_id' => 1,
-            ]); <br>";
-        }
+//         foreach (Dmedico::get() as $marcasxx) {
+//             echo    "
+//             Dmedico::create([
+//                 'id'=>{$marcasxx->id},
+//                 'nombrexx' => '{$marcasxx->nombrexx}',
+//                 {$magicosx}
+//             ]); <br>";
+//         }
+// echo '<br>marcas<br>';
+//         foreach (Dmarca::get() as $marcasxx) {
+//             echo    "
+//             Dmarca::create([
+//                 'id'=>{$marcasxx->id},
+//                 'reginvim' => '{$marcasxx->reginvim}',
+//                 'dmedico_id' => {$marcasxx->dmedico_id},
+//                 'marcaxxx' => '{$marcasxx->marcaxxx}',
+//                 {$magicosx}
+//             ]); <br>";
+//         }
+//         echo '<br>lotes<br>';
+        // foreach (Ep::get() as $marcasxx) {
+        //     echo    "
+        //     Ep::create([
+        //         'id'=>{$marcasxx->id},
+        //         'nombre' => '{$marcasxx->nombre}',
+        //         {$magicosx}
+        //     ]); <br>";
+        // }
 
-      
         // $this->opciones['padrexxx'] = '';
         // $this->opciones['indecrea'] = false;
         // $this->opciones['botoform'][] =
@@ -201,12 +239,17 @@ class ExcelController extends Controller
         // ddd($excelxxx);
         // Excel::import(new MmarcasImport, $excelxxx);
         // Excel::import(new MinvimasImport, $excelxxx);
+        // Excel::import(new MlotesImport, $excelxxx);
+        Excel::import(new EpsImport, $excelxxx);
         // Excel::import(new SisClinicasImport, $excelxxx);
         // $numeroxx=rand(1, 12);
         // echo $numeroxx.' '.($numeroxx<=10?12:11).'<br>';
         // echo str_pad($numeroxx, ($numeroxx<10?12:11), "0", STR_PAD_RIGHT );
         // Excel::import(new PacientesImport, $excelxxx);
-        Excel::import(new MnptsImport, $excelxxx);
+        // Excel::import(new MnptsImport, $excelxxx);
+        // Excel::import(new DmedicosImport, $excelxxx);
+        //Excel::import(new DmarcasImport, $excelxxx);
+        // Excel::import(new DlotesImport, $excelxxx);
         // $dataxxxx = $request->all();
         // return $this->grabar($dataxxxx, '', 'Registro creado con éxito');
     }
