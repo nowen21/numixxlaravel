@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class Paciente extends Model {
+class Conciliacion extends Model {
 
   protected $fillable = [
       'registro',
@@ -77,7 +77,7 @@ class Paciente extends Model {
                 $objetoxx->update($dataxxxx);
             } else {
                 $dataxxxx['user_crea_id'] = Auth::user()->id;
-                $objetoxx = Paciente::create($dataxxxx);
+                $objetoxx = Conciliacion::create($dataxxxx);
             }
             return $objetoxx;
         }, 5);

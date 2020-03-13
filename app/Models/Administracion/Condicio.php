@@ -84,4 +84,26 @@ class Condicio extends Model
         }
         return $condicio;
     }
+
+    public static function getCombo($dataxxxx)
+    {
+        $comboxxx = [];
+        if ($dataxxxx['cabecera']) {
+            if ($dataxxxx['ajaxxxxx']) {
+                $comboxxx[] = ['valuexxx' => '', 'optionxx' => 'Seleccione'];
+            } else {
+                $comboxxx = ['' => 'Seleccione'];
+            }
+        }
+        $activida = Condicio::get();
+        foreach ($activida as $registro) {
+            if ($dataxxxx['ajaxxxxx']) {
+                $comboxxx[] = ['valuexxx' => $registro->id, 'optionxx' => $registro->condicio];
+            } else {
+                $comboxxx[$registro->id] = $registro->condicio;
+            }
+        }
+
+        return $comboxxx;
+    }
 }

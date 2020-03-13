@@ -3,7 +3,6 @@
 namespace App\Models\Medicamentos;
 
 use App\Models\Clinica\SisClinica;
-use App\Models\Formulaciones\Dformula;
 use App\Models\Sistema\SisEsta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -14,10 +13,11 @@ class Medicame extends Model {
   protected $fillable = [
       'nombgene',
       'concentr',
+      'unidconc',
       'unidmedi',
-      'sis_esta_id',
       'casa_id',
       'sis_clinica_id',
+      'sis_esta_id',
       'user_crea_id',
       'user_edita_id',
   ];

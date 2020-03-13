@@ -3,7 +3,7 @@
 
 	$controll = 'Administracion\Rango';
 	$routexxx = 'rango';
-	Route::group(['prefix' => 'drangos'], function () use ($controll, $routexxx) {
+	Route::group(['prefix' => 'rangos'], function () use ($controll, $routexxx) {
 
 		Route::get('', [
 			'uses' => $controll . 'Controller@index',
@@ -33,4 +33,7 @@
 			'uses' => $controll . 'Controller@destroy',
 			'middleware' => ['permission:' . $routexxx . '-borrar']
 		])->name($routexxx . '.borrar');
+		require_once('web_rnpt.php');
+		require_once('web_rcodigo.php');
+		require_once('web_rcondici.php');
 	});

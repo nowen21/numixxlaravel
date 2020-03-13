@@ -32,21 +32,7 @@
         </div>
         @endif
     </div>
-    <div class="form-group col-md-6" >
-        {{ Form::label('codiword', 'Código Word Office:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-            {{ Form::text('codiword', $todoxxxx['modeloxx']->codiword, ['class' => 'form-control-plaintext','style'=>"height: 35px" ]) }}
-        @else
-            {{ Form::text('codiword', null, ['class' => $errors->first('codiword') ? 'form-control  is-invalid' : 'form-control', 
-            'placeholder' => 'Código Word Office', 'maxlength' => '120', 'autofocus','style'=>"height: 28px"]) }}
-        @endif
-        @if($errors->has('codiword'))
-            <div class="invalid-feedback d-block">
-                {{ $errors->first('codiword') }}
-        </div>
-        @endif   
-      </div>
-    <div class="form-group col-md-6" >
+    <div class="form-group col-md-12" >
         {{ Form::label('sis_esta_id', 'Estado:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], $todoxxxx['modeloxx']->sis_esta_id, ['class' => 'form-control-plaintext','id'=>'sis_esta_id']) }}

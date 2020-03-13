@@ -7,6 +7,7 @@ use App\Http\Requests\Clinica\CrangoCrearRequest;
 use App\Http\Requests\Clinica\CrangoEditarRequest;
 use App\Models\Administracion\Condicio;
 use App\Models\Administracion\Rango;
+use App\Models\Administracion\Rango\Rcodigo;
 use App\Models\Clinica\Crango;
 use App\Models\Clinica\SisClinica;
 use App\Models\Sistema\SisEsta;
@@ -110,8 +111,8 @@ class CrangoController extends Controller
             $rangoxxx = $objetoxx->rango_id;
             $condicio = $objetoxx->condicio_id;
         }
-        $this->opciones['rangoxxx'] = Rango::combo([
-            'cabecera' => true, 'esajaxxx' => false,
+        $this->opciones['rangoxxx'] = Rcodigo::combo([
+            'cabecera' => true, 'ajaxxxxx' => false,
             'clinicax' => $this->opciones['clinicax'], 'crangoxx' => $rangoxxx
         ]);
 

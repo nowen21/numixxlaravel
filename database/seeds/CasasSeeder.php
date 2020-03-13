@@ -20,7 +20,7 @@ class CasasSeeder extends Seeder
         Casa::create(['id' => 6, 'casa' => 'GLUCONATO DE CALCIO', 'nameidxx' => 'calcioxxx', 'unidmedi'=>'mg/día','ordecasa' => 6, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Casa::create(['id' => 7, 'casa' => 'SULFATO DE MAGNESIO', 'nameidxx' => 'magnesio', 'unidmedi'=>'mg/día','ordecasa' => 7, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Casa::create(['id' => 8, 'casa' => 'ELEMENTOS TRAZA', 'nameidxx' => 'elemtraz', 'unidmedi'=>'mcgZn/día','ordecasa' => 8, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
-        Casa::create(['id' => 9, 'casa' => 'MULTIVITAMINAS HIDROSOLUBLE', 'nameidxx' => 'multivit', 'unidmedi'=>'mg/dia','ordecasa' => 9, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
+        Casa::create(['id' => 9, 'casa' => 'VITAMINAS HIDROSOLUBLE', 'nameidxx' => 'multivit', 'unidmedi'=>'mg/dia','ordecasa' => 9, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Casa::create(['id' => 10, 'casa' => 'GLUTAMINA', 'nameidxx' => 'glutamin', 'unidmedi'=>'g/kg/día','ordecasa' => 10, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Casa::create(['id' => 11, 'casa' => 'VITAMINA C', 'nameidxx' => 'vitaminc', 'unidmedi'=>'mg/día','ordecasa' => 11, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Casa::create(['id' => 12, 'casa' => 'COMPLEJO B', 'nameidxx' => 'complejb', 'unidmedi'=>'ml/día','ordecasa' => 12, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
@@ -28,8 +28,8 @@ class CasasSeeder extends Seeder
         Casa::create(['id' => 14, 'casa' => 'ÁCIDO FÓLICO', 'nameidxx' => 'acidfoli', 'unidmedi'=>'mg/día','ordecasa' => 14, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Casa::create(['id' => 15, 'casa' => 'VITAMINA K', 'nameidxx' => 'vitamink', 'unidmedi'=>'mg/día','ordecasa' => 15, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Casa::create(['id' => 16, 'casa' => 'LIPIDOS', 'nameidxx' => 'lipidosx', 'unidmedi'=>'g/kg/día','ordecasa' => 16, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
-        Casa::create(['id' => 17, 'casa' => 'MULTIVITAMINAS LIPOSOLUBLES', 'nameidxx' => 'multiuno', 'unidmedi'=>'mg Vit A/dia','ordecasa' => 17, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
+        Casa::create(['id' => 17, 'casa' => 'VITAMINAS LIPOSOLUBLES', 'nameidxx' => 'multiuno', 'unidmedi'=>'mg Vit A/dia','ordecasa' => 17, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Casa::create(['id' => 18, 'casa' => 'AGUA', 'nameidxx' => 'aguaeste', 'unidmedi'=>'mg','ordecasa' => 18, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
-        Casa::create(['id' => 19, 'casa' => 'MULTIVITAMINA LIPO/HIDRO', 'nameidxx' => 'hidrlipo', 'unidmedi'=>'ml','ordecasa' => 18, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
+        //Casa::create(['id' => 19, 'casa' => 'MULTIVITAMINA LIPO/HIDRO', 'nameidxx' => 'hidrlipo', 'unidmedi'=>'ml','ordecasa' => 18, 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
     }
 }

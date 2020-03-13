@@ -2,7 +2,6 @@
 
 namespace App\Models\Administracion;
 
-use App\Http\Requests\Clinica\SisClinicaEditarRequest;
 use App\Models\Clinica\SisClinica;
 use App\Models\Sistema\SisEsta;
 use Illuminate\Database\Eloquent\Model;

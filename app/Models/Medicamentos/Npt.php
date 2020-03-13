@@ -16,7 +16,7 @@ class Npt extends Model {
               $comboxxx = ['' => 'Seleccione'];
           }
       }
-      $activida = Npt::get();
+      $activida = Npt::whereNotIn('id',[4])->get();
       foreach ($activida as $registro) {
           if ($dataxxxx['ajaxxxxx']) {
               $comboxxx[] = ['valuexxx' => $registro->id, 'optionxx' => $registro->nombre];

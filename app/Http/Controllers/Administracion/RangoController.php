@@ -21,8 +21,8 @@ class RangoController extends Controller
             'tituloxx' => 'Crear Rango',
             'slotxxxx' => 'rango',
             'carpetax' => 'Rango',
-            'indecrea' => false,
-            'esindexx' => false
+            'indecrea' => false, // true muestra index o crear sin pestañas, false muestra las pestañas
+            'esindexx' => false, // true indica si es index o crear que debe mostrar
         ];
 
         $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
@@ -51,7 +51,8 @@ class RangoController extends Controller
      */
     public function index()
     {
-               
+        $this->opciones['indecrea']=true;
+        $this->opciones['esindexx']=true;     
         $this->opciones['tablasxx'][] =
             [
 
@@ -84,7 +85,7 @@ class RangoController extends Controller
             ];
         
 
-        $this->opciones['padrexxx'] = '';
+        $this->opciones['padrexxx'] ='';
 
         $this->opciones['accionxx'] = 'index';
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
@@ -107,8 +108,9 @@ class RangoController extends Controller
      */
     public function create()
     {
+       
         $this->opciones['padrexxx'] = '';
-        $this->opciones['indecrea'] = false;
+        $this->opciones['indecrea'] = true;
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
@@ -126,6 +128,7 @@ class RangoController extends Controller
     public function store(RangoCrearRequest $request)
     {
         $dataxxxx = $request->all();
+       
         return $this->grabar($dataxxxx, '', 'Registro creado con éxito');
     }
 
@@ -137,6 +140,8 @@ class RangoController extends Controller
      */
     public function show(Rango $objetoxx)
     {
+        $this->opciones['cardhead']=Rango::getRango(['padrexxx'=>$objetoxx->id]);
+        $this->opciones['parametr'] =  [$objetoxx->id];
         $this->opciones['tituloxx']='Ver: Rango';
         $this->opciones['indecrea'] = false;
         $this->opciones['padrexxx'] = $objetoxx->id;
@@ -153,13 +158,16 @@ class RangoController extends Controller
      */
     public function edit(Rango $objetoxx)
     {
+        $this->opciones['cardhead']=Rango::getRango(['padrexxx'=>$objetoxx->id]);
+        $this->opciones['parametr'] =  [$objetoxx->id];
+        
         $this->opciones['tituloxx']='Editar: Rango';
         $this->opciones['indecrea'] = false;
         $this->opciones['padrexxx'] = $objetoxx->id;
-        $this->opciones['parametr'] = [$objetoxx->id];
+      
         $this->opciones['botoform'][] =
             [
-                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
+                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', $this->opciones['parametr']],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
         return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
@@ -167,8 +175,9 @@ class RangoController extends Controller
 
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
+        $rangoxxx=Rango::transaccion($dataxxxx, $objectx);
         return redirect()
-            ->route($this->opciones['routxxxx'] . '.editar', [Rango::transaccion($dataxxxx, $objectx)->id])
+            ->route($this->opciones['routxxxx'] . '.editar', [$rangoxxx->id])
             ->with('info', $infoxxxx);
     }
 
@@ -193,12 +202,11 @@ class RangoController extends Controller
      */
     public function destroy(Rango $objetoxx)
     {
+        $this->opciones['cardhead']=Rango::getRango(['padrexxx'=>$objetoxx->id]);
         $this->opciones['parametr'] = [$objetoxx->id];
-
         $objetoxx->sis_esta_id = ($objetoxx->sis_esta_id == 2) ? 1 : 2;
         $objetoxx->save();
         $activado = $objetoxx->sis_esta_id == 2 ? 'inactivado' : 'activado';
-
         return redirect()->route($this->opciones['routxxxx'])->with('info', 'Registro ' . $activado . ' con éxito');
     }
 }

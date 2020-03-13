@@ -14,9 +14,6 @@ class Rango extends Model
   protected $fillable = [
     'ranginic',
     'rangfina',
-    'usercrea',
-    'codiword',
-    'usermodi',
     'sis_esta_id',
     'user_crea_id',
     'user_edita_id'
@@ -75,7 +72,7 @@ class Rango extends Model
         //echo $dataxxxx['crangoxx'];
       }
     }
-    
+
 
     //ddd(1);
     /**
@@ -100,5 +97,10 @@ class Rango extends Model
       }
     }
     return $comboxxx;
+  }
+  public static function getRango($dataxxxx)
+  {
+    $rangoxxx = Rango::find($dataxxxx['padrexxx']);
+    return 'RANGO: ' . $rangoxxx->ranginic . ' - ' . $rangoxxx->rangfina;
   }
 }

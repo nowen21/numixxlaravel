@@ -22,7 +22,6 @@ class RangoEditarRequest extends FormRequest
       'rangfina.numeric' => 'El rango final debe ser numérico',
       'rangfina.min' => 'El valor mínimo para rango inicial debe ser uno',
       'rangfina.max' => 'El valor máximo para rango final debe estar entre el rango inicial y 9999',
-      'codiword.required' => 'Ingrese el código word office',
     ];
   }
 
@@ -51,7 +50,6 @@ class RangoEditarRequest extends FormRequest
      $this->_reglasx = [
       'ranginic' => ['required', 'numeric', 'min:1', 'max:9999'],
       'rangfina' => ['required', 'numeric', 'min:1', 'max:9999'],
-      'codiword' => ['required']
     ];
     $this->validar();
    
@@ -60,9 +58,12 @@ class RangoEditarRequest extends FormRequest
 
   public function validar()
   {
-    
-    $rangoold = Rango::find($this->segments()[2]);
-    $rangonew = Rango::where('ranginic', $this->ranginic)->where('rangfina', $this->rangfina)->first();
+    // ddd($this->segments());
+    $rangoold = Rango::find($this->segments()[2]); 
+    $rangonew = Rango::where('ranginic', $this->ranginic)
+    ->where('rangfina', $this->rangfina)
+  
+    ->first();
     if (isset($rangonew->id)) {
       if ($rangoold->id != $rangonew->id) {
         $this->_mensaje['rangoxxx.required'] = "El rango ya existe";

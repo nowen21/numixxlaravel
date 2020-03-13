@@ -20,6 +20,7 @@ class CreateMedicamesTable extends Migration
             $table->bigInteger('casa_id')->unsigned();
             $table->string('nombgene',100)->unique();
             $table->double('concentr', 20, 2);
+            $table->string('unidconc',20);
             $table->string('unidmedi',20);
 
             $table->foreign('sis_clinica_id')->references('id')->on('sis_clinicas');
@@ -32,6 +33,7 @@ class CreateMedicamesTable extends Migration
             $table->integer('casa_id');
             $table->string('nombgene',100);
             $table->double('concentr', 20, 2);
+            $table->string('unidconc',20);
             $table->string('unidmedi',20);
 
             $table=CamposMagicos::h_magicos($table);

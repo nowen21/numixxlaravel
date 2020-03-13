@@ -16,10 +16,28 @@ class RolesYPermisosSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         // crear para clinicas
         Permission::create(['name' => 'administracion-modulo',  'descripc' => 'Habilita los permisos para el módulo de administración']);
-        // Permission::create(['name' => 'estado-leer',  'descripc' => 'Listar estados']);
-        // Permission::create(['name' => 'estado-crear',  'descripc' => 'Crear estado']);
-        // Permission::create(['name' => 'estado-editar',  'descripc' => 'Editar estado']);
-        // Permission::create(['name' => 'estado-borrar',  'descripc' => 'Inactivar estado']);
+        // condiciones del los rangos
+        $permiso='npt';
+        Permission::create(['name' => $permiso.'-leer',  'descripc' => 'Listar npts']);
+        Permission::create(['name' => $permiso.'-crear',  'descripc' => 'Crear npt']);
+        Permission::create(['name' => $permiso.'-editar',  'descripc' => 'Editar npt']);
+        Permission::create(['name' => $permiso.'-borrar',  'descripc' => 'Inactivar npt']);
+       
+        $permiso='rnpt';
+        Permission::create(['name' => $permiso.'-leer',  'descripc' => 'Listar npts del rango']);
+        Permission::create(['name' => $permiso.'-crear',  'descripc' => 'Crear npt del rango']);
+        Permission::create(['name' => $permiso.'-editar',  'descripc' => 'Editar npt del rango']);
+        Permission::create(['name' => $permiso.'-borrar',  'descripc' => 'Inactivar npt del rango']);
+        $permiso='rcondici';
+        Permission::create(['name' => $permiso.'-leer',  'descripc' => 'Listar Conciones del rango']);
+        Permission::create(['name' => $permiso.'-crear',  'descripc' => 'Crear Concione del rango']);
+        Permission::create(['name' => $permiso.'-editar',  'descripc' => 'Editar Concione del rango']);
+        Permission::create(['name' => $permiso.'-borrar',  'descripc' => 'Inactivar Concione del rango']);
+        $permiso='rcodigo';
+        Permission::create(['name' => $permiso.'-leer',  'descripc' => 'Listar Códigos de la condición']);
+        Permission::create(['name' => $permiso.'-crear',  'descripc' => 'Crear Código de la condición']);
+        Permission::create(['name' => $permiso.'-editar',  'descripc' => 'Editar Código de la condición']);
+        Permission::create(['name' => $permiso.'-borrar',  'descripc' => 'Inactivar Código de la condición']);
 
         Permission::create(['name' => 'usuario-leer',  'descripc' => 'Listar usuarios']);
         Permission::create(['name' => 'usuario-crear',  'descripc' => 'Crear usuario']);
@@ -120,6 +138,7 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => 'dlote-editar',  'descripc' => 'Editar lote dispositivos médicos']);
         Permission::create(['name' => 'dlote-borrar',  'descripc' => 'Inactivar lote dispositivos médicos']);
 
+       
 
         Permission::create(['name' => 'rango-leer',  'descripc' => 'Listar rangos']);
         Permission::create(['name' => 'rango-crear',  'descripc' => 'Crear rango']);
