@@ -4,21 +4,15 @@ namespace App\Http\Controllers\Pacientes;
 
 use App\Helpers\Cformula\Dataformulario;
 use App\Helpers\Cformula\GrabarFormulacion;
+use App\Helpers\Cformula\Validacionesajax;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Formulaciones\CformulaCrearRequest;
 use App\Http\Requests\Formulaciones\CformulaEditarRequest;
-use App\Http\Requests\Pacientes\PacienteCrearRequest;
-use App\Http\Requests\Pacientes\PacienteEditarRequest;
-use App\Models\Administracion\Ep;
-use App\Models\Administracion\Genero;
-use App\Models\Administracion\Servicio;
 use App\Models\Clinica\SisClinica;
 use App\Models\Formulaciones\Cformula;
-use App\Models\Medicamentos\Npt;
 use App\Models\Pacientes\Paciente;
-use App\Models\Sistema\Departamento;
-use App\Models\Sistema\Municipio;
 use App\Models\Sistema\SisEsta;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CformulaController extends Controller
@@ -64,6 +58,8 @@ class CformulaController extends Controller
      */
     public function index($padrexxx)
     {
+        $paciente=Paciente::getPaciente(['padrexxx'=>$padrexxx]);
+        $this->opciones['paciente']=$paciente;
         $this->opciones['botoform'][0]['routingx'][1] = $padrexxx;
         $this->opciones['indecrea'] = false;
         $this->opciones['esindexx'] = false;
@@ -122,7 +118,6 @@ class CformulaController extends Controller
     
         }
         // Se arma el titulo de acuerdo al array opciones
-        $this->opciones['tituloxx'] = $this->opciones['accionxx'] . ': ' . $this->opciones['tituloxx'];
         return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }
     /**
@@ -131,23 +126,22 @@ class CformulaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create($padrexxx)
-    {
-        $paciente = Paciente::find($padrexxx);
-        
+    {        
+        $paciente=Paciente::getPaciente(['padrexxx'=>$padrexxx]);
         $this->opciones['formular'] = Dataformulario::getPintarFormulario(
             [
                 'paciente' => $paciente,
                 'furmulac' => '',
             ]
         );
-        $clinicax=SisClinica::find($padrexxx);
-        $clinicax=[$clinicax->id=>$clinicax->clinica];
-        $this->opciones['paciente'] = $paciente;
-        $this->opciones['clinicax'] = $clinicax;
+        //ddd($padrexxx);
+        
+        $this->opciones['paciente'] =$paciente;
+        $this->opciones['clinicax'] = [$paciente->sis_clinica->id=>$paciente->sis_clinica->clinica];
         $this->opciones['botoform'][0]['routingx'][1] = $padrexxx;
         $this->opciones['parametr'] = [$padrexxx];
         $this->opciones['padrexxx'] = $padrexxx;
-        $this->opciones['indecrea'] = true;
+        $this->opciones['indecrea'] = false;
         $this->opciones['clinicac'] = true;
         $this->opciones['botoform'][] =
             [
@@ -180,25 +174,18 @@ class CformulaController extends Controller
      */
     public function show($padrexxx,Cformula $objetoxx)
     {
-        $paciente = Paciente::find($padrexxx);
-        
+        $this->opciones['tituloxx']='Ver: Formulación';
+        $paciente=Paciente::getPaciente(['padrexxx'=>$padrexxx]);
         $this->opciones['formular'] = Dataformulario::getPintarFormulario(
             [
                 'paciente' => $paciente,
                 'furmulac' => $objetoxx,
-               
             ]
         );
-        $clinicax=SisClinica::find($padrexxx);
-        $clinicax=[$clinicax->id=>$clinicax->clinica];
         $this->opciones['paciente'] = $paciente;
-        $this->opciones['clinicax'] = $clinicax;
-
+        $this->opciones['clinicax'] = [$paciente->sis_clinica->id=>$paciente->sis_clinica->clinica];
         $this->opciones['botoform'][0]['routingx'][1] = $padrexxx;
-      
-        
         $this->opciones['parametr'] = [$objetoxx->id];
-        
         $this->opciones['readonly'] = 'readonly';
         return $this->view($objetoxx,  'modeloxx', 'Ver', $this->opciones['rutacarp'] . 'pestanias');
     }
@@ -211,8 +198,8 @@ class CformulaController extends Controller
      */
     public function edit($padrexxx,Cformula $objetoxx)
     { 
-        $paciente = Paciente::find($padrexxx);
-        
+        $this->opciones['tituloxx']='Editar: Formulación';
+        $paciente=Paciente::getPaciente(['padrexxx'=>$padrexxx]);
         $this->opciones['formular'] = Dataformulario::getPintarFormulario(
             [
                 'paciente' => $paciente,
@@ -220,14 +207,10 @@ class CformulaController extends Controller
                
             ]
         );
-        $clinicax=SisClinica::find($padrexxx);
-        $clinicax=[$clinicax->id=>$clinicax->clinica];
         $this->opciones['paciente'] = $paciente;
-        $this->opciones['clinicax'] = $clinicax;
+        $this->opciones['clinicax'] = [$paciente->sis_clinica->id=>$paciente->sis_clinica->clinica];
         $this->opciones['botoform'][0]['routingx'][1] = $padrexxx;
         $this->opciones['parametr'] = [$padrexxx,$objetoxx->id];
-
-     
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$padrexxx,$objetoxx->id]],
@@ -280,5 +263,33 @@ class CformulaController extends Controller
         $activado = $objetoxx->sis_esta_id == 2 ? 'inactivado' : 'activado';
 
         return redirect()->route($this->opciones['routxxxx'])->with('info', 'Registro ' . $activado . ' con éxito');
+    }
+
+    public function getFormular(Request $request)
+    {
+        if($request->ajax()){
+            return response()->json(Validacionesajax::formulaciones($request->all()));
+        }
+    }
+    //public function getPedineon($paciente)
+     public function getPedineon(Request $request)
+    {
+        require_once('DataFormulacionEjemplo.php');
+        $respuest=[];
+
+       // ddd($dataxxxx['dataxxxx']);
+        if($request->ajax()){
+            $dataxxxx=$request->all();
+            $existexx=['elemtraz', 'multivit', 'multiuno'];
+            foreach($dataxxxx['dataxxxx'] as $key => $value){
+                if (in_array($value['name'], $existexx)) {
+                    $dataxxxx['campo_id']=$value['name'].'_cant';
+                    $respuest[]=Validacionesajax::getFormulaciones($dataxxxx,$value['name']); 
+                }
+                //$dataxxxx = 
+            }
+            //return $respuest;
+            return response()->json($respuest);
+        }
     }
 }

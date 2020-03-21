@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Administracion\Usuario;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UsuariosStoreRequest extends FormRequest {
+class UsuarioCrearRequest extends FormRequest {
 
   /**
    * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class UsuariosStoreRequest extends FormRequest {
         'email.unique' => 'El E-mail ya se encuentra en uso',
         'password.required' => 'El password debe ser obligatorio',
         'password.min' => 'El password mínimo debe ser de 6 caracteres',
-        'clinica_id.required' => 'La IPS es requerida',
+        'sis_clinica_id.required' => 'La Clínica es requerida',
     ];
   }
 
@@ -36,7 +36,7 @@ class UsuariosStoreRequest extends FormRequest {
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',
         'password' => 'required|string|min:6',
-        'clinica_id' => 'required',
+        'sis_clinica_id' => 'required',
     ];
   }
 

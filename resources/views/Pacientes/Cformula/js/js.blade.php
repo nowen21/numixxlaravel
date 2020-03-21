@@ -1,8 +1,7 @@
-<script>
- 
-   
 
-    function filterFloat(evt, input) {
+
+<script>
+  function filterFloat(evt, input) {
     // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘.’ = 46, ‘-’ = 43
     var key = window.Event ? evt.which : evt.keyCode;
     var chark = String.fromCharCode(key);
@@ -40,9 +39,67 @@
     $('.select2').select2({
       language: "es"
     });
+  var template=function(json){
+    var mensaje={     
+        title:'<div class="alert alert-danger text-center popover-title"><strong>'+json.menssage[3]+'</strong></div>', 
+        content: '<div class="alert alert-info">'+json.menssage[2]+'</div>',
+        placement: "left",html: true
+      };
+    return mensaje;
+  }
 
+    var pedineon=function(){
+      $.ajax({
+        url: "{{route('formular.pedineon',$todoxxxx['parametr'])}}",
+        type: 'GET',
+        data: {
+          dataxxxx: f_dataxxxx(),
+        },
+        dataType: 'json',
+        success: function (json) {
+          $.each(json,function(i,d){
+            $("#" + d.campcant).val(d.cantidad); // mostrar requerimiento diario o volumen
+            $("#" + d.campvolu).val(d.volumenx); // mostrar requerimiento diario o volumen
+          });          
+        },
+        error: function (xhr, status) {
+          alert('Disculpe, existió un problema');
+        }
+      });
+    }
+    var f_dataxxxx=function(){
+      var dataxxxx = $('#formulario').serializeArray()
+          dataxxxx.push({name: "npt_id", value: '{{$todoxxxx["paciente"]->npt_id}}'});
+          return dataxxxx;
+    }
+    var f_ajax = function (campo_id) {
+      
+      $("#" + campo_id.split('_')[0] + '_cant').prop('title', '');
+      $.ajax({
+        url: "{{route('formular.formular',$todoxxxx['parametr'])}}",
+        type: 'GET',
+        data: {
+          dataxxxx: f_dataxxxx(),
+          campo_id: campo_id
+        },
+        dataType: 'json',
+        success: function (json) {
+          $("#" + json.unidadxx[0]).text(json.unidadxx[1]) // mostrar la unidad
+          $("#" + json.cantvolu[0]).val(json.cantvolu[1]); // mostrar requerimiento diario o volumen
+          $("#" + json.menssage[0]).popover('dispose');
+          if(json.menssage[2]!=''){
+            $("#" + json.menssage[0]).popover(template(json));
+            $("#" + json.menssage[0]).popover(json.menssage[1]); 
+          }
+        },
+        error: function (xhr, status) {
+          alert('Disculpe, existió un problema');
+        }
+      });
+      
+    }
     $('#multivit').on('change', function (e) {
-      if ($(this).val() == 20) {
+      if ($(this).val() == 30) {
         $('#ocultarx').hide("fast");
       } else {
         $('#ocultarx').show("slow");
@@ -63,88 +120,40 @@
       }
     })
     $('.calcularvolumen').on('keyup', function () {
-
-      $("#velocidad").val($('#volumen').val() / $('#tiempo').val());
-    });
-    $('#peso').on('keyup', function () {
-      recalcular();
-    });
-    //dataxxxx={'medicame':?,'campo_id':?,'compauxi':?}
-    var f_ajax = function (campo_id) {
-      var dataxxxx = $('#formulario').serializeArray()
-      dataxxxx.push({name: "npt_id", value: '{{$todoxxxx["paciente"]->npt_id}}'});
-      $("#" + campo_id.split('_')[0] + '_cant').prop('title', '');
+     // $("#velocidad").val($('#volumen').val() / $('#tiempo').val());
       $.ajax({
-        url: "{{url('api/cformula/volumen')}}",
+        url: "{{url('api/cformula/calcular')}}",
         type: 'GET',
         data: {
-          dataxxxx: dataxxxx,
-          campo_id: campo_id
+          volumenx: $('#volumen').val(),
+          tiempoxx: $('#tiempo').val(),
         },
         dataType: 'json',
         success: function (json) {
-          $("#" + campo_id.split('_')[0] + '_unid').text(json.unidadxx)
-          if (json.tipocamp == 'cant') {
-            $("#" + json.campvolu).val(json.valovolu);
-          } else {
-            $("#" + json.campcant).val(json.valocant);
-          }
-          if (json.mostmess) {
-            $("#" + campo_id.split('_')[0] + '_cant').attr("data-original-title", json.menssage);
-            //$("#"+campo_id.split('_')[0]+'_cant').prop('title',json.menssage);
-            $("#" + campo_id.split('_')[0] + '_cant').tooltip("show");
-            //, 'title'=>""
-          } else {
-            $("#" + campo_id.split('_')[0] + '_cant').prop('title', ''); //, 'title'=>""
-            $("#" + campo_id.split('_')[0] + '_cant').tooltip("hide");
-          }
-
+          $("#velocidad").val(json.calculox);
         },
         error: function (xhr, status) {
           alert('Disculpe, existió un problema');
         }
       });
-    }
-
-    var windowsx = function () {
-      var respuest = false;
-      var isMobile = {
-        Android: function () {
-          return navigator.userAgent.match(/Android/i);
-        },
-        BlackBerry: function () {
-          return navigator.userAgent.match(/BlackBerry/i);
-        },
-        iOS: function () {
-          return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-        },
-        Opera: function () {
-          return navigator.userAgent.match(/Opera Mini/i);
-        },
-        Windows: function () {
-          return navigator.userAgent.match(/IEMobile/i);
-        }
-      };
-      if (isMobile.Android()){
-        respuest = true;
-      } else if (isMobile.BlackBerry()){
-        respuest = true;
-      } else if (isMobile.iOS()){
-        respuest = true;
-      } else if (isMobile.Opera()){
-        respuest = true;
-      } else if (isMobile.Windows()){
-        respuest = true;
+    });
+    $('#peso').on('keyup', function () {
+      if($(this).val()>0 && eval({{$todoxxxx["paciente"]->npt_id}})<3){
+        pedineon($(this).val())
       }
-      return respuest;
-    }
+      recalcular();
+    });
+    //dataxxxx={'medicame':?,'campo_id':?,'compauxi':?}
+    
+
+   
 
     $('.input-number').on('keyup', function (event) {
 
 
       var aguaeste = $(this).attr('id').split('_');
       var codigo = event.keyCode;
-      if ((((codigo >= 96 && codigo <= 105) || (codigo >= 48 && codigo <= 57)) && aguaeste[0] != 'aguaeste') || codigo == 8 && aguaeste[0] != 'aguaeste' || windowsx()==true) {
+      if ((((codigo >= 96 && codigo <= 105) || (codigo >= 48 && codigo <= 57)) && aguaeste[0] != 'aguaeste') || codigo == 8 && aguaeste[0] != 'aguaeste' ) {
 
         if (!$("#tiempo").val() > 0) {
           $(this).val('');

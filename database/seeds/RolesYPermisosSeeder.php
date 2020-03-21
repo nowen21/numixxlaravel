@@ -44,6 +44,9 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => 'usuario-editar',  'descripc' => 'Editar usuario']);
         Permission::create(['name' => 'usuario-borrar',  'descripc' => 'Inactivar usuario']);
 
+        /**
+         * permisos para clinicas
+         */
         Permission::create(['name' => 'clinica-leer',  'descripc' => 'Listar clínicas']);
         Permission::create(['name' => 'clinica-crear',  'descripc' => 'Crear clínica']);
         Permission::create(['name' => 'clinica-editar',  'descripc' => 'Editar clínica']);
@@ -63,20 +66,17 @@ class RolesYPermisosSeeder extends Seeder
 
         Permission::create(['name' => 'crango-asiganar',  'descripc' => 'Permite asignar rangos a una clínica']);
         Permission::create(['name' => 'crango-leer',  'descripc' => 'Listar rangos clínica']);
-        Permission::create(['name' => 'crango-crear',  'descripc' => 'Asignar rango clínica']);
-        Permission::create(['name' => 'crango-editar',  'descripc' => 'Editar rango clínica']);
-        Permission::create(['name' => 'crango-borrar',  'descripc' => 'Inactivar rango clínica']);
+        Permission::create(['name' => 'crango-crear',  'descripc' => 'Asignar rango a clínica']);
+        Permission::create(['name' => 'c a-editar',  'descripc' => 'Editar rango a clínica']);
+        Permission::create(['name' => 'crango-borrar',  'descripc' => 'Inactivar rango a clínica']);
 
 
-        Permission::create(['name' => 'cremision-leer',  'descripc' => 'Listar rangos clínica']);
-        Permission::create(['name' => 'cremision-crear',  'descripc' => 'Asignar rango clínica']);
-        Permission::create(['name' => 'cremision-editar',  'descripc' => 'Editar rango clínica']);
-        Permission::create(['name' => 'cremision-borrar',  'descripc' => 'Inactivar rango clínica']);
+        Permission::create(['name' => 'cremision-leer',  'descripc' => 'Listar remisiones clínica']);
+        Permission::create(['name' => 'cremision-crear',  'descripc' => 'Asignar remisiones a clínica']);
+        Permission::create(['name' => 'cremision-editar',  'descripc' => 'Editar remisiones a clínica']);
+        Permission::create(['name' => 'cremision-borrar',  'descripc' => 'Inactivar remisiones a clínica']);
 
-        Permission::create(['name' => 'cservicio-leer',  'descripc' => 'Listar rangos clínica']);
-        Permission::create(['name' => 'cservicio-crear',  'descripc' => 'Asignar rango clínica']);
-        Permission::create(['name' => 'cservicio-editar',  'descripc' => 'Editar rango clínica']);
-        Permission::create(['name' => 'cservicio-borrar',  'descripc' => 'Inactivar rango clínica']);
+       
 
         /**
          * medicamentos
@@ -207,16 +207,36 @@ class RolesYPermisosSeeder extends Seeder
          */
         Permission::create(['name' => 'sistema-modulo',  'descripc' => 'Habilita los permisos para el módulo de administración del sistema']);
 
-        Permission::create(['name' => 'usuarios-leer',  'descripc' => 'Listar usuarios']);
-        Permission::create(['name' => 'usuarios-crear',  'descripc' => 'Crear usuario']);
-        Permission::create(['name' => 'usuarios-editar',  'descripc' => 'Editar usuario']);
-        Permission::create(['name' => 'usuarios-borrar',  'descripc' => 'Inactivar usuario']);
+        $permiso='roles';
+        Permission::create(['name' => $permiso.'-leer',  'descripc' => 'Listar roles']);
+        Permission::create(['name' => $permiso.'-crear',  'descripc' => 'Crear rol']);
+        Permission::create(['name' => $permiso.'-editar',  'descripc' => 'Editar rol']);
+        Permission::create(['name' => $permiso.'-borrar',  'descripc' => 'Inactivar rol']);
 
-        Permission::create(['name' => 'roles-leer',  'descripc' => 'Listar roles']);
-        Permission::create(['name' => 'roles-crear',  'descripc' => 'Crear rol']);
-        Permission::create(['name' => 'roles-editar',  'descripc' => 'Editar rol']);
-        Permission::create(['name' => 'roles-borrar',  'descripc' => 'Inactivar rol']);
+        $permiso='rpermiso';
+        Permission::create(['name' => $permiso.'-leer',  'descripc' => 'Lista de premisos asignados al rol']);
+        Permission::create(['name' => $permiso.'-crear',  'descripc' => 'Asignar permisos al rol']);
+        Permission::create(['name' => $permiso.'-editar',  'descripc' => 'Editar permisos del rol']);
+        Permission::create(['name' => $permiso.'-borrar',  'descripc' => 'Inactivar permisos del rol']);
 
+        $permiso='usuarios';
+        Permission::create(['name' => $permiso.'-leer',  'descripc' => 'Listar usuarios']);
+        Permission::create(['name' => $permiso.'-crear',  'descripc' => 'Crear usuario']);
+        Permission::create(['name' => $permiso.'-editar',  'descripc' => 'Editar usuario']);
+        Permission::create(['name' => $permiso.'-borrar',  'descripc' => 'Inactivar usuario']);
+
+        
+        $permiso='uroles';
+        Permission::create(['name' => $permiso.'-leer',  'descripc' => 'Listar roles del usuario']);
+        Permission::create(['name' => $permiso.'-crear',  'descripc' => 'Asignar roles al usuario']);
+        Permission::create(['name' => $permiso.'-editar',  'descripc' => 'Editar roles del usuario']);
+        Permission::create(['name' => $permiso.'-borrar',  'descripc' => 'Inactivar rol del usuario']);
+        
+        $permiso='servicio';
+        Permission::create(['name' => $permiso.'-leer',  'descripc' => 'Listar servicios']);
+        Permission::create(['name' => $permiso.'-crear',  'descripc' => 'Asignar servicio']);
+        Permission::create(['name' => $permiso.'-editar',  'descripc' => 'Editar servicio']);
+        Permission::create(['name' => $permiso.'-borrar',  'descripc' => 'Inactivar servicio']);
 
         /**
          * Reportes
@@ -233,7 +253,14 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => 'ordprodu-editar',  'descripc' => 'Editar órden de prodicción']);
         Permission::create(['name' => 'ordprodu-borrar',  'descripc' => 'Inactivar órden de prodicción']);
 
-
         Role::create(['name' => 'super-administrador',])->givePermissionTo(Permission::all());
+
+        Role::create(['name' => 'profesional-salud',])
+        ->givePermissionTo(
+            [
+                'paciente-leer','paciente-leer','paciente-leer','paciente-leer',
+                'formular-leer','formular-leer','formular-leer','formular-leer',
+            ]
+        );
     }
 }

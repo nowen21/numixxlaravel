@@ -31,13 +31,13 @@ class Magnesios {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        $formulax[12] = $this->dataxxxx['volumenx'] * 100;
+        $formulax[13] = $this->dataxxxx['volumenx'] * 100;
         break;
       case 2: // neonatos
-        $formulax[12] = $this->dataxxxx['volumenx'] * 100;
+        $formulax[13] = $this->dataxxxx['volumenx'] * 100;
         break;
       case 3: // adultos
-        $formulax[12] = $this->dataxxxx['volumenx'] * 20;
+        $formulax[13] = $this->dataxxxx['volumenx'] * 20;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['rediario'] = $formulax[$this->medicame];
@@ -47,13 +47,13 @@ class Magnesios {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[12] = $this->pesoxxxx * $this->dataxxxx['requdiar'];
+        $formulax[13] = $this->pesoxxxx * $this->dataxxxx['requdiar'];
         break;
       case 2:// neonatos
-        $formulax[12] = $this->pesoxxxx * $this->dataxxxx['requdiar'];
+        $formulax[13] = $this->pesoxxxx * $this->dataxxxx['requdiar'];
         break;
       case 3:// adultos
-        $formulax[12] = $this->dataxxxx['requdiar'];
+        $formulax[13] = $this->dataxxxx['requdiar'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
@@ -63,13 +63,13 @@ class Magnesios {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[12] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[13] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
       case 2:// neonatos        
-        $formulax[12] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[13] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
       case 3:
-        $formulax[12] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[13] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['purgaxxx'] = $formulax[$this->medicame];
@@ -79,13 +79,13 @@ class Magnesios {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[12] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 200;
+        $formulax[13] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 200;
         break;
       case 2:// neonatos
-        $formulax[12] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 200;
+        $formulax[13] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 200;
         break;
       case 3:// adultos
-        $formulax[12] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 20;
+        $formulax[13] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 20;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] = $formulax[$this->medicame];

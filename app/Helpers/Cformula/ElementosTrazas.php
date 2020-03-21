@@ -31,15 +31,15 @@ class ElementosTrazas {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        $formulax[16] = $this->dataxxxx['volumenx'] * 250 / $this->pesoxxxx;
+        $formulax[17] = $this->dataxxxx['volumenx'] * 250 / $this->pesoxxxx;
         break;
       case 2: // neonatos
-        $formulax[16] = $this->dataxxxx['volumenx'] * 250 / $this->pesoxxxx;
+        $formulax[17] = $this->dataxxxx['volumenx'] * 250 / $this->pesoxxxx;
         break;
       case 3: // adultos
-        $formulax[13] = $this->dataxxxx['volumenx'] * 0.33;
-        $formulax[14] = $this->dataxxxx['volumenx'] * 0.654;
-        $formulax[15] = $this->dataxxxx['volumenx'];
+        $formulax[14] = $this->dataxxxx['volumenx'] * 0.33;
+        $formulax[15] = $this->dataxxxx['volumenx'] * 0.654;
+        $formulax[16] = $this->dataxxxx['volumenx'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['rediario'] = $formulax[$this->medicame];
@@ -49,15 +49,15 @@ class ElementosTrazas {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[16] = $this->pesoxxxx * $this->dataxxxx['requdiar'];
+        $formulax[17] = $this->pesoxxxx * $this->dataxxxx['requdiar'];
         break;
       case 2:// neonatos
-        $formulax[16] = $this->pesoxxxx * $this->dataxxxx['requdiar'];
+        $formulax[17] = $this->pesoxxxx * $this->dataxxxx['requdiar'];
         break;
       case 3:// adultos
-        $formulax[13] = $this->dataxxxx['requdiar'];
         $formulax[14] = $this->dataxxxx['requdiar'];
         $formulax[15] = $this->dataxxxx['requdiar'];
+        $formulax[16] = $this->dataxxxx['requdiar'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
@@ -67,15 +67,15 @@ class ElementosTrazas {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[16] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[17] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
       case 2:// neonatos        
-        $formulax[16] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[17] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
       case 3:
-        $formulax[13] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         $formulax[14] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         $formulax[15] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[16] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['purgaxxx'] = $formulax[$this->medicame];
@@ -85,15 +85,15 @@ class ElementosTrazas {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[16] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 250;
+        $formulax[17] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 250;
         break;
       case 2:// neonatos
-        $formulax[16] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 250;
+        $formulax[17] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 250;
         break;
       case 3:// adultos
-        $formulax[13] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 0.33;
-        $formulax[14] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 0.654;
-        $formulax[15] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
+        $formulax[14] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 0.33;
+        $formulax[15] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 0.654;
+        $formulax[16] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] = $formulax[$this->medicame];
@@ -104,7 +104,11 @@ class ElementosTrazas {
     $this->medicame = $medicame->id;
     $this->casaxxxx = $medicame->casa->id;
     $this->purgaxxx = $purgaxxx;
-    $this->requemientodiarionpt();
+    if($this->npt_idxx==3){
+ $this->requemientodiarionpt();
+    }
+
+   
     $this->requemientototalnpt();
     $this->volumennpt();
     $this->purganpt();

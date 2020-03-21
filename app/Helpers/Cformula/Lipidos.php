@@ -7,8 +7,12 @@ namespace App\Helpers\Cformula;
  *
  * @author Ing. José Dúmar Jiménez Ruíz (nowen21@gmail.com)
  */
-class Lipidos {
-
+class Lipidos
+{
+  const FACTORX5 = 5;
+  const FACTOR10 = 10;
+  const FACTORX1 = 0.1;
+  const FACTORX9 = 0.099;
   private $estructu;
   private $pesoxxxx;
   private $npt_idxx;
@@ -17,7 +21,8 @@ class Lipidos {
   private $dataxxxx;
   private $purgaxxx;
 
-  public function __construct($estructu, $pesoxxxx, $npt_idxx) {
+  public function __construct($estructu, $pesoxxxx, $npt_idxx)
+  {
     $this->estructu = $estructu;
     $this->pesoxxxx = $pesoxxxx;
     $this->npt_idxx = $npt_idxx;
@@ -27,95 +32,100 @@ class Lipidos {
     $this->purgaxxx = 0;
   }
 
-  private function requemientodiarionpt() {
+  private function requemientodiarionpt()
+  {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        $formulax[25] = ($this->dataxxxx['volumenx'] / 5 + 0.1 * $this->dataxxxx['multivi2']) / $this->pesoxxxx;
-        $formulax[26] = ($this->dataxxxx['volumenx'] / 5 + 0.1 * $this->dataxxxx['multivi2'] / 0.099) / $this->pesoxxxx;
-        $formulax[27] = ($this->dataxxxx['volumenx'] / 10 + 0.1 * $this->dataxxxx['multivi2'] / 0.099) / $this->pesoxxxx;
+        $formulax[26] = ($this->dataxxxx['volumenx'] / self::FACTORX5 + self::FACTORX1 * $this->dataxxxx['multivi2']) / $this->pesoxxxx;
+        $formulax[27] = ($this->dataxxxx['volumenx'] / self::FACTORX5 + self::FACTORX1 * $this->dataxxxx['multivi2'] / self::FACTORX9) / $this->pesoxxxx;
+        $formulax[28] = ($this->dataxxxx['volumenx'] / self::FACTOR10 + self::FACTORX1 * $this->dataxxxx['multivi2'] / self::FACTORX9) / $this->pesoxxxx;
         break;
       case 2: // neonatos
-        $formulax[25] = ($this->dataxxxx['volumenx'] / 5 + 0.1 * $this->dataxxxx['multivi2']) / $this->pesoxxxx;
-        $formulax[26] = ($this->dataxxxx['volumenx'] / 5 + 0.1 * $this->dataxxxx['multivi2'] / 0.099) / $this->pesoxxxx;
-        $formulax[27] = ($this->dataxxxx['volumenx'] / 10 + 0.1 * $this->dataxxxx['multivi2'] / 0.099) / $this->pesoxxxx;
+        $formulax[26] = ($this->dataxxxx['volumenx'] / self::FACTORX5 + self::FACTORX1 * $this->dataxxxx['multivi2']) / $this->pesoxxxx;
+        $formulax[27] = ($this->dataxxxx['volumenx'] / self::FACTORX5 + self::FACTORX1 * $this->dataxxxx['multivi2'] / self::FACTORX9) / $this->pesoxxxx;
+        $formulax[28] = ($this->dataxxxx['volumenx'] / self::FACTOR10 + self::FACTORX1 * $this->dataxxxx['multivi2'] / self::FACTORX9) / $this->pesoxxxx;
         break;
       case 3: // adultos
-        $formulax[25] = ($this->dataxxxx['volumenx'] / 5 + 0.1 * $this->dataxxxx['multivi2'] / 0.099) / $this->pesoxxxx;
-        $formulax[26] = ($this->dataxxxx['volumenx'] / 5 + 0.1 * $this->dataxxxx['multivi2'] / 0.099) / $this->pesoxxxx;
-        $formulax[27] = ($this->dataxxxx['volumenx'] / 10 + 0.1 * $this->dataxxxx['multivi2'] / 0.099) / $this->pesoxxxx;
+        $formulax[26] = ($this->dataxxxx['volumenx'] / self::FACTORX5) / $this->pesoxxxx;
+        $formulax[27] = ($this->dataxxxx['volumenx'] / self::FACTORX5) / $this->pesoxxxx;
+        $formulax[28] = ($this->dataxxxx['volumenx'] / self::FACTOR10) / $this->pesoxxxx;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['rediario'] = $formulax[$this->medicame];
   }
 
-  private function requemientototalnpt() {
+  private function requemientototalnpt()
+  {
     $formulax = [];
     switch ($this->npt_idxx) {
-      case 1:// pediatricos
-        $formulax[25] = $this->dataxxxx['requdiar'] * $this->pesoxxxx;
+      case 1: // pediatricos
         $formulax[26] = $this->dataxxxx['requdiar'] * $this->pesoxxxx;
         $formulax[27] = $this->dataxxxx['requdiar'] * $this->pesoxxxx;
+        $formulax[28] = $this->dataxxxx['requdiar'] * $this->pesoxxxx;
         break;
-      case 2:// neonatos
-        $formulax[25] = $this->dataxxxx['requdiar'] * $this->pesoxxxx;
+      case 2: // neonatos
         $formulax[26] = $this->dataxxxx['requdiar'] * $this->pesoxxxx;
         $formulax[27] = $this->dataxxxx['requdiar'] * $this->pesoxxxx;
+        $formulax[28] = $this->dataxxxx['requdiar'] * $this->pesoxxxx;
         break;
-      case 3:// adultos
-        $formulax[25] = $this->dataxxxx['requdiar'] * $this->pesoxxxx;
+      case 3: // adultos
         $formulax[26] = $this->dataxxxx['requdiar'] * $this->pesoxxxx;
         $formulax[27] = $this->dataxxxx['requdiar'] * $this->pesoxxxx;
+        $formulax[28] = $this->dataxxxx['requdiar'] * $this->pesoxxxx;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
   }
 
-  private function purganpt() {
+  private function purganpt()
+  {
     $formulax = [];
     switch ($this->npt_idxx) {
-      case 1:// pediatricos
-        $formulax[25] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
+      case 1: // pediatricos
         $formulax[26] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
         $formulax[27] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
+        $formulax[28] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
         break;
-      case 2:// neonatos        
-        $formulax[25] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
+      case 2: // neonatos        
         $formulax[26] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
         $formulax[27] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
+        $formulax[28] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
         break;
       case 3:
-        $formulax[25] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
         $formulax[26] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
         $formulax[27] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
+        $formulax[28] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['purgaxxx'] = $formulax[$this->medicame];
   }
 
-  private function volumennpt() {
+  private function volumennpt()
+  {
     $formulax = [];
     switch ($this->npt_idxx) {
-      case 1:// pediatricos       
-        $formulax[25] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - 0.1 * $this->dataxxxx['multivi2']) * 5;
-        $formulax[26] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - 0.1 * $this->dataxxxx['multivi2']) * 5;
-        $formulax[27] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - 0.1 * $this->dataxxxx['multivi2']) * 10;
+      case 1: // pediatricos       
+        $formulax[26] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['multivi2']) * self::FACTORX5;
+        $formulax[27] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['multivi2']) * self::FACTORX5;
+        $formulax[28] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['multivi2']) * self::FACTOR10;
         break;
-      case 2:// neonatos
-        $formulax[25] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - 0.1 * $this->dataxxxx['multivi2']) * 5;
-        $formulax[26] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - 0.1 * $this->dataxxxx['multivi2']) * 5;
-        $formulax[27] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - 0.1 * $this->dataxxxx['multivi2']) * 10;
+      case 2: // neonatos
+        $formulax[26] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['multivi2']) * self::FACTORX5;
+        $formulax[27] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['multivi2']) * self::FACTORX5;
+        $formulax[28] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['multivi2']) * self::FACTOR10;
         break;
-      case 3:// adultos
-        $formulax[25] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - 0.1 * $this->dataxxxx['multivi2'] / 0.099) * 5;
-        $formulax[26] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - 0.1 * $this->dataxxxx['multivi2'] / 0.099) * 5;
-        $formulax[27] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - 0.1 * $this->dataxxxx['multivi2'] / 0.099) * 10;
+      case 3: // adultos
+        $formulax[26] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * self::FACTORX5);
+        $formulax[27] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * self::FACTORX5);
+        $formulax[28] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * self::FACTOR10);
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] = $formulax[$this->medicame];
   }
 
-  public function lipido($dataxxxx, $medicame, $purgaxxx) {
+  public function lipido($dataxxxx, $medicame, $purgaxxx)
+  {
     $this->dataxxxx = $dataxxxx;
     $this->medicame = $medicame->id;
     $this->casaxxxx = $medicame->casa->id;
@@ -127,5 +137,4 @@ class Lipidos {
 
     return $this->estructu[$this->casaxxxx];
   }
-
 }

@@ -18,7 +18,14 @@ Route::get('cformula/rangos', function (Request $request) {
 Route::get('cformula/volumen', function (Request $request) {
   if (!$request->ajax())
     return redirect('/');
+   
   return response()->json(Validacionesajax::formulaciones($request->all()));
+});
+
+Route::get('cformula/calcular', function (Request $request) {
+  if (!$request->ajax())
+    return redirect('/');
+  return response()->json(['calculox'=>number_format(($request->volumenx/$request->tiempoxx),1)]);
 });
 
 

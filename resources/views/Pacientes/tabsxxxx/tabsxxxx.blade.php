@@ -1,4 +1,7 @@
 <div class="card">
+  <div class="card-header">
+    PACIENTE: {{ $todoxxxx['paciente']->nombres }}
+  </div>
   <div class="card-header p-2">
     <ul class="nav nav-tabs">
       @canany(['paciente-leer', 'paciente-crear', 'paciente-editar', 'paciente-borrar'])

@@ -1,4 +1,8 @@
 @extends('layouts.index')
+@section('styles')
+
+
+@endsection
 @section('content')
 @if ($todoxxxx["indecrea"])
 

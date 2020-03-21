@@ -8,7 +8,6 @@ use App\Http\Requests\Pacientes\PacienteEditarRequest;
 use App\Models\Administracion\Ep;
 use App\Models\Administracion\Genero;
 use App\Models\Administracion\Servicio;
-
 use App\Models\Medicamentos\Npt;
 use App\Models\Pacientes\Paciente;
 use App\Models\Sistema\Departamento;
@@ -32,7 +31,7 @@ class PacienteController extends Controller
             'indecrea'=>false,
             'esindexx'=>false
         ];
-
+       
         $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
         $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
         $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
@@ -58,8 +57,8 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $padrexxx='';
+    { 
+        $padrexxx=Auth::user()->sis_clinica_id;
         $this->opciones['indecrea']=true;
         $this->opciones['esindexx']=true;
         $this->opciones['accionxx']='index';
@@ -71,22 +70,24 @@ class PacienteController extends Controller
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                    ['campoxxx' => 'medicame', 'dataxxxx' => $padrexxx],
+                    ['campoxxx' => 'clinicax', 'dataxxxx' => $padrexxx],
                 ],
                 'vercrear' => true,
                 'accitabl' => true,
                 'urlxxxxx' => 'api/paciente/paciente',
                 'cabecera' =>[
                     ['td' => 'ID'],
+                     ['td' => 'CEDULA'],
                     ['td' => 'NOMBRES'],
-                    ['td' => 'APELLIDOS'],
+                   
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'pacientes.id'],
+                     ['data' => 'cedula', 'name' => 'pacientes.cedula'],
                     ['data' => 'nombres', 'name' => 'pacientes.nombres'],
-                    ['data' => 'apellidos', 'name' => 'pacientes.apellidos'],
+                   
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tablapacientes',
@@ -116,7 +117,7 @@ class PacienteController extends Controller
         }
         $this->opciones['municipi'] = Municipio::combo(['cabecera' => true, 'ajaxxxxx' => false,'departam'=>$departam]);
         // Se arma el titulo de acuerdo al array opciones
-        $this->opciones['tituloxx'] = $this->opciones['accionxx'] . ': ' . $this->opciones['tituloxx'];
+        
         return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }
     /**
@@ -158,6 +159,8 @@ class PacienteController extends Controller
      */
     public function show(Paciente $objetoxx)
     {
+        $this->opciones['tituloxx']='Ver: Paciente';
+        $this->opciones['paciente'] =$objetoxx;
         $this->opciones['clinicax'] =$objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
         $this->opciones['botoform'][] =
@@ -177,7 +180,8 @@ class PacienteController extends Controller
      */
     public function edit(Paciente $objetoxx)
     {
-        //ddd($objetoxx->id);
+        $this->opciones['tituloxx']='Editar: Paciente';
+        $this->opciones['paciente'] =$objetoxx;
         $this->opciones['clinicax'] =$objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
         $this->opciones['botoform'][] =

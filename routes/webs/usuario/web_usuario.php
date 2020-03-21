@@ -1,32 +1,34 @@
 <?php
-Route::group(['prefix' => 'usuarios'], function () {
-    Route::get('', [
-	    'uses' => 'Usuario\UsuarioController@index',
-	    'middleware' => ['permission:usuarios-leer|usuarios-crear|usuarios-editar|usuarios-borrar']
-	])->name('usuario');
+$controll = 'Usuario\Usuario';
+$routexxx = 'usuarios';
+Route::group(['prefix' => 'usuarios'], function () use ($controll, $routexxx) {
+
+	Route::get('', [
+		'uses' => $controll . 'Controller@index',
+		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
+	])->name($routexxx);
 	Route::get('nuevo', [
-                        'uses' => 'Usuario\UsuarioController@create',
-                        'middleware' => ['permission:usuarios-crear']
-                        ]
-                )->name('usuario.nuevo');
+		'uses' => $controll . 'Controller@create',
+		'middleware' => ['permission:' . $routexxx . '-crear']
+	])->name($routexxx . '.nuevo');
 	Route::post('crear', [
-	    'uses' => 'Usuario\UsuarioController@store',
-	    'middleware' => ['permission:usuarios-crear']
-	])->name('usuario.crear');
+		'uses' => $controll . 'Controller@store',
+		'middleware' => ['permission:' . $routexxx . '-crear']
+	])->name($routexxx . '.crear');
 	Route::get('editar/{objetoxx}', [
-	    'uses' => 'Usuario\UsuarioController@edit',
-	    'middleware' => ['permission:usuarios-editar']
-	])->name('usuario.editar');
+		'uses' => $controll . 'Controller@edit',
+		'middleware' => ['permission:' . $routexxx . '-editar']
+	])->name($routexxx . '.editar');
 	Route::put('editar/{objetoxx}', [
-	    'uses' => 'Usuario\UsuarioController@update',
-	    'middleware' => ['permission:usuarios-editar']
-	])->name('usuario.editar');
+		'uses' => $controll . 'Controller@update',
+		'middleware' => ['permission:' . $routexxx . '-editar']
+	])->name($routexxx . '.editar');
 	Route::get('ver/{objetoxx}', [
-	    'uses' => 'Usuario\UsuarioController@show',
-	    'middleware' => ['permission:usuarios-leer']
-	])->name('usuario.ver');
+		'uses' => $controll . 'Controller@show',
+		'middleware' => ['permission:' . $routexxx . '-leer']
+	])->name($routexxx . '.ver');
 	Route::delete('borrar/{objetoxx}', [
-	    'uses' => 'Usuario\UsuarioController@destroy',
-	    'middleware' => ['permission:usuarios-borrar']
-	])->name('usuario.borrar');
+		'uses' => $controll . 'Controller@destroy',
+		'middleware' => ['permission:' . $routexxx . '-borrar']
+	])->name($routexxx . '.borrar');
 });

@@ -12,9 +12,11 @@ class Pacientes
     {
         $paciente = Paciente::select([
             'pacientes.id', 'pacientes.nombres', 'pacientes.apellidos', 'pacientes.sis_esta_id',
-            'sis_estas.s_estado'
+            'sis_estas.s_estado','pacientes.cedula'
         ])
-            ->join('sis_estas', 'pacientes.sis_esta_id', '=', 'sis_estas.id');
+            ->join('sis_estas', 'pacientes.sis_esta_id', '=', 'sis_estas.id')
+            ->where('sis_clinica_id',$request->clinicax)
+            ;
 
         return DatatableHelper::getDatatable($paciente, $request);
     }

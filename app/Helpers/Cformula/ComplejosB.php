@@ -10,7 +10,6 @@ namespace App\Helpers\Cformula;
 class ComplejosB {
 
   private $estructu;
-  private $pesoxxxx;
   private $npt_idxx;
   private $medicame;
   private $casaxxxx;
@@ -31,13 +30,13 @@ class ComplejosB {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        $formulax[21] = $this->dataxxxx['volumenx'];
+        $formulax[22] = $this->dataxxxx['volumenx'];
         break;
       case 2: // neonatos
-        $formulax[21] = $this->dataxxxx['volumenx'];
+        $formulax[22] = $this->dataxxxx['volumenx'];
         break;
       case 3: // adultos
-        $formulax[21] = $this->dataxxxx['volumenx'];
+        $formulax[22] = $this->dataxxxx['volumenx'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['rediario'] = $formulax[$this->medicame];
@@ -47,13 +46,13 @@ class ComplejosB {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[21] = $this->dataxxxx['requdiar'];
+        $formulax[22] = $this->dataxxxx['requdiar'];
         break;
       case 2:// neonatos
-        $formulax[21] = $this->dataxxxx['requdiar'];
+        $formulax[22] = $this->dataxxxx['requdiar'];
         break;
       case 3:// adultos
-        $formulax[21] = $this->dataxxxx['requdiar'];
+        $formulax[22] = $this->dataxxxx['requdiar'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
@@ -63,13 +62,13 @@ class ComplejosB {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[21] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[22] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
       case 2:// neonatos        
-        $formulax[21] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[22] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
       case 3:
-        $formulax[21] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[22] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['purgaxxx'] = $formulax[$this->medicame];
@@ -79,13 +78,13 @@ class ComplejosB {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[21] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
+        $formulax[22] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
         break;
       case 2:// neonatos
-        $formulax[21] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
+        $formulax[22] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
         break;
       case 3:// adultos
-        $formulax[21] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
+        $formulax[22] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] = $formulax[$this->medicame];

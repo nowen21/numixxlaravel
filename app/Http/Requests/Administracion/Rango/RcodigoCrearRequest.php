@@ -14,10 +14,12 @@ class RcodigoCrearRequest extends FormRequest
         $this->_mensaje = [
             'rcondici_id.required' => 'Seleccione una condición',
             'codiprod.required' => 'Ingrese el código word office',
+            'descripc.required' => 'Ingrese la descripción del rango',
         ];
         $this->_reglasx = [
             'rcondici_id' => ['required'],
             'codiprod' => ['required'],
+            'descripc' => ['required'],
         ];
     }
 

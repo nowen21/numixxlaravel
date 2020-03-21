@@ -41,19 +41,19 @@ class Sodios {
         if ($this->dataxxxx['fosfa_id'] == 4) {
           $calcfosf = $this->dataxxxx['fosfcant'] * 2;
         }
-        $formulax[9] = ($this->dataxxxx['volumenx'] * 2 + $calcfosf) / $this->pesoxxxx; //SODIO CLORURO
+        $formulax[10] = ($this->dataxxxx['volumenx'] * 2 + $calcfosf) / $this->pesoxxxx; //SODIO CLORURO
         break;
       case 2: // neonatos
         if ($this->dataxxxx['fosfa_id'] == 4) {
           $calcfosf = $this->dataxxxx['fosfcant'] * 2;
         }
-        $formulax[9] = ($this->dataxxxx['volumenx'] * 2 + $calcfosf) / $this->pesoxxxx; //SODIO CLORURO
+        $formulax[10] = ($this->dataxxxx['volumenx'] * 2 + $calcfosf) / $this->pesoxxxx; //SODIO CLORURO
         break;
       case 3: // adultos
         if ($this->dataxxxx['fosfa_id'] == 4) {
           $calcfosf = $this->dataxxxx['fosfcant'] * 2;
         }
-        $formulax[9] = ($this->dataxxxx['volumenx'] * 2 + $calcfosf) / $this->pesoxxxx; //SODIO CLORURO
+        $formulax[10] = ($this->dataxxxx['volumenx'] * 2 + $calcfosf) / $this->pesoxxxx; //SODIO CLORURO
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['rediario'] = $formulax[$this->medicame];
@@ -67,19 +67,19 @@ class Sodios {
         if ($this->dataxxxx['fosfa_id'] == 4) {
           $restaxxx = $this->dataxxxx['fosfcant'] * $this->pesoxxxx * 2;
         }
-        $formulax[9] =  ($this->pesoxxxx * $this->dataxxxx['requdiar']) - $restaxxx; //SODIO CLORURO
+        $formulax[10] =  ($this->pesoxxxx * $this->dataxxxx['requdiar']) - $restaxxx; //SODIO CLORURO
         break;
       case 2:// neonatos
         if ($this->dataxxxx['fosfa_id'] == 4) {
           $restaxxx = $this->dataxxxx['fosfcant'] * $this->pesoxxxx * 2;
         }
-        $formulax[9] =  ($this->pesoxxxx * $this->dataxxxx['requdiar']) - $restaxxx; //SODIO CLORURO
+        $formulax[10] =  ($this->pesoxxxx * $this->dataxxxx['requdiar']) - $restaxxx; //SODIO CLORURO
         break;
       case 3:// adultos
         if ($this->dataxxxx['fosfa_id'] == 4) {
           $restaxxx = $this->dataxxxx['fosfcant'] * 2;
         }
-        $formulax[9] =  ($this->pesoxxxx * $this->dataxxxx['requdiar']) - $restaxxx; //SODIO CLORURO
+        $formulax[10] =  ($this->pesoxxxx * $this->dataxxxx['requdiar']) - $restaxxx; //SODIO CLORURO
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
@@ -89,13 +89,13 @@ class Sodios {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[9] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //SODIO CLORURO
+        $formulax[10] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //SODIO CLORURO
         break;
       case 2:// neonatos        
-        $formulax[9] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //SODIO CLORURO
+        $formulax[10] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //SODIO CLORURO
         break;
       case 3:
-        $formulax[9] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //SODIO CLORURO
+        $formulax[10] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //SODIO CLORURO
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['purgaxxx'] = $formulax[$this->medicame];
@@ -105,13 +105,13 @@ class Sodios {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[9] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 2; //SODIO CLORURO
+        $formulax[10] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 2; //SODIO CLORURO
         break;
       case 2:// neonatos
-        $formulax[9] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 2; //SODIO CLORURO 
+        $formulax[10] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 2; //SODIO CLORURO 
         break;
       case 3:// adultos
-        $formulax[9] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']/2; //SODIO CLORURO
+        $formulax[10] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']/2; //SODIO CLORURO
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] = $formulax[$this->medicame];

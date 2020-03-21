@@ -12,9 +12,7 @@ class Crango extends Model
 {
     protected $fillable = [
         'sis_clinica_id',
-        'rango_id',
-        
-        'condicio_id',
+        'rcodigo_id',
         'sis_esta_id',
         'user_crea_id',
         'user_edita_id'

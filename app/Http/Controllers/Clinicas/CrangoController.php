@@ -74,16 +74,16 @@ class CrangoController extends Controller
                 'urlxxxxx' => 'api/clinica/crango',
                 'cabecera' => [
                     ['td' => 'ID'],
-                    ['td' => 'RANGO INICIA'],
-                    ['td' => 'RANGO FINALIZA'],
+                    ['td' => 'CODIGO'],
+                    ['td' => 'RANGO'],
                     ['td' => 'CONDICION'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
-                    ['data' => 'id', 'name' => 'rangos.id'],
-                    ['data' => 'ranginic', 'name' => 'rangos.ranginic'],
-                    ['data' => 'rangfina', 'name' => 'rangos.rangfina'],
+                    ['data' => 'id', 'name' => 'rcodigos.id'],
+                    ['data' => 'codiprod', 'name' => 'rcodigos.codiprod'],
+                    ['data' => 'descripc', 'name' => 'rcodigos.descripc'],
                     ['data' => 'condicio', 'name' => 'condicios.condicio'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
@@ -101,25 +101,17 @@ class CrangoController extends Controller
     }
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
     {
-        $rangoxxx = 0;
-        $condicio = 0;
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
         if ($nombobje != '') {
             $this->opciones[$nombobje] = $objetoxx;
-            $rangoxxx = $objetoxx->rango_id;
-            $condicio = $objetoxx->condicio_id;
         }
         $this->opciones['rangoxxx'] = Rcodigo::combo([
-            'cabecera' => true, 'ajaxxxxx' => false,
-            'clinicax' => $this->opciones['clinicax'], 'crangoxx' => $rangoxxx
+            'cabecera' => false, 'ajaxxxxx' => false,
+            'clinicax' => $this->opciones['clinicax']
         ]);
 
-        $this->opciones['condicio'] = Condicio::combo([
-            'cabecera' => false, 'ajaxxxxx' => false,
-            'clinicax' => $this->opciones['clinicax'], 'rango_id' => $rangoxxx, 'condicio' => $condicio
-        ]);
         // Se arma el titulo de acuerdo al array opciones
         return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Formulaciones\Hidrpedi;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -32,5 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DmedicosSeeder::class);
         $this->call(DmarcasSeeder::class);
         $this->call(DlotesSeeder::class);
+        $this->call(HidrpedisSeeder::class);
+        $this->call(LipopedisSeeder::class);
     }
 }

@@ -36,7 +36,7 @@ class Condicio extends Model
     public static function combo($dataxxxx)
     {
         $notinxxx = [];
-        $crangosx = Crango::where('rango_id', $dataxxxx['rango_id'])
+        $crangosx = Crango::where('rcodigo_id', $dataxxxx['rango_id'])
         ->where('sis_clinica_id', $dataxxxx['clinicax'])->get();
         foreach ($crangosx as $crangoxx) {
             if ($dataxxxx['condicio'] != $crangoxx->condicio_id) {

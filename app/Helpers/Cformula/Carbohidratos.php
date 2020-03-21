@@ -37,16 +37,16 @@ class Carbohidratos {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        $formulax[7] = $this->dataxxxx['volumenx'] / 2 / $this->pesoxxxx / 1.44; //carbo
-        $formulax[8] = $this->dataxxxx['volumenx'] / 10 / $this->pesoxxxx / 1.44; //carbo
+        $formulax[8] = $this->dataxxxx['volumenx'] / 2 / $this->pesoxxxx / 1.44; //carbo
+        $formulax[9] = $this->dataxxxx['volumenx'] / 10 / $this->pesoxxxx / 1.44; //carbo
         break;
       case 2: // neonatos
-        $formulax[7] = $this->dataxxxx['volumenx'] / 2 / $this->pesoxxxx / 1.44; //carbo
-        $formulax[8] = $this->dataxxxx['volumenx'] / 10 / $this->pesoxxxx / 1.44; //carbo
+        $formulax[8] = $this->dataxxxx['volumenx'] / 2 / $this->pesoxxxx / 1.44; //carbo
+        $formulax[9] = $this->dataxxxx['volumenx'] / 10 / $this->pesoxxxx / 1.44; //carbo
         break;
       case 3: // adultos
-        $formulax[7] = $this->dataxxxx['volumenx'] / 2 / $this->pesoxxxx / 1.44; //carbo
-        $formulax[8] = $this->dataxxxx['volumenx'] / 10 / $this->pesoxxxx / 1.44; //carbo
+        $formulax[8] = $this->dataxxxx['volumenx'] / 2 / $this->pesoxxxx / 1.44; //carbo
+        $formulax[9] = $this->dataxxxx['volumenx'] / 10 / $this->pesoxxxx / 1.44; //carbo
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['rediario'] = $formulax[$this->medicame];
@@ -56,16 +56,16 @@ class Carbohidratos {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[7] = $this->dataxxxx['requdiar'] * $this->pesoxxxx * 1.44; //f6 carbohidrato 50        
-        $formulax[8] = $this->dataxxxx['requdiar'] * $this->pesoxxxx * 1.44; //f7 carbohidrato 10 
+        $formulax[8] = $this->dataxxxx['requdiar'] * $this->pesoxxxx * 1.44; //f6 carbohidrato 50        
+        $formulax[9] = $this->dataxxxx['requdiar'] * $this->pesoxxxx * 1.44; //f7 carbohidrato 10 
         break;
       case 2:// neonatos
-        $formulax[7] = $this->dataxxxx['requdiar'] * $this->pesoxxxx * 1.44; //f6 carbohidrato 50        
-        $formulax[8] = $this->dataxxxx['requdiar'] * $this->pesoxxxx * 1.44; //f7 carbohidrato 10 
+        $formulax[8] = $this->dataxxxx['requdiar'] * $this->pesoxxxx * 1.44; //f6 carbohidrato 50        
+        $formulax[9] = $this->dataxxxx['requdiar'] * $this->pesoxxxx * 1.44; //f7 carbohidrato 10 
         break;
       case 3:// adultos
-        $formulax[7] = $this->dataxxxx['requdiar'] * $this->pesoxxxx * 1.44; //f6 carbohidrato 50        
-        $formulax[8] = $this->dataxxxx['requdiar'] * $this->pesoxxxx * 1.44; //f7 carbohidrato 10 
+        $formulax[8] = $this->dataxxxx['requdiar'] * $this->pesoxxxx * 1.44; //f6 carbohidrato 50        
+        $formulax[9] = $this->dataxxxx['requdiar'] * $this->pesoxxxx * 1.44; //f7 carbohidrato 10 
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
@@ -75,16 +75,16 @@ class Carbohidratos {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[7] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //f6 carbohidrato 50        
-        $formulax[8] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //f7 carbohidrato 10 
+        $formulax[8] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //f6 carbohidrato 50        
+        $formulax[9] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //f7 carbohidrato 10 
         break;
       case 2:// neonatos        
-        $formulax[7] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //f6 carbohidrato 50        
-        $formulax[8] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //f7 carbohidrato 10 
+        $formulax[8] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //f6 carbohidrato 50        
+        $formulax[9] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //f7 carbohidrato 10 
         break;
       case 3:
-        $formulax[7] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //f6 carbohidrato 50        
-        $formulax[8] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //f7 carbohidrato 10 
+        $formulax[8] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //f6 carbohidrato 50        
+        $formulax[9] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx; //f7 carbohidrato 10 
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['purgaxxx'] = $formulax[$this->medicame];
@@ -94,16 +94,16 @@ class Carbohidratos {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[7] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 2; //CARBOHIDRATOS  DAD 50%     
-        $formulax[8] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 10; //CARBOHIDRATOS  DAD 10%  
+        $formulax[8] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 2; //CARBOHIDRATOS  DAD 50%     
+        $formulax[9] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 10; //CARBOHIDRATOS  DAD 10%  
         break;
       case 2:// neonatos
-        $formulax[7] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 2; //CARBOHIDRATOS  DAD 50%     
-        $formulax[8] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 10; //CARBOHIDRATOS  DAD 10%   
+        $formulax[8] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 2; //CARBOHIDRATOS  DAD 50%     
+        $formulax[9] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 10; //CARBOHIDRATOS  DAD 10%   
         break;
       case 3:// adultos
-        $formulax[7] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 2; //CARBOHIDRATOS  DAD 50%     
-        $formulax[8] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 10; //CARBOHIDRATOS  DAD 10%  
+        $formulax[8] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 2; //CARBOHIDRATOS  DAD 50%     
+        $formulax[9] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 10; //CARBOHIDRATOS  DAD 10%  
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] = $formulax[$this->medicame];

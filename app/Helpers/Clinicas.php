@@ -96,13 +96,18 @@ class Clinicas
             'rangos.ranginic',
             'rangos.rangfina',
             'condicios.condicio',
+            'rcodigos.codiprod',
+            'rcodigos.descripc',
             'crangos.sis_clinica_id',
             's_estado',
             'crangos.sis_esta_id'
         )
-            ->join('rangos', 'crangos.rango_id', '=', 'rangos.id')
-            ->join('condicios', 'crangos.condicio_id', '=', 'condicios.id')
-            ->join('sis_estas', 'rangos.sis_esta_id', '=', 'sis_estas.id')
+            ->join('rcodigos', 'crangos.rcodigo_id', '=', 'rcodigos.id')
+            ->join('rcondicis', 'rcodigos.rcondici_id', '=', 'rcondicis.id')
+            ->join('condicios', 'rcondicis.condicio_id', '=', 'condicios.id')
+            ->join('rnpts', 'rcondicis.rnpt_id', '=', 'rnpts.id')
+            ->join('rangos', 'rnpts.rango_id', '=', 'rangos.id')
+            ->join('sis_estas', 'crangos.sis_esta_id', '=', 'sis_estas.id')
             ->where('crangos.sis_clinica_id', $request->clinicax);
         return DatatableHelper::getDatatable($paciente, $request);
     }

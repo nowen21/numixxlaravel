@@ -8,14 +8,13 @@ namespace App\Helpers\Cformula;
  * @author Ing. José Dúmar Jiménez Ruíz (nowen21@gmail.com)
  */
 class VitaminasC {
+  const FACTORXX = 100;
   private $estructu;
-  private $pesoxxxx;
   private $npt_idxx;
   private $medicame;
   private $casaxxxx;
   private $dataxxxx;
   private $purgaxxx;
-
   public function __construct($estructu, $pesoxxxx, $npt_idxx) {
     $this->estructu = $estructu;
     $this->pesoxxxx = $pesoxxxx;
@@ -24,19 +23,20 @@ class VitaminasC {
     $this->casaxxxx = 0;
     $this->dataxxxx = [];
     $this->purgaxxx = 0;
+  
   }
 
   private function requemientodiarionpt() {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        $formulax[20] = $this->dataxxxx['volumenx'] * 100;
+        $formulax[21] = $this->dataxxxx['volumenx'] * self::FACTORXX;
         break;
       case 2: // neonatos
-        $formulax[20] = $this->dataxxxx['volumenx'] * 100;
+        $formulax[21] = $this->dataxxxx['volumenx'] * self::FACTORXX;
         break;
       case 3: // adultos
-        $formulax[20] = $this->dataxxxx['volumenx'] * 100;
+        $formulax[21] = $this->dataxxxx['volumenx'] * self::FACTORXX;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['rediario'] = $formulax[$this->medicame];
@@ -46,13 +46,13 @@ class VitaminasC {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[20] =$this->dataxxxx['requdiar'];
+        $formulax[21] =$this->dataxxxx['requdiar'];
         break;
       case 2:// neonatos
-        $formulax[20] =$this->dataxxxx['requdiar'];
+        $formulax[21] =$this->dataxxxx['requdiar'];
         break;
       case 3:// adultos
-        $formulax[20] =$this->dataxxxx['requdiar'];
+        $formulax[21] =$this->dataxxxx['requdiar'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
@@ -62,13 +62,13 @@ class VitaminasC {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[20] =  $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[21] =  $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
       case 2:// neonatos        
-        $formulax[20] =  $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[21] =  $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
       case 3:
-        $formulax[20] =  $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[21] =  $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['purgaxxx'] = $formulax[$this->medicame];
@@ -78,13 +78,13 @@ class VitaminasC {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[20] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']/100;
+        $formulax[21] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']/self::FACTORXX;
         break;
       case 2:// neonatos
-        $formulax[20] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']/100;
+        $formulax[21] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']/self::FACTORXX;
         break;
       case 3:// adultos
-        $formulax[20] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']/100;
+        $formulax[21] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']/self::FACTORXX;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] = $formulax[$this->medicame];

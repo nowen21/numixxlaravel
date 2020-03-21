@@ -18,17 +18,14 @@ class CreateCrangosTable extends Migration
             $table->bigIncrements('id');
            
             $table=CamposMagicos::getForeign($table,'sis_clinica');
-            $table=CamposMagicos::getForeign($table,'condicio');
-            $table=CamposMagicos::getForeign($table,'rango');
+            $table=CamposMagicos::getForeign($table,'rcodigo');
             $table=CamposMagicos::magicos($table);
-            $table->unique(['condicio_id','rango_id','sis_clinica_id']);
+            $table->unique(['rcodigo_id','sis_clinica_id']);
         });
         Schema::create('h_crangos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('sis_clinica_id');
-            
-            $table->integer('condicio_id');
-            $table->integer('rango_id');
+            $table->integer('rcodigo_id');
             $table=CamposMagicos::h_magicos($table);
         });
     }

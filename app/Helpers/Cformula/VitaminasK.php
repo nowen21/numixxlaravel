@@ -13,17 +13,19 @@ namespace App\Helpers\Cformula;
  *
  * @author Ing. José Dúmar Jiménez Ruíz (nowen21@gmail.com)
  */
-class VitaminasK {
-
+class VitaminasK
+{
+  const FACTORXX = 0.1;
   private $estructu;
-  private $pesoxxxx;
+
   private $npt_idxx;
   private $medicame;
   private $casaxxxx;
   private $dataxxxx;
   private $purgaxxx;
 
-  public function __construct($estructu, $pesoxxxx, $npt_idxx) {
+  public function __construct($estructu, $pesoxxxx, $npt_idxx)
+  {
     $this->estructu = $estructu;
     $this->pesoxxxx = $pesoxxxx;
     $this->npt_idxx = $npt_idxx;
@@ -33,71 +35,76 @@ class VitaminasK {
     $this->purgaxxx = 0;
   }
 
-  private function requemientodiarionpt() {
+  private function requemientodiarionpt()
+  {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        $formulax[24] = $this->dataxxxx['volumenx'] / 0.1;
+        $formulax[25] = $this->dataxxxx['volumenx'] / self::FACTORXX;
         break;
       case 2: // neonatos
-        $formulax[24] = $this->dataxxxx['volumenx'] / 0.1;
+        $formulax[25] = $this->dataxxxx['volumenx'] / self::FACTORXX;
         break;
       case 3: // adultos
-        $formulax[24] = $this->dataxxxx['volumenx'] / 0.1;
+        $formulax[25] = $this->dataxxxx['volumenx'] / self::FACTORXX;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['rediario'] = $formulax[$this->medicame];
   }
 
-  private function requemientototalnpt() {
+  private function requemientototalnpt()
+  {
     $formulax = [];
     switch ($this->npt_idxx) {
-      case 1:// pediatricos
-        $formulax[24] = $this->dataxxxx['requdiar'];
+      case 1: // pediatricos
+        $formulax[25] = $this->dataxxxx['requdiar'];
         break;
-      case 2:// neonatos
-        $formulax[24] = $this->dataxxxx['requdiar'];
+      case 2: // neonatos
+        $formulax[25] = $this->dataxxxx['requdiar'];
         break;
-      case 3:// adultos
-        $formulax[24] = $this->dataxxxx['requdiar'];
+      case 3: // adultos
+        $formulax[25] = $this->dataxxxx['requdiar'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
   }
 
-  private function purganpt() {
+  private function purganpt()
+  {
     $formulax = [];
     switch ($this->npt_idxx) {
-      case 1:// pediatricos
-        $formulax[24] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+      case 1: // pediatricos
+        $formulax[25] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
-      case 2:// neonatos        
-        $formulax[24] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+      case 2: // neonatos        
+        $formulax[25] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
       case 3:
-        $formulax[24] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[25] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['purgaxxx'] = $formulax[$this->medicame];
   }
 
-  private function volumennpt() {
+  private function volumennpt()
+  {
     $formulax = [];
     switch ($this->npt_idxx) {
-      case 1:// pediatricos
-        $formulax[24] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 0.1;
+      case 1: // pediatricos
+        $formulax[25] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * self::FACTORXX;
         break;
-      case 2:// neonatos
-        $formulax[24] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 0.1;
+      case 2: // neonatos
+        $formulax[25] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * self::FACTORXX;
         break;
-      case 3:// adultos
-        $formulax[24] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 0.1;
+      case 3: // adultos
+        $formulax[25] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * self::FACTORXX;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] = $formulax[$this->medicame];
   }
 
-  public function vitaminak($dataxxxx, $medicame, $purgaxxx) {
+  public function vitaminak($dataxxxx, $medicame, $purgaxxx)
+  {
     $this->dataxxxx = $dataxxxx;
     $this->medicame = $medicame->id;
     $this->casaxxxx = $medicame->casa->id;
@@ -106,8 +113,7 @@ class VitaminasK {
     $this->requemientototalnpt();
     $this->volumennpt();
     $this->purganpt();
-    
+
     return $this->estructu[$this->casaxxxx];
   }
-
 }

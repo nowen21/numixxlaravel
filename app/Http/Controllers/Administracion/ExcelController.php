@@ -20,6 +20,8 @@ use App\Models\Clinica\SisClinica;
 use App\Models\Dispositivos\Dlote;
 use App\Models\Dispositivos\Dmarca;
 use App\Models\Dispositivos\Dmedico;
+use App\Models\Formulaciones\Hidrpedi;
+use App\Models\Formulaciones\Lipopedi;
 use App\Models\Medicamentos\Medicame;
 use App\Models\Medicamentos\Minvima;
 use App\Models\Medicamentos\Mlote;
@@ -130,14 +132,11 @@ class ExcelController extends Controller
         $magicosx = "'user_crea_id'=>1,
         'user_edita_id'=>1,
          'sis_esta_id'=>1";
-        foreach (Medicame::get() as $marcasxx) {
-            echo    "Medicame::create([
-                    'nombgene'=> '{$marcasxx->nombgene}',
-                    'concentr'=> '{$marcasxx->concentr}',
-                    'unidconc'=> '{$marcasxx->unidconc}',
-                    'unidmedi'=> '{$marcasxx->unidmedi}',
-                    'casa_id'=> '{$marcasxx->casa_id}',
-                    'sis_clinica_id'=> '{$marcasxx->sis_clinica_id}',
+        foreach (Lipopedi::get() as $marcasxx) {
+            echo    "Lipopedi::create([
+                    'inicioxx'=> '{$marcasxx->inicioxx}',
+                    'finalxxx'=> '{$marcasxx->finalxxx}',
+                    'requerim'=> '{$marcasxx->requerim}',
                     {$magicosx}]); <br>";
         }
 

@@ -1,15 +1,14 @@
 <?php
 
 use App\Helpers\Pacientes;
-use App\Models\Sistema\Municipio;
+use App\Helpers\Usuarios\Usuarios;
 use Illuminate\Http\Request;
 
 
 Route::get('usuario/usuario', function (Request $request) {
   if (!$request->ajax())
     return redirect('/');
-
-  return Pacientes::getPacientes($request);
+  return Usuarios::getUsuarios($request);
 });
 
 Route::get('usuario/rol', function (Request $request) {

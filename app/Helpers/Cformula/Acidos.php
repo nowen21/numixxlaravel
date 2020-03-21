@@ -32,13 +32,13 @@ class Acidos {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        $formulax[23] = $this->dataxxxx['volumenx'] ;
+        $formulax[24] = $this->dataxxxx['volumenx'] ;
         break;
       case 2: // neonatos
-         $formulax[23] = $this->dataxxxx['volumenx'] ;
+         $formulax[24] = $this->dataxxxx['volumenx'] ;
         break;
       case 3: // adultos
-         $formulax[23] = $this->dataxxxx['volumenx'] ;
+         $formulax[24] = $this->dataxxxx['volumenx'] ;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['rediario'] = $formulax[$this->medicame];
@@ -48,13 +48,13 @@ class Acidos {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[23] = $this->dataxxxx['requdiar'];
+        $formulax[24] = $this->dataxxxx['requdiar'];
         break;
       case 2:// neonatos
-        $formulax[23] = $this->dataxxxx['requdiar'];
+        $formulax[24] = $this->dataxxxx['requdiar'];
         break;
       case 3:// adultos
-        $formulax[23] = $this->dataxxxx['requdiar'];
+        $formulax[24] = $this->dataxxxx['requdiar'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
@@ -64,13 +64,13 @@ class Acidos {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[23] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[24] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
       case 2:// neonatos        
-        $formulax[23] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[24] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
       case 3:
-        $formulax[23] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[24] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['purgaxxx'] = $formulax[$this->medicame];
@@ -80,13 +80,13 @@ class Acidos {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[23] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
+        $formulax[24] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
         break;
       case 2:// neonatos
-        $formulax[23] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
+        $formulax[24] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
         break;
       case 3:// adultos
-        $formulax[23] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
+        $formulax[24] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] = $formulax[$this->medicame];

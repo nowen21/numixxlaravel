@@ -1,4 +1,3 @@
-<div class="form-group row">
     <div class="form-group col-md-4">
         {{ Form::label('sis_clinica_id', 'Clínica:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
@@ -92,57 +91,4 @@
     <div class="form-group col-md-12">
         <hr style="border:  #000000 solid 2px" />
     </div>
-    <div class="form-group col-md-12">
-        <table class="table table-bordered" style="margin-top: 10px">
-            <thead>
-                <tr>
-                    <th>MEDICAMENTO</th>
-                    <th>SELECCIÓN</th>
-                    <th>UNIDAD</th>
-                    <th>REQUERIMIENTO</th>
-                    <th>VOLUMEN</th>
-                </tr>
-            </thead>
-            <tbody id="formulaciontable">
-
-                @foreach($todoxxxx['formular'] as $formulax)
-                <?php
-    $idxxxxxx = '';
-    $ocultarx = '';
-    if ($formulax['campo_id'] == 'multiuno' && $todoxxxx['paciente']->npt_id == 3) {
-      $idxxxxxx = 'ocultarx';
-      $ocultarx = 'display: none';
-    }
     
-    ?>
-                <tr id="{{$idxxxxxx}}" style="">
-                    <td>{{$formulax['casaxxxx']}}</td>
-                    <td>{{ Form::select($formulax['campo_id'], $formulax['selelist'], $formulax['selevalu'],['class'=>'form-control medicamento select2','id'=>$formulax['campo_id']]) }}
-                    </td>
-                    <td id="{{$formulax['campo_id'].'_unid'}}">{{$formulax['unidmedi']}}</td>
-                    <td> {{ Form::text($formulax['campo_id'].'_cant', 
-        $formulax['requerim'],
-        
-        ['class'=>'form-control input-number test',
-        'id'=>$formulax['campo_id'].'_cant',
-        'placeholder'=>'Diario',
-        'onkeypress'=>'return filterFloat(event,this);',
-        'data-toggle'=>"popover",
-        $formulax['readonly'],
-       
-
-        ]) }} </td>
-                    <td>{{ Form::text($formulax['campo_id'].'_volu', 
-        $formulax['volumenx'],
-        ['class'=>'form-control input-number test','style'=>'width: 100px',
-        'id'=>$formulax['campo_id'].'_volu',
-        'onkeypress'=>'return filterFloat(event,this);',
-        $formulax['readonly'],
-
-        ]) }} </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Administracion\Usuario;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UsuariosUpdateRequest extends FormRequest {
+class UsuarioEditarRequest extends FormRequest {
 
   /**
    * Determine if the user is authorized to make this request.
@@ -20,7 +20,7 @@ class UsuariosUpdateRequest extends FormRequest {
         'name.required' => 'El nombre del usuario es requerido',
         'email.required' => 'El E-mail es requerido',
         'email.unique' => 'El E-mail ya se encuentra en uso',
-        'clinica_id.required' => 'La IPS es requerida',
+        'sis_clinica_id.required' => 'La clínica es requerida',
     ];
   }
 
@@ -34,7 +34,7 @@ class UsuariosUpdateRequest extends FormRequest {
         'name' => 'required',
         'email' => ['required',
             'unique:users,email,' . $this->segments()[1]],
-        'clinica_id' => 'required',
+        'sis_clinica_id' => 'required',
     ];
   }
 

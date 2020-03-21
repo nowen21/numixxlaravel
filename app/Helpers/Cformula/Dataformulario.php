@@ -71,10 +71,14 @@ class Dataformulario
   public static function getPintarFormulario($dataxxxx)
   {
     $formulacion = [];
+    
     // listar las casas que apliquen
     $casasxxx = Casa::select('casas.id', 'casas.casa','unidmedi','nameidxx')
       ->orderBy('casas.ordecasa', 'ASC')->get();
     //    // recorre las casas
+    $existexx=['elemtraz', 'multivit', 'multiuno'];
+    $aguaxxxx=['aguaeste'];
+    $aguaeste=0;
     foreach ($casasxxx as $key => $value) {
       if (Dataformulario::getCasaMedicamentos($dataxxxx, $value->id)) {
         $selevalu = '';
@@ -84,7 +88,7 @@ class Dataformulario
         $requtota = '';
         // saber cuales son los medicames que aplican para la lista
         $dataxxxx['casaidxx'] = $value->id;
-        $dataxxxx['cabecera'] = true;
+        $dataxxxx['cabecera'] = false;
         $dataxxxx['ajaxxxxx'] = false;
         $dataxxxx['tipocomb'] = true;
         $selelist = Dataformulario::getMedicamentosCasa($dataxxxx);
@@ -105,7 +109,10 @@ class Dataformulario
             }
           }
         }
-
+        
+        $pedineon=(in_array($value['nameidxx'], $existexx)==true && $dataxxxx['paciente']->npt_id<3);
+        $aguaeste=(in_array($value['nameidxx'], $aguaxxxx)==true);
+       
         $formulacion[] = [
           'casaxxxx' => $value['casa'],
           'campo_id' => $value['nameidxx'], // nombre del campo con el que se guarda
@@ -114,12 +121,12 @@ class Dataformulario
           'requerim' => $requerim,
           'requtota' => $requtota,
           'volumenx' => $volumenx,
+          'readonly'=>  $pedineon?'readonly':$aguaeste?'readonly':'',
           'valorxxx' => 4,
           'unidmedi' => $value->unidmedi,
         ];
       }
     }
-
     return $formulacion;
   }
 

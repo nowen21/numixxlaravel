@@ -9,7 +9,7 @@
     <ul class="nav nav-treeview">
         @canany(['usuarios-leer'])
             <li class="nav-item">
-                <a href="{{ route('usuario') }}" class="nav-link">
+                <a href="{{ route('usuarios') }}" class="nav-link">
                     <i class="fas fa-child nav-icon"></i>
                     <p>Usuarios</p>
                 </a>

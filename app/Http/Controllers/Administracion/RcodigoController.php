@@ -152,7 +152,7 @@ class RcodigoController extends Controller
         $this->opciones['parametr'] =  [$padrexxx,$objetoxx->id];
         $this->opciones['tituloxx']='Ver: Rango';
         $this->opciones['indecrea'] = false;
-        $this->opciones['padrexxx'] = $objetoxx->id;
+        $this->opciones['padrexxx'] = $padrexxx;
         $this->opciones['parametr'] = [$objetoxx->id];
         $this->opciones['readonly'] = 'readonly';
         return $this->view($objetoxx,  'modeloxx', 'Ver', $this->opciones['rutacarp'] . 'pestanias');
@@ -172,7 +172,7 @@ class RcodigoController extends Controller
         
         $this->opciones['tituloxx']='Editar: Rango';
         $this->opciones['indecrea'] = false;
-        $this->opciones['padrexxx'] = $objetoxx->id;
+        $this->opciones['padrexxx'] = $padrexxx;
       
         $this->opciones['botoform'][] =
             [

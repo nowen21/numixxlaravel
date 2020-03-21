@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Clinica;
 
+use App\Models\Clinica\Crango;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CrangoEditarRequest extends FormRequest {
@@ -11,12 +12,10 @@ class CrangoEditarRequest extends FormRequest {
 
   public function __construct() {
     $this->_mensaje = [
-        'condicio_id.required' => 'Seleccione una condición',
-        'rango_id.required' => 'Selecciones un rango',
+        'rcodigo_id.required' => 'Selecciones un rango',
     ];
     $this->_reglasx = [
-        'condicio_id' => ['required'],
-        'rango_id' => ['required']
+        'rcodigo_id' => ['required'],
     ];
   }
 
@@ -44,7 +43,11 @@ class CrangoEditarRequest extends FormRequest {
   }
 
   public function validar() {
-    
+    $rangoxxx=Crango::where('sis_clinica_id',$this->segments()[1])->where('rcodigo_id',$this->rcodigo_id)->first();
+    $rangoyxx=Crango::where('sis_clinica_id',$this->segments()[1])->first();
+    if(isset($rangoxxx->id) && isset($rangoyxx->id)){      
+      $this->_mensaje['existexx.required']='El rango ya está asociado a la clínica';
+      $this->_reglasx['existexx']=['required'];
+    }
   }
-
 }

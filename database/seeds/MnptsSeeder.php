@@ -77,5 +77,9 @@ class MnptsSeeder extends Seeder
         Mnpt::create(['id' => 63, 'medicame_id' => 26, 'npt_id' => 2, 'sis_esta_id' => 1, 'randesde' => 0.5, 'ranhasta' => 2, 'rangunid' => 'g/kg/día', 'user_crea_id' => 1, 'user_edita_id' => 1,]);
         Mnpt::create(['id' => 64, 'medicame_id' => 27, 'npt_id' => 2, 'sis_esta_id' => 1, 'randesde' => 0.5, 'ranhasta' => 2, 'rangunid' => 'g/kg/día', 'user_crea_id' => 1, 'user_edita_id' => 1,]);
         Mnpt::create(['id' => 65, 'medicame_id' => 28, 'npt_id' => 2, 'sis_esta_id' => 1, 'randesde' => 0.5, 'ranhasta' => 2, 'rangunid' => 'g/kg/día', 'user_crea_id' => 1, 'user_edita_id' => 1,]);
+
+        Mnpt::create(['id' => 66, 'medicame_id' => 28, 'npt_id' => 1, 'sis_esta_id' => 1, 'randesde' => 5000, 'ranhasta' => 5000, 'rangunid' => 'ml', 'user_crea_id' => 1, 'user_edita_id' => 1,]);
+        Mnpt::create(['id' => 67, 'medicame_id' => 28, 'npt_id' => 2, 'sis_esta_id' => 1, 'randesde' => 5000, 'ranhasta' => 5000, 'rangunid' => 'ml', 'user_crea_id' => 1, 'user_edita_id' => 1,]);
+        Mnpt::create(['id' => 68, 'medicame_id' => 28, 'npt_id' => 3, 'sis_esta_id' => 1, 'randesde' => 5000, 'ranhasta' => 5000, 'rangunid' => 'ml', 'user_crea_id' => 1, 'user_edita_id' => 1,]);
     }
 }

@@ -59,7 +59,26 @@ class Rcondici extends Model
                 $comboxxx[$registro->id] = $registro->condicio->condicio;
             }
         }
-
+        return $comboxxx;
+    }
+    public static function getCombo($dataxxxx)
+    {
+        $comboxxx = [];
+        if ($dataxxxx['cabecera']) {
+            if ($dataxxxx['ajaxxxxx']) {
+                $comboxxx[] = ['valuexxx' => '', 'optionxx' => 'Seleccione'];
+            } else {
+                $comboxxx = ['' => 'Seleccione'];
+            }
+        }
+        $activida = Rcondici::get();
+        foreach ($activida as $registro) {
+            if ($dataxxxx['ajaxxxxx']) {
+                $comboxxx[] = ['valuexxx' => $registro->id, 'optionxx' => $registro->condicio->condicio];
+            } else {
+                $comboxxx[$registro->id] = $registro->condicio->condicio;
+            }
+        }
         return $comboxxx;
     }
 }

@@ -32,4 +32,13 @@ Route::group(['prefix' => '{padrexxx}'], function () use ($controll, $routexxx) 
 		'uses' => $controll . 'Controller@destroy',
 		'middleware' => ['permission:' . $routexxx . '-borrar']
 	])->name($routexxx . '.borrar');
+
+	Route::get('formular', [
+		'uses' => $controll . 'Controller@getFormular',
+		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
+	])->name($routexxx . '.formular');
+	Route::get('pedineon', [
+		'uses' => $controll . 'Controller@getPedineon',
+		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
+	])->name($routexxx . '.pedineon');
 });

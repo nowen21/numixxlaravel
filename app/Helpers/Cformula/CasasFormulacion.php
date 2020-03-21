@@ -91,6 +91,7 @@ class CasasFormulacion {
     return $estructu;
   }
   public function calculos($dataxxxx) {
+    //ddd($dataxxxx['medisele']);
     $medicame = Medicame::where('id', $dataxxxx['medisele'])->first();
     $calculox=[];
     switch ($medicame->casa->id) {

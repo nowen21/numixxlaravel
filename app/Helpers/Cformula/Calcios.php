@@ -37,13 +37,13 @@ class Calcios {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        $formulax[11] = $this->dataxxxx['volumenx'] * 100 / $this->pesoxxxx; //CALCIO GLUCONATO 10%  
+        $formulax[12] = $this->dataxxxx['volumenx'] * 100 / $this->pesoxxxx; //CALCIO GLUCONATO 10%  
         break;
       case 2: // neonatos
-        $formulax[11] = $this->dataxxxx['volumenx'] * 100 / $this->pesoxxxx; //CALCIO GLUCONATO 10%  
+        $formulax[12] = $this->dataxxxx['volumenx'] * 100 / $this->pesoxxxx; //CALCIO GLUCONATO 10%  
         break;
       case 3: // adultos
-        $formulax[11] = $this->dataxxxx['volumenx'] * 9.2; //CALCIO GLUCONATO 10%  
+        $formulax[12] = $this->dataxxxx['volumenx'] * 9.2; //CALCIO GLUCONATO 10%  
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['rediario'] = $formulax[$this->medicame];
@@ -53,13 +53,13 @@ class Calcios {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[11] = $this->pesoxxxx * $this->dataxxxx['requdiar']; //CALCIO GLUCONATO 10%  
+        $formulax[12] = $this->pesoxxxx * $this->dataxxxx['requdiar']; //CALCIO GLUCONATO 10%  
         break;
       case 2:// neonatos
-        $formulax[11] = $this->pesoxxxx * $this->dataxxxx['requdiar']; //CALCIO GLUCONATO 10%  
+        $formulax[12] = $this->pesoxxxx * $this->dataxxxx['requdiar']; //CALCIO GLUCONATO 10%  
         break;
       case 3:// adultos
-        $formulax[11] = $this->dataxxxx['requdiar']; //CALCIO GLUCONATO 10%  
+        $formulax[12] = $this->dataxxxx['requdiar']; //CALCIO GLUCONATO 10%  
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
@@ -69,13 +69,13 @@ class Calcios {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[11] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[12] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
       case 2:// neonatos        
-        $formulax[11] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[12] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
       case 3:
-        $formulax[11] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[12] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['purgaxxx'] = $formulax[$this->medicame];
@@ -85,13 +85,13 @@ class Calcios {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[11] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 100;
+        $formulax[12] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 100;
         break;
       case 2:// neonatos
-        $formulax[11] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 100;
+        $formulax[12] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 100;
         break;
       case 3:// adultos
-        $formulax[11] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 9.2;
+        $formulax[12] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 9.2;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] = $formulax[$this->medicame];

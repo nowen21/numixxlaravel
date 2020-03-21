@@ -11,6 +11,7 @@ class Rcodigo extends Model
     protected $fillable = [
         'rcondici_id',
         'codiprod',
+        'descripc',
         'sis_esta_id',  'user_crea_id', 'user_edita_id'
     ];
 
@@ -44,16 +45,16 @@ class Rcodigo extends Model
                 $comboxxx = ['' => 'Seleccione'];
             }
         }
-        $activida =Rcodigo::get();
+        $activida = Rcodigo::get();
         foreach ($activida as $registro) {
-$rangoxxx=$registro->rcondici->rnpt->rango;
+            $rangoxxx = $registro->rcondici->rnpt->rango;
 
 
-            $optionxx= $registro->codiprod.
-            ' (' .$rangoxxx->ranginic.' - '.
-            $rangoxxx->rangfina.' '.
-            $registro->rcondici->rnpt->npt->nombre.' '.
-            $registro->rcondici->condicio->condicio.')' ;
+            $optionxx = $registro->codiprod .
+                ' (' . $rangoxxx->ranginic . ' - ' .
+                $rangoxxx->rangfina . ' ' .
+                $registro->rcondici->rnpt->npt->nombre . ' ' .
+                $registro->rcondici->condicio->condicio . ')';
 
 
 
