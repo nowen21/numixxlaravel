@@ -3,21 +3,34 @@
 namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Http\Requests\Pacientes\PacienteCrearRequest;
+use App\Http\Requests\Pacientes\PacienteEditarRequest;
+use App\Models\Administracion\Ep;
+use App\Models\Administracion\Genero;
+use App\Models\Administracion\Servicio;
 
-class UrolController extends Controller
+use App\Models\Medicamentos\Npt;
+use App\Models\Pacientes\Paciente;
+use App\Models\Sistema\Departamento;
+use App\Models\Sistema\Municipio;
+use App\Models\Sistema\SisEsta;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
+
+class RpermisoController extends Controller
 {
     private $opciones;
 
     public function __construct()
     {
         $this->opciones = [
-            'permisox' => 'uroles',
+            'permisox' => 'rpermiso',
             'parametr' => [],
-            'rutacarp' => 'Sistema.Usuario.',
+            'rutacarp' => 'Sistema.Rol.',
             'tituloxx' => 'Crear: Rol',
-            'slotxxxx'=>'uroles',
-            'carpetax'=>'Urol',
+            'slotxxxx'=>'rpermiso',
+            'carpetax'=>'Rpermiso',
             'indecrea'=>false,
             'esindexx'=>false
         ];
@@ -28,9 +41,9 @@ class UrolController extends Controller
         $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
 
         $this->opciones['readonly'] = '';
-        $this->opciones['rutaxxxx'] = 'uroles';
-        $this->opciones['routnuev'] = 'uroles';
-        $this->opciones['routxxxx'] = 'uroles';
+        $this->opciones['rutaxxxx'] = 'rpermiso';
+        $this->opciones['routnuev'] = 'rpermiso';
+        $this->opciones['routxxxx'] = 'rpermiso';
 
         $this->opciones['botoform'] = [
             [
@@ -48,7 +61,7 @@ class UrolController extends Controller
      */
     public function index($padrexxx)
     {
-        $this->opciones['usuariox']=User::where('id',$padrexxx)->first();
+        $this->opciones['cardhead']='ROL: '.Role::find($padrexxx)->name;
         $this->opciones['parametr'] = [$padrexxx];
         $this->opciones['indecrea']=false;
         $this->opciones['esindexx']=false;
@@ -57,7 +70,7 @@ class UrolController extends Controller
         $this->opciones['tablasxx'] = [
             [
                 'titunuev' => 'NUEVO ROL',
-                'titulist' => 'LISTA DE ROLES ASIGNADOS',
+                'titulist' => 'LISTA DE PERMISOS ASIGNADOS',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
@@ -65,49 +78,52 @@ class UrolController extends Controller
                 ],
                 'vercrear' => FALSE,
                 'accitabl' => true,
-                'urlxxxxx' => 'api/usuario/urol',
+                'urlxxxxx' => 'api/rol/rpermisos',
                 'cabecera' =>[
                     ['td' => 'ID'],
-                    ['td' => 'ROL'],
+                    ['td' => 'PERMISO'],
+                    ['td' => 'DESCRIPCION'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
-                    ['data' => 'id', 'name' => 'uroles.id'],
-                    ['data' => 'name', 'name' => 'roles.name'],
+                    ['data' => 'id', 'name' => 'permissions.id'],
+                    ['data' => 'name', 'name' => 'permissions.name'],
+                    ['data' => 'descripc', 'name' => 'permissions.descripc'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
-                'tablaxxx' => 'tablauroles',
-                'permisox' => 'uroles',
-                'routxxxx' => 'uroles',
+                'tablaxxx' => 'tablarpermisos',
+                'permisox' => 'rpermiso',
+                'routxxxx' => 'rpermiso',
                 'parametr' => [$padrexxx],
             ],
             [
                 'titunuev' => 'NUEVO ROL',
-                'titulist' => 'SELECCIONE EL PERMISO QUE DESEA ASIGNAR',
+                'titulist' => 'SELECCIONE EL ROL QUE DESEA ASIGNAR',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
                     ['campoxxx' => 'padrexxx', 'dataxxxx' => $padrexxx],
                 ],
                 'vercrear' => FALSE,
                 'accitabl' => FALSE,
-                'urlxxxxx' => 'api/usuario/rol',
+                'urlxxxxx' => 'api/rol/permisos',
                 'cabecera' =>[
                     ['td' => 'ID'],
-                    ['td' => 'ROL'],
+                    ['td' => 'PERMISO'],
+                    ['td' => 'DESCRIPCION'],
                 ],
                 'columnsx' => [
-                    ['data' => 'id', 'name' => 'roles.id'],
-                    ['data' => 'name', 'name' => 'roles.name'],
+                    ['data' => 'id', 'name' => 'permissions.id'],
+                    ['data' => 'name', 'name' => 'permissions.name'],
+                    ['data' => 'descripc', 'name' => 'permissions.descripc'],
                 ],
-                'tablaxxx' => 'tablaroles',
-                'permisox' => 'uroles',
-                'routxxxx' => 'uroles',
+                'tablaxxx' => 'tablapermisos',
+                'permisox' => 'rpermiso',
+                'routxxxx' => 'rpermiso',
                 'parametr' => [$padrexxx],
             ],
 
         ];
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
-    
 }

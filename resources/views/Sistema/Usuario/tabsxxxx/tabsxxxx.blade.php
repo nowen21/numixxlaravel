@@ -8,9 +8,9 @@
       <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='usuarios') ?' active' : '' }} text-sm" 
         href="{{ route('usuarios.editar', $todoxxxx['parametr']) }}">Usuario</a></li>
       @endcanany
-      @canany(['usuarios-leer', 'usuarios-crear', 'usuarios-editar', 'usuarios-borrar'])
-      <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='urol') ?' active' : '' }} text-sm" 
-        href="{{ route('usuarios.editar', $todoxxxx['parametr']) }}">Roles</a></li>
+      @canany(['uroles-leer', 'uroles-crear', 'uroles-editar', 'uroles-borrar'])
+      <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='uroles') ?' active' : '' }} text-sm" 
+        href="{{ route('uroles', $todoxxxx['parametr']) }}">Roles</a></li>
       @endcanany
       
     </ul>
@@ -21,8 +21,8 @@
         @if(isset($usuarios))
           {{ $usuarios }}
         @endif
-        @if(isset($urol))
-          {{ $urol }}
+        @if(isset($uroles))
+          {{ $uroles }}
         @endif
        
       </div>

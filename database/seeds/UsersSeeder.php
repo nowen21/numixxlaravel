@@ -16,11 +16,11 @@ class UsersSeeder extends Seeder
         'email'=>'nowen21@gmail.com','password'=>'N0w3n2104$',
         'sis_clinica_id'=>1
         ]);
-        $super->assignRole('super-administrador');
+       
         $super=User::create(['name'=>'ADMINISTRADOR NUMIXX',
         'email'=>'numixx@numixx.com','password'=>'Num1xx123$',
         'sis_clinica_id'=>1
         ]);
-        $super->assignRole('super-administrador');
+        
     }
 }

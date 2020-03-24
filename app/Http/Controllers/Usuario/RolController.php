@@ -3,20 +3,14 @@
 namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Pacientes\PacienteCrearRequest;
-use App\Http\Requests\Pacientes\PacienteEditarRequest;
-use App\Models\Administracion\Ep;
-use App\Models\Administracion\Genero;
-use App\Models\Administracion\Servicio;
-
-use App\Models\Medicamentos\Npt;
-use App\Models\Pacientes\Paciente;
-use App\Models\Sistema\Departamento;
-use App\Models\Sistema\Municipio;
+use App\Http\Requests\Administracion\Usuario\RoleCrearRequest;
+use App\Http\Requests\Administracion\Usuario\RoleEditarRequest;
 use App\Models\Sistema\SisEsta;
+use App\Models\Usuarios\Rol;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
-class Paciente8Controller extends Controller
+class RolController extends Controller
 {
     private $opciones;
 
@@ -25,9 +19,9 @@ class Paciente8Controller extends Controller
         $this->opciones = [
             'permisox' => 'roles',
             'parametr' => [],
-            'rutacarp' => 'Sistema.',
+            'rutacarp' => 'Sistema.Rol.',
             'tituloxx' => 'Crear: Rol',
-            'slotxxxx'=>'rol',
+            'slotxxxx'=>'roles',
             'carpetax'=>'Rol',
             'indecrea'=>false,
             'esindexx'=>false
@@ -39,9 +33,9 @@ class Paciente8Controller extends Controller
         $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
 
         $this->opciones['readonly'] = '';
-        $this->opciones['rutaxxxx'] = 'rol';
-        $this->opciones['routnuev'] = 'rol';
-        $this->opciones['routxxxx'] = 'rol';
+        $this->opciones['rutaxxxx'] = 'roles';
+        $this->opciones['routnuev'] = 'roles';
+        $this->opciones['routxxxx'] = 'roles';
 
         $this->opciones['botoform'] = [
             [
@@ -71,27 +65,25 @@ class Paciente8Controller extends Controller
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                    ['campoxxx' => 'medicame', 'dataxxxx' => $padrexxx],
+                    ['campoxxx' => 'padrexxx', 'dataxxxx' => $padrexxx],
                 ],
                 'vercrear' => true,
                 'accitabl' => true,
-                'urlxxxxx' => 'api/usuario/rol',
+                'urlxxxxx' => 'api/rol/roles',
                 'cabecera' =>[
                     ['td' => 'ID'],
-                    ['td' => 'NOMBRES'],
-                    ['td' => 'APELLIDOS'],
+                    ['td' => 'ROL'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
-                    ['data' => 'id', 'name' => 'pacientes.id'],
-                    ['data' => 'nombres', 'name' => 'pacientes.nombres'],
-                    ['data' => 'apellidos', 'name' => 'pacientes.apellidos'],
+                    ['data' => 'id', 'name' => 'roles.id'],
+                    ['data' => 'name', 'name' => 'roles.name'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
-                'tablaxxx' => 'tablapacientes',
-                'permisox' => 'paciente',
-                'routxxxx' => 'paciente',
+                'tablaxxx' => 'tablaroles',
+                'permisox' => 'roles',
+                'routxxxx' => 'roles',
                 'parametr' => [$padrexxx],
             ],
 
@@ -100,23 +92,13 @@ class Paciente8Controller extends Controller
     }
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
     {
-        $this->opciones['generoxx'] = Genero::combo(['cabecera' => true, 'ajaxxxxx' => false]);
-        $this->opciones['epsxxxxx'] = Ep::combo(['cabecera' => true, 'ajaxxxxx' => false]);
-        $this->opciones['nptxxxxx'] = Npt::combo(['cabecera' => true, 'ajaxxxxx' => false]);
-        $this->opciones['servicio'] = Servicio::combo(['cabecera' => true, 'ajaxxxxx' => false]);
-        $this->opciones['departam'] = Departamento::combo(['cabecera' => true, 'ajaxxxxx' => false]);
-        $departam='';
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
         if ($nombobje != '') {
             $this->opciones[$nombobje] = $objetoxx;
-            $objetoxx->departamento_id=$objetoxx->municipio->departamento_id;
-            $departam=$objetoxx->departamento_id;
+            $this->opciones['cardhead']='ROL: '.$objetoxx->name;
         }
-        $this->opciones['municipi'] = Municipio::combo(['cabecera' => true, 'ajaxxxxx' => false,'departam'=>$departam]);
-        // Se arma el titulo de acuerdo al array opciones
-        $this->opciones['tituloxx'] = $this->opciones['accionxx'] . ': ' . $this->opciones['tituloxx'];
         return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }
     /**
@@ -143,7 +125,7 @@ class Paciente8Controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PacienteCrearRequest $request)
+    public function store(RoleCrearRequest $request)
     {
         $dataxxxx = $request->all();
         $dataxxxx['sis_clinica_id']=Auth::user()->sis_clinica_id;
@@ -156,15 +138,11 @@ class Paciente8Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Paciente $objetoxx)
+    public function show(Role $objetoxx)
     {
         $this->opciones['clinicax'] =$objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
-        $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => $objetoxx->sis_esta_id == 1 ? 'INACTIVAR' : 'ACTIVAR', 'routingx' => [$this->opciones['routxxxx'], []], 'formhref' => 1,
-                'tituloxx' => '', 'clasexxx' => $objetoxx->sis_esta_id == 1 ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success'
-            ];
+       
         $this->opciones['readonly'] = 'readonly';
         return $this->view($objetoxx,  'modeloxx', 'Ver', $this->opciones['rutacarp'] . 'pestanias');
     }
@@ -175,7 +153,7 @@ class Paciente8Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Paciente $objetoxx)
+    public function edit(Role $objetoxx)
     {
         $this->opciones['clinicax'] =$objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
@@ -190,7 +168,7 @@ class Paciente8Controller extends Controller
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
         return redirect()
-            ->route($this->opciones['routxxxx'] . '.editar', [Paciente::transaccion($dataxxxx, $objectx)->id])
+            ->route($this->opciones['routxxxx'] . '.editar', [Rol::transaccion($dataxxxx, $objectx)->id])
             ->with('info', $infoxxxx);
     }
 
@@ -201,7 +179,7 @@ class Paciente8Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PacienteEditarRequest  $request, Paciente $objetoxx)
+    public function update(RoleEditarRequest  $request, Role $objetoxx)
     {
         $dataxxxx = $request->all();
         return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
@@ -213,7 +191,7 @@ class Paciente8Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Paciente $objetoxx)
+    public function destroy(Role $objetoxx)
     {
         $this->opciones['parametr'] = [$objetoxx->id];
 

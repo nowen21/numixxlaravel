@@ -2,25 +2,20 @@
 
 namespace App\Models\Usuarios;
 
-use App\Models\Administracion\Ep;
-use App\Models\Administracion\Genero;
-use App\Models\Administracion\Servicio;
-use App\Models\Clinica\SisClinica;
-use App\Models\Medicamentos\Npt;
-use App\Models\Sistema\Municipio;
-use App\Models\Sistema\SisEsta;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
-class Rol extends Model {
+class Rol extends Role
+{
 
-  protected $fillable = [
-      'name',
-  ];
+    protected $fillable = [
+        'name', 'user_edita_id', 'user_crea_id'
+    ];
 
-  public static function transaccion($dataxxxx,  $objetoxx)
+    public static function transaccion($dataxxxx,  $objetoxx)
     {
+        $dataxxxx['name'] = strtoupper($dataxxxx['name']);
         $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {
             $dataxxxx['user_edita_id'] = Auth::user()->id;
             if ($objetoxx != '') {

@@ -20,7 +20,7 @@ class UsuarioController extends Controller
         $this->opciones = [
             'permisox' => 'usuarios',
             'parametr' => [],
-            'rutacarp' => 'Sistema.',
+            'rutacarp' => 'Sistema.Usuario.',
             'tituloxx' => 'Crear: Usuario',
             'slotxxxx'=>'usuarios',
             'carpetax'=>'Usuario',

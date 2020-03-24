@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Administracion\Usuario;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleCrateRequest extends FormRequest {
+class RoleCrearRequest extends FormRequest {
 
   /**
    * Determine if the user is authorized to make this request.
@@ -18,9 +18,7 @@ class RoleCrateRequest extends FormRequest {
   public function messages() {
     return [
         'name.required' => 'Ingrese el nombre del rol',
-        'slug.required' => 'Ingrese el slug',
-        'description.requerid' => 'Ingrese una descripción del rol',
-        
+        'name.unique' => 'El rol ya existe',
     ];
   }
 
@@ -31,9 +29,9 @@ class RoleCrateRequest extends FormRequest {
    */
   public function rules() {
     return [
-          'name' => 'required',
-        'slug' => 'required',
-        'description' => 'required',
+          'name' => ['required',
+          'unique:roles,name'
+        ],
     ];
   }
 

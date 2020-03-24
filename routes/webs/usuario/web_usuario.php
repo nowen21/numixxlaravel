@@ -31,4 +31,5 @@ Route::group(['prefix' => 'usuarios'], function () use ($controll, $routexxx) {
 		'uses' => $controll . 'Controller@destroy',
 		'middleware' => ['permission:' . $routexxx . '-borrar']
 	])->name($routexxx . '.borrar');
+	require_once('web_urol.php');
 });
