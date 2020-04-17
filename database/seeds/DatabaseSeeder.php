@@ -36,5 +36,9 @@ class DatabaseSeeder extends Seeder
         $this->call(DlotesSeeder::class);
         $this->call(HidrpedisSeeder::class);
         $this->call(LipopedisSeeder::class);
+        $this->call(RangosSeeder::class);
+        $this->call(RnptsSeeder::class);
+        $this->call(RcondicisSeeder::class);
+        $this->call(RcodigosSeeder::class);
     }
 }

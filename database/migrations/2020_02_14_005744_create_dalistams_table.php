@@ -19,8 +19,8 @@ class CreateDalistamsTable extends Migration
             $table->bigInteger('calistam_id')->unsigned();
             $table->string('campo_id',10);
             $table->double('unidad',6,2);
-            $table->double('cantcons',6,2);
-            $table->double('diferenc',6,2);
+            $table->double('cantcons',6,2)->nullable();
+            $table->double('diferenc',6,2)->nullable();
             $table->foreign('calistam_id')->references('id')->on('calistams');
             $table=CamposMagicos::magicos($table);
         });

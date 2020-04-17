@@ -68,6 +68,6 @@ class Mlote extends Model {
     }, 5);
     return $usuariox;
   }
-
+  
 
 }

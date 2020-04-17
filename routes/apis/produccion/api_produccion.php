@@ -1,39 +1,42 @@
 <?php
-
-use App\Helpers\Pacientes;
-use App\Models\Sistema\Municipio;
+use App\Helpers\Produccion\Produccion;
 use Illuminate\Http\Request;
 
 
+Route::get('produccion/produccion', function (Request $request) {
+  if (!$request->ajax())
+    return redirect('/');
+
+  return Produccion::getPacientesCformula($request);
+});
 Route::get('produccion/alistamiento', function (Request $request) {
   if (!$request->ajax())
     return redirect('/');
 
-  return Pacientes::getPacientes($request);
+  return Produccion::getAlistamientos($request);
 });
-
 Route::get('produccion/preparacion', function (Request $request) {
   if (!$request->ajax())
     return redirect('/');
-  return response()->json(Pacientes::getCalcularedad($request));
+
+  return Produccion::getPacientesPreparacion($request);
 });
 
-Route::get('produccion/conciliacion', function (Request $request) {
-  if (!$request->ajax())
-    return redirect('/');
-  return response()->json(Municipio::combo(['ajaxxxxx'=>true,'cabecera'=>true,'departam'=>$request->departam]));
-});
-
-Route::get('produccion/controlp', function (Request $request) {
+Route::get('produccion/procesos', function (Request $request) {
   if (!$request->ajax())
     return redirect('/');
 
-  return Pacientes::getPacientesCformula($request);
+  return Produccion::getControles($request);
 });
-
-Route::get('produccion/controlt', function (Request $request) {
+Route::get('produccion/terminados', function (Request $request) {
   if (!$request->ajax())
     return redirect('/');
 
-  return Pacientes::getPacientesCformula($request);
+  return Produccion::getTerminados($request);
+});
+Route::get('produccion/conciliaciones', function (Request $request) {
+  if (!$request->ajax())
+    return redirect('/');
+
+  return Produccion::getConciliaciones($request);
 });

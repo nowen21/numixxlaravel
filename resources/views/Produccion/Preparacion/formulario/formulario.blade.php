@@ -1,207 +1,42 @@
 <div class="form-group row">
-    <div class="form-group col-md-4">
-        {{ Form::label('registro', 'Fecha registro:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('registro', $todoxxxx['modeloxx']->registro, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
-        @else
-        {{ Form::text('registro', null, ['class' => $errors->first('registro') ?
-         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Fecha registro', 'maxlength' => '120', 'style'=>'height: 28px']) }}
-        @endif
-        @if($errors->has('registro'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('registro') }}
+    <div class="form-group col-md-6">
+        {{ Form::label('sis_clinica_id', 'Clínica:', ['class' => 'control-label col-form-label-sm']) }}
+        <div id="" class="form-control" style="height: 28px">
+            {{$todoxxxx['modeloxx']->sis_clinica->clinica}}
         </div>
-        @endif
     </div>
-    <div class="form-group col-md-4">
-        {{ Form::label('cedula', 'Cédula:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('cedula', $todoxxxx['modeloxx']->cedula, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
-        @else
-        {{ Form::text('cedula', null, ['class' => $errors->first('cedula') ?
-         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Cédula', 'maxlength' => '120', 'autofocus','style'=>'height: 28px']) }}
-        @endif
-        @if($errors->has('cedula'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('cedula') }}
+    <div class="form-group col-md-6">
+        {{ Form::label('tiempo', 'Tiempo Infisión:', ['class' => 'control-label col-form-label-sm']) }}
+        
+        <div id="" class="form-control" style="height: 28px">
+            {{$todoxxxx['modeloxx']->tiempo}}
         </div>
-        @endif
     </div>
-    <div class="form-group col-md-4">
-        {{ Form::label('nombres', 'Nombres:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('nombres', $todoxxxx['modeloxx']->nombres, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
-        @else
-        {{ Form::text('nombres', null, ['class' => $errors->first('nombres') ?
-         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Nombres', 'maxlength' => '120', 'autofocus','style'=>'height: 28px']) }}
-        @endif
-        @if($errors->has('nombres'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('nombres') }}
+    <div class="form-group col-md-6">
+        {{ Form::label('velocidad', 'Velocidad Infusión:', ['class' => 'control-label col-form-label-sm']) }}
+        <div id="" class="form-control" style="height: 28px">
+            {{$todoxxxx['modeloxx']->velocidad}}
         </div>
-        @endif
     </div>
-
-    <div class="form-group col-md-4">
-        {{ Form::label('apellidos', 'Apellidos:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('apellidos', $todoxxxx['modeloxx']->apellidos, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
-        @else
-        {{ Form::text('apellidos', null, ['class' => $errors->first('apellidos') ?
-         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Apellidos', 'maxlength' => '120', 'autofocus','style'=>'height: 28px']) }}
-        @endif
-        @if($errors->has('apellidos'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('apellidos') }}
+    <div class="form-group col-md-6">
+        {{ Form::label('volumen', 'Volumen:', ['class' => 'control-label col-form-label-sm']) }}
+        <div id="" class="form-control" style="height: 28px">
+            {{$todoxxxx['modeloxx']->volumen}}
         </div>
-        @endif
     </div>
-
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
+        {{ Form::label('purga', 'Purga:', ['class' => 'control-label col-form-label-sm']) }}
+        <div id="" class="form-control" style="height: 28px">
+            {{$todoxxxx['modeloxx']->purga}}
+        </div>
+    </div>
+    <div class="form-group col-md-6">
         {{ Form::label('peso', 'Peso:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('peso', $todoxxxx['modeloxx']->peso, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
-        @else
-        {{ Form::text('peso', null, ['class' => $errors->first('peso') ?
-         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Peso', 'maxlength' => '120', 'autofocus','style'=>'height: 28px']) }}
-        @endif
-        @if($errors->has('peso'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('peso') }}
+        <div id="" class="form-control" style="height: 28px">
+            {{$todoxxxx['modeloxx']->peso}}
         </div>
-        @endif
     </div>
-
-    <div class="form-group col-md-4">
-        {{ Form::label('genero_id', 'Género:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::select('genero_id', $todoxxxx['generoxx'], $todoxxxx['modeloxx']->genero_id, ['class' => 'form-control-plaintext','id'=>'genero_id']) }}
-        @else
-        {{ Form::select('genero_id', $todoxxxx['generoxx'], null, ['class' => $errors->first('genero_id') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'genero_id']) }}
-        @endif
-        @if($errors->has('genero_id'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('genero_id') }}
-        </div>
-        @endif
-    </div>
-
-    <div class="form-group col-md-4">
-        {{ Form::label('ep_id', 'Eps:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::select('ep_id', $todoxxxx['epsxxxxx'], $todoxxxx['modeloxx']->ep_id, ['class' => 'form-control-plaintext','id'=>'ep_id']) }}
-        @else
-        {{ Form::select('ep_id', $todoxxxx['epsxxxxx'], null, ['class' => $errors->first('ep_id') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'ep_id']) }}
-        @endif
-        @if($errors->has('ep_id'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('ep_id') }}
-        </div>
-        @endif
-    </div>
-
-    <div class="form-group col-md-4">
-        {{ Form::label('npt_id', 'Npt:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::select('npt_id', $todoxxxx['nptxxxxx'], $todoxxxx['modeloxx']->npt_id, ['class' => 'form-control-plaintext','id'=>'npt_id']) }}
-        @else
-        {{ Form::select('npt_id', $todoxxxx['nptxxxxx'], null, ['class' => $errors->first('npt_id') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'npt_id']) }}
-        @endif
-        @if($errors->has('npt_id'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('npt_id') }}
-        </div>
-        @endif
-    </div>
-
-    
-
-    <div class="form-group col-md-4">
-        {{ Form::label('cama', 'Cama:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('cama', $todoxxxx['modeloxx']->cama, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
-        @else
-        {{ Form::text('cama', null, ['class' => $errors->first('cama') ?
-         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Cama', 'maxlength' => '120', 'autofocus','style'=>'height: 28px']) }}
-        @endif
-        @if($errors->has('cama'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('cama') }}
-        </div>
-        @endif
-    </div>
-
-    <div class="form-group col-md-4">
-        {{ Form::label('servicio_id', 'Servicio:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::select('servicio_id', $todoxxxx['servicio'], $todoxxxx['modeloxx']->servicio_id, ['class' => 'form-control-plaintext','id'=>'servicio_id']) }}
-        @else
-        {{ Form::select('servicio_id', $todoxxxx['servicio'], null, ['class' => $errors->first('servicio_id') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'servicio_id']) }}
-        @endif
-        @if($errors->has('servicio_id'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('servicio_id') }}
-        </div>
-        @endif
-    </div>
-
-    
-
-    <div class="form-group col-md-4">
-        {{ Form::label('fechnaci', 'Fecha de Nacimiento:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('fechnaci', $todoxxxx['modeloxx']->fechnaci, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
-        @else
-        {{ Form::text('fechnaci', null, ['class' => $errors->first('fechnaci') ?
-         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Fecha de Nacimiento', 'maxlength' => '120', 'autofocus','style'=>'height: 28px']) }}
-        @endif
-        @if($errors->has('fechnaci'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('fechnaci') }}
-        </div>
-        @endif
-    </div>
-
-    <div class="form-group col-md-4">
-        {{ Form::label('edad', 'Edad:', ['class' => 'control-label col-form-label-sm']) }}
-        <div id="edad" class="form-control" style='height: 28px'></div>
-    </div>
-
-    <div class="form-group col-md-4">
-        {{ Form::label('departamento_id', 'Departamento:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::select('departamento_id', $todoxxxx['departam'], $todoxxxx['modeloxx']->departamento_id, ['class' => 'form-control-plaintext','id'=>'departamento_id']) }}
-        @else
-        {{ Form::select('departamento_id', $todoxxxx['departam'], null, ['class' => $errors->first('departamento_id') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'departamento_id']) }}
-        @endif
-        @if($errors->has('departamento_id'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('departamento_id') }}
-        </div>
-        @endif
-    </div>
-
-    <div class="form-group col-md-4">
-        {{ Form::label('municipio_id', 'Municipio:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::select('municipio_id', $todoxxxx['municipi'], $todoxxxx['modeloxx']->municipio_id, ['class' => 'form-control-plaintext','id'=>'municipio_id']) }}
-        @else
-        {{ Form::select('municipio_id', $todoxxxx['municipi'], null, ['class' => $errors->first('municipio_id') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'municipio_id']) }}
-        @endif
-        @if($errors->has('municipio_id'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('municipio_id') }}
-        </div>
-        @endif
-    </div>
-    
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-12">
         {{ Form::label('sis_esta_id', 'Estado:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], $todoxxxx['modeloxx']->sis_esta_id, ['class' => 'form-control-plaintext','id'=>'sis_esta_id']) }}
@@ -214,5 +49,63 @@
             {{ $errors->first('sis_esta_id') }}
         </div>
         @endif
+    </div>
+    <div class="form-group col-md-12">
+        <hr style="border:  #000000 solid 2px" />
+    </div>
+    <div class="form-group col-md-12">
+        <table style="width: 100%">
+            <thead>
+                <tr>
+                    <th style=" width: 45%; text-align: left; border-top: 2px #000 solid;border-bottom: 2px #000 solid;">
+                        NUTRIENTE:
+                    </th>
+                    <th style=" width: 10%; text-align: left; border-top: 2px #000 solid;border-bottom: 2px #000 solid;">
+                        REQ
+                    </th>
+                    <th style=" width: 15%; text-align: left;border-top: 2px #000 solid;border-bottom: 2px #000 solid;">
+                        VOLUMEN
+                    </th>
+                    <th style=" width: 15%; text-align: left;border-top: 2px #000 solid;border-bottom: 2px #000 solid;">
+                        VOLUMEN PURGA
+                    </th>
+                    <th style=" width: 15%; text-align: left;border-top: 2px #000 solid;border-bottom: 2px #000 solid;">
+                        PREPARADO
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="checkiados">
+            @foreach( $todoxxxx['modeloxx']->dformulas as $value)
+                @if($value->cantidad!=0)
+                <tr>
+                    <td style="  text-align: left; background: #d2d6dc" >
+                    {{$value->medicame->casa->casa}}
+                    </td>
+                    <td style="  text-align: left;">
+                    {{$value->cantidad}}
+                    </td>
+                    <td style="  text-align: left;">
+                    {{number_format($value->volumen,2)}}
+                    </td>
+                    <td style=" text-align: left;">
+                    {{number_format($value->purga,2)}}
+                    </td>
+                    <td style=" text-align: left;">
+                    <?php
+                    $checkedxx = '';
+                    if ($value->preparar == 1) {
+                        $checkedxx = 'checked';
+                    } else if (is_array(old('preparar_' . $value->id)) && in_array(1, old('preparar_' . $value->id))) {
+                        $checkedxx = 'checked';
+                    }
+                    ?>
+                    <input type="checkbox" class="checks" value="1" name="preparar_{{$value->id}}[]" {{$checkedxx}} id="preparar_{{$value->id}}">
+                    </td>
+                </tr>
+
+                @endif
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>

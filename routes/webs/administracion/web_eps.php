@@ -1,6 +1,4 @@
 <?php
-
-
 	$controll = 'Administracion\Ep';
 	$routexxx = 'eps';
 	Route::group(['prefix' => $routexxx], function () use ($controll, $routexxx) {

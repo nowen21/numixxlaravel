@@ -6,7 +6,7 @@ use App\Models\Alerta;
 use App\Models\Clinica\SisClinica;
 use App\Models\Medicamentos\Medicame;
 use App\Models\Pacientes\Paciente;
-use App\Models\Proceso;
+use App\Models\Produccion\Proceso;
 use App\Models\Sistema\SisEsta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +24,7 @@ class Cformula extends Model
     'purga',
     'total',
     'peso',
+    'userevis_id',
     'userprep_id',
     'userproc_id',
     'userlibe_id',
@@ -87,7 +88,10 @@ class Cformula extends Model
   public static function combolote($valorxxx = false)
   {
     $listaxxx = 0;
-    $formulac = Cformula::where('userprep', '>', 0)->where('userproc', 0)->where('created_at', 'like', date('Y-m-d', time()) . "%")->get();
+    $formulac = Cformula::where('userprep_id', '>', 0)
+      ->where('userevis_id', '>', 0)
+      ->where('userproc_id', 0)
+      ->where('created_at', 'like', date('Y-m-d', time()) . "%")->get();
     if ($valorxxx) {
       $listaxxx = count($formulac);
     } else {
@@ -143,5 +147,68 @@ class Cformula extends Model
       return $objetoxx;
     }, 5);
     return $usuariox;
+  }
+
+  public static function getCformulas($dataxxxx)
+  {
+    $comboxxx = [];
+    if ($dataxxxx['cabecera']) {
+      if ($dataxxxx['ajaxxxxx']) {
+        $comboxxx[] = ['valuexxx' => '', 'optionxx' => 'Seleccione'];
+      } else {
+        $comboxxx = ['' => 'Seleccione'];
+      }
+    }
+    /**
+     * hallar las formulaciones que ya se le hicieron control de proceso
+     */
+    $procesos = Proceso::where('created_at', 'like', date('Y-m-d', time()) . "%")->get();
+    $notinxxx = [];
+    foreach ($procesos as $procesox) {
+      if (!in_array($procesox->cformula_id, $notinxxx)) {
+        $notinxxx[] = $procesox->cformula_id;
+      }
+    }
+   
+    /**
+     * hallar formulaciones que no se le han hecho contro de proceso
+     */ 
+    $activida = Cformula::where(function ($queryxxx)  {
+      $queryxxx->where('userevis_id', '>', 0);
+      $queryxxx->where('userprep_id', '>', 0);
+      $queryxxx->where('userproc_id',  null);
+      $queryxxx->where('created_at', 'like', date('Y-m-d', time()) . "%");
+      return $queryxxx;
+    })
+      ->get();
+    foreach ($activida as $registro) {
+      if (!in_array($registro->id, $notinxxx)) {
+        if ($dataxxxx['ajaxxxxx']) {
+          $comboxxx[] = ['valuexxx' => $registro->id, 'optionxx' => 'Formulación: ' . $registro->id];
+        } else {
+          $comboxxx[$registro->id] = 'Formulación: ' . $registro->id;
+        }
+      }
+    }
+    if ($dataxxxx['isupdate'] > 0) {
+      $registro = Cformula::where('id', $dataxxxx['isupdate'])->first();
+      if ($dataxxxx['ajaxxxxx']) {
+        $comboxxx[] = ['valuexxx' => $registro->id, 'optionxx' => 'Formulación: ' . $registro->id];
+      } else {
+        $comboxxx[$registro->id] = 'Formulación: ' . $registro->id;
+      }
+    } else {
+      /**
+       * no hay preparaciones
+       */
+      if (count($comboxxx) == 1) {
+        if ($dataxxxx['ajaxxxxx']) {
+          $comboxxx[] = ['valuexxx' => '', 'optionxx' => 'No hay preparaciones en este momento, vuelva a intentar más tarde'];
+        } else {
+          $comboxxx = ['' => 'No hay preparaciones en este momento, vuelva a intentar más tarde'];
+        }
+      }
+    }
+    return $comboxxx;
   }
 }

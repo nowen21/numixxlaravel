@@ -14,8 +14,16 @@ use App\Imports\MlotesImport;
 use App\Imports\MmarcasImport;
 use App\Imports\MnptsImport;
 use App\Imports\PacientesImport;
+use App\Imports\RangosImport;
+use App\Imports\RcodigosImport;
+use App\Imports\RcondicisImport;
+use App\Imports\RnptsImport;
 use App\Imports\SisClinicasImport;
 use App\Models\Administracion\Ep;
+use App\Models\Administracion\Rango;
+use App\Models\Administracion\Rango\Rcodigo;
+use App\Models\Administracion\Rango\Rcondici;
+use App\Models\Administracion\Rango\Rnpt;
 use App\Models\Clinica\SisClinica;
 use App\Models\Dispositivos\Dlote;
 use App\Models\Dispositivos\Dmarca;
@@ -132,13 +140,13 @@ class ExcelController extends Controller
         $magicosx = "'user_crea_id'=>1,
         'user_edita_id'=>1,
          'sis_esta_id'=>1";
-        foreach (Lipopedi::get() as $marcasxx) {
-            echo    "Lipopedi::create([
-                    'inicioxx'=> '{$marcasxx->inicioxx}',
-                    'finalxxx'=> '{$marcasxx->finalxxx}',
-                    'requerim'=> '{$marcasxx->requerim}',
-                    {$magicosx}]); <br>";
-        }
+        // foreach (Lipopedi::get() as $marcasxx) {
+        //     echo    "Lipopedi::create([
+        //             'inicioxx'=> '{$marcasxx->inicioxx}',
+        //             'finalxxx'=> '{$marcasxx->finalxxx}',
+        //             'requerim'=> '{$marcasxx->requerim}',
+        //             {$magicosx}]); <br>";
+        // }
 
         // foreach (Mmarca::get() as $marcasxx) {
         //  echo    "Mmarca::create(['id' => {$marcasxx->id}, 'nombcome' => '{$marcasxx->nombcome}', 'osmorali' => {$marcasxx->osmorali}, 'pesoespe' => {$marcasxx->pesoespe}, 
@@ -228,6 +236,21 @@ class ExcelController extends Controller
         //     ]); <br>";
         // }
         //echo bcrypt('830109312-4');
+
+        echo '<br>RANGOS<br>';
+        foreach (Rcodigo::get() as $marcasxx) {
+            echo    "
+            Rcodigo::create([
+                'id'=>{$marcasxx->id},
+                'codiprod' => '{$marcasxx->codiprod}',
+                'rcondici_id' => '{$marcasxx->rcondici_id}',
+                {$magicosx}
+            ]); <br>";
+        }
+
+
+
+
         // $this->opciones['padrexxx'] = '';
         // $this->opciones['indecrea'] = false;
         // $this->opciones['botoform'][] =
@@ -249,7 +272,11 @@ class ExcelController extends Controller
         $excelxxx = $request->file('excelxxx');
 
         // ddd($excelxxx);
-        Excel::import(new MedicamesImport, $excelxxx);
+        Excel::import(new RcodigosImport, $excelxxx);
+        
+        // Excel::import(new RcondicisImport, $excelxxx);
+        // Excel::import(new RnptsImport, $excelxxx);
+        // Excel::import(new RangosImport, $excelxxx);
         // Excel::import(new MmarcasImport, $excelxxx);
         // Excel::import(new MinvimasImport, $excelxxx);
         // Excel::import(new MlotesImport, $excelxxx);

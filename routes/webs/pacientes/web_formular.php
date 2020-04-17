@@ -41,4 +41,9 @@ Route::group(['prefix' => '{padrexxx}'], function () use ($controll, $routexxx) 
 		'uses' => $controll . 'Controller@getPedineon',
 		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
 	])->name($routexxx . '.pedineon');
+
+	Route::post('getRequerimientoVolumen', [
+		'uses' => $controll . 'Controller@getRequerimientoVolumen',
+		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
+	])->name($routexxx.'.rangvolu');
 });

@@ -34,7 +34,7 @@ Route::group(['prefix' => 'clinicas'], function () {
 	])->name('clinica.dv');
 	require_once('web_cmedicame.php');
 	require_once('web_paciente.php');
-	require_once('web_rango.php');
+	require_once('web_crango.php');
 
 	require_once('web_remision.php');
 });

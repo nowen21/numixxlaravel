@@ -8,40 +8,45 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class Dformula extends Model {
+class Dformula extends Model
+{
 
   protected $fillable = [
-      'cformula_id',
-      'medicame_id',
-      'preparar_id',
-      'cantidad',
-      'rtotal',
-      'volumen',
-      'purga',
-      'user_crea_id',
-      'user_edita_id',
-      'sis_esta_id'
+    'cformula_id',
+    'medicame_id',
+    'preparar',
+    'cantidad',
+    'rtotal',
+    'volumen',
+    'purga',
+    'user_crea_id',
+    'user_edita_id',
+    'sis_esta_id'
   ];
 
-  public static function combo($medicamento) {
+  public static function combo($medicamento)
+  {
     $lista = [];
     $medic = Dformula::whereIn('idformulacion', $medicamento)->get();
     foreach ($medic as $key => $value) {
       $lista[] = [
-          'medicamento' => $value->medicamento,
-          'cantidad' => $value->cantidad,
-          'volumen' => $value->volumen,
+        'medicamento' => $value->medicamento,
+        'cantidad' => $value->cantidad,
+        'volumen' => $value->volumen,
       ];
     }
     return $lista;
   }
-  public function medicame() {
+  public function medicame()
+  {
     return $this->belongsTo(Medicame::class);
   }
-  public function mlotes() {
+  public function mlotes()
+  {
     return $this->belongsToMany(Mlote::class);
   }
-  public function dfmlotes() {
+  public function dfmlotes()
+  {
     return $this->hasMany(Dfmlote::class);
   }
 
@@ -71,5 +76,23 @@ class Dformula extends Model {
       return $objetoxx;
     }, 5);
     return $usuariox;
+  }
+
+  public static function getTransaccionPreparacion($dataxxxx,  $objetoxx)
+  {
+    $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {
+      foreach ($dataxxxx as $key => $value) {
+        $data = explode('_', $key);
+        if ($data[0] == 'preparar') {
+          $datallexx = Dformula::where('cformula_id', $objetoxx->id)->where('id', $data[1])->first();
+          $grabarxx = [
+            'preparar' => $value[0],
+          ];
+          $datallexx->update($grabarxx);
+          //     $this->descontarinventario($datallexx);
+        }
+      }
+    }, 5);
+    // return $usuariox;
   }
 }

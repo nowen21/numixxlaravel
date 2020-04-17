@@ -97,7 +97,6 @@ class Clinicas
             'rangos.rangfina',
             'condicios.condicio',
             'rcodigos.codiprod',
-            'rcodigos.descripc',
             'crangos.sis_clinica_id',
             's_estado',
             'crangos.sis_esta_id'

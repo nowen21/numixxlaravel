@@ -11,7 +11,7 @@ class Rcodigo extends Model
     protected $fillable = [
         'rcondici_id',
         'codiprod',
-        'descripc',
+       // 'descripc',
         'sis_esta_id',  'user_crea_id', 'user_edita_id'
     ];
 

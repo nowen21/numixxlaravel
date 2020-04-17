@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Clinicas;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Clinica\CrangoCrearRequest;
 use App\Http\Requests\Clinica\CrangoEditarRequest;
-use App\Models\Administracion\Condicio;
-use App\Models\Administracion\Rango;
 use App\Models\Administracion\Rango\Rcodigo;
 use App\Models\Clinica\Crango;
 use App\Models\Clinica\SisClinica;
@@ -18,6 +16,7 @@ class CrangoController extends Controller
 
     public function __construct()
     {
+       
         $this->opciones = [
             'cardhead' => '', // titulo para las pestañas
             'permisox' => 'crango',
@@ -34,18 +33,17 @@ class CrangoController extends Controller
         $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
         $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
         $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
-
         $this->opciones['readonly'] = '';
         $this->opciones['rutaxxxx'] = 'crango';
         $this->opciones['routnuev'] = 'crango';
         $this->opciones['routxxxx'] = 'crango';
-
         $this->opciones['botoform'] = [
             [
                 'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'], []],
                 'formhref' => 2, 'tituloxx' => 'VOLVER A RANGO', 'clasexxx' => 'btn btn-sm btn-primary'
             ],
         ];
+        
     }
 
 
@@ -56,7 +54,7 @@ class CrangoController extends Controller
      */
     public function index($clinica)
     {
-
+       
         $clinicax = SisClinica::where('id', $clinica)->first();
         $this->opciones['cardhead'] = 'CLINICA: ' . $clinicax->clinica;
         $this->opciones['tablasxx'][] =
@@ -75,7 +73,8 @@ class CrangoController extends Controller
                 'cabecera' => [
                     ['td' => 'ID'],
                     ['td' => 'CODIGO'],
-                    ['td' => 'RANGO'],
+                    ['td' => 'RANGO INCIA'],
+                    ['td' => 'RANGO FINALIZA'],
                     ['td' => 'CONDICION'],
                     ['td' => 'ESTADO'],
                 ],
@@ -83,7 +82,8 @@ class CrangoController extends Controller
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'rcodigos.id'],
                     ['data' => 'codiprod', 'name' => 'rcodigos.codiprod'],
-                    ['data' => 'descripc', 'name' => 'rcodigos.descripc'],
+                    ['data' => 'ranginic', 'name' => 'rangos.ranginic'],
+                    ['data' => 'rangfina', 'name' => 'rangos.rangfina'],
                     ['data' => 'condicio', 'name' => 'condicios.condicio'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],

@@ -19,7 +19,7 @@ class PacienteCrearRequest extends FormRequest
       'cedula.required' => 'Ingrese el número de documento',
       'cedula.unique' => 'El número de documento  ya existe, debe comunicarse con el equipo de numixx',
       'nombres.required' => 'Ingrese el nombre',
-      'apellidos.required' => 'Ingrese el apellido',
+      
       'peso.required' => 'Ingreso el peso',
       'genero_id.required' => 'Seleccione un género',
       'ep_id.required' => 'Seleccione una eps',
@@ -31,7 +31,7 @@ class PacienteCrearRequest extends FormRequest
       'registro' => 'required',
       'cedula' => 'required|unique:pacientes',
       'nombres' => 'required',
-      'apellidos' => 'required',
+      
       'peso' => 'required',
       'genero_id' => 'required',
       'ep_id' => 'required',

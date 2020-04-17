@@ -138,7 +138,7 @@
       });
     });
     $('#peso').on('keyup', function () {
-      if($(this).val()>0 && eval({{$todoxxxx["paciente"]->npt_id}})<3){
+      if($(this).val()>0 && eval('{{$todoxxxx["paciente"]->npt_id}}')<3){
         pedineon($(this).val())
       }
       recalcular();
@@ -198,7 +198,7 @@
 
 
 
-    $('.guardarx').click(function () {
+    $('.guardarx').click(function () { alert(5)
       var hayalmenosuno = 0;
       var vaciosxx = 0
       $("#formulaciontable input").each(function () {
@@ -253,9 +253,10 @@
 
     $("#formulaciontable select").each(function () {
       $.ajax({
-        url: "{{url('api/cformula/rangos')}}",
-        type: 'GET',
+        url: "{{route('formular.rangvolu',$todoxxxx['parametr'])}}",
+        type: 'POST',
         data: {
+          _token: $("input[name='_token']").val(),
           npt_id:'{{$todoxxxx["paciente"]->npt_id}}',
           medicame: $(this).val(),
           idmedica: $(this).prop('id'),

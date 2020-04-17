@@ -18,7 +18,6 @@ class PacienteEditarRequest extends FormRequest
       'registro.required' => 'Seleccines una fecha para el registro del paciente',
       'cedula.unique' => 'El número de documento  ya existe, debe comunicarse con el equipo de numixx',
       'nombres.required' => 'Ingrese el nombre',
-      'apellidos.required' => 'Ingrese el apellido',
       'peso.required' => 'Ingreso el peso',
       'genero_id.required' => 'Seleccione un género',
       'ep_id.required' => 'Seleccione una eps',
@@ -30,7 +29,6 @@ class PacienteEditarRequest extends FormRequest
     $this->_reglasx = [
       'registro' => 'required',
       'nombres' => 'required',
-      'apellidos' => 'required',
       'peso' => 'required',
       'genero_id' => 'required',
       'ep_id' => 'required',

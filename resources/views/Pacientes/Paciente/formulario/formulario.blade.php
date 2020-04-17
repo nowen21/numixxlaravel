@@ -41,7 +41,6 @@
         </div>
         @endif
     </div>
-
     <div class="form-group col-md-4">
         {{ Form::label('apellidos', 'Apellidos:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
@@ -56,7 +55,6 @@
         </div>
         @endif
     </div>
-
     <div class="form-group col-md-4">
         {{ Form::label('peso', 'Peso:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')

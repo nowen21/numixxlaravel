@@ -146,7 +146,7 @@ class CformulaController extends Controller
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
-                'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+                'formhref' => 3, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary guardarx'
             ];
         return $this->view(true, '', 'Crear', $this->opciones['rutacarp'] . 'pestanias');
     }
@@ -290,6 +290,13 @@ class CformulaController extends Controller
             }
             //return $respuest;
             return response()->json($respuest);
+        }
+    }
+
+    public function getRequerimientoVolumen(Request $request)
+    {
+        if($request->ajax()){
+            return Validacionesajax::getRango($request);
         }
     }
 }

@@ -38,13 +38,18 @@
                 @case('Ver')
                     @include('layouts.components.pestanias.ver')
                     @break
+                @case('Modulo')
+                    @include('layouts.components.pestanias.modulo')
+                    @break
             @endswitch
         @endslot
     @endcomponent
     @section('codigo')
-        @if ($todoxxxx['accionxx']=='index')
-            @include('layouts.components.tablajquery.js')
-            @include($todoxxxx["rutacarp"].$todoxxxx["carpetax"].'.js.tabla')
+        @if ($todoxxxx['accionxx']=='index' || $todoxxxx['accionxx']=='Modulo')
+            @if($todoxxxx['accionxx']=='index')
+                @include('layouts.components.tablajquery.js')
+                @include($todoxxxx["rutacarp"].$todoxxxx["carpetax"].'.js.tabla')
+            @endif
         @else
             @include($todoxxxx["rutacarp"].$todoxxxx["carpetax"].'.js.js')
         @endif

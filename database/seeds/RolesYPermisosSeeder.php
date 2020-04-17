@@ -67,7 +67,7 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => 'crango-asiganar',  'descripc' => 'Permite asignar rangos a una clínica']);
         Permission::create(['name' => 'crango-leer',  'descripc' => 'Listar rangos clínica']);
         Permission::create(['name' => 'crango-crear',  'descripc' => 'Asignar rango a clínica']);
-        Permission::create(['name' => 'c a-editar',  'descripc' => 'Editar rango a clínica']);
+        Permission::create(['name' => 'crango-editar',  'descripc' => 'Editar rango a clínica']);
         Permission::create(['name' => 'crango-borrar',  'descripc' => 'Inactivar rango a clínica']);
 
 
@@ -169,6 +169,13 @@ class RolesYPermisosSeeder extends Seeder
          * Producción
          */
         Permission::create(['name' => 'produccion-modulo',  'descripc' => 'Habilita los permisos para el módulo de producciòn']);
+
+        $permiso='revision';
+        Permission::create(['name' => $permiso.'-leer',  'descripc' => 'Listar revisiones']);
+        Permission::create(['name' => $permiso.'-crear',  'descripc' => 'Crear revisión']);
+        Permission::create(['name' => $permiso.'-editar',  'descripc' => 'Editar revisión']);
+        Permission::create(['name' => $permiso.'-borrar',  'descripc' => 'Inactivar revisión']);
+
 
         Permission::create(['name' => 'alistami-leer',  'descripc' => 'Listar alistamientos']);
         Permission::create(['name' => 'alistami-crear',  'descripc' => 'Crear alistamiento']);

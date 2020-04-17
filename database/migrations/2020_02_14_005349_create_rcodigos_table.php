@@ -17,14 +17,14 @@ class CreateRcodigosTable extends Migration
         Schema::create('rcodigos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('codiprod');
-            $table->string('descripc',150);
+            // $table->string('descripc',150);
             $table=CamposMagicos::getForeign($table, 'rcondici');
             $table=CamposMagicos::magicos($table);
         });
         Schema::create('h_rcodigos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('codiprod');
-            $table->string('descripc',150);
+            // $table->string('descripc',150);
             $table->integer('rcondici_id');
             $table=CamposMagicos::h_magicos($table);
         });

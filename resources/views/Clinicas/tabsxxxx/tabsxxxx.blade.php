@@ -10,15 +10,15 @@
       @endcanany
       @canany(['cmedicame-leer', 'cmedicame-crear', 'cmedicame-editar', 'cmedicame-borrar'])
       <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='cmedicame') ?' active' : '' }} 
-        text-sm" href="{{ route('cmedicame', $todoxxxx['clinicax']) }}">Medicamento</a></li>
+        text-sm" href="{{ route('cmedicame', $todoxxxx['clinicax']) }}">Medicamentos</a></li>
       @endcanany
       @canany(['crango-leer', 'crango-crear', 'crango-editar', 'crango-borrar'])
       <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='crango') ?' active' : '' }} 
-        text-sm" href="{{ route('crango', $todoxxxx['clinicax']) }}">Rango</a></li>
+        text-sm" href="{{ route('crango', $todoxxxx['clinicax']) }}">Rangos</a></li>
       @endcanany
       @canany(['cremision-leer', 'cremision-crear', 'cremision-editar', 'cremision-borrar'])
       <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='cremision') ?' active' : '' }} 
-        text-sm" href="{{ route('cremision', $todoxxxx['clinicax']) }}">Remision</a></li>
+        text-sm" href="{{ route('cremision', $todoxxxx['clinicax']) }}">Remisiones</a></li>
       @endcanany
     </ul>
   </div>

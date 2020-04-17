@@ -23,7 +23,7 @@ class Dmarca extends Model
   public function sis_esta() {
     return $this->belongsTo(SisEsta::class);
   }
-  public function dispmedico() {
+  public function dmedico() {
     return $this->belongsTo(Dmedico::class);
   }
   public static function transaccion($dataxxxx,  $objetoxx)

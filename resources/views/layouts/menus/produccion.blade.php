@@ -7,46 +7,12 @@
         </p>
     </a>
     <ul class="nav nav-treeview">
-        @canany(['alistami-leer'])
-            <li class="nav-item">
-                <a href="{{ route('alistami') }}" class="nav-link">
-                    <i class="fas fa-child nav-icon"></i>
-                    <p>Alistamientos</p>
-                </a>
-            </li>
-        @endcanany
-        @canany(['preparac-leer'])
-            <li class="nav-item">
-                <a href="{{ route('preparac') }}" class="nav-link">
-                    <i class="fas fa-child nav-icon"></i>
-                    <p>Preparaciones</p>
-                </a>
-            </li>
-        @endcanany
-        @canany(['controlp-leer'])
-            <li class="nav-item">
-                <a href="{{ route('controlp') }}" class="nav-link">
-                    <i class="fas fa-child nav-icon"></i>
-                    <p>Control en proceso</p>
-                </a>
-            </li>
-        @endcanany
-        @canany(['controlt-leer'])
-            <li class="nav-item">
-                <a href="{{ route('controlt') }}" class="nav-link">
-                    <i class="fas fa-child nav-icon"></i>
-                    <p>Control productos terminados</p>
-                </a>
-            </li>
-        @endcanany
-        @canany(['concilia-leer'])
-            <li class="nav-item">
-                <a href="{{ route('concilia') }}" class="nav-link">
-                    <i class="fas fa-child nav-icon"></i>
-                    <p>Conciliaciones</p>
-                </a>
-            </li>
-        @endcanany
+        <li class="nav-item">
+            <a href="{{ route('produccion.modulo') }}" class="nav-link">
+                <i class="fas fa-child nav-icon"></i>
+                <p>Producción</p>
+            </a>
+        </li>
 
     </ul>
 </li>
