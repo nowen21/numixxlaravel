@@ -82,4 +82,8 @@ Route::get('clinica/condicio', function (Request $request) {
   return Clinicas::getCondicio($request);
 });
 
-
+Route::get('clinica/inactivarmedicam', function (Request $request) {
+  if (!$request->ajax())
+    return redirect('/');
+  return response()->json(Clinicas::getInactivarMedicam($request));
+});

@@ -42,6 +42,7 @@ class CrangoController extends Controller
                 'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'], []],
                 'formhref' => 2, 'tituloxx' => 'VOLVER A RANGO', 'clasexxx' => 'btn btn-sm btn-primary'
             ],
+           
         ];
         
     }
@@ -163,6 +164,9 @@ class CrangoController extends Controller
         $this->opciones['clinicax'] = $padrexxx;
         $this->opciones['parametr'] = [$objetoxx->sis_clinica_id, $objetoxx->id];
         $this->opciones['botoform'][0]['routingx'][1] = $this->opciones['parametr'];
+
+
+        
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => $objetoxx->sis_esta_id == 1 ? 'INACTIVAR' : 'ACTIVAR', 'routingx' => [$this->opciones['routxxxx'], []], 'formhref' => 1,
@@ -190,6 +194,12 @@ class CrangoController extends Controller
             [
                 'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', $this->opciones['parametr']],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+            ];
+
+
+            $this->opciones['botoform'][]=  [
+                'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'].'.nuevo', $this->opciones['parametr']],
+                'formhref' => 2, 'tituloxx' => 'NUEVO RANGO', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
         return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
     }

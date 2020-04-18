@@ -27,10 +27,7 @@ class Usuarios
     public static function getRoles($request)
     {
         $rolesxxx = ModelHasRole::select(['role_id'])->where('model_id', $request->padrexxx)->get();
-        $paciente = Role::select(
-            'roles.id',
-            'roles.name',
-        )
+        $paciente = Role::select([ 'roles.id','roles.name',])
             ->whereNotIn('id', $rolesxxx);
         return DatatableHelper::getDatatable($paciente, $request);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Clinicas;
 
+use App\Helpers\Clinicas;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Clinica\SisClinicaCrearRequest;
 use App\Http\Requests\Clinica\SisClinicaEditarRequest;
@@ -18,7 +19,7 @@ class CmedicameController extends Controller
     public function __construct()
     {
         $this->opciones = [
-            'cardhead' => '',// titulo para las pestañas
+            'cardhead' => '', // titulo para las pestañas
             'permisox' => 'cmedicame',
             'parametr' => [],
             'rutacarp' => 'Clinicas.',
@@ -55,15 +56,16 @@ class CmedicameController extends Controller
      */
     public function index($clinica)
     {
+        $this->opciones['parametr'] = [$clinica];
         $clinicax = SisClinica::where('id', $clinica)->first();
-        $this->opciones['cardhead']='CLINICA: '. $clinicax->clinica;
+        $this->opciones['cardhead'] = 'CLINICA: ' . $clinicax->clinica;
         $this->opciones['tablasxx'][] =
             [
 
                 'titunuev' => 'NUEVA CLINICA',
                 'titulist' => 'LISTA DE MEDICAMENTOS',
                 'dataxxxx' => [
-                    ['campoxxx' => 'botonesx', 'dataxxxx' => 'Clinicas.Clinica.botones.botonesapi'],
+                    ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
                     ['campoxxx' => 'clinicax', 'dataxxxx' => $clinica],
                 ],
@@ -76,7 +78,7 @@ class CmedicameController extends Controller
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
-                     ['data' => 'botonexx', 'name' => 'botonexx'],
+                    ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'medicames.id'],
                     ['data' => 'nombgene', 'name' => 'medicames.nombgene'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
@@ -84,7 +86,7 @@ class CmedicameController extends Controller
                 'tablaxxx' => 'cmedicamentos',
                 'permisox' => $this->opciones['permisox'],
             ];
-                                                                            //
+        //
         if (User::find(Auth::user()->id)->can($this->opciones['permisox'] . '-asiganar')) {
             $this->opciones['tablasxx'][] = [
                 'titunuev' => 'NUEVA CLINICA',
@@ -102,7 +104,7 @@ class CmedicameController extends Controller
                     ['td' => 'MEDICAMENTO'],
                     ['td' => 'ESTADO'],
                 ], 'columnsx' => [
-                   // ['data' => 'botonexx', 'name' => 'botonexx'],
+                    // ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'medicames.id'],
                     ['data' => 'nombgene', 'name' => 'medicames.nombgene'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
@@ -258,5 +260,13 @@ class CmedicameController extends Controller
             $digitoxx = 11 - $moduloxx;
         }
         return ['digitoxx' => $digitoxx];
+    }
+
+    public function getInactivarMedicam($padrexxx,Request $request)
+    {
+        if ($request->ajax()) {
+            $request->sis_clinica_id=$padrexxx;
+            return response()->json(Clinicas::getInactivarMedicam($request));
+        }
     }
 }

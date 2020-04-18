@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Pacientes;
 
 use Illuminate\Foundation\Http\FormRequest;
 class PacienteServicioCreateRequest extends FormRequest {

@@ -6,9 +6,11 @@ use App\Models\Administracion\Condicio;
 use App\Models\Administracion\Rango;
 use App\Models\Administracion\Servicio;
 use App\Models\Clinica\Crango;
+use App\Models\Clinica\MedicameSisClinica;
 use App\Models\Clinica\SisClinica;
 use App\Models\Medicamentos\Medicame;
 use App\Models\Pacientes\Paciente;
+use Illuminate\Support\Facades\Auth;
 
 class Clinicas
 {
@@ -39,9 +41,9 @@ class Clinicas
     }
     public static function getMedicamentosAsignados($request)
     {
-        $paciente = Medicame::select('medicames.id', 'medicames.nombgene', 's_estado', 'medicames.sis_esta_id')
+        $paciente = Medicame::select(['medicame_sis_clinica.id', 'medicames.nombgene', 's_estado', 'medicame_sis_clinica.sis_esta_id'])
             ->join('medicame_sis_clinica', 'medicames.id', '=', 'medicame_sis_clinica.medicame_id')
-            ->join('sis_estas', 'medicames.sis_esta_id', '=', 'sis_estas.id')
+            ->join('sis_estas', 'medicame_sis_clinica.sis_esta_id', '=', 'sis_estas.id')
             ->where('medicame_sis_clinica.sis_clinica_id', $request->clinicax);
         return DatatableHelper::getDatatable($paciente, $request);
     }
@@ -113,8 +115,8 @@ class Clinicas
 
     public static function getRangos($request)
     {
-        
-        $paciente = Rango::select(['rangos.id','rangos.ranginic','rangos.rangfina','rangos.sis_esta_id','sis_estas.s_estado'])
+
+        $paciente = Rango::select(['rangos.id', 'rangos.ranginic', 'rangos.rangfina', 'rangos.sis_esta_id', 'sis_estas.s_estado'])
             ->join('sis_estas', 'rangos.sis_esta_id', '=', 'sis_estas.id')
             ->where('rangos.sis_esta_id', 1);
 
@@ -133,14 +135,28 @@ class Clinicas
             'servicios.id',
             'servicios.servicio',
             's_estado',
-            'servicios.sis_esta_id')
+            'servicios.sis_esta_id'
+        )
             ->join('sis_estas', 'servicios.sis_esta_id', '=', 'sis_estas.id');
         return DatatableHelper::getDatatable($paciente, $request);
     }
 
     public static function getCondicio($request)
-    { 
-        return response()->json(Condicio::combo(['cabecera' => false, 'ajaxxxxx' => true,
-        'clinicax' => $request->clinicax, 'rango_id' => $request->crangoxx, 'condicio' => 0]));
+    {
+        return response()->json(Condicio::combo([
+            'cabecera' => false, 'ajaxxxxx' => true,
+            'clinicax' => $request->clinicax, 'rango_id' => $request->crangoxx, 'condicio' => 0
+        ]));
+    }
+
+    public static function getInactivarMedicam($request)
+    {
+        
+
+
+
+        $registro = MedicameSisClinica::where('id', $request->registro)->first();
+        $registro->update(['sis_esta_id' => ($registro->sis_esta_id == 1) ? 2 : 1, 'user_edita_id' => Auth::user()->id]);
+        return [];
     }
 }

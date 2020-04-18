@@ -11,6 +11,7 @@ use App\Models\Formulaciones\Ordene;
 use App\Models\Produccion\Calistam;
 use App\Models\Produccion\Dalistam;
 use App\Models\Sistema\SisEsta;
+use Illuminate\Http\Request;
 
 class ConciliacionController extends Controller
 {
@@ -192,5 +193,31 @@ class ConciliacionController extends Controller
         return redirect()->route($this->opciones['routxxxx'])->with('info', 'Registro ' . $activado . ' con éxito');
     }
 
-
+    public function esnumerico(Request $request) {
+        if ($request->ajax()) {
+          $data = $request->all();
+          $numeroxx = $data['cantcons'];
+          if (!is_numeric($data['cantcons'])) {// se verifica que sea un volor numerico lo que se ingrese
+            if ($data['cantcons'] != '') {
+              $numeroxx = substr($numeroxx, 0, strlen($numeroxx) - 1);
+            } else {
+              $numeroxx = 0;
+            }
+          }
+          $cantmayo = false;
+          if ($numeroxx > $data['cantalis']) {
+            $cantmayo = true;
+          }
+    
+          $idelemen = $data['idcancon'][0] . '_' . $data['idcancon'][1];
+          return response()->json([
+                      'numeroxx' => $numeroxx,
+                      'diferenc' => $data['cantalis'] - $numeroxx,
+                      'cantalis' => $data['cantalis'],
+                      'idcancon' => $idelemen . '_con',
+                      'idiferen' => $idelemen . '_dif',
+                      'cantmayo' => $cantmayo
+          ]);
+        }
+      }
 }

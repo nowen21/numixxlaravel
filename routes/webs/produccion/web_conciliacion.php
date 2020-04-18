@@ -4,14 +4,7 @@ Route::group(['prefix' => 'conciliaciones'], function () {
 	    'uses' => 'Produccion\ConciliacionController@index',
 	    'middleware' => ['permission:concilia-leer|concilia-crear|concilia-editar|concilia-borrar']
 	])->name('concilia');
-	Route::get('nuevo', [
-	    'uses' => 'Produccion\ConciliacionController@create',
-	    'middleware' => ['permission:concilia-crear']
-	])->name('concilia.nuevo');
-	Route::post('crear', [
-	    'uses' => 'Produccion\ConciliacionController@store',
-	    'middleware' => ['permission:concilia-crear']
-	])->name('concilia.crear');
+	
 	Route::get('editar/{objetoxx}', [
 	    'uses' => 'Produccion\ConciliacionController@edit',
 	    'middleware' => ['permission:concilia-editar']
@@ -28,4 +21,9 @@ Route::group(['prefix' => 'conciliaciones'], function () {
 	    'uses' => 'Produccion\ConciliacionController@destroy',
 	    'middleware' => ['permission:concilia-borrar']
 	])->name('concilia.borrar');
+
+	Route::post('esnumerico', [
+	    'uses' => 'Produccion\ConciliacionController@esnumerico',
+		'middleware' => ['concilia-editar']
+	])->name('concilia.esnumerico');
 });

@@ -32,4 +32,8 @@ Route::group(['prefix' => '{padrexxx}'], function () use ($controll, $routexxx) 
 		'uses' => $controll . 'Controller@destroy',
 		'middleware' => ['permission:' . $routexxx . '-borrar']
 	])->name($routexxx . '.borrar');
+	Route::get('inactivar', [
+		'uses' => $controll . 'Controller@getInactivarMedicam',
+		'middleware' => ['permission:' . $routexxx . '-leer']
+	])->name($routexxx . '.inactivar');
 });

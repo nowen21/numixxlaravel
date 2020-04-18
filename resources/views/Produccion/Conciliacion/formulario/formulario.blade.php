@@ -114,9 +114,9 @@
 
 
                     <td scope="col" class="letras">
-                        {{ Form::text($alistami['medic_id'].'con', $alistami['value_me'],
-                            ['class'=>'form-control numerico','id'=>$alistami['medic_id'].'con',
-                            'onkeypress'=>'return filterFloat(event,this);','style'=>'width: 80px']) }}
+                    <div class="form-control" id="{{$alistami['medic_id']}}_con">
+                            {{$alistami['value_me']}}
+                        </div>
                     </td>
                     <td scope="col" class="letras" style="width: 100px">
                         <div class="form-control" id="{{$alistami['medic_id']}}">
@@ -124,9 +124,10 @@
                         </div>
                     </td>
                     <td scope="col" class="letras">
-                        <div class="form-control" id="{{$alistami['medic_id']}}_dif">
-                            {{$alistami['value_me']}}
-                        </div>
+                    {{ Form::text($alistami['medic_id'].'_dif', $alistami['value_me'],
+                            ['class'=>'form-control numerico','id'=>$alistami['medic_id'].'_dif',
+                            'onkeypress'=>'return filterFloat(event,this);','style'=>'width: 80px']) }}
+                        
                     </td>
                 </tr>
                 @endforeach

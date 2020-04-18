@@ -1,2 +1,10 @@
-<a class="btn btn-sm btn-primary" href="{{ route('clinica.editar', $id) }}">Editar</a>
-<a class="btn btn-sm btn-primary" href="{{ route('clinica.ver', $id) }}">Ver</a>
+<?php 
+$clasexxx='danger';
+$textoxxx='Inactivar';
+if($sis_esta_id==2){
+    $clasexxx='success';
+    $textoxxx='Activar';
+}
+?>
+
+<a class="btn btn-sm btn-{{$clasexxx}} estadoxx" href="javascript:void(0)" id="{{$id}}">{{$textoxxx}}</a>
