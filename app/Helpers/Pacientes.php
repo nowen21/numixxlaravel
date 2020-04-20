@@ -12,8 +12,9 @@ class Pacientes
     {
         $paciente = Paciente::select([
             'pacientes.id', 'pacientes.nombres', 'pacientes.apellidos', 'pacientes.sis_esta_id',
-            'sis_estas.s_estado','pacientes.cedula'
+            'sis_estas.s_estado','pacientes.cedula','sis_clinica_id'
         ])
+        ->join('sis_clinicas', 'pacientes.sis_clinica_id', '=', 'sis_clinicas.id')
             ->join('sis_estas', 'pacientes.sis_esta_id', '=', 'sis_estas.id')
             ->where('sis_clinica_id',$request->clinicax)
             ;
@@ -30,7 +31,7 @@ class Pacientes
     {
         $paciente = Cformula::select([
             'cformulas.id', 'cformulas.tiempo', 'cformulas.velocidad','cformulas.volumen',
-            'cformulas.purga','cformulas.peso', 'cformulas.total','cformulas.sis_esta_id',
+            'cformulas.purga','cformulas.peso', 'cformulas.total','cformulas.sis_esta_id','cformulas.sis_clinica_id',
             'sis_estas.s_estado','cformulas.paciente_id',
         ])
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id');

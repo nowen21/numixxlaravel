@@ -107,14 +107,14 @@
 
                 @foreach($todoxxxx['formular'] as $formulax)
                 <?php
-    $idxxxxxx = '';
-    $ocultarx = '';
-    if ($formulax['campo_id'] == 'multiuno' && $todoxxxx['paciente']->npt_id == 3) {
-      $idxxxxxx = 'ocultarx';
-      $ocultarx = 'display: none';
-    }
-    
-    ?>
+                $idxxxxxx = '';
+                $ocultarx = '';
+                if ($formulax['campo_id'] == 'multiuno' && $todoxxxx['paciente']->npt_id == 3) {
+                    $idxxxxxx = 'ocultarx';
+                    $ocultarx = 'display: none';
+                }
+
+                ?>
                 <tr id="{{$idxxxxxx}}" style="">
                     <td>{{$formulax['casaxxxx']}}</td>
                     <td>{{ Form::select($formulax['campo_id'], $formulax['selelist'], $formulax['selevalu'],['class'=>'form-control medicamento select2','id'=>$formulax['campo_id']]) }}

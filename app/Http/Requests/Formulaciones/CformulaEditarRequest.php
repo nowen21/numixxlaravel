@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Formulaciones;
 
 use App\Models\Administracion\Rango;
+use App\Models\Clinica\Crango;
 use App\Models\Medicamentos\Medicame;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -91,12 +92,20 @@ class CformulaEditarRequest extends FormRequest
     /**
      * esto cambió, revisarlo
      */
-    $minimoxx = Rango::join('rango_sis_clinica', 'rangos.id', '=', 'rango_sis_clinica.rango_id')
-      ->where('rango_sis_clinica.sis_clinica_id', $dataxxxx['sis_clinica_id'])->min('rangos.ranginic');
-    $maximoxx = Rango::join('rango_sis_clinica', 'rangos.id', '=', 'rangos.id')
-      ->where('rango_sis_clinica.sis_clinica_id', $dataxxxx['sis_clinica_id'])->max('rangos.rangfina');
+
+
+
+    $minimoxx = Crango::join('rcodigos', 'crangos.rcodigo_id', '=', 'rcodigos.id')
+      ->join('rcondicis', 'rcodigos.rcondici_id', '=', 'rcondicis.id')
+      ->join('rnpts', 'rcondicis.rnpt_id', '=', 'rnpts.id')
+      ->join('rangos', 'rnpts.rango_id', '=', 'rangos.id')
+      ->where('crangos.sis_clinica_id', $dataxxxx['sis_clinica_id'])->min('rangos.ranginic');
+    $maximoxx = Crango::join('rcodigos', 'crangos.rcodigo_id', '=', 'rcodigos.id')
+      ->join('rcondicis', 'rcodigos.rcondici_id', '=', 'rcondicis.id')
+      ->join('rnpts', 'rcondicis.rnpt_id', '=', 'rnpts.id')
+      ->join('rangos', 'rnpts.rango_id', '=', 'rangos.id')
+      ->where('crangos.sis_clinica_id', $dataxxxx['sis_clinica_id'])->max('rangos.rangfina');
     $volutota = $dataxxxx['volumen'] + $dataxxxx['purga'];
-    //    exit();
     if ($minimoxx > $volutota) {
       $this->_mensaje['liminfer.required'] = "La formulación está por debajo del rango contratado, por favor comunicarse con la admnistración de NUMIXX.S.A.S";
       $this->_reglasx['liminfer'] = 'required';

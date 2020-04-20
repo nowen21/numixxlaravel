@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Pacientes;
+namespace App\Http\Controllers\Clinicas;
 
+use App\Helpers\Clinicas;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Pacientes\PacienteCrearRequest;
 use App\Http\Requests\Pacientes\PacienteEditarRequest;
 use App\Models\Administracion\Ep;
 use App\Models\Administracion\Genero;
 use App\Models\Administracion\Servicio;
+use App\Models\Clinica\SisClinica;
 use App\Models\Medicamentos\Npt;
 use App\Models\Pacientes\Paciente;
 use App\Models\Sistema\Departamento;
@@ -24,14 +26,15 @@ class PacienteController extends Controller
         $this->opciones = [
             'permisox' => 'paciente',
             'parametr' => [],
-            'rutacarp' => 'Pacientes.',
+            'rutacarp' => 'Clinicas.',
             'tituloxx' => 'Crear: Paciente',
-            'slotxxxx'=>'paciente',
-            'carpetax'=>'Paciente',
-            'indecrea'=>false,
-            'esindexx'=>false
+            'slotxxxy' => 'paciente',
+            'slotxxxx' => 'paciente',
+            'carpetax' => 'Paciente',
+            'indecrea' => false,
+            'esindexx' => false
         ];
-       
+
         $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
         $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
         $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
@@ -56,12 +59,21 @@ class PacienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    { 
-        $padrexxx=Auth::user()->sis_clinica_id;
-        $this->opciones['indecrea']=true;
-        $this->opciones['esindexx']=true;
-        $this->opciones['accionxx']='index';
+    public function index(SisClinica $padrexxx)
+    {  $this->opciones['cardheap'] = 'PACIENTES: ';
+        $this->opciones['cardhead'] = 'CLINICA: '.$padrexxx->clinica;
+        $this->opciones['botoform'][0]['routingx'][1] = $padrexxx->id;
+        $clinicax = Auth::user()->sis_clinica_id;
+        $padrexxx=$padrexxx->id;
+        if($clinicax==1){
+            $padrexxx=$clinicax;
+        }
+        $this->opciones['parametr'] = [$padrexxx];
+        
+        
+        // $this->opciones['indecrea']=true;
+        //$this->opciones['esindexx']=true;
+        $this->opciones['accionxx'] = 'index';
         $this->opciones['padrexxx'] = $padrexxx;
         $this->opciones['tablasxx'] = [
             [
@@ -75,19 +87,18 @@ class PacienteController extends Controller
                 'vercrear' => true,
                 'accitabl' => true,
                 'urlxxxxx' => 'api/paciente/paciente',
-                'cabecera' =>[
+                'cabecera' => [
                     ['td' => 'ID'],
-                     ['td' => 'CEDULA'],
+                    ['td' => 'CEDULA'],
                     ['td' => 'NOMBRES'],
-                   
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'pacientes.id'],
-                     ['data' => 'cedula', 'name' => 'pacientes.cedula'],
+                    ['data' => 'cedula', 'name' => 'pacientes.cedula'],
                     ['data' => 'nombres', 'name' => 'pacientes.nombres'],
-                   
+
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tablapacientes',
@@ -106,18 +117,18 @@ class PacienteController extends Controller
         $this->opciones['nptxxxxx'] = Npt::combo(['cabecera' => true, 'ajaxxxxx' => false]);
         $this->opciones['servicio'] = Servicio::combo(['cabecera' => true, 'ajaxxxxx' => false]);
         $this->opciones['departam'] = Departamento::combo(['cabecera' => true, 'ajaxxxxx' => false]);
-        $departam='';
+        $departam = '';
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
         if ($nombobje != '') {
             $this->opciones[$nombobje] = $objetoxx;
-            $objetoxx->departamento_id=$objetoxx->municipio->departamento_id;
-            $departam=$objetoxx->departamento_id;
+            $objetoxx->departamento_id = $objetoxx->municipio->departamento_id;
+            $departam = $objetoxx->departamento_id;
         }
-        $this->opciones['municipi'] = Municipio::combo(['cabecera' => true, 'ajaxxxxx' => false,'departam'=>$departam]);
+        $this->opciones['municipi'] = Municipio::combo(['cabecera' => true, 'ajaxxxxx' => false, 'departam' => $departam]);
         // Se arma el titulo de acuerdo al array opciones
-        
+
         return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }
     /**
@@ -125,11 +136,20 @@ class PacienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(SisClinica $padrexxx)
     {
+        $this->opciones['cardheap'] = 'CREAR PACIENTE';
+        $this->opciones['cardhead']='CLINICA: '.$padrexxx->clinica;
 
-        $this->opciones['indecrea']=true;
-        $this->opciones['clinicac']=true;
+        $clinicax = Auth::user()->sis_clinica_id;
+        $padrexxx=$padrexxx->id;
+        if($clinicax==1){
+            $padrexxx=$clinicax;
+        }
+        $this->opciones['botoform'][0]['routingx'][1] = $padrexxx;
+        $this->opciones['parametr'] = [$padrexxx];
+        // $this->opciones['indecrea']=true;
+        $this->opciones['clinicac'] = true;
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
@@ -144,10 +164,10 @@ class PacienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PacienteCrearRequest $request)
+    public function store(PacienteCrearRequest $request, $padrexxx)
     {
         $dataxxxx = $request->all();
-        
+
         return $this->grabar($dataxxxx, '', 'Registro creado con éxito');
     }
 
@@ -157,11 +177,20 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Paciente $objetoxx)
+    public function show(SisClinica $padrexxx,Paciente $objetoxx)
     {
-        $this->opciones['tituloxx']='Ver: Paciente';
-        $this->opciones['paciente'] =$objetoxx;
-        $this->opciones['clinicax'] =$objetoxx->id;
+        $this->opciones['cardheap'] = 'VER PACIENTE: '.$objetoxx->nombres.' '.$objetoxx->apellidos;
+        $this->opciones['cardhead']='CLINICA: '.$padrexxx->clinica;
+
+        $clinicax = Auth::user()->sis_clinica_id;
+        $padrexxx=$padrexxx->id;
+        if($clinicax==1){
+            $padrexxx=$clinicax;
+        }
+        $this->opciones['botoform'][0]['routingx'][1] = $padrexxx;
+        $this->opciones['tituloxx'] = 'Ver: Paciente';
+        $this->opciones['paciente'] = $objetoxx;
+        $this->opciones['clinicax'] = $objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
         $this->opciones['botoform'][] =
             [
@@ -178,15 +207,23 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Paciente $objetoxx)
+    public function edit(SisClinica $padrexxx,Paciente $objetoxx)
     {
-        $this->opciones['tituloxx']='Editar: Paciente';
-        $this->opciones['paciente'] =$objetoxx;
-        $this->opciones['clinicax'] =$objetoxx->id;
-        $this->opciones['parametr'] = [$objetoxx->id];
+        $this->opciones['cardheap'] = 'EDITAR PACIENTE: '.$objetoxx->nombres.' '.$objetoxx->apellidos;
+        $this->opciones['cardhead']='CLINICA: '.$padrexxx->clinica;
+
+        $clinicax = Auth::user()->sis_clinica_id;
+        $padrexxx=$padrexxx->id;
+        if($clinicax==1){
+            $padrexxx=$clinicax;
+        }
+        $this->opciones['botoform'][0]['routingx'][1] = $padrexxx;
+        $this->opciones['parametr'] = [$padrexxx,$objetoxx->id];
+        $this->opciones['tituloxx'] = 'Editar: Paciente';
+        $this->opciones['paciente'] = $objetoxx;
         $this->opciones['botoform'][] =
             [
-                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
+                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$padrexxx,$objetoxx->id]],
                 'formhref' => 1, 'tituloxx' => 'kkkk', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
         return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
@@ -206,7 +243,7 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PacienteEditarRequest  $request, Paciente $objetoxx)
+    public function update(SisClinica $padrexxx,PacienteEditarRequest  $request, Paciente $objetoxx)
     {
         $dataxxxx = $request->all();
         return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
@@ -218,7 +255,7 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Paciente $objetoxx)
+    public function destroy(Paciente $objetoxx, $padrexxx)
     {
         $this->opciones['parametr'] = [$objetoxx->id];
 
@@ -228,6 +265,4 @@ class PacienteController extends Controller
 
         return redirect()->route($this->opciones['routxxxx'])->with('info', 'Registro ' . $activado . ' con éxito');
     }
-
-
 }

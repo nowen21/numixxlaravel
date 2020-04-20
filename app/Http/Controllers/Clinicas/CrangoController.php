@@ -16,13 +16,14 @@ class CrangoController extends Controller
 
     public function __construct()
     {
-       
+
         $this->opciones = [
             'cardhead' => '', // titulo para las pestañas
             'permisox' => 'crango',
             'parametr' => [],
             'rutacarp' => 'Clinicas.',
             'tituloxx' => 'Crear: Rango',
+            'slotxxxy' => 'clinica',
             'slotxxxx' => 'crango',
             'carpetax' => 'Rango',
             'indecrea' => false,
@@ -42,9 +43,8 @@ class CrangoController extends Controller
                 'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'], []],
                 'formhref' => 2, 'tituloxx' => 'VOLVER A RANGO', 'clasexxx' => 'btn btn-sm btn-primary'
             ],
-           
+
         ];
-        
     }
 
 
@@ -55,7 +55,8 @@ class CrangoController extends Controller
      */
     public function index($clinica)
     {
-       
+
+
         $clinicax = SisClinica::where('id', $clinica)->first();
         $this->opciones['cardhead'] = 'CLINICA: ' . $clinicax->clinica;
         $this->opciones['tablasxx'][] =
@@ -94,7 +95,7 @@ class CrangoController extends Controller
                 'parametr' => [$clinica],
             ];
 
-
+        $this->opciones['parametr'] = [$clinica];
         $this->opciones['clinicax'] = $clinica;
 
         $this->opciones['accionxx'] = 'index';
@@ -166,12 +167,10 @@ class CrangoController extends Controller
         $this->opciones['botoform'][0]['routingx'][1] = $this->opciones['parametr'];
 
 
-        
-        $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => $objetoxx->sis_esta_id == 1 ? 'INACTIVAR' : 'ACTIVAR', 'routingx' => [$this->opciones['routxxxx'], []], 'formhref' => 1,
-                'tituloxx' => '', 'clasexxx' => $objetoxx->sis_esta_id == 1 ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success'
-            ];
+        $this->opciones['botoform'][] =  [
+            'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'] . '.nuevo', $this->opciones['parametr']],
+            'formhref' => 2, 'tituloxx' => 'NUEVO RANGO', 'clasexxx' => 'btn btn-sm btn-primary'
+        ];
         $this->opciones['readonly'] = 'readonly';
         return $this->view($objetoxx,  'modeloxx', 'Ver', $this->opciones['rutacarp'] . 'pestanias');
     }
@@ -197,10 +196,10 @@ class CrangoController extends Controller
             ];
 
 
-            $this->opciones['botoform'][]=  [
-                'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'].'.nuevo', $this->opciones['parametr']],
-                'formhref' => 2, 'tituloxx' => 'NUEVO RANGO', 'clasexxx' => 'btn btn-sm btn-primary'
-            ];
+        $this->opciones['botoform'][] =  [
+            'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'] . '.nuevo', $this->opciones['parametr']],
+            'formhref' => 2, 'tituloxx' => 'NUEVO RANGO', 'clasexxx' => 'btn btn-sm btn-primary'
+        ];
         return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
     }
 

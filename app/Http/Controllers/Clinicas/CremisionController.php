@@ -22,6 +22,7 @@ class CremisionController extends Controller
             'parametr' => [],
             'rutacarp' => 'Clinicas.',
             'tituloxx' => 'clinica',
+            'slotxxxy' => 'clinica',
             'slotxxxx' => 'crango',
             'carpetax' => 'Rango',
             'indecrea' => false,

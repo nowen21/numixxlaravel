@@ -1,43 +1,46 @@
 <div class="card">
   <div class="card-header">
-   {{$todoxxxx['cardhead']}}
-  </div>
-  <div class="card-header p-2">
-    <ul class="nav nav-tabs">
-      @canany(['clinica-leer', 'clinica-crear', 'clinica-editar', 'clinica-borrar'])
-      <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='clinica') ?' active' : '' }} 
-        text-sm" href="{{ route('clinica.editar', $todoxxxx['clinicax']) }}">Clínica</a></li>
-      @endcanany
-      @canany(['cmedicame-leer', 'cmedicame-crear', 'cmedicame-editar', 'cmedicame-borrar'])
-      <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='cmedicame') ?' active' : '' }} 
-        text-sm" href="{{ route('cmedicame', $todoxxxx['clinicax']) }}">Medicamentos</a></li>
-      @endcanany
-      @canany(['crango-leer', 'crango-crear', 'crango-editar', 'crango-borrar'])
-      <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='crango') ?' active' : '' }} 
-        text-sm" href="{{ route('crango', $todoxxxx['clinicax']) }}">Rangos</a></li>
-      @endcanany
-      @canany(['cremision-leer', 'cremision-crear', 'cremision-editar', 'cremision-borrar'])
-      <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='cremision') ?' active' : '' }} 
-        text-sm" href="{{ route('cremision', $todoxxxx['clinicax']) }}">Remisiones</a></li>
-      @endcanany
-    </ul>
+    {{$todoxxxx['cardhead']}}
   </div>
   <div class="card-body">
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        @canany(['clinica-leer', 'clinica-crear', 'clinica-editar', 'clinica-borrar'])
+      <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxy']=='clinica') ?' active' : '' }} 
+        text-sm" href="{{ route('clinica.editar', $todoxxxx['parametr']) }}">Clínica</a></li>
+      @endcanany
+      </li>
+      <li class="nav-item">
+        @canany(['paciente-leer', 'paciente-crear', 'paciente-editar', 'paciente-borrar'])
+      <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxy']=='paciente') ?' active' : '' }} text-sm" href="{{ route('paciente', $todoxxxx['parametr']) }}">Paciente</a></li>
+      @endcanany
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
     <div class="tab-content">
-      <div class="tab-pane active" id="{{ $todoxxxx['slotxxxx'] }}">
-      @if(isset($clinica))
-      {{ $clinica }}
-      @endif
-      @if(isset($cmedicame))
-      {{ $cmedicame }}
-      @endif
-      @if(isset($crango))
-      {{ $crango }}
-      @endif
-      @if(isset($cremision))
-      {{ $cremision }}
-      @endif
+      <div id="home" class="container tab-pane active">
+        <div class="card">
+          @if(isset($paciente) || isset($formular))
+            @include('Clinicas.tabsxxxx.paciente.header')
+            @include('Clinicas.tabsxxxx.paciente.body')
+          @else
+            @include('Clinicas.tabsxxxx.clinica.header')
+            @include('Clinicas.tabsxxxx.clinica.body')
+          @endif
+        </div>
       </div>
     </div>
+
+
+
+
   </div>
+
+
+
+
+
+
+
 </div>

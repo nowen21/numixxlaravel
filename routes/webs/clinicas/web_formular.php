@@ -1,8 +1,8 @@
 <?php
 
-$controll = 'Pacientes\Cformula';
+$controll = 'Clinicas\Cformula';
 $routexxx = 'formular';
-Route::group(['prefix' => '{padrexxx}'], function () use ($controll, $routexxx) {
+Route::group(['prefix' => '{padrexxy}'], function () use ($controll, $routexxx) {
 
 	Route::get('', [
 		'uses' => $controll . 'Controller@index',

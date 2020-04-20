@@ -1,31 +1,34 @@
 <?php
-Route::group(['prefix' => '/{clinica}'], function () {
-    Route::get('paciente', [
-	    'uses' => 'Clinicas\CpacienteController@index',
-	    'middleware' => ['permission:cpaciente-leer|cpaciente-crear|cpaciente-editar|cpaciente-borrar']
-	])->name('cpaciente');
+$controll = 'Clinicas\Paciente';
+$routexxx = 'paciente';
+Route::group(['prefix' => '{padrexxx}/pacientes'], function () use ($controll, $routexxx) {
+	Route::get('', [
+		'uses' => $controll . 'Controller@index',
+		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
+	])->name($routexxx);
 	Route::get('nuevo', [
-	    'uses' => 'Clinicas\CpacienteController@create',
-	    'middleware' => ['permission:cpaciente-crear']
-	])->name('cpaciente.nuevo');
+		'uses' => $controll . 'Controller@create',
+		'middleware' => ['permission:' . $routexxx . '-crear']
+	])->name($routexxx . '.nuevo');
 	Route::post('crear', [
-	    'uses' => 'Clinicas\CpacienteController@store',
-	    'middleware' => ['permission:cpaciente-crear']
-	])->name('cpaciente.crear');
+		'uses' => $controll . 'Controller@store',
+		'middleware' => ['permission:' . $routexxx . '-crear']
+	])->name($routexxx . '.crear');
 	Route::get('editar/{objetoxx}', [
-	    'uses' => 'Clinicas\CpacienteController@edit',
-	    'middleware' => ['permission:cpaciente-editar']
-	])->name('cpaciente.editar');
+		'uses' => $controll . 'Controller@edit',
+		'middleware' => ['permission:' . $routexxx . '-editar']
+	])->name($routexxx . '.editar');
 	Route::put('editar/{objetoxx}', [
-	    'uses' => 'Clinicas\CpacienteController@update',
-	    'middleware' => ['permission:cpaciente-editar']
-	])->name('cpaciente.editar');
+		'uses' => $controll . 'Controller@update',
+		'middleware' => ['permission:' . $routexxx . '-editar']
+	])->name($routexxx . '.editar');
 	Route::get('ver/{objetoxx}', [
-	    'uses' => 'Clinicas\CpacienteController@show',
-	    'middleware' => ['permission:cpaciente-leer']
-	])->name('cpaciente.ver');
+		'uses' => $controll . 'Controller@show',
+		'middleware' => ['permission:' . $routexxx . '-leer']
+	])->name($routexxx . '.ver');
 	Route::delete('borrar/{objetoxx}', [
-	    'uses' => 'Clinicas\CpacienteController@destroy',
-	    'middleware' => ['permission:cpaciente-borrar']
-	])->name('cpaciente.borrar');
+		'uses' => $controll . 'Controller@destroy',
+		'middleware' => ['permission:' . $routexxx . '-borrar']
+	])->name($routexxx . '.borrar');
+	require_once('web_formular.php');
 });

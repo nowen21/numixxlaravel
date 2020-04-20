@@ -24,6 +24,7 @@ class CmedicameController extends Controller
             'parametr' => [],
             'rutacarp' => 'Clinicas.',
             'tituloxx' => 'clinica',
+            'slotxxxy' => 'clinica',
             'slotxxxx' => 'cmedicame',
             'carpetax' => 'Medicamento',
             'indecrea' => false,
