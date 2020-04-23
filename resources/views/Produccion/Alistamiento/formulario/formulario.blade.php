@@ -47,7 +47,7 @@
         </div>
         @endif
     </div>
-    
+
     <div class="form-group col-md-6">
         {{ Form::label('sis_esta_id', 'Estado:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
@@ -82,31 +82,31 @@
                 </tr>
             </thead>
             <tbody id="formulaciontable">
-<style>
-    .letras{
-        font-size: 10px;
-    }
-</style>
+                <style>
+                    .letras {
+                        font-size: 10px;
+                    }
+                </style>
                 @foreach($todoxxxx['alistami'] as $alistami)
-                <tr >
+                <tr>
                     <td scope="col" class="letras">{{$alistami['medicamd']}}</td>
                     <td scope="col" class="letras" style="width: 100px">
-                    @if($alistami['medicamd']!='')
+                        @if($alistami['medicamd']!='')
                         {{ Form::text($alistami['dispo_id'], $alistami['value_di'],
                             ['class'=>'form-control numerico','id'=>$alistami['dispo_id'],
-                            'onkeypress'=>'return filterFloat(event,this);','style'=>'width: 80px']) }}  
-                    @endif
+                            'onkeypress'=>'return filterFloat(event,this);','style'=>'width: 80px']) }}
+                        @endif
                     </td>
                     <td scope="col" class="letras">{{$alistami['lotexxxd']}}</td>
                     <td scope="col" class="letras">{{$alistami['reginvid']}}</td>
                     <td scope="col" class="letras">{{$alistami['fechvend']}}</td>
                     <td scope="col" class="letras">{{$alistami['medicamm']}}</td>
                     <td scope="col" class="letras">
-                    @if($alistami['medicamm']!='')
+                        @if($alistami['medicamm']!='')
                         {{ Form::text($alistami['medic_id'], $alistami['value_me'],
                             ['class'=>'form-control numerico','id'=>$alistami['medic_id'],
-                            'onkeypress'=>'return filterFloat(event,this);','style'=>'width: 80px']) }}  
-                    @endif
+                            'onkeypress'=>'return filterFloat(event,this);','style'=>'width: 80px']) }}
+                        @endif
                     </td>
                     <td scope="col" class="letras">{{$alistami['lotexxxm']}}</td>
                     <td scope="col" class="letras">{{$alistami['reginvim']}}</td>

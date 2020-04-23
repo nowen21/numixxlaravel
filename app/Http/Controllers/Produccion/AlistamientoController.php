@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Produccion;
 
+use App\Helpers\Pdfs\Pdfs;
 use App\Helpers\Produccion\Alistamiento;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produccion\CalistamCrearRequest;
@@ -219,5 +220,15 @@ class AlistamientoController extends Controller
         return redirect()->route($this->opciones['routxxxx'])->with('info', 'Registro ' . $activado . ' con éxito');
     }
 
-
+    public function getPdfCalistam(Calistam $objetoxx)
+    {
+        $dataxxxx = [
+            'vistaurl' => 'Produccion.Alistamiento.pdf.alistami',
+            'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
+            'tipoxxxx' => 2,
+            'nombarch' => 'alistamiento',
+            'dataxxxx' => ['cabecera'=>$objetoxx,'detallex'=>Alistamiento::getMlotesDlotes($objetoxx->id)]
+        ];
+        return Pdfs::getImprimirPdf($dataxxxx);
+    }
 }

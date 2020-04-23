@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 })->name('/');
-
+Route::get('user-list-pdf/{objetoxx}', 'Pdfs\PdfController@getPdfExpUsuarios')->name('user.pdf');
 
 
 Route::group(['middleware' => ['guest']], function () {

@@ -23,8 +23,8 @@ class CformulaController extends Controller
     {
         $this->opciones = [
             'permisox' => 'formular',
-            'cardhead' => '', 
-            'cardheap' => '', 
+            'cardhead' => 'CLINICA :', 
+            'cardheap' => 'FORMULACIONES', 
             'parametr' => [],
             'rutacarp' => 'Clinicas.',
             'tituloxx' => 'Crear: Formulación',
@@ -61,6 +61,8 @@ class CformulaController extends Controller
      */
     public function index($clinicax,$padrexxx)
     {
+
+        $this->opciones['cardhead']=$this->opciones['cardhead'].SisClinica::where('id',$clinicax)->first()->clinica;   
         $paciente=Paciente::getPaciente(['padrexxx'=>$padrexxx]);
         $this->opciones['paciente']=$paciente;
         $this->opciones['botoform'][0]['routingx'][1] = [$clinicax,$padrexxx];
@@ -128,9 +130,12 @@ class CformulaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+   
     public function create($clinicax,$padrexxx)
-    {        
+    {   
+        $this->opciones['cardhead']=$this->opciones['cardhead'].SisClinica::where('id',$clinicax)->first()->clinica;  
         $paciente=Paciente::getPaciente(['padrexxx'=>$padrexxx]);
+        $this->opciones['cardheap']='FORMULACION PACIENTE: '.$paciente->nombres.' '.$paciente->apellidos;   
         $this->opciones['formular'] = Dataformulario::getPintarFormulario(
             [
                 'paciente' => $paciente,
@@ -177,8 +182,10 @@ class CformulaController extends Controller
      */
     public function show($clinicax,$padrexxx,Cformula $objetoxx)
     {
+        $this->opciones['cardhead']=$this->opciones['cardhead'].SisClinica::where('id',$clinicax)->first()->clinica;  
         $this->opciones['tituloxx']='Ver: Formulación';
         $paciente=Paciente::getPaciente(['padrexxx'=>$padrexxx]);
+        $this->opciones['cardheap']='FORMULACION PACIENTE: '.$paciente->nombres.' '.$paciente->apellidos;   
         $this->opciones['formular'] = Dataformulario::getPintarFormulario(
             [
                 'paciente' => $paciente,
@@ -201,8 +208,10 @@ class CformulaController extends Controller
      */
     public function edit($clinicax,$padrexxx,Cformula $objetoxx)
     { 
+        $this->opciones['cardhead']=$this->opciones['cardhead'].SisClinica::where('id',$clinicax)->first()->clinica;  
         $this->opciones['tituloxx']='Editar: Formulación';
         $paciente=Paciente::getPaciente(['padrexxx'=>$padrexxx]);
+        $this->opciones['cardheap']='FORMULACION PACIENTE: '.$paciente->nombres.' '.$paciente->apellidos;   
         $this->opciones['formular'] = Dataformulario::getPintarFormulario(
             [
                 'paciente' => $paciente,
@@ -263,6 +272,7 @@ class CformulaController extends Controller
      */
     public function destroy($clinicax,$padrexxx,Cformula $objetoxx)
     {
+        $this->opciones['cardhead']=$this->opciones['cardhead'].SisClinica::where('id',$clinicax)->first()->clinica;  
         $this->opciones['botoform'][0]['routingx'][1] = $padrexxx;
         $this->opciones['parametr'] = [$objetoxx->id];
 

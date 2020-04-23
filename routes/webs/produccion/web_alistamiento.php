@@ -28,4 +28,8 @@ Route::group(['prefix' => 'alistamientos'], function () {
 	    'uses' => 'Produccion\AlistamientoController@destroy',
 	    'middleware' => ['permission:alistami-borrar']
 	])->name('alistami.borrar');
+	Route::get('imprimir/{objetoxx}', [
+	    'uses' => 'Produccion\AlistamientoController@getPdfCalistam',
+	    'middleware' => ['permission:alistami-leer']
+	])->name('alistami.imprimir');
 });
