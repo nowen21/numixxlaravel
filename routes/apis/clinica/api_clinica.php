@@ -1,22 +1,12 @@
 <?php
 
 use App\Helpers\Clinicas;
-use App\Models\Clinica\SisClinica;
 use Illuminate\Http\Request;
 
 Route::get('clinica/clinica', function (Request $request) {
   if (!$request->ajax())
     return redirect('/');
-
-  return datatables()
-    ->eloquent(
-      SisClinica::select('sis_clinicas.id', 'sis_clinicas.clinica', 's_estado', 'sis_clinicas.sis_esta_id')
-        ->join('sis_estas', 'sis_clinicas.sis_esta_id', '=', 'sis_estas.id')
-    )
-    ->addColumn('botonexx', $request->botonesx)
-    ->addColumn('s_estado', $request->estadoxx)
-    ->rawColumns(['botonexx', 's_estado'])
-    ->toJson();
+  return Clinicas::getClinicas($request);
 });
 
 Route::get('clinica/cmedicamento', function (Request $request) {

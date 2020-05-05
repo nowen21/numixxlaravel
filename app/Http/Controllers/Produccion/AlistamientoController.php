@@ -221,7 +221,7 @@ class AlistamientoController extends Controller
     }
 
     public function getPdfCalistam(Calistam $objetoxx)
-    {
+    { 
         $dataxxxx = [
             'vistaurl' => 'Produccion.Alistamiento.pdf.alistami',
             'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],

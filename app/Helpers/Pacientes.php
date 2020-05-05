@@ -12,11 +12,11 @@ class Pacientes
     {
         $paciente = Paciente::select([
             'pacientes.id', 'pacientes.nombres', 'pacientes.apellidos', 'pacientes.sis_esta_id',
-            'sis_estas.s_estado','pacientes.cedula','sis_clinica_id'
+            'sis_estas.s_estado','pacientes.cedula','pacientes.sis_clinica_id'
         ])
         ->join('sis_clinicas', 'pacientes.sis_clinica_id', '=', 'sis_clinicas.id')
             ->join('sis_estas', 'pacientes.sis_esta_id', '=', 'sis_estas.id')
-            ->where('sis_clinica_id',$request->clinicax)
+            ->where('pacientes.sis_clinica_id',$request->clinicax)
             ;
 
         return DatatableHelper::getDatatable($paciente, $request);
@@ -34,7 +34,8 @@ class Pacientes
             'cformulas.purga','cformulas.peso', 'cformulas.total','cformulas.sis_esta_id','cformulas.sis_clinica_id',
             'sis_estas.s_estado','cformulas.paciente_id',
         ])
-            ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id');
+            ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
+            ->where('cformulas.paciente_id',$request->paciente);
 
         return DatatableHelper::getDatatable($paciente, $request);
     }

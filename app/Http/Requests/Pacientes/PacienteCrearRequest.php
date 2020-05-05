@@ -29,7 +29,7 @@ class PacienteCrearRequest extends FormRequest
     ];
     $this->_reglasx = [
       'registro' => 'required',
-      'cedula' => 'required|unique:pacientes',
+      'cedula' => ['required'],
       'nombres' => 'required',
       
       'peso' => 'required',
@@ -69,9 +69,10 @@ class PacienteCrearRequest extends FormRequest
 
   public function validar()
   {
-    $otroregi = Paciente::where('sis_clinica_id', Auth::user()->sis_clinica_id)->where('cedula', $this->cedula)->first();
+    $otroregi = Paciente::where('sis_clinica_id', $this->segments()[1])->where('cedula', $this->cedula)->first();
     if (isset($otroregi->id)) {
       $this->_reglasx['cedula'][1] = 'unique:pacientes';
     }
+    
   }
 }

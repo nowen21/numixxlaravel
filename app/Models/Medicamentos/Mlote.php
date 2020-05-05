@@ -3,22 +3,18 @@
 namespace App\Models\Medicamentos;
 
 use App\Models\Formulaciones\Dfmlote;
-use App\Models\Formulaciones\Dformula;
 use App\Models\Sistema\SisEsta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Mlote extends Model {
-
   protected $fillable = [
       'fechvenc', 'minvima_id', 'inventar', 'lotexxxx', 'sis_esta_id', 'user_crea_id', 'user_edita_id'
   ];
-
   public function sis_esta() {
     return $this->belongsTo(SisEsta::class);
   }
-
   public function minvima() {
     return $this->belongsTo(Minvima::class);
   }

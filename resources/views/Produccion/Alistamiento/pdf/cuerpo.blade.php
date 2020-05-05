@@ -1,8 +1,8 @@
 <style>
-    .letras1 {
-      font-size: 10px;
-    }
-  </style>
+  .letras1 {
+    font-size: 10px;
+  }
+</style>
 <thead>
   <tr>
     <th class="letras1">DISPOSITIVO MÉDICO</th>
@@ -27,14 +27,18 @@
   <tr>
     <td scope="col" class="letras">{{$alistami['medicamd']}}</td>
     <td scope="col" class="letras" style="width: 100px">
+      @if($alistami['medicamd']!='')
       {{$alistami['value_di']}}
+      @endif
     </td>
     <td scope="col" class="letras">{{$alistami['lotexxxd']}}</td>
     <td scope="col" class="letras">{{$alistami['reginvid']}}</td>
     <td scope="col" class="letras">{{$alistami['fechvend']}}</td>
     <td scope="col" class="letras">{{$alistami['medicamm']}}</td>
-    <td scope="col" class="letras">
+    <td scope="col" class="letras" style="width: 100px">
+      @if($alistami['medicamm']!='')
       {{$alistami['value_me']}}
+      @endif
     </td>
     <td scope="col" class="letras">{{$alistami['lotexxxm']}}</td>
     <td scope="col" class="letras">{{$alistami['reginvim']}}</td>

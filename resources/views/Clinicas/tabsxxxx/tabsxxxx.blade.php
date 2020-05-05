@@ -3,13 +3,17 @@
     {{$todoxxxx['cardhead']}}
   </div>
   <div class="card-body">
+  <?php
+      $puedexxx=auth()->user()->can('clinica-editar')?'editar':'ver';
+      ?>
     <ul class="nav nav-tabs" role="tablist">
       <li class="nav-item">
         @canany(['clinica-leer', 'clinica-crear', 'clinica-editar', 'clinica-borrar'])
       <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxy']=='clinica') ?' active' : '' }} 
-        text-sm" href="{{ route('clinica.editar', $todoxxxx['parametr']) }}">Clínica</a></li>
+        text-sm" href="{{ route('clinica.'.$puedexxx, $todoxxxx['parametr']) }}">Clínica</a></li>
       @endcanany
       </li>
+      
       <li class="nav-item">
         @canany(['paciente-leer', 'paciente-crear', 'paciente-editar', 'paciente-borrar'])
       <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxy']=='paciente') ?' active' : '' }} text-sm" href="{{ route('paciente', $todoxxxx['parametr']) }}">Paciente</a></li>

@@ -60,17 +60,16 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(SisClinica $padrexxx)
-    {  $this->opciones['cardheap'] = 'PACIENTES: ';
-        $this->opciones['cardhead'] = 'CLINICA: '.$padrexxx->clinica;
+    {
+        $this->opciones['cardheap'] = 'PACIENTES: ';
+        $this->opciones['cardhead'] = 'CLINICA: ' . $padrexxx->clinica;
         $this->opciones['botoform'][0]['routingx'][1] = $padrexxx->id;
         $clinicax = Auth::user()->sis_clinica_id;
-        $padrexxx=$padrexxx->id;
-        if($clinicax==1){
-            $padrexxx=$clinicax;
-        }
+        $padrexxx = $padrexxx->id;
+
         $this->opciones['parametr'] = [$padrexxx];
-        
-        
+
+
         // $this->opciones['indecrea']=true;
         //$this->opciones['esindexx']=true;
         $this->opciones['accionxx'] = 'index';
@@ -139,13 +138,13 @@ class PacienteController extends Controller
     public function create(SisClinica $padrexxx)
     {
         $this->opciones['cardheap'] = 'CREAR PACIENTE';
-        $this->opciones['cardhead']='CLINICA: '.$padrexxx->clinica;
+        $this->opciones['cardhead'] = 'CLINICA: ' . $padrexxx->clinica;
 
         $clinicax = Auth::user()->sis_clinica_id;
-        $padrexxx=$padrexxx->id;
-        if($clinicax==1){
-            $padrexxx=$clinicax;
-        }
+        $padrexxx = $padrexxx->id;
+        // if($clinicax==1){
+        //     $padrexxx=$clinicax;
+        // }
         $this->opciones['botoform'][0]['routingx'][1] = $padrexxx;
         $this->opciones['parametr'] = [$padrexxx];
         // $this->opciones['indecrea']=true;
@@ -167,7 +166,7 @@ class PacienteController extends Controller
     public function store(PacienteCrearRequest $request, $padrexxx)
     {
         $dataxxxx = $request->all();
-
+        $dataxxxx['sis_clinica_id'] = $padrexxx;
         return $this->grabar($dataxxxx, '', 'Registro creado con éxito');
     }
 
@@ -177,27 +176,20 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(SisClinica $padrexxx,Paciente $objetoxx)
+    public function show(SisClinica $padrexxx, Paciente $objetoxx)
     {
-        $this->opciones['cardheap'] = 'VER PACIENTE: '.$objetoxx->nombres.' '.$objetoxx->apellidos;
-        $this->opciones['cardhead']='CLINICA: '.$padrexxx->clinica;
+        $this->opciones['cardheap'] = 'EDITAR PACIENTE: ' . $objetoxx->nombres . ' ' . $objetoxx->apellidos;
+        $this->opciones['cardhead'] = 'CLINICA: ' . $padrexxx->clinica;
 
         $clinicax = Auth::user()->sis_clinica_id;
-        $padrexxx=$padrexxx->id;
-        if($clinicax==1){
-            $padrexxx=$clinicax;
-        }
+        $padrexxx = $padrexxx->id;
+        // if($clinicax==1){
+        //     $padrexxx=$clinicax;
+        // }
         $this->opciones['botoform'][0]['routingx'][1] = $padrexxx;
-        $this->opciones['tituloxx'] = 'Ver: Paciente';
+        $this->opciones['parametr'] = [$padrexxx, $objetoxx->id];
+        $this->opciones['tituloxx'] = 'Editar: Paciente';
         $this->opciones['paciente'] = $objetoxx;
-        $this->opciones['clinicax'] = $objetoxx->id;
-        $this->opciones['parametr'] = [$objetoxx->id];
-        $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => $objetoxx->sis_esta_id == 1 ? 'INACTIVAR' : 'ACTIVAR', 'routingx' => [$this->opciones['routxxxx'], []], 'formhref' => 1,
-                'tituloxx' => '', 'clasexxx' => $objetoxx->sis_esta_id == 1 ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success'
-            ];
-        $this->opciones['readonly'] = 'readonly';
         return $this->view($objetoxx,  'modeloxx', 'Ver', $this->opciones['rutacarp'] . 'pestanias');
     }
 
@@ -207,23 +199,23 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(SisClinica $padrexxx,Paciente $objetoxx)
+    public function edit(SisClinica $padrexxx, Paciente $objetoxx)
     {
-        $this->opciones['cardheap'] = 'EDITAR PACIENTE: '.$objetoxx->nombres.' '.$objetoxx->apellidos;
-        $this->opciones['cardhead']='CLINICA: '.$padrexxx->clinica;
+        $this->opciones['cardheap'] = 'EDITAR PACIENTE: ' . $objetoxx->nombres . ' ' . $objetoxx->apellidos;
+        $this->opciones['cardhead'] = 'CLINICA: ' . $padrexxx->clinica;
 
         $clinicax = Auth::user()->sis_clinica_id;
-        $padrexxx=$padrexxx->id;
-        if($clinicax==1){
-            $padrexxx=$clinicax;
-        }
+        $padrexxx = $padrexxx->id;
+        // if($clinicax==1){
+        //     $padrexxx=$clinicax;
+        // }
         $this->opciones['botoform'][0]['routingx'][1] = $padrexxx;
-        $this->opciones['parametr'] = [$padrexxx,$objetoxx->id];
+        $this->opciones['parametr'] = [$padrexxx, $objetoxx->id];
         $this->opciones['tituloxx'] = 'Editar: Paciente';
         $this->opciones['paciente'] = $objetoxx;
         $this->opciones['botoform'][] =
             [
-                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$padrexxx,$objetoxx->id]],
+                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$padrexxx, $objetoxx->id]],
                 'formhref' => 1, 'tituloxx' => 'kkkk', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
         return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
@@ -231,8 +223,10 @@ class PacienteController extends Controller
 
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
+        $paciente = Paciente::transaccion($dataxxxx, $objectx);
+
         return redirect()
-            ->route($this->opciones['routxxxx'] . '.editar', [Paciente::transaccion($dataxxxx, $objectx)->id])
+            ->route($this->opciones['routxxxx'] . '.editar', [$paciente->sis_clinica_id, $paciente->id])
             ->with('info', $infoxxxx);
     }
 
@@ -243,7 +237,7 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SisClinica $padrexxx,PacienteEditarRequest  $request, Paciente $objetoxx)
+    public function update(SisClinica $padrexxx, PacienteEditarRequest  $request, Paciente $objetoxx)
     {
         $dataxxxx = $request->all();
         return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');

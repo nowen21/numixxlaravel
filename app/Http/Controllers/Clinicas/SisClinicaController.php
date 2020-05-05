@@ -8,6 +8,7 @@ use App\Http\Requests\Clinica\SisClinicaEditarRequest;
 use App\Models\Clinica\SisClinica;
 use App\Models\Sistema\SisEsta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SisClinicaController extends Controller
 {
@@ -16,22 +17,24 @@ class SisClinicaController extends Controller
     public function __construct()
     {
         $this->opciones = [
-            'cardhead' => '',// titulo para las pestañas
+            'cardhead' => '', // titulo para las pestañas
             'permisox' => 'clinica',
             'parametr' => [],
             'rutacarp' => 'Clinicas.',
             'tituloxx' => 'clinica',
             'slotxxxy' => 'clinica',
-            'slotxxxx'=>'clinica',
-            'carpetax'=>'Clinica',
-            'indecrea'=>false,
-            'esindexx'=>false
+            'slotxxxx' => 'clinica',
+            'carpetax' => 'Clinica',
+            'indecrea' => false,
+            'esindexx' => false
         ];
 
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
+
+        $this->middleware(['permission:' .
+            $this->opciones['permisox'] . '-leer|' .
+            $this->opciones['permisox'] . '-crear|' .
+            $this->opciones['permisox'] . '-editar|' .
+            $this->opciones['permisox'] . '-borrar']);
 
         $this->opciones['readonly'] = '';
         $this->opciones['rutaxxxx'] = 'clinica';
@@ -54,10 +57,10 @@ class SisClinicaController extends Controller
      */
     public function index()
     {
-        $padrexxx='';
-        $this->opciones['indecrea']=true;
-        $this->opciones['esindexx']=true;
-        $this->opciones['accionxx']='index';
+        $padrexxx = Auth::user()->sis_clinica_id;
+        $this->opciones['indecrea'] = true;
+        $this->opciones['esindexx'] = true;
+        $this->opciones['accionxx'] = 'index';
         $this->opciones['padrexxx'] = $padrexxx;
         $this->opciones['tablasxx'] = [
             [
@@ -65,21 +68,22 @@ class SisClinicaController extends Controller
                 'titulist' => 'LISTA DE CLINICAS',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                    ['campoxxx' => 'medicame', 'dataxxxx' => $padrexxx],
+                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
+                    ['campoxxx' => 'padrexxx', 'dataxxxx' => $padrexxx],
+                    ['campoxxx' => 'puededit', 'dataxxxx' => auth()->user()->can('clinica-editar') ? true : false],
                 ],
                 'vercrear' => true,
                 'accitabl' => true,
                 'urlxxxxx' => 'api/clinica/clinica',
-                'cabecera' =>[
+                'cabecera' => [
                     ['td' => 'ID'],
                     ['td' => 'CLINICA'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
-                    ['data' => 'id', 'name' => 'sis_clinica.id'],
-                    ['data' => 'clinica', 'name' => 'sis_clinica.clinica'],
+                    ['data' => 'id', 'name' => 'sis_clinicas.id'],
+                    ['data' => 'clinica', 'name' => 'sis_clinicas.clinica'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tablaclinicas',
@@ -111,9 +115,9 @@ class SisClinicaController extends Controller
      */
     public function create()
     {
-        $this->opciones['indecrea']=true;
-        $this->opciones['clinicax'] =''; 
-        $this->opciones['clinicac']=true;
+        $this->opciones['indecrea'] = true;
+        $this->opciones['clinicax'] = '';
+        $this->opciones['clinicac'] = true;
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
@@ -142,15 +146,9 @@ class SisClinicaController extends Controller
      */
     public function show(SisClinica $objetoxx)
     {
-        $this->opciones['cardhead']='CLINICA: '. $objetoxx->clinica;
-        $this->opciones['clinicax'] =$objetoxx->id;
+        $this->opciones['cardhead'] = 'CLINICA: ' . $objetoxx->clinica;
+        $this->opciones['clinicax'] = $objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
-        $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => $objetoxx->sis_esta_id == 1 ? 'INACTIVAR' : 'ACTIVAR', 'routingx' => [$this->opciones['routxxxx'], []], 'formhref' => 1,
-                'tituloxx' => '', 'clasexxx' => $objetoxx->sis_esta_id == 1 ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success'
-            ];
-        $this->opciones['readonly'] = 'readonly';
         return $this->view($objetoxx,  'modeloxx', 'Ver', $this->opciones['rutacarp'] . 'pestanias');
     }
 
@@ -162,8 +160,8 @@ class SisClinicaController extends Controller
      */
     public function edit(SisClinica $objetoxx)
     {
-        $this->opciones['cardhead']='CLINICA: '. $objetoxx->clinica;
-        $this->opciones['clinicax'] =$objetoxx->id;
+        $this->opciones['cardhead'] = 'CLINICA: ' . $objetoxx->clinica;
+        $this->opciones['clinicax'] = $objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
         $this->opciones['botoform'][] =
             [
@@ -171,7 +169,7 @@ class SisClinicaController extends Controller
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
 
-           
+
         return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
     }
 

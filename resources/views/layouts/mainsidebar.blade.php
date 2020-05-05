@@ -48,27 +48,7 @@
       @include('layouts.menus.sistema')
       @endcan
 
-      <!-- FIN TERRITORIO -->
-      <!-- ACCIONES -->
-      {{-- @canany(['aiindex-leer','agtema-leer','agtaller-leer','agsubtema-leer','agdependencia-leer',
-                'agcontexto-leer','agrecurso-leer','agconvenio-leer','agactividad-leer'])
-        @include('layouts.menus.acciones')
-      @endcanany --}}
-      {{-- @canany(['parametro-leer','dependencia-leer', 'actividadproceso-leer',
-        'usuario-leer','rol-leer','permiso-leer','actividad-leer','documentoFuente-leer','proceso-leer',
-        'mapaProceso-leer','entidad-leer','tema-leer','parametro-leer','siscargo-leer',
-
-        'inpreguntas-leer','inlineabase-leer','area-leer','inbasefuente-leer',
-        'inbasedocumen-leer','indocindicador-leer','inrespuesta-leer','invalidacion-leer','inacciongestion-leer'])
-        @include('layouts.menus.administracion')
-
-      @endcanany --}}
-      <!-- FIN ADMINISTRACION -->
-
-      <!-- INDICADORES -->
-      {{-- @canany(['ingrupal-leer','inindividual-leer'])
-        @include('layouts.menus.indicadores')
-      @endcanany --}}
+      
 
       <!-- FIN INDICADORES -->
     </ul>

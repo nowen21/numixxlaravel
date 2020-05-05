@@ -88,7 +88,6 @@ class Paciente extends Model
       if ($objetoxx != '') {
         $objetoxx->update($dataxxxx);
       } else {
-        $dataxxxx['sis_clinica_id'] = Auth::user()->sis_clinica_id;
         $dataxxxx['user_crea_id'] = Auth::user()->id;
         $objetoxx = Paciente::create($dataxxxx);
       }

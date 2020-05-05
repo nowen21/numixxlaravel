@@ -1,2 +1,5 @@
-<a class="btn btn-sm btn-primary" href="{{ route('clinica.editar', $id) }}">Editar</a>
-<a class="btn btn-sm btn-primary" href="{{ route('clinica.ver', $id) }}">Ver</a>
+
+@if($requestx->puededit)
+<a class="btn btn-sm btn-primary" href="{{ route('clinica.editar', $queryxxx->id) }}">Editar</a>
+@endif
+<a class="btn btn-sm btn-primary" href="{{ route('clinica.ver', $queryxxx->id) }}">Ver</a>

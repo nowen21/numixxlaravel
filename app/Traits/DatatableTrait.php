@@ -1,24 +1,8 @@
 <?php
+namespace App\Traits;
+trait DatatableTrait{
 
-namespace App\Helpers;
-
-class DatatableHelper
-{
-    public static function getDatatable($queryxxx, $requestx)
-    {
-        return datatables()
-            ->eloquent($queryxxx)
-            ->addColumn('botonexx', $requestx->botonesx)
-            ->addColumn('s_estado', $requestx->estadoxx)
-            ->rawColumns(['botonexx', 's_estado'])
-            ->toJson();
-    }
-
-    /**
-     * construccion del datatable de manera dinamica
-     */
-
-    public static function getDt($queryxxx, $requestx)
+    public function getDatatable($queryxxx, $requestx)
     {
         return datatables()
             ->of($queryxxx)
@@ -26,7 +10,7 @@ class DatatableHelper
                 'botonexx',
                 function ($queryxxx) use ($requestx) {
                     return  view($requestx->botonesx, [
-                        'queryxxx' => $queryxxx,
+                        'dataxxxx' => $queryxxx,
                         'requestx' => $requestx,
                     ]);
                 }
@@ -35,7 +19,8 @@ class DatatableHelper
                 's_estado',
                 function ($queryxxx) use ($requestx) {
                     return  view($requestx->estadoxx, [
-                        'queryxxx' => $queryxxx,
+                        'sis_esta_id' => $queryxxx->sis_esta_id,
+                        's_estado' => $queryxxx->s_estado,
                         'requestx' => $requestx,
                     ]);
                 }

@@ -14,7 +14,7 @@ class PdfController extends Controller
         $dataxxxx = [
             'vistaurl' => 'Produccion.Alistamiento.pdf.alistami',
             'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
-            'tipoxxxx' => 2,
+            'tipoxxxx' => 1,
             'nombarch' => 'alistamiento',
             'dataxxxx' => ['cabecera'=>$objetoxx,'detallex'=>Alistamiento::getMlotesDlotes($objetoxx->id)]
         ];

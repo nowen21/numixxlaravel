@@ -67,8 +67,9 @@ class CmedicameController extends Controller
                 'titulist' => 'LISTA DE MEDICAMENTOS',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
+                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
                     ['campoxxx' => 'clinicax', 'dataxxxx' => $clinica],
+                    ['campoxxx' => 'puededit', 'dataxxxx' => auth()->user()->can('clinica-editar') ? true : false],
                 ],
                 'accitabl' => true,
                 'vercrear' => false,

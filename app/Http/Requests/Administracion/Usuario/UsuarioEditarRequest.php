@@ -33,7 +33,7 @@ class UsuarioEditarRequest extends FormRequest {
     return [
         'name' => 'required',
         'email' => ['required',
-            'unique:users,email,' . $this->segments()[1]],
+            'unique:users,email,' . $this->segments()[2]],
         'sis_clinica_id' => 'required',
     ];
   }

@@ -57,12 +57,12 @@ class Roles
     public static function getAsignarPermiso($request)
     {
         $rolxxxxx = Role::find($request->rolxxxxx);
-        $permisox = Permission::find($request->padrexxx);
+        $permisox = Permission::find($request->permisox);
         switch ($request->asigquit) {
-            case 1:
-                $rolxxxxx->givePermissionTo($permisox->name);
+            case 1: // asignar permiso al rol
+                $rolxxxxx->givePermissionTo($permisox->name); 
                 break;
-            case 2:
+            case 2: // quitar el premiso del rol
                 $rolxxxxx->revokePermissionTo($permisox->name);
                 break;
         }

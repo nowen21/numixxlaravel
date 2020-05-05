@@ -19,13 +19,13 @@ class RevisionController extends Controller
     public function __construct()
     {
         $this->opciones = [
-            'cardhead'=>'Revisión Formulación',
+            'cardhead' => 'Revisión Formulación',
             'permisox' => 'revision',
             'parametr' => [],
             'rutacarp' => 'Produccion.',
             'tituloxx' => 'Crear: Formulación',
             'slotxxxx' => 'revision',
-            'carpetax' => 'revision',
+            'carpetax' => 'Revision',
             'indecrea' => false,
             'esindexx' => false
         ];
@@ -56,8 +56,8 @@ class RevisionController extends Controller
      */
     public function index()
     {
-        
-        $this->opciones['paciente']='';
+
+        $this->opciones['paciente'] = '';
         // $this->opciones['botoform'][0]['routingx'][1] = $padrexxx;
         $this->opciones['indecrea'] = false;
         $this->opciones['esindexx'] = false;
@@ -112,45 +112,47 @@ class RevisionController extends Controller
         // indica si se esta actualizando o viendo
         if ($nombobje != '') {
             $this->opciones[$nombobje] = $objetoxx;
-    
         }
         // Se arma el titulo de acuerdo al array opciones
         return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }
-    
-    
+
+
     public function edit(Cformula $objetoxx)
-    { 
+    {
 
-     
-        $this->opciones['tituloxx']='Revisar: Formulación';
-        
-        
-        $paciente= $objetoxx->paciente;
 
-        $this->opciones['cardhead']=$this->opciones['cardhead'].' Paciente: '.$paciente->nombres.' '.$paciente->apellidos;
+        $this->opciones['tituloxx'] = 'Revisar: Formulación';
+
+
+        $paciente = $objetoxx->paciente;
+
+        $this->opciones['cardhead'] = $this->opciones['cardhead'] . ' Paciente: ' . $paciente->nombres . ' ' . $paciente->apellidos;
 
         $this->opciones['formular'] = Dataformulario::getPintarFormulario(
             [
                 'paciente' => $paciente,
                 'furmulac' => $objetoxx,
-               
+
             ]
         );
         $this->opciones['paciente'] = $paciente;
-      
+
         $this->opciones['parametr'] = [$objetoxx->id];
-        $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$objetoxx->id]],
-                'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
-            ];
-       return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
+        if (date('Y-m-d', time()) == explode(' ', $objetoxx->created_at)[0]) {
+            $this->opciones['botoform'][] =
+                [
+                    'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$objetoxx->id]],
+                    'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+                ];
+        }
+
+        return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
     }
 
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
-        $cformula=Cformula::transaccion($dataxxxx, $objectx);
+        $cformula = Cformula::transaccion($dataxxxx, $objectx);
         return redirect()
             ->route($this->opciones['routxxxx'] . '.editar', [$cformula->id])
             ->with('info', $infoxxxx);
@@ -165,9 +167,7 @@ class RevisionController extends Controller
      */
     public function update(Request  $request, Cformula $objetoxx)
     {
-        $dataxxxx = ['userevis_id'=>Auth::user()->id];
+        $dataxxxx = ['userevis_id' => Auth::user()->id];
         return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
     }
-
-    
 }

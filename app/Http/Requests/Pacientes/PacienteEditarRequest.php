@@ -72,7 +72,7 @@ class PacienteEditarRequest extends FormRequest
   {
     
     $registro = Paciente::where('id', $this->segments()[2])->first();
-    $otroregi = Paciente::where('sis_clinica_id', Auth::user()->sis_clinica_id)->where('cedula', $this->cedula)->first();
+    $otroregi = Paciente::where('sis_clinica_id', $this->segments()[1])->where('cedula', $this->cedula)->first();
     if (isset($registro->id) && isset($otroregi->id)) {
       if ($registro->id != $otroregi->id) {
         $this->_reglasx['cedula'][1] = 'unique:pacientes,cedula,' . $this->segments()[2];

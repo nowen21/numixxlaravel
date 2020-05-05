@@ -14,6 +14,18 @@ use Illuminate\Support\Facades\Auth;
 
 class Clinicas
 {
+    public static function getClinicas($request)
+    {
+        $clinicas = SisClinica::select(['sis_clinicas.id', 'sis_clinicas.clinica', 's_estado', 'sis_clinicas.sis_esta_id'])
+            ->join('sis_estas', 'sis_clinicas.sis_esta_id', '=', 'sis_estas.id')
+            ->where(function ($queryxxx) use ($request) {
+                if ($request->padrexxx != 1) {
+                    $queryxxx->where('sis_clinicas.id', $request->padrexxx);
+                }
+            });
+        return DatatableHelper::getDt($clinicas, $request);
+    }
+
     public static function asignarMedicam($request)
     {
         return SisClinica::find($request->clinicax)->medicames()->attach(
@@ -45,7 +57,7 @@ class Clinicas
             ->join('medicame_sis_clinica', 'medicames.id', '=', 'medicame_sis_clinica.medicame_id')
             ->join('sis_estas', 'medicame_sis_clinica.sis_esta_id', '=', 'sis_estas.id')
             ->where('medicame_sis_clinica.sis_clinica_id', $request->clinicax);
-        return DatatableHelper::getDatatable($paciente, $request);
+        return DatatableHelper::getDt($paciente, $request);
     }
 
     public static function getPacientesAsignados($request)
@@ -151,10 +163,6 @@ class Clinicas
 
     public static function getInactivarMedicam($request)
     {
-        
-
-
-
         $registro = MedicameSisClinica::where('id', $request->registro)->first();
         $registro->update(['sis_esta_id' => ($registro->sis_esta_id == 1) ? 2 : 1, 'user_edita_id' => Auth::user()->id]);
         return [];

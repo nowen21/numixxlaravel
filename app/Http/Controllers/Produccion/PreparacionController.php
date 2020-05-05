@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Produccion;
 
-use App\Helpers\Produccion\Alistamiento;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Produccion\PreparacionEditarRequest;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Formulaciones\Dformula;
-use App\Models\Formulaciones\Ordene;
 use App\Models\Produccion\Calistam;
 use App\Models\Sistema\SisEsta;
 

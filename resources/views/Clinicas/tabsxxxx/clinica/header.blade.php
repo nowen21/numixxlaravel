@@ -2,7 +2,7 @@
     <ul class="nav nav-tabs">
         @canany(['clinica-leer', 'clinica-crear', 'clinica-editar', 'clinica-borrar'])
         <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='clinica') ?' active' : '' }} 
-        text-sm" href="{{ route('clinica.editar', $todoxxxx['parametr']) }}">Clínica</a></li>
+        text-sm" href="{{ route('clinica.'.$puedexxx, $todoxxxx['parametr']) }}">Clínica {{$puedexxx}}</a></li>
         @endcanany
         @canany(['cmedicame-leer', 'cmedicame-crear', 'cmedicame-editar', 'cmedicame-borrar'])
         <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='cmedicame') ?' active' : '' }} 
