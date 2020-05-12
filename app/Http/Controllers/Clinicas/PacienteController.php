@@ -90,6 +90,7 @@ class PacienteController extends Controller
                     ['td' => 'ID'],
                     ['td' => 'CEDULA'],
                     ['td' => 'NOMBRES'],
+                    ['td' => 'APELLIDOS'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
@@ -97,7 +98,7 @@ class PacienteController extends Controller
                     ['data' => 'id', 'name' => 'pacientes.id'],
                     ['data' => 'cedula', 'name' => 'pacientes.cedula'],
                     ['data' => 'nombres', 'name' => 'pacientes.nombres'],
-
+                    ['data' => 'apellidos', 'name' => 'pacientes.apellidos'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tablapacientes',

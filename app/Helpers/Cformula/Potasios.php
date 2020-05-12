@@ -15,7 +15,8 @@ use App\Models\Medicamentos\Medicame;
  *
  * @author Ing. José Dúmar Jiménez Ruíz (nowen21@gmail.com)
  */
-class Potasios {
+class Potasios
+{
 
   private $estructu;
   private $pesoxxxx;
@@ -25,9 +26,10 @@ class Potasios {
   private $dataxxxx;
   private $purgaxxx;
   private $fosfatos;
- private $volutota;
+  private $volutota;
 
-  public function __construct($estructu, $pesoxxxx, $npt_idxx) {
+  public function __construct($estructu, $pesoxxxx, $npt_idxx)
+  {
     $this->estructu = $estructu;
     $this->pesoxxxx = $pesoxxxx;
     $this->npt_idxx = $npt_idxx;
@@ -35,14 +37,14 @@ class Potasios {
     $this->casaxxxx = 0;
     $this->dataxxxx = [];
     $this->purgaxxx = 0;
-    $this->volutota=0;
+    $this->volutota = 0;
     $this->fosfatos = new Fosfatos($estructu, $pesoxxxx, $npt_idxx);
-    
   }
-/**
- * calcula requerimiento cuando se digita el volumen
- */
-  private function requemientodiarionpt() {
+  /**
+   * calcula requerimiento cuando se digita el volumen
+   */
+  private function requemientodiarionpt()
+  {
     $factorxx = 0;
     switch ($this->dataxxxx['fosfa_id']) {
       case 6:
@@ -53,9 +55,9 @@ class Potasios {
         break;
     }
     $formulax = [];
-    $fosfcant=$this->dataxxxx['fosfcant'];    
-    if($fosfcant==''){
-      $fosfcant=0;
+    $fosfcant = $this->dataxxxx['fosfcant'];
+    if ($fosfcant == '') {
+      $fosfcant = 0;
     }
     switch ($this->npt_idxx) {
       case 1: // pediatricos
@@ -74,56 +76,63 @@ class Potasios {
     $this->estructu[$this->casaxxxx][$this->medicame]['rediario'] = $formulax[$this->medicame];
   }
 
-  private function requemientototalnpt() {
+  private function requemientototalnpt()
+  {
     $restasxx = 0;
     $medicame = Medicame::where('id', $this->dataxxxx['fosfa_id'])->first();
-    $retolfos=0; 
-    if($this->dataxxxx['fosfcant']!=''){
-      $retolfos=$this->fosfatos->fosfato(['volumenx'=>0,'requdiar'=>$this->dataxxxx['fosfcant']],
-       $medicame, $this->purgaxxx)[$this->dataxxxx['fosfa_id']]['reqtotal'];
+    $retolfos = 0;
+    if ($this->dataxxxx['fosfcant'] != '') {
+      $retolfos = $this->fosfatos->fosfato(
+        ['volumenx' => 0, 'requdiar' => $this->dataxxxx['fosfcant']],
+        $medicame,
+        $this->purgaxxx
+      )[$this->dataxxxx['fosfa_id']]['reqtotal'];
     }
-    
+
     //ddd($retolfos);
-    switch ($this->dataxxxx['fosfa_id']) { 
+    switch ($this->dataxxxx['fosfa_id']) {
       case 6:
         if ($this->npt_idxx == 3) {
           $restasxx = $retolfos * 3.6; //f9  potasio
         } else {
-          $restasxx =$retolfos * $this->pesoxxxx * 3.8;
+          $restasxx = $retolfos * $this->pesoxxxx * 3.8;
         }
         break;
       case 7:
         if ($this->npt_idxx == 3) {
           $restasxx = $retolfos * 2; //f9  potasio
         } else {
-          $restasxx = $retolfos * $this->pesoxxxx * 2; //f9  potasio
+          $volumenx = ($this->dataxxxx['fosfcant'] * $this->pesoxxxx);
+          $restasxx = $volumenx > 0 ? $volumenx * 2 : 0; //f9  potasio
         }
         break;
     }
-    $formulax = []; 
+
+    $formulax = [];
     switch ($this->npt_idxx) {
-      case 1:// pediatricos
-        $formulax[11] = $this->pesoxxxx * $this->dataxxxx['requdiar'] - $restasxx; //POTASIO CLORURO      
+      case 1: // pediatricos
+         $formulax[11] = $this->pesoxxxx *$this->dataxxxx['requdiar'] - $restasxx; //POTASIO CLORURO      
         break;
-      case 2:// neonatos
+      case 2: // neonatos
         $formulax[11] = $this->pesoxxxx * $this->dataxxxx['requdiar'] - $restasxx; //POTASIO CLORURO  
         break;
-      case 3:// adultos
+      case 3: // adultos
         $formulax[11] = $this->pesoxxxx * $this->dataxxxx['requdiar'] - $restasxx; //POTASIO CLORURO  
         break;
     }
-   //ddd($formulax[$this->medicame]);
+    //ddd($formulax[$this->medicame]);
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
   }
 
-  private function purganpt() {
-    
+  private function purganpt()
+  {
+
     $formulax = [];
     switch ($this->npt_idxx) {
-      case 1:// pediatricos 
+      case 1: // pediatricos 
         $formulax[11] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx']; //POTASIO CLORURO
         break;
-      case 2:// neonatos        
+      case 2: // neonatos        
         $formulax[11] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx']; //POTASIO CLORURO
         break;
       case 3:
@@ -132,27 +141,29 @@ class Potasios {
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['purgaxxx'] = $formulax[$this->medicame];
   }
-// cuando se digita requerimiento diario
-/**
- * calcula el volumen cuando se digita el requerimiento diario
- */
-  private function volumennpt() {
+  // cuando se digita requerimiento diario
+  /**
+   * calcula el volumen cuando se digita el requerimiento diario
+   */
+  private function volumennpt()
+  {
     $formulax = [];
     switch ($this->npt_idxx) {
-      case 1:// pediatricos
+      case 1: // pediatricos
         $formulax[11] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 2; //POTASIO CLORURO
         break;
-      case 2:// neonatos
+      case 2: // neonatos
         $formulax[11] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 2; //POTASIO CLORURO
         break;
-      case 3:// adultos
+      case 3: // adultos
         $formulax[11] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 2; //POTASIO CLORURO
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] = $formulax[$this->medicame];
   }
 
-  public function potasio($dataxxxx, $medicame, $purgaxxx) {
+  public function potasio($dataxxxx, $medicame, $purgaxxx)
+  {
     $this->dataxxxx = $dataxxxx;
     $this->medicame = $medicame->id;
     $this->casaxxxx = $medicame->casa->id;
@@ -161,8 +172,7 @@ class Potasios {
     $this->requemientototalnpt();
     $this->volumennpt();
     $this->purganpt();
-    
+
     return $this->estructu[$this->casaxxxx];
   }
-
 }

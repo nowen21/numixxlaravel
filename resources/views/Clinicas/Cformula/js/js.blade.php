@@ -105,7 +105,7 @@
         $('#ocultarx').show("slow");
       }
     })
-    var recalcular = function () {
+    var recalcular = function () { 
       var agua = $('#formulario').serializeArray()
       $.each(agua, function (i, valor) {
         var valido = valor.name.split('_')
@@ -193,12 +193,27 @@
           aguax_id = parseFloat(aguax_id) + parseFloat(valor.value);
         }
       });
-      $("#aguaeste_volu").val($("#volumen").val() - aguax_id);
+      $.ajax({
+        url: "{{route('formular.redondear',$todoxxxx['parametr'])}}",
+        type: 'GET',
+        data: {
+          redendeo: $("#volumen").val() - aguax_id,
+         
+        },
+        dataType: 'json',
+        success: function (json) {
+          $("#aguaeste_volu").val(json.redendeo);
+        },
+        error: function (xhr, status) {
+          alert('Disculpe, existió un problema');
+        }
+      });
+     
     }, 500);
 
 
 
-    $('.guardarx').click(function () { alert(5)
+    $('.guardarx').click(function () {
       var hayalmenosuno = 0;
       var vaciosxx = 0
       $("#formulaciontable input").each(function () {

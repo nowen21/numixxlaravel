@@ -1,10 +1,16 @@
 <?php
+
 namespace App\Http\Controllers\Medicamentos;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Medicamentos\MnptCrearRequest;
 use App\Http\Requests\Medicamentos\MnptEditarRequest;
 use App\Models\Medicamentos\Mnpt;
+use App\Models\Medicamentos\Npt;
+use App\Models\Medicamentos\Unidad\Rangonpt;
+use App\Models\Medicamentos\Unidad\Unidad;
+use App\Models\Medicamentos\Unidad\Unidrang;
+use App\Models\Medicamentos\Unidad\Urangnpt;
 use App\Models\Sistema\SisEsta;
 
 
@@ -14,7 +20,7 @@ class MnptController extends Controller
 
     public function __construct() //alista las variables para ser usadas próximamente
     {
-        $this->opciones = [// un array
+        $this->opciones = [ // un array
             'permisox' => 'mnpt',
             'parametr' => [],
             'rutacarp' => 'Medicame.Medicamento.',
@@ -91,10 +97,10 @@ class MnptController extends Controller
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'mnpts.id'],
-                    ['data' => 'nombre', 'name' => 'mnpts.nombre'],
-                    ['data' => 'randesde', 'name' => 'mnpts.randesde'],
-                    ['data' => 'ranhasta', 'name' => 'mnpts.ranhasta'],
-                    ['data' => 'rangunid', 'name' => 'mnpts.rangunid'],
+                    ['data' => 'nombre', 'name' => 'npts.nombre'],
+                    ['data' => 'randesde', 'name' => 'rangonpts.randesde'],
+                    ['data' => 'ranhasta', 'name' => 'rangonpts.ranhasta'],
+                    ['data' => 's_unidad', 'name' => 'unidads.s_unidad'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tablamnpt',
@@ -111,17 +117,18 @@ class MnptController extends Controller
 
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
     {
-        $padrexxx=0;
+        $padrexxx = 0;
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
         if ($nombobje != '') {
             $this->opciones[$nombobje] = $objetoxx;
-            $padrexxx=$objetoxx->npt_id;
-
+            $padrexxx = $objetoxx->urangnpt_id;
         }
-        $this->opciones['mnptxxxx'] = Mnpt::combo(['cabecera' => true, 'esajaxxx' => false,
-         "medicame"=>$this->opciones['padrexxx'], "selectxx"=>$padrexxx]);
+        $this->opciones['mnptxxxx'] = Mnpt::combo([
+            'cabecera' => true, 'esajaxxx' => false,
+            "medicame" => $this->opciones['padrexxx'], "selectxx" => $padrexxx
+        ]);
         // Se arma el titulo de acuerdo al array opciones
         return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }

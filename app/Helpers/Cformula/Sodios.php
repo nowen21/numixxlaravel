@@ -38,19 +38,19 @@ class Sodios {
     $calcfosf = 0;
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        if ($this->dataxxxx['fosfa_id'] == 4) {
+        if ($this->dataxxxx['fosfa_id'] == 5) {
           $calcfosf = $this->dataxxxx['fosfcant'] * 2;
         }
         $formulax[10] = ($this->dataxxxx['volumenx'] * 2 + $calcfosf) / $this->pesoxxxx; //SODIO CLORURO
         break;
       case 2: // neonatos
-        if ($this->dataxxxx['fosfa_id'] == 4) {
+        if ($this->dataxxxx['fosfa_id'] == 5) {
           $calcfosf = $this->dataxxxx['fosfcant'] * 2;
         }
         $formulax[10] = ($this->dataxxxx['volumenx'] * 2 + $calcfosf) / $this->pesoxxxx; //SODIO CLORURO
         break;
       case 3: // adultos
-        if ($this->dataxxxx['fosfa_id'] == 4) {
+        if ($this->dataxxxx['fosfa_id'] == 5) {
           $calcfosf = $this->dataxxxx['fosfcant'] * 2;
         }
         $formulax[10] = ($this->dataxxxx['volumenx'] * 2 + $calcfosf) / $this->pesoxxxx; //SODIO CLORURO
@@ -64,19 +64,19 @@ class Sodios {
     $restaxxx = 0;
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        if ($this->dataxxxx['fosfa_id'] == 4) {
+        if ($this->dataxxxx['fosfa_id'] == 5) {
           $restaxxx = $this->dataxxxx['fosfcant'] * $this->pesoxxxx * 2;
         }
         $formulax[10] =  ($this->pesoxxxx * $this->dataxxxx['requdiar']) - $restaxxx; //SODIO CLORURO
         break;
       case 2:// neonatos
-        if ($this->dataxxxx['fosfa_id'] == 4) {
+        if ($this->dataxxxx['fosfa_id'] == 5) {
           $restaxxx = $this->dataxxxx['fosfcant'] * $this->pesoxxxx * 2;
         }
         $formulax[10] =  ($this->pesoxxxx * $this->dataxxxx['requdiar']) - $restaxxx; //SODIO CLORURO
         break;
       case 3:// adultos
-        if ($this->dataxxxx['fosfa_id'] == 4) {
+        if ($this->dataxxxx['fosfa_id'] == 5) {
           $restaxxx = $this->dataxxxx['fosfcant'] * 2;
         }
         $formulax[10] =  ($this->pesoxxxx * $this->dataxxxx['requdiar']) - $restaxxx; //SODIO CLORURO

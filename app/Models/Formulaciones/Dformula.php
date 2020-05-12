@@ -41,14 +41,14 @@ class Dformula extends Model
   {
     return $this->belongsTo(Medicame::class);
   }
-  public function mlotes()
-  {
-    return $this->belongsToMany(Mlote::class);
-  }
-  public function dfmlotes()
-  {
-    return $this->hasMany(Dfmlote::class);
-  }
+  // public function mlotes()
+  // {
+  //   return $this->belongsToMany(Mlote::class);
+  // }
+  // public function dfmlotes()
+  // {
+  //   return $this->hasMany(Dfmlote::class);
+  // }
 
   public static function transaccion($dataxxxx,  $objetoxx)
   {

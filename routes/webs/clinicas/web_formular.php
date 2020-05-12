@@ -46,4 +46,9 @@ Route::group(['prefix' => '{padrexxy}'], function () use ($controll, $routexxx) 
 		'uses' => $controll . 'Controller@getRequerimientoVolumen',
 		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
 	])->name($routexxx.'.rangvolu');
+	Route::get('redondear', [
+		'uses' => $controll . 'Controller@getRedondear',
+		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
+	])->name($routexxx . '.redondear');
+	
 });

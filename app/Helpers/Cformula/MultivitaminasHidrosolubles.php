@@ -26,8 +26,8 @@ class MultivitaminasHidrosolubles {
     $this->casaxxxx = 0;
     $this->dataxxxx = [];
     $this->purgaxxx = 0;
-    $this->factor20=0.099;
-    $this->factor30=1;
+    $this->factor20=0.04;
+    $this->factor30=0.099;
   }
 
   private function requemientodiarionpt() {

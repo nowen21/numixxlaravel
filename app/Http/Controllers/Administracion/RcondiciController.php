@@ -23,7 +23,7 @@ class RcondiciController extends Controller
             'rutacarp' => 'Administracion.Rango.',
             'tituloxx' => 'Crear Condicion Rango',
             'slotxxxx' => 'rcondici',
-            'carpetax' => 'RCondici',
+            'carpetax' => 'Rcondici',
             'indecrea' => false,
             'esindexx' => false
         ];

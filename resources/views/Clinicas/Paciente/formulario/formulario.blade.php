@@ -5,7 +5,7 @@
         {{ Form::text('registro', $todoxxxx['modeloxx']->registro, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
         @else
         {{ Form::text('registro', null, ['class' => $errors->first('registro') ?
-         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Fecha registro', 'maxlength' => '120', 'style'=>'height: 28px']) }}
+         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Fecha registro', 'maxlength' => '120', 'style'=>'height: 28px','autocomplete'=>'off']) }}
         @endif
         @if($errors->has('registro'))
         <div class="invalid-feedback d-block">

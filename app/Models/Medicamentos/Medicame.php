@@ -40,7 +40,8 @@ class Medicame extends Model {
     $lista = ['' => 'Seleccione'];
     $medic = Medicame::select('medicames.id', 'medicames.nombgene', 'npts.nombre')
             ->join('mnpts', 'medicames.id', '=', 'mnpts.medicame_id')
-            ->join('npts', 'mnpts.npt_id', '=', 'npts.id')
+            ->join('urangnpts', 'mnpts.urangnpt_id', '=', 'urangnpts.id')
+            ->join('npts', 'urangnpts.npt_id', '=', 'npts.id')
             ->where('mnpts.estado_id', 1)
             ->where('medicames.estado_id', 1)
             ->get();

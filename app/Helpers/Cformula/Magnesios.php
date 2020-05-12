@@ -31,10 +31,10 @@ class Magnesios {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        $formulax[13] = $this->dataxxxx['volumenx'] * 100;
+        $formulax[13] = ($this->dataxxxx['volumenx'] * 200);
         break;
       case 2: // neonatos
-        $formulax[13] = $this->dataxxxx['volumenx'] * 100;
+        $formulax[13] = ($this->dataxxxx['volumenx'] * 200);
         break;
       case 3: // adultos
         $formulax[13] = $this->dataxxxx['volumenx'] * 20;

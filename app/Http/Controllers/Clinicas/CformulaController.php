@@ -12,19 +12,22 @@ use App\Models\Clinica\SisClinica;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Pacientes\Paciente;
 use App\Models\Sistema\SisEsta;
+use App\Traits\Cformula\CalculosFormulacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CformulaController extends Controller
 {
+    use CalculosFormulacion;
     private $opciones;
-
+    private $dataform;
     public function __construct()
     {
+        $this->dataform = new Dataformulario();
         $this->opciones = [
             'permisox' => 'formular',
-            'cardhead' => 'CLINICA :', 
-            'cardheap' => 'FORMULACIONES', 
+            'cardhead' => 'CLINICA :',
+            'cardheap' => 'FORMULACIONES',
             'parametr' => [],
             'rutacarp' => 'Clinicas.',
             'tituloxx' => 'Crear: Formulación',
@@ -35,10 +38,11 @@ class CformulaController extends Controller
             'esindexx' => false
         ];
 
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
+        $this->middleware(['permission:' .
+            $this->opciones['permisox'] . '-leer|' .
+            $this->opciones['permisox'] . '-crear|' .
+            $this->opciones['permisox'] . '-editar|' .
+            $this->opciones['permisox'] . '-borrar']);
 
         $this->opciones['readonly'] = '';
         $this->opciones['rutaxxxx'] = 'formular';
@@ -59,18 +63,17 @@ class CformulaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($clinicax,$padrexxx)
+    public function index($clinicax, $padrexxx)
     {
-
-        $this->opciones['cardhead']=$this->opciones['cardhead'].SisClinica::where('id',$clinicax)->first()->clinica;   
-        $paciente=Paciente::getPaciente(['padrexxx'=>$padrexxx]);
-        $this->opciones['paciente']=$paciente;
-        $this->opciones['botoform'][0]['routingx'][1] = [$clinicax,$padrexxx];
+        $this->opciones['cardhead'] = $this->opciones['cardhead'] . SisClinica::where('id', $clinicax)->first()->clinica;
+        $paciente = Paciente::getPaciente(['padrexxx' => $padrexxx]);
+        $this->opciones['paciente'] = $paciente;
+        $this->opciones['botoform'][0]['routingx'][1] = [$clinicax, $padrexxx];
         $this->opciones['indecrea'] = false;
         $this->opciones['esindexx'] = false;
         $this->opciones['accionxx'] = 'index';
         $this->opciones['padrexxx'] = $padrexxx;
-        $this->opciones['parametr'] = [$clinicax,$padrexxx];
+        $this->opciones['parametr'] = [$clinicax, $padrexxx];
         $this->opciones['tablasxx'] = [
             [
                 'titunuev' => 'NUEVA FORMULACIóN',
@@ -107,7 +110,7 @@ class CformulaController extends Controller
                 'tablaxxx' => 'tablaformulaciones',
                 'permisox' => 'formular',
                 'routxxxx' => 'formular',
-                'parametr' => [$clinicax,$padrexxx],
+                'parametr' => [$clinicax, $padrexxx],
             ],
 
         ];
@@ -118,36 +121,40 @@ class CformulaController extends Controller
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
+        
+        $this->opciones['calculos'] = $this->_dataxxx;
         if ($nombobje != '') {
+            $this->opciones['calculos'] = $this->dataform->calculos($objetoxx);
             $this->opciones[$nombobje] = $objetoxx;
-    
         }
+
+
         // Se arma el titulo de acuerdo al array opciones
-        return view($vistaxxx, ['todoxxxx' => $this->opciones]);
+        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-   
-    public function create($clinicax,$padrexxx)
-    {   
-        $this->opciones['cardhead']=$this->opciones['cardhead'].SisClinica::where('id',$clinicax)->first()->clinica;  
-        $paciente=Paciente::getPaciente(['padrexxx'=>$padrexxx]);
-        $this->opciones['cardheap']='FORMULACION PACIENTE: '.$paciente->nombres.' '.$paciente->apellidos;   
+
+    public function create($clinicax, $padrexxx)
+    {
+        $this->opciones['cardhead'] = $this->opciones['cardhead'] . SisClinica::where('id', $clinicax)->first()->clinica;
+        $paciente = Paciente::getPaciente(['padrexxx' => $padrexxx]);
+        $this->opciones['cardheap'] = 'FORMULACION PACIENTE: ' . $paciente->nombres . ' ' . $paciente->apellidos;
         $this->opciones['formular'] = Dataformulario::getPintarFormulario(
             [
                 'paciente' => $paciente,
                 'furmulac' => '',
             ]
         );
-        //ddd($padrexxx);
-        
-        $this->opciones['paciente'] =$paciente;
-        $this->opciones['clinicax'] = [$paciente->sis_clinica->id=>$paciente->sis_clinica->clinica];
-        $this->opciones['botoform'][0]['routingx'][1] = [$clinicax,$padrexxx];
-        $this->opciones['parametr'] = [$clinicax,$padrexxx];
+        //ddd($this->opciones['formular']);
+
+        $this->opciones['paciente'] = $paciente;
+        $this->opciones['clinicax'] = [$paciente->sis_clinica->id => $paciente->sis_clinica->clinica];
+        $this->opciones['botoform'][0]['routingx'][1] = [$clinicax, $padrexxx];
+        $this->opciones['parametr'] = [$clinicax, $padrexxx];
         $this->opciones['padrexxx'] = $padrexxx;
         $this->opciones['indecrea'] = false;
         $this->opciones['clinicac'] = true;
@@ -165,11 +172,11 @@ class CformulaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($clinicax,$paciente,CformulaCrearRequest $request)
+    public function store($clinicax, $paciente, CformulaCrearRequest $request)
     {
         $dataxxxx = $request->all();
-        $dataxxxx['desdexxx'] =10;
-        $dataxxxx['paciente_id'] =$paciente;
+        $dataxxxx['desdexxx'] = 10;
+        $dataxxxx['paciente_id'] = $paciente;
         $dataxxxx['sis_clinica_id'] = Auth::user()->sis_clinica_id;
         return $this->grabar($dataxxxx, '', 'Registro creado con éxito');
     }
@@ -180,12 +187,12 @@ class CformulaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($clinicax,$padrexxx,Cformula $objetoxx)
+    public function show($clinicax, $padrexxx, Cformula $objetoxx)
     {
-        $this->opciones['cardhead']=$this->opciones['cardhead'].SisClinica::where('id',$clinicax)->first()->clinica;  
-        $this->opciones['tituloxx']='Ver: Formulación';
-        $paciente=Paciente::getPaciente(['padrexxx'=>$padrexxx]);
-        $this->opciones['cardheap']='FORMULACION PACIENTE: '.$paciente->nombres.' '.$paciente->apellidos;   
+        $this->opciones['cardhead'] = $this->opciones['cardhead'] . SisClinica::where('id', $clinicax)->first()->clinica;
+        $this->opciones['tituloxx'] = 'Ver: Formulación';
+        $paciente = Paciente::getPaciente(['padrexxx' => $padrexxx]);
+        $this->opciones['cardheap'] = 'FORMULACION PACIENTE: ' . $paciente->nombres . ' ' . $paciente->apellidos;
         $this->opciones['formular'] = Dataformulario::getPintarFormulario(
             [
                 'paciente' => $paciente,
@@ -193,9 +200,9 @@ class CformulaController extends Controller
             ]
         );
         $this->opciones['paciente'] = $paciente;
-        $this->opciones['clinicax'] = [$paciente->sis_clinica->id=>$paciente->sis_clinica->clinica];
-        $this->opciones['botoform'][0]['routingx'][1] = [$clinicax,$padrexxx];
-        $this->opciones['parametr'] = [$clinicax,$objetoxx->id];
+        $this->opciones['clinicax'] = [$paciente->sis_clinica->id => $paciente->sis_clinica->clinica];
+        $this->opciones['botoform'][0]['routingx'][1] = [$clinicax, $padrexxx];
+        $this->opciones['parametr'] = [$clinicax, $objetoxx->id];
         $this->opciones['readonly'] = 'readonly';
         return $this->view($objetoxx,  'modeloxx', 'Ver', $this->opciones['rutacarp'] . 'pestanias');
     }
@@ -206,48 +213,48 @@ class CformulaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($clinicax,$padrexxx,Cformula $objetoxx)
-    { 
-        $this->opciones['cardhead']=$this->opciones['cardhead'].SisClinica::where('id',$clinicax)->first()->clinica;  
-        $this->opciones['tituloxx']='Editar: Formulación';
-        $paciente=Paciente::getPaciente(['padrexxx'=>$padrexxx]);
-        $this->opciones['cardheap']='FORMULACION PACIENTE: '.$paciente->nombres.' '.$paciente->apellidos;   
+    public function edit($clinicax, $padrexxx, Cformula $objetoxx)
+    {
+        $this->opciones['cardhead'] = $this->opciones['cardhead'] . SisClinica::where('id', $clinicax)->first()->clinica;
+        $this->opciones['tituloxx'] = 'Editar: Formulación';
+        $paciente = Paciente::getPaciente(['padrexxx' => $padrexxx]);
+        $this->opciones['cardheap'] = 'FORMULACION PACIENTE: ' . $paciente->nombres . ' ' . $paciente->apellidos;
         $this->opciones['formular'] = Dataformulario::getPintarFormulario(
             [
                 'paciente' => $paciente,
                 'furmulac' => $objetoxx,
-               
+
             ]
         );
         $this->opciones['paciente'] = $paciente;
-        $this->opciones['clinicax'] = [$paciente->sis_clinica->id=>$paciente->sis_clinica->clinica];
-        $this->opciones['botoform'][0]['routingx'][1] = [$clinicax,$padrexxx];
-        $this->opciones['parametr'] = [$clinicax,$padrexxx,$objetoxx->id];
+        $this->opciones['clinicax'] = [$paciente->sis_clinica->id => $paciente->sis_clinica->clinica];
+        $this->opciones['botoform'][0]['routingx'][1] = [$clinicax, $padrexxx];
+        $this->opciones['parametr'] = [$clinicax, $padrexxx, $objetoxx->id];
         $this->opciones['botoform'][] =
             [
-                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$padrexxx,$objetoxx->id]],
+                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$padrexxx, $objetoxx->id]],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
 
-            $this->opciones['botoform'][] =[
-                'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'].'.nuevo', [$clinicax,$padrexxx]],
-                'formhref' => 2, 'tituloxx' => 'CREAR NUEVO', 'clasexxx' => 'btn btn-sm btn-primary'
-            ];
+        $this->opciones['botoform'][] = [
+            'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'] . '.nuevo', [$clinicax, $padrexxx]],
+            'formhref' => 2, 'tituloxx' => 'CREAR NUEVO', 'clasexxx' => 'btn btn-sm btn-primary'
+        ];
         return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
     }
 
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
-        $cformula=Cformula::transaccion($dataxxxx, $objectx);
-        $dataxxxx['cformula']=$cformula;
-      
+        $cformula = Cformula::transaccion($dataxxxx, $objectx);
+        $dataxxxx['cformula'] = $cformula;
+
         GrabarFormulacion::setDformula($dataxxxx);
         $redirect = '.ver';
         if (auth()->user()->can($this->opciones['routxxxx'] . '-editar')) {
             $redirect = '.editar';
         }
         return redirect()
-            ->route($this->opciones['routxxxx'] . $redirect, [$cformula->sis_clinica,$cformula->paciente_id,$cformula->id])
+            ->route($this->opciones['routxxxx'] . $redirect, [$cformula->sis_clinica, $cformula->paciente_id, $cformula->id])
             ->with('info', $infoxxxx);
     }
 
@@ -258,7 +265,7 @@ class CformulaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($clinicax,$paciente,CformulaEditarRequest  $request, Cformula $objetoxx)
+    public function update($clinicax, $paciente, CformulaEditarRequest  $request, Cformula $objetoxx)
     {
         $dataxxxx = $request->all();
         return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
@@ -270,9 +277,9 @@ class CformulaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($clinicax,$padrexxx,Cformula $objetoxx)
+    public function destroy($clinicax, $padrexxx, Cformula $objetoxx)
     {
-        $this->opciones['cardhead']=$this->opciones['cardhead'].SisClinica::where('id',$clinicax)->first()->clinica;  
+        $this->opciones['cardhead'] = $this->opciones['cardhead'] . SisClinica::where('id', $clinicax)->first()->clinica;
         $this->opciones['botoform'][0]['routingx'][1] = $padrexxx;
         $this->opciones['parametr'] = [$objetoxx->id];
 
@@ -285,36 +292,37 @@ class CformulaController extends Controller
 
     public function getFormular(Request $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             return response()->json(Validacionesajax::formulaciones($request->all()));
         }
     }
-    //public function getPedineon($paciente)
-     public function getPedineon(Request $request)
+    public function getPedineon(Request $request)
     {
-        require_once('DataFormulacionEjemplo.php');
-        $respuest=[];
-
-       // ddd($dataxxxx['dataxxxx']);
-        if($request->ajax()){
-            $dataxxxx=$request->all();
-            $existexx=['elemtraz', 'multivit', 'multiuno'];
-            foreach($dataxxxx['dataxxxx'] as $key => $value){
+        $respuest = [];
+        if ($request->ajax()) {
+            $dataxxxx = $request->all();
+            $existexx = ['elemtraz', 'multivit', 'multiuno'];
+            foreach ($dataxxxx['dataxxxx'] as $key => $value) {
                 if (in_array($value['name'], $existexx)) {
-                    $dataxxxx['campo_id']=$value['name'].'_cant';
-                    $respuest[]=Validacionesajax::getFormulaciones($dataxxxx,$value['name']); 
+                    $dataxxxx['campo_id'] = $value['name'] . '_cant';
+                    $respuest[] = Validacionesajax::getFormulaciones($dataxxxx, $value['name']);
                 }
-                //$dataxxxx = 
             }
-            //return $respuest;
             return response()->json($respuest);
         }
     }
 
     public function getRequerimientoVolumen(Request $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             return Validacionesajax::getRango($request);
+        }
+    }
+
+    public function getRedondear(Request $request)
+    {
+        if ($request->ajax()) {
+            return response()->json(['redendeo' => number_format($request->redendeo)]);
         }
     }
 }

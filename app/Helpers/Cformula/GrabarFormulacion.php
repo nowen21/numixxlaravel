@@ -41,6 +41,7 @@ class GrabarFormulacion {
             'fosfa_id' => $fosfsele, // fosfato seleccionado
             'fosfcant' => $requfosf, // requerimiento diario del fosfato del fosfato seleccionado
             'multivi2' => $multlipo, // multivitamina liposoluble seleccionada
+            'lipovolu' => $cabecera['multiuno_volu'], // multivitamina liposoluble seleccionada
             'volumenx' => $cabecera[$data[0]],
         ];
         $formulax = $casaform->calculos($dataxxxx)[$cabecera[$data[0]]];

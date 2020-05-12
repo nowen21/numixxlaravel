@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Administracion\Rango;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rango;
 class RangoCreateRequest extends FormRequest {
 
   private $_mensaje;

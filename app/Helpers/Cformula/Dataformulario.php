@@ -5,7 +5,7 @@ namespace App\Helpers\Cformula;
 use App\Models\Formulaciones\Dfmlote;
 use App\Models\Medicamentos\Casa;
 use App\Models\Medicamentos\Medicame;
-
+use App\Traits\Cformula\CalculosFormulacion;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,12 +20,19 @@ use App\Models\Medicamentos\Medicame;
  */
 class Dataformulario
 {
+  use CalculosFormulacion;
+  public function getDataxxx()
+  {
+    return $this->_dataxxx;
+  }
   private static function getMedicamentosCasa($dataxxxx)
   {
     $medicame = Medicame::select('medicames.id', 'medicames.nombgene')
       ->join('mnpts', 'medicames.id', '=', 'mnpts.medicame_id')
+      ->join('urangnpts', 'mnpts.urangnpt_id', '=', 'urangnpts.id')
       ->join('medicame_sis_clinica', 'medicames.id', '=', 'medicame_sis_clinica.medicame_id')
-      ->where('mnpts.npt_id', $dataxxxx['paciente']->npt_id)
+
+      ->where('urangnpts.npt_id', $dataxxxx['paciente']->npt_id)
       ->where('medicame_sis_clinica.sis_clinica_id', $dataxxxx['paciente']->sis_clinica->id)
       ->where('medicames.casa_id', $dataxxxx['casaidxx'])
       ->get();
@@ -58,8 +65,9 @@ class Dataformulario
     $tienemed = false;
     $medicame = Medicame::select('medicames.id', 'medicames.nombgene')
       ->join('mnpts', 'medicames.id', '=', 'mnpts.medicame_id')
+      ->join('urangnpts', 'mnpts.urangnpt_id', '=', 'urangnpts.id')
       ->join('medicame_sis_clinica', 'medicames.id', '=', 'medicame_sis_clinica.medicame_id')
-      ->where('mnpts.npt_id', $dataxxxx['paciente']->npt_id)
+      ->where('urangnpts.npt_id', $dataxxxx['paciente']->npt_id)
       ->where('medicame_sis_clinica.sis_clinica_id', $dataxxxx['paciente']->sis_clinica->id)
       ->where('medicames.casa_id', $casaidxx)
       ->first();
@@ -71,14 +79,14 @@ class Dataformulario
   public static function getPintarFormulario($dataxxxx)
   {
     $formulacion = [];
-    
+
     // listar las casas que apliquen
-    $casasxxx = Casa::select('casas.id', 'casas.casa','unidmedi','nameidxx')
+    $casasxxx = Casa::select('casas.id', 'casas.casa', 'unidmedi', 'nameidxx')
       ->orderBy('casas.ordecasa', 'ASC')->get();
     //    // recorre las casas
-    $existexx=['elemtraz', 'multivit', 'multiuno'];
-    $aguaxxxx=['aguaeste'];
-    $aguaeste=0;
+    $existexx = ['elemtraz', 'multivit', 'multiuno'];
+    $aguaxxxx = ['aguaeste'];
+    $aguaeste = 0;
     foreach ($casasxxx as $key => $value) {
       if (Dataformulario::getCasaMedicamentos($dataxxxx, $value->id)) {
         $selevalu = '';
@@ -93,7 +101,7 @@ class Dataformulario
         $dataxxxx['tipocomb'] = true;
         $selelist = Dataformulario::getMedicamentosCasa($dataxxxx);
         $dataxxxx['tipocomb'] = false;
-        $combo_id  = Dataformulario::getMedicamentosCasa($dataxxxx);
+        $combo_id = Dataformulario::getMedicamentosCasa($dataxxxx);
         //$combo_id = Medicame::combo1($value->id, false, $dataxxxx['paciente'], []);
         // cuando se pinta el formulario con datos 
         if (isset($dataxxxx['furmulac']->id)) {
@@ -104,15 +112,15 @@ class Dataformulario
                 $selevalu = $valor->medicame_id;
                 $requerim = $valor->cantidad;
                 $requtota = $valor->rtotal;
-                $volumenx = $valor->volumen;
+                $volumenx = number_format($valor->volumen, 2);
               }
             }
           }
         }
-        
-        $pedineon=(in_array($value['nameidxx'], $existexx)==true && $dataxxxx['paciente']->npt_id<3);
-        $aguaeste=(in_array($value['nameidxx'], $aguaxxxx)==true);
-       
+
+        $pedineon = (in_array($value['nameidxx'], $existexx) == true && $dataxxxx['paciente']->npt_id < 3);
+        $aguaeste = (in_array($value['nameidxx'], $aguaxxxx) == true);
+
         $formulacion[] = [
           'casaxxxx' => $value['casa'],
           'campo_id' => $value['nameidxx'], // nombre del campo con el que se guarda
@@ -121,8 +129,8 @@ class Dataformulario
           'requerim' => $requerim,
           'requtota' => $requtota,
           'volumenx' => $volumenx,
-          'readonly'=>  $pedineon?'readonly':$aguaeste?'readonly':'',
-          'valorxxx' => 4,
+          'readonly' =>  $pedineon ? 'readonly' : $aguaeste ? 'readonly' : '',
+          ///'valorxxx' => 4,
           'unidmedi' => $value->unidmedi,
         ];
       }
@@ -156,22 +164,29 @@ class Dataformulario
    * @access public
    * @param $furmulac fomulacion que arma datasxxx
    */
+  private function getDataCasa($dataxxxx)
+  {
+    return [
+      'casaxxxx' => $dataxxxx['dformula']->medicame->casa->nombre, // nombre de la casa
+      'selevalu' => $dataxxxx['dformula']->medicame_id, // id casa seleccionada
+      'requerim' => $dataxxxx['dformula']->rtotal, // requrimiento total del medicame
+      'requtota' => $dataxxxx['dformula']->cantidad, // cantidad digitada
+      'volumenx' => $dataxxxx['dformula']->volumen, // volumen del medicame solicitado
+      'nombgene' => $dataxxxx['dformula']->medicame->nombgene // nombre del medicame
+    ];
+  }
   private function armardata($cabecera)
   {
     $formulacion = ['osmolari' => 0, 'pesoespe' => 0];
     // recorrer cada una de las formulaciones medicas
-    foreach ($cabecera->formulacionmeds as $key => $formulacionmed) {
-      $osmopeso = $this->osmolaridadypesoespecifico($formulacionmed);
-      $formulacion[$formulacionmed->medicame->casa_id] = [
-        'casaxxxx' => $formulacionmed->medicame->casa->nombre, // nombre de la casa
-        'selevalu' => $formulacionmed->medicame_id, // id casa seleccionada
-        'requerim' => $formulacionmed->rtotal, // requrimiento total del medicame
-        'requtota' => $formulacionmed->cantidad, // cantidad digitada
-        'volumenx' => $formulacionmed->volumen, // volumen del medicame solicitado
-        'nombgene' => $formulacionmed->medicame->nombgene // nombre del medicame
-      ];
-      $formulacion['osmolari'] += $osmopeso['osmolari'] * $formulacionmed->purga;
-      $formulacion['pesoespe'] += $osmopeso['pesoespe'] * $formulacionmed->purga;
+    foreach ($cabecera->dformulas as $key => $formulacionmed) {
+
+      $formulacion[$formulacionmed->medicame->casa_id] = $this->getDataCasa(['dformula' => $formulacionmed]);
+      if ($cabecera->userevis_id) {
+        $osmopeso = $this->osmolaridadypesoespecifico($formulacionmed);
+        $formulacion['osmolari'] += $osmopeso['osmolari'] * $formulacionmed->purga; // calcular la osmolarida
+        $formulacion['pesoespe'] += $osmopeso['pesoespe'] * $formulacionmed->purga; // calcular el peso específico
+      }
     }
     return $formulacion;
   }
@@ -179,28 +194,27 @@ class Dataformulario
   public function calculos($cabecera)
   {
     $datasxxx = $this->armardata($cabecera);
-    $calculos = [];
-    $calculos['volutota'] = $cabecera->volumen; //volumen total
-    $calculos['veloinfu'] = $cabecera->velocidad; //velocidad de infusion
-    $calculos['pesoxxxx'] = $cabecera->peso; //velocidad de infusion
-    $calculos['velopurg'] = $cabecera->volumen + $cabecera->purga; //velocidad de infusion
+    $this->_dataxxx['volutota'] = $cabecera->volumen; //volumen total
+    $this->_dataxxx['veloinfu'] = $cabecera->velocidad; //velocidad de infusion
+    $this->_dataxxx['pesoxxxx'] = $cabecera->peso; //velocidad de infusion
+    $this->_dataxxx['velopurg'] = $cabecera->volumen + $cabecera->purga; //velocidad de infusion
     if ($cabecera->paciente->npt_id == 3) { // adultos
-      $calculos = $this->calculosadultos($calculos, $datasxxx);
+      $this->_dataxxx = $this->calculosadultos($this->_dataxxx, $datasxxx);
     } else { // neonato y pediatrico
-      $calculos = $this->calculosneopediatrico($calculos, $datasxxx);
+      $this->_dataxxx = $this->calculosneopediatrico($this->_dataxxx, $datasxxx);
     }
-    $calculos['carbvali'] = $calculos['concarbo'] > 24.5 ? 'ADVER/R.H�?GADO GRASO' : $calculos['concarbo'] < 24.4 ? 'SEGURA' : '';
-    $calculos['concprov'] = $calculos['concprot'] < 1 ? 'NO ESTABLE' : 'ESTABLE';
-    $calculos['conclipv'] = ($calculos['conclipi'] < 1 && $calculos['conclipi'] != 0) ? 'NO ESTABLE' : 'ESTABLE';
-    $calculos['osmolari'] = $datasxxx['osmolari'] / $calculos['velopurg']; //OSMOLARIDAD (mOsm / L) 
-    $calculos['osmolarv'] = $calculos['osmolari'] > 700 ? 'VIA CENTRAL' : 'VIA PERIFÉRICA';
-    $calculos['calcfosv'] = $calculos['calcfosf'] < 2 ? 'SEGURA' : 'NO SEGURA';
-    $calculos['calototv'] = $calculos['calotota'] / $calculos['calotota'] * 100;
-    $calculos['calocarv'] = $calculos['calocarb'] / $calculos['calotota'] * 100;
-    $calculos['calolipv'] = $calculos['calolipi'] / $calculos['calotota'] * 100;
-    $calculos['caloprov'] = $calculos['caloprot'] / $calculos['calotota'] * 100;
-    $calculos['pesoteor'] = $datasxxx['pesoespe']; //PESO TEORICO  (GRAMOS)
-    return $calculos;
+    $this->_dataxxx['carbvali'] = $this->_dataxxx['concarbo'] > 24.5 ? 'ADVER/R.H�?GADO GRASO' : $this->_dataxxx['concarbo'] < 24.4 ? 'SEGURA' : '';
+    $this->_dataxxx['concprov'] = $this->_dataxxx['concprot'] < 1 ? 'NO ESTABLE' : 'ESTABLE';
+    $this->_dataxxx['conclipv'] = ($this->_dataxxx['conclipi'] < 1 && $this->_dataxxx['conclipi'] != 0) ? 'NO ESTABLE' : 'ESTABLE';
+    $this->_dataxxx['osmolari'] = $datasxxx['osmolari'] / $this->_dataxxx['velopurg']; //OSMOLARIDAD (mOsm / L) 
+    $this->_dataxxx['osmolarv'] = $this->_dataxxx['osmolari'] > 700 ? 'VIA CENTRAL' : 'VIA PERIFÉRICA';
+    $this->_dataxxx['calcfosv'] = $this->_dataxxx['calcfosf'] < 2 ? 'SEGURA' : 'NO SEGURA';
+    $this->_dataxxx['calototv'] = $this->_dataxxx['calotota'] / $this->_dataxxx['calotota'] * 100;
+    $this->_dataxxx['calocarv'] = $this->_dataxxx['calocarb'] / $this->_dataxxx['calotota'] * 100;
+    $this->_dataxxx['calolipv'] = $this->_dataxxx['calolipi'] / $this->_dataxxx['calotota'] * 100;
+    $this->_dataxxx['caloprov'] = $this->_dataxxx['caloprot'] / $this->_dataxxx['calotota'] * 100;
+    $this->_dataxxx['pesoteor'] = $datasxxx['pesoespe']; //PESO TEORICO  (GRAMOS)
+    return $this->_dataxxx;
   }
 
   private function casa($idcasaxx, $datasxxx)
