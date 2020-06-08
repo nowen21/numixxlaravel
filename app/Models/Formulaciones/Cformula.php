@@ -8,16 +8,19 @@ use App\Models\Medicamentos\Medicame;
 use App\Models\Pacientes\Paciente;
 use App\Models\Produccion\Proceso;
 use App\Models\Sistema\SisEsta;
+use App\Traits\Produccion\InventarioTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Cformula extends Model
 {
-
+use InventarioTrait;
   protected $fillable = [
     'paciente_id',
     'sis_clinica_id',
+    'proceso_id',
+    'terminado_id',
     'tiempo',
     'volumen',
     'velocidad',
@@ -138,12 +141,10 @@ class Cformula extends Model
       } else {
         $dataxxxx['sis_esta_id'] = 1;
         $dataxxxx['total'] = $totalxxx;
-        $dataxxxx['ordene_id'] = Ordene::ordendia();
+        $dataxxxx['ordene_id'] = Ordene::getOrdenDia();
         $dataxxxx['user_crea_id'] = Auth::user()->id;
-        //ddd( $dataxxxx);
         $objetoxx = Cformula::create($dataxxxx);
       }
-
       return $objetoxx;
     }, 5);
     return $usuariox;

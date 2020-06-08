@@ -1,6 +1,6 @@
 <?php
 Route::group(['prefix' => 'conciliaciones'], function () {
-    Route::get('', [
+    Route::get('{padrexxx}', [
 	    'uses' => 'Produccion\ConciliacionController@index',
 	    'middleware' => ['permission:concilia-leer|concilia-crear|concilia-editar|concilia-borrar']
 	])->name('concilia');
@@ -24,6 +24,8 @@ Route::group(['prefix' => 'conciliaciones'], function () {
 
 	Route::post('esnumerico', [
 	    'uses' => 'Produccion\ConciliacionController@esnumerico',
-		'middleware' => ['concilia-editar']
 	])->name('concilia.esnumerico');
+	Route::get('imprimir/{objetoxx}', [
+	    'uses' => 'Produccion\ConciliacionController@getPdfConciliacion',
+	])->name('concilia.imprimir');
 });

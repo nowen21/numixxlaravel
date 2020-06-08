@@ -121,7 +121,7 @@ class CformulaController extends Controller
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
-        
+
         $this->opciones['calculos'] = $this->_dataxxx;
         if ($nombobje != '') {
             $this->opciones['calculos'] = $this->dataform->calculos($objetoxx);
@@ -311,18 +311,10 @@ class CformulaController extends Controller
             return response()->json($respuest);
         }
     }
-
     public function getRequerimientoVolumen(Request $request)
     {
         if ($request->ajax()) {
             return Validacionesajax::getRango($request);
-        }
-    }
-
-    public function getRedondear(Request $request)
-    {
-        if ($request->ajax()) {
-            return response()->json(['redendeo' => number_format($request->redendeo)]);
         }
     }
 }

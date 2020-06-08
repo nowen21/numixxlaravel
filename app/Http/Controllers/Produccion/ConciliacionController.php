@@ -2,39 +2,41 @@
 
 namespace App\Http\Controllers\Produccion;
 
-use App\Helpers\Produccion\Alistamiento;
-use App\Helpers\Produccion\Conciliacion;
+use App\Helpers\Pdfs\Pdfs;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Produccion\ConciliacionCrearRequest;
 use App\Http\Requests\Produccion\ConciliacionEditarRequest;
-use App\Models\Formulaciones\Ordene;
 use App\Models\Produccion\Calistam;
 use App\Models\Produccion\Dalistam;
 use App\Models\Sistema\SisEsta;
+use App\Traits\Conciliacion\ConciliacionTrait;
+use App\Traits\Pestanias\ProduccionTrait;
 use Illuminate\Http\Request;
 
 class ConciliacionController extends Controller
 {
     private $opciones;
-
+    use ProduccionTrait;
+    use ConciliacionTrait;
     public function __construct()
     {
         $this->opciones = [
-            'cardhead'=>'CONCILIACIONES',
+            'cardhead' => 'CONCILIACIONES',
             'permisox' => 'concilia',
             'parametr' => [],
             'rutacarp' => 'Produccion.',
             'tituloxx' => 'Crear: Conciliación',
-            'slotxxxx'=>'concilia',
-            'carpetax'=>'Conciliacion',
-            'indecrea'=>false,
-            'esindexx'=>false
+            'slotxxxx' => 'concilia',
+            'carpetax' => 'Conciliacion',
+            'indecrea' => false,
+            'esindexx' => false,
+            'pestania' => []
         ];
 
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
+        $this->middleware(['permission:'
+            . $this->opciones['permisox'] . '-leer|'
+            . $this->opciones['permisox'] . '-crear|'
+            . $this->opciones['permisox'] . '-editar|'
+            . $this->opciones['permisox'] . '-borrar|']);
 
         $this->opciones['readonly'] = '';
         $this->opciones['rutaxxxx'] = 'concilia';
@@ -55,26 +57,26 @@ class ConciliacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($padrexxx)
     {
-        $padrexxx='';
-        $this->opciones['indecrea']=false;
-        $this->opciones['esindexx']=true;
-        $this->opciones['accionxx']='index';
-        $this->opciones['padrexxx'] = $padrexxx;
+
+        $this->opciones['indecrea'] = false;
+        $this->opciones['esindexx'] = true;
+        $this->opciones['accionxx'] = 'index';
+        // $this->opciones['padrexxx'] = $padrexxx;
         $this->opciones['tablasxx'] = [
             [
                 'titunuev' => 'NUEVA CONCILIACION',
                 'titulist' => 'LISTA DE CONCILIACIONES',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                    ['campoxxx' => 'medicame', 'dataxxxx' => $padrexxx],
+                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
+                    ['campoxxx' => 'padrexxx', 'dataxxxx' => $padrexxx],
                 ],
                 'vercrear' => false,
                 'accitabl' => true,
                 'urlxxxxx' => 'api/produccion/conciliaciones',
-                'cabecera' =>[
+                'cabecera' => [
                     ['td' => 'ID'],
                     ['td' => 'PRODUCTO'],
                     ['td' => 'FECHA'],
@@ -86,7 +88,7 @@ class ConciliacionController extends Controller
                     ['data' => 'id', 'name' => 'calistams.id'],
                     ['data' => 'producto', 'name' => 'calistams.producto'],
                     ['data' => 'created_at', 'name' => 'calistams.created_at'],
-                    ['data' => 'ordepres', 'name' => 'calistams.ordepres'],
+                    ['data' => 'ordeprod', 'name' => 'ordenes.ordeprod'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tablaordenes',
@@ -96,23 +98,25 @@ class ConciliacionController extends Controller
             ],
 
         ];
-        $cabecera = Calistam::where('ordepres', Ordene::ordendia())->first();
-        if(isset($cabecera->id)){
-            $this->opciones['tablasxx'][0]['vercrear']=false;  
-        }
-       return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
+
+        $this->opciones['pestania'] = $this->getPestanias(['tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => Calistam::find($padrexxx)]);
+        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
-    private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
-    { 
+    private function view($dataxxxx)
+    {
+
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
-        $this->opciones['accionxx'] = $accionxx;
+        $this->opciones['accionxx'] = $dataxxxx['accionxx'];
         // indica si se esta actualizando o viendo
-        if ($nombobje != '') {
-            $this->opciones[$nombobje] = $objetoxx;
-        }        
-        return view($vistaxxx, ['todoxxxx' => $this->opciones]);
+        if ($dataxxxx['objetoxx'] != '') {
+            $this->opciones['modeloxx'] = $dataxxxx['objetoxx'];
+            $this->opciones['ordenxxx'] = [$dataxxxx['objetoxx']->ordene_id => $dataxxxx['objetoxx']->ordene->ordeprod];
+        }
+        $this->opciones['botoform'][0]['routingx'][1] = [$dataxxxx['objetoxx']->id];
+        $this->opciones['pestania'] = $this->getPestanias(['tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => $dataxxxx['objetoxx']]);
+        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
-   
+
     /**
      * Display the specified resource.
      *
@@ -122,16 +126,10 @@ class ConciliacionController extends Controller
     public function show(Calistam $objetoxx)
     {
         $this->opciones['tituloxx'] = 'Ver: Conciliación';
-        $this->opciones['alistami']=Conciliacion::getMlotesDlotes($objetoxx->id);
-        $this->opciones['clinicax'] =$objetoxx->id;
+        $this->opciones['alistami'] = $this->getConsiliacion(['padrexxx' => $objetoxx]);
+        $this->opciones['clinicax'] = $objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
-        // $this->opciones['botoform'][] =
-        //     [
-        //         'mostrars' => true, 'accionxx' => $objetoxx->sis_esta_id == 1 ? 'INACTIVAR' : 'ACTIVAR', 'routingx' => [$this->opciones['routxxxx'], []], 'formhref' => 1,
-        //         'tituloxx' => '', 'clasexxx' => $objetoxx->sis_esta_id == 1 ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success'
-        //     ];
-        $this->opciones['readonly'] = 'readonly';
-        return $this->view($objetoxx,  'modeloxx', 'Ver', $this->opciones['rutacarp'] . 'pestanias');
+        return $this->view(['objetoxx' => $objetoxx, 'accionxx' => 'Ver']);
     }
 
     /**
@@ -142,20 +140,22 @@ class ConciliacionController extends Controller
      */
     public function edit(Calistam $objetoxx)
     {
-        $this->opciones['alistami']=Conciliacion::getMlotesDlotes($objetoxx->id);
-        $this->opciones['clinicax'] =$objetoxx->id;
+        $this->opciones['alistami'] = $this->getConsiliacion(['padrexxx' => $objetoxx]);
+
+        $this->opciones['clinicax'] = $objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
-        return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
+        return $this->view(['objetoxx' => $objetoxx, 'accionxx' => 'Editar']);
     }
 
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
-        $cabecera=Calistam::transaccion($dataxxxx, $objectx);
+        $cabecera = Calistam::transaccion($dataxxxx, $objectx);
+        $dataxxxx['dalistax'] = false;
         Dalistam::transaccion($dataxxxx,  $cabecera);
         return redirect()
             ->route($this->opciones['routxxxx'] . '.editar', [$cabecera->id])
@@ -170,10 +170,9 @@ class ConciliacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(ConciliacionEditarRequest  $request, Calistam $objetoxx)
-    { 
+    {
         $dataxxxx = $request->all();
         return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
-       
     }
 
     /**
@@ -193,31 +192,37 @@ class ConciliacionController extends Controller
         return redirect()->route($this->opciones['routxxxx'])->with('info', 'Registro ' . $activado . ' con éxito');
     }
 
-    public function esnumerico(Request $request) {
+    public function esnumerico(Request $request)
+    {
         if ($request->ajax()) {
-          $data = $request->all();
-          $numeroxx = $data['cantcons'];
-          if (!is_numeric($data['cantcons'])) {// se verifica que sea un volor numerico lo que se ingrese
-            if ($data['cantcons'] != '') {
-              $numeroxx = substr($numeroxx, 0, strlen($numeroxx) - 1);
-            } else {
-              $numeroxx = 0;
+            $cantmayo = false;
+            if ($request->cantsobr > $request->cantalis) {
+                $cantmayo = true;
             }
-          }
-          $cantmayo = false;
-          if ($numeroxx > $data['cantalis']) {
-            $cantmayo = true;
-          }
-    
-          $idelemen = $data['idcancon'][0] . '_' . $data['idcancon'][1];
-          return response()->json([
-                      'numeroxx' => $numeroxx,
-                      'diferenc' => $data['cantalis'] - $numeroxx,
-                      'cantalis' => $data['cantalis'],
-                      'idcancon' => $idelemen . '_con',
-                      'idiferen' => $idelemen . '_dif',
-                      'cantmayo' => $cantmayo
-          ]);
+            $idelemen = $request->idcancon[0] . '_' . $request->idcancon[1];
+            return response()->json([
+                'numeroxx' => $request->cantsobr,
+                'diferenc' => $request->cantalis - $request->cantsobr,
+                'cantalis' => $request->cantalis,
+                'idcancon' => $idelemen . '_con',
+                'idiferen' => $idelemen . '_dif',
+                'cantmayo' => $cantmayo
+            ]);
         }
-      }
+    }
+
+    public function getPdfConciliacion(Calistam $objetoxx)
+    {
+
+        $dataxxxx = [
+            'vistaurl' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.formulario.pdf.cabecera',
+            'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
+            'tipoxxxx' => 2,
+            'nombarch' => 'alistamiento',
+            'dataxxxx' => [
+                'cabecera' => $objetoxx, 'detallex' => $this->getConsiliacion(['padrexxx' => $objetoxx])
+            ]
+        ];
+        return Pdfs::getImprimirPdf($dataxxxx);
+    }
 }

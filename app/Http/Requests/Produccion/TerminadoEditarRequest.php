@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Produccion;
 
+use App\Models\Formulaciones\Cformula;
 use App\Models\Produccion\Proceso;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +25,7 @@ class TerminadoEditarRequest extends FormRequest {
         'realxxx_.required' => 'Peso real es requerido',
         'limitesx.required' => 'Peso dentro límites establecidos es requerido',
         'concepto.required' => 'El Concepto es requerido',
-        'proceso_id.required' => 'Seleccione un proceso',
+        'cformula_id.required' => 'Seleccione un proceso',
     ];
     $this->_reglasx = [
         'completo' => 'required',
@@ -39,7 +40,7 @@ class TerminadoEditarRequest extends FormRequest {
         'realxxx_' => 'required',
         'limitesx' => 'required',
         'concepto' => 'required',
-        'proceso_id' => 'required',
+        'cformula_id' => 'required',
     ];
   }
 
@@ -88,8 +89,8 @@ class TerminadoEditarRequest extends FormRequest {
 
   public function validar() {
     $dataxxxx = $this->toArray();
-    $procesox =Proceso::where('id', $dataxxxx['proceso_id'])->first();
-    switch ($procesox->cformula->paciente->npt_id) {
+    $cformula =Cformula::where('id', $dataxxxx['cformula_id'])->first();
+    switch ($cformula->paciente->npt_id) {
       case 3:
         $this->limitexx(7, $dataxxxx);
         break;

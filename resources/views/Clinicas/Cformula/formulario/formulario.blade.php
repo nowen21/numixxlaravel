@@ -51,7 +51,7 @@
         {{ Form::text('volumen', $todoxxxx['modeloxx']->volumen, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
         @else
         {{ Form::text('volumen', null, ['class' => $errors->first('volumen') ?
-         'form-control  is-invalid calcularvolumen' : 'form-control calcularvolumen', 
+         'form-control  is-invalid calcularvolumen calcularagua' : 'form-control calcularvolumen calcularagua', 
          'placeholder' => 'Volumen Total', 'maxlength' => '120', 'autofocus','style'=>'height: 28px','autocomplete'=>"off"]) }}
         @endif
         @if($errors->has('volumen'))
@@ -121,13 +121,13 @@
                 ?>
                 <tr id="{{$idxxxxxx}}" style="">
                     <td>{{$formulax['casaxxxx']}}</td>
-                    <td>{{ Form::select($formulax['campo_id'], $formulax['selelist'], $formulax['selevalu'],['class'=>'form-control medicamento select2','id'=>$formulax['campo_id']]) }}
+                    <td>{{ Form::select($formulax['campo_id'], $formulax['selelist'], $formulax['selevalu'],['class'=>'form-control medicamento calcularagua select2','id'=>$formulax['campo_id']]) }}
                     </td>
                     <td id="{{$formulax['campo_id'].'_unid'}}">{{$formulax['unidmedi']}}</td>
                     <td> {{ Form::text($formulax['campo_id'].'_cant', 
         $formulax['requerim'],
         
-        ['class'=>'form-control input-number test',
+        ['class'=>'form-control input-number test calcularagua',
         'id'=>$formulax['campo_id'].'_cant',
         'placeholder'=>'Diario',
         'onkeypress'=>'return filterFloat(event,this);',
@@ -138,7 +138,7 @@
         ]) }} </td>
                     <td>{{ Form::text($formulax['campo_id'].'_volu', 
         $formulax['volumenx'],
-        ['class'=>'form-control input-number test','style'=>'width: 100px',
+        ['class'=>'form-control input-number test calcularagua','style'=>'width: 100px',
         'id'=>$formulax['campo_id'].'_volu',
         'onkeypress'=>'return filterFloat(event,this);',
         $formulax['readonly'],'autocomplete'=>"off"

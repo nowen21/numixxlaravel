@@ -8,7 +8,7 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="{{ route('produccion.modulo') }}" class="nav-link">
+            <a href="{{ route('produccion') }}" class="nav-link">
                 <i class="fas fa-child nav-icon"></i>
                 <p>Producción</p>
             </a>

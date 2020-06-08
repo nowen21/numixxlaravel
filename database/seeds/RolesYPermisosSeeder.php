@@ -192,37 +192,41 @@ class RolesYPermisosSeeder extends Seeder
          */
         Permission::create(['name' => 'produccion-modulo',  'descripc' => 'Habilita los permisos para el módulo de producciòn']);
 
-        $permiso = 'revision';
+        $permiso = 'revision'; 
         Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar revisiones']);
         Permission::create(['name' => $permiso . '-crear',  'descripc' => 'Crear revisión']);
         Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar revisión']);
         Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar revisión']);
 
+        $permiso = 'alistami';
+        Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar alistamientos']);
+        Permission::create(['name' => $permiso . '-crear',  'descripc' => 'Crear alistamiento']);
+        Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar alistamiento']);
+        Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar alistamiento']);
+        
+        $permiso = 'preparac'; 
+        Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar preparaciones']);
+        Permission::create(['name' => $permiso . '-crear',  'descripc' => 'Crear preparación']);
+        Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar preparación']);
+        Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar preparación']);
 
-        Permission::create(['name' => 'alistami-leer',  'descripc' => 'Listar alistamientos']);
-        Permission::create(['name' => 'alistami-crear',  'descripc' => 'Crear alistamiento']);
-        Permission::create(['name' => 'alistami-editar',  'descripc' => 'Editar alistamiento']);
-        Permission::create(['name' => 'alistami-borrar',  'descripc' => 'Inactivar alistamiento']);
+        $permiso = 'controlp'; 
+        Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar controles en proceso']);
+        Permission::create(['name' => $permiso . '-crear',  'descripc' => 'Crear control es proceso']);
+        Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar control es proceso']);
+        Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar control es proceso']);
 
-        Permission::create(['name' => 'preparac-leer',  'descripc' => 'Listar preparaciones']);
-        Permission::create(['name' => 'preparac-crear',  'descripc' => 'Crear preparación']);
-        Permission::create(['name' => 'preparac-editar',  'descripc' => 'Editar preparación']);
-        Permission::create(['name' => 'preparac-borrar',  'descripc' => 'Inactivar preparación']);
+        $permiso = 'controlt';
+        Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar controles de productos terminados']);
+        Permission::create(['name' => $permiso . '-crear',  'descripc' => 'Crear control de producto terminado']);
+        Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar control de producto terminado']);
+        Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar control de producto terminado']);
 
-        Permission::create(['name' => 'controlp-leer',  'descripc' => 'Listar controles en proceso']);
-        Permission::create(['name' => 'controlp-crear',  'descripc' => 'Crear control es proceso']);
-        Permission::create(['name' => 'controlp-editar',  'descripc' => 'Editar control es proceso']);
-        Permission::create(['name' => 'controlp-borrar',  'descripc' => 'Inactivar control es proceso']);
-
-        Permission::create(['name' => 'controlt-leer',  'descripc' => 'Listar controles de productos terminados']);
-        Permission::create(['name' => 'controlt-crear',  'descripc' => 'Crear control de producto terminado']);
-        Permission::create(['name' => 'controlt-editar',  'descripc' => 'Editar control de producto terminado']);
-        Permission::create(['name' => 'controlt-borrar',  'descripc' => 'Inactivar control de producto terminado']);
-
-        Permission::create(['name' => 'concilia-leer',  'descripc' => 'Listar conciliaciones']);
-        Permission::create(['name' => 'concilia-crear',  'descripc' => 'Crear conciliación']);
-        Permission::create(['name' => 'concilia-editar',  'descripc' => 'Editar conciliación']);
-        Permission::create(['name' => 'concilia-borrar',  'descripc' => 'Inactivar conciliación']);
+        $permiso = 'concilia';
+        Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar conciliaciones']);
+        Permission::create(['name' => $permiso . '-crear',  'descripc' => 'Crear conciliación']);
+        Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar conciliación']);
+        Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar conciliación']);
 
 
 
@@ -286,11 +290,40 @@ class RolesYPermisosSeeder extends Seeder
 
         Role::create(['name' => 'profesional-salud',])
             ->givePermissionTo(
-                ['administracion-modulo',
-                'clinica-leer',
-                    'paciente-leer', 'paciente-leer', 'paciente-leer', 'paciente-leer',
-                    'formular-leer', 'formular-leer', 'formular-leer', 'formular-leer',
-                    'cmedicame-leer', 'cmedicame-leer', 'cmedicame-leer', 'cmedicame-leer',
+                [
+                    'administracion-modulo',
+                    'clinica-leer',
+                    'paciente-leer', 'paciente-crear', 'paciente-editar', 'paciente-borrar',
+                    'formular-leer', 'formular-crear', 'formular-editar', 'formular-borrar',
+                    'cmedicame-leer',
+                ]
+            );
+        Role::create(['name' => 'Revisiones',])
+            ->givePermissionTo(
+                [
+                    'produccion-modulo',
+                    'revision-leer', 'revision-crear', 'revision-editar', 'revision-borrar',
+                ]
+            );
+
+            Role::create(['name' => 'Preparaciones',])
+            ->givePermissionTo(
+                ['produccion-modulo',
+                    'preparac-leer', 'preparac-crear', 'preparac-editar', 'preparac-borrar',
+                ]
+            );
+
+            Role::create(['name' => 'Control-Proceso',])
+            ->givePermissionTo(
+                ['produccion-modulo',
+                    'controlp-leer', 'controlp-crear', 'controlp-editar', 'controlp-borrar',
+                ]
+            );
+
+            Role::create(['name' => 'Control-Terminado',])
+            ->givePermissionTo(
+                ['produccion-modulo',
+                    'controlt-leer', 'controlt-crear', 'controlt-editar', 'controlt-borrar',
                 ]
             );
     }

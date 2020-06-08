@@ -11,35 +11,37 @@ use App\Models\Formulaciones\Ordene;
 use App\Models\Produccion\Calistam;
 use App\Models\Produccion\Dalistam;
 use App\Models\Sistema\SisEsta;
+use App\Traits\Pestanias\ProduccionTrait;
+use App\Traits\Produccion\InventarioTrait;
 
 class AlistamientoController extends Controller
 {
     private $opciones;
-
+    use ProduccionTrait;
+    use InventarioTrait;
     public function __construct()
     {
         $this->opciones = [
-            'cardhead'=>'ALISTAMIENTOS',
+            'cardhead' => 'ALISTAMIENTOS',
             'permisox' => 'alistami',
             'parametr' => [],
             'rutacarp' => 'Produccion.',
             'tituloxx' => 'Crear: Alistamiento',
-            'slotxxxx'=>'alistami',
-            'carpetax'=>'Alistamiento',
-            'indecrea'=>false,
-            'esindexx'=>false
+            'slotxxxx' => 'alistami',
+            'carpetax' => 'Alistamiento',
+            'indecrea' => false,
+            'esindexx' => false,
+            'pestania' => []
         ];
 
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
-
-        $this->opciones['readonly'] = '';
+        $this->middleware(['permission:' .
+            $this->opciones['permisox'] . '-leer|' .
+            $this->opciones['permisox'] . '-crear|' .
+            $this->opciones['permisox'] . '-editar|' .
+            $this->opciones['permisox'] . '-borrar']);
         $this->opciones['rutaxxxx'] = 'alistami';
         $this->opciones['routnuev'] = 'alistami';
         $this->opciones['routxxxx'] = 'alistami';
-
         $this->opciones['botoform'] = [
             [
                 'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'], []],
@@ -56,10 +58,11 @@ class AlistamientoController extends Controller
      */
     public function index()
     {
-        $padrexxx='';
-        $this->opciones['indecrea']=false;
-        $this->opciones['esindexx']=true;
-        $this->opciones['accionxx']='index';
+        $this->getInactivarMlostesvencidos();
+        $padrexxx = '';
+        $this->opciones['indecrea'] = false;
+        $this->opciones['esindexx'] = true;
+        $this->opciones['accionxx'] = 'index';
         $this->opciones['padrexxx'] = $padrexxx;
         $this->opciones['tablasxx'] = [
             [
@@ -67,13 +70,13 @@ class AlistamientoController extends Controller
                 'titulist' => 'LISTA DE ALISTAMIENTOS',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                    ['campoxxx' => 'medicame', 'dataxxxx' => $padrexxx],
+                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
+                    ['campoxxx' => 'puededit', 'dataxxxx' => auth()->user()->can('clinica-editar') ? true : false],
                 ],
                 'vercrear' => true,
                 'accitabl' => true,
                 'urlxxxxx' => 'api/produccion/alistamiento',
-                'cabecera' =>[
+                'cabecera' => [
                     ['td' => 'ID'],
                     ['td' => 'PRODUCTO'],
                     ['td' => 'ORDEN DE SERVICIO'],
@@ -83,7 +86,7 @@ class AlistamientoController extends Controller
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'calistams.id'],
                     ['data' => 'producto', 'name' => 'calistams.producto'],
-                    ['data' => 'ordepres', 'name' => 'calistams.ordepres'],
+                    ['data' => 'ordeprod', 'name' => 'ordenes.ordeprod'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tablaordenes',
@@ -93,21 +96,26 @@ class AlistamientoController extends Controller
             ],
 
         ];
-        $cabecera = Calistam::where('ordepres', Ordene::ordendia())->first();
-        if(isset($cabecera->id)){
-            $this->opciones['tablasxx'][0]['vercrear']=false;  
+        $this->opciones['pestania'] = $this->getPestanias(['tablaxxx' => $this->opciones['routxxxx']]);
+
+        $cabecera = Calistam::where('ordene_id', Ordene::ordendia())->first();
+        if (isset($cabecera->id)) {
+            $this->opciones['tablasxx'][0]['vercrear'] = false;
         }
-       return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
+        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
-    private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
-    { 
+    private function view($dataxxxx)
+    {
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
-        $this->opciones['accionxx'] = $accionxx;
+        $this->opciones['accionxx'] = $dataxxxx['accionxx'];
+
         // indica si se esta actualizando o viendo
-        if ($nombobje != '') {
-            $this->opciones[$nombobje] = $objetoxx;
-        }        
-        return view($vistaxxx, ['todoxxxx' => $this->opciones]);
+        if ($dataxxxx['objetoxx'] != '') {
+            $this->opciones['modeloxx'] = $dataxxxx['objetoxx'];
+            $this->opciones['ordenxxx'] = [$dataxxxx['objetoxx']->ordene_id => $dataxxxx['objetoxx']->ordene->ordeprod];
+        }
+        $this->opciones['pestania'] = $this->getPestanias(['tablaxxx' => $this->opciones['routxxxx']]);
+        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
     /**
      * Show the form for creating a new resource.
@@ -116,16 +124,16 @@ class AlistamientoController extends Controller
      */
     public function create()
     {
-        
-        $this->opciones['alistami']=Alistamiento::getMlotesDlotes(0);
-        $this->opciones['indecrea']=false;
-        $this->opciones['clinicac']=true;
+        $this->opciones['ordenxxx'] = Ordene::ordendia();
+        $this->opciones['alistami'] = Alistamiento::getMlotesDlotes(0);
+        $this->opciones['indecrea'] = false;
+        $this->opciones['clinicac'] = true;
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
-        return $this->view(true, '', 'Crear', $this->opciones['rutacarp'] . 'pestanias');
+        return $this->view(['objetoxx' => '', 'accionxx' => 'Crear']);
     }
 
     /**
@@ -137,7 +145,6 @@ class AlistamientoController extends Controller
     public function store(CalistamCrearRequest $request)
     {
         $dataxxxx = $request->all();
-        $dataxxxx['ordepres']=Ordene::ordendia();
         return $this->grabar($dataxxxx, '', 'Alistamiento creado con éxito!!');
     }
 
@@ -149,8 +156,8 @@ class AlistamientoController extends Controller
      */
     public function show(Calistam $objetoxx)
     {
-        $this->opciones['alistami']=Alistamiento::getMlotesDlotes($objetoxx->id);
-        $this->opciones['clinicax'] =$objetoxx->id;
+        $this->opciones['alistami'] = Alistamiento::getMlotesDlotes($objetoxx->id);
+        $this->opciones['clinicax'] = $objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
         // $this->opciones['botoform'][] =
         //     [
@@ -158,7 +165,7 @@ class AlistamientoController extends Controller
         //         'tituloxx' => '', 'clasexxx' => $objetoxx->sis_esta_id == 1 ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success'
         //     ];
         $this->opciones['readonly'] = 'readonly';
-        return $this->view($objetoxx,  'modeloxx', 'Ver', $this->opciones['rutacarp'] . 'pestanias');
+        return $this->view(['objetoxx' => $objetoxx, 'accionxx' => 'Ver']);
     }
 
     /**
@@ -169,20 +176,21 @@ class AlistamientoController extends Controller
      */
     public function edit(Calistam $objetoxx)
     {
-        $this->opciones['alistami']=Alistamiento::getMlotesDlotes($objetoxx->id);
-        $this->opciones['clinicax'] =$objetoxx->id;
+        $this->opciones['alistami'] = Alistamiento::getMlotesDlotes($objetoxx->id);
+        $this->opciones['clinicax'] = $objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
-        return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
+        return $this->view(['objetoxx' => $objetoxx, 'accionxx' => 'Editar']);
     }
 
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
-        $cabecera=Calistam::transaccion($dataxxxx, $objectx);
+        $cabecera = Calistam::transaccion($dataxxxx, $objectx);
+        $dataxxxx['dalistax'] = true;
         Dalistam::transaccion($dataxxxx,  $cabecera);
         return redirect()
             ->route($this->opciones['routxxxx'] . '.editar', [$cabecera->id])
@@ -197,10 +205,9 @@ class AlistamientoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(CalistamEditarRequest  $request, Calistam $objetoxx)
-    { 
+    {
         $dataxxxx = $request->all();
         return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
-       
     }
 
     /**
@@ -221,13 +228,13 @@ class AlistamientoController extends Controller
     }
 
     public function getPdfCalistam(Calistam $objetoxx)
-    { 
+    {
         $dataxxxx = [
             'vistaurl' => 'Produccion.Alistamiento.pdf.alistami',
             'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
             'tipoxxxx' => 2,
             'nombarch' => 'alistamiento',
-            'dataxxxx' => ['cabecera'=>$objetoxx,'detallex'=>Alistamiento::getMlotesDlotes($objetoxx->id)]
+            'dataxxxx' => ['cabecera' => $objetoxx, 'detallex' => Alistamiento::getMlotesDlotes($objetoxx->id)]
         ];
         return Pdfs::getImprimirPdf($dataxxxx);
     }

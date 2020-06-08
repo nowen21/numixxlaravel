@@ -15,21 +15,24 @@ class Produccion
         $paciente = Cformula::select([
             'cformulas.id', 'cformulas.tiempo', 'cformulas.velocidad', 'cformulas.volumen',
             'cformulas.purga', 'cformulas.peso', 'cformulas.total', 'cformulas.sis_esta_id',
-            'sis_estas.s_estado', 'cformulas.paciente_id',
+            'sis_estas.s_estado', 'cformulas.paciente_id', 'cformulas.userevis_id'
         ])
-            ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id');
+            ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
+            ->orderBy('cformulas.userevis_id', 'ASC')
+            ->orderBy('cformulas.created_at', 'ASC');
 
-        return DatatableHelper::getDatatable($paciente, $request);
+        return DatatableHelper::getDtb($paciente, $request);
     }
     public static function getAlistamientos($request)
     {
         $paciente = Calistam::select([
-            'calistams.id', 'calistams.producto', 'calistams.ordepres', 'calistams.sis_esta_id',
+            'calistams.id', 'calistams.producto', 'ordenes.ordeprod', 'calistams.sis_esta_id',
             'sis_estas.s_estado', 'calistams.created_at'
         ])
+            ->join('ordenes', 'calistams.ordene_id', '=', 'ordenes.id')
             ->join('sis_estas', 'calistams.sis_esta_id', '=', 'sis_estas.id');
 
-        return DatatableHelper::getDatatable($paciente, $request);
+        return DatatableHelper::getDt($paciente, $request);
     }
 
     public static function getPacientesPreparacion($request)
@@ -37,45 +40,59 @@ class Produccion
         $paciente = Cformula::select([
             'cformulas.id', 'cformulas.sis_esta_id',
             'sis_estas.s_estado',
-            'sis_clinicas.clinica','pacientes.nombres','pacientes.apellidos','pacientes.cedula','cformulas.userprep_id'
+            'sis_clinicas.clinica', 'pacientes.nombres', 'pacientes.apellidos', 'pacientes.cedula', 'cformulas.userprep_id'
         ])
             ->join('pacientes', 'cformulas.paciente_id', '=', 'pacientes.id')
             ->join('sis_clinicas', 'cformulas.sis_clinica_id', '=', 'sis_clinicas.id')
-            ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id');
-
-        return DatatableHelper::getDatatable($paciente, $request);
+            ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
+            ->where('cformulas.userevis_id', '!=', null)
+            ->orderBy('cformulas.userprep_id', 'ASC')
+            ->orderBy('cformulas.created_at', 'ASC');
+        return DatatableHelper::getDtb($paciente, $request);
     }
 
     public static function getControles($request)
     {
-        $paciente = Proceso::select([
-            'procesos.id', 'procesos.sis_esta_id',
-            'sis_estas.s_estado','procesos.cformula_id','procesos.created_at','procesos.updated_at'
-        ])        
-            ->join('sis_estas', 'procesos.sis_esta_id', '=', 'sis_estas.id');
-
-        return DatatableHelper::getDatatable($paciente, $request);
+        $paciente = Cformula::select([
+            'cformulas.id', 'cformulas.sis_esta_id',
+            'sis_estas.s_estado','cformulas.created_at',
+            'sis_clinicas.clinica', 'pacientes.nombres', 'pacientes.apellidos', 'pacientes.cedula', 
+            'cformulas.proceso_id'
+        ])
+            ->join('pacientes', 'cformulas.paciente_id', '=', 'pacientes.id')
+            ->join('sis_clinicas', 'cformulas.sis_clinica_id', '=', 'sis_clinicas.id')
+            ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
+            ->where('cformulas.userprep_id', '!=', null)
+            ->orderBy('cformulas.proceso_id', 'ASC')
+            ->orderBy('cformulas.created_at', 'ASC');
+        return DatatableHelper::getDtb($paciente, $request);
     }
     public static function getTerminados($request)
     {
-        $paciente = Terminado::select([
-            'terminados.id', 'terminados.sis_esta_id','terminados.proceso_id',
-            'sis_estas.s_estado','procesos.cformula_id','terminados.created_at'
-        ])    
-        ->join('procesos', 'terminados.proceso_id', '=', 'procesos.id')
-            ->join('sis_estas', 'terminados.sis_esta_id', '=', 'sis_estas.id');
-
-        return DatatableHelper::getDatatable($paciente, $request);
+        $paciente = Cformula::select([
+            'cformulas.id', 'cformulas.sis_esta_id', 'cformulas.terminado_id',
+            'sis_estas.s_estado','cformulas.created_at', 'pacientes.cedula',
+            'sis_clinicas.clinica', 'pacientes.nombres', 'pacientes.apellidos'
+        ])
+            ->join('pacientes', 'cformulas.paciente_id', '=', 'pacientes.id')
+            ->join('procesos', 'cformulas.proceso_id', '=', 'procesos.id')
+            ->join('sis_clinicas', 'cformulas.sis_clinica_id', '=', 'sis_clinicas.id')
+            ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
+            ->orderBy('cformulas.terminado_id', 'ASC')
+            ->orderBy('cformulas.created_at', 'ASC');
+        return DatatableHelper::getDtb($paciente, $request);
     }
 
     public static function getConciliaciones($request)
     {
         $paciente = Calistam::select([
-            'calistams.id', 'calistams.producto', 'calistams.ordepres', 'calistams.sis_esta_id',
+            'calistams.id', 'calistams.producto', 'ordenes.ordeprod', 'calistams.sis_esta_id',
             'sis_estas.s_estado', 'calistams.created_at'
         ])
-            ->join('sis_estas', 'calistams.sis_esta_id', '=', 'sis_estas.id');
+            ->join('ordenes', 'calistams.ordene_id', '=', 'ordenes.id')
+            ->join('sis_estas', 'calistams.sis_esta_id', '=', 'sis_estas.id')
+            ->where('calistams.id', $request->padrexxx);
 
-        return DatatableHelper::getDatatable($paciente, $request);
+        return DatatableHelper::getDt($paciente, $request);
     }
 }

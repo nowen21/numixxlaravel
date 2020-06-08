@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\Produccion;
 
 use App\Helpers\Cformula\Dataformulario;
-use App\Helpers\Cformula\GrabarFormulacion;
-use App\Helpers\Cformula\Validacionesajax;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Produccion\RevisionEditarRequest;
 use App\Models\Formulaciones\Cformula;
-use App\Models\Pacientes\Paciente;
 use App\Models\Sistema\SisEsta;
-use Illuminate\Http\Request;
+use App\Traits\Pestanias\ProduccionTrait;
+use App\Traits\Produccion\InventarioTrait;
 use Illuminate\Support\Facades\Auth;
 
 class RevisionController extends Controller
 {
     private $opciones;
-
+    use ProduccionTrait;
+    use InventarioTrait;
     public function __construct()
     {
         $this->opciones = [
@@ -30,11 +30,11 @@ class RevisionController extends Controller
             'esindexx' => false
         ];
 
-        $this->middleware(['permission:' . 
-        $this->opciones['permisox'] . '-leer|' . 
-        $this->opciones['permisox'] . '-crear|'. 
-        $this->opciones['permisox'] . '-editar|'. 
-        $this->opciones['permisox'] . '-borrar']);
+        $this->middleware(['permission:' .
+            $this->opciones['permisox'] . '-leer|' .
+            $this->opciones['permisox'] . '-crear|' .
+            $this->opciones['permisox'] . '-editar|' .
+            $this->opciones['permisox'] . '-borrar']);
 
         $this->opciones['readonly'] = '';
         $this->opciones['rutaxxxx'] = 'revision';
@@ -70,8 +70,11 @@ class RevisionController extends Controller
                 'titunuev' => 'NUEVA FORMULACIóN',
                 'titulist' => 'LISTA DE FORMULACIONES',
                 'dataxxxx' => [
-                    ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
+                    ['campoxxx' => 'botonesx', 'dataxxxx' =>
+                    $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
+                    ['campoxxx' => 'revisado', 'dataxxxx' =>
+                    $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.revisado'],
+                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
                 ],
                 'vercrear' => false,
                 'accitabl' => true,
@@ -83,7 +86,7 @@ class RevisionController extends Controller
                     ['td' => 'VOLUMEN'],
                     ['td' => 'PURGA'],
                     ['td' => 'PESO'],
-                    ['td' => 'TOTAL'],
+                    ['td' => 'REVISADO'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
@@ -94,7 +97,7 @@ class RevisionController extends Controller
                     ['data' => 'volumen', 'name' => 'cformulas.volumen'],
                     ['data' => 'purga', 'name' => 'cformulas.purga'],
                     ['data' => 'peso', 'name' => 'cformulas.peso'],
-                    ['data' => 'total', 'name' => 'cformulas.total'],
+                    ['data' => 'revisado', 'name' => 'revisado'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tablaformulaciones',
@@ -104,6 +107,9 @@ class RevisionController extends Controller
             ],
 
         ];
+        $this->opciones['pestania'] = $this->getPestanias([
+            'tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => ''
+        ]);
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
@@ -114,6 +120,9 @@ class RevisionController extends Controller
         if ($nombobje != '') {
             $this->opciones[$nombobje] = $objetoxx;
         }
+        $this->opciones['pestania'] = $this->getPestanias([
+            'tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => ''
+        ]);
         // Se arma el titulo de acuerdo al array opciones
         return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }
@@ -140,23 +149,28 @@ class RevisionController extends Controller
         $this->opciones['paciente'] = $paciente;
 
         $this->opciones['parametr'] = [$objetoxx->id];
-        if (date('Y-m-d', time()) == explode(' ', $objetoxx->created_at)[0]) {
-            $this->opciones['botoform'][] =
-                [
-                    'mostrars' => true, 'accionxx' => 'LISTO', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$objetoxx->id]],
-                    'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
-                ];
-        }
+        /**
+         * solo se puede modificar la revision si la conciliacion no se ha realizado
+         */
+
+        // if ($objetoxx->userevis_id == 0) {
+        $this->opciones['botoform'][] =
+            [
+                'mostrars' => true, 'accionxx' => 'LISTO', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$objetoxx->id]],
+                'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+            ];
+        // }
 
         return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
     }
 
-    private function grabar($dataxxxx, $objectx, $infoxxxx)
+    private function grabar($dataxxxx)
     {
-        $cformula = Cformula::transaccion($dataxxxx, $objectx);
+        $cformula = $dataxxxx['objetoxx']->update($dataxxxx['dataxxxx']);
+        $this->getDescontarInventario(['cformula' => $dataxxxx['objetoxx']]);
         return redirect()
-            ->route($this->opciones['routxxxx'] . '.editar', [$cformula->id])
-            ->with('info', $infoxxxx);
+            ->route($this->opciones['routxxxx'] . '.editar', [$dataxxxx['objetoxx']->id])
+            ->with('info', $dataxxxx['infoxxxx']);
     }
 
     /**
@@ -166,9 +180,9 @@ class RevisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request  $request, Cformula $objetoxx)
+    public function update(RevisionEditarRequest  $request, Cformula $objetoxx)
     {
-        $dataxxxx = ['userevis_id' => Auth::user()->id];
-        return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
+        $dataxxxx = ['userevis_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id];
+        return $this->grabar(['dataxxxx' => $dataxxxx, 'objetoxx' => $objetoxx, 'infoxxxx' => 'Se ha realizado la revisión con éxito']);
     }
 }

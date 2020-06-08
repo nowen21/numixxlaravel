@@ -2,6 +2,7 @@
 
 namespace App\Models\Formulaciones;
 
+use App\Models\Medicamentos\Mlote;
 use Illuminate\Database\Eloquent\Model;
 
 class Dfmlote extends Model  {
@@ -14,4 +15,12 @@ class Dfmlote extends Model  {
       'user_edita_id',
       'sis_esta_id'
   ];
+
+  public function dformula(){
+    return $this->belongsTo(Dformula::class);
+  }
+
+  public function mlote(){
+    return $this->belongsTo(Mlote::class);
+  }
 }

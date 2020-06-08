@@ -30,7 +30,7 @@
       {{explode(' ', $cabecera->created_at)[0]}}
     </div>
     <div class="flotar" style="width: 5%;text-align: center;">OP</div>
-    <div class="flotar" style="width: 20%;text-align: center; border-bottom: 1px #000 solid">{{$cabecera->ordepres}}</div>
+    <div class="flotar" style="width: 20%;text-align: center; border-bottom: 1px #000 solid">{{$cabecera->ordene->ordeprod}}</div>
   </div>
   <div style=" width: 100%; padding-top: 40px ">
     <table style=" border: 1px #000 solid" border='1' cellspacing="0">

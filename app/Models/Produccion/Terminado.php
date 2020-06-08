@@ -2,6 +2,7 @@
 
 namespace App\Models\Produccion;
 
+use App\Models\Formulaciones\Cformula;
 use App\Models\Sistema\SisEsta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,6 @@ class Terminado extends Model
 
   protected $fillable = [
     'completo',
-    'proceso_id',
     'particul',
     'integrid',
     'contenid',
@@ -31,9 +31,9 @@ class Terminado extends Model
     'sis_esta_id'
   ];
 
-  public function proceso()
+  public function cformula()
   {
-    return $this->belongsTo(Proceso::class);
+    return $this->hasOne(Cformula::class);
   }
 
   public function sis_esta()
@@ -129,6 +129,8 @@ class Terminado extends Model
         $dataxxxx['user_crea_id'] = Auth::user()->id;
         $objetoxx = Terminado::create($dataxxxx);
       }
+      $cformula=Cformula::find($dataxxxx['cformula_id']);
+      $cformula->update(['terminado_id'=>$objetoxx->id,'user_edita_id' => Auth::user()->id]);
       return $objetoxx;
     }, 5);
     return $usuariox;

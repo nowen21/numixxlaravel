@@ -32,18 +32,16 @@
         @endif
     </div>
     <div class="form-group col-md-6">
-        {{ Form::label('ordepres', 'OP:', ['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::label('ordene_id', 'OP:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('ordepres', $todoxxxx['modeloxx']->ordepres, 
-            ['class' => 'form-control-plaintext','style'=>'height: 28px','readonly'=>'readonly']) }}
+        {{ Form::select('ordene_id', $todoxxxx['ordenxxx'], $todoxxxx['modeloxx']->ordene_id, ['class' => 'form-control-plaintext','id'=>'ordene_id']) }}
         @else
-        {{ Form::text('ordepres', null, ['class' => $errors->first('ordepres') ?
-         'form-control  is-invalid' : 'form-control', 'placeholder' => 'OP', 'maxlength' => '120', 
-         'autofocus','style'=>'height: 28px','readonly'=>'readonly']) }}
+        {{ Form::select('ordene_id', $todoxxxx['ordenxxx'], null, ['class' => $errors->first('ordene_id') ? 
+        'form-control is-invalid select2' : 'form-control select2','id'=>'ordene_id']) }}
         @endif
-        @if($errors->has('ordepres'))
+        @if($errors->has('ordene_id'))
         <div class="invalid-feedback d-block">
-            {{ $errors->first('ordepres') }}
+            {{ $errors->first('ordene_id') }}
         </div>
         @endif
     </div>

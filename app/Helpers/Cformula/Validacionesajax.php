@@ -18,9 +18,9 @@ class Validacionesajax
   public static function getRango($request)
   {
     $medicame = Mnpt::where('medicame_id', $request->medicame)
-    ->join('urangnpts','mnpts.urangnpt_id','=','urangnpts.id')
-    ->join('unidrangs','urangnpts.unidrang_id','=','unidrangs.id')
-    ->join('unidads','unidrangs.unidad_id','=','unidads.id')
+      ->join('urangnpts', 'mnpts.urangnpt_id', '=', 'urangnpts.id')
+      ->join('unidrangs', 'urangnpts.unidrang_id', '=', 'unidrangs.id')
+      ->join('unidads', 'unidrangs.unidad_id', '=', 'unidads.id')
       ->where('urangnpts.npt_id', $request->npt_id)->first();
     return response()->json(['medicame' => $medicame->s_unidad, 'idmedica' => $request->idmedica . '_unid']);
   }
@@ -53,14 +53,30 @@ class Validacionesajax
 
   private static function convertirdata($dataxxxx)
   {
+    $campo_id = explode('_', $dataxxxx['campo_id']);
     $newdatax = [];
+    $aguaxxxx = 0;
+    $calcular=[];
+    $volumenx = 0; 
     foreach ($dataxxxx['dataxxxx'] as $key => $value) {
       if ($key > 1) {
         $newdatax[$value['name']] = $value['value'];
+        /**
+         * calcular el agua
+         */
+        $campoxxx = explode('_', $value['name']);
+        if (count($campoxxx) > 1 && $campoxxx[1] == 'volu' && $campoxxx[0] != 'aguaeste' && $campo_id[0]!=$campoxxx[0] ) {
+              $aguaxxxx += $value['value']; 
+        }
+        /**
+         * conocer el volumen
+         */
+        if ($value['name'] == 'volumen') {
+          $volumenx = $value['value'];
+        }
       }
     }
-
-    $campo_id = explode('_', $dataxxxx['campo_id']);
+    $dataxxxx['aguaxxxx'] = $volumenx - $aguaxxxx;
     $dataxxxx['campoxxx'] = $campo_id[0]; // nombre del campo que se selecciono
     $dataxxxx['cantvolu'] = $campo_id[1]; // saber si el requerimiento diario es por cantidad o por volumen
     $dataxxxx['medisele'] = $newdatax[$dataxxxx['campoxxx']]; // mediamento seleccionado
@@ -70,7 +86,6 @@ class Validacionesajax
     $dataxxxx['campo_id'] = $dataxxxx['campo_id']; // campo en que se esta digitando
     $dataxxxx['rediafos'] = $newdatax["fosfatox_" . $dataxxxx['cantvolu']]; // requerimiento diario o volumen del fosfato seleccionado
     $dataxxxx['multivi2'] = $newdatax["multiuno_cant"]; // multivitamina liposoluble seleccionada requerimiento diario
-    
     $dataxxxx['lipovolu'] = $newdatax["multiuno_volu"]; // multivitamina liposoluble seleccionada volumen
     $dataxxxx['peso'] = $newdatax["peso"]; // multivitamina liposoluble seleccionada
     $dataxxxx['npt_id'] = $newdatax["npt_id"]; // multivitamina liposoluble seleccionada
@@ -78,7 +93,6 @@ class Validacionesajax
     $dataxxxx['tiempo'] = $newdatax["tiempo"]; // multivitamina liposoluble seleccionada
     $dataxxxx['velocidad'] = $newdatax["velocidad"]; // multivitamina liposoluble seleccionada
     $dataxxxx['volumenx'] = $newdatax[$dataxxxx['campo_id']];
-    //ddd($dataxxxx['campo_id']);
     return $dataxxxx;
   }
 
@@ -100,13 +114,12 @@ class Validacionesajax
     //ddd($valocant);
 
     // consular el rango
-    $medicame = Mnpt::
-    join('urangnpts','mnpts.urangnpt_id','=','urangnpts.id')
-    ->join('unidrangs','urangnpts.unidrang_id','=','unidrangs.id')
-    ->join('unidads','unidrangs.unidad_id','=','unidads.id')
-    ->join('rangonpts','unidrangs.rangonpt_id','=','rangonpts.id')
-    ->where('medicame_id', $dataxxxx['medisele'])
-    ->where('urangnpts.npt_id', $dataxxxx['npt_id'])->first();
+    $medicame = Mnpt::join('urangnpts', 'mnpts.urangnpt_id', '=', 'urangnpts.id')
+      ->join('unidrangs', 'urangnpts.unidrang_id', '=', 'unidrangs.id')
+      ->join('unidads', 'unidrangs.unidad_id', '=', 'unidads.id')
+      ->join('rangonpts', 'unidrangs.rangonpt_id', '=', 'rangonpts.id')
+      ->where('medicame_id', $dataxxxx['medisele'])
+      ->where('urangnpts.npt_id', $dataxxxx['npt_id'])->first();
     $menssage = '';
     $mostmess = false;
     // lanzar mensaje cuanto la cantidad ingresada es menor al rango establecido
@@ -131,6 +144,9 @@ class Validacionesajax
     $respuest['cantvolu'] = ($dataxxxx['cantvolu'] == 'cant') ?
       [$dataxxxx['campoxxx'] . '_volu', number_format($valovolu, 2)] : // si se digitó requerimiento diario
       [$dataxxxx['campoxxx'] . '_cant', number_format($valocant, 1)]; // si se digito volumen
+ 
+    $respuest['aguaxxxx'] = number_format(($dataxxxx['cantvolu'] == 'cant') ? $dataxxxx['aguaxxxx'] - $valovolu : $dataxxxx['aguaxxxx']-$dataxxxx['requdiar'], 2);
+
     /**
      * unidad de medida que tiene el medicamento seleccionado
      */
@@ -156,7 +172,7 @@ class Validacionesajax
       case 'multivit': //hidrosoluble
         $requerim = Hidrpedi::where(function ($queryxxx) use ($dataxxxx) {
           $pesoxxxx = $dataxxxx["peso"];
-          $finalxxx=$pesoxxxx;
+          $finalxxx = $pesoxxxx;
           if ($pesoxxxx < 0.5) {
             $queryxxx->where('finalxxx', '<=', 0.5);
           } elseif ($pesoxxxx > 2.4) {
@@ -164,14 +180,14 @@ class Validacionesajax
           } else {
             $decimale = explode('.', $pesoxxxx);
             $inicioxx = $pesoxxxx;
-            $finalxxx=$pesoxxxx;
+            $finalxxx = $pesoxxxx;
             if (count($decimale) > 1) {
               $largoxxx = strlen($decimale[1]);
-              $inicioxx = $pesoxxxx-0.1;
-              $finalxxx=$inicioxx;
+              $inicioxx = $pesoxxxx - 0.1;
+              $finalxxx = $inicioxx;
               if ($largoxxx > 1) {
                 $inicioxx = $decimale[0] . '.' . substr($decimale[1], 0, 1);
-                $finalxxx=$pesoxxxx;
+                $finalxxx = $pesoxxxx;
               }
             }
             $queryxxx->whereBetween('inicioxx', [$inicioxx, $finalxxx]);
@@ -185,7 +201,7 @@ class Validacionesajax
       case 'multiuno': //liposoluble
         $requerim = Lipopedi::where(function ($queryxxx) use ($dataxxxx) {
           $pesoxxxx = $dataxxxx["peso"];
-          $finalxxx=$pesoxxxx;
+          $finalxxx = $pesoxxxx;
           if ($pesoxxxx < 0.5) {
             $queryxxx->where('finalxxx', '<=', 0.5);
           } elseif ($pesoxxxx > 2.4) {
@@ -193,14 +209,14 @@ class Validacionesajax
           } else {
             $decimale = explode('.', $pesoxxxx);
             $inicioxx = $pesoxxxx;
-            $finalxxx=$pesoxxxx;
+            $finalxxx = $pesoxxxx;
             if (count($decimale) > 1) {
               $largoxxx = strlen($decimale[1]);
-              $inicioxx = $pesoxxxx-0.1;
-              $finalxxx=$inicioxx;
+              $inicioxx = $pesoxxxx - 0.1;
+              $finalxxx = $inicioxx;
               if ($largoxxx > 1) {
                 $inicioxx = $decimale[0] . '.' . substr($decimale[1], 0, 1);
-                $finalxxx=$pesoxxxx;
+                $finalxxx = $pesoxxxx;
               }
             }
             $queryxxx->whereBetween('inicioxx', [$inicioxx, $finalxxx]);
@@ -221,11 +237,12 @@ class Validacionesajax
   {
     $dataxxxx = Validacionesajax::convertirdata($dataxxxx);
     $construc = [
-      'peso' => $dataxxxx['peso'], 
-      'npt_id' => $dataxxxx['npt_id'], 
-      'purga' => $dataxxxx['purga'], 
-      'tiempo' => $dataxxxx['tiempo'], 
-      'velocidad' => $dataxxxx['velocidad']];
+      'peso' => $dataxxxx['peso'],
+      'npt_id' => $dataxxxx['npt_id'],
+      'purga' => $dataxxxx['purga'],
+      'tiempo' => $dataxxxx['tiempo'],
+      'velocidad' => $dataxxxx['velocidad']
+    ];
     $casaform = new CasasFormulacion($construc);
     $dataxxxx['requdiar'] = Validacionesajax::getPedineon($dataxxxx);
     $formulax = $casaform->calculos($dataxxxx)[$dataxxxx['medisele']];

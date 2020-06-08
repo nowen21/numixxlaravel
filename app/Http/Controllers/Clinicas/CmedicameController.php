@@ -31,11 +31,10 @@ class CmedicameController extends Controller
             'esindexx' => false
         ];
 
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
-
+       $this->middleware (['permission:' . $this->opciones['permisox'] . '-leer|'
+            . $this->opciones['permisox'] . '-crear|'
+            . $this->opciones['permisox'] . '-editar|'
+            . $this->opciones['permisox'] . '-borrar']);
         $this->opciones['readonly'] = '';
         $this->opciones['rutaxxxx'] = 'cmedicame';
         $this->opciones['routnuev'] = 'cmedicame';
@@ -67,8 +66,8 @@ class CmedicameController extends Controller
                 'titulist' => 'LISTA DE MEDICAMENTOS',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
                     ['campoxxx' => 'clinicax', 'dataxxxx' => $clinica],
+                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
                     ['campoxxx' => 'puededit', 'dataxxxx' => auth()->user()->can('clinica-editar') ? true : false],
                 ],
                 'accitabl' => true,
@@ -94,7 +93,7 @@ class CmedicameController extends Controller
                 'titunuev' => 'NUEVA CLINICA',
                 'titulist' => 'SELECCIONE EL MEDICAMENTO QUE DESEE ADICIONAR A LA CLÍNICA: ' . $clinicax->clinica,
                 'dataxxxx' => [
-                    ['campoxxx' => 'botonesx', 'dataxxxx' => 'Clinicas.Clinica.botones.botonesapi'],
+                    // ['campoxxx' => 'botonesx', 'dataxxxx' => 'Clinicas.Clinica.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
                     ['campoxxx' => 'clinicax', 'dataxxxx' => $clinica],
                 ],
@@ -264,10 +263,10 @@ class CmedicameController extends Controller
         return ['digitoxx' => $digitoxx];
     }
 
-    public function getInactivarMedicam($padrexxx,Request $request)
+    public function getInactivarMedicam($padrexxx, Request $request)
     {
         if ($request->ajax()) {
-            $request->sis_clinica_id=$padrexxx;
+            $request->sis_clinica_id = $padrexxx;
             return response()->json(Clinicas::getInactivarMedicam($request));
         }
     }

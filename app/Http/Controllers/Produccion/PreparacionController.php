@@ -9,11 +9,12 @@ use App\Models\Formulaciones\Cformula;
 use App\Models\Formulaciones\Dformula;
 use App\Models\Produccion\Calistam;
 use App\Models\Sistema\SisEsta;
+use App\Traits\Pestanias\ProduccionTrait;
 
 class PreparacionController extends Controller
 {
     private $opciones;
-
+    use ProduccionTrait;
     public function __construct()
     {
         $this->opciones = [
@@ -28,11 +29,11 @@ class PreparacionController extends Controller
             'esindexx'=>false
         ];
 
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
-
+        $this->middleware(['permission:'
+        . $this->opciones['permisox'] . '-leer|'
+        . $this->opciones['permisox'] . '-crear|'
+        . $this->opciones['permisox'] . '-editar|'
+        . $this->opciones['permisox'] . '-borrar|']);
         $this->opciones['readonly'] = '';
         $this->opciones['rutaxxxx'] = 'preparac';
         $this->opciones['routnuev'] = 'preparac';
@@ -64,8 +65,11 @@ class PreparacionController extends Controller
                 'titunuev' => 'NUEVA PREPARACION',
                 'titulist' => 'LISTA DE PREPARACIONES',
                 'dataxxxx' => [
-                    ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
+                    ['campoxxx' => 'botonesx', 'dataxxxx' => 
+                    $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
+                    ['campoxxx' => 'revisado', 'dataxxxx' => 
+                    $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.preparad'],
+                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
                     ['campoxxx' => 'medicame', 'dataxxxx' => $padrexxx],
                 ],
                 'vercrear' => false,
@@ -78,7 +82,7 @@ class PreparacionController extends Controller
                     ['td' => 'NOMBRES'],
                     ['td' => 'APELLIDOS'],
                     ['td' => 'CLINICA'],
-                    ['td' => 'ESTADO PREPARACION'],
+                    ['td' => 'PREPARACION'],
                     ['td' => 'ESTADO'],
 
                 ],
@@ -89,7 +93,7 @@ class PreparacionController extends Controller
                     ['data' => 'nombres', 'name' => 'pacientes.nombres'],
                     ['data' => 'apellidos', 'name' => 'pacientes.apellidos'],
                     ['data' => 'clinica', 'name' => 'sis_clinicas.clinica'],
-                    ['data' => 'userprep_id', 'name' => 'cformulas.userprep_id'],
+                    ['data' => 'revisado', 'name' => 'revisado'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tablaordenes',
@@ -97,13 +101,10 @@ class PreparacionController extends Controller
                 'routxxxx' => 'preparac',
                 'parametr' => [],
             ],
-
-         
-
-
-
-
         ];
+        $this->opciones['pestania'] = $this->getPestanias([
+            'tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => ''
+        ]);
        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
@@ -113,7 +114,10 @@ class PreparacionController extends Controller
         // indica si se esta actualizando o viendo
         if ($nombobje != '') {
             $this->opciones[$nombobje] = $objetoxx;
-        }        
+        }   
+        $this->opciones['pestania'] = $this->getPestanias([
+            'tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => ''
+        ]);
         return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }
     
@@ -122,11 +126,6 @@ class PreparacionController extends Controller
         $this->opciones['cardhead']='PREPARACION PACIENTE: '.$objetoxx->paciente->nombres.' '.$objetoxx->paciente->apellidos;
         $this->opciones['clinicax'] =$objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
-        // $this->opciones['botoform'][] =
-        //     [
-        //         'mostrars' => true, 'accionxx' => $objetoxx->sis_esta_id == 1 ? 'INACTIVAR' : 'ACTIVAR', 'routingx' => [$this->opciones['routxxxx'], []], 'formhref' => 1,
-        //         'tituloxx' => '', 'clasexxx' => $objetoxx->sis_esta_id == 1 ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success'
-        //     ];
         $this->opciones['readonly'] = 'readonly';
         return $this->view($objetoxx,  'modeloxx', 'Ver', $this->opciones['rutacarp'] . 'pestanias');
     }
@@ -165,7 +164,7 @@ class PreparacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PreparacionEditarRequest  $request, Calistam $objetoxx)
+    public function update(PreparacionEditarRequest  $request, Cformula $objetoxx)
     { 
         $dataxxxx = $request->all();
         

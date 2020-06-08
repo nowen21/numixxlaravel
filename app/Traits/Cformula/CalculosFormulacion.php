@@ -37,4 +37,8 @@ trait CalculosFormulacion
             'calcfosf' => 0
         ];
     }
+
+    public function getPesoTeorico(){
+    
+    }
 }

@@ -146,14 +146,15 @@ class Dataformulario
    */
   private function osmolaridadypesoespecifico($formlote)
   {
+    
     $osmolari = 0;
     $pesoespe = 0;
     $purgaxxx = $formlote->purga;
     // recorrer cada uno de los lotes los que se le desconto el volumen de la formulacion medica
-    foreach ($formlote->mlotes as $key => $lotexxxx) {
-      $volumenx = Dfmlote::where('dformula_id', $formlote->id)->where('mlote_id', $lotexxxx->id)->first()->volumenx; // volumen consumido por cada lote
-      $osmolari += $volumenx / $purgaxxx * $lotexxxx->minvima->marca->osmorali; //osmolaridad por cada uno de los lotes
-      $pesoespe += $volumenx / $purgaxxx * $lotexxxx->minvima->marca->pesoespe; // peso especifico por cada uno de los lotes
+    foreach ($formlote->dfmlotes as $key => $lotexxxx) {
+      $volumenx = $lotexxxx->volumenx; // volumen consumido por cada lote
+      $osmolari += $volumenx / $purgaxxx * $lotexxxx->mlote->minvima->mmarca->osmorali; //osmolaridad por cada uno de los lotes
+      $pesoespe += $volumenx / $purgaxxx * $lotexxxx->mlote->minvima->mmarca->pesoespe; // peso especifico por cada uno de los lotes
     }
     return ['osmolari' => $osmolari, 'pesoespe' => $pesoespe];
   }
@@ -193,6 +194,7 @@ class Dataformulario
 
   public function calculos($cabecera)
   {
+    
     $datasxxx = $this->armardata($cabecera);
     $this->_dataxxx['volutota'] = $cabecera->volumen; //volumen total
     $this->_dataxxx['veloinfu'] = $cabecera->velocidad; //velocidad de infusion
