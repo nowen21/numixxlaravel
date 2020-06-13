@@ -24,6 +24,7 @@
       }
     }
   }
+
   function filter(__val__) {
     var preg = /^([0-9]+\.?[0-9]{0,2})$/;
     if (preg.test(__val__) === true) {
@@ -33,9 +34,28 @@
     }
 
   }
-  $(function(){
+  $(function() {
     $('.select2').select2({
       language: "es"
     });
+    var f_peso_establecido = function(dataxxxx) {
+        $('#limitesx').empty();
+      $.ajax({
+        url: "{{route('controlt.pesoreal')}}",
+        data: dataxxxx.dataxxxx,
+        type: 'GET',
+        dataType: 'json',
+        success: function(json) {
+            $("#limitesx").append('<option value="'+json.valuexxx+'">'+json.opcionxx+'</option>');
+        },
+        error: function(xhr, status) {
+          alert('Disculpe, existió un problema');
+        },
+      });
+    }
+    $('#realxxx_').keyup(function() {
+      f_peso_establecido({dataxxxx:{pesoreal:$(this).val(),pesoteor:$("#teorico_").val()}});
+    });
+
   });
 </script>

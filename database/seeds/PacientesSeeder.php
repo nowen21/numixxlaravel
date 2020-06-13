@@ -4718,11 +4718,11 @@ class PacientesSeeder extends Seeder
         'municipio_id' => 641, 'npt_id' => 2, 'servicio_id' => 1, 'sis_esta_id' => 1, 
         'user_crea_id' => 1, 'sis_clinica_id' => 1, 'user_edita_id' => 1,]);
     
-        Paciente::create(['id' => 4679, 'registro' => 2020 - 03 - 10, 
+        Paciente::create(['id' => 4679, 'registro' => 2020-03-10, 
         'cedula' => '17496707', 'nombres' => 'JOSE DUMAR(ADULTO)', 
         'apellidos' => 'JIMENEZ RUIZ(ADULTO)', 'peso' => 80, 'genero_id' => 1, 
-        'ep_id' => 1, 'cama' => 319, 'fechnaci' => 1975 - 06 - 01, 'departamento_id' => 14, 
-        'municipio_id' => 641, 'npt_id' => 2, 'servicio_id' => 1, 'sis_esta_id' => 1, 
+        'ep_id' => 1, 'cama' => 319, 'fechnaci' => 1975-06-01, 'departamento_id' => 14, 
+        'municipio_id' => 641, 'npt_id' => 3, 'servicio_id' => 1, 'sis_esta_id' => 1, 
         'user_crea_id' => 1, 'sis_clinica_id' => 1, 'user_edita_id' => 1,]);
     }
 }

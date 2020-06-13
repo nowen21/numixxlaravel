@@ -137,7 +137,7 @@ class UsuarioController extends Controller
     public function store(UsuarioCrearRequest $request)
     {
         $dataxxxx = $request->all();
-        $dataxxxx['sis_clinica_id']=Auth::user()->sis_clinica_id;
+        
         return $this->grabar($dataxxxx, '', 'Registro creado con éxito');
     }
 

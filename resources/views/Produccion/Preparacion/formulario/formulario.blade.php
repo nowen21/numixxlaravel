@@ -70,7 +70,7 @@
                         VOLUMEN PURGA
                     </th>
                     <th style=" width: 15%; text-align: left;border-top: 2px #000 solid;border-bottom: 2px #000 solid;">
-                        PREPARADO
+                        ADICIONADO
                     </th>
                 </tr>
             </thead>

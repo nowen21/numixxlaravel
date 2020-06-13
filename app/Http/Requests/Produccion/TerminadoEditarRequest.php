@@ -2,14 +2,14 @@
 
 namespace App\Http\Requests\Produccion;
 
-use App\Models\Formulaciones\Cformula;
-use App\Models\Produccion\Proceso;
+use App\Traits\Produccion\TerminadoTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TerminadoEditarRequest extends FormRequest {
 
   private $_mensaje;
   private $_reglasx;
+  use TerminadoTrait;
 
   public function __construct() {
     $this->_mensaje = [
@@ -64,41 +64,11 @@ class TerminadoEditarRequest extends FormRequest {
    * @return array
    */
   public function rules() {
-    $this->validar();
+    $dataxxxx = $this->validar(['pesoteor'=>$this->toArray()['teorico_'],'pesoreal'=>$this->toArray()['realxxx_']]);
+    if ($dataxxxx['valuexxx']== 1) {
+      $this->_reglasx['limitexx'] = 'required';
+      $this->_mensaje['limitexx.required'] = $dataxxxx['messagex'];
+    }
     return $this->_reglasx;
   }
-
-  private function limitexx($porcenta, $dataxxxx) {
-    $realxxxx = $dataxxxx['realxxx_'];
-    $teoricox = $dataxxxx['teorico_'];
-    $limitexx = $teoricox * $porcenta / 100;
-
-    if ($realxxxx < $teoricox) {
-      if ($teoricox - $realxxxx > $limitexx) {
-        $this->_reglasx['limitexx'] = 'required';
-        $this->_mensaje['limitexx.required'] = 'La NPT no cumple con el peso requerido, revisar de nuevo';
-      }
-    }
-    if ($realxxxx > $teoricox) {
-      if ($realxxxx - $teoricox > $limitexx) {
-        $this->_reglasx['limitexx'] = 'required';
-        $this->_mensaje['limitexx.required'] = 'La NPT no cumple con el peso requerido, revisar de nuevo';
-      }
-    }
-  }
-
-  public function validar() {
-    $dataxxxx = $this->toArray();
-    $cformula =Cformula::where('id', $dataxxxx['cformula_id'])->first();
-    switch ($cformula->paciente->npt_id) {
-      case 3:
-        $this->limitexx(7, $dataxxxx);
-        break;
-      case 2:
-      case 1:
-        $this->limitexx(5, $dataxxxx);
-        break;
-    }
-  }
-
 }

@@ -2,10 +2,10 @@
     <div class="form-group col-md-12">
         {{ Form::label('cformula_id', 'Formulación:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::select('cformula_id', $todoxxxx['procesox'], $todoxxxx['modeloxx']->cformula_id, ['class' => 'form-control-plaintext select2','id'=>'cformula_id']) }}
+        {{ Form::select('cformula_id', $todoxxxx['procesox'], $todoxxxx['modeloxx']->cformula_id, ['class' => 'form-control-plaintext ','id'=>'cformula_id']) }}
         @else
-        {{ Form::select('cformula_id', $todoxxxx['procesox'], null, ['class' => $errors->first('cformula_id') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'cformula_id']) }}
+        {{ Form::select('cformula_id', $todoxxxx['procesox'], null, ['class' => $errors->first('cformula_id') ?
+        'form-control is-invalid ' : 'form-control ','id'=>'cformula_id']) }}
         @endif
         @if($errors->has('cformula_id'))
         <div class="invalid-feedback d-block">
@@ -18,8 +18,8 @@
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('completo', $todoxxxx['sinoxxxx'], $todoxxxx['modeloxx']->completo, ['class' => 'form-control-plaintext','id'=>'completo']) }}
         @else
-        {{ Form::select('completo', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('completo') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'completo']) }}
+        {{ Form::select('completo', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('completo') ?
+        'form-control is-invalid ' : 'form-control ','id'=>'completo']) }}
         @endif
         @if($errors->has('completo'))
         <div class="invalid-feedback d-block">
@@ -33,8 +33,8 @@
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('particul', $todoxxxx['sinoxxxx'], $todoxxxx['modeloxx']->particul, ['class' => 'form-control-plaintext','id'=>'particul']) }}
         @else
-        {{ Form::select('particul', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('particul') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'particul']) }}
+        {{ Form::select('particul', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('particul') ?
+        'form-control is-invalid ' : 'form-control ','id'=>'particul']) }}
         @endif
         @if($errors->has('particul'))
         <div class="invalid-feedback d-block">
@@ -47,8 +47,8 @@
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('integrid', $todoxxxx['sinoxxxx'], $todoxxxx['modeloxx']->integrid, ['class' => 'form-control-plaintext','id'=>'integrid']) }}
         @else
-        {{ Form::select('integrid', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('integrid') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'integrid']) }}
+        {{ Form::select('integrid', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('integrid') ?
+        'form-control is-invalid ' : 'form-control ','id'=>'integrid']) }}
         @endif
         @if($errors->has('integrid'))
         <div class="invalid-feedback d-block">
@@ -61,8 +61,8 @@
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('contenid', $todoxxxx['sinoxxxx'], $todoxxxx['modeloxx']->contenid, ['class' => 'form-control-plaintext','id'=>'contenid']) }}
         @else
-        {{ Form::select('contenid', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('contenid') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'contenid']) }}
+        {{ Form::select('contenid', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('contenid') ?
+        'form-control is-invalid ' : 'form-control ','id'=>'contenid']) }}
         @endif
         @if($errors->has('contenid'))
         <div class="invalid-feedback d-block">
@@ -75,8 +75,8 @@
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('fugasxxx', $todoxxxx['sinoxxxx'], $todoxxxx['modeloxx']->fugasxxx, ['class' => 'form-control-plaintext','id'=>'fugasxxx']) }}
         @else
-        {{ Form::select('fugasxxx', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('fugasxxx') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'fugasxxx']) }}
+        {{ Form::select('fugasxxx', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('fugasxxx') ?
+        'form-control is-invalid ' : 'form-control ','id'=>'fugasxxx']) }}
         @endif
         @if($errors->has('fugasxxx'))
         <div class="invalid-feedback d-block">
@@ -89,8 +89,8 @@
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('miscelas', $todoxxxx['sinoxxxx'], $todoxxxx['modeloxx']->miscelas, ['class' => 'form-control-plaintext','id'=>'miscelas']) }}
         @else
-        {{ Form::select('miscelas', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('miscelas') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'miscelas']) }}
+        {{ Form::select('miscelas', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('miscelas') ?
+        'form-control is-invalid ' : 'form-control ','id'=>'miscelas']) }}
         @endif
         @if($errors->has('miscelas'))
         <div class="invalid-feedback d-block">
@@ -103,8 +103,8 @@
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('burbujas', $todoxxxx['sinoxxxx'], $todoxxxx['modeloxx']->burbujas, ['class' => 'form-control-plaintext','id'=>'burbujas']) }}
         @else
-        {{ Form::select('burbujas', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('burbujas') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'burbujas']) }}
+        {{ Form::select('burbujas', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('burbujas') ?
+        'form-control is-invalid ' : 'form-control ','id'=>'burbujas']) }}
         @endif
         @if($errors->has('burbujas'))
         <div class="invalid-feedback d-block">
@@ -112,14 +112,14 @@
         </div>
         @endif
     </div>
-    
+
     <div class="form-group col-md-4">
         {{ Form::label('document', 'Documentación completa:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('document', $todoxxxx['sinoxxxx'], $todoxxxx['modeloxx']->document, ['class' => 'form-control-plaintext','id'=>'document']) }}
         @else
-        {{ Form::select('document', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('document') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'document']) }}
+        {{ Form::select('document', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('document') ?
+        'form-control is-invalid ' : 'form-control ','id'=>'document']) }}
         @endif
         @if($errors->has('document'))
         <div class="invalid-feedback d-block">
@@ -127,8 +127,8 @@
         </div>
         @endif
     </div>
-    
-    
+
+
 
     <div class="form-group col-md-4">
         {{ Form::label('teorico_', 'Peso teórico:') }}
@@ -162,10 +162,10 @@
     <div class="form-group col-md-4">
         {{ Form::label('limitesx', 'Peso dentro límites establecidos:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::select('limitesx', $todoxxxx['sinoxxxx'], $todoxxxx['modeloxx']->limitesx, ['class' => 'form-control-plaintext','id'=>'limitesx']) }}
+        {{ Form::select('limitesx', $todoxxxx['pedelies'], $todoxxxx['modeloxx']->limitesx, ['class' => 'form-control-plaintext','id'=>'limitesx']) }}
         @else
-        {{ Form::select('limitesx', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('limitesx') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'limitesx']) }}
+        {{ Form::select('limitesx', $todoxxxx['pedelies'], null, ['class' => $errors->first('limitesx') ?
+        'form-control is-invalid ' : 'form-control ','id'=>'limitesx']) }}
         @endif
         @if($errors->has('limitesx'))
         <div class="invalid-feedback d-block">
@@ -176,10 +176,10 @@
     <div class="form-group col-md-4">
         {{ Form::label('concepto', 'Concepto:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::select('concepto', $todoxxxx['sinoxxxx'], $todoxxxx['modeloxx']->concepto, ['class' => 'form-control-plaintext','id'=>'concepto']) }}
+        {{ Form::select('concepto', $todoxxxx['concepto'], $todoxxxx['modeloxx']->concepto, ['class' => 'form-control-plaintext','id'=>'concepto']) }}
         @else
-        {{ Form::select('concepto', $todoxxxx['sinoxxxx'], null, ['class' => $errors->first('concepto') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'concepto']) }}
+        {{ Form::select('concepto', $todoxxxx['concepto'], null, ['class' => $errors->first('concepto') ?
+        'form-control is-invalid ' : 'form-control ','id'=>'concepto']) }}
         @endif
         @if($errors->has('concepto'))
         <div class="invalid-feedback d-block">
@@ -187,14 +187,14 @@
         </div>
         @endif
     </div>
-    
+
     <div class="form-group col-md-12">
         {{ Form::label('sis_esta_id', 'Estado:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], $todoxxxx['modeloxx']->sis_esta_id, ['class' => 'form-control-plaintext','id'=>'sis_esta_id']) }}
         @else
-        {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'sis_esta_id']) }}
+        {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ?
+        'form-control is-invalid ' : 'form-control ','id'=>'sis_esta_id']) }}
         @endif
         @if($errors->has('sis_esta_id'))
         <div class="invalid-feedback d-block">
