@@ -7,7 +7,7 @@ use App\Models\Medicamentos\Medicame;
 
 trait PintarFormularioTrait
 {
-    private function getMedicamentosCasa($dataxxxx)
+    public function getMCasas($dataxxxx)
     {
       $medicame = Medicame::select('medicames.id', 'medicames.nombgene')
         ->join('mnpts', 'medicames.id', '=', 'mnpts.medicame_id')
@@ -42,7 +42,7 @@ trait PintarFormularioTrait
       }
       return $comboxxx;
     }
-    private function getCasaMedicamentos($dataxxxx, $casaidxx)
+    public function getCasaMedicamentos($dataxxxx, $casaidxx)
     {
         $tienemed = false;
         $medicame = Medicame::select('medicames.id', 'medicames.nombgene')
@@ -81,9 +81,9 @@ trait PintarFormularioTrait
                 $dataxxxx['cabecera'] = false;
                 $dataxxxx['ajaxxxxx'] = false;
                 $dataxxxx['tipocomb'] = true;
-                $selelist = $this->getMedicamentosCasa($dataxxxx);
+                $selelist = $this->getMCasas($dataxxxx);
                 $dataxxxx['tipocomb'] = false;
-                $combo_id = $this->getMedicamentosCasa($dataxxxx);
+                $combo_id =  $this->getMCasas($dataxxxx);
                 //$combo_id = Medicame::combo1($value->id, false, $dataxxxx['paciente'], []);
                 // cuando se pinta el formulario con datos
                 if (isset($dataxxxx['furmulac']->id)) {

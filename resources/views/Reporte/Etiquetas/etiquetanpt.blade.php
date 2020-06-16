@@ -129,7 +129,7 @@ foreach ($cformula->dformulas as $value) {
         {{$cformula->paciente->cama}}
       </td>
       <td style=" width: 25%; text-align: left; ">
-        {{$cformula->paciente->servicio->nombre}}
+        {{$cformula->paciente->servicio->servicio}}
       </td>
       <td style=" width: 25%; text-align: left; ">
         {{ date("Y-m-d",strtotime(explode(' ',$cformula->created_at)[0]."+ 2 days"))}}
@@ -167,7 +167,7 @@ foreach ($cformula->dformulas as $value) {
         Clínica
       </td>
       <td style=" width: 50%; text-align: left; ">
-        {{$cformula->sis_clinica->nombre}}
+        {{$cformula->sis_clinica->clinica}}
       </td>
       <td style=" width: 25%; text-align: left; ">
         {{$cformula->paciente->npt->nombre}}
