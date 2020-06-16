@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Helpers\Pdfs;
+namespace App\Traits\Pdfs;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 
-class Pdfs
+trait PdfTrait
 {
-    public static function getImprimirPdf($dataxxxx) {
+    public function getImprimirPdf($dataxxxx) {
         $view = View::make($dataxxxx['vistaurl'], $dataxxxx['dataxxxx'])->render();
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         $pdf->setPaper($dataxxxx['dimensio']//array(0, 0, 9.5 * 72, 14.9 * 72)
-
             , "portrait");
 
         if ($dataxxxx['tipoxxxx'] == 1) {
@@ -22,8 +21,7 @@ class Pdfs
           return $pdf->download($dataxxxx['nombarch'].'.pdf');
         }
         if ($dataxxxx['tipoxxxx'] == 3) {
-          return view($dataxxxx['nombarch'], $dataxxxx['dataxxxx']);
+          return view($dataxxxx['vistaurl'], $dataxxxx['dataxxxx']);
         }
       }
-
 }

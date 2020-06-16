@@ -110,7 +110,7 @@ class TerminadoController extends Controller
     }
     private function view($dataxxxx)
     {
-        $this->opciones['pedelies']=[];
+        $this->opciones['pedelies'] = [];
         $this->opciones['sinoxxxx'] = ['' => '..::Seleccione::..', 1 => 'NO', 2 => 'SI'];
         $this->opciones['concepto'] = ['' => '..::Seleccione::..', 1 => 'RECHAZADO', 2 => 'APROBADO'];
         $this->opciones['pesoteor'] = number_format($this->peso($dataxxxx['procesox']), 2, ".", "");
@@ -118,9 +118,9 @@ class TerminadoController extends Controller
         $this->opciones['accionxx'] = $dataxxxx['accionxx'];
         // indica si se esta actualizando o viendo
         if ($dataxxxx['objetoxx'] != '') {
-            $this->opciones['pedelies']=[2=>'SI'];
-            if($dataxxxx['objetoxx']->limitesx==1){
-                $this->opciones['pedelies']=[1=>'NO'];
+            $this->opciones['pedelies'] = [2 => 'SI'];
+            if ($dataxxxx['objetoxx']->limitesx == 1) {
+                $this->opciones['pedelies'] = [1 => 'NO'];
             }
             $this->opciones['modeloxx'] = $dataxxxx['objetoxx'];
         }
@@ -144,6 +144,11 @@ class TerminadoController extends Controller
             [
                 'mostrars' => true, 'accionxx' => 'GRABAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+            ];
+        $this->opciones['botoform'][] =
+            [
+                'mostrars' => true, 'accionxx' => '', 'routingx' => ['reporpdf.etiquetanpt', [$padrexxx]],
+                'formhref' => 4, 'tituloxx' => 'VER ETIQUTA', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
         return $this->view(['objetoxx' => '', 'accionxx' => 'Crear', 'procesox' => $padrexxx]);
     }
@@ -174,7 +179,6 @@ class TerminadoController extends Controller
         $this->opciones['procesox'] = [$objetoxx->cformula->id => 'Formulación: ' . $objetoxx->cformula->id];
         $this->opciones['clinicax'] = $objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
-        $this->opciones['readonly'] = 'readonly';
         return $this->view(['objetoxx' => $objetoxx, 'accionxx' => 'Ver', 'procesox' => $objetoxx->cformula->id]);
     }
 
@@ -193,6 +197,11 @@ class TerminadoController extends Controller
             [
                 'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+            ];
+        $this->opciones['botoform'][] =
+            [
+                'mostrars' => true, 'accionxx' => '', 'routingx' => ['reporpdf.etiquetanpt', [$objetoxx->cformula->id]],
+                'formhref' => 4, 'tituloxx' => 'VER ETIQUTA', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
         return $this->view(['objetoxx' => $objetoxx, 'accionxx' => 'Editar', 'procesox' => $objetoxx->cformula->id]);
     }
