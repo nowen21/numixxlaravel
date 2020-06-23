@@ -32,7 +32,7 @@ class GrabarFormulacion {
     $requfosf=$cabecera['fosfatox_cant'];
     $multlipo=$cabecera['multiuno_cant'];
     foreach ($cabecera as $key => $value) {
-      
+
       $data = explode('_', $key);
       if (isset($data[1]) && $data[1]=='volu') {
         $dataxxxx = [
@@ -42,7 +42,9 @@ class GrabarFormulacion {
             'fosfcant' => $requfosf, // requerimiento diario del fosfato del fosfato seleccionado
             'multivi2' => $multlipo, // multivitamina liposoluble seleccionada
             'lipovolu' => $cabecera['multiuno_volu'], // multivitamina liposoluble seleccionada
-            'volumenx' => $cabecera[$data[0]],
+            //'volumenx' => $cabecera[$data[0]],
+            'volumenx' => $cabecera[$data[0] . '_volu'],
+
         ];
         $formulax = $casaform->calculos($dataxxxx)[$cabecera[$data[0]]];
         $totalxxx = $formulax['reqtotal'];

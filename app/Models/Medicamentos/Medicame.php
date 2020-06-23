@@ -61,7 +61,7 @@ class Medicame extends Model {
 //     return $this->belongsToMany(Npt::class);
 //   }
 
-  public function marcas() {
+  public function mmarcas() {
     return $this->hasMany(Mmarca::class);
   }
 
