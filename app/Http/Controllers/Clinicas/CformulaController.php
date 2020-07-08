@@ -12,13 +12,16 @@ use App\Models\Clinica\SisClinica;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Pacientes\Paciente;
 use App\Models\Sistema\SisEsta;
+use App\Traits\Cformula\CalculosAjaxTrait;
 use App\Traits\Cformula\CalculosFormulacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Types\This;
 
 class CformulaController extends Controller
 {
     use CalculosFormulacion;
+    use CalculosAjaxTrait;
     private $opciones;
     private $dataform;
     public function __construct()
@@ -121,14 +124,11 @@ class CformulaController extends Controller
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
-
         $this->opciones['calculos'] = $this->_dataxxx;
         if ($nombobje != '') {
             $this->opciones['calculos'] = $this->dataform->calculos($objetoxx);
             $this->opciones[$nombobje] = $objetoxx;
         }
-
-
         // Se arma el titulo de acuerdo al array opciones
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
@@ -293,7 +293,9 @@ class CformulaController extends Controller
     public function getFormular(Request $request)
     {
         if ($request->ajax()) {
-            return response()->json(Validacionesajax::formulaciones($request->all()));
+            $dataxxxx['finalxxx'] = $this->getCalculos($request->all()['dataxxxx']);
+            $dataxxxx['formulax'] = Validacionesajax::formulaciones($request->all());
+            return response()->json($dataxxxx);
         }
     }
     public function getPedineon(Request $request)
@@ -311,6 +313,11 @@ class CformulaController extends Controller
             return response()->json($respuest);
         }
     }
+    // public function getRequerimientoVolumenq(Request $request)
+    // {
+    //    ddd( $this->getCalculos($this->getData()['dataxxxx']));
+    // }
+
     public function getRequerimientoVolumen(Request $request)
     {
         if ($request->ajax()) {

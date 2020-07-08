@@ -17,12 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersSeeder::class);        
         $this->call(RolesYPermisosSeeder::class);
         $this->call(AsignarRolSeeder::class);
-        $this->call(UnidadsSeeder::class);
-        $this->call(RangonptsSeeder::class);
-        $this->call(UnidrangSeeder::class);
+        $this->call(CasasSeeder::class);
         $this->call(NptsSeeder::class);
-        $this->call(UrangnptSeeder::class);
-        $this->call(CasasSeeder::class);        
         $this->call(MedicamesSeeder::class);
         $this->call(MmarcasSeeder::class);
         $this->call(MinvimasSeeder::class);

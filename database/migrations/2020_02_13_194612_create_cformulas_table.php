@@ -28,16 +28,16 @@ class CreateCformulasTable extends Migration
 
             $table->bigInteger('userevis_id')->unsigned()->nullable()->comment('USUARIO QUE REVISA LA FORMULACION');
             $table->bigInteger('userprep_id')->unsigned()->nullable()->comment('USUARIO QUE PREPARA LA FORMULACION');
-            $table->bigInteger('proceso_id')->unsigned()->nullable()->comment('PROCESO DE LA FORMULACION');
-            $table->bigInteger('terminado_id')->unsigned()->nullable()->comment('TERMINADO DE LA FORMULACION');
+            $table->bigInteger('userproc_id')->unsigned()->nullable()->comment('USUARIO QUE PROCESA LA FORMULACION');
+            $table->bigInteger('userlibe_id')->unsigned()->nullable()->comment('USUARIO QUE LIBERA LA FORMULACION');
             $table->bigInteger('ordene_id')->unsigned();
            
             $table->foreign('paciente_id')->references('id')->on('pacientes');
             $table->foreign('sis_clinica_id')->references('id')->on('sis_clinicas');
             $table->foreign('userevis_id')->references('id')->on('users');
             $table->foreign('userprep_id')->references('id')->on('users');
-            $table->foreign('proceso_id')->references('id')->on('procesos');
-            $table->foreign('terminado_id')->references('id')->on('terminados');
+            $table->foreign('userproc_id')->references('id')->on('users');
+            $table->foreign('userlibe_id')->references('id')->on('users');
             $table->foreign('ordene_id')->references('id')->on('ordenes');
             
             $table=CamposMagicos::magicos($table);

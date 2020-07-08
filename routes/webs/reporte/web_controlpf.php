@@ -1,31 +1,39 @@
 <?php
-Route::group(['prefix' => 'controlespf'], function () {
+$controll = 'Reporte\ControlPF';
+$routexxx = 'controlpf';
+Route::group(['prefix' => $routexxx], function () use ($controll, $routexxx) {
+
     Route::get('', [
-	    'uses' => 'Reporte\ControlPFController@index',
-	    'middleware' => ['permission:contropf-leer|contropf-crear|contropf-editar|contropf-borrar']
-	])->name('controlpf');
-	Route::get('nuevo', [
-	    'uses' => 'Reporte\ControlPFController@create',
-	    'middleware' => ['permission:contropf-crear']
-	])->name('controlpf.nuevo');
-	Route::post('crear', [
-	    'uses' => 'Reporte\ControlPFController@store',
-	    'middleware' => ['permission:contropf-crear']
-	])->name('controlpf.crear');
-	Route::get('editar/{objetoxx}', [
-	    'uses' => 'Reporte\ControlPFController@edit',
-	    'middleware' => ['permission:contropf-editar']
-	])->name('controlpf.editar');
-	Route::put('editar/{objetoxx}', [
-	    'uses' => 'Reporte\ControlPFController@update',
-	    'middleware' => ['permission:contropf-editar']
-	])->name('controlpf.editar');
-	Route::get('ver/{objetoxx}', [
-	    'uses' => 'Reporte\ControlPFController@show',
-	    'middleware' => ['permission:contropf-leer']
-	])->name('controlpf.ver');
-	Route::delete('borrar/{objetoxx}', [
-	    'uses' => 'Reporte\ControlPFController@destroy',
-	    'middleware' => ['permission:contropf-borrar']
-	])->name('controlpf.borrar');
+        'uses' => $controll . 'Controller@index',
+        'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
+    ])->name($routexxx);
+    Route::get('{padrexxx}/nuevo', [
+        'uses' => $controll . 'Controller@create',
+        'middleware' => ['permission:' . $routexxx . '-crear']
+    ])->name($routexxx . '.nuevo');
+    Route::post('crear', [
+        'uses' => $controll . 'Controller@store',
+        'middleware' => ['permission:' . $routexxx . '-crear']
+    ])->name($routexxx . '.crear');
+    Route::get('editar/{objetoxx}', [
+        'uses' => $controll . 'Controller@edit',
+        'middleware' => ['permission:' . $routexxx . '-editar']
+    ])->name($routexxx . '.editar');
+    Route::put('editar/{objetoxx}', [
+        'uses' => $controll . 'Controller@update',
+        'middleware' => ['permission:' . $routexxx . '-editar']
+    ])->name($routexxx . '.editar');
+    Route::get('ver/{objetoxx}', [
+        'uses' => $controll . 'Controller@show',
+        'middleware' => ['permission:' . $routexxx . '-leer']
+    ])->name($routexxx . '.ver');
+    Route::delete('borrar/{objetoxx}', [
+        'uses' => $controll . 'Controller@destroy',
+        'middleware' => ['permission:' . $routexxx . '-borrar']
+    ])->name($routexxx . '.borrar');
+
+    Route::get('pesoreal', [
+        'uses' => $controll . 'Controller@getPesoreal',
+
+    ])->name($routexxx . '.pesoreal');
 });

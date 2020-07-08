@@ -7,16 +7,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Produccion\TerminadoCrearRequest;
 use App\Http\Requests\Produccion\TerminadoEditarRequest;
 use App\Models\Formulaciones\Cformula;
-use App\Models\Produccion\Proceso;
 use App\Models\Produccion\Terminado;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Pestanias\ProduccionTrait;
+use App\Traits\Produccion\TerminadoTrait;
 use Illuminate\Http\Request;
 
 class TerminadoController extends Controller
 {
     private $opciones;
     use ProduccionTrait;
+    use TerminadoTrait;
     public function __construct()
     {
         $this->opciones = [
@@ -109,12 +110,18 @@ class TerminadoController extends Controller
     }
     private function view($dataxxxx)
     {
-        $this->opciones['sinoxxxx']=[''=>'..::Seleccione::..',1=>'NO',2=>'SI'];
-        $this->opciones['pesoteor'] = number_format($this->peso($dataxxxx['procesox']),2,".","");
+        $this->opciones['pedelies'] = [];
+        $this->opciones['sinoxxxx'] = ['' => '..::Seleccione::..', 1 => 'NO', 2 => 'SI'];
+        $this->opciones['concepto'] = ['' => '..::Seleccione::..', 1 => 'RECHAZADO', 2 => 'APROBADO'];
+        $this->opciones['pesoteor'] = number_format($this->peso($dataxxxx['procesox']), 2, ".", "");
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $dataxxxx['accionxx'];
         // indica si se esta actualizando o viendo
         if ($dataxxxx['objetoxx'] != '') {
+            $this->opciones['pedelies'] = [2 => 'SI'];
+            if ($dataxxxx['objetoxx']->limitesx == 1) {
+                $this->opciones['pedelies'] = [1 => 'NO'];
+            }
             $this->opciones['modeloxx'] = $dataxxxx['objetoxx'];
         }
 
@@ -129,7 +136,7 @@ class TerminadoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create($padrexxx)
-    { 
+    {
         $this->opciones['procesox'] = [$padrexxx => 'Formulación: ' . $padrexxx];
         $this->opciones['indecrea'] = false;
         $this->opciones['clinicac'] = true;
@@ -137,6 +144,11 @@ class TerminadoController extends Controller
             [
                 'mostrars' => true, 'accionxx' => 'GRABAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+            ];
+        $this->opciones['botoform'][] =
+            [
+                'mostrars' => true, 'accionxx' => '', 'routingx' => ['reporpdf.etiquetanpt', [$padrexxx]],
+                'formhref' => 4, 'tituloxx' => 'VER ETIQUTA', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
         return $this->view(['objetoxx' => '', 'accionxx' => 'Crear', 'procesox' => $padrexxx]);
     }
@@ -167,7 +179,6 @@ class TerminadoController extends Controller
         $this->opciones['procesox'] = [$objetoxx->cformula->id => 'Formulación: ' . $objetoxx->cformula->id];
         $this->opciones['clinicax'] = $objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
-        $this->opciones['readonly'] = 'readonly';
         return $this->view(['objetoxx' => $objetoxx, 'accionxx' => 'Ver', 'procesox' => $objetoxx->cformula->id]);
     }
 
@@ -186,6 +197,11 @@ class TerminadoController extends Controller
             [
                 'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+            ];
+        $this->opciones['botoform'][] =
+            [
+                'mostrars' => true, 'accionxx' => '', 'routingx' => ['reporpdf.etiquetanpt', [$objetoxx->cformula->id]],
+                'formhref' => 4, 'tituloxx' => 'VER ETIQUTA', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
         return $this->view(['objetoxx' => $objetoxx, 'accionxx' => 'Editar', 'procesox' => $objetoxx->cformula->id]);
     }
@@ -229,16 +245,16 @@ class TerminadoController extends Controller
     }
     private function peso($procesox)
     {
-       
+
         $dataform = new Dataformulario();
         $formulac = Cformula::where('id', $procesox)->first();
-        $calculos = $dataform->calculos($formulac);  
+        $calculos = $dataform->calculos($formulac);
         return $calculos['pesoteor'];
     }
-    public function pesoteorico(Request $request)
+    public function getPesoreal(Request $request)
     {
         if ($request->ajax()) {
-            return response()->json(['pesoteor' => $this->peso($request->all()['procesox'])]);
+            return response()->json($this->validar($request->all()));
         }
     }
 }

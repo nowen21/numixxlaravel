@@ -17,21 +17,22 @@ class CreateMnptsTable extends Migration
         Schema::create('mnpts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('medicame_id')->unsigned();
-            $table->bigInteger('urangnpt_id')->unsigned();
+            $table->bigInteger('npt_id')->unsigned();
+            $table->double('randesde',2);
+            $table->double('ranhasta',2);
+            $table->string('rangunid');
             $table->foreign('medicame_id')->references('id')->on('medicames');
-            $table->foreign('urangnpt_id')->references('id')->on('urangnpts');
+            $table->foreign('npt_id')->references('id')->on('npts');
             $table=CamposMagicos::magicos($table);
-            $table->softDeletes();
         });
         Schema::create('h_mnpts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_old');
             $table->integer('medicame_id');
-            $table->integer('urangnpt_id');
-            $table->string('rutaxxxx', 50);
-            $table->string('ipxxxxxx', 50);
-            $table->string('metodoxx', 50);
-            $table->softDeletes();
+            $table->integer('npt_id');
+            $table->double('randesde',2);
+            $table->double('ranhasta',2);
+            $table->string('rangunid');
+
             $table=CamposMagicos::h_magicos($table);
         });
     }

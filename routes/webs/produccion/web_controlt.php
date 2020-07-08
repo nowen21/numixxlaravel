@@ -31,5 +31,10 @@ Route::group(['prefix' => $routexxx], function () use ($controll, $routexxx) {
 		'uses' => $controll . 'Controller@destroy',
 		'middleware' => ['permission:' . $routexxx . '-borrar']
 	])->name($routexxx . '.borrar');
+
+	Route::get('pesoreal', [
+		'uses' => $controll . 'Controller@getPesoreal',
+		
+	])->name($routexxx . '.pesoreal');
 });
 

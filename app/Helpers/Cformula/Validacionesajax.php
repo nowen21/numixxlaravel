@@ -57,7 +57,7 @@ class Validacionesajax
     $newdatax = [];
     $aguaxxxx = 0;
     $calcular=[];
-    $volumenx = 0; 
+    $volumenx = 0;
     foreach ($dataxxxx['dataxxxx'] as $key => $value) {
       if ($key > 1) {
         $newdatax[$value['name']] = $value['value'];
@@ -66,7 +66,7 @@ class Validacionesajax
          */
         $campoxxx = explode('_', $value['name']);
         if (count($campoxxx) > 1 && $campoxxx[1] == 'volu' && $campoxxx[0] != 'aguaeste' && $campo_id[0]!=$campoxxx[0] ) {
-              $aguaxxxx += $value['value']; 
+              $aguaxxxx += $value['value'];
         }
         /**
          * conocer el volumen
@@ -142,9 +142,9 @@ class Validacionesajax
      * cantidad en volumen o en requirimiento diaro, dependiendo de lo que se digitó
      */
     $respuest['cantvolu'] = ($dataxxxx['cantvolu'] == 'cant') ?
-      [$dataxxxx['campoxxx'] . '_volu', number_format($valovolu, 2)] : // si se digitó requerimiento diario
-      [$dataxxxx['campoxxx'] . '_cant', number_format($valocant, 1)]; // si se digito volumen
- 
+      [$dataxxxx['campoxxx'] . '_volu', number_format($valovolu, 2,'.', '')] : // si se digitó requerimiento diario
+      [$dataxxxx['campoxxx'] . '_cant', number_format($valocant, 1,'.', '')]; // si se digito volumen
+
     $respuest['aguaxxxx'] = number_format(($dataxxxx['cantvolu'] == 'cant') ? $dataxxxx['aguaxxxx'] - $valovolu : $dataxxxx['aguaxxxx']-$dataxxxx['requdiar'], 2);
 
     /**
@@ -156,7 +156,7 @@ class Validacionesajax
 
 
   /**
-   * calcular el requerimiento diario para elementos traza, vitamina hidrosolube y vitamina liposoluble cuando el npt es 
+   * calcular el requerimiento diario para elementos traza, vitamina hidrosolube y vitamina liposoluble cuando el npt es
    * pediatrio o neonato
    */
   private static function getPedineon($dataxxxx)
