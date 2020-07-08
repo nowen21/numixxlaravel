@@ -3,7 +3,7 @@
 use App\Models\Pacientes\Paciente;
 use Illuminate\Database\Seeder;
 
-class PacientesSeeder_bk extends Seeder
+class PacientesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
