@@ -10,7 +10,6 @@ use App\Models\Formulaciones\Cformula;
 use App\Models\Produccion\Calistam;
 use App\Traits\Cformula\CalcularEdadTrait;
 use App\Traits\Cformula\CalculosTrait;
-use App\Traits\Cformula\PintarFormularioTrait;
 use App\Traits\Pdfs\PdfTrait;
 
 class PdfController extends Controller
@@ -57,8 +56,5 @@ class PdfController extends Controller
         ];
 
         return $this->getImprimirPdf($dataxxxx);
-
-
-        // return $this->getEtiquetaNpt(['cformula' => ]);
     }
 }

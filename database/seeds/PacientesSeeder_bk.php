@@ -3,7 +3,7 @@
 use App\Models\Pacientes\Paciente;
 use Illuminate\Database\Seeder;
 
-class PacientesSeeder extends Seeder
+class PacientesSeeder_bk extends Seeder
 {
     /**
      * Run the database seeds.
@@ -4688,6 +4688,12 @@ class PacientesSeeder extends Seeder
         Paciente::create(['id' => 4674, 'registro' => 2020 - 03 - 10, 'cedula' => '1057611240,0', 'nombres' => 'ZIRLEY HELIANA BELTRAN SUA', 'apellidos' => 'ZIRLEY HELIANA BELTRAN SUA', 'peso' => 32, 'genero_id' => 3, 'ep_id' => 1, 'cama' => 0, 'fechnaci' => 2020 - 03 - 10, 'departamento_id' => 14, 'municipio_id' => 641, 'npt_id' => 4, 'servicio_id' => 1, 'sis_esta_id' => 1, 'user_crea_id' => 1, 'sis_clinica_id' => 41, 'user_edita_id' => 1,]);
         Paciente::create(['id' => 4675, 'registro' => 2020 - 03 - 10, 'cedula' => '1133484573', 'nombres' => 'ZOBEIRA FRANCO MONTE', 'apellidos' => 'ZOBEIRA FRANCO MONTE', 'peso' => 16, 'genero_id' => 3, 'ep_id' => 1, 'cama' => 4, 'fechnaci' => 2020 - 03 - 10, 'departamento_id' => 14, 'municipio_id' => 641, 'npt_id' => 4, 'servicio_id' => 1, 'sis_esta_id' => 1, 'user_crea_id' => 1, 'sis_clinica_id' => 55, 'user_edita_id' => 1,]);
         Paciente::create(['id' => 4676, 'registro' => 2020 - 03 - 10, 'cedula' => '1133099043', 'nombres' => 'ZULDERI VARON', 'apellidos' => 'ZULDERI VARON', 'peso' => 65, 'genero_id' => 3, 'ep_id' => 1, 'cama' => 319, 'fechnaci' => 2020 - 03 - 10, 'departamento_id' => 14, 'municipio_id' => 641, 'npt_id' => 4, 'servicio_id' => 1, 'sis_esta_id' => 1, 'user_crea_id' => 1, 'sis_clinica_id' => 19, 'user_edita_id' => 1,]);
-    
+
+        Paciente::create(['id' => 4679, 'registro' => '2020-03-10',
+        'cedula' => '17496707', 'nombres' => 'JOSE DUMAR(ADULTO)',
+        'apellidos' => 'JIMENEZ RUIZ(ADULTO)', 'peso' => 80, 'genero_id' => 1,
+        'ep_id' => 1, 'cama' => 319, 'fechnaci' => '1975-06-01', 'departamento_id' => 14,
+        'municipio_id' => 641, 'npt_id' => 3, 'servicio_id' => 1, 'sis_esta_id' => 1,
+        'user_crea_id' => 1, 'sis_clinica_id' => 1, 'user_edita_id' => 1,]);
     }
 }
