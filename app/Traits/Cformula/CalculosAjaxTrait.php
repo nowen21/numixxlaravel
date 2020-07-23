@@ -10,6 +10,11 @@ use App\Models\Medicamentos\Mmarca;
 trait CalculosAjaxTrait
 {
     private $_datacat = [];
+    /**
+     * Este metodo se utiliza como ejemplo para ver y armar la estructura del array con el que se van a ralizar los cálculos
+     *
+     * @return void
+     */
     public function getData()
     {
         return
@@ -73,7 +78,7 @@ trait CalculosAjaxTrait
                     9 =>
                     [
                         'name' => 'aminoaci_cant',
-                        'value' => 0.6
+                        'value' => 0
                     ],
 
                     10 =>
@@ -396,7 +401,7 @@ trait CalculosAjaxTrait
 
                 ],
 
-                'campo_id' => 'aminoaci_cant',
+                'campo_id' => 'aminoaci_volu',
                 '_token' => '3fiupRYqdP44f6f2udhmVBjhgNHCsRXXu2BZFaZP',
                 2 => ''
             ];
@@ -453,9 +458,19 @@ trait CalculosAjaxTrait
      */
     private function getDataCasa($dataxxxx)
     {
+        $requdiar = $dataxxxx['dataxxxx'][$dataxxxx['campoxxx'][0] . '_cant'];
+        /**
+         * encontra el requerimiento diario del volumen digitado
+         */
+        if (
+            $dataxxxx['medisele'] == $dataxxxx['campoxxx'][0] . '_volu' &&
+            $dataxxxx['dataxxxx'][$dataxxxx['campoxxx'][0] . '_volu'] > 0
+        ) {
+            $requdiar = $dataxxxx['dataxxxx'][$dataxxxx['campoxxx'][0] . '_volu'];
+        }
         $dataxxxy = [
             'medisele' => $dataxxxx['medicame']->id, // mediamento seleccionado
-            'requdiar' => $dataxxxx['dataxxxx'][$dataxxxx['campoxxx'][0] . '_cant'], // requerimineto diario por el mendicamento seleccionado
+            'requdiar' => $requdiar, // requerimineto diario por el mendicamento seleccionado
             'fosfa_id' => $dataxxxx['dataxxxx']['fosfatox'], // fosfato seleccionado
             'fosfcant' => $dataxxxx['dataxxxx']['fosfatox_cant'], // requerimiento diario del fosfato del fosfato seleccionado
             'multivi2' => $dataxxxx['dataxxxx']['multiuno_cant'], // multivitamina liposoluble seleccionada
@@ -463,6 +478,14 @@ trait CalculosAjaxTrait
             'volumenx' => $dataxxxx['dataxxxx'][$dataxxxx['campoxxx'][0] . '_volu'],
         ];
 
+
+        $formulax = $dataxxxx['casaform']->calculos($dataxxxy)[$dataxxxx['medicame']->id];
+        if (
+            $dataxxxx['medisele'] == $dataxxxx['campoxxx'][0] . '_volu' &&
+            $dataxxxx['dataxxxx'][$dataxxxx['campoxxx'][0] . '_volu'] > 0
+        ) {
+            $dataxxxy['requdiar']=$formulax['rediario'];
+        }
         $formulax = $dataxxxx['casaform']->calculos($dataxxxy)[$dataxxxx['medicame']->id];
         return [
             'casaxxxx' => $dataxxxx['medicame']->casa->casa, // nombre de la casa
@@ -474,14 +497,19 @@ trait CalculosAjaxTrait
             'formulax' => $formulax
         ];
     }
-
+    /**
+     * se convierte el array que se captura del formulario para que se adapete a un array asociativo con nombre del campo y el valor
+     *
+     * @param array $cabecera
+     * @return $formulacion
+     */
     private function getArmarData($cabecera)
     {
 
         $formulacion = ['osmolari' => 0, 'pesoespe' => 0];
         $dataxxxx = [];
-        foreach ($cabecera as $registro) {
-            $dataxxxx[$registro['name']] = $registro['value'];
+        foreach ($cabecera['dataxxxx'] as $registro) {
+            $dataxxxx[$registro['name']] = $registro['value'] == '' ? 0 : $registro['value'];
         }
         $this->_datacat['clinicax'] = $dataxxxx['sis_clinica_id'];
         $this->_datacat['tiempoxx'] = $dataxxxx['tiempo'];
@@ -513,6 +541,7 @@ trait CalculosAjaxTrait
                         'medicame' => $medicame,
                         'casaform' => $casaform,
                         'campoxxx' => $campoxxx,
+                        'medisele' => $cabecera['campo_id']
                     ]
                 );
 
@@ -660,6 +689,7 @@ trait CalculosAjaxTrait
         $this->_datacat['osmolari'] = $datasxxx['osmolari'] / $this->_datacat['velopurg']; //OSMOLARIDAD (mOsm / L)
         $this->_datacat['osmolarv'] = $this->_datacat['osmolari'] > 700 ? 'VIA CENTRAL' : 'VIA PERIFÉRICA';
         $this->_datacat['calcfosv'] = $this->_datacat['calcfosf'] < 2 ? 'SEGURA' : 'NO SEGURA';
+
         $this->_datacat['calototv'] = $this->_datacat['calotota'] / $this->_datacat['calotota'] * 100;
         $this->_datacat['calocarv'] = $this->_datacat['calocarb'] / $this->_datacat['calotota'] * 100;
         $this->_datacat['calolipv'] = $this->_datacat['calolipi'] / $this->_datacat['calotota'] * 100;

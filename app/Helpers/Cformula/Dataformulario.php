@@ -84,7 +84,9 @@ class Dataformulario
     $casasxxx = Casa::select('casas.id', 'casas.casa', 'unidmedi', 'nameidxx')
       ->orderBy('casas.ordecasa', 'ASC')->get();
     //    // recorre las casas
-    $existexx = ['elemtraz', 'multivit', 'multiuno'];
+    $existexx = [
+        // 'elemtraz', 'multivit', 'multiuno'
+    ];
     $aguaxxxx = ['aguaeste'];
     $aguaeste = 0;
     foreach ($casasxxx as $key => $value) {

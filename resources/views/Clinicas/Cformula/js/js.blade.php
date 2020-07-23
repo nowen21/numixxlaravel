@@ -101,7 +101,6 @@
                         $("#" + json.menssage[0]).popover(json.menssage[1]);
                     }
 
-                    console.log(json);
                     $("#aguaeste_volu").val(json.aguaxxxx);
                 },
                 error: function(xhr, status) {
@@ -149,9 +148,9 @@
             });
         });
         $('#peso').on('keyup', function() {
-            if ($(this).val() > 0 && eval('{{$todoxxxx["paciente"]->npt_id}}') < 3) {
-                pedineon($(this).val())
-            }
+            // if ($(this).val() > 0 && eval('{{$todoxxxx["paciente"]->npt_id}}') < 3) {
+            //     pedineon($(this).val()); console.log($(this).val())
+            // }
             recalcular();
         });
         //dataxxxx={'medicame':?,'campo_id':?,'compauxi':?}
@@ -160,8 +159,6 @@
 
 
         $('.input-number').on('keyup', function(event) {
-
-
             var aguaeste = $(this).attr('id').split('_');
             var codigo = event.keyCode;
             if ((((codigo >= 96 && codigo <= 105) || (codigo >= 48 && codigo <= 57)) && aguaeste[0] != 'aguaeste') || codigo == 8 && aguaeste[0] != 'aguaeste') {

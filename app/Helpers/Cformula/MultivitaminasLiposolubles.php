@@ -70,7 +70,7 @@ class MultivitaminasLiposolubles {
       case 1:// pediatricos
         $formulax[19] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] *  $this->purgaxxx;
         break;
-      case 2:// neonatos        
+      case 2:// neonatos
         $formulax[19] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] *  $this->purgaxxx;
         break;
       case 3:
@@ -83,10 +83,12 @@ class MultivitaminasLiposolubles {
   private function volumennpt() {
     $formulax = [];
     switch ($this->npt_idxx) {
-      case 1:// pediatricos       
+      case 1:// pediatricos
+
         $formulax[19] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
         break;
       case 2:// neonatos
+
         $formulax[19] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
         break;
       case 3:// adultos
@@ -102,7 +104,7 @@ class MultivitaminasLiposolubles {
     $this->casaxxxx = $medicame->casa->id;
     $this->purgaxxx = $purgaxxx;
     $this->requemientodiarionpt();
-    $this->requemientototalnpt();    
+    $this->requemientototalnpt();
     $this->volumennpt();
     $this->purganpt();
     return $this->estructu[$this->casaxxxx];

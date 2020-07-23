@@ -73,7 +73,7 @@ class Aminoacidos {
       case 1:// pediatricos
         $formulax[3] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx']; //f2 amino 15
         break;
-      case 2:// neonatos        
+      case 2:// neonatos
         $formulax[3] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx']; //f2 amino 15
         break;
       case 3:
@@ -107,7 +107,7 @@ class Aminoacidos {
     $this->casaxxxx = $medicame->casa->id;
     $this->purgaxxx = $purgaxxx;
     $this->requemientodiarionpt();
-    $this->requemientototalnpt();    
+    $this->requemientototalnpt();
     $this->volumennpt();
     $this->purganpt();
     return $this->estructu[$this->casaxxxx];

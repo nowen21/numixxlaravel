@@ -42,10 +42,10 @@ Route::group(['prefix' => '{padrexxy}'], function () use ($controll, $routexxx) 
 		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
 	])->name($routexxx . '.pedineon');
 
-	// Route::get('getRequerimientoVolumenq', [
-	// 	'uses' => $controll . 'Controller@getRequerimientoVolumenq',
-	// 	'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
-	// ])->name($routexxx.'.rangvolu');
+	Route::get('getRequerimientoVolumenq', [
+		'uses' => $controll . 'Controller@getRequerimientoVolumenq',
+		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
+	])->name($routexxx.'.rangvolu');
 	Route::post('getRequerimientoVolumen', [
 		'uses' => $controll . 'Controller@getRequerimientoVolumen',
 		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']

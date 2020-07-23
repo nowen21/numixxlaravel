@@ -40,7 +40,7 @@ class CasasFormulacion {
   private $vitamink;
   private $lipidosx;
   private $aguasxxx;
-  
+
 
   /**
    * Constructor para la clase.
@@ -119,7 +119,7 @@ class CasasFormulacion {
       case 8:
         $calculox=$this->elemento->elemento($dataxxxx, $medicame, $this->purgaxxx);
         break;
-      case 9: 
+      case 9:
         $calculox=$this->hidrosol->hidrosoluble($dataxxxx, $medicame, $this->purgaxxx);
         break;
       case 10:
@@ -143,10 +143,10 @@ class CasasFormulacion {
       case 16:
         $calculox=$this->lipidosx->lipido($dataxxxx, $medicame, $this->purgaxxx);
         break;
-      case 17: 
+      case 17:
         $calculox=$this->liposolu->liposoluble($dataxxxx, $medicame, $this->purgaxxx);
         break;
-      case 18: 
+      case 18:
         $calculox=$this->aguasxxx->agua($dataxxxx, $medicame, $this->purgaxxx);
         break;
     }

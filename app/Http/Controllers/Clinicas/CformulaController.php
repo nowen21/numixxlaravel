@@ -293,15 +293,15 @@ class CformulaController extends Controller
     public function getFormular(Request $request)
     {
         if ($request->ajax()) {
-            $dataxxxx['finalxxx'] = $this->getCalculos($request->all()['dataxxxx']);
             $dataxxxx['formulax'] = Validacionesajax::formulaciones($request->all());
+             $dataxxxx['finalxxx'] = $this->getCalculos($request->all());
             return response()->json($dataxxxx);
         }
     }
     public function getPedineon(Request $request)
     {
-        $respuest = [];
         if ($request->ajax()) {
+            $respuest = [];
             $dataxxxx = $request->all();
             $existexx = ['elemtraz', 'multivit', 'multiuno'];
             foreach ($dataxxxx['dataxxxx'] as $key => $value) {
@@ -310,13 +310,14 @@ class CformulaController extends Controller
                     $respuest[] = Validacionesajax::getFormulaciones($dataxxxx, $value['name']);
                 }
             }
+
             return response()->json($respuest);
         }
     }
-    // public function getRequerimientoVolumenq(Request $request)
-    // {
-    //    ddd( $this->getCalculos($this->getData()['dataxxxx']));
-    // }
+    public function getRequerimientoVolumenq()
+    {
+       ddd( $this->getCalculos($this->getData()));
+    }
 
     public function getRequerimientoVolumen(Request $request)
     {

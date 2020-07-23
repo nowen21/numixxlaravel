@@ -100,7 +100,12 @@ class Validacionesajax
   {
 
     $dataxxxx = Validacionesajax::convertirdata($dataxxxx);
-    $construc = ['peso' => $dataxxxx['peso'], 'npt_id' => $dataxxxx['npt_id'], 'purga' => $dataxxxx['purga'], 'tiempo' => $dataxxxx['tiempo'], 'velocidad' => $dataxxxx['velocidad']];
+    $construc = [
+        'peso' => $dataxxxx['peso'],
+        'npt_id' => $dataxxxx['npt_id'],
+        'purga' => $dataxxxx['purga'],
+        'tiempo' => $dataxxxx['tiempo'],
+        'velocidad' => $dataxxxx['velocidad']];
     $casaform = new CasasFormulacion($construc);
 
     $dataxxxx['requdiar'] = Validacionesajax::esnumerico($dataxxxx['requdiar']);
@@ -194,7 +199,6 @@ class Validacionesajax
           }
           return $queryxxx;
         })
-
           ->first()->requerim;
         //ddd($requerim);
         break;
@@ -227,7 +231,6 @@ class Validacionesajax
           ->first()->requerim;
         break;
     }
-
     return $requerim;
   }
   /**
@@ -244,10 +247,10 @@ class Validacionesajax
       'velocidad' => $dataxxxx['velocidad']
     ];
     $casaform = new CasasFormulacion($construc);
-    $dataxxxx['requdiar'] = Validacionesajax::getPedineon($dataxxxx);
+    if($dataxxxx['npt_id']!=3){
+       $dataxxxx['requdiar'] = Validacionesajax::getPedineon($dataxxxx);
+    }
     $formulax = $casaform->calculos($dataxxxx)[$dataxxxx['medisele']];
-
-
     /**
      * cantidad en volumen y en requirimiento diaro
      */
