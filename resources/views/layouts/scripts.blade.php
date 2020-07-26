@@ -47,5 +47,21 @@
 <!-- <script src="{{ asset('especiales/contarcaracteres.js') }}"></script>
 <script src="{{ asset('especiales/fechas.js') }}"></script>
 <script src="{{ asset('especiales/combos.js') }}"></script> -->
+<script>
+    toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": false,
+  "showDuration": "5000",
+  "hideDuration": "3000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+</script>
 @include('layouts.mensaje')
 @yield('scripts')

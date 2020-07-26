@@ -119,7 +119,7 @@
                 }
 
                 ?>
-                <tr id="{{$idxxxxxx}}" style="">
+                <tr id="{{$idxxxxxx}}">
                     <td>{{$formulax['casaxxxx']}}</td>
                     <td>{{ Form::select($formulax['campo_id'], $formulax['selelist'], $formulax['selevalu'],['class'=>'form-control medicamento calcularagua select2','id'=>$formulax['campo_id']]) }}
                     </td>

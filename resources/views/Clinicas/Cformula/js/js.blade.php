@@ -84,6 +84,7 @@
                 data: {
                     dataxxxx: f_dataxxxx(),
                     campo_id: campo_id,
+                    requedia:$('#'+campo_id).val(),
                     _token: $("input[name='_token']").val(),
                 },
                 dataType: 'json',

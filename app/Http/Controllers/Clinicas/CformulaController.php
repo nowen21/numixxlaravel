@@ -16,7 +16,6 @@ use App\Traits\Cformula\CalculosAjaxTrait;
 use App\Traits\Cformula\CalculosFormulacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use phpDocumentor\Reflection\Types\This;
 
 class CformulaController extends Controller
 {
@@ -83,9 +82,13 @@ class CformulaController extends Controller
                 'titulist' => 'LISTA DE FORMULACIONES',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
+                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
                     ['campoxxx' => 'paciente', 'dataxxxx' => $padrexxx],
+                    ['campoxxx' => 'editarxx', 'dataxxxx' => auth()->user()->can($this->opciones['routxxxx'] . '-editar')],
+                    ['campoxxx' => 'leerxxxx', 'dataxxxx' => auth()->user()->can($this->opciones['routxxxx'] . '-leer')],
+                    ['campoxxx' => 'copiarxx', 'dataxxxx' => auth()->user()->can($this->opciones['routxxxx'] . '-copiar')],
                 ],
+
                 'vercrear' => true,
                 'accitabl' => true,
                 'urlxxxxx' => 'api/paciente/formulaciones',
@@ -330,8 +333,26 @@ class CformulaController extends Controller
     public function getFormular(Request $request)
     {
         if ($request->ajax()) {
-            $dataxxxx['formulax'] = Validacionesajax::formulaciones($request->all());
-             $dataxxxx['finalxxx'] = $this->getCalculos($request->all());
+            $campo_id=explode('_',$request->campo_id);
+
+            $respuest['cantvolu'] = ($campo_id[1] == 'cant') ?
+            [$campo_id[0] . '_volu', '']: // si se digitó requerimiento diario
+            [$campo_id[0] . '_cant', '']; // si se digito volumen
+
+
+
+            $dataxxxx = [
+                'formulax'=>['cantvolu'=>$respuest['cantvolu'],
+                'unidadxx'=>[$campo_id[0] . '_cant', ''],
+                'menssage'=>[$campo_id[0] . '_cant', 'hide','']] ,'finalxxx'=>[]];
+
+
+
+            if ($request->requedia > 0) {
+                $dataxxxx['formulax'] = Validacionesajax::formulaciones($request->all());
+                $dataxxxx['finalxxx'] = $this->getCalculos($request->all());
+            }
+
             return response()->json($dataxxxx);
         }
     }
@@ -353,7 +374,7 @@ class CformulaController extends Controller
     }
     public function getRequerimientoVolumenq()
     {
-       ddd( $this->getCalculos($this->getData()));
+        ddd($this->getCalculos($this->getData()));
     }
 
     public function getRequerimientoVolumen(Request $request)

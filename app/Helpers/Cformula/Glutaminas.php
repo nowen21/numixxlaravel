@@ -52,8 +52,8 @@ class Glutaminas {
       case 2:// neonatos
         $formulax[4] = $this->pesoxxxx * $this->dataxxxx['requdiar'];
         break;
-      case 3:// adultos 
-        $formulax[4] = $this->pesoxxxx * $this->dataxxxx['requdiar']; 
+      case 3:// adultos
+        $formulax[4] = $this->pesoxxxx * $this->dataxxxx['requdiar'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
@@ -65,7 +65,7 @@ class Glutaminas {
       case 1:// pediatricos
         $formulax[4] =  $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] ;
         break;
-      case 2:// neonatos        
+      case 2:// neonatos
         $formulax[4] =  $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] ;
         break;
       case 3:
@@ -97,7 +97,7 @@ class Glutaminas {
     $this->casaxxxx = $medicame->casa->id;
     $this->purgaxxx = $purgaxxx;
     $this->requemientodiarionpt();
-    $this->requemientototalnpt();   
+    $this->requemientototalnpt();
     $this->volumennpt();
      $this->purganpt();
     return $this->estructu[$this->casaxxxx];

@@ -37,6 +37,6 @@ class Pacientes
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
             ->where('cformulas.paciente_id',$request->paciente);
 
-        return DatatableHelper::getDatatable($paciente, $request);
+        return DatatableHelper::getDtFormulacion($paciente, $request);
     }
 }

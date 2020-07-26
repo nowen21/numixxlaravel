@@ -1,3 +1,9 @@
-<a class="btn btn-sm btn-primary" href="{{ route('formular.editar', [$sis_clinica_id,$paciente_id,$id]) }}">Editar</a>
-<a class="btn btn-sm btn-primary" href="{{ route('formular.ver', [$sis_clinica_id,$paciente_id,$id]) }}">Ver</a>
-<a class="btn btn-sm btn-primary" href="{{ route('formular.copiar', [$sis_clinica_id,$paciente_id,$id]) }}">Copiar Formulación</a>
+@if($requestx->editarxx)
+<a class="btn btn-sm btn-primary" href="{{ route('formular.editar', [$queryxxx->sis_clinica_id,$queryxxx->paciente_id,$queryxxx->id]) }}">Editar</a>
+@endif
+@if($requestx->leerxxxx)
+<a class="btn btn-sm btn-primary" href="{{ route('formular.ver', [$queryxxx->sis_clinica_id,$queryxxx->paciente_id,$queryxxx->id]) }}">Ver</a>
+@endif
+@if($requestx->copiarxx)
+<a class="btn btn-sm btn-primary" href="{{ route('formular.copiar', [$queryxxx->sis_clinica_id,$queryxxx->paciente_id,$queryxxx->id]) }}">Copiar Formulación</a>
+@endif
