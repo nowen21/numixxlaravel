@@ -79,7 +79,7 @@ class CformulaController extends Controller
         $this->opciones['parametr'] = [$clinicax, $padrexxx];
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'NUEVA FORMULACIóN',
+                'titunuev' => 'NUEVA FORMULACIÓN',
                 'titulist' => 'LISTA DE FORMULACIONES',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
@@ -242,6 +242,35 @@ class CformulaController extends Controller
         ];
         return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
     }
+    public function copy($clinicax, $padrexxx, Cformula $objetoxx)
+    {
+        $this->opciones['cardhead'] = $this->opciones['cardhead'] . SisClinica::where('id', $clinicax)->first()->clinica;
+        $this->opciones['tituloxx'] = 'Copiar: Formulación';
+        $paciente = Paciente::getPaciente(['padrexxx' => $padrexxx]);
+        $this->opciones['cardheap'] = 'FORMULACION PACIENTE: ' . $paciente->nombres . ' ' . $paciente->apellidos;
+        $this->opciones['formular'] = Dataformulario::getPintarFormulario(
+            [
+                'paciente' => $paciente,
+                'furmulac' => $objetoxx,
+
+            ]
+        );
+        $this->opciones['paciente'] = $paciente;
+        $this->opciones['clinicax'] = [$paciente->sis_clinica->id => $paciente->sis_clinica->clinica];
+        $this->opciones['botoform'][0]['routingx'][1] = [$clinicax, $padrexxx];
+        $this->opciones['parametr'] = [$clinicax, $padrexxx, $objetoxx->id];
+        $this->opciones['botoform'][] =
+            [
+                'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.copiar', [$padrexxx, $objetoxx->id]],
+                'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+            ];
+
+        $this->opciones['botoform'][] = [
+            'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'] . '.nuevo', [$clinicax, $padrexxx]],
+            'formhref' => 2, 'tituloxx' => 'CREAR NUEVO', 'clasexxx' => 'btn btn-sm btn-primary'
+        ];
+        return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
+    }
 
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
@@ -269,6 +298,14 @@ class CformulaController extends Controller
     {
         $dataxxxx = $request->all();
         return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
+    }
+    public function copyu($clinicax, $paciente, CformulaCrearRequest  $request, Cformula $objetoxx)
+    {
+        $dataxxxx = $request->all();
+        $dataxxxx['desdexxx'] = 10;
+        $dataxxxx['paciente_id'] = $paciente;
+        $dataxxxx['sis_clinica_id'] = Auth::user()->sis_clinica_id;
+        return $this->grabar($dataxxxx, '', 'Registro creado con éxito');
     }
 
     /**

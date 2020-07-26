@@ -36,16 +36,16 @@ class Lipidos
   {
     $formulax = [];
     switch ($this->npt_idxx) {
-    //   case 1: // pediatricos
-    //     $formulax[26] = ($this->dataxxxx['volumenx'] / self::FACTORX5 + self::FACTORX1 * $this->dataxxxx['lipovolu']) / $this->pesoxxxx;
-    //     $formulax[27] = ($this->dataxxxx['volumenx'] / self::FACTORX5 + self::FACTORX1 * $this->dataxxxx['lipovolu'] / self::FACTORX9) / $this->pesoxxxx;
-    //     $formulax[28] = ($this->dataxxxx['volumenx'] / self::FACTOR10 + self::FACTORX1 * $this->dataxxxx['lipovolu'] / self::FACTORX9) / $this->pesoxxxx;
-    //     break;
-    //   case 2: // neonatos
-    //     $formulax[26] = ($this->dataxxxx['volumenx'] / self::FACTORX5 + self::FACTORX1 * $this->dataxxxx['lipovolu']) / $this->pesoxxxx;
-    //     $formulax[27] = ($this->dataxxxx['volumenx'] / self::FACTORX5 + self::FACTORX1 * $this->dataxxxx['lipovolu'] / self::FACTORX9) / $this->pesoxxxx;
-    //     $formulax[28] = ($this->dataxxxx['volumenx'] / self::FACTOR10 + self::FACTORX1 * $this->dataxxxx['lipovolu'] / self::FACTORX9) / $this->pesoxxxx;
-    //     break;
+        //   case 1: // pediatricos
+        //     $formulax[26] = ($this->dataxxxx['volumenx'] / self::FACTORX5 + self::FACTORX1 * $this->dataxxxx['lipovolu']) / $this->pesoxxxx;
+        //     $formulax[27] = ($this->dataxxxx['volumenx'] / self::FACTORX5 + self::FACTORX1 * $this->dataxxxx['lipovolu'] / self::FACTORX9) / $this->pesoxxxx;
+        //     $formulax[28] = ($this->dataxxxx['volumenx'] / self::FACTOR10 + self::FACTORX1 * $this->dataxxxx['lipovolu'] / self::FACTORX9) / $this->pesoxxxx;
+        //     break;
+        //   case 2: // neonatos
+        //     $formulax[26] = ($this->dataxxxx['volumenx'] / self::FACTORX5 + self::FACTORX1 * $this->dataxxxx['lipovolu']) / $this->pesoxxxx;
+        //     $formulax[27] = ($this->dataxxxx['volumenx'] / self::FACTORX5 + self::FACTORX1 * $this->dataxxxx['lipovolu'] / self::FACTORX9) / $this->pesoxxxx;
+        //     $formulax[28] = ($this->dataxxxx['volumenx'] / self::FACTOR10 + self::FACTORX1 * $this->dataxxxx['lipovolu'] / self::FACTORX9) / $this->pesoxxxx;
+        //     break;
 
       case 1: // pediatricos
         // $formulax[26] = ($this->dataxxxx['volumenx']  + self::FACTORX1 * $this->dataxxxx['lipovolu']) / $this->pesoxxxx;
@@ -124,20 +124,20 @@ class Lipidos
         // $formulax[26] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['lipovolu']) ;
         // $formulax[27] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['lipovolu']) ;
         // $formulax[28] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['lipovolu']) ;
-        $formulax[26] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']* self::FACTORX5) ;
-        $formulax[27] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']* self::FACTORX5) ;
-        $formulax[28] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']* self::FACTORX5) ;
+        $formulax[26] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * self::FACTORX5);
+        $formulax[27] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * self::FACTORX5);
+        $formulax[28] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * self::FACTORX5);
 
-    break;
+        break;
       case 2: // neonatos
-        $formulax[26] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['lipovolu'])* self::FACTORX5;
-        $formulax[27] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['lipovolu'])* self::FACTORX5 ;
-        $formulax[28] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['lipovolu'])* self::FACTORX5;
+        $formulax[26] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['lipovolu']) * self::FACTORX5;
+        $formulax[27] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['lipovolu']) * self::FACTORX5;
+        $formulax[28] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] - self::FACTORX1 * $this->dataxxxx['lipovolu']) * self::FACTORX5;
         // $formulax[26] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']* self::FACTORX5) ;
         // $formulax[27] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']* self::FACTORX5) ;
         // $formulax[28] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']* self::FACTORX5) ;
 
-    break;
+        break;
       case 3: // adultos
         $formulax[26] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * self::FACTORX5);
         $formulax[27] = ($this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * self::FACTORX5);

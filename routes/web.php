@@ -15,8 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('/');
 Route::get('user-list-pdf/{objetoxx}', 'Pdfs\PdfController@getPdfExpUsuarios')->name('user.pdf');
-
-
+$optionsx=['regiester'=>false];
+Auth::routes($optionsx);
 Route::group(['middleware' => ['guest']], function () {
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Auth\LoginController@Login');

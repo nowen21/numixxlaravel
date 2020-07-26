@@ -44,5 +44,7 @@ class DepartamentosSeeder extends Seeder
         Departamento::create(['id' => 30, 'nombre' => 'VALLE DEL CAUCA', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Departamento::create(['id' => 31, 'nombre' => 'VAUPÉS', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Departamento::create(['id' => 32, 'nombre' => 'VICHADA', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
+        Departamento::create(['id' => 33, 'nombre' => 'BOGOTÁ DC', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
+
     }
 }

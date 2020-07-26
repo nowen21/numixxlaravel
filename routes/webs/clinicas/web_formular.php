@@ -23,7 +23,19 @@ Route::group(['prefix' => '{padrexxy}'], function () use ($controll, $routexxx) 
 	Route::put('editar/{objetoxx}', [
 		'uses' => $controll . 'Controller@update',
 		'middleware' => ['permission:' . $routexxx . '-editar']
-	])->name($routexxx . '.editar');
+    ])->name($routexxx . '.editar');
+
+    Route::get('copiar/{objetoxx}', [
+		'uses' => $controll . 'Controller@copy',
+		'middleware' => ['permission:' . $routexxx . '-copiar']
+	])->name($routexxx . '.copiar');
+	Route::put('copiar/{objetoxx}', [
+		'uses' => $controll . 'Controller@copyu',
+		'middleware' => ['permission:' . $routexxx . '-copiar']
+	])->name($routexxx . '.copiar');
+
+
+
 	Route::get('ver/{objetoxx}', [
 		'uses' => $controll . 'Controller@show',
 		'middleware' => ['permission:' . $routexxx . '-leer']

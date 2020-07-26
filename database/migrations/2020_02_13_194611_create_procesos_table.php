@@ -16,8 +16,6 @@ class CreateProcesosTable extends Migration
     {
         Schema::create('procesos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            // $table->bigInteger('user_id')->unsigned();//usuario responsable del proceso
-            $table->bigInteger('cformula_id')->unsigned();//llave foranea de la tabla formulaciones
             $table->boolean('coloraci');//coloración normal
             $table->boolean('ausepart');//ausencia de partículas
             $table->boolean('ausefuga');//ausencia de fugas
@@ -25,15 +23,11 @@ class CreateProcesosTable extends Migration
             $table->boolean('nopasaxx');//indica si el control en proceso es exitoso o no
             $table->boolean('estaproc');//Estado del proceso
             $table->boolean('listermi');//indica si ya esta terminado
-            // $table->foreign('user_id')->references('id')->on('users'); 
-            $table->foreign('cformula_id')->references('id')->on('cformulas');
             $table=CamposMagicos::magicos($table); //usuario responsable del proceso
         });
 
         Schema::create('h_procesos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');//usuario responsable del proceso
-            $table->integer('cformula_id');//llave foranea de la tabla formulaciones
             $table->boolean('coloraci');//coloración normal
             $table->boolean('ausepart');//ausencia de partículas
             $table->boolean('ausefuga');//ausencia de fugas

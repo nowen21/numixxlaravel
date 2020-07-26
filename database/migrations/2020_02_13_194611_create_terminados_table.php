@@ -16,7 +16,6 @@ class CreateTerminadosTable extends Migration
     {
         Schema::create('terminados', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('proceso_id')->unsigned(); //proceso al que se le va a realizar el terminado
             $table->boolean('completo'); //datos completos y correctos en la etiqueta
             $table->boolean('particul'); //ausencia de partículas
             $table->boolean('integrid'); //integridad de la bolsa o empaque primario
@@ -31,12 +30,10 @@ class CreateTerminadosTable extends Migration
             $table->boolean('concepto'); //Concepto (A) Aprobado (R) Rechazado
             $table->boolean('estaterm'); //estado del terminado
             $table->boolean('nopasaxx'); //indica si el control producto terminado es exitoso o no
-            $table->foreign('proceso_id')->references('id')->on('procesos');
             $table=CamposMagicos::magicos($table);
         });
         Schema::create('h_terminados', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('proceso_id'); //proceso al que se le va a realizar el terminado
             $table->boolean('completo'); //datos completos y correctos en la etiqueta
             $table->boolean('particul'); //ausencia de partículas
             $table->boolean('integrid'); //integridad de la bolsa o empaque primario

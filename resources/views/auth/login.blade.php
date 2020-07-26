@@ -44,6 +44,11 @@
                                 <button type="submit" class="btn btn-primary">
                                     Iniciar
                                 </button>
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Olvidó su contraseña?') }}
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </form>

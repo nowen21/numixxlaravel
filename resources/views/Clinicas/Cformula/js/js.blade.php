@@ -147,13 +147,13 @@
                 }
             });
         });
-        $('#peso').on('keyup', function() {
-            // if ($(this).val() > 0 && eval('{{$todoxxxx["paciente"]->npt_id}}') < 3) {
-            //     pedineon($(this).val()); console.log($(this).val())
-            // }
-            recalcular();
-        });
-        //dataxxxx={'medicame':?,'campo_id':?,'compauxi':?}
+        // $('#peso').on('keyup', function() {
+        //     // if ($(this).val() > 0 && eval('{{$todoxxxx["paciente"]->npt_id}}') < 3) {
+        //     //     pedineon($(this).val()); console.log($(this).val())
+        //     // }
+        //     recalcular();
+        // });
+        // //dataxxxx={'medicame':?,'campo_id':?,'compauxi':?}
 
 
 
@@ -210,7 +210,7 @@
 
             $("#formvaci").val(hayalmenosuno);
             $.confirm({
-                title: 'FAVOR REVISAR Y CONFIRMAR!',
+                title: '¡FAVOR REVISAR Y CONFIRMAR!',
                 content: content,
                 type: 'red',
                 typeAnimated: true,
@@ -220,7 +220,7 @@
                         btnClass: 'btn-red',
                         action: function() {
                             $.confirm({
-                                title: '¡Reconfirmación de envío..!!',
+                                title: '¡Reconfirmación de envío..!',
                                 content: content,
                                 type: 'red',
                                 typeAnimated: true,

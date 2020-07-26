@@ -21,6 +21,21 @@ class UsersSeeder extends Seeder
         'email'=>'numixx@numixx.com','password'=>'Num1xx123$',
         'sis_clinica_id'=>1
         ]);
-        
+        $super=User::create(['name'=>'USUARIO DE REVISIONES',
+        'email'=>'revisiones@numixx.com','password'=>'N0w3n2104$',
+        'sis_clinica_id'=>1
+        ]);
+        $super=User::create(['name'=>'USUARIO DE PREPARACIONES',
+        'email'=>'preparaciones@numixx.com','password'=>'N0w3n2104$',
+        'sis_clinica_id'=>1
+        ]);
+        $super=User::create(['name'=>'USUARIO DE CONTROL PROCESOS',
+        'email'=>'procesos@numixx.com','password'=>'N0w3n2104$',
+        'sis_clinica_id'=>1
+        ]);
+        $super=User::create(['name'=>'USUARIO DE CONTROL PRUCTOS TERMINADOS',
+        'email'=>'terminados@numixx.com','password'=>'N0w3n2104$',
+        'sis_clinica_id'=>1
+        ]);
     }
 }

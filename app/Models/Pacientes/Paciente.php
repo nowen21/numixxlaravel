@@ -16,87 +16,92 @@ use Illuminate\Support\Facades\DB;
 class Paciente extends Model
 {
 
-  protected $fillable = [
-    'registro',
-    'cedula',
-    'nombres',
-    'apellidos',
-    'peso',
-    'genero_id',
-    'ep_id',
-    'cama',
-    'fechnaci',
-    'departamento_id',
-    'municipio_id',
-    'npt_id',
-    'servicio_id',
-    'sis_esta_id',
-    'user_crea_id',
-    'sis_clinica_id',
-    'user_edita_id'
-  ];
+    protected $fillable = [
+        'registro',
+        'cedula',
+        'nombres',
+        'apellidos',
+        'peso',
+        'genero_id',
+        'ep_id',
+        'cama',
+        'fechnaci',
+        'departamento_id',
+        'municipio_id',
+        'npt_id',
+        'servicio_id',
+        'sis_esta_id',
+        'user_crea_id',
+        'sis_clinica_id',
+        'user_edita_id'
+    ];
 
-  public function genero()
-  {
-    return $this->belongsTo(Genero::class);
-  }
+    public function genero()
+    {
+        return $this->belongsTo(Genero::class);
+    }
 
-  public function ep()
-  {
-    return $this->belongsTo(Ep::class);
-  }
+    public function ep()
+    {
+        return $this->belongsTo(Ep::class);
+    }
 
-  public function servicio()
-  {
-    return $this->belongsTo(Servicio::class);
-  }
-  public function servicios()
-  {
-    return $this->belongsToMany(Servicio::class)->withTimestamps();
-  }
+    public function servicio()
+    {
+        return $this->belongsTo(Servicio::class);
+    }
+    public function servicios()
+    {
+        return $this->belongsToMany(Servicio::class)->withTimestamps();
+    }
 
-  public function sis_clinicas()
-  {
-    return $this->belongsToMany(SisClinica::class)->withTimestamps();
-  }
+    public function sis_clinicas()
+    {
+        return $this->belongsToMany(SisClinica::class)->withTimestamps();
+    }
 
-  public function municipio()
-  {
-    return $this->belongsTo(Municipio::class);
-  }
+    public function municipio()
+    {
+        return $this->belongsTo(Municipio::class);
+    }
 
-  public function npt()
-  {
-    return $this->belongsTo(Npt::class);
-  }
+    public function npt()
+    {
+        return $this->belongsTo(Npt::class);
+    }
 
-  public function sis_esta()
-  {
-    return $this->belongsTo(SisEsta::class);
-  }
-  public function sis_clinica()
-  {
-    return $this->belongsTo(SisClinica::class);
-  }
+    public function sis_esta()
+    {
+        return $this->belongsTo(SisEsta::class);
+    }
+    public function sis_clinica()
+    {
+        return $this->belongsTo(SisClinica::class);
+    }
 
 
-  public static function transaccion($dataxxxx,  $objetoxx)
-  {
+    public static function transaccion($dataxxxx,  $objetoxx)
+    {
 
-    $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {
-      $dataxxxx['user_edita_id'] = Auth::user()->id;
-      if ($objetoxx != '') {
-        $objetoxx->update($dataxxxx);
-      } else {
-        $dataxxxx['user_crea_id'] = Auth::user()->id;
-        $objetoxx = Paciente::create($dataxxxx);
-      }
-      return $objetoxx;
-    }, 5);
-    return $usuariox;
-  }
-  public static function getPaciente($dataxxxx){
-    $paciente=Paciente::where('id',$dataxxxx['padrexxx'])->first();
-    return $paciente;
-  }
+        $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {
+            $dataxxxx['cama']  = strtoupper($dataxxxx['cama']);
+            $dataxxxx['nombres'] = strtoupper($dataxxxx['nombres']);
+            $dataxxxx['apellidos'] = strtoupper($dataxxxx['apellidos']);
+
+            $dataxxxx['user_edita_id'] = Auth::user()->id;
+            if ($objetoxx != '') {
+                $objetoxx->update($dataxxxx);
+            } else {
+                $dataxxxx['user_crea_id'] = Auth::user()->id;
+                $objetoxx = Paciente::create($dataxxxx);
+            }
+            return $objetoxx;
+        }, 5);
+        return $usuariox;
+    }
+    public static function getPaciente($dataxxxx)
+    {
+        $paciente = Paciente::where('id', $dataxxxx['padrexxx'])->first();
+        return $paciente;
+    }
 }
