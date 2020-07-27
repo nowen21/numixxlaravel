@@ -59,7 +59,7 @@
                 <tr >
                     <td>{{$formulax->medicame->casa->casa}}</td>
                     <td>{{$formulax->medicame->nombgene}}</td>
-                    <td>{{$formulax['unidmedi']}}</td>
+                    <td>{{$formulax->medicame->casa->unidmedi}}</td>
                     <td><div class="form-control" style="height: 28px">{{$formulax->cantidad}}</div></td>
                     <td><div class="form-control" style="height: 28px">{{number_format($formulax->volumen,2)}}</div></td>
                 </tr>

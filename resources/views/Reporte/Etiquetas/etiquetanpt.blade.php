@@ -208,7 +208,7 @@ foreach ($cformula->dformulas as $value) {
         VOLUMEN DÍA
       </td>
       <td style=" width:25%;">
-        {{$volumdia+$cformula->aguax_id}}
+        {{number_format($volumdia+$cformula->aguax_id,2)}}
       </td>
     </tr>
     <tr>
@@ -222,7 +222,7 @@ foreach ($cformula->dformulas as $value) {
         VELOCIDAD
       </td>
       <td style=" width:25%;">
-        {{$cformula->velocidad}}
+        {{number_format($cformula->velocidad,2)}}
       </td>
     </tr>
     <tr>
@@ -232,46 +232,47 @@ foreach ($cformula->dformulas as $value) {
       <td style=" width:15%;">
         Cal NP/g P
       </td>
+
       <td style=" width:30%;">
-        DNP
+        Osmoralidad
       </td>
       <td style=" width:25%;">
-        Osmoralidad
+
       </td>
     </tr>
     <tr>
-      <td style=" width:30%;">
+      <td >
         {{explode(' ',$cformula->created_at)[0]}}
       </td>
-      <td style=" width:15%;">
+      <td>
         {{number_format(($carbohid*3.4 + $lipidoxx*9 +$vitalipx*1.12)/(($aminoaci+$glutamin)/6.25),2)}}
       </td>
-      <td style=" width:30%;">
-        {{$dnpxxxxx}}
-      </td>
-      <td style=" width:25%;">
+
+      <td>
         {{number_format($calculos['osmolari'],2)}}
+      </td>
+      <td>
+
       </td>
     </tr>
 
     <tr>
-      <td style=" width:30%;">
-        FECHA INICIO NP
-      </td>
-      <td style=" width:15%;">
+
+      <td>
         CALORÍAS TOTALES
       </td>
-      <td style=" width:30%;">
+      <td>
         CAL TOTAL/Kg/DÍA
       </td>
-      <td style=" width:25%;">
-        RELACIÓN Ca/FÓSFORO {{"(<2)"}}
+      <td>
+        RELACIÓN Ca/FÓSFORO (<2)
+      </td>
+      <td>
+
       </td>
     </tr>
     <tr>
-      <td>
-        {{$cformula->paciente->registro}}
-      </td>
+
       <td>
         {{number_format(($lipidoxx*9 +$vitalipx*1.12)+($carbohid*3.4)+($aminoaci+$glutamin)*4,2)}}
       </td>
@@ -280,6 +281,9 @@ foreach ($cformula->dformulas as $value) {
       </td>
       <td>
         {{$calculos['calcfosv']}}
+      </td>
+      <td>
+
       </td>
     </tr>
 

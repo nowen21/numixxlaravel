@@ -5,11 +5,15 @@ namespace App\Helpers\Produccion;
 use App\Helpers\DatatableHelper;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Produccion\Calistam;
-use App\Models\Produccion\Proceso;
-use App\Models\Produccion\Terminado;
 
 class Produccion
 {
+    /**
+     * lista las formulaciones para arevision
+     *
+     * @param [type] $request
+     * @return void
+     */
     public static function getPacientesCformula($request)
     {
         $paciente = Cformula::select([
@@ -18,6 +22,7 @@ class Produccion
             'sis_estas.s_estado', 'cformulas.paciente_id', 'cformulas.userevis_id'
         ])
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
+            ->where('cformulas.created_at', 'LIKE', date('Y-m-d',time()).'%')
             ->orderBy('cformulas.userevis_id', 'ASC')
             ->orderBy('cformulas.created_at', 'ASC');
 
@@ -46,6 +51,7 @@ class Produccion
             ->join('sis_clinicas', 'cformulas.sis_clinica_id', '=', 'sis_clinicas.id')
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
             ->where('cformulas.userevis_id', '!=', null)
+            ->where('cformulas.created_at', 'LIKE', date('Y-m-d',time()).'%')
             ->orderBy('cformulas.userprep_id', 'ASC')
             ->orderBy('cformulas.created_at', 'ASC');
         return DatatableHelper::getDtb($paciente, $request);
@@ -56,12 +62,13 @@ class Produccion
         $paciente = Cformula::select([
             'cformulas.id', 'cformulas.sis_esta_id',
             'sis_estas.s_estado','cformulas.created_at',
-            'sis_clinicas.clinica', 'pacientes.nombres', 'pacientes.apellidos', 'pacientes.cedula', 
+            'sis_clinicas.clinica', 'pacientes.nombres', 'pacientes.apellidos', 'pacientes.cedula',
             'cformulas.proceso_id'
         ])
             ->join('pacientes', 'cformulas.paciente_id', '=', 'pacientes.id')
             ->join('sis_clinicas', 'cformulas.sis_clinica_id', '=', 'sis_clinicas.id')
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
+            ->where('cformulas.created_at', 'LIKE', date('Y-m-d',time()).'%')
             ->where('cformulas.userprep_id', '!=', null)
             ->orderBy('cformulas.proceso_id', 'ASC')
             ->orderBy('cformulas.created_at', 'ASC');
@@ -78,6 +85,7 @@ class Produccion
             ->join('procesos', 'cformulas.proceso_id', '=', 'procesos.id')
             ->join('sis_clinicas', 'cformulas.sis_clinica_id', '=', 'sis_clinicas.id')
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
+            ->where('cformulas.created_at', 'LIKE', date('Y-m-d',time()).'%')
             ->orderBy('cformulas.terminado_id', 'ASC')
             ->orderBy('cformulas.created_at', 'ASC');
         return DatatableHelper::getDtb($paciente, $request);
