@@ -19,13 +19,13 @@
             </li>
         @endguest
   <!-- Messages Dropdown Menu -->
-  {{-- @include('layout.nav-bar.right.messages.index') --}}
+  {{-- @include('layouts.nav-bar.right.messages.index') --}}
   <!-- End Messages Dropdown Menu -->
-
+  @auth
   <!-- Notifications Dropdown Menu -->
-  {{-- @include('layout.nav-bar.right.notifications') --}}
+  @include('layouts.nav-bar.right.notifications')
   <!-- Notifications Dropdown Menu -->
-
+  @endauth
   <!-- Controls -->
   {{-- <li class="nav-item">
     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">

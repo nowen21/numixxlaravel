@@ -1,7 +1,7 @@
 <?php
 
 $controll = 'Administracion\Servicio';
-$routexxx = 'cservicio';
+$routexxx = 'servicio';
 Route::group(['prefix' => 'servicios'], function () use ($controll, $routexxx) {
 
 	Route::get('', [

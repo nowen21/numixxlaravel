@@ -6,7 +6,7 @@
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
-  $.widget.bridge('uibutton', $.ui.button)
+    $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -49,19 +49,73 @@
 <script src="{{ asset('especiales/combos.js') }}"></script> -->
 <script>
     toastr.options = {
-  "closeButton": true,
-  "debug": false,
-  "newestOnTop": false,
-  "progressBar": false,
-  "positionClass": "toast-top-right",
-  "preventDuplicates": false,
-  "showDuration": "5000",
-  "hideDuration": "3000",
-  "showEasing": "swing",
-  "hideEasing": "linear",
-  "showMethod": "fadeIn",
-  "hideMethod": "fadeOut"
-}
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "showDuration": "5000",
+        "hideDuration": "3000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    $('body').click(function() {
+
+
+
+
+        var f_ajax = function() {
+            $('#alertas').empty();
+            $.ajax({
+                url: "{{route('clinica.getAlertas')}}",
+                type: 'POST',
+                data: {
+                    _token: $("input[name='_token']").val(),
+                },
+                dataType: 'json',
+                success: function(json) {
+
+                    $('#campana').text(json.totalxxx)
+                    $('#totalnotifi').text(json.notifica)
+                    $.each(json.dataxxxx, function(i, d) {
+
+                        var alerta = '';
+                        alerta += '<div class="dropdown-divider"></div>';
+                        alerta += '<div class="dropdown-item">';
+                        alerta += '<i class="fas ' + d.encabeza.iconoxxx + ' mr-2"></i>';
+                        alerta += d.encabeza.tituloxx;
+                        alerta += '<div class="list-group">';
+                        $.each(d.dataxxxx, function(i, m) {
+                            if (i < 2) {
+                                alerta += '<a href="' + m.linkxxxx + '" class="list-group-item list-group-item-action">';
+                                alerta += m.titulink;
+                                alerta += '<span class="float-right text-muted text-sm">';
+                                alerta += m.fechorax;
+                                alerta += '</span>';
+                                alerta += '</a> ';
+                            }
+                        })
+
+                        alerta += '</div> </div>';
+                        $('#alertas').append(alerta);
+
+
+                    });
+
+                },
+                error: function(xhr, status) {
+                    alert('Disculpe, existió un problema');
+                }
+            });
+
+        }
+        if ($("#alertas").length > 0) {
+            f_ajax();
+        }
+    });
 </script>
 @include('layouts.mensaje')
 @yield('scripts')

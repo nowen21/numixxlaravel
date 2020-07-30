@@ -25,10 +25,11 @@ class RangoController extends Controller
             'esindexx' => false, // true indica si es index o crear que debe mostrar
         ];
 
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
+        $this->middleware(['permission:' .
+            $this->opciones['permisox'] . '-leer|' .
+            $this->opciones['permisox'] . '-crear|' .
+            $this->opciones['permisox'] . '-editar|' .
+            $this->opciones['permisox'] . '-borrar']);
 
         $this->opciones['readonly'] = '';
         $this->opciones['rutaxxxx'] = 'rango';
@@ -52,7 +53,7 @@ class RangoController extends Controller
     public function index()
     {
         $this->opciones['indecrea']=true;
-        $this->opciones['esindexx']=true;     
+        $this->opciones['esindexx']=true;
         $this->opciones['tablasxx'][] =
             [
 
@@ -83,7 +84,7 @@ class RangoController extends Controller
                 'parametr' => [],
                 'routxxxx' => $this->opciones['routxxxx'],
             ];
-        
+
 
         $this->opciones['padrexxx'] ='';
 
@@ -108,7 +109,7 @@ class RangoController extends Controller
      */
     public function create()
     {
-       
+
         $this->opciones['padrexxx'] = '';
         $this->opciones['indecrea'] = true;
         $this->opciones['botoform'][] =
@@ -128,7 +129,7 @@ class RangoController extends Controller
     public function store(RangoCrearRequest $request)
     {
         $dataxxxx = $request->all();
-       
+
         return $this->grabar($dataxxxx, '', 'Registro creado con éxito');
     }
 
@@ -160,11 +161,11 @@ class RangoController extends Controller
     {
         $this->opciones['cardhead']=Rango::getRango(['padrexxx'=>$objetoxx->id]);
         $this->opciones['parametr'] =  [$objetoxx->id];
-        
+
         $this->opciones['tituloxx']='Editar: Rango';
         $this->opciones['indecrea'] = false;
         $this->opciones['padrexxx'] = $objetoxx->id;
-      
+
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', $this->opciones['parametr']],

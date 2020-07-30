@@ -35,5 +35,9 @@ Route::group(['prefix' => 'clinicas'], function () {
 	require_once('web_cmedicame.php');
 	require_once('web_crango.php');
 	require_once('web_paciente.php');
-	require_once('web_remision.php');
+    require_once('web_remision.php');
+
+    Route::post('getAlertas', [
+		'uses' => 'Clinicas\SisClinicaController@getAlertas',
+	])->name('clinica.getAlertas');
 });

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Formulaciones\Hidrpedi;
+use App\Models\Tipoacion;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(SisEstasSeeder::class);
         $this->call(ClinicasSeeder::class);
-        $this->call(UsersSeeder::class);        
+        $this->call(UsersSeeder::class);
         $this->call(RolesYPermisosSeeder::class);
         $this->call(AsignarRolSeeder::class);
         $this->call(UnidadsSeeder::class);
@@ -22,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UnidrangSeeder::class);
         $this->call(NptsSeeder::class);
         $this->call(UrangnptSeeder::class);
-        $this->call(CasasSeeder::class);        
+        $this->call(CasasSeeder::class);
         $this->call(MedicamesSeeder::class);
         $this->call(MmarcasSeeder::class);
         $this->call(MinvimasSeeder::class);
@@ -34,7 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MunicipiosSeeder::class);
         $this->call(ServiciosSeeder::class);
         $this->call(CondiciosSeeder::class);
-        $this->call(PacientesSeeder::class); 
+        $this->call(PacientesSeeder::class);
         $this->call(DmedicosSeeder::class);
         $this->call(DmarcasSeeder::class);
         $this->call(DlotesSeeder::class);
@@ -44,5 +45,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RnptsSeeder::class);
         $this->call(RcondicisSeeder::class);
         $this->call(RcodigosSeeder::class);
+        $this->call(TipoaccionsSeeder::class);
     }
 }

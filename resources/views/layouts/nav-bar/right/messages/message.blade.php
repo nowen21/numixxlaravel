@@ -3,7 +3,7 @@
     class="img-size-50 mr-3 img-circle">
   <div class="media-body">
     <h3 class="dropdown-item-title">
-      Josue Dumar
+      Jose Dumar
       <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
     </h3>
     <p class="text-sm">Iniciamos el desarrollo...</p>

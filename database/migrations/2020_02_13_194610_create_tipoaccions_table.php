@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipoalertasTable extends Migration
+class CreateTipoaccionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,15 +14,25 @@ class CreateTipoalertasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipoalertas', function (Blueprint $table) {
+        Schema::create('tipoaccions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('tituloxx',50)->unique();
+            $table->string('permisox',50);
+            $table->string('iconoxxx',50);
+            $table->string('pestania',150);
+            $table->string('routexxx',50);
+            $table->string('titulink',50);
             $table->text('cuerpoxx');
             $table=CamposMagicos::magicos($table);
         });
-        Schema::create('h_tipoalertas', function (Blueprint $table) {
+        Schema::create('h_tipoaccions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('tituloxx',50);
+            $table->string('permisox',50);
+            $table->string('iconoxxx',50);
+            $table->string('pestania',150);
+            $table->string('routexxx',50);
+            $table->string('titulink',50);
             $table->text('cuerpoxx');
             $table=CamposMagicos::h_magicos($table);
         });
@@ -35,7 +45,7 @@ class CreateTipoalertasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('h_tipoalertas');
-        Schema::dropIfExists('tipoalertas');
+        Schema::dropIfExists('h_tipoaciones');
+        Schema::dropIfExists('tipoaciones');
     }
 }

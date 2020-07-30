@@ -9,6 +9,7 @@ use App\Http\Requests\Produccion\TerminadoEditarRequest;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Produccion\Terminado;
 use App\Models\Sistema\SisEsta;
+use App\Traits\Cformula\AlertasTrait;
 use App\Traits\Pestanias\ProduccionTrait;
 use App\Traits\Produccion\TerminadoTrait;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class TerminadoController extends Controller
     private $opciones;
     use ProduccionTrait;
     use TerminadoTrait;
+    use AlertasTrait;
     public function __construct()
     {
         $this->opciones = [
@@ -209,6 +211,9 @@ class TerminadoController extends Controller
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
         $cabecera = Terminado::transaccion($dataxxxx, $objectx);
+        if ($objectx == '') {
+            $this->getAlerta(['objetoxx'=>$cabecera->cformula,'tipoacci'=>1]);
+        }
         return redirect()
             ->route($this->opciones['routxxxx'] . '.editar', [$cabecera->id])
             ->with('info', $infoxxxx);

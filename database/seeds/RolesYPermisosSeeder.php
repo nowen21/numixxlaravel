@@ -271,6 +271,15 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar servicio']);
         Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar servicio']);
 
+
+
+        $permiso = 'alerta';
+        Permission::create(['name' => $permiso . '-cliente',  'descripc' => 'Listar las alertas del cliente']);
+        Permission::create(['name' => $permiso . '-revisar',  'descripc' => 'Listar las alertas de revisiones']);
+        Permission::create(['name' => $permiso . '-preparar',  'descripc' => 'Listar las alertas de preparaciones']);
+        Permission::create(['name' => $permiso . '-procesar',  'descripc' => 'Listar las alertas de control en proceso']);
+        Permission::create(['name' => $permiso . '-terminar',  'descripc' => 'Listar las alertas de producto terminado']);
+
         /**
          * Reportes
          */

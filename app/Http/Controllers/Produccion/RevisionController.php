@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Produccion;
 use App\Helpers\Cformula\Dataformulario;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produccion\RevisionEditarRequest;
+use App\Models\Alerta;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Sistema\SisEsta;
+use App\Traits\Cformula\AlertasTrait;
 use App\Traits\Pestanias\ProduccionTrait;
 use App\Traits\Produccion\InventarioTrait;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +18,7 @@ class RevisionController extends Controller
     private $opciones;
     use ProduccionTrait;
     use InventarioTrait;
+    use AlertasTrait;
     public function __construct()
     {
         $this->opciones = [
@@ -81,7 +84,7 @@ class RevisionController extends Controller
                 'urlxxxxx' => 'api/produccion/produccion',
                 'cabecera' => [
                     ['td' => 'ID'],
-                    ['td' => 'TIMPO INFUSION'],
+                    ['td' => 'TIEMPO INFUSION'],
                     ['td' => 'VELOCIDAD INFUSION'],
                     ['td' => 'VOLUMEN'],
                     ['td' => 'PURGA'],
@@ -167,6 +170,7 @@ class RevisionController extends Controller
     private function grabar($dataxxxx)
     {
         $cformula = $dataxxxx['objetoxx']->update($dataxxxx['dataxxxx']);
+
         $this->getDescontarInventario(['cformula' => $dataxxxx['objetoxx']]);
         return redirect()
             ->route($this->opciones['routxxxx'] . '.editar', [$dataxxxx['objetoxx']->id])
@@ -182,6 +186,7 @@ class RevisionController extends Controller
      */
     public function update(RevisionEditarRequest  $request, Cformula $objetoxx)
     {
+        $this->getAlerta(['objetoxx'=>$objetoxx,'tipoacci'=>3]);
         $dataxxxx = ['userevis_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id];
         return $this->grabar(['dataxxxx' => $dataxxxx, 'objetoxx' => $objetoxx, 'infoxxxx' => 'Se ha realizado la revisión con éxito']);
     }

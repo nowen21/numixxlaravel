@@ -6,7 +6,7 @@
   <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
     <a href="#" class="dropdown-item">
       <!-- Message Start -->
-      @include('layout.nav-bar.right.messages.message')
+      @include('layouts.nav-bar.right.messages.message')
       <!-- Message End -->
     </a>
     <div class="dropdown-divider"></div>

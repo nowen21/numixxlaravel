@@ -9,12 +9,14 @@ use App\Models\Formulaciones\Cformula;
 use App\Models\Formulaciones\Ordene;
 use App\Models\Produccion\Proceso;
 use App\Models\Sistema\SisEsta;
+use App\Traits\Cformula\AlertasTrait;
 use App\Traits\Pestanias\ProduccionTrait;
 
 class ControlPController extends Controller
 {
     private $opciones;
     use ProduccionTrait;
+    use AlertasTrait;
     public function __construct()
     {
         $this->opciones = [
@@ -65,9 +67,9 @@ class ControlPController extends Controller
                 'titunuev' => 'NUEVO CONTROL DE PROCESO',
                 'titulist' => 'LISTA CONTROL DE PROCESOS',
                 'dataxxxx' => [
-                    ['campoxxx' => 'botonesx', 'dataxxxx' => 
+                    ['campoxxx' => 'botonesx', 'dataxxxx' =>
                     $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
-                    ['campoxxx' => 'revisado', 'dataxxxx' => 
+                    ['campoxxx' => 'revisado', 'dataxxxx' =>
                     $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.controlp'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
                     ['campoxxx' => 'medicame', 'dataxxxx' => $padrexxx],
@@ -76,7 +78,7 @@ class ControlPController extends Controller
                 'accitabl' => true,
                 'urlxxxxx' => 'api/produccion/procesos',
                 'cabecera' =>[
-                   
+
                     ['td' => 'LOTE INTERNO'],
                     ['td' => 'CEDULAddd'],
                     ['td' => 'NOMBRES'],
@@ -111,18 +113,18 @@ class ControlPController extends Controller
        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
-    { 
+    {
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
         if ($nombobje != '') {
             $this->opciones[$nombobje] = $objetoxx;
-        }  
+        }
         $this->opciones['pestania'] = $this->getPestanias([
             'tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => ''
         ]);
 
-              
+
          return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }
     /**
@@ -133,6 +135,12 @@ class ControlPController extends Controller
     public function create($padrexxx)
     {
         $padrexxx= Cformula::find($padrexxx);
+        if($padrexxx->proceso_id!=null){
+            return redirect()
+            ->route($this->opciones['routxxxx'] . '.editar', [$padrexxx->proceso_id]);
+        }
+
+
         $this->opciones['cformula'] = [$padrexxx->id=>'Formulación: '.$padrexxx->id];
         $this->opciones['indecrea']=false;
         $this->opciones['clinicac']=true;
@@ -179,7 +187,7 @@ class ControlPController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Proceso $objetoxx)
-    { 
+    {
         $this->opciones['cformula'] = [$objetoxx->cformula->id=>'Formulación: '.$objetoxx->cformula->id];
         $this->opciones['clinicax'] =$objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
@@ -194,6 +202,9 @@ class ControlPController extends Controller
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
         $cabecera=Proceso::transaccion($dataxxxx, $objectx);
+        if ($objectx == '') {
+            $this->getAlerta(['objetoxx'=>$cabecera->cformula,'tipoacci'=>5]);
+        }
         return redirect()
             ->route($this->opciones['routxxxx'] . '.editar', [$cabecera->id])
             ->with('info', $infoxxxx);
@@ -207,7 +218,7 @@ class ControlPController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(ControlpEditarRequest  $request, Proceso $objetoxx)
-    { 
+    {
         $dataxxxx = $request->all();
         return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
     }

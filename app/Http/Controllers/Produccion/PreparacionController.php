@@ -9,12 +9,14 @@ use App\Models\Formulaciones\Cformula;
 use App\Models\Formulaciones\Dformula;
 use App\Models\Produccion\Calistam;
 use App\Models\Sistema\SisEsta;
+use App\Traits\Cformula\AlertasTrait;
 use App\Traits\Pestanias\ProduccionTrait;
 
 class PreparacionController extends Controller
 {
     private $opciones;
     use ProduccionTrait;
+    use AlertasTrait;
     public function __construct()
     {
         $this->opciones = [
@@ -65,9 +67,9 @@ class PreparacionController extends Controller
                 'titunuev' => 'NUEVA PREPARACION',
                 'titulist' => 'LISTA DE PREPARACIONES',
                 'dataxxxx' => [
-                    ['campoxxx' => 'botonesx', 'dataxxxx' => 
+                    ['campoxxx' => 'botonesx', 'dataxxxx' =>
                     $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
-                    ['campoxxx' => 'revisado', 'dataxxxx' => 
+                    ['campoxxx' => 'revisado', 'dataxxxx' =>
                     $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.preparad'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
                     ['campoxxx' => 'medicame', 'dataxxxx' => $padrexxx],
@@ -76,7 +78,7 @@ class PreparacionController extends Controller
                 'accitabl' => true,
                 'urlxxxxx' => 'api/produccion/preparacion',
                 'cabecera' =>[
-                   
+
                     ['td' => 'LOTE INTERNO'],
                     ['td' => 'CEDULA'],
                     ['td' => 'NOMBRES'],
@@ -108,19 +110,19 @@ class PreparacionController extends Controller
        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
-    { 
+    {
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
         if ($nombobje != '') {
             $this->opciones[$nombobje] = $objetoxx;
-        }   
+        }
         $this->opciones['pestania'] = $this->getPestanias([
             'tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => ''
         ]);
         return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }
-    
+
     public function show(Cformula $objetoxx)
     {
         $this->opciones['cardhead']='PREPARACION PACIENTE: '.$objetoxx->paciente->nombres.' '.$objetoxx->paciente->apellidos;
@@ -165,11 +167,12 @@ class PreparacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(PreparacionEditarRequest  $request, Cformula $objetoxx)
-    { 
+    {
+        $this->getAlerta(['objetoxx'=>$objetoxx,'tipoacci'=>4]);
         $dataxxxx = $request->all();
-        
+
         return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
-       
+
     }
 
     /**

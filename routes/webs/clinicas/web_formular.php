@@ -61,5 +61,5 @@ Route::group(['prefix' => '{padrexxy}'], function () use ($controll, $routexxx) 
 	Route::post('getRequerimientoVolumen', [
 		'uses' => $controll . 'Controller@getRequerimientoVolumen',
 		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
-	])->name($routexxx.'.rangvolu');
+    ])->name($routexxx.'.rangvolu');
 });

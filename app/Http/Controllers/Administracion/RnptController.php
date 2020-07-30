@@ -28,10 +28,11 @@ class RnptController extends Controller
             'esindexx' => false
         ];
 
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
+        $this->middleware(['permission:' .
+            $this->opciones['permisox'] . '-leer|' .
+            $this->opciones['permisox'] . '-crear|' .
+            $this->opciones['permisox'] . '-editar|' .
+            $this->opciones['permisox'] . '-borrar']);
 
         $this->opciones['readonly'] = '';
         $this->opciones['rutaxxxx'] = 'rnpt';
@@ -54,7 +55,7 @@ class RnptController extends Controller
      */
     public function index($padrexxx)
     {
-        $this->opciones['cardhead']=Rango::getRango(['padrexxx'=>$padrexxx]);      
+        $this->opciones['cardhead']=Rango::getRango(['padrexxx'=>$padrexxx]);
         $this->opciones['tablasxx'][] =
             [
 
@@ -84,7 +85,7 @@ class RnptController extends Controller
                 'parametr' => [$padrexxx],
                 'routxxxx' => $this->opciones['routxxxx'],
             ];
-        
+
 
         $this->opciones['padrexxx'] = $padrexxx;
 
@@ -166,11 +167,11 @@ class RnptController extends Controller
         $this->opciones['cardhead']=Rango::getRango(['padrexxx'=>$padrexxx]);
         $this->opciones['botoform'][0]['routingx'][1]=$padrexxx;
         $this->opciones['parametr'] =  [$padrexxx,$objetoxx->id];
-        
+
         $this->opciones['tituloxx']='Editar: Npt al Rango';
         $this->opciones['indecrea'] = false;
         $this->opciones['padrexxx'] = $padrexxx;
-      
+
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', $this->opciones['parametr']],

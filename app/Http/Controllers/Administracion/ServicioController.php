@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Administracion;
 
+use App\Helpers\AlertasHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Administracion\ServicioCrearRequest;
 use App\Http\Requests\Administracion\ServicioEditarRequest;
@@ -15,7 +16,7 @@ class ServicioController extends Controller
     public function __construct()
     {
         $this->opciones = [
-            'permisox' => 'cservicio',
+            'permisox' => 'servicio',
             'parametr' => [],
             'rutacarp' => 'Administracion.Servicio.',
             'tituloxx' => 'Crear: Servicio',
@@ -25,15 +26,15 @@ class ServicioController extends Controller
             'esindexx' => false
         ];
 
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
-
+       $this->middleware(['permission:' .
+            $this->opciones['permisox'] . '-leer|' .
+            $this->opciones['permisox'] . '-crear|' .
+            $this->opciones['permisox'] . '-editar|' .
+            $this->opciones['permisox'] . '-borrar']);
         $this->opciones['readonly'] = '';
-        $this->opciones['rutaxxxx'] = 'cservicio';
-        $this->opciones['routnuev'] = 'cservicio';
-        $this->opciones['routxxxx'] = 'cservicio';
+        $this->opciones['rutaxxxx'] = 'servicio';
+        $this->opciones['routnuev'] = 'servicio';
+        $this->opciones['routxxxx'] = 'servicio';
 
         $this->opciones['botoform'][] =
             [
@@ -73,14 +74,14 @@ class ServicioController extends Controller
                     ['data' => 'servicio', 'name' => 'servicios.servicio'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
-                'routxxxx' => 'cservicio',
+                'routxxxx' => 'servicio',
                 'tablaxxx' => 'tablacservicio',
                 'permisox' => $this->opciones['permisox'],
                 'parametr' => [],
             ];
 
         $this->opciones['padrexxx'] = '';
-
+        $this->opciones['esindexx']=true;
         $this->opciones['accionxx'] = 'index';
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }

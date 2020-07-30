@@ -2,28 +2,34 @@
 
 namespace App\Models;
 
+use App\Models\Clinica\SisClinica;
+use App\Models\Formulaciones\Cformula;
 use Illuminate\Database\Eloquent\Model;
 
-class Alerta extends Model {
+class Alerta extends Model
+{
 
-  protected $fillable = [
-      'clinica_id', 'leidaxxx', 'tipoalerta_id', 'tipoacione_id', 'formulacione_id'
-  ];
+    protected $fillable = [
+         'leidaxxx', 'routexxx', 'tipoaccion_id', 'cformula_id','sis_esta_id','user_crea_id','user_edita_id'
+    ];
 
-  public function clinica() {
-    return $this->belongsTo(Alerta::class);
-  }
+    public function clinica()
+    {
+        return $this->belongsTo(SisClinica::class);
+    }
 
-  public function formulacione() {
-    return $this->belongsTo(Formulacione::class);
-  }
+    public function cformula()
+    {
+        return $this->belongsTo(Cformula::class);
+    }
 
-  public function tipoacione() {
-    return $this->belongsTo(Tipoacione::class);
-  }
+    public function tipoaccion()
+    {
+        return $this->belongsTo(Tipoaccion::class);
+    }
 
-  public function tipoalerta() {
-    return $this->belongsTo(Tipoalerta::class);
-  }
-
+    public function tipoalert()
+    {
+        return $this->belongsTo(Tipoalert::class);
+    }
 }

@@ -27,10 +27,11 @@ class RcodigoController extends Controller
             'esindexx' => false
         ];
 
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
+        $this->middleware(['permission:' .
+            $this->opciones['permisox'] . '-leer|' .
+            $this->opciones['permisox'] . '-crear|' .
+            $this->opciones['permisox'] . '-editar|' .
+            $this->opciones['permisox'] . '-borrar']);
 
         $this->opciones['readonly'] = '';
         $this->opciones['rutaxxxx'] = 'rcodigo';
@@ -53,7 +54,7 @@ class RcodigoController extends Controller
      */
     public function index($padrexxx)
     {
-        $this->opciones['cardhead'] = Rango::getRango(['padrexxx' => $padrexxx]);  
+        $this->opciones['cardhead'] = Rango::getRango(['padrexxx' => $padrexxx]);
         $this->opciones['tablasxx'][] =
             [
 
@@ -69,14 +70,14 @@ class RcodigoController extends Controller
                 'urlxxxxx' => 'api/administracion/codigos',
                 'cabecera' => [
                     ['td' => 'ID'],
-                    ['td' => 'CODIGO'],                    
+                    ['td' => 'CODIGO'],
                     ['td' => 'CONDICON'],
                     ['td' => 'NPT'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
-                    ['data' => 'id', 'name' => 'rcodigo.id'], 
+                    ['data' => 'id', 'name' => 'rcodigo.id'],
                     ['data' => 'codiprod', 'name' => 'condicios.codiprod'],
                     ['data' => 'condicio', 'name' => 'condicios.condicio'],
                     ['data' => 'nombre', 'name' => 'npts.nombre'],
@@ -87,7 +88,7 @@ class RcodigoController extends Controller
                 'parametr' => [$padrexxx],
                 'routxxxx' => $this->opciones['routxxxx'],
             ];
-        
+
 
         $this->opciones['padrexxx'] = $padrexxx;
 
@@ -169,11 +170,11 @@ class RcodigoController extends Controller
         $this->opciones['cardhead'] = Rango::getRango(['padrexxx' => $padrexxx]);
         $this->opciones['botoform'][0]['routingx'][1]=$padrexxx;
         $this->opciones['parametr'] =  [$padrexxx,$objetoxx->id];
-        
+
         $this->opciones['tituloxx']='Editar: Rango';
         $this->opciones['indecrea'] = false;
         $this->opciones['padrexxx'] = $padrexxx;
-      
+
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', $this->opciones['parametr']],

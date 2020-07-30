@@ -195,6 +195,11 @@ return [
          * excel
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
+
+        /**
+         * helpers personalizados
+         */
+        App\Providers\AlertasServiceProvider::class,
     ],
 
     /*
@@ -249,6 +254,8 @@ return [
 
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+        'Alertas' => App\Helpers\AlertasHelper::class,
     ],
 
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Clinicas;
 
+use App\Helpers\AlertasHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Clinica\SisClinicaCrearRequest;
 use App\Http\Requests\Clinica\SisClinicaEditarRequest;
@@ -233,5 +234,12 @@ class SisClinicaController extends Controller
             $digitoxx = 11 - $moduloxx;
         }
         return ['digitoxx' => $digitoxx];
+    }
+
+    public function getAlertas(Request $request)
+    {
+        if ($request->ajax()) {
+            return response()->json(AlertasHelper::alertas());
+        }
     }
 }
