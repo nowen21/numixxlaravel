@@ -22,7 +22,11 @@ Route::get('clinica/asignarPaciente', function (Request $request) {
   return response()->json(Clinicas::asignarPaciente($request));
 });
 
-
+Route::get('clinica/crango', function (Request $request) {
+  if (!$request->ajax())
+    return redirect('/');
+  return Clinicas::getRangosAsignados($request);
+});
 Route::get('clinica/rango', function (Request $request) {
   if (!$request->ajax())
     return redirect('/');
