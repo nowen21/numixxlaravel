@@ -4,9 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Alerta;
 use App\Models\Tipoaccion;
-use App\Traits\Cformula\AlertasTrait;
 use Illuminate\Support\Facades\Auth;
-use Psy\CodeCleaner\ReturnTypePass;
 
 class AlertasHelper
 {
