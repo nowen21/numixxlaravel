@@ -1,43 +1,50 @@
 <?php
-Route::group(['prefix' => 'clinicas'], function () {
+$controll='Clinicas\Clinica';
+$routexxx='clinicax';
+Route::group(['prefix' => 'clinicas'], function () use($routexxx,$controll) {
     Route::get('', [
-	    'uses' => 'Clinicas\SisClinicaController@index',
-	    'middleware' => ['permission:clinica-leer|clinica-crear|clinica-editar|clinica-borrar']
-	])->name('clinica');
+	    'uses' => $controll.'Controller@index',
+	    'middleware' => ['permission:'.$routexxx.'-leer|'.$routexxx.'-crear|'.$routexxx.'-editar|'.$routexxx.'-borrar']
+    ])->name($routexxx);
+    Route::get('listaxxx', [
+	    'uses' => $controll.'Controller@getListado',
+	    'middleware' => ['permission:'.$routexxx.'-leer|'.$routexxx.'-crear|'.$routexxx.'-editar|'.$routexxx.'-borrar']
+    ])->name($routexxx.'.listaxxx');
+
 	Route::get('nuevo', [
-	    'uses' => 'Clinicas\SisClinicaController@create',
-	    'middleware' => ['permission:clinica-crear']
-	])->name('clinica.nuevo');
+	    'uses' => $controll.'Controller@create',
+	    'middleware' => ['permission:'.$routexxx.'-crear']
+	])->name($routexxx.'.nuevo');
 	Route::post('crear', [
-	    'uses' => 'Clinicas\SisClinicaController@store',
-	    'middleware' => ['permission:clinica-crear']
-	])->name('clinica.crear');
+	    'uses' => $controll.'Controller@store',
+	    'middleware' => ['permission:'.$routexxx.'-crear']
+	])->name($routexxx.'.crear');
 	Route::get('editar/{objetoxx}', [
-	    'uses' => 'Clinicas\SisClinicaController@edit',
-	    'middleware' => ['permission:clinica-editar']
-	])->name('clinica.editar');
+	    'uses' => $controll.'Controller@edit',
+	    'middleware' => ['permission:'.$routexxx.'-editar']
+	])->name($routexxx.'.editar');
 	Route::put('editar/{objetoxx}', [
-	    'uses' => 'Clinicas\SisClinicaController@update',
-	    'middleware' => ['permission:clinica-editar']
-	])->name('clinica.editar');
+	    'uses' => $controll.'Controller@update',
+	    'middleware' => ['permission:'.$routexxx.'-editar']
+	])->name($routexxx.'.editar');
 	Route::get('ver/{objetoxx}', [
-	    'uses' => 'Clinicas\SisClinicaController@show',
-	    'middleware' => ['permission:clinica-leer']
-	])->name('clinica.ver');
-	Route::delete('borrar/{objetoxx}', [
-	    'uses' => 'Clinicas\SisClinicaController@destroy',
-	    'middleware' => ['permission:clinica-borrar']
-	])->name('clinica.borrar');
+	    'uses' => $controll.'Controller@show',
+	    'middleware' => ['permission:'.$routexxx.'-leer']
+	])->name($routexxx.'.ver');
+    Route::get('borrar/{objetoxx}', [
+	    'uses' => $controll.'Controller@inactivate',
+	    'middleware' => ['permission:'.$routexxx.'-borrar']
+    ])->name($routexxx.'.borrar');
 
-	Route::get('dv', [
-	    'uses' => 'Clinicas\SisClinicaController@dv',
-	])->name('clinica.dv');
-	require_once('web_cmedicame.php');
-	require_once('web_crango.php');
-	require_once('web_paciente.php');
-    require_once('web_remision.php');
-
+    Route::put('borrar/{objetoxx}', [
+		'uses' => $controll . 'Controller@destroy',
+		'middleware' => ['permission:' . $routexxx . '-borrar']
+	])->name($routexxx . '.borrar');
+    Route::get('dv', [
+	    'uses' => $controll.'Controller@dv',
+	])->name($routexxx.'.dv');
     Route::post('getAlertas', [
-		'uses' => 'Clinicas\SisClinicaController@getAlertas',
-	])->name('clinica.getAlertas');
+		'uses' => $controll.'Controller@getAlertas',
+    ])->name($routexxx.'.getAlertas');
 });
+require_once('web_sisclinica.php');

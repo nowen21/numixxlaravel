@@ -4,13 +4,14 @@
 
 @endsection
 @section('content')
+
 @if ($todoxxxx["indecrea"])
 
-    @if ($todoxxxx["esindexx"])        
+    @if ($todoxxxx["esindexx"])
          @include('layouts.components.pestanias.index')
     @else
-       @include('layouts.components.pestanias.crear') 
-    @endif  
+       @include('layouts.components.pestanias.crear')
+    @endif
 
     @endsection
     @section('codigo')
@@ -32,11 +33,11 @@
                 @case('Crear')
                     @include('layouts.components.pestanias.crear')
                     @break
-                @case('Editar') 
+                @case('Editar')
                     @include('layouts.components.pestanias.editar')
                     @break
                 @case('Ver')
-                    @include('layouts.components.pestanias.ver')
+                    @include('layouts.components.pestanias.verw')
                     @break
                 @case('Modulo')
                     @include('layouts.components.pestanias.modulo')

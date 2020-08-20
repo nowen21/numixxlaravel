@@ -72,10 +72,17 @@ class RolesYPermisosSeeder extends Seeder
         /**
          * permisos para clinicas
          */
-        Permission::create(['name' => 'clinica-leer',  'descripc' => 'Listar clínicas']);
-        Permission::create(['name' => 'clinica-crear',  'descripc' => 'Crear clínica']);
-        Permission::create(['name' => 'clinica-editar',  'descripc' => 'Editar clínica']);
-        Permission::create(['name' => 'clinica-borrar',  'descripc' => 'Inactivar clínica']);
+        Permission::create(['name' => 'clinicax-leer',  'descripc' => 'Listar clínicas']);
+        Permission::create(['name' => 'clinicax-crear',  'descripc' => 'Crear clínica']);
+        Permission::create(['name' => 'clinicax-editar',  'descripc' => 'Editar clínica']);
+        Permission::create(['name' => 'clinicax-borrar',  'descripc' => 'Inactivar clínica']);
+/**
+         * permisos para sucurdales
+         */
+        Permission::create(['name' => 'sisclini-leer',  'descripc' => 'Listar Sucursales']);
+        Permission::create(['name' => 'sisclini-crear',  'descripc' => 'Crear Sucursal']);
+        Permission::create(['name' => 'sisclini-editar',  'descripc' => 'Editar Sucursal']);
+        Permission::create(['name' => 'sisclini-borrar',  'descripc' => 'Inactivar Sucursal']);
 
         Permission::create(['name' => 'cmedicame-asiganar',  'descripc' => 'Permite asignar medicamentos a una clínica']);
         Permission::create(['name' => 'cmedicame-leer',  'descripc' => 'Listar medicamentos clínica']);
@@ -301,7 +308,7 @@ class RolesYPermisosSeeder extends Seeder
             ->givePermissionTo(
                 [
                     'administracion-modulo',
-                    'clinica-leer',
+                    'clinicax-leer',
                     'paciente-leer', 'paciente-crear', 'paciente-editar', 'paciente-borrar',
                     'formular-leer', 'formular-crear', 'formular-editar', 'formular-borrar',
                     'cmedicame-leer',

@@ -4,31 +4,35 @@ namespace App\Http\Controllers\Clinicas;
 
 use App\Helpers\Clinicas;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Clinica\SisClinicaCrearRequest;
-use App\Http\Requests\Clinica\SisClinicaEditarRequest;
+
 use App\Models\Clinica\SisClinica;
-use App\Models\Sistema\SisEsta;
+use App\Traits\ClinicaTrait;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CmedicameController extends Controller
 {
+    use ClinicaTrait;
     private $opciones;
 
     public function __construct()
     {
         $this->opciones = [
+            'pestpadr' => 3,
             'cardhead' => '', // titulo para las pestañas
+            'cardheap' => '',
             'permisox' => 'cmedicame',
             'parametr' => [],
             'rutacarp' => 'Clinicas.',
             'tituloxx' => 'clinica',
+            'tabsxxxx' => 'Clinicas.tabsxxxx.clinica.header',
             'slotxxxy' => 'clinica',
             'slotxxxx' => 'cmedicame',
             'carpetax' => 'Medicamento',
             'indecrea' => false,
-            'esindexx' => false
+            'esindexx' => false,
+            'rowscols' => 'rowspancolspan',
         ];
 
        $this->middleware (['permission:' . $this->opciones['permisox'] . '-leer|'
@@ -54,29 +58,29 @@ class CmedicameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($clinica)
+    public function index(SisClinica $padrexxx)
     {
-        $this->opciones['parametr'] = [$clinica];
-        $clinicax = SisClinica::where('id', $clinica)->first();
-        $this->opciones['cardhead'] = 'CLINICA: ' . $clinicax->clinica;
+        $this->opciones['sucursal'] = $padrexxx->id;
+        $this->opciones['padrexxx'] = $padrexxx->clinica_id;
+        $this->opciones['parametr'] = $padrexxx->id;
+        $this->opciones['cardhead'] = 'CLÍNICA: '.$padrexxx->clinica->clinica;
+        $this->opciones['cardheap'] = 'SUCURSAL: '.$padrexxx->sucursal;
         $this->opciones['tablasxx'][] =
             [
 
                 'titunuev' => 'NUEVA CLINICA',
                 'titulist' => 'LISTA DE MEDICAMENTOS',
                 'dataxxxx' => [
-                    ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
-                    ['campoxxx' => 'clinicax', 'dataxxxx' => $clinica],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
-                    ['campoxxx' => 'puededit', 'dataxxxx' => auth()->user()->can('clinica-editar') ? true : false],
+
                 ],
                 'accitabl' => true,
                 'vercrear' => false,
-                'urlxxxxx' => 'api/clinica/cmedicamento',
+                'urlxxxxx' => route($this->opciones['routxxxx'] . '.asignado', $this->opciones['parametr']),
                 'cabecera' => [
-                    ['td' => 'ID'],
-                    ['td' => 'MEDICAMENTO'],
-                    ['td' => 'ESTADO'],
+                    ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'MEDICAMENTO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
@@ -91,19 +95,19 @@ class CmedicameController extends Controller
         if (User::find(Auth::user()->id)->can($this->opciones['permisox'] . '-asiganar')) {
             $this->opciones['tablasxx'][] = [
                 'titunuev' => 'NUEVA CLINICA',
-                'titulist' => 'SELECCIONE EL MEDICAMENTO QUE DESEE ADICIONAR A LA CLÍNICA: ' . $clinicax->clinica,
+                'titulist' => 'SELECCIONE EL MEDICAMENTO QUE DESEE ADICIONAR A LA SUCURSAL: ' . $padrexxx->sucursal,
                 'dataxxxx' => [
                     // ['campoxxx' => 'botonesx', 'dataxxxx' => 'Clinicas.Clinica.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                    ['campoxxx' => 'clinicax', 'dataxxxx' => $clinica],
+                    ['campoxxx' => 'clinicax', 'dataxxxx' => $padrexxx->id],
                 ],
                 'vercrear' => false,
                 'accitabl' => false,
-                'urlxxxxx' => 'api/clinica/medicamento',
+                'urlxxxxx' => route($this->opciones['routxxxx'] . '.asignar', $this->opciones['parametr']),
                 'cabecera' => [
-                    ['td' => 'ID'],
-                    ['td' => 'MEDICAMENTO'],
-                    ['td' => 'ESTADO'],
+                    ['td' => 'ID' , 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'MEDICAMENTO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                 ], 'columnsx' => [
                     // ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'medicames.id'],
@@ -115,158 +119,37 @@ class CmedicameController extends Controller
             ];
         }
 
-        $this->opciones['clinicax'] = $clinica;
+        $this->opciones['clinicax'] = $padrexxx->id;
 
         $this->opciones['accionxx'] = 'index';
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
-    private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
-    {
-        $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
-        $this->opciones['accionxx'] = $accionxx;
-        // indica si se esta actualizando o viendo
-        if ($nombobje != '') {
-            $this->opciones[$nombobje] = $objetoxx;
-        }
 
-        // Se arma el titulo de acuerdo al array opciones
-        $this->opciones['tituloxx'] = $this->opciones['accionxx'] . ': ' . $this->opciones['tituloxx'];
-        return view($vistaxxx, ['todoxxxx' => $this->opciones]);
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-        $this->opciones['indecrea'] = true;
-        $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
-                'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
-            ];
-        return $this->view(true, '', 'Crear', $this->opciones['rutacarp'] . 'pestanias');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(SisClinicaCrearRequest $request)
-    {
-        $dataxxxx = $request->all();
-        return $this->grabar($dataxxxx, '', 'Registro creado con éxito');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(SisClinica $objetoxx)
-    {
-        $this->opciones['indecrea'] = false;
-        $this->opciones['clinicax'] = $objetoxx->id;
-        $this->opciones['parametr'] = [$objetoxx->id];
-        $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => $objetoxx->sis_esta_id == 1 ? 'INACTIVAR' : 'ACTIVAR', 'routingx' => [$this->opciones['routxxxx'], []], 'formhref' => 1,
-                'tituloxx' => '', 'clasexxx' => $objetoxx->sis_esta_id == 1 ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success'
-            ];
-        $this->opciones['readonly'] = 'readonly';
-        return $this->view($objetoxx,  'modeloxx', 'Ver', $this->opciones['rutacarp'] . 'pestanias');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(SisClinica $objetoxx)
-    {
-        $this->opciones['indecrea'] = true;
-        $this->opciones['clinicax'] = $objetoxx->id;
-        $this->opciones['parametr'] = [$objetoxx->id];
-        $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
-                'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
-            ];
-        return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
-    }
-
-    private function grabar($dataxxxx, $objectx, $infoxxxx)
-    {
-        return redirect()
-            ->route($this->opciones['routxxxx'] . '.editar', [SisClinica::transaccion($dataxxxx, $objectx)->id])
-            ->with('info', $infoxxxx);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(SisClinicaEditarRequest  $request, SisClinica $objetoxx)
-    {
-        $dataxxxx = $request->all();
-        return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(SisClinica $objetoxx)
-    {
-        $this->opciones['parametr'] = [$objetoxx->id];
-
-        $objetoxx->sis_esta_id = ($objetoxx->sis_esta_id == 2) ? 1 : 2;
-        $objetoxx->save();
-        $activado = $objetoxx->sis_esta_id == 2 ? 'inactivado' : 'activado';
-
-        return redirect()->route($this->opciones['routxxxx'])->with('info', 'Registro ' . $activado . ' con éxito');
-    }
-
-    public function dv(Request $request)
+    public function getAsignado(Request $request,$padrexxx)
     {
         if ($request->ajax()) {
-            return response()->json($this->digitoverificacion($request->nitxxxxx));
+            $request->padrexxx=$padrexxx;
+            $request->routexxx = [$this->opciones['routxxxx']];
+            $request->botonesx = $this->opciones['rutacarp'] .
+                $this->opciones['carpetax'] . '.botones.botonesapi';
+            $request->estadoxx = 'layouts.components.botones.estadosx';
+            return $this->getAsignados($request);
         }
     }
-
-    public function digitoverificacion($nitxxxxx)
-    {
-        $primosxx = [3, 7, 13, 17, 19, 23, 29, 37, 41, 43, 47, 53, 59, 67, 71];
-        $lengnitx = strlen($nitxxxxx);
-        $sumaxxxx = 0;
-        for ($i = 0; $i < $lengnitx; $i++) {
-            $sumaxxxx += $primosxx[$i] * substr($nitxxxxx, $lengnitx - ($i + 1), 1);
-        }
-        $moduloxx = fmod($sumaxxxx, 11);
-        $digitoxx = 0;
-        if ($moduloxx == 0 || $moduloxx == 1) {
-            $digitoxx = $moduloxx;
-        } else {
-            $digitoxx = 11 - $moduloxx;
-        }
-        return ['digitoxx' => $digitoxx];
-    }
-
-    public function getInactivarMedicam($padrexxx, Request $request)
+    public function getAsignar(Request $request,$padrexxx)
     {
         if ($request->ajax()) {
-            $request->sis_clinica_id = $padrexxx;
+            $request->padrexxx=$padrexxx;
+            $request->routexxx = [$this->opciones['routxxxx']];
+            $request->botonesx = $this->opciones['rutacarp'] .
+                $this->opciones['carpetax'] . '.botones.botonesapi';
+            $request->estadoxx = 'layouts.components.botones.estadosx';
+            return $this->getMedicametos($request);
+        }
+    }
+    public function getInactivarMedicam( Request $request)
+    {
+        if ($request->ajax()) {
             return response()->json(Clinicas::getInactivarMedicam($request));
         }
     }

@@ -1,8 +1,8 @@
 <div class="card-body">
     <div class="tab-content">
         <div class="tab-pane active" id="{{ $todoxxxx['slotxxxx'] }}">
-            @if(isset($clinica))
-            {{ $clinica }}
+            @if(isset($clinicax))
+            {{ $clinicax }}
             @endif
             @if(isset($cmedicame))
             {{ $cmedicame }}

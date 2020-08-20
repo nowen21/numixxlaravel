@@ -2,19 +2,18 @@
 
 namespace App\Models\Clinica;
 
-use App\Models\Administracion\Rango;
-use App\Models\Medicamentos\Medicame;
-use App\Models\Sistema\Municipio;
+use App\Models\Sistema\SisEsta;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class SisClinica extends Model
+class Clinica extends Model
 {
     protected $fillable = [
-         'sucursal','clinica_id', 'municipio_id', 'sis_esta_id', 'user_crea_id', 'user_edita_id'
+        'nitxxxxx', 'clinica', 'telefono', 'sis_esta_id', 'digiveri', 'user_crea_id', 'user_edita_id'
     ];
+
     public function creador()
     {
         return $this->belongsTo(User::class, 'user_crea_id');
@@ -28,22 +27,6 @@ class SisClinica extends Model
     {
         return $this->belongsTo(SisEsta::class);
     }
-    public function clinica()
-    {
-        return $this->belongsTo(Clinica::class);
-    }
-    public function municipio()
-    {
-        return $this->belongsTo(Municipio::class);
-    }
-    public function medicames()
-    {
-        return $this->belongsToMany(Medicame::class)->withTimestamps();
-    }
-    public function rangos()
-    {
-        return $this->belongsToMany(Rango::class)->withTimestamps();
-    }
     public static function transaccion($dataxxxx)
     {
         $objetoxx = DB::transaction(function () use ($dataxxxx) {
@@ -53,7 +36,7 @@ class SisClinica extends Model
                 $dataxxxx['modeloxx']->update($dataxxxx['requestx']->all());
             } else {
                 $dataxxxx['requestx']->request->add(['user_crea_id' => Auth::user()->id]);
-                $dataxxxx['modeloxx'] = SisClinica::create($dataxxxx['requestx']->all());
+                $dataxxxx['modeloxx'] = Clinica::create($dataxxxx['requestx']->all());
             }
             return $dataxxxx['modeloxx'];
         }, 5);
@@ -71,7 +54,7 @@ class SisClinica extends Model
                 $comboxxx = ['' => 'Seleccione'];
             }
         }
-        $activida = SisClinica::get();
+        $activida = Clinica::get();
         foreach ($activida as $registro) {
             if ($ajaxxxxx) {
                 $comboxxx[] = ['valuexxx' => $registro->id, 'optionxx' => $registro->clinica];

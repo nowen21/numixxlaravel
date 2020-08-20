@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Models\Clinica\Clinica;
+use App\Models\Clinica\SisClinica;
+use App\Models\Sistema\SisEsta;
 use App\Notifications\RestablecerContrasenia;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,6 +55,15 @@ class User extends Authenticatable
     public function editor()
     {
         return $this->belongsTo(User::class, 'user_edita_id');
+    }
+
+    public function sis_esta()
+    {
+        return $this->belongsTo(SisEsta::class, 'user_edita_id');
+    }
+    public function sis_clinica()
+    {
+        return $this->belongsTo(SisClinica::class);
     }
     public function setPasswordAttribute($value)
     {

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Clinica;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SisClinicaCrearRequest extends FormRequest
+class ClinicaCrearRequest extends FormRequest
 {
 
     private $_mensaje;
@@ -14,20 +14,26 @@ class SisClinicaCrearRequest extends FormRequest
     {
 
         $this->_mensaje = [
-            'sucursal.required' => 'Ingrese el nombre de la sucursal',
-            'municipio_id.required' => 'Seleccione un municipio',
-            'sucursal.unique' => 'La sucursala ya se encuenta en uso',
+            'telefono.required' => 'Ingrese el número de teléfono',
+            'nitxxxxx.required' => 'Ingrese el nit',
+            'nitxxxxx.unique' => 'el nit ya se encuentra en uso',
+            'clinica.required' => 'Ingrese el nombre de la clínica',
+            'clinica.unique' => 'El nombre de la clínica ya se encuentra en uso',
         ];
         $this->_reglasx = [
-
-            'sucursal' =>
+            'telefono' =>
             [
                 'required', //y todos las validaciones a que haya lugar separadas por coma
-                'unique:sis_clinicas,sucursal,'
             ],
-            'municipio_id' =>
+            'nitxxxxx' =>
             [
                 'required', //y todos las validaciones a que haya lugar separadas por coma
+                'unique:clinicas,nitxxxxx,'
+            ],
+            'clinica' =>
+            [
+                'required', //y todos las validaciones a que haya lugar separadas por coma
+                'unique:clinicas,clinica,'
             ],
         ];
     }

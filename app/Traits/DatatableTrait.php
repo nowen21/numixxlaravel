@@ -9,8 +9,11 @@ trait DatatableTrait{
             ->addColumn(
                 'botonexx',
                 function ($queryxxx) use ($requestx) {
+                    $requestx->puedever = auth()->user()->can($requestx->routexxx[0] . '-leer');
+                    $requestx->pueditar = auth()->user()->can($requestx->routexxx[0] . '-editar');
+                    $requestx->puedinac = auth()->user()->can($requestx->routexxx[0] . '-borrar');
                     return  view($requestx->botonesx, [
-                        'dataxxxx' => $queryxxx,
+                        'queryxxx' => $queryxxx,
                         'requestx' => $requestx,
                     ]);
                 }
@@ -19,8 +22,7 @@ trait DatatableTrait{
                 's_estado',
                 function ($queryxxx) use ($requestx) {
                     return  view($requestx->estadoxx, [
-                        'sis_esta_id' => $queryxxx->sis_esta_id,
-                        's_estado' => $queryxxx->s_estado,
+                        'queryxxx' => $queryxxx,
                         'requestx' => $requestx,
                     ]);
                 }

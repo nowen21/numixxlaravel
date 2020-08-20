@@ -1,3 +1,3 @@
 
-@component('layouts.components.pestanias.pestanias',['todoxxxx'=>$todoxxxx])
+@component('layouts.components.pestanias.pestaniasgeneral',['todoxxxx'=>$todoxxxx])
 @endcomponent

@@ -17,6 +17,10 @@ class CremisionController extends Controller
     public function __construct()
     {
         $this->opciones = [
+            'pestpadr' => 3,
+            'cardheap' => '',
+            'rowscols' => 'rowspancolspan',
+            'tabsxxxx' => 'Clinicas.tabsxxxx.clinica.header',
             'cardhead' => '',// titulo para las pestañas
             'permisox' => 'crango',
             'parametr' => [],
@@ -53,10 +57,12 @@ class CremisionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($clinica)
+    public function index(SisClinica $padrexxx)
     {
-        $clinicax = SisClinica::where('id', $clinica)->first();
-        $this->opciones['cardhead']='CLINICA: '. $clinicax->clinica;
+        $this->opciones['sucursal'] = $padrexxx->id;
+        $this->opciones['padrexxx'] = $padrexxx->clinica_id;
+
+        $this->opciones['cardhead']='CLINICA: '. $padrexxx->clinica->clinica;
         $this->opciones['tablasxx'][] =
             [
 
@@ -65,15 +71,16 @@ class CremisionController extends Controller
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => 'Clinicas.Clinica.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                    ['campoxxx' => 'clinicax', 'dataxxxx' => $clinica],
+                    ['campoxxx' => 'clinicax', 'dataxxxx' => $padrexxx->id],
                 ],
                 'accitabl' => true,
                 'vercrear' => false,
                 'urlxxxxx' => 'api/clinica/crango',
                 'cabecera' => [
-                    ['td' => 'ID'],
-                    ['td' => 'RANGO'],
-                    ['td' => 'ESTADO'],
+                    ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'RANGO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
@@ -88,19 +95,20 @@ class CremisionController extends Controller
         if (User::find(Auth::user()->id)->can($this->opciones['permisox'] . '-asiganar')) {
             $this->opciones['tablasxx'][] = [
                 'titunuev' => 'NUEVA CLINICA',
-                'titulist' => 'SELECCIONE EL/LOS RANGO/S QUE DESEE ADICIONAR A LA CLÍNICA: ' . $clinicax->clinica,
+                'titulist' => 'SELECCIONE EL/LOS RANGO/S QUE DESEE ADICIONAR A LA CLÍNICA: ' . $padrexxx->clinica->clinica,
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => 'Clinicas.Clinica.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                    ['campoxxx' => 'clinicax', 'dataxxxx' => $clinica],
+                    ['campoxxx' => 'clinicax', 'dataxxxx' => $padrexxx->id],
                 ],
                 'vercrear' => false,
                 'accitabl' => false,
                 'urlxxxxx' => 'api/clinica/rango',
                 'cabecera' => [
-                    ['td' => 'ID'],
-                    ['td' => 'RANGO'],
-                    ['td' => 'ESTADO'],
+                    ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'RANGO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                 ], 'columnsx' => [
                     // ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'rangos.id'],
@@ -112,7 +120,7 @@ class CremisionController extends Controller
             ];
         }
 
-        $this->opciones['clinicax'] = $clinica;
+        $this->opciones['clinicax'] = $padrexxx->sis_clinica_id;
 
         $this->opciones['accionxx'] = 'index';
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);

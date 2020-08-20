@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers\Clinicas;
 
-
+use App\Helpers\AlertasHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Clinica\SisClinicaCrearRequest;
-use App\Http\Requests\Clinica\SisClinicaEditarRequest;
+use App\Http\Requests\Clinica\ClinicaCrearRequest;
+use App\Http\Requests\Clinica\ClinicaEditarRequest;
 use App\Models\Clinica\Clinica;
-use App\Models\Clinica\SisClinica;
-use App\Models\Sistema\Departamento;
-use App\Models\Sistema\Municipio;
 use App\Models\Sistema\SisEsta;
 use App\Traits\ClinicaTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SisClinicaController extends Controller
+class ClinicaController extends Controller
 {
     use ClinicaTrait;
     private $opciones;
@@ -23,17 +20,17 @@ class SisClinicaController extends Controller
     public function __construct()
     {
         $this->opciones = [
-            'pestpadr' => 2, // true indica si solo muestra la pestaña dependencias false muestra la pestaña padre y las hijas
-            'permisox' => 'sisclini',
+            'pestpadr' => 1, // true indica si solo muestra la pestaña dependencias false muestra la pestaña padre y las hijas
+            'permisox' => 'clinicax',
             'parametr' => [],
             'cardhead' => '',
             'cardheap' => '',
-            'tabsxxxx' => 'Clinicas.tabsxxxx.clinica.header',
+            'tabsxxxx'=>'Clinicas.tabsxxxx.clinica.header',
             'rutacarp' => 'Clinicas.',
-            'tituloxx' => 'SUCURSALES',
-            'carpetax' => 'Sucursal',
-            'slotxxxx' => 'sisclini',
-            'slotxxxy' => 'sisclini',
+            'tituloxx' => 'CLÍNICA',
+            'carpetax' => 'Clinica',
+            'slotxxxx' => 'clinicax',
+            'slotxxxy' => 'clinicax',
             'tablaxxx' => 'datatable',
             'indecrea' => false, // false muestra las pestañas
             'esindexx' => false,
@@ -45,9 +42,9 @@ class SisClinicaController extends Controller
             'conperfi' => '', // indica si la vista va a tener perfil
             'usuariox' => [],
             'rowscols' => 'rowspancolspan',
-            'rutaxxxx' => 'sisclini',
-            'routnuev' => 'sisclini',
-            'routxxxx' => 'sisclini',
+            'rutaxxxx' => 'clinicax',
+            'routnuev' => 'clinicax',
+            'routxxxx' => 'clinicax',
         ];
 
         $this->middleware(['permission:'
@@ -61,7 +58,7 @@ class SisClinicaController extends Controller
         $this->opciones['botoform'] = [
             [
                 'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'], []],
-                'formhref' => 2, 'tituloxx' => 'VOLVER A SUCURSALES', 'clasexxx' => 'btn btn-sm btn-primary'
+                'formhref' => 2, 'tituloxx' => 'VOLVER A CLÍNICAS', 'clasexxx' => 'btn btn-sm btn-primary'
             ],
         ];
     }
@@ -72,18 +69,18 @@ class SisClinicaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($padrexxx)
+    public function index()
     {
-        $this->opciones['cardhead'] = Clinica::find($padrexxx)->clinica;
-        $this->opciones['parametr'] = [$padrexxx];
 
+        $this->opciones['parametr'] = [];
+        $this->opciones['tituhead'] = '';
         $this->opciones['botoform'][0]['routingx'][1] = $this->opciones['parametr'];
         $this->opciones['padrexxx'] = '';
         $this->opciones['esindexx'] = true;
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'SUCURSAL',
-                'titulist' => 'LISTA DE SUCURSALES',
+                'titunuev' => 'CLÍNICA',
+                'titulist' => 'LISTA DE CLÍNICAS',
                 'dataxxxx' => [],
 
                 'accitabl' => true,
@@ -92,13 +89,13 @@ class SisClinicaController extends Controller
                 'cabecera' => [
                     ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'SUCURSAL', 'widthxxx' => '0', 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'CLÍNICA', 'widthxxx' => '0', 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ESTADO', 'widthxxx' => '0', 'rowspanx' => 1, 'colspanx' => 1],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
-                    ['data' => 'id', 'name' => 'sis_clinicas.id'],
-                    ['data' => 'sucursal', 'name' => 'sis_clinicas.sucursal'],
+                    ['data' => 'id', 'name' => 'clinicas.id'],
+                    ['data' => 'clinica', 'name' => 'clinicas.clinica'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => $this->opciones['tablaxxx'],
@@ -114,37 +111,26 @@ class SisClinicaController extends Controller
     public function getListado(Request $request)
     {
         if ($request->ajax()) {
-            $request->routexxx = [$this->opciones['routxxxx'], 'sisclini'];
+            $request->routexxx = [$this->opciones['routxxxx'], 'clinicax'];
             $request->botonesx = $this->opciones['rutacarp'] .
                 $this->opciones['carpetax'] . '.botones.botonesapi';
             $request->estadoxx = 'layouts.components.botones.estadosx';
-            return $this->getSucursales($request);
+            return $this->getListados($request);
         }
     }
     private function view($dataxxxx)
     {
-        $this->opciones['tituloxx'] = 'SUCURSAL';
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
-        $this->opciones['departam'] = Departamento::combo(['cabecera' => false, 'ajaxxxxx' => false]);
-
         $this->opciones['accionxx'] = $dataxxxx['accionxx'];
-        $departam = 0;
         // indica si se esta actualizando o viendo
         if ($dataxxxx['modeloxx'] != '') {
-            $this->opciones['sucursal'] = $dataxxxx['modeloxx']->id;
-            $this->opciones['padrexxx']=$dataxxxx['modeloxx']->clinica_id;
-            $this->opciones['parametr'] =$dataxxxx['modeloxx']->id;
-            $this->opciones['clinicai'] = [$dataxxxx['modeloxx']->clinica_id=>$dataxxxx['modeloxx']->clinica->clinica];
-            $departam = $dataxxxx['modeloxx']->departamento_id = $dataxxxx['modeloxx']->municipio->departamento_id;
-            $this->opciones['botoform'][0]['routingx'][1] = $dataxxxx['modeloxx']->clinica_id;
-            $this->opciones['cardhead'] = 'CLINICA: '.$dataxxxx['modeloxx']->clinica->clinica;
-            $this->opciones['cardheap'] = 'SUCURSAL: '.$dataxxxx['modeloxx']->sucursal;
+            $this->opciones['cardhead'] = $dataxxxx['modeloxx']->clinica;
             $this->opciones['modeloxx'] = $dataxxxx['modeloxx'];
-            $this->opciones['pestpadr'] = 3;
+            $this->opciones['pestpadr'] = 2;
             if (auth()->user()->can($this->opciones['permisox'] . '-crear')) {
                 $this->opciones['botoform'][] =
                     [
-                        'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'] . '.nuevo', $this->opciones['parametr'] ],
+                        'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'] . '.nuevo', [$dataxxxx['padrexxx']->id]],
                         'formhref' => 2, 'tituloxx' => 'IR A CREAR NUEVO REGISTRO', 'clasexxx' => 'btn btn-sm btn-primary'
                     ];
             }
@@ -155,7 +141,6 @@ class SisClinicaController extends Controller
             $this->opciones['useredit'] = $dataxxxx['modeloxx']->editor->name;
         }
 
-        $this->opciones['municipi'] = Municipio::combo(['departam' => $departam, 'cabecera' => true, 'ajaxxxxx' => false]);
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
     /**
@@ -163,11 +148,9 @@ class SisClinicaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Clinica $padrexxx)
+    public function create()
     {
-        $this->opciones['padrexxx']=$padrexxx->id;
-        $this->opciones['clinicai'] = [$padrexxx->id=>$padrexxx->clinica];
-        $this->opciones['botoform'][0]['routingx'][1] = $this->opciones['parametr'] = [$padrexxx->id];
+        $this->opciones['parametr'] = [];
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
@@ -182,7 +165,7 @@ class SisClinicaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SisClinicaCrearRequest $request)
+    public function store(ClinicaCrearRequest $request)
     {
         return $this->grabar([
             'requestx' => $request,
@@ -197,10 +180,10 @@ class SisClinicaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(SisClinica $objetoxx)
+    public function show(Clinica $objetoxx)
     {
         $this->opciones['parametr'] = [$objetoxx->id];
-        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Ver', 'padrexxx' => $objetoxx]);
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Ver','padrexxx'=>$objetoxx]);
     }
 
     /**
@@ -209,7 +192,7 @@ class SisClinicaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(SisClinica $objetoxx)
+    public function edit(Clinica $objetoxx)
     {
 
         $this->opciones['parametr'] = [$objetoxx->id];
@@ -220,13 +203,13 @@ class SisClinicaController extends Controller
                     'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
                 ];
         }
-        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Editar', 'padrexxx' => $objetoxx]);
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Editar','padrexxx'=>$objetoxx]);
     }
 
     private function grabar($dataxxxx)
     {
         return redirect()
-            ->route($this->opciones['routxxxx'] . '.editar', [SisClinica::transaccion($dataxxxx)->id])
+            ->route($this->opciones['routxxxx'] . '.editar', [Clinica::transaccion($dataxxxx)->id])
             ->with('info', $dataxxxx['menssage']);
     }
 
@@ -237,7 +220,7 @@ class SisClinicaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SisClinicaEditarRequest $request, SisClinica $objetoxx)
+    public function update(ClinicaEditarRequest $request, Clinica $objetoxx)
     {
         return $this->grabar([
             'requestx' => $request,
@@ -246,7 +229,7 @@ class SisClinicaController extends Controller
         ]);
     }
 
-    public function inactivate(SisClinica $objetoxx)
+    public function inactivate(Clinica $objetoxx)
     {
         $this->opciones['parametr'] = [$objetoxx->id];
         if (auth()->user()->can($this->opciones['permisox'] . '-borrar')) {
@@ -256,23 +239,48 @@ class SisClinicaController extends Controller
                     'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
                 ];
         }
-        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Destroy', 'padrexxx' => $objetoxx]);
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Destroy','padrexxx'=>$objetoxx]);
     }
 
 
-    public function destroy(Request $request, SisClinica $objetoxx)
+    public function destroy(Request $request, Clinica $objetoxx)
     {
-
         $objetoxx->update(['sis_esta_id' => 2, 'user_edita_id' => Auth::user()->id]);
         return redirect()
-            ->route($this->opciones['permisox'], [$objetoxx->clinica_id])
-            ->with('info', 'Sucursal inactivada correctamente');
+            ->route($this->opciones['slotxxxx'], [])
+            ->with('info', 'Clínica inactivada correctamente');
     }
 
-    public function getMunicipio(Request $request)
+
+    public function dv(Request $request)
     {
         if ($request->ajax()) {
-            return response()->json(Municipio::combo(['departam' =>$request->departam==''?0:$request->departam, 'cabecera' => true, 'ajaxxxxx' => true]));
+            return response()->json($this->digitoverificacion($request->nitxxxxx));
+        }
+    }
+
+    public function digitoverificacion($nitxxxxx)
+    {
+        $primosxx = [3, 7, 13, 17, 19, 23, 29, 37, 41, 43, 47, 53, 59, 67, 71];
+        $lengnitx = strlen($nitxxxxx);
+        $sumaxxxx = 0;
+        for ($i = 0; $i < $lengnitx; $i++) {
+            $sumaxxxx += $primosxx[$i] * substr($nitxxxxx, $lengnitx - ($i + 1), 1);
+        }
+        $moduloxx = fmod($sumaxxxx, 11);
+        $digitoxx = 0;
+        if ($moduloxx == 0 || $moduloxx == 1) {
+            $digitoxx = $moduloxx;
+        } else {
+            $digitoxx = 11 - $moduloxx;
+        }
+        return ['digitoxx' => $digitoxx];
+    }
+
+    public function getAlertas(Request $request)
+    {
+        if ($request->ajax()) {
+            return response()->json(AlertasHelper::alertas());
         }
     }
 }

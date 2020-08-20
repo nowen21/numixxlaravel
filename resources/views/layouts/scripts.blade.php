@@ -62,7 +62,7 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
-    $('body').click(function() {
+    $('bbody').click(function() {
 
 
 
@@ -70,7 +70,7 @@
         var f_ajax = function() {
             $('#alertas').empty();
             $.ajax({
-                url: "{{route('clinica.getAlertas')}}",
+                url: "{{route('clinicax.getAlertas')}}",
                 type: 'POST',
                 data: {
                     _token: $("input[name='_token']").val(),

@@ -40,9 +40,9 @@
              </a>
          </li>
          @endcan
-         @can('clinica-leer')
+         @can('clinicax-leer')
          <li class="nav-item">
-             <a href="{{ route('clinica') }}" class="nav-link">
+             <a href="{{ route('clinicax') }}" class="nav-link">
                  <i class="fas fa-door-open nav-icon"></i>
                  <p>Clinicas</p>
              </a>

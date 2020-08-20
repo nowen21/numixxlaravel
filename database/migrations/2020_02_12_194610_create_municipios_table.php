@@ -1,6 +1,4 @@
 <?php
-
-use App\Camposmagicos\CamposMagicos;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,7 +18,11 @@ class CreateMunicipiosTable extends Migration
             $table->string('nombre',50);
 
             $table->foreign('departamento_id')->references('id')->on('departamentos');
-            $table=CamposMagicos::magicos($table);
+            $table->bigInteger('user_crea_id')->default(1);
+            $table->bigInteger('user_edita_id')->default(1);
+            $table->bigInteger('sis_esta_id')->unsigned();
+            $table->foreign('sis_esta_id')->references('id')->on('sis_estas');
+            $table->timestamps();
         });
 
     }

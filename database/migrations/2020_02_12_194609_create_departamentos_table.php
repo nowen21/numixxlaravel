@@ -18,7 +18,11 @@ class CreateDepartamentosTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre',30);
 
-            $table=CamposMagicos::magicos($table);
+            $table->bigInteger('user_crea_id')->default(1);
+            $table->bigInteger('user_edita_id')->default(1);
+            $table->bigInteger('sis_esta_id')->unsigned();
+            $table->foreign('sis_esta_id')->references('id')->on('sis_estas');
+            $table->timestamps();
         });
     }
 

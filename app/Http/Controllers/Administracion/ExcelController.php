@@ -4,40 +4,16 @@ namespace App\Http\Controllers\Administracion;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Administracion\EpEditarRequest;
-use App\Imports\DlotesImport;
-use App\Imports\DmarcasImport;
-use App\Imports\DmedicosImport;
-use App\Imports\EpsImport;
-use App\Imports\MedicamesImport;
-use App\Imports\MinvimasImport;
-use App\Imports\MlotesImport;
-use App\Imports\MmarcasImport;
-use App\Imports\MnptsImport;
-use App\Imports\PacientesImport;
-use App\Imports\RangosImport;
+
 use App\Imports\RcodigosImport;
-use App\Imports\RcondicisImport;
-use App\Imports\RnptsImport;
-use App\Imports\SisClinicasImport;
+
 use App\Models\Administracion\Ep;
-use App\Models\Administracion\Rango;
-use App\Models\Administracion\Rango\Rcodigo;
-use App\Models\Administracion\Rango\Rcondici;
-use App\Models\Administracion\Rango\Rnpt;
+use App\Models\Clinica\Clinica;
 use App\Models\Clinica\SisClinica;
-use App\Models\Dispositivos\Dlote;
-use App\Models\Dispositivos\Dmarca;
-use App\Models\Dispositivos\Dmedico;
-use App\Models\Formulaciones\Hidrpedi;
-use App\Models\Formulaciones\Lipopedi;
-use App\Models\Medicamentos\Medicame;
-use App\Models\Medicamentos\Minvima;
-use App\Models\Medicamentos\Mlote;
-use App\Models\Medicamentos\Mmarca;
-use App\Models\Medicamentos\Mnpt;
-use App\Models\Pacientes\Pacientec;
+use App\Models\Pacientes\Paciente;
 use App\Models\Sistema\Municipio;
 use App\Models\Sistema\SisEsta;
+use App\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -84,7 +60,131 @@ class ExcelController extends Controller
      */
     public function index()
     {
+        echo '[<br>';
+        $i = 0;
+        // foreach (User::get() as $key => $value) {
+        //   echo "  [
+        //         'name' => '{$value->name}',
+        //         'email' => '{$value->email}', 'password' => '{$value->password}',
+        //         'sis_clinica_id' => {$value->sis_clinica_id}
+        //   ],<br>";
+        // }
+         $id = [4, 5, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 20, 21, 22, 25, 31, 32, 37, 42, 46, 47, 49, 50, 58, 63, 65, 66, 67, 68, 69, 71];
 
+            $cli =[
+                1=>1,
+2=>2,
+3=>3,
+4=>3,
+5=>3,
+6=>4,
+7=>5,
+8=>5,
+9=>5,
+10=>5,
+11=>5,
+12=>5,
+13=>6,
+14=>6,
+15=>6,
+16=>6,
+17=>6,
+18=>6,
+19=>7,
+20=>7,
+21=>7,
+22=>7,
+23=>8,
+24=>9,
+25=>9,
+26=>10,
+27=>11,
+28=>12,
+29=>13,
+30=>14,
+31=>14,
+32=>14,
+33=>15,
+34=>16,
+35=>17,
+36=>18,
+37=>18,
+38=>19,
+39=>20,
+40=>21,
+41=>22,
+42=>22,
+43=>23,
+44=>24,
+45=>25,
+46=>25,
+47=>25,
+48=>26,
+49=>26,
+50=>26,
+51=>27,
+52=>28,
+53=>29,
+54=>30,
+55=>31,
+56=>32,
+57=>33,
+58=>33,
+59=>34,
+60=>35,
+61=>36,
+62=>37,
+63=>37,
+64=>38,
+65=>38,
+66=>38,
+67=>38,
+68=>38,
+69=>38,
+70=>39,
+71=>39,
+72=>40,
+73=>41,
+74=>42,
+75=>43  ];
+
+        foreach (Paciente::get() as $key => $value) {
+            $comentar = '';
+            if (!in_array($value->sis_clinica_id, $id)) {
+                // $comentar = '//';
+                $i++;
+ echo  $comentar . "
+            ['registro' => '{$value->registro}', 'cedula' => '{$value->cedula}', 'nombres' => '{$value->nombres}',
+            'apellidos' => '{$value->apellidos}', 'peso' => {$value->peso}, 'genero_id' => {$value->genero_id}, 'ep_id' => {$value->ep_id},
+            'cama' => {$value->cama}, 'fechnaci' => '{$value->fechnaci}', 'departamento_id' => {$value->departamento_id},
+            'municipio_id' => {$value->municipio_id}, 'npt_id' => {$value->npt_id}, 'servicio_id' => {$value->servicio_id},
+            'sis_esta_id' => {$value->sis_esta_id}, 'user_crea_id' => {$value->user_crea_id}, 'sis_clinica_id' => {$cli[$value->sis_clinica_id]},
+            'user_edita_id' => {$value->user_edita_id},
+        ],  //{$i}<br>";
+            }
+        }
+
+//         foreach (Clinica::get() as $key => $value) {
+//             $comentar = '//';
+//             if ($value['sis_esta_id'] == 1) {
+//                 $comentar = '';
+//                 $i++;
+
+//             }
+// echo "{$value->id}=>{$i},<br>";
+//             // echo  $comentar."['clinica_id' => {$i}, 'municipio_id' => 641,  'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1],  //{$value->id}<br>";
+
+//         }
+
+        // foreach (Clinica::get() as $key => $value) {
+        //     if($value['sis_esta_id']==1){
+        //         $i++;
+        //       echo  "['id' => {$i},'nitxxxxx' => {$value['nitxxxxx']}, 'clinica' => '{$value['clinica']}', 'telefono' => '{$value['telefono']}', 'digiveri' => {$value['digiveri']}, 'user_crea_id' => {$value['user_crea_id']}, 'user_edita_id' => {$value['user_edita_id']}, 'sis_esta_id' => {$value['sis_esta_id']}],<br>";
+
+        //     }
+        // }
+
+        echo '];';
         $this->opciones['tablasxx'][] =
             [
 
@@ -118,7 +218,7 @@ class ExcelController extends Controller
         $this->opciones['padrexxx'] = '';
 
         $this->opciones['accionxx'] = 'index';
-        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
+        // return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
     {
@@ -1266,8 +1366,8 @@ class ExcelController extends Controller
          'sis_esta_id'=>1";
         // echo '[<br>';
         foreach ($municipi as $key => $value) {
-           $muni= Municipio::find($value[0]);
-           $muni->update(['nombre'=>$value[1],'departamento_id'=>$value[2]]);
+            $muni = Municipio::find($value[0]);
+            $muni->update(['nombre' => $value[1], 'departamento_id' => $value[2]]);
             // echo "[$value->id,'$value->nombre',$value->departamento_id],<br>";
         }
         // echo ']<br>';
