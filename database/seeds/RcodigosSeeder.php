@@ -215,5 +215,8 @@ class RcodigosSeeder extends Seeder
         Rcodigo::create(['id' => 201, 'codiprod' => 'NAP-013', 'rcondici_id' => '186', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Rcodigo::create(['id' => 202, 'codiprod' => 'NAP-007', 'rcondici_id' => '180', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Rcodigo::create(['id' => 203, 'codiprod' => 'NAP-006', 'rcondici_id' => '181', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
+        Rcodigo::create(['id' => 204, 'codiprod' => 'NAP-006', 'rcondici_id' => '3', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
+        Rcodigo::create(['id' => 205, 'codiprod' => 'NAP-006', 'rcondici_id' => '31', 'user_crea_id' => 2, 'user_edita_id' => 2, 'sis_esta_id' => 1]);
+
     }
 }

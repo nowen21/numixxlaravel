@@ -16,7 +16,7 @@ class CreateEpsTable extends Migration
     {
         Schema::create('eps', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre',250);
+            $table->string('nombre',250)->unique();
 
             $table=CamposMagicos::magicos($table);
         });

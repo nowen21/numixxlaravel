@@ -17,13 +17,13 @@ class CreateCalistamsTable extends Migration
         Schema::create('calistams', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('producto',50);
-            $table->bigInteger('ordene_id')->unsigned()->comment('ORDEN DE PRODUCCION');
-            $table->foreign('ordene_id')->references('id')->on('ordenes');
+            $table->bigInteger('orden_id')->unsigned()->comment('ORDEN DE PRODUCCION');
+            $table->foreign('orden_id')->references('id')->on('ordens');
             $table=CamposMagicos::magicos($table);
         });
         Schema::create('h_calistams', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('ordene_id');
+            $table->bigInteger('orden_id');
             $table->string('ordepres',50);
             $table=CamposMagicos::h_magicos($table);
         });

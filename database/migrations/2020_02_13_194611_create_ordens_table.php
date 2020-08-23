@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdenesTable extends Migration
+class CreateOrdensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,13 @@ class CreateOrdenesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ordenes', function (Blueprint $table) {
+        Schema::create('ordens', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('ordeprod');
             $table->string('observac')->nullable();
             $table=CamposMagicos::magicos($table);
         });
-        Schema::create('h_ordenes', function (Blueprint $table) {
+        Schema::create('h_ordens', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('ordeprod');
             $table->string('observac')->nullable();

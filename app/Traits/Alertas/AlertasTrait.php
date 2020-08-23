@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Traits\Cformula;
+namespace App\Traits\Alertas;
 
 use App\Models\Alerta;
 use Illuminate\Support\Facades\Auth;

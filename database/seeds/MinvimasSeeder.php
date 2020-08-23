@@ -57,5 +57,10 @@ class MinvimasSeeder extends Seeder
         Minvima::create(['id' => 43, 'reginvim' => '2008M-010887-R1', 'mmarca_id' => 43, 'sis_esta_id' => 1, 'user_crea_id' => 1, 'user_edita_id' => 1]);
         Minvima::create(['id' => 44, 'reginvim' => '2016M-0005159-R1', 'mmarca_id' => 44, 'sis_esta_id' => 1, 'user_crea_id' => 1, 'user_edita_id' => 1]);
         Minvima::create(['id' => 45, 'reginvim' => '2006M-007522-R2', 'mmarca_id' => 45, 'sis_esta_id' => 1, 'user_crea_id' => 1, 'user_edita_id' => 1]);
+        Minvima::create(['id' => 46, 'reginvim' => '2019M-0003145-R2', 'mmarca_id' => 26, 'sis_esta_id' => 2, 'user_crea_id' => 2,
+        'user_edita_id' => 1
+        ]);
+
+
     }
 }

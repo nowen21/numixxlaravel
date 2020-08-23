@@ -8,15 +8,14 @@ use App\Models\Medicamentos\Medicame;
 use App\Models\Pacientes\Paciente;
 use App\Models\Produccion\Proceso;
 use App\Models\Sistema\SisEsta;
-use App\Traits\Cformula\AlertasTrait;
 use App\Traits\Produccion\InventarioTrait;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Cformula extends Model
 {
-    use AlertasTrait;
     use InventarioTrait;
     protected $fillable = [
         'paciente_id',
@@ -33,12 +32,24 @@ class Cformula extends Model
         'userprep_id',
         'userproc_id',
         'userlibe_id',
-        'ordene_id',
+        'orden_id',
         'sis_esta_id',
         'user_crea_id',
         'user_edita_id',
     ];
 
+    public function creador()
+    {
+        return $this->belongsTo(User::class,'user_crea_id');
+    }
+    public function editor()
+    {
+        return $this->belongsTo(User::class,'user_edita_id');
+    }
+    public function sis_esta()
+    {
+        return $this->belongsTo(User::class,'user_edita_id');
+    }
     public static function combo($casa, $medicamento)
     {
         $medic = '';
@@ -112,13 +123,10 @@ class Cformula extends Model
         }
         return $listaxxx;
     }
-    public function sis_esta()
+
+    public function orden()
     {
-        return $this->belongsTo(SisEsta::class);
-    }
-    public function ordene()
-    {
-        return $this->belongsTo(Ordene::class);
+        return $this->belongsTo(Orden::class);
     }
     public function alrtas()
     {
@@ -144,7 +152,7 @@ class Cformula extends Model
 
                 $dataxxxx['sis_esta_id'] = 1;
                 $dataxxxx['total'] = $totalxxx;
-                $dataxxxx['ordene_id'] = Ordene::getOrdenDia();
+                $dataxxxx['orden_id'] = Orden::getOrdenDia();
                 $dataxxxx['user_crea_id'] = Auth::user()->id;
                 $objetoxx = Cformula::create($dataxxxx);
                 Alerta::create([

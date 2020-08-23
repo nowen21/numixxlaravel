@@ -203,5 +203,7 @@ class RcondicisSeeder extends Seeder
         Rcondici::create(['id' => 189, 'condicio_id' => '5', 'rnpt_id' => '59', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Rcondici::create(['id' => 190, 'condicio_id' => '14', 'rnpt_id' => '59', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
         Rcondici::create(['id' => 191, 'condicio_id' => '15', 'rnpt_id' => '59', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]);
+        Rcondici::create(['id' => 192, 'condicio_id' => '6', 'rnpt_id' => '31', 'user_crea_id' => 2, 'user_edita_id' => 2, 'sis_esta_id' => 1]);
+
     }
 }

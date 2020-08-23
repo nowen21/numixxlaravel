@@ -2,20 +2,31 @@
 
 $controll = 'Clinicas\Cformula';
 $routexxx = 'formular';
-Route::group(['prefix' => '{padrexxy}'], function () use ($controll, $routexxx) {
 
-	Route::get('', [
+Route::group(['prefix' => '{padrexxx}/formulaciones'], function () use ($routexxx, $controll) {
+    Route::get('', [
 		'uses' => $controll . 'Controller@index',
 		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
 	])->name($routexxx);
 	Route::get('nuevo', [
 		'uses' => $controll . 'Controller@create',
 		'middleware' => ['permission:' . $routexxx . '-crear']
-	])->name($routexxx . '.nuevo');
-	Route::post('crear', [
+    ])->name($routexxx . '.nuevo');
+    Route::get('listaxxx', [
+		'uses' => $controll . 'Controller@getListado',
+		'middleware' => ['permission:' . $routexxx . '-leer']
+	])->name($routexxx.'.listaxxx');
+    Route::post('crear', [
 		'uses' => $controll . 'Controller@store',
 		'middleware' => ['permission:' . $routexxx . '-crear']
 	])->name($routexxx . '.crear');
+});
+
+
+
+Route::group(['prefix' => 'formula'], function () use ($controll, $routexxx) {
+
+
 	Route::get('editar/{objetoxx}', [
 		'uses' => $controll . 'Controller@edit',
 		'middleware' => ['permission:' . $routexxx . '-editar']
@@ -23,7 +34,20 @@ Route::group(['prefix' => '{padrexxy}'], function () use ($controll, $routexxx) 
 	Route::put('editar/{objetoxx}', [
 		'uses' => $controll . 'Controller@update',
 		'middleware' => ['permission:' . $routexxx . '-editar']
-    ])->name($routexxx . '.editar');
+	])->name($routexxx . '.editar');
+	Route::get('ver/{objetoxx}', [
+		'uses' => $controll . 'Controller@show',
+		'middleware' => ['permission:' . $routexxx . '-leer']
+	])->name($routexxx . '.ver');
+    Route::get('borrar/{objetoxx}', [
+	    'uses' => $controll.'Controller@inactivate',
+	    'middleware' => ['permission:'.$routexxx.'-borrar']
+    ])->name($routexxx.'.borrar');
+
+    Route::put('borrar/{objetoxx}', [
+		'uses' => $controll . 'Controller@destroy',
+		'middleware' => ['permission:' . $routexxx . '-borrar']
+    ])->name($routexxx . '.borrar');
 
     Route::get('copiar/{objetoxx}', [
 		'uses' => $controll . 'Controller@copy',
@@ -34,22 +58,12 @@ Route::group(['prefix' => '{padrexxy}'], function () use ($controll, $routexxx) 
 		'middleware' => ['permission:' . $routexxx . '-copiar']
 	])->name($routexxx . '.copiar');
 
-
-
-	Route::get('ver/{objetoxx}', [
-		'uses' => $controll . 'Controller@show',
-		'middleware' => ['permission:' . $routexxx . '-leer']
-	])->name($routexxx . '.ver');
-	Route::delete('borrar/{objetoxx}', [
-		'uses' => $controll . 'Controller@destroy',
-		'middleware' => ['permission:' . $routexxx . '-borrar']
-	])->name($routexxx . '.borrar');
-
-	Route::post('formular', [
+	Route::get('formular', [
 		'uses' => $controll . 'Controller@getFormular',
 		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
 	])->name($routexxx . '.formular');
-	Route::get('pedineon', [
+
+    Route::get('pedineon', [
 		'uses' => $controll . 'Controller@getPedineon',
 		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
 	])->name($routexxx . '.pedineon');
@@ -58,8 +72,10 @@ Route::group(['prefix' => '{padrexxy}'], function () use ($controll, $routexxx) 
 		'uses' => $controll . 'Controller@getRequerimientoVolumenq',
 		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
 	])->name($routexxx.'.rangvolu');
-	Route::post('getRequerimientoVolumen', [
-		'uses' => $controll . 'Controller@getRequerimientoVolumen',
-		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
-    ])->name($routexxx.'.rangvolu');
+
+
 });
+
+
+
+

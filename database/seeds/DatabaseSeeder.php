@@ -18,9 +18,11 @@ class DatabaseSeeder extends Seeder
         $this->call(MunicipiosSeeder::class);
         $this->call(ClinicasSeeder::class);
         $this->call(SisClinicasSeeder::class);
+
         $this->call(UsersSeeder::class);
         $this->call(RolesYPermisosSeeder::class);
         $this->call(AsignarRolSeeder::class);
+
         $this->call(UnidadsSeeder::class);
         $this->call(RangonptsSeeder::class);
         $this->call(UnidrangSeeder::class);
@@ -28,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UrangnptSeeder::class);
         $this->call(CasasSeeder::class);
         $this->call(MedicamesSeeder::class);
+        $this->call(MedicameSisClinicaSeeder::class);
         $this->call(MmarcasSeeder::class);
         $this->call(MinvimasSeeder::class);
         $this->call(MlotesSeeder::class);
@@ -47,6 +50,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RnptsSeeder::class);
         $this->call(RcondicisSeeder::class);
         $this->call(RcodigosSeeder::class);
+        $this->call(CrangosSeeder::class);
         $this->call(TipoaccionsSeeder::class);
     }
 }

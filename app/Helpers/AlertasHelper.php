@@ -35,22 +35,24 @@ class AlertasHelper
                 })
                 ->get();
             foreach ($alertaxx as $key => $value) {
-                if ($dataxxxx['tipoacci'] == 1) {
-                    $acciones->cuerpoxx = str_replace("xxxxxxxx", $value->cformula->sis_clinica->clinica, $acciones->cuerpoxx);
+                $cuerpoxx=$acciones->cuerpoxx;
+                if ($dataxxxx['tipoacci'] == 1) { // se ha creado una formulacion
+                    $cuerpoxx = str_replace("xxxxxxxx", $value->cformula->sis_clinica->sucursal, $cuerpoxx);
                 }
 
-                $acciones->cuerpoxx = str_replace("yyyyyyyy", $value->cformula_id, $acciones->cuerpoxx);
+                $cuerpoxx = str_replace("yyyyyyyy", $value->cformula_id, $cuerpoxx);
                 $registrx['respuest'] = true;
                 $registrx['encabeza']['totalxxx'] += 1;
                 $registrx['dataxxxx'][] = [
                     'titulink' => $acciones->titulink,
-                    'cuerpoxx' => $acciones->cuerpoxx,
+                    'cuerpoxx' => $cuerpoxx,
                     'fechorax' => 'FECHA Y HORA: ' . date('Y-m-d H:m:s', strtotime($value->cformula->created_at)),
                     'linkxxxx' => route($acciones->routexxx, $dataxxxx['tipoacci'] == 1 ? [$value->cformula->sis_clinica_id, $value->cformula->paciente_id, $value->routexxx] : [$value->routexxx])
                 ];
             }
             $registrx['encabeza']['tituloxx'] = $registrx['encabeza']['totalxxx'] . ' ' . $registrx['encabeza']['tituloxx'];
         }
+
         return $registrx;
     }
     public static function alertas()

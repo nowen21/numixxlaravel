@@ -9,6 +9,7 @@ use App\Models\Clinica\SisClinica;
 use App\Models\Medicamentos\Npt;
 use App\Models\Sistema\Municipio;
 use App\Models\Sistema\SisEsta;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -36,6 +37,14 @@ class Paciente extends Model
         'user_edita_id'
     ];
 
+    public function creador()
+    {
+        return $this->belongsTo(User::class,'user_crea_id');
+    }
+    public function editor()
+    {
+        return $this->belongsTo(User::class,'user_edita_id');
+    }
     public function genero()
     {
         return $this->belongsTo(Genero::class);
@@ -80,22 +89,21 @@ class Paciente extends Model
     }
 
 
-    public static function transaccion($dataxxxx,  $objetoxx)
+    public static function transaccion($dataxxxx)
     {
+        $usuariox = DB::transaction(function () use ($dataxxxx) {
+            $dataxxxx['requestx']->cama  = strtoupper($dataxxxx['requestx']->cama);
+            $dataxxxx['requestx']->nombres = strtoupper($dataxxxx['requestx']->nombres);
+            $dataxxxx['requestx']->apellidos = strtoupper($dataxxxx['requestx']->apellidos);
 
-        $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {
-            $dataxxxx['cama']  = strtoupper($dataxxxx['cama']);
-            $dataxxxx['nombres'] = strtoupper($dataxxxx['nombres']);
-            $dataxxxx['apellidos'] = strtoupper($dataxxxx['apellidos']);
-
-            $dataxxxx['user_edita_id'] = Auth::user()->id;
-            if ($objetoxx != '') {
-                $objetoxx->update($dataxxxx);
+            $dataxxxx['requestx']->user_edita_id = Auth::user()->id;
+            if ($dataxxxx['modeloxx'] != '') {
+                $dataxxxx['modeloxx']->update($dataxxxx['requestx']->all());
             } else {
-                $dataxxxx['user_crea_id'] = Auth::user()->id;
-                $objetoxx = Paciente::create($dataxxxx);
+                $dataxxxx['requestx']->user_crea_id = Auth::user()->id;
+                $dataxxxx['modeloxx'] = Paciente::create($dataxxxx['requestx']->all());
             }
-            return $objetoxx;
+            return $dataxxxx['modeloxx'];
         }, 5);
         return $usuariox;
     }

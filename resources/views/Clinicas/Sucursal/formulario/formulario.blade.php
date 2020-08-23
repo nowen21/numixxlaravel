@@ -14,7 +14,7 @@
     </div>
 
     <div class="form-group col-md-6">
-        {{ Form::label('clinica_id', 'Departamento:', ['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::label('clinica_id', 'Clínica:', ['class' => 'control-label col-form-label-sm']) }}
 
         {{ Form::select('clinica_id', $todoxxxx['clinicai'], null, ['class' => $errors->first('clinica_id') ? 'form-control is-invalid select2' : 'form-control select2','style'=>"width: 100%;",'id'=>'clinica_id']) }}
 

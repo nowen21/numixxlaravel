@@ -33,7 +33,7 @@ class SisClinicaController extends Controller
             'tituloxx' => 'SUCURSALES',
             'carpetax' => 'Sucursal',
             'slotxxxx' => 'sisclini',
-            'slotxxxy' => 'sisclini',
+            'slotxxxy' => 'clinicax',
             'tablaxxx' => 'datatable',
             'indecrea' => false, // false muestra las pestañas
             'esindexx' => false,
@@ -90,10 +90,12 @@ class SisClinicaController extends Controller
                 'vercrear' => true,
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', $this->opciones['parametr']),
                 'cabecera' => [
+                    [
                     ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'SUCURSAL', 'widthxxx' => '0', 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ESTADO', 'widthxxx' => '0', 'rowspanx' => 1, 'colspanx' => 1],
+                    ]
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
@@ -136,6 +138,7 @@ class SisClinicaController extends Controller
             $this->opciones['parametr'] =$dataxxxx['modeloxx']->id;
             $this->opciones['clinicai'] = [$dataxxxx['modeloxx']->clinica_id=>$dataxxxx['modeloxx']->clinica->clinica];
             $departam = $dataxxxx['modeloxx']->departamento_id = $dataxxxx['modeloxx']->municipio->departamento_id;
+
             $this->opciones['botoform'][0]['routingx'][1] = $dataxxxx['modeloxx']->clinica_id;
             $this->opciones['cardhead'] = 'CLINICA: '.$dataxxxx['modeloxx']->clinica->clinica;
             $this->opciones['cardheap'] = 'SUCURSAL: '.$dataxxxx['modeloxx']->sucursal;
@@ -155,7 +158,9 @@ class SisClinicaController extends Controller
             $this->opciones['useredit'] = $dataxxxx['modeloxx']->editor->name;
         }
 
+
         $this->opciones['municipi'] = Municipio::combo(['departam' => $departam, 'cabecera' => true, 'ajaxxxxx' => false]);
+
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
     /**

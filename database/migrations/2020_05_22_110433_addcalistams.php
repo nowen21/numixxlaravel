@@ -13,7 +13,7 @@ class Addcalistams extends Migration
     public function up()
     {
         Schema::table('calistams', function ($table) {
-            $table->boolean('concilia')->after('ordene_id');
+            $table->boolean('concilia')->after('orden_id');
          });
     }
 

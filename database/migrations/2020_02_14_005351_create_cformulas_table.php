@@ -25,21 +25,22 @@ class CreateCformulasTable extends Migration
             $table->double('peso', 15, 2);
             $table->double('total', 15, 2);
             $table->bigInteger('sis_clinica_id')->unsigned();
-
+            $table->bigInteger('crango_id')->unsigned()->nullable()->comment('RANGO ASIGNADO A LA FORMULACION');
             $table->bigInteger('userevis_id')->unsigned()->nullable()->comment('USUARIO QUE REVISA LA FORMULACION');
             $table->bigInteger('userprep_id')->unsigned()->nullable()->comment('USUARIO QUE PREPARA LA FORMULACION');
             $table->bigInteger('proceso_id')->unsigned()->nullable()->comment('PROCESO DE LA FORMULACION');
             $table->bigInteger('terminado_id')->unsigned()->nullable()->comment('TERMINADO DE LA FORMULACION');
-            $table->bigInteger('ordene_id')->unsigned();
-           
+            $table->bigInteger('orden_id')->unsigned();
+
             $table->foreign('paciente_id')->references('id')->on('pacientes');
+            $table->foreign('crango_id')->references('id')->on('crangos');
             $table->foreign('sis_clinica_id')->references('id')->on('sis_clinicas');
             $table->foreign('userevis_id')->references('id')->on('users');
             $table->foreign('userprep_id')->references('id')->on('users');
             $table->foreign('proceso_id')->references('id')->on('procesos');
             $table->foreign('terminado_id')->references('id')->on('terminados');
-            $table->foreign('ordene_id')->references('id')->on('ordenes');
-            
+            $table->foreign('orden_id')->references('id')->on('ordens');
+
             $table=CamposMagicos::magicos($table);
 
         });
@@ -57,7 +58,7 @@ class CreateCformulasTable extends Migration
             $table->integer('userprep_id')->comment('USUARIO QUE PREPARA LA FORMULACION');
             $table->integer('userproc_id')->comment('USUARIO QUE PROCESA LA FORMULACION');
             $table->integer('userlibe_id')->comment('USUARIO QUE LIBERA LA FORMULACION');
-            $table->integer('ordene_id');
+            $table->integer('orden_id');
             $table=CamposMagicos::h_magicos($table);
         });
     }

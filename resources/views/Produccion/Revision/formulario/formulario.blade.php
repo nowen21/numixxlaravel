@@ -2,7 +2,7 @@
     <div class="form-group col-md-4">
         {{ Form::label('sis_clinica_id', 'Clínica:', ['class' => 'control-label col-form-label-sm']) }}
        <div id="sis_clinica_id" class="form-control" style="height: 28px">
-         {{$todoxxxx['modeloxx']->sis_clinica->clinica}}
+       {{$todoxxxx['modeloxx']->sis_clinica->clinica->clinica}} (SUCURSAL: {{$todoxxxx['modeloxx']->sis_clinica->sucursal}})
        </div>
     </div>
     <div class="form-group col-md-4">

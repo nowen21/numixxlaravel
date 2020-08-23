@@ -32,7 +32,9 @@ class Municipio extends Model {
         $comboxxx = ['' => 'Seleccione'];
       }
     }
+
     $activida = Municipio::where('departamento_id',$dataxxxx['departam'])->get();
+
     foreach ($activida as $registro) {
       if ($dataxxxx['ajaxxxxx']) {
         $comboxxx[] = ['valuexxx' => $registro->id, 'optionxx' => $registro->nombre];
@@ -40,6 +42,7 @@ class Municipio extends Model {
         $comboxxx[$registro->id] = $registro->nombre;
       }
     }
+
     return $comboxxx;
   }
 

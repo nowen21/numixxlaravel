@@ -1,15 +1,26 @@
 <?php
 $controll = 'Clinicas\Paciente';
 $routexxx = 'paciente';
-Route::group(['prefix' => '{padrexxx}/pacientes'], function () use ($controll, $routexxx) {
-	Route::get('', [
+
+Route::group(['prefix' => '{padrexxx}/pacientes'], function () use ($routexxx, $controll) {
+    Route::get('', [
 		'uses' => $controll . 'Controller@index',
 		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
 	])->name($routexxx);
 	Route::get('nuevo', [
 		'uses' => $controll . 'Controller@create',
 		'middleware' => ['permission:' . $routexxx . '-crear']
-	])->name($routexxx . '.nuevo');
+    ])->name($routexxx . '.nuevo');
+    Route::get('listaxxx', [
+		'uses' => $controll . 'Controller@getListado',
+		'middleware' => ['permission:' . $routexxx . '-leer']
+	])->name($routexxx.'.listaxxx');
+
+});
+
+
+Route::group(['prefix' => 'paciente'], function () use ($controll, $routexxx) {
+
 	Route::post('crear', [
 		'uses' => $controll . 'Controller@store',
 		'middleware' => ['permission:' . $routexxx . '-crear']
@@ -26,9 +37,27 @@ Route::group(['prefix' => '{padrexxx}/pacientes'], function () use ($controll, $
 		'uses' => $controll . 'Controller@show',
 		'middleware' => ['permission:' . $routexxx . '-leer']
 	])->name($routexxx . '.ver');
-	Route::delete('borrar/{objetoxx}', [
+    Route::get('borrar/{objetoxx}', [
+	    'uses' => $controll.'Controller@inactivate',
+	    'middleware' => ['permission:'.$routexxx.'-borrar']
+    ])->name($routexxx.'.borrar');
+
+    Route::put('borrar/{objetoxx}', [
 		'uses' => $controll . 'Controller@destroy',
 		'middleware' => ['permission:' . $routexxx . '-borrar']
-	])->name($routexxx . '.borrar');
-	require_once('web_formular.php');
+    ])->name($routexxx . '.borrar');
+
+    Route::get('edadxxxx', [
+	    'uses' => $controll.'Controller@getCalcularEdade',
+	    'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar']
+    ])->name($routexxx.'.edadxxxx');
+
+    Route::get('municipio', [
+	    'uses' => $controll.'Controller@getMunicipio',
+	    'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar']
+    ])->name($routexxx.'.municipio');
+
+
+
 });
+ require_once('web_formular.php');

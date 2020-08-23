@@ -63,7 +63,7 @@
                     });
                 },
                 error: function(xhr, status) {
-                    alert('Disculpe, existió un problema');
+                    alert('Disculpe, existió un problema para pediatrio y neonato');
                 }
             });
         }
@@ -80,12 +80,11 @@
             $("#" + campo_id.split('_')[0] + '_cant').prop('title', '');
             $.ajax({
                 url: "{{route('formular.formular',$todoxxxx['parametr'])}}",
-                type: 'POST',
+                type: 'get',
                 data: {
                     dataxxxx: f_dataxxxx(),
                     campo_id: campo_id,
                     requedia:$('#'+campo_id).val(),
-                    _token: $("input[name='_token']").val(),
                 },
                 dataType: 'json',
                 success: function(json) {
@@ -105,7 +104,7 @@
                     $("#aguaeste_volu").val(json.aguaxxxx);
                 },
                 error: function(xhr, status) {
-                    alert('Disculpe, existió un problema');
+                    alert('Disculpe, existió un problema al realizar el cálculo');
                 }
             });
 
@@ -144,7 +143,7 @@
                     $("#velocidad").val(json.calculox);
                 },
                 error: function(xhr, status) {
-                    alert('Disculpe, existió un problema');
+                    alert('Disculpe, existió un problema al calcular el volumen');
                 }
             });
         });
@@ -243,27 +242,26 @@
             });
         });
 
-        $("#formulaciontable select").each(function() {
-            $.ajax({
-                url: "{{route('formular.rangvolu',$todoxxxx['parametr'])}}",
-                type: 'POST',
-                data: {
-                    _token: $("input[name='_token']").val(),
-                    npt_id: '{{$todoxxxx["paciente"]->npt_id}}',
-                    medicame: $(this).val(),
-                    idmedica: $(this).prop('id'),
+        // $("#formulaciontable select").each(function() {
+        //     $.ajax({
+        //         url: "{{route('formular.rangvolu',$todoxxxx['parametr'])}}",
+        //         type: 'GET',
+        //         data: {
+        //             npt_id: '{{$todoxxxx["paciente"]->npt_id}}',
+        //             medicame: $(this).val(),
+        //             idmedica: $(this).prop('id'),
 
-                },
-                dataType: 'json',
-                success: function(json) {
-                    $('#' + json.idmedica).text(json.medicame);
+        //         },
+        //         dataType: 'json',
+        //         success: function(json) {
+        //             $('#' + json.idmedica).text(json.medicame);
 
-                },
-                error: function(xhr, status) {
-                    alert('Disculpe, existió un problema');
-                }
-            });
+        //         },
+        //         error: function(xhr, status) {
+        //             alert('Disculpe, existió un problema al mostrar los rangos');
+        //         }
+        //     });
 
-        });
+        // });
     });
 </script>

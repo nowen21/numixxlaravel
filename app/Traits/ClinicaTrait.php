@@ -1,11 +1,15 @@
 <?php
 namespace App\Traits;
 
+use App\Helpers\Fechas;
 use App\Models\Administracion\Rango;
 use App\Models\Clinica\Clinica;
 use App\Models\Clinica\Crango;
 use App\Models\Clinica\SisClinica;
+use App\Models\Formulaciones\Cformula;
+use App\Models\Formulaciones\Orden;
 use App\Models\Medicamentos\Medicame;
+use App\Models\Pacientes\Paciente;
 
 trait ClinicaTrait{
     use DatatableTrait;
@@ -84,6 +88,55 @@ trait ClinicaTrait{
         $paciente = Rango::select(['rangos.id', 'rangos.ranginic', 'rangos.rangfina', 'rangos.sis_esta_id', 'sis_estas.s_estado'])
             ->join('sis_estas', 'rangos.sis_esta_id', '=', 'sis_estas.id')
             ->where('rangos.sis_esta_id', 1);
+
+        return $this->getDatatable($paciente, $request);
+    }
+    public static function getAsignarMedicam($request)
+    {
+        return SisClinica::find($request->clinicax)->medicames()->attach(
+            [$request->medicame => ['user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1]]
+        );
+    }
+
+    public  function getRemisiones($request)
+    {
+
+        $paciente =
+       Orden::select(['ordens.id','ordens.ordeprod','ordens.observac','ordens.sis_esta_id', 'sis_estas.s_estado'])
+
+        ->join('cformulas','ordens.id','=','cformulas.orden_id')
+            ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
+            ->orderBy('ordens.updated_at')
+            ->groupBy('cformulas.orden_id')
+            ;
+
+        return $this->getDatatable($paciente, $request);
+    }
+
+    public function getPacientes($request)
+    {
+        $paciente = Paciente::select([
+            'pacientes.id', 'pacientes.nombres', 'pacientes.apellidos', 'pacientes.sis_esta_id',
+            'sis_estas.s_estado','pacientes.cedula','pacientes.sis_clinica_id'
+        ])
+        ->join('sis_clinicas', 'pacientes.sis_clinica_id', '=', 'sis_clinicas.id')
+            ->join('sis_estas', 'pacientes.sis_esta_id', '=', 'sis_estas.id')
+            ->where('pacientes.sis_clinica_id',$request->padrexxx)
+            ;
+
+        return $this->getDatatable($paciente, $request);
+    }
+
+
+    public function getPacientesCformula($request)
+    {
+        $paciente = Cformula::select([
+            'cformulas.id', 'cformulas.tiempo', 'cformulas.velocidad','cformulas.volumen',
+            'cformulas.purga','cformulas.peso', 'cformulas.total','cformulas.sis_esta_id','cformulas.sis_clinica_id',
+            'sis_estas.s_estado','cformulas.paciente_id','cformulas.userevis_id'
+        ])
+            ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
+            ->where('cformulas.paciente_id',$request->padrexxx->id);
 
         return $this->getDatatable($paciente, $request);
     }

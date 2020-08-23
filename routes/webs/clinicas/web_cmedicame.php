@@ -22,6 +22,10 @@ Route::group(['prefix' => 'sucursal/{padrexxx}'], function () use ($routexxx, $c
 Route::group(['prefix' => 'medicamento'], function () use ($controll, $routexxx) {
 	Route::get('inactivar', [
 		'uses' => $controll . 'Controller@getInactivarMedicam',
-		'middleware' => ['permission:' . $routexxx . '-leer']
-	])->name($routexxx . '.inactivar');
+		'middleware' => ['permission:' . $routexxx . '-crear|'. $routexxx . '-editar|']
+    ])->name($routexxx . '.inactivar');
+    Route::get('asignarmedi', [
+		'uses' => $controll . 'Controller@getAsignarMedicame',
+		'middleware' => ['permission:' . $routexxx . '-crear|'. $routexxx . '-editar|']
+	])->name($routexxx . '.asignarmedi');
 });

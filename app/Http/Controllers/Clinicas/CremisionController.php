@@ -3,51 +3,55 @@
 namespace App\Http\Controllers\Clinicas;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Clinica\SisClinicaCrearRequest;
-use App\Http\Requests\Clinica\SisClinicaEditarRequest;
+use App\Http\Requests\Clinica\CrangoCrearRequest;
+use App\Http\Requests\Clinica\CrangoEditarRequest;
+use App\Models\Administracion\Rango\Rcodigo;
+use App\Models\Clinica\Crango;
 use App\Models\Clinica\SisClinica;
 use App\Models\Sistema\SisEsta;
-use App\User;
+use App\Traits\ClinicaTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CremisionController extends Controller
 {
     private $opciones;
-
+    use ClinicaTrait;
     public function __construct()
     {
+
         $this->opciones = [
             'pestpadr' => 3,
             'cardheap' => '',
             'rowscols' => 'rowspancolspan',
             'tabsxxxx' => 'Clinicas.tabsxxxx.clinica.header',
-            'cardhead' => '',// titulo para las pestañas
-            'permisox' => 'crango',
+            'cardhead' => '', // titulo para las pestañas
+
+            'permisox' => 'cremision',
             'parametr' => [],
             'rutacarp' => 'Clinicas.',
-            'tituloxx' => 'clinica',
-            'slotxxxy' => 'clinica',
-            'slotxxxx' => 'crango',
-            'carpetax' => 'Rango',
+            'tituloxx' => 'REMISIÓN',
+            'slotxxxy' => 'clinicax',
+            'slotxxxx' => 'cremision',
+            'carpetax' => 'Remision',
             'indecrea' => false,
             'esindexx' => false
         ];
 
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
+        $this->middleware (['permission:' . $this->opciones['permisox'] . '-leer|'
+            . $this->opciones['permisox'] . '-crear|'
+            . $this->opciones['permisox'] . '-editar|'
+            . $this->opciones['permisox'] . '-borrar']);
 
-        $this->opciones['readonly'] = '';
-        $this->opciones['rutaxxxx'] = 'crango';
-        $this->opciones['routnuev'] = 'crango';
-        $this->opciones['routxxxx'] = 'crango';
-
+        $this->opciones['rutaxxxx'] = 'cremision';
+        $this->opciones['routnuev'] = 'cremision';
+        $this->opciones['routxxxx'] = 'cremision';
         $this->opciones['botoform'] = [
             [
                 'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'], []],
-                'formhref' => 2, 'tituloxx' => 'VOLVER A CLINICAS', 'clasexxx' => 'btn btn-sm btn-primary'
+                'formhref' => 2, 'tituloxx' => 'VOLVER A REMISIONES', 'clasexxx' => 'btn btn-sm btn-primary'
             ],
+
         ];
     }
 
@@ -57,102 +61,113 @@ class CremisionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(SisClinica $padrexxx)
+    public function index( SisClinica $padrexxx)
     {
         $this->opciones['sucursal'] = $padrexxx->id;
-        $this->opciones['padrexxx'] = $padrexxx->clinica_id;
-
-        $this->opciones['cardhead']='CLINICA: '. $padrexxx->clinica->clinica;
+        $this->opciones['padrexxx']  =$padrexxx->clinica_id;
+        $this->opciones['cardhead'] = 'CLÍNICA: ' . $padrexxx->clinica->clinica;
+        $this->opciones['cardheap'] = 'SUCURSAL: '.$padrexxx->sucursal;
         $this->opciones['tablasxx'][] =
             [
 
-                'titunuev' => 'NUEVA CLINICA',
-                'titulist' => 'LISTA DE RANGOS',
+                'titunuev' => 'NUEVA REMISIÓN',
+                'titulist' => 'LISTA DE REMISIONES',
                 'dataxxxx' => [
-                    ['campoxxx' => 'botonesx', 'dataxxxx' => 'Clinicas.Clinica.botones.botonesapi'],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                    ['campoxxx' => 'clinicax', 'dataxxxx' => $padrexxx->id],
+
                 ],
                 'accitabl' => true,
-                'vercrear' => false,
-                'urlxxxxx' => 'api/clinica/crango',
+                'vercrear' => true,
+                'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', [$padrexxx->id]),
                 'cabecera' => [
                     ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'RANGO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ORDEN', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
-                    ['data' => 'id', 'name' => 'rangos.id'],
-                    ['data' => 'nombres', 'name' => 'rangos.nombres'],
+                    ['data' => 'id', 'name' => 'remisions.id'],
+                    ['data' => 'ordeprod', 'name' => 'remisions.ordeprod'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
-                'tablaxxx' => 'tablacrango',
+                'tablaxxx' => 'datatable',
                 'permisox' => $this->opciones['permisox'],
+                'routxxxx' => $this->opciones['routxxxx'],
+                'parametr' => [$padrexxx->id],
             ];
-        //
-        if (User::find(Auth::user()->id)->can($this->opciones['permisox'] . '-asiganar')) {
-            $this->opciones['tablasxx'][] = [
-                'titunuev' => 'NUEVA CLINICA',
-                'titulist' => 'SELECCIONE EL/LOS RANGO/S QUE DESEE ADICIONAR A LA CLÍNICA: ' . $padrexxx->clinica->clinica,
-                'dataxxxx' => [
-                    ['campoxxx' => 'botonesx', 'dataxxxx' => 'Clinicas.Clinica.botones.botonesapi'],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                    ['campoxxx' => 'clinicax', 'dataxxxx' => $padrexxx->id],
-                ],
-                'vercrear' => false,
-                'accitabl' => false,
-                'urlxxxxx' => 'api/clinica/rango',
-                'cabecera' => [
-                    ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'RANGO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                ], 'columnsx' => [
-                    // ['data' => 'botonexx', 'name' => 'botonexx'],
-                    ['data' => 'id', 'name' => 'rangos.id'],
-                    ['data' => 'nombres', 'name' => 'rangos.nombres'],
-                    ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
-                ],
-                'tablaxxx' => 'tablapaciente',
-                'permisox' => $this->opciones['permisox'],
-            ];
-        }
 
-        $this->opciones['clinicax'] = $padrexxx->sis_clinica_id;
+        $this->opciones['parametr'] = [$padrexxx->id];
+        $this->opciones['clinicax'] = $padrexxx->id;
 
         $this->opciones['accionxx'] = 'index';
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
-    private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
+
+    public function getListado(Request $request,$padrexxx)
     {
+        if ($request->ajax()) {
+            $request->padrexxx=$padrexxx;
+            $request->routexxx = [$this->opciones['routxxxx']];
+            $request->botonesx = $this->opciones['rutacarp'] .
+                $this->opciones['carpetax'] . '.botones.botonesapi';
+            $request->estadoxx = 'layouts.components.botones.estadosx';
+            return $this->getRemisiones($request);
+        }
+    }
+    private function view($dataxxxx)
+    {
+
+        $this->opciones['clinicai']  =[$dataxxxx['padrexxx']->id=>$dataxxxx['padrexxx']->sucursal];
+        $this->opciones['clinicax'] = $dataxxxx['padrexxx']->id;
+        $this->opciones['sucursal'] = $dataxxxx['padrexxx']->id;
+        $this->opciones['rangoxxx'] = Rcodigo::combo([
+            'cabecera' => false, 'ajaxxxxx' => false,
+            'clinicax' => $this->opciones['clinicax']
+        ]);
+        $this->opciones['parametr'] = [$dataxxxx['padrexxx']->id];
+        $this->opciones['botoform'][0]['routingx'][1] = $this->opciones['parametr'];
+        $this->opciones['padrexxx']  =$dataxxxx['padrexxx']->clinica->id;
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
-        $this->opciones['accionxx'] = $accionxx;
+        $this->opciones['accionxx'] = $dataxxxx['accionxx'];
+        $this->opciones['cardhead'] = 'CLINICA: ' . $dataxxxx['padrexxx']->clinica->clinica;
+        $this->opciones['cardheap'] = 'SUCURSAL: '.$dataxxxx['padrexxx']->sucursal;
         // indica si se esta actualizando o viendo
-        if ($nombobje != '') {
-            $this->opciones[$nombobje] = $objetoxx;
+        if ($dataxxxx['modeloxx'] != '') {
+            $this->opciones['parametr'] = [$dataxxxx['modeloxx']->id];
+            $this->opciones['clinicai']  =[$dataxxxx['modeloxx']->sis_clinica_id=>$dataxxxx['modeloxx']->sis_clinica->sucursal];
+
+            $this->opciones['modeloxx'] = $dataxxxx['modeloxx'];
+            $this->opciones['pestpadr'] = 3;
+            if (auth()->user()->can($this->opciones['permisox'] . '-crear')) {
+                $this->opciones['botoform'][] =
+                    [
+                        'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'] . '.nuevo', [$dataxxxx['padrexxx']->id]],
+                        'formhref' => 2, 'tituloxx' => 'IR A CREAR NUEVO REGISTRO', 'clasexxx' => 'btn btn-sm btn-primary'
+                    ];
+            }
+
+            $this->opciones['fechcrea'] = $dataxxxx['modeloxx']->created_at;
+            $this->opciones['fechedit'] = $dataxxxx['modeloxx']->updated_at;
+            $this->opciones['usercrea'] = $dataxxxx['modeloxx']->creador->name;
+            $this->opciones['useredit'] = $dataxxxx['modeloxx']->editor->name;
         }
 
-        // Se arma el titulo de acuerdo al array opciones
-        $this->opciones['tituloxx'] = $this->opciones['accionxx'] . ': ' . $this->opciones['tituloxx'];
-        return view($vistaxxx, ['todoxxxx' => $this->opciones]);
+        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(SisClinica $padrexxx)
     {
-
-        $this->opciones['indecrea'] = true;
+        $this->opciones['indecrea'] = false;
         $this->opciones['botoform'][] =
             [
-                'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
+                'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$padrexxx->id]],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
-        return $this->view(true, '', 'Crear', $this->opciones['rutacarp'] . 'pestanias');
+            return $this->view(['modeloxx' => '', 'accionxx' => 'Crear','padrexxx'=>$padrexxx]);
     }
 
     /**
@@ -161,10 +176,15 @@ class CremisionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SisClinicaCrearRequest $request)
+    public function store(CrangoCrearRequest $request)
     {
-        $dataxxxx = $request->all();
-        return $this->grabar($dataxxxx, '', 'Registro creado con éxito');
+
+        return $this->grabar(
+            [
+                'requestx' => $request,
+                'modeloxx' => '',
+                'menssage' => 'Registro creado con éxito'
+            ]);
     }
 
     /**
@@ -173,18 +193,15 @@ class CremisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(SisClinica $objetoxx)
+    public function show( Crango $objetoxx)
     {
+        $this->opciones['tituloxx'] = 'Ver: Rango';
         $this->opciones['indecrea'] = false;
-        $this->opciones['clinicax'] = $objetoxx->id;
-        $this->opciones['parametr'] = [$objetoxx->id];
-        $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => $objetoxx->sis_esta_id == 1 ? 'INACTIVAR' : 'ACTIVAR', 'routingx' => [$this->opciones['routxxxx'], []], 'formhref' => 1,
-                'tituloxx' => '', 'clasexxx' => $objetoxx->sis_esta_id == 1 ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success'
-            ];
-        $this->opciones['readonly'] = 'readonly';
-        return $this->view($objetoxx,  'modeloxx', 'Ver', $this->opciones['rutacarp'] . 'pestanias');
+        $this->opciones['botoform'][] =  [
+            'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'] . '.nuevo', $this->opciones['parametr']],
+            'formhref' => 2, 'tituloxx' => 'NUEVO RANGO', 'clasexxx' => 'btn btn-sm btn-primary'
+        ];
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Ver','padrexxx'=>$objetoxx->sis_clinica]);
     }
 
     /**
@@ -193,24 +210,29 @@ class CremisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(SisClinica $objetoxx)
+    public function edit( Crango $objetoxx)
     {
-        $this->opciones['indecrea'] = true;
-        $this->opciones['clinicax'] = $objetoxx->id;
-        $this->opciones['parametr'] = [$objetoxx->id];
+        $this->opciones['tituloxx'] = 'Editar: Rango';
+        $this->opciones['indecrea'] = false;
         $this->opciones['botoform'][] =
             [
-                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
+                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', $this->opciones['parametr']],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
-        return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
+
+        $this->opciones['botoform'][] =  [
+            'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'] . '.nuevo', $objetoxx->sis_clinica->id],
+            'formhref' => 2, 'tituloxx' => 'NUEVO RANGO', 'clasexxx' => 'btn btn-sm btn-primary'
+        ];
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Editar','padrexxx'=>$objetoxx->sis_clinica]);
     }
 
-    private function grabar($dataxxxx, $objectx, $infoxxxx)
+    private function grabar($dataxxxx)
     {
+        $crangoxx = Crango::transaccion($dataxxxx);
         return redirect()
-            ->route($this->opciones['routxxxx'] . '.editar', [SisClinica::transaccion($dataxxxx, $objectx)->id])
-            ->with('info', $infoxxxx);
+            ->route($this->opciones['routxxxx'] . '.editar', [$crangoxx->id])
+            ->with('info', $dataxxxx['menssage']);
     }
 
     /**
@@ -220,26 +242,34 @@ class CremisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SisClinicaEditarRequest  $request, SisClinica $objetoxx)
+    public function update(CrangoEditarRequest  $request, Crango $objetoxx)
     {
-        $dataxxxx = $request->all();
-        return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
+        return $this->grabar( [
+            'requestx' => $request,
+            'modeloxx' => $objetoxx,
+            'menssage' => 'Registro actualizado con éxito'
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(SisClinica $objetoxx)
+    public function inactivate(Crango $objetoxx)
     {
-        $this->opciones['parametr'] = [$objetoxx->id];
-
-        $objetoxx->sis_esta_id = ($objetoxx->sis_esta_id == 2) ? 1 : 2;
-        $objetoxx->save();
-        $activado = $objetoxx->sis_esta_id == 2 ? 'inactivado' : 'activado';
-
-        return redirect()->route($this->opciones['routxxxx'])->with('info', 'Registro ' . $activado . ' con éxito');
+        if (auth()->user()->can($this->opciones['permisox'] . '-borrar')) {
+            $this->opciones['botoform'][] =
+                [
+                    'mostrars' => true, 'accionxx' => 'INACTIVAR', 'routingx' => [$this->opciones['routxxxx'] . '.borrar', []],
+                    'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+                ];
+        }
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Destroy','padrexxx'=>$objetoxx->sis_clinica]);
     }
+
+
+    public function destroy(Request $request, Crango $objetoxx)
+    {
+        $objetoxx->update(['sis_esta_id' => 2, 'user_edita_id' => Auth::user()->id]);
+        return redirect()
+            ->route($this->opciones['permisox'], [$objetoxx->sis_clinica_id])
+            ->with('info', 'Rango inactivado correctamente');
+    }
+
 }

@@ -5,7 +5,7 @@
         }
         var f_asingnarMedicamento = function(dataxxxx) {
             $.ajax({
-                url: "{{url('api/clinica/asignarmedicame')}}",
+                url: "{{route('cmedicame.asignarmedi')}}",
                 type: 'GET',
                 data: dataxxxx,
                 dataType: 'json',

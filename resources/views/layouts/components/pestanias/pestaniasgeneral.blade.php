@@ -4,7 +4,7 @@
         @slot($todoxxxx['slotxxxx'])
             @switch($todoxxxx['accionxx'])
                 @case('index')
-                    @include('layouts.components.pestanias.index')
+                    @include('layouts.components.pestanias.indexgeneral')
                 @break
                 @case('Crear')
                     @include('layouts.components.pestanias.crear')

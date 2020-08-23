@@ -27,7 +27,7 @@ class CmedicameController extends Controller
             'rutacarp' => 'Clinicas.',
             'tituloxx' => 'clinica',
             'tabsxxxx' => 'Clinicas.tabsxxxx.clinica.header',
-            'slotxxxy' => 'clinica',
+            'slotxxxy' => 'clinicax',
             'slotxxxx' => 'cmedicame',
             'carpetax' => 'Medicamento',
             'indecrea' => false,
@@ -77,10 +77,12 @@ class CmedicameController extends Controller
                 'vercrear' => false,
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.asignado', $this->opciones['parametr']),
                 'cabecera' => [
+                    [
                     ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'MEDICAMENTO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ]
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
@@ -97,17 +99,16 @@ class CmedicameController extends Controller
                 'titunuev' => 'NUEVA CLINICA',
                 'titulist' => 'SELECCIONE EL MEDICAMENTO QUE DESEE ADICIONAR A LA SUCURSAL: ' . $padrexxx->sucursal,
                 'dataxxxx' => [
-                    // ['campoxxx' => 'botonesx', 'dataxxxx' => 'Clinicas.Clinica.botones.botonesapi'],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                    ['campoxxx' => 'clinicax', 'dataxxxx' => $padrexxx->id],
                 ],
                 'vercrear' => false,
                 'accitabl' => false,
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.asignar', $this->opciones['parametr']),
                 'cabecera' => [
+                    [
                     ['td' => 'ID' , 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'MEDICAMENTO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ]
                 ], 'columnsx' => [
                     // ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'medicames.id'],
@@ -153,4 +154,12 @@ class CmedicameController extends Controller
             return response()->json(Clinicas::getInactivarMedicam($request));
         }
     }
+
+    public function getAsignarMedicame( Request $request)
+    {
+        if ($request->ajax()) {
+            return response()->json($this->getAsignarMedicam($request));
+        }
+    }
+
 }

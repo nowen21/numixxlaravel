@@ -21,15 +21,13 @@
         <div class="table-responsive">
             <table id="{{ $tableName }}" class="table table-bordered   table-sm">
                 <thead>
- <tr class="text-center">
                     @foreach( $todoxxxx['cabecera'] as $cabecera )
-
-
-                        <th width="{{$cabecera['widthxxx']}}" rowspan="{{$cabecera['rowspanx']}}" colspan="{{$cabecera['colspanx']}}"> {{ $cabecera['td']   }}</th>
-
-
+                    <tr class="text-center">
+                        @foreach( $cabecera as $cabecerx)
+                        <th width="{{$cabecerx['widthxxx']}}" rowspan="{{$cabecerx['rowspanx']}}" colspan="{{$cabecerx['colspanx']}}"> {{ $cabecerx['td']   }}</th>
+                        @endforeach
+                    </tr>
                     @endforeach
-    </tr>
                 </thead>
             </table>
         </div>

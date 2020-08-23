@@ -31,7 +31,7 @@ class CrangoController extends Controller
             'parametr' => [],
             'rutacarp' => 'Clinicas.',
             'tituloxx' => 'Crear: Rango',
-            'slotxxxy' => 'clinica',
+            'slotxxxy' => 'clinicax',
             'slotxxxx' => 'crango',
             'carpetax' => 'Rango',
             'indecrea' => false,
@@ -79,6 +79,7 @@ class CrangoController extends Controller
                 'vercrear' => true,
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', [$padrexxx->id]),
                 'cabecera' => [
+                    [
                     ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'CODIGO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
@@ -86,6 +87,7 @@ class CrangoController extends Controller
                     ['td' => 'RANGO FINALIZA', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'CONDICION', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ]
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
