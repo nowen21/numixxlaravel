@@ -19,33 +19,25 @@ class CremisionController extends Controller
     use ClinicaTrait;
     public function __construct()
     {
-
-        $this->opciones = [
-            'pestpadr' => 3,
-            'cardheap' => '',
-            'rowscols' => 'rowspancolspan',
-            'tabsxxxx' => 'Clinicas.tabsxxxx.clinica.header',
-            'cardhead' => '', // titulo para las pestañas
-
-            'permisox' => 'cremision',
-            'parametr' => [],
-            'rutacarp' => 'Clinicas.',
-            'tituloxx' => 'REMISIÓN',
-            'slotxxxy' => 'clinicax',
-            'slotxxxx' => 'cremision',
-            'carpetax' => 'Remision',
-            'indecrea' => false,
-            'esindexx' => false
-        ];
-
-        $this->middleware (['permission:' . $this->opciones['permisox'] . '-leer|'
+        $this->opciones['pestpadr'] = 3;
+        $this->opciones['parapest'] = [0,0,0,0];// paramentros para las pestañas
+        $this->opciones['permisox'] = 'cremision';
+        $this->opciones['routxxxx'] = 'cremision';
+        $this->opciones['rutacarp'] = 'Clinicas.';
+        $this->opciones['carpetax'] = 'Remision';
+        $this->opciones['slotxxxx'] =  $this->opciones['permisox'];
+        $this->opciones['slotxxxy'] = 'clinicax';
+        $this->opciones['tabsxxxx'] = 'Clinicas.tabsxxxx.clinica.header';
+        $this->opciones['tituloxx'] = 'PACIENTE';
+        $this->opciones['fechcrea'] = '';
+        $this->opciones['fechedit'] = '';
+        $this->opciones['usercrea'] = '';
+        $this->opciones['useredit'] = '';
+        $this->middleware(['permission:'
+            . $this->opciones['permisox'] . '-leer|'
             . $this->opciones['permisox'] . '-crear|'
             . $this->opciones['permisox'] . '-editar|'
             . $this->opciones['permisox'] . '-borrar']);
-
-        $this->opciones['rutaxxxx'] = 'cremision';
-        $this->opciones['routnuev'] = 'cremision';
-        $this->opciones['routxxxx'] = 'cremision';
         $this->opciones['botoform'] = [
             [
                 'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'], []],
@@ -63,8 +55,9 @@ class CremisionController extends Controller
      */
     public function index( SisClinica $padrexxx)
     {
+
         $this->opciones['sucursal'] = $padrexxx->id;
-        $this->opciones['padrexxx']  =$padrexxx->clinica_id;
+        $this->opciones['parapest'][0]  =$padrexxx->clinica_id;
         $this->opciones['cardhead'] = 'CLÍNICA: ' . $padrexxx->clinica->clinica;
         $this->opciones['cardheap'] = 'SUCURSAL: '.$padrexxx->sucursal;
         $this->opciones['tablasxx'][] =
@@ -78,12 +71,12 @@ class CremisionController extends Controller
                 'accitabl' => true,
                 'vercrear' => true,
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', [$padrexxx->id]),
-                'cabecera' => [
+                'cabecera' => [[
                     ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ORDEN', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                ],
+                ]],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'remisions.id'],

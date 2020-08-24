@@ -21,6 +21,7 @@ class CrangoController extends Controller
     {
 
         $this->opciones = [
+            'parapest' => [0,0,0,0],// paramentros para las pestañas
             'pestpadr' => 3,
             'cardheap' => '',
             'rowscols' => 'rowspancolspan',
@@ -64,7 +65,7 @@ class CrangoController extends Controller
     public function index( SisClinica $padrexxx)
     {
         $this->opciones['sucursal'] = $padrexxx->id;
-        $this->opciones['padrexxx']  =$padrexxx->clinica_id;
+        $this->opciones['parapest'][0]  =$padrexxx->clinica_id;
         $this->opciones['cardhead'] = 'CLINICA: ' . $padrexxx->clinica->clinica;
         $this->opciones['cardheap'] = 'SUCURSAL: '.$padrexxx->sucursal;
         $this->opciones['tablasxx'][] =
@@ -134,7 +135,7 @@ class CrangoController extends Controller
         ]);
         $this->opciones['parametr'] = [$dataxxxx['padrexxx']->id];
         $this->opciones['botoform'][0]['routingx'][1] = $this->opciones['parametr'];
-        $this->opciones['padrexxx']  =$dataxxxx['padrexxx']->clinica->id;
+        $this->opciones['parapest'][0]  =$dataxxxx['padrexxx']->clinica->id;
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $dataxxxx['accionxx'];
         $this->opciones['cardhead'] = 'CLINICA: ' . $dataxxxx['padrexxx']->clinica->clinica;

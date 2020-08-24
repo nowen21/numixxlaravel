@@ -32,7 +32,7 @@
         @endcanany
         @canany(['sisclini-leer', 'sisclini-crear', 'sisclini-editar', 'sisclini-borrar'])
         <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='sisclini') ?' active' : '' }}
-        text-sm" href="{{ route('sisclini', $todoxxxx['padrexxx']) }}">Sucursales</a></li>
+        text-sm" href="{{ route('sisclini', $todoxxxx['parapest'][0]) }}">Sucursales</a></li>
         @endcanany
         @canany(['cmedicame-leer', 'cmedicame-crear', 'cmedicame-editar', 'cmedicame-borrar'])
         <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='cmedicame') ?' active' : '' }}

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Clinicas;
 
-use App\Helpers\Clinicas;
 use App\Helpers\Fechas;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Pacientes\PacienteCrearRequest;
@@ -70,9 +69,6 @@ class PacienteController extends Controller
 
         $this->opciones['parametr'] = [$padrexxx->id];
 
-
-        // $this->opciones['indecrea']=true;
-        //$this->opciones['esindexx']=true;
         $this->opciones['accionxx'] = 'index';
         $this->opciones['parapest'][0] = $padrexxx->id;
         $this->opciones['tablasxx'] = [

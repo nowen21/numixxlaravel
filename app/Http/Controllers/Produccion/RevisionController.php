@@ -9,6 +9,7 @@ use App\Models\Formulaciones\Cformula;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Alertas\AlertasTrait;
 use App\Traits\Pestanias\ProduccionTrait;
+use App\Traits\Produccion\AsignaRangoTrait;
 use App\Traits\Produccion\InventarioTrait;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +19,7 @@ class RevisionController extends Controller
     use ProduccionTrait;
     use InventarioTrait;
     use AlertasTrait;
+    use AsignaRangoTrait;
     public function __construct()
     {
         $this->opciones = [
@@ -168,12 +170,14 @@ class RevisionController extends Controller
 
     private function grabar($dataxxxx)
     {
-        $cformula = $dataxxxx['objetoxx']->update($dataxxxx['dataxxxx']);
+        $this->getRangos($dataxxxx);
 
-        $this->getDescontarInventario(['cformula' => $dataxxxx['objetoxx']]);
-        return redirect()
-            ->route($this->opciones['routxxxx'] . '.editar', [$dataxxxx['objetoxx']->id])
-            ->with('info', $dataxxxx['infoxxxx']);
+        // $cformula = $dataxxxx['modeloxx']->update($dataxxxx['dataxxxx']);
+
+        // $this->getDescontarInventario(['cformula' => $dataxxxx['modeloxx']]);
+        // return redirect()
+        //     ->route($this->opciones['routxxxx'] . '.editar', [$dataxxxx['modeloxx']->id])
+        //     ->with('info', $dataxxxx['infoxxxx']);
     }
 
     /**
@@ -187,6 +191,6 @@ class RevisionController extends Controller
     {
         $this->getAlerta(['objetoxx'=>$objetoxx,'tipoacci'=>3]);
         $dataxxxx = ['userevis_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id];
-        return $this->grabar(['dataxxxx' => $dataxxxx, 'objetoxx' => $objetoxx, 'infoxxxx' => 'Se ha realizado la revisión con éxito']);
+        return $this->grabar(['dataxxxx' => $dataxxxx, 'modeloxx' => $objetoxx, 'infoxxxx' => 'Se ha realizado la revisión con éxito']);
     }
 }

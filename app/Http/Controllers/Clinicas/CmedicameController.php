@@ -19,6 +19,7 @@ class CmedicameController extends Controller
     public function __construct()
     {
         $this->opciones = [
+            'parapest' => [0,0,0,0],// paramentros para las pestañas
             'pestpadr' => 3,
             'cardhead' => '', // titulo para las pestañas
             'cardheap' => '',
@@ -61,7 +62,7 @@ class CmedicameController extends Controller
     public function index(SisClinica $padrexxx)
     {
         $this->opciones['sucursal'] = $padrexxx->id;
-        $this->opciones['padrexxx'] = $padrexxx->clinica_id;
+        $this->opciones['parapest'][0] = $padrexxx->id;
         $this->opciones['parametr'] = $padrexxx->id;
         $this->opciones['cardhead'] = 'CLÍNICA: '.$padrexxx->clinica->clinica;
         $this->opciones['cardheap'] = 'SUCURSAL: '.$padrexxx->sucursal;

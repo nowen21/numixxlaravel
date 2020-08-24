@@ -27,7 +27,7 @@ class TipoaccionsSeeder extends Seeder
         'permisox'=>'alerta-revisar','pestania'=>'REVISIONES','iconoxxx'=>'fa-spell-check',
         'routexxx'=>'revision.editar',
         'titulink'=>'REVISAR FORMULACIÓN',
-        'cuerpoxx'=>'Señores numixx la siguente formulacion: yyyyyyyy ha sido revisada.',
+        'cuerpoxx'=>'Señores numixx la siguente formulacion: yyyyyyyy ha sido creada.',
 
 
 

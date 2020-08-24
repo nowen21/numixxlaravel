@@ -102,7 +102,7 @@ trait ClinicaTrait{
     {
 
         $paciente =
-       Orden::select(['ordens.id','ordens.ordeprod','ordens.observac','ordens.sis_esta_id', 'sis_estas.s_estado'])
+       Cformula::select(['ordens.id','ordens.ordeprod','ordens.observac','ordens.sis_esta_id', 'sis_estas.s_estado'])
 
         ->join('cformulas','ordens.id','=','cformulas.orden_id')
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')

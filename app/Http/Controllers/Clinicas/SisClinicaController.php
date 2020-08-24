@@ -23,6 +23,7 @@ class SisClinicaController extends Controller
     public function __construct()
     {
         $this->opciones = [
+            'parapest' => [0,0,0,0],// paramentros para las pestañas
             'pestpadr' => 2, // true indica si solo muestra la pestaña dependencias false muestra la pestaña padre y las hijas
             'permisox' => 'sisclini',
             'parametr' => [],
@@ -134,7 +135,7 @@ class SisClinicaController extends Controller
         // indica si se esta actualizando o viendo
         if ($dataxxxx['modeloxx'] != '') {
             $this->opciones['sucursal'] = $dataxxxx['modeloxx']->id;
-            $this->opciones['padrexxx']=$dataxxxx['modeloxx']->clinica_id;
+            $this->opciones['parapest'][0]=$dataxxxx['modeloxx']->clinica_id;
             $this->opciones['parametr'] =$dataxxxx['modeloxx']->id;
             $this->opciones['clinicai'] = [$dataxxxx['modeloxx']->clinica_id=>$dataxxxx['modeloxx']->clinica->clinica];
             $departam = $dataxxxx['modeloxx']->departamento_id = $dataxxxx['modeloxx']->municipio->departamento_id;
