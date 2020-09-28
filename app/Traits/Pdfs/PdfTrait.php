@@ -5,6 +5,7 @@ namespace App\Traits\Pdfs;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 
+
 trait PdfTrait
 {
     public function getImprimirPdf($dataxxxx) {
