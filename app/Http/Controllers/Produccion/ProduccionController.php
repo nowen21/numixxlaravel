@@ -46,7 +46,7 @@ class ProduccionController extends Controller
      */
     public function index()
     {
-       
+
         $this->opciones['indecrea'] = false;
         $this->opciones['esindexx'] = true;
         $this->opciones['accionxx'] = 'index';
@@ -81,7 +81,7 @@ class ProduccionController extends Controller
                     ['data' => 'cedula', 'name' => 'pacientes.cedula'],
                     ['data' => 'nombres', 'name' => 'pacientes.nombres'],
                     ['data' => 'apellidos', 'name' => 'pacientes.apellidos'],
-                    ['data' => 'clinica', 'name' => 'sis_clinicas.clinica'],
+                    ['data' => 'clinica', 'name' => 'clinicas.clinica'],
                     ['data' => 'revisado', 'name' => 'revisado'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
@@ -98,5 +98,5 @@ class ProduccionController extends Controller
         ]);
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
-    
+
 }

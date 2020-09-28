@@ -7,7 +7,7 @@ use App\Helpers\Produccion\Alistamiento;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produccion\CalistamCrearRequest;
 use App\Http\Requests\Produccion\CalistamEditarRequest;
-use App\Models\Formulaciones\Ordene;
+use App\Models\Formulaciones\Orden;
 use App\Models\Produccion\Calistam;
 use App\Models\Produccion\Dalistam;
 use App\Models\Sistema\SisEsta;
@@ -86,7 +86,7 @@ class AlistamientoController extends Controller
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'calistams.id'],
                     ['data' => 'producto', 'name' => 'calistams.producto'],
-                    ['data' => 'ordeprod', 'name' => 'ordenes.ordeprod'],
+                    ['data' => 'ordeprod', 'name' => 'ordens.ordeprod'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tablaordenes',
@@ -98,7 +98,7 @@ class AlistamientoController extends Controller
         ];
         $this->opciones['pestania'] = $this->getPestanias(['tablaxxx' => $this->opciones['routxxxx']]);
 
-        $cabecera = Calistam::where('ordene_id', Ordene::ordendia())->first();
+        $cabecera = Calistam::where('orden_id', Orden::ordendia())->first();
         if (isset($cabecera->id)) {
             $this->opciones['tablasxx'][0]['vercrear'] = false;
         }
@@ -112,7 +112,7 @@ class AlistamientoController extends Controller
         // indica si se esta actualizando o viendo
         if ($dataxxxx['objetoxx'] != '') {
             $this->opciones['modeloxx'] = $dataxxxx['objetoxx'];
-            $this->opciones['ordenxxx'] = [$dataxxxx['objetoxx']->ordene_id => $dataxxxx['objetoxx']->ordene->ordeprod];
+            $this->opciones['ordenxxx'] = [$dataxxxx['objetoxx']->orden_id => $dataxxxx['objetoxx']->orden->ordeprod];
         }
         $this->opciones['pestania'] = $this->getPestanias(['tablaxxx' => $this->opciones['routxxxx']]);
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
@@ -124,7 +124,7 @@ class AlistamientoController extends Controller
      */
     public function create()
     {
-        $this->opciones['ordenxxx'] = Ordene::ordendia();
+        $this->opciones['ordenxxx'] = Orden::ordendia();
         $this->opciones['alistami'] = Alistamiento::getMlotesDlotes(0);
         $this->opciones['indecrea'] = false;
         $this->opciones['clinicac'] = true;

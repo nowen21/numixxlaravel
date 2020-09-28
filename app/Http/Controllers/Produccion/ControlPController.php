@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Produccion\ControlpCrearRequest;
 use App\Http\Requests\Produccion\ControlpEditarRequest;
 use App\Models\Formulaciones\Cformula;
-use App\Models\Formulaciones\Ordene;
+use App\Models\Formulaciones\Orden;
 use App\Models\Produccion\Proceso;
 use App\Models\Sistema\SisEsta;
-use App\Traits\Cformula\AlertasTrait;
+use App\Traits\Alertas\AlertasTrait;
 use App\Traits\Pestanias\ProduccionTrait;
 
 class ControlPController extends Controller
@@ -94,7 +94,7 @@ class ControlPController extends Controller
                     ['data' => 'cedula', 'name' => 'pacientes.cedula'],
                     ['data' => 'nombres', 'name' => 'pacientes.nombres'],
                     ['data' => 'apellidos', 'name' => 'pacientes.apellidos'],
-                    ['data' => 'clinica', 'name' => 'sis_clinicas.clinica'],
+                    ['data' => 'clinica', 'name' => 'clinicas.clinica'],
                     ['data' => 'revisado', 'name' => 'revisado'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
@@ -161,7 +161,7 @@ class ControlPController extends Controller
     public function store(ControlpCrearRequest $request)
     {
         $dataxxxx = $request->all();
-        $dataxxxx['ordepres']=Ordene::ordendia();
+        $dataxxxx['ordepres']=Orden::ordendia();
         return $this->grabar($dataxxxx, '', 'Alistamiento creado con éxito!!');
     }
 

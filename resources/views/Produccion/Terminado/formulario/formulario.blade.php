@@ -133,10 +133,10 @@
     <div class="form-group col-md-4">
         {{ Form::label('teorico_', 'Peso teórico:') }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('teorico_', $todoxxxx['modeloxx']->teorico_, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
+        {{ Form::text('teorico_', $todoxxxx['modeloxx']->teorico_, ['class' => 'form-control-plaintext']) }}
         @else
         {{ Form::text('teorico_', $todoxxxx['pesoteor'], ['class' => $errors->first('teorico_') ?
-         'form-control  is-invalid calcularvolumen' : 'form-control calcularvolumen', 'placeholder' => 'Peso teórico', 'maxlength' => '120', 'style'=>'height: 28px','readonly']) }}
+         'form-control  is-invalid calcularvolumen' : 'form-control calcularvolumen', 'placeholder' => 'Peso teórico', 'maxlength' => '120','readonly']) }}
         @endif
         @if($errors->has('teorico_'))
         <div class="invalid-feedback d-block">
@@ -147,10 +147,10 @@
     <div class="form-group col-md-4">
         {{ Form::label('realxxx_', 'Peso real:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('realxxx_', $todoxxxx['modeloxx']->realxxx_, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
+        {{ Form::text('realxxx_', $todoxxxx['modeloxx']->realxxx_, ['class' => 'form-control-plaintext']) }}
         @else
         {{ Form::text('realxxx_', null, ['class' => $errors->first('realxxx_') ?
-         'form-control  is-invalid calcularvolumen' : 'form-control calcularvolumen', 'placeholder' => 'Peso real', 'maxlength' => '120', 'style'=>'height: 28px']) }}
+         'form-control  is-invalid calcularvolumen' : 'form-control calcularvolumen', 'placeholder' => 'Peso real', 'maxlength' => '120']) }}
         @endif
         @if($errors->has('realxxx_'))
         <div class="invalid-feedback d-block">

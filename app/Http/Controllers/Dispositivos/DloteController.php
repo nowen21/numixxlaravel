@@ -102,7 +102,7 @@ class DloteController extends Controller
 
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
     {
-        $this->opciones['marcaxxx'] = Dmarca::combo(['medicame' => $this->opciones['padrexxx'], 'cabecera' => true, 'esajaxxx' => false]);
+        $this->opciones['marcaxxx'] = Dmarca::combo(['padrexxx' => $this->opciones['padrexxx'], 'cabecera' => true, 'ajaxxxxx' => false]);
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo

@@ -66,7 +66,7 @@ class UsuarioController extends Controller
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                   
+
                 ],
                 'vercrear' => true,
                 'accitabl' => true,
@@ -75,7 +75,7 @@ class UsuarioController extends Controller
                     ['td' => 'ID'],
                     ['td' => 'NOMBRES'],
                     ['td' => 'E-MAIL'],
-                    ['td' => 'CLINICA'],
+                    ['td' => 'SUCURSAL'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
@@ -83,7 +83,7 @@ class UsuarioController extends Controller
                     ['data' => 'id', 'name' => 'users.id'],
                     ['data' => 'name', 'name' => 'users.nombres'],
                     ['data' => 'email', 'name' => 'users.apellidos'],
-                    ['data' => 'clinica', 'name' => 'sis_clinicas.clinica'],
+                    ['data' => 'sucursal', 'name' => 'sis_clinicas.sucursal'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tablapacientes',
@@ -99,13 +99,13 @@ class UsuarioController extends Controller
     {
         $this->opciones['rolesxxx'] = Role::get();
         $this->opciones['clinicid'] = SisClinica::combo( true, false);
-        
+
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
         if ($nombobje != '') {
             $this->opciones[$nombobje] = $objetoxx;
-            
+
         }
         // Se arma el titulo de acuerdo al array opciones
         return view($vistaxxx, ['todoxxxx' => $this->opciones]);
@@ -137,7 +137,7 @@ class UsuarioController extends Controller
     public function store(UsuarioCrearRequest $request)
     {
         $dataxxxx = $request->all();
-        
+
         return $this->grabar($dataxxxx, '', 'Registro creado con éxito');
     }
 

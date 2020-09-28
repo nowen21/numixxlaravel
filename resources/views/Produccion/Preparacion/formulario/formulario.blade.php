@@ -1,38 +1,38 @@
 <div class="form-group row">
     <div class="form-group col-md-6">
         {{ Form::label('sis_clinica_id', 'Clínica:', ['class' => 'control-label col-form-label-sm']) }}
-        <div id="" class="form-control" style="height: 28px">
-            {{$todoxxxx['modeloxx']->sis_clinica->clinica}}
+        <div id="" class="form-control" >
+            {{$todoxxxx['modeloxx']->sis_clinica->clinica->clinica}}
         </div>
     </div>
     <div class="form-group col-md-6">
         {{ Form::label('tiempo', 'Tiempo Infisión:', ['class' => 'control-label col-form-label-sm']) }}
-        
-        <div id="" class="form-control" style="height: 28px">
+
+        <div id="" class="form-control" >
             {{$todoxxxx['modeloxx']->tiempo}}
         </div>
     </div>
     <div class="form-group col-md-6">
         {{ Form::label('velocidad', 'Velocidad Infusión:', ['class' => 'control-label col-form-label-sm']) }}
-        <div id="" class="form-control" style="height: 28px">
+        <div id="" class="form-control" >
             {{$todoxxxx['modeloxx']->velocidad}}
         </div>
     </div>
     <div class="form-group col-md-6">
         {{ Form::label('volumen', 'Volumen:', ['class' => 'control-label col-form-label-sm']) }}
-        <div id="" class="form-control" style="height: 28px">
+        <div id="" class="form-control" >
             {{$todoxxxx['modeloxx']->volumen}}
         </div>
     </div>
     <div class="form-group col-md-6">
         {{ Form::label('purga', 'Purga:', ['class' => 'control-label col-form-label-sm']) }}
-        <div id="" class="form-control" style="height: 28px">
+        <div id="" class="form-control" >
             {{$todoxxxx['modeloxx']->purga}}
         </div>
     </div>
     <div class="form-group col-md-6">
         {{ Form::label('peso', 'Peso:', ['class' => 'control-label col-form-label-sm']) }}
-        <div id="" class="form-control" style="height: 28px">
+        <div id="" class="form-control" >
             {{$todoxxxx['modeloxx']->peso}}
         </div>
     </div>
@@ -41,7 +41,7 @@
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], $todoxxxx['modeloxx']->sis_esta_id, ['class' => 'form-control-plaintext','id'=>'sis_esta_id']) }}
         @else
-        {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ? 
+        {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ?
         'form-control is-invalid select2' : 'form-control select2','id'=>'sis_esta_id']) }}
         @endif
         @if($errors->has('sis_esta_id'))

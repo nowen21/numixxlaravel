@@ -2,9 +2,9 @@
   <div class="form-group col-md-6">
     {{ Form::label('nombre', 'Nombre:', ['class' => 'control-label col-form-label-sm']) }}
       @if($todoxxxx['accionxx'] == 'Ver')
-          {{ Form::text('nombre', $todoxxxx['modeloxx']->nombre, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
+          {{ Form::text('nombre', $todoxxxx['modeloxx']->nombre, ['class' => 'form-control-plaintext']) }}
       @else
-          {{ Form::text('nombre', null, ['class' => $errors->first('nombre') ? 'form-control  is-invalid' : 'form-control', 'placeholder' => 'Nombre del tipo de seguimiento', 'maxlength' => '120', 'autofocus','style'=>'height: 28px']) }}
+          {{ Form::text('nombre', null, ['class' => $errors->first('nombre') ? 'form-control  is-invalid' : 'form-control', 'placeholder' => 'Nombre del tipo de seguimiento', 'maxlength' => '120', 'autofocus']) }}
       @endif
       @if($errors->has('nombre'))
           <div class="invalid-feedback d-block">
@@ -12,8 +12,8 @@
           </div>
       @endif
   </div>
-  
-  
+
+
   <div class="form-group col-md-6" >
     {{ Form::label('area_id', 'Area:', ['class' => 'control-label col-form-label-sm']) }}
       @if($todoxxxx['accionxx'] == 'Ver')
@@ -27,14 +27,14 @@
         </div>
       @endif
   </div>
- 
 
-  
+
+
   <div class="form-group col-md-12">
     {{ Form::label('fos_tse_id', 'Tipo de Seguimiento:', ['class' => 'control-label col-form-label-sm']) }}
       @if($todoxxxx['accionxx'] == 'Ver')
           {{ Form::select('fos_tse_id', $todoxxxx['tiposegu'], $todoxxxx['modeloxx']->fos_tse_id, ['class' => $errors->first('fos_tse_id') ? 'form-control is-invalid' : 'form-control']) }}
-      @else 
+      @else
           {{ Form::select('fos_tse_id', $todoxxxx['tiposegu'], null, ['class' => $errors->first('fos_tse_id') ? 'form-control is-invalid select2' : 'form-control select2']) }}
       @endif
   </div>
@@ -44,7 +44,7 @@
       </div>
   @endif
 
- 
+
   <div class="form-group col-md-12">
      {{ Form::label('descripcion', 'Descripción:', ['class' => 'control-label col-form-label-sm']) }}
       @if ($todoxxxx['accionxx'] == 'Ver')

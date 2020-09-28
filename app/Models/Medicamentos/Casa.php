@@ -33,7 +33,7 @@ class Casa extends Model
                 $comboxxx = ['' => 'Seleccione'];
             }
         }
-        $activida = Casa::where('sis_esta_id', 1)->get();
+        $activida = Casa::get();
         foreach ($activida as $registro) {
             if ($dataxxxx['ajaxxxxx']) {
                 $comboxxx[] = ['valuexxx' => $registro->id, 'optionxx' => $registro->casa];

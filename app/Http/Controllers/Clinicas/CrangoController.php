@@ -25,7 +25,7 @@ class CrangoController extends Controller
             'pestpadr' => 3,
             'cardheap' => '',
             'rowscols' => 'rowspancolspan',
-            'tabsxxxx' => 'Clinicas.tabsxxxx.clinica.header',
+            'tabsxxxx' => 'Clinicas.tabsxxxx.clinica.rango',
             'cardhead' => '', // titulo para las pestañas
 
             'permisox' => 'crango',

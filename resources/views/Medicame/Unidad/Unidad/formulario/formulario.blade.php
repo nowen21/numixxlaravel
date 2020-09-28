@@ -2,9 +2,9 @@
     <div class="form-group col-md-6">
         {{ Form::label('s_unidad', 'Unidad de Medida:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('s_unidad', $todoxxxx['modeloxx']->s_unidad, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
+        {{ Form::text('s_unidad', $todoxxxx['modeloxx']->s_unidad, ['class' => 'form-control-plaintext']) }}
         @else
-        {{ Form::text('s_unidad', null, ['class' => $errors->first('s_unidad') ? 'form-control  is-invalid' : 'form-control', 'placeholder' => 'Unidad de Medida', 'maxlength' => '120', 'autofocus','style'=>'height: 28px']) }}
+        {{ Form::text('s_unidad', null, ['class' => $errors->first('s_unidad') ? 'form-control  is-invalid' : 'form-control', 'placeholder' => 'Unidad de Medida', 'maxlength' => '120', 'autofocus']) }}
         @endif
         @if($errors->has('s_unidad'))
         <div class="invalid-feedback d-block">

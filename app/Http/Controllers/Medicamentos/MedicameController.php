@@ -90,7 +90,7 @@ class MedicameController extends Controller
 
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
-    
+
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
     {
         $this->opciones['casasxx'] = Casa::combo(['cabecera' => true, 'ajaxxxxx' => false]);

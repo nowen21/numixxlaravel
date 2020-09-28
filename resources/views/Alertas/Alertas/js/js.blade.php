@@ -36,11 +36,12 @@
 
   }
   $(document).ready(function () {
-    $('.select2').select2({
-      language: "es"
+   $('.select2').select2({
+      language: "es",
+      theme: 'bootstrap4'
     });
 
-    $('.guardarx').click(function () { 
+    $('.guardarx').click(function () {
 
       var title = '';
       var content = '';
@@ -83,7 +84,7 @@
       });
     });
 
-   
+
   });
 
 </script>

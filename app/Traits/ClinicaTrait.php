@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Traits;
 
 use App\Helpers\Fechas;
@@ -11,7 +12,8 @@ use App\Models\Formulaciones\Orden;
 use App\Models\Medicamentos\Medicame;
 use App\Models\Pacientes\Paciente;
 
-trait ClinicaTrait{
+trait ClinicaTrait
+{
     use DatatableTrait;
 
     public function getListados($request)
@@ -19,8 +21,8 @@ trait ClinicaTrait{
         $clinicas = Clinica::select(['clinicas.id', 'clinicas.clinica', 's_estado', 'clinicas.sis_esta_id'])
             ->join('sis_estas', 'clinicas.sis_esta_id', '=', 'sis_estas.id')
             ->where(function ($queryxxx) use ($request) {
-                $clinicax=auth()->user()->sis_clinica->clinica_id;
-                if ( $clinicax!= 1) {
+                $clinicax = auth()->user()->sis_clinica->clinica_id;
+                if ($clinicax != 1) {
                     $queryxxx->where('clinicas.id', $clinicax);
                 }
             });
@@ -28,11 +30,11 @@ trait ClinicaTrait{
     }
     public function getSucursales($request)
     {
-        $clinicas = SisClinica::select(['sis_clinicas.id','sucursal', 'nombre', 's_estado', 'sis_clinicas.sis_esta_id'])
+        $clinicas = SisClinica::select(['sis_clinicas.id', 'sucursal', 'nombre', 's_estado', 'sis_clinicas.sis_esta_id'])
             ->join('municipios', 'sis_clinicas.sis_esta_id', '=', 'municipios.id')
             ->join('sis_estas', 'sis_clinicas.sis_esta_id', '=', 'sis_estas.id')
             ->where(function ($queryxxx) use ($request) {
-                    $queryxxx->where('sis_clinicas.clinica_id', $request->padrexxx);
+                $queryxxx->where('sis_clinicas.clinica_id', $request->padrexxx);
             });
         return $this->getDatatable($clinicas, $request);
     }
@@ -101,14 +103,14 @@ trait ClinicaTrait{
     public  function getRemisiones($request)
     {
 
-        $paciente =
-       Cformula::select(['ordens.id','ordens.ordeprod','ordens.observac','ordens.sis_esta_id', 'sis_estas.s_estado'])
+        $paciente = Orden::select(['ordens.id', 'ordens.ordeprod', 'ordens.observac', 'ordens.sis_esta_id', 'sis_estas.s_estado'])
 
-        ->join('cformulas','ordens.id','=','cformulas.orden_id')
+            ->join('cformulas', 'ordens.id', '=', 'cformulas.orden_id')
+            ->join('si', 'ordens.id', '=', 'cformulas.orden_id')
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
+            ->where('cformulas.sis_clinica_id',$request->padrexxx)
             ->orderBy('ordens.updated_at')
-            ->groupBy('cformulas.orden_id')
-            ;
+            ->groupBy('cformulas.orden_id');
 
         return $this->getDatatable($paciente, $request);
     }
@@ -117,12 +119,11 @@ trait ClinicaTrait{
     {
         $paciente = Paciente::select([
             'pacientes.id', 'pacientes.nombres', 'pacientes.apellidos', 'pacientes.sis_esta_id',
-            'sis_estas.s_estado','pacientes.cedula','pacientes.sis_clinica_id'
+            'sis_estas.s_estado', 'pacientes.cedula', 'pacientes.sis_clinica_id'
         ])
-        ->join('sis_clinicas', 'pacientes.sis_clinica_id', '=', 'sis_clinicas.id')
+            ->join('sis_clinicas', 'pacientes.sis_clinica_id', '=', 'sis_clinicas.id')
             ->join('sis_estas', 'pacientes.sis_esta_id', '=', 'sis_estas.id')
-            ->where('pacientes.sis_clinica_id',$request->padrexxx)
-            ;
+            ->where('pacientes.sis_clinica_id', $request->padrexxx);
 
         return $this->getDatatable($paciente, $request);
     }
@@ -131,12 +132,12 @@ trait ClinicaTrait{
     public function getPacientesCformula($request)
     {
         $paciente = Cformula::select([
-            'cformulas.id', 'cformulas.tiempo', 'cformulas.velocidad','cformulas.volumen',
-            'cformulas.purga','cformulas.peso', 'cformulas.total','cformulas.sis_esta_id','cformulas.sis_clinica_id',
-            'sis_estas.s_estado','cformulas.paciente_id','cformulas.userevis_id'
+            'cformulas.id', 'cformulas.tiempo', 'cformulas.velocidad', 'cformulas.volumen',
+            'cformulas.purga', 'cformulas.peso', 'cformulas.total', 'cformulas.sis_esta_id', 'cformulas.sis_clinica_id',
+            'sis_estas.s_estado', 'cformulas.paciente_id', 'cformulas.userevis_id', 'cformulas.created_at'
         ])
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
-            ->where('cformulas.paciente_id',$request->padrexxx->id);
+            ->where('cformulas.paciente_id', $request->padrexxx->id);
 
         return $this->getDatatable($paciente, $request);
     }

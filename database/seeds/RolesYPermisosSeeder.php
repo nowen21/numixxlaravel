@@ -311,7 +311,7 @@ class RolesYPermisosSeeder extends Seeder
                     'clinicax-leer',
                     'paciente-leer', 'paciente-crear', 'paciente-editar', 'paciente-borrar',
                     'formular-leer', 'formular-crear', 'formular-editar', 'formular-borrar',
-                    'cmedicame-leer',
+                    'cmedicame-leer','formular-copiar'
                 ]
             );
         Role::create(['name' => 'Revisiones',])

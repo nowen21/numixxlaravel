@@ -1,7 +1,8 @@
 <script>
     $(function() {
         $('.select2').select2({
-            language: "es"
+            language: "es",
+            theme: 'bootstrap4'
         });
         $("#nombres,#apellidos,#cama").keyup(function() {
             $(this).val($(this).val().toUpperCase())

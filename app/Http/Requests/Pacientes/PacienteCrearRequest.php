@@ -19,9 +19,10 @@ class PacienteCrearRequest extends FormRequest
       'cedula.required' => 'Ingrese el número de documento',
       'cedula.unique' => 'El número de documento  ya existe, debe comunicarse con el equipo de numixx',
       'nombres.required' => 'Ingrese el nombre',
-      
+
       'peso.required' => 'Ingreso el peso',
       'genero_id.required' => 'Seleccione un género',
+      'servicio_id.required' => 'Seleccione un servicio',
       'ep_id.required' => 'Seleccione una eps',
       'cama.required' => 'Ingrese el número de cama',
       'fechnaci.required' => 'Seleccione la fehca de nacimiento del paciente',
@@ -31,7 +32,7 @@ class PacienteCrearRequest extends FormRequest
       'registro' => 'required',
       'cedula' => ['required'],
       'nombres' => 'required',
-      
+      'servicio_id' => 'required',
       'peso' => 'required',
       'genero_id' => 'required',
       'ep_id' => 'required',
@@ -73,6 +74,6 @@ class PacienteCrearRequest extends FormRequest
     if (isset($otroregi->id)) {
       $this->_reglasx['cedula'][1] = 'unique:pacientes';
     }
-    
+
   }
 }

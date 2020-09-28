@@ -35,8 +35,9 @@
 
     }
     $(document).ready(function() {
-        $('.select2').select2({
-            language: "es"
+        $('.select2bs4').select2({
+            language: "es",
+            theme: 'bootstrap4'
         });
         var template = function(json) {
             var mensaje = {

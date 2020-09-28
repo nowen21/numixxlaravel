@@ -1,6 +1,6 @@
 <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Seleccione una opacion
+        Seleccione una opción
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         @if(auth()->user()->can( $requestx->routexxx[0].'-editar'))

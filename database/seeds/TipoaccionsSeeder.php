@@ -37,7 +37,7 @@ class TipoaccionsSeeder extends Seeder
         'permisox'=>'alerta-preparar','pestania'=>'PREPARACIONES','iconoxxx'=>'fa-bong',
         'routexxx'=>'preparac.editar',
         'titulink'=>'PREPARAR FORMULACIÓN',
-        'cuerpoxx'=>'Señores numixx la siguente formulacion: yyyyyyyy ha sido preparada.',
+        'cuerpoxx'=>'Señores numixx la siguente formulacion: yyyyyyyy ha sido revisada.',
 
 
 
@@ -47,7 +47,7 @@ class TipoaccionsSeeder extends Seeder
         'permisox'=>'alerta-procesar','pestania'=>'CONTROL EN PROCESO','iconoxxx'=>'fa-cog',
         'routexxx'=>'controlp.nuevo',
         'titulink'=>'CONTROLAR FORMULACIÓN',
-        'cuerpoxx'=>'Señores numixx la siguente formulacion: yyyyyyyy ha sido revisada.',
+        'cuerpoxx'=>'Señores numixx la siguente formulacion: yyyyyyyy se ha preparado.',
 
 
 
@@ -58,7 +58,7 @@ class TipoaccionsSeeder extends Seeder
         'pestania'=>'REALIZAR CONTROL PRODUCTO TERMINADO','iconoxxx'=>'fa-user-check',
         'routexxx'=>'controlt.nuevo',
         'titulink'=>'TERMINAR FORMULACIÓN',
-        'cuerpoxx'=>'Señores: xxxxxxxx la siguente formulacion: yyyyyyyy ha sido preparada.',
+        'cuerpoxx'=>'Señores: xxxxxxxx la siguente formulacion: yyyyyyyy se le ha realizado control en proceso.',
 
 
 

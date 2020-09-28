@@ -36,7 +36,8 @@
   }
   $(document).ready(function () {
     $('.select2').select2({
-      language: "es"
+      language: "es",
+      theme: 'bootstrap4'
     });
     $("#nombcome,#marcaxxx").keyup(function () {
       $(this).val($(this).val().toUpperCase())
@@ -50,7 +51,7 @@
       yearRange: "+0:+50",
     });
 
-    
+
 
 });
 

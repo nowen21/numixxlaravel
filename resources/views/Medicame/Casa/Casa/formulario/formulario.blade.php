@@ -27,7 +27,7 @@
 
 <div class="form-group row">
     <div class="form-group col-md-6">
-        {{ Form::text('casa', null, ['class' => $errors->first('casa') ? 'form-control  is-invalid' : 'form-control', 'placeholder' => 'Casa', 'maxlength' => '120', 'autofocus','style'=>'height: 28px']) }}
+        {{ Form::text('casa', null, ['class' => $errors->first('casa') ? 'form-control  is-invalid' : 'form-control', 'placeholder' => 'Casa', 'maxlength' => '120', 'autofocus']) }}
         @if($errors->has('casa'))
         <div class="invalid-feedback d-block">
             {{ $errors->first('casa') }}
@@ -38,7 +38,7 @@
       {{ Form::label('unidmedi', 'Unidad de Medida:', ['class' => 'control-label col-form-label-sm']) }}
 
       {{ Form::text('unidmedi', null, ['class' => $errors->first('unidmedi') ?
-      'form-control  is-invalid' : 'form-control', 'placeholder' => 'Unidad de Medida', 'maxlength' => '120', 'autofocus','style'=>'height: 28px']) }}
+      'form-control  is-invalid' : 'form-control', 'placeholder' => 'Unidad de Medida', 'maxlength' => '120', 'autofocus']) }}
       @if($errors->has('unidmedi'))
       <div class="invalid-feedback d-block">
           {{ $errors->first('unidmedi') }}
@@ -48,7 +48,7 @@
 
     <div class="form-group col-md-6">
         {{ Form::label('nameidxx', 'ID campo:', ['class' => 'control-label col-form-label-sm']) }}
-        {{ Form::text('nameidxx', null, ['class' => $errors->first('nameidxx') ? 'form-control  is-invalid test' : 'form-control test', 'placeholder' => 'ID campo',  'autofocus','style'=>'height: 28px',
+        {{ Form::text('nameidxx', null, ['class' => $errors->first('nameidxx') ? 'form-control  is-invalid test' : 'form-control test', 'placeholder' => 'ID campo',  'autofocus',
         'maxlength'=>"8" ,
     'data-toggle'=>"tooltip", 'data-placement'=>"right", 'title'=>"Este ID es con el que se va a identificar el medicamento en el formulario, debe de ser de 8 caracteres; se recomienda que se arme con el nombre de la casa"
 

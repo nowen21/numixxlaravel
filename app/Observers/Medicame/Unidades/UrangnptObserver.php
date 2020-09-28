@@ -36,7 +36,6 @@ class UrangnptObserver
      */
     public function updated(Urangnpt $modeloxx)
     {
-        ddd(request()->method());
         HUrangnpt::create($this->getLog(request()->method(),$modeloxx));
     }
 

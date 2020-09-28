@@ -41,11 +41,11 @@ class RestablecerContrasenia extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject('Reinicio de contraseña')
-->greeting('Cordial saludo..')
-            ->line('Hemos recibido una peticion para el reinico de tu contraseña.')
-            ->action('Reiniciar Contraseña', url('/password/reset/'.$this->token))
-            ->line('Si tu no has hecho esta peticón no hagas nada!')
+            ->subject('Reinicio de contraseña')
+            ->greeting('Cordial saludo..')
+            ->line('Hemos recibido una petición para el reinico de tu contraseña.')
+            ->action('Reiniciar Contraseña', url('/password/reset/' . $this->token))
+            ->line('Si tu no has hecho esta petición no hagas nada!')
             ->salutation('Gracias');
     }
 

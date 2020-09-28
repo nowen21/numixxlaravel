@@ -35,8 +35,9 @@
 
   }
   $(function() {
-    $('.select2').select2({
-      language: "es"
+   $('.select2').select2({
+      language: "es",
+      theme: 'bootstrap4'
     });
     var f_peso_establecido = function(dataxxxx) {
         $('#limitesx').empty();

@@ -9,7 +9,7 @@ use App\Models\Formulaciones\Cformula;
 use App\Models\Formulaciones\Dformula;
 use App\Models\Produccion\Calistam;
 use App\Models\Sistema\SisEsta;
-use App\Traits\Cformula\AlertasTrait;
+use App\Traits\Alertas\AlertasTrait;
 use App\Traits\Pestanias\ProduccionTrait;
 
 class PreparacionController extends Controller
@@ -94,7 +94,7 @@ class PreparacionController extends Controller
                     ['data' => 'cedula', 'name' => 'pacientes.cedula'],
                     ['data' => 'nombres', 'name' => 'pacientes.nombres'],
                     ['data' => 'apellidos', 'name' => 'pacientes.apellidos'],
-                    ['data' => 'clinica', 'name' => 'sis_clinicas.clinica'],
+                    ['data' => 'clinica', 'name' => 'clinicas.clinica'],
                     ['data' => 'revisado', 'name' => 'revisado'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],

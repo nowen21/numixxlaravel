@@ -1,14 +1,15 @@
 <script>
   $(function(){
-    $('.select2').select2({
-      language: "es"
+   $('.select2').select2({
+      language: "es",
+      theme: 'bootstrap4'
     });
     var f_condicio=function(dataxxxx){
       $('#condicio_id').empty();
       $.ajax({
         url: "{{url('api/clinica/condicio')}}",
         type: 'GET',
-        data: { 
+        data: {
           clinicax: '{{$todoxxxx["clinicax"]}}',
           crangoxx:dataxxxx.crangoxx
         },
@@ -30,7 +31,7 @@
     }
     $("#rango_id").change(function () {
       f_condicio({selected:'',crangoxx:$(this).val()})
-      
+
     });
 
 

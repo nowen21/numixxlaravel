@@ -170,14 +170,14 @@ class RevisionController extends Controller
 
     private function grabar($dataxxxx)
     {
-        $this->getRangos($dataxxxx);
+        //$this->getRangos($dataxxxx);
 
-        // $cformula = $dataxxxx['modeloxx']->update($dataxxxx['dataxxxx']);
+        $cformula = $dataxxxx['modeloxx']->update($dataxxxx['dataxxxx']);
 
-        // $this->getDescontarInventario(['cformula' => $dataxxxx['modeloxx']]);
-        // return redirect()
-        //     ->route($this->opciones['routxxxx'] . '.editar', [$dataxxxx['modeloxx']->id])
-        //     ->with('info', $dataxxxx['infoxxxx']);
+        $this->getDescontarInventario(['cformula' => $dataxxxx['modeloxx']]);
+        return redirect()
+            ->route($this->opciones['routxxxx'] . '.editar', [$dataxxxx['modeloxx']->id])
+            ->with('info', $dataxxxx['infoxxxx']);
     }
 
     /**

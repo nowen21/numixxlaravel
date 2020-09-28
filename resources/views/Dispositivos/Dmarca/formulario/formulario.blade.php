@@ -2,35 +2,35 @@
   <div class="form-group col-md-4">
     {{ Form::label('marcaxxx', 'Marca:', ['class' => 'control-label col-form-label-sm']) }}
     @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('marcaxxx', $todoxxxx['modeloxx']->marcaxxx, ['class' => 'form-control-plaintext' ,'style'=>"height: 28px"]) }}
+        {{ Form::text('marcaxxx', $todoxxxx['modeloxx']->marcaxxx, ['class' => 'form-control-plaintext' ]) }}
     @else
-        {{ Form::text('marcaxxx', null, ['class' => $errors->first('marcaxxx') ? 
-        'form-control  is-invalid' : 'form-control', 'placeholder' => 'Marca', 'maxlength' => '120', 'autofocus','style'=>"height: 28px"]) }}
+        {{ Form::text('marcaxxx', null, ['class' => $errors->first('marcaxxx') ?
+        'form-control  is-invalid' : 'form-control', 'placeholder' => 'Marca', 'maxlength' => '120', 'autofocus']) }}
     @endif
     @if($errors->has('marcaxxx'))
         <div class="invalid-feedback d-block">
             {{ $errors->first('marcaxxx') }}
     </div>
-    @endif   
+    @endif
   </div>
 
-  
+
   <div class="form-group col-md-4">
-    {{ Form::label('reginvim', 'Registro Invima:', ['class' => 'control-label col-form-label-sm','style'=>"height: 28px"]) }}
+    {{ Form::label('reginvim', 'Registro Invima:', ['class' => 'control-label col-form-label-sm']) }}
     @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::text('reginvim', $todoxxxx['modeloxx']->reginvim, ['class' => 'form-control-plaintext']) }}
     @else
-        {{ Form::text('reginvim', null, ['class' => $errors->first('reginvim') ? 
-        'form-control  is-invalid' : 'form-control', 'placeholder' => 'Registro Invima', 'maxlength' => '120', 'autofocus','style'=>"height: 28px"]) }}
+        {{ Form::text('reginvim', null, ['class' => $errors->first('reginvim') ?
+        'form-control  is-invalid' : 'form-control', 'placeholder' => 'Registro Invima', 'maxlength' => '120', 'autofocus']) }}
     @endif
     @if($errors->has('reginvim'))
         <div class="invalid-feedback d-block">
             {{ $errors->first('reginvim') }}
     </div>
-    @endif   
+    @endif
   </div>
-  
-  
+
+
   <div class="form-group col-md-4">
     {{ Form::label('sis_esta_id', 'Estado:', ['class' => 'control-label col-form-label-sm']) }}
     @if($todoxxxx['accionxx'] == 'Ver')
@@ -44,6 +44,6 @@
     </div>
     @endif
   </div>
-    
-    
+
+
 </div>

@@ -18,7 +18,7 @@ class MedicameCrearRequest extends FormRequest {
         'unidmedi.required' => 'Ingrese la unidad de medida',
     ];
     $this->_reglasx = [
-        
+
         'nombgene' => 'required|string|unique:medicames',
         'concentr' => 'required',
         'unidmedi' => 'required',
@@ -49,15 +49,15 @@ class MedicameCrearRequest extends FormRequest {
   }
 
   public function validar() {
-    $dataxxxx = $this->toArray();
-    if (!isset($dataxxxx['npts'])) {
-      $this->_mensaje['nptsxxxx.required'] = "Seleccione al menos un npt";
-      $this->_reglasx['nptsxxxx'] = 'required';
-    }
-    if (!isset($dataxxxx['casas'])) {
-      $this->_mensaje['casa_id.required'] = "Seleccione al menos una casa";
-      $this->_reglasx['casa_id'] = 'required';
-    }
+    // $dataxxxx = $this->toArray();
+    // if (!isset($dataxxxx['npts'])) {
+    //   $this->_mensaje['nptsxxxx.required'] = "Seleccione al menos un npt";
+    //   $this->_reglasx['nptsxxxx'] = 'required';
+    // }
+    // if (!isset($dataxxxx['casas'])) {
+    //   $this->_mensaje['casa_id.required'] = "Seleccione al menos una casa";
+    //   $this->_reglasx['casa_id'] = 'required';
+    // }
   }
 
 }

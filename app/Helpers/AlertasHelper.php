@@ -22,8 +22,7 @@ class AlertasHelper
 
         if (auth()->user()->can($acciones->permisox)) {
 
-            $alertaxx = Alerta::
-            join('cformulas', 'alertas.cformula_id', '=', 'cformulas.id')
+            $alertaxx = Alerta::join('cformulas', 'alertas.cformula_id', '=', 'cformulas.id')
 
                 ->where(function ($queryxxx) use ($acciones) {
                     $queryxxx->where('leidaxxx', 0);
@@ -35,19 +34,19 @@ class AlertasHelper
                 })
                 ->get();
             foreach ($alertaxx as $key => $value) {
-                $cuerpoxx=$acciones->cuerpoxx;
+                $cuerpoxx = $acciones->cuerpoxx;
                 if ($dataxxxx['tipoacci'] == 1) { // se ha creado una formulacion
                     $cuerpoxx = str_replace("xxxxxxxx", $value->cformula->sis_clinica->sucursal, $cuerpoxx);
                 }
-
+                $clinicax = $value->cformula->sis_clinica;
                 $cuerpoxx = str_replace("yyyyyyyy", $value->cformula_id, $cuerpoxx);
                 $registrx['respuest'] = true;
                 $registrx['encabeza']['totalxxx'] += 1;
                 $registrx['dataxxxx'][] = [
                     'titulink' => $acciones->titulink,
-                    'cuerpoxx' => $cuerpoxx,
-                    'fechorax' => 'FECHA Y HORA: ' . date('Y-m-d H:m:s', strtotime($value->cformula->created_at)),
-                    'linkxxxx' => route($acciones->routexxx, $dataxxxx['tipoacci'] == 1 ? [$value->cformula->sis_clinica_id, $value->cformula->paciente_id, $value->routexxx] : [$value->routexxx])
+                    'cuerpoxx' => $cuerpoxx. ' Clínica: ' . $clinicax->clinica->clinica. '(Sucursal:'.$clinicax->sucursal.')',
+                    'fechorax' => 'FECHA Y HORA: ' . $value->cformula->created_at ,
+                    'linkxxxx' => route($acciones->routexxx, $dataxxxx['tipoacci'] == 1 ? [$clinicax->id, $value->cformula->paciente_id, $value->routexxx] : [$value->routexxx])
                 ];
             }
             $registrx['encabeza']['tituloxx'] = $registrx['encabeza']['totalxxx'] . ' ' . $registrx['encabeza']['tituloxx'];

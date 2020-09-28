@@ -16,7 +16,8 @@ class Clinicas
 {
     public static function getClinicas($request)
     {
-        $clinicas = SisClinica::select(['sis_clinicas.id', 'sis_clinicas.clinica', 's_estado', 'sis_clinicas.sis_esta_id'])
+        $clinicas = SisClinica::select(['sis_clinicas.id', 'clinicas.clinica', 's_estado', 'sis_clinicas.sis_esta_id'])
+            ->join('clinicas', 'sis_clinicas.clinica_id', '=', 'clinicas.id')
             ->join('sis_estas', 'sis_clinicas.sis_esta_id', '=', 'sis_estas.id')
             ->where(function ($queryxxx) use ($request) {
                 if ($request->padrexxx != 1) {

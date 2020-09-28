@@ -72,7 +72,7 @@ class SisClinica extends Model
             }
         }
         $activida = SisClinica::get();
-        foreach ($activida as $registro) {
+        foreach ($activida as $key=> $registro) {
             if ($ajaxxxxx) {
                 $comboxxx[] = ['valuexxx' => $registro->id, 'optionxx' => $registro->sucursal];
             } else {

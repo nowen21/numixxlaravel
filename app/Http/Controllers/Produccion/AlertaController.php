@@ -3,14 +3,10 @@
 namespace App\Http\Controllers\Produccion;
 
 use App\Helpers\AlertasHelper;
-use App\Helpers\Cformula\Dataformulario;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Produccion\RevisionEditarRequest;
-use App\Models\Formulaciones\Cformula;
-use App\Models\Sistema\SisEsta;
 use App\Traits\Pestanias\ProduccionTrait;
 use App\Traits\Produccion\InventarioTrait;
-use Illuminate\Support\Facades\Auth;
+
 
 class AlertaController extends Controller
 {

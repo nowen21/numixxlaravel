@@ -2,7 +2,7 @@
 
 namespace App\Models\Produccion;
 
-use App\Models\Formulaciones\Ordene;
+use App\Models\Formulaciones\Orden;
 use App\Models\Sistema\SisEsta;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +14,7 @@ class Calistam extends Model
 
   protected $fillable = [
     'producto',
-    'ordene_id',
+    'orden_id',
     'sis_esta_id',
     'user_crea_id',
     'user_edita_id'
@@ -31,16 +31,16 @@ class Calistam extends Model
   {
     return $this->belongsTo(SisEsta::class);
   }
-  public function ordene()
+  public function orden()
   {
-    return $this->belongsTo(Ordene::class);
+    return $this->belongsTo(Orden::class);
   }
 
   public function dalistams()
   {
     return $this->hasMany(Dalistam::class);
   }
-  
+
   public static function transaccion($dataxxxx,  $objetoxx)
   {
     $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {

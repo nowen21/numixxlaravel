@@ -4,7 +4,7 @@ namespace App\Traits\Produccion;
 
 use App\Models\Formulaciones\Dfmlote;
 use App\Models\Formulaciones\Dformula;
-use App\Models\Formulaciones\Ordene;
+use App\Models\Formulaciones\Orden;
 use App\Models\Medicamentos\Medicame;
 use App\Models\Medicamentos\Mlote;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +39,7 @@ trait InventarioTrait
 
   /**
    * Realizar las validaciones para el descuento de inventario.
-   * 
+   *
    * @param  $detallex registro que contiene el valor de la purga el cual se quiere completar el descuento
    * @param int $cantidad cantidad que se lleva acumulada para el descuento
    * @param $registro registro del lote al que se le va a descontar inventario
@@ -113,10 +113,10 @@ trait InventarioTrait
   public function getOrden()
   {
     $fechahoy = date('Y-m-d', time());
-    $ordendia = Ordene::where('created_at', 'like', "{$fechahoy}%")->first();
+    $ordendia = Orden::where('created_at', 'like', "{$fechahoy}%")->first();
     if (!isset($ordendia->id)) {
       $fechahoy = explode('-', $fechahoy);
-      $ordendia = Ordene::create([
+      $ordendia = Orden::create([
         'ordeprod' => $fechahoy[2] . $fechahoy[1] . substr($fechahoy[0], 2, 2),
         'sis_esta_id' => 1, 'user_crea_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id
       ]);
@@ -134,5 +134,5 @@ trait InventarioTrait
     return [$ordendia->id => $ordendia->ordeprod];
   }
 
-  
+
 }

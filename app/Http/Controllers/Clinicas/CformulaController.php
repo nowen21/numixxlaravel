@@ -92,6 +92,7 @@ class CformulaController extends Controller
                         ['td' => 'PURGA', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                         ['td' => 'PESO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                         ['td' => 'TOTAL', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'FECHA', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                         ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ]
                 ],
@@ -104,6 +105,7 @@ class CformulaController extends Controller
                     ['data' => 'purga', 'name' => 'cformulas.purga'],
                     ['data' => 'peso', 'name' => 'cformulas.peso'],
                     ['data' => 'total', 'name' => 'cformulas.total'],
+                    ['data' => 'created_at', 'name' => 'cformulas.created_at'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tablaformulaciones',
@@ -133,9 +135,6 @@ class CformulaController extends Controller
         $this->opciones['paciente'] = $dataxxxx['padrexxx'];
         $this->opciones['parapest'][0] = $this->opciones['paciente']->sis_clinica_id;
         $this->opciones['parapest'][1] = $this->opciones['paciente']->id;
-
-
-
         $this->opciones['parametr'] = [$this->opciones['paciente']->id];
         $this->opciones['botoform'][0]['routingx'][1] = $this->opciones['parametr'];
         $this->opciones['cardhead'] = $this->opciones['cardhead'] . $this->opciones['paciente']->sis_clinica->clinica->clinica;
@@ -164,7 +163,6 @@ class CformulaController extends Controller
             $this->opciones['fechedit'] = $dataxxxx['modeloxx']->updated_at;
             $this->opciones['usercrea'] = $dataxxxx['modeloxx']->creador->name;
             $this->opciones['useredit'] = $dataxxxx['modeloxx']->editor->name;
-
             $this->opciones['parametr'] = [$dataxxxx['modeloxx']->id];
         }
         // Se arma el titulo de acuerdo al array opciones
@@ -372,7 +370,7 @@ class CformulaController extends Controller
     }
     public function getRequerimientoVolumenq()
     {
-        ddd($this->getCalculos($this->getData()));
+       // ddd($this->getCalculos($this->getData()));
     }
 
     public function getRequerimientoVolumen(Request $request)

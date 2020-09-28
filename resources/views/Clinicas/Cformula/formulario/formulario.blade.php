@@ -1,4 +1,5 @@
 <div class="form-group row">
+    @include('layouts.registro')
     <div class="form-group col-md-4">
         {{ Form::label('sis_clinica_id', 'Clínica:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
@@ -16,11 +17,11 @@
     <div class="form-group col-md-4">
         {{ Form::label('tiempo', 'Tiempo Infusión:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('tiempo', $todoxxxx['modeloxx']->tiempo, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
+        {{ Form::text('tiempo', $todoxxxx['modeloxx']->tiempo, ['class' => 'form-control-plaintext']) }}
         @else
         {{ Form::text('tiempo', null, ['class' => $errors->first('tiempo') ?
          'form-control  is-invalid calcularvolumen' : 'form-control calcularvolumen',
-         'placeholder' => 'Tiempo Infusión', 'maxlength' => '120', 'style'=>'height: 28px','autocomplete'=>"off"]) }}
+         'placeholder' => 'Tiempo Infusión', 'maxlength' => '120','autocomplete'=>"off"]) }}
         @endif
         @if($errors->has('tiempo'))
         <div class="invalid-feedback d-block">
@@ -37,7 +38,7 @@
         @else
         {{ Form::text('velocidad', null, ['class' => $errors->first('velocidad') ?
          'form-control  is-invalid' : 'form-control', 'placeholder' => 'Velocidad Infusión:',
-         'maxlength' => '120', 'autofocus','style'=>'height: 28px','readonly','autocomplete'=>"off"]) }}
+         'maxlength' => '120', 'autofocus','readonly','autocomplete'=>"off"]) }}
         @endif
         @if($errors->has('velocidad'))
         <div class="invalid-feedback d-block">
@@ -48,11 +49,11 @@
     <div class="form-group col-md-4">
         {{ Form::label('volumen', 'Volumen Total:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('volumen', $todoxxxx['modeloxx']->volumen, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
+        {{ Form::text('volumen', $todoxxxx['modeloxx']->volumen, ['class' => 'form-control-plaintext']) }}
         @else
         {{ Form::text('volumen', null, ['class' => $errors->first('volumen') ?
          'form-control  is-invalid calcularvolumen calcularagua' : 'form-control calcularvolumen calcularagua',
-         'placeholder' => 'Volumen Total', 'maxlength' => '120', 'autofocus','style'=>'height: 28px','autocomplete'=>"off"]) }}
+         'placeholder' => 'Volumen Total', 'maxlength' => '120', 'autofocus','autocomplete'=>"off"]) }}
         @endif
         @if($errors->has('volumen'))
         <div class="invalid-feedback d-block">
@@ -64,11 +65,11 @@
     <div class="form-group col-md-4">
         {{ Form::label('purga', 'Purga:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('purga', $todoxxxx['modeloxx']->purga, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
+        {{ Form::text('purga', $todoxxxx['modeloxx']->purga, ['class' => 'form-control-plaintext']) }}
         @else
         {{ Form::text('purga', null, ['class' => $errors->first('purga') ?
          'form-control  is-invalid' : 'form-control', 'placeholder' => 'Purga', 'maxlength' => '120',
-         'autofocus','style'=>'height: 28px','autocomplete'=>"off"]) }}
+         'autofocus','autocomplete'=>"off"]) }}
         @endif
         @if($errors->has('purga'))
         <div class="invalid-feedback d-block">
@@ -80,11 +81,11 @@
     <div class="form-group col-md-4">
         {{ Form::label('peso', 'Peso:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('peso', $todoxxxx['modeloxx']->peso, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
+        {{ Form::text('peso', $todoxxxx['modeloxx']->peso, ['class' => 'form-control-plaintext']) }}
         @else
         {{ Form::text('peso', null, ['class' => $errors->first('peso') ?
          'form-control  is-invalid' : 'form-control', 'placeholder' => 'Peso', 'maxlength' => '120',
-         'autofocus','style'=>'height: 28px','autocomplete'=>"off"]) }}
+         'autofocus','autocomplete'=>"off"]) }}
         @endif
         @if($errors->has('peso'))
         <div class="invalid-feedback d-block">
@@ -119,9 +120,11 @@
                 }
 
                 ?>
+
                 <tr id="{{$idxxxxxx}}">
                     <td>{{$formulax['casaxxxx']}}</td>
-                    <td>{{ Form::select($formulax['campo_id'], $formulax['selelist'], $formulax['selevalu'],['class'=>'form-control medicamento calcularagua select2','id'=>$formulax['campo_id']]) }}
+                    <td>{{ Form::select($formulax['campo_id'], $formulax['selelist'], $formulax['selevalu'],
+                        ['class'=>'form-control medicamento calcularagua select2bs4','id'=>$formulax['campo_id'],'style'=>'width: 100%;']) }}
                     </td>
                     <td id="{{$formulax['campo_id'].'_unid'}}">{{$formulax['unidmedi']}}</td>
                     <td> {{ Form::text($formulax['campo_id'].'_cant',
@@ -151,4 +154,5 @@
         @include('Clinicas.Cformula.formulario.resultad')
 
     </div>
+    @include('layouts.registro')
 </div>

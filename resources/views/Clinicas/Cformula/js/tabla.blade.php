@@ -21,7 +21,7 @@ $(document).ready(function() {
             @endforeach
         ],
         "language": {
-            "url": "{{ url('/adminlte/plugins/datatables/Spanish.lang') }}"
+            "url": "{{ url('/adminlte/plugins/datatables/Spanish.lang') }}",
         }
     });
   @endforeach

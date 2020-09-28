@@ -88,7 +88,7 @@ class ConciliacionController extends Controller
                     ['data' => 'id', 'name' => 'calistams.id'],
                     ['data' => 'producto', 'name' => 'calistams.producto'],
                     ['data' => 'created_at', 'name' => 'calistams.created_at'],
-                    ['data' => 'ordeprod', 'name' => 'ordenes.ordeprod'],
+                    ['data' => 'ordeprod', 'name' => 'ordens.ordeprod'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tablaordenes',
@@ -110,7 +110,7 @@ class ConciliacionController extends Controller
         // indica si se esta actualizando o viendo
         if ($dataxxxx['objetoxx'] != '') {
             $this->opciones['modeloxx'] = $dataxxxx['objetoxx'];
-            $this->opciones['ordenxxx'] = [$dataxxxx['objetoxx']->ordene_id => $dataxxxx['objetoxx']->ordene->ordeprod];
+            $this->opciones['ordenxxx'] = [$dataxxxx['objetoxx']->orden_id => $dataxxxx['objetoxx']->orden->ordeprod];
         }
         $this->opciones['botoform'][0]['routingx'][1] = [$dataxxxx['objetoxx']->id];
         $this->opciones['pestania'] = $this->getPestanias(['tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => $dataxxxx['objetoxx']]);

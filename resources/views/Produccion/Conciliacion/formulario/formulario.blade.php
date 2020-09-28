@@ -2,12 +2,12 @@
     <div class="form-group col-md-6">
         {{ Form::label('producto', 'Producto:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('producto', $todoxxxx['modeloxx']->producto, 
-            ['class' => 'form-control-plaintext','style'=>'height: 28px','readonly'=>'readonly']) }}
+        {{ Form::text('producto', $todoxxxx['modeloxx']->producto,
+            ['class' => 'form-control-plaintext','readonly'=>'readonly']) }}
         @else
         {{ Form::text('producto', 'NUTRICIÓN PARENTERAL', ['class' => $errors->first('producto') ?
-         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Producto', 
-         'maxlength' => '120', 'style'=>'height: 28px','readonly'=>'readonly']) }}
+         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Producto',
+         'maxlength' => '120','readonly'=>'readonly']) }}
         @endif
         @if($errors->has('producto'))
         <div class="invalid-feedback d-block">
@@ -18,12 +18,12 @@
     <div class="form-group col-md-6">
         {{ Form::label('created_at', 'Registro:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('created_at', $todoxxxx['modeloxx']->created_at, 
-            ['class' => 'form-control-plaintext','style'=>'height: 28px','readonly'=>'readonly']) }}
+        {{ Form::text('created_at', $todoxxxx['modeloxx']->created_at,
+            ['class' => 'form-control-plaintext','readonly'=>'readonly']) }}
         @else
         {{ Form::text('created_at', null, ['class' => $errors->first('created_at') ?
-         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Registro', 'maxlength' => '120', 
-         'autofocus','style'=>'height: 28px','readonly'=>'readonly']) }}
+         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Registro', 'maxlength' => '120',
+         'autofocus','readonly'=>'readonly']) }}
         @endif
         @if($errors->has('created_at'))
         <div class="invalid-feedback d-block">
@@ -32,16 +32,16 @@
         @endif
     </div>
     <div class="form-group col-md-6">
-        {{ Form::label('ordene_id', 'OP:', ['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::label('orden_id', 'OP:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::select('ordene_id', $todoxxxx['ordenxxx'], $todoxxxx['modeloxx']->ordene_id, ['class' => 'form-control-plaintext','id'=>'ordene_id']) }}
+        {{ Form::select('orden_id', $todoxxxx['ordenxxx'], $todoxxxx['modeloxx']->orden_id, ['class' => 'form-control-plaintext','id'=>'orden_id']) }}
         @else
-        {{ Form::select('ordene_id', $todoxxxx['ordenxxx'], null, ['class' => $errors->first('ordene_id') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'ordene_id']) }}
+        {{ Form::select('orden_id', $todoxxxx['ordenxxx'], null, ['class' => $errors->first('orden_id') ?
+        'form-control is-invalid select2' : 'form-control select2','id'=>'orden_id']) }}
         @endif
-        @if($errors->has('ordene_id'))
+        @if($errors->has('orden_id'))
         <div class="invalid-feedback d-block">
-            {{ $errors->first('ordene_id') }}
+            {{ $errors->first('orden_id') }}
         </div>
         @endif
     </div>
@@ -51,7 +51,7 @@
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], $todoxxxx['modeloxx']->sis_esta_id, ['class' => 'form-control-plaintext','id'=>'sis_esta_id']) }}
         @else
-        {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ? 
+        {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ?
         'form-control is-invalid select2' : 'form-control select2','id'=>'sis_esta_id']) }}
         @endif
         @if($errors->has('sis_esta_id'))

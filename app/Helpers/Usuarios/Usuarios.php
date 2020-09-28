@@ -16,7 +16,7 @@ class Usuarios
             'users.id',
             'users.name',
             'users.email',
-            'sis_clinicas.clinica',
+            'sis_clinicas.sucursal',
             's_estado',
             'users.sis_esta_id'
         )

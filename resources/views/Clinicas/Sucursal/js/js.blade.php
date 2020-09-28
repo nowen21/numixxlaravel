@@ -2,7 +2,7 @@
     $(function() {
         $('.select2').select2({
             language: "es",
-
+            theme: 'bootstrap4',
         });
         $("#sucursal").keyup(function() {
             $(this).val($(this).val().toUpperCase())

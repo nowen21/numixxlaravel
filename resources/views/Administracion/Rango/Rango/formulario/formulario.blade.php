@@ -6,8 +6,8 @@
         'style'=>'height: 28px']) }}
         @else
         {{ Form::number('ranginic', null, ['class' => $errors->first('ranginic') ?
-         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Rango Desde', 
-         'autofocus','style'=>'height: 28px','onkeypress'=>'return filterFloat(event,this);']) }}
+         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Rango Desde',
+         'autofocus','onkeypress'=>'return filterFloat(event,this);']) }}
         @endif
         @if($errors->has('ranginic'))
         <div class="invalid-feedback d-block">
@@ -21,9 +21,9 @@
         {{ Form::number('rangfina', $todoxxxx['modeloxx']->rangfina, ['class' => 'form-control-plaintext',
         'style'=>'height: 28px']) }}
         @else
-        {{ Form::number('rangfina', null, ['class' => $errors->first('rangfina') ? 
-        'form-control  is-invalid' : 'form-control', 'placeholder' => 'Rango Hasta',  'autofocus','style'=>'height: 28px'
-        ,'onkeypress'=>'return filterFloat(event,this);', 
+        {{ Form::number('rangfina', null, ['class' => $errors->first('rangfina') ?
+        'form-control  is-invalid' : 'form-control', 'placeholder' => 'Rango Hasta',  'autofocus'
+        ,'onkeypress'=>'return filterFloat(event,this);',
         ]) }}
         @endif
         @if($errors->has('rangfina'))
@@ -37,7 +37,7 @@
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], $todoxxxx['modeloxx']->sis_esta_id, ['class' => 'form-control-plaintext','id'=>'sis_esta_id']) }}
         @else
-        {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ? 
+        {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ?
         'form-control is-invalid select2' : 'form-control select2','id'=>'sis_esta_id','style'=>'width: 100%']) }}
         @endif
         @if($errors->has('sis_esta_id'))

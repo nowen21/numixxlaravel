@@ -31,10 +31,10 @@ class Produccion
     public static function getAlistamientos($request)
     {
         $paciente = Calistam::select([
-            'calistams.id', 'calistams.producto', 'ordenes.ordeprod', 'calistams.sis_esta_id',
+            'calistams.id', 'calistams.producto', 'ordens.ordeprod', 'calistams.sis_esta_id',
             'sis_estas.s_estado', 'calistams.created_at'
         ])
-            ->join('ordenes', 'calistams.ordene_id', '=', 'ordenes.id')
+            ->join('ordens', 'calistams.orden_id', '=', 'ordens.id')
             ->join('sis_estas', 'calistams.sis_esta_id', '=', 'sis_estas.id');
 
         return DatatableHelper::getDt($paciente, $request);
@@ -45,10 +45,11 @@ class Produccion
         $paciente = Cformula::select([
             'cformulas.id', 'cformulas.sis_esta_id',
             'sis_estas.s_estado',
-            'sis_clinicas.clinica', 'pacientes.nombres', 'pacientes.apellidos', 'pacientes.cedula', 'cformulas.userprep_id'
+            'clinicas.clinica', 'pacientes.nombres', 'pacientes.apellidos', 'pacientes.cedula', 'cformulas.userprep_id'
         ])
             ->join('pacientes', 'cformulas.paciente_id', '=', 'pacientes.id')
             ->join('sis_clinicas', 'cformulas.sis_clinica_id', '=', 'sis_clinicas.id')
+            ->join('clinicas', 'sis_clinicas.clinica_id', '=', 'clinicas.id')
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
             ->where('cformulas.userevis_id', '!=', null)
             ->where('cformulas.created_at', 'LIKE', date('Y-m-d',time()).'%')
@@ -62,11 +63,12 @@ class Produccion
         $paciente = Cformula::select([
             'cformulas.id', 'cformulas.sis_esta_id',
             'sis_estas.s_estado','cformulas.created_at',
-            'sis_clinicas.clinica', 'pacientes.nombres', 'pacientes.apellidos', 'pacientes.cedula',
+            'clinicas.clinica', 'pacientes.nombres', 'pacientes.apellidos', 'pacientes.cedula',
             'cformulas.proceso_id'
         ])
             ->join('pacientes', 'cformulas.paciente_id', '=', 'pacientes.id')
             ->join('sis_clinicas', 'cformulas.sis_clinica_id', '=', 'sis_clinicas.id')
+            ->join('clinicas', 'sis_clinicas.clinica_id', '=', 'clinicas.id')
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
             ->where('cformulas.created_at', 'LIKE', date('Y-m-d',time()).'%')
             ->where('cformulas.userprep_id', '!=', null)
@@ -79,11 +81,12 @@ class Produccion
         $paciente = Cformula::select([
             'cformulas.id', 'cformulas.sis_esta_id', 'cformulas.terminado_id',
             'sis_estas.s_estado','cformulas.created_at', 'pacientes.cedula',
-            'sis_clinicas.clinica', 'pacientes.nombres', 'pacientes.apellidos'
+            'clinicas.clinica', 'pacientes.nombres', 'pacientes.apellidos'
         ])
             ->join('pacientes', 'cformulas.paciente_id', '=', 'pacientes.id')
             ->join('procesos', 'cformulas.proceso_id', '=', 'procesos.id')
             ->join('sis_clinicas', 'cformulas.sis_clinica_id', '=', 'sis_clinicas.id')
+            ->join('clinicas', 'sis_clinicas.clinica_id', '=', 'clinicas.id')
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
             ->where('cformulas.created_at', 'LIKE', date('Y-m-d',time()).'%')
             ->orderBy('cformulas.terminado_id', 'ASC')
@@ -94,10 +97,10 @@ class Produccion
     public static function getConciliaciones($request)
     {
         $paciente = Calistam::select([
-            'calistams.id', 'calistams.producto', 'ordenes.ordeprod', 'calistams.sis_esta_id',
+            'calistams.id', 'calistams.producto', 'ordens.ordeprod', 'calistams.sis_esta_id',
             'sis_estas.s_estado', 'calistams.created_at'
         ])
-            ->join('ordenes', 'calistams.ordene_id', '=', 'ordenes.id')
+            ->join('ordens', 'calistams.orden_id', '=', 'ordens.id')
             ->join('sis_estas', 'calistams.sis_esta_id', '=', 'sis_estas.id')
             ->where('calistams.id', $request->padrexxx);
 

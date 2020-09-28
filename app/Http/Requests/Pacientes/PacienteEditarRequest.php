@@ -21,6 +21,7 @@ class PacienteEditarRequest extends FormRequest
       'peso.required' => 'Ingreso el peso',
       'genero_id.required' => 'Seleccione un género',
       'ep_id.required' => 'Seleccione una eps',
+      'servicio_id.required' => 'Seleccione un servicio',
       'cama.required' => 'Ingrese el número de cama',
       'fechnaci.required' => 'Seleccione la fecha de naciemiento del paciente',
       'departamento_id.required' => 'Seleccione un departamento',
@@ -31,6 +32,7 @@ class PacienteEditarRequest extends FormRequest
       'nombres' => 'required',
       'peso' => 'required',
       'genero_id' => 'required',
+      'servicio_id' => 'required',
       'ep_id' => 'required',
       'cama' => 'required',
       'fechnaci' => 'required',
@@ -70,7 +72,7 @@ class PacienteEditarRequest extends FormRequest
 
   public function validar()
   {
-    
+
     $registro = Paciente::where('id', $this->segments()[2])->first();
     $otroregi = Paciente::where('sis_clinica_id', $this->segments()[1])->where('cedula', $this->cedula)->first();
     if (isset($registro->id) && isset($otroregi->id)) {

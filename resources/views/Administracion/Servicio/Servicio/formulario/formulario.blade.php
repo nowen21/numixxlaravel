@@ -2,10 +2,10 @@
     <div class="form-group col-md-6">
         {{ Form::label('servicio', 'Servicio:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::text('servicio', $todoxxxx['modeloxx']->servicio, ['class' => 'form-control-plaintext','style'=>'height: 28px']) }}
+        {{ Form::text('servicio', $todoxxxx['modeloxx']->servicio, ['class' => 'form-control-plaintext']) }}
         @else
-        {{ Form::text('servicio', null, ['class' => $errors->first('servicio') ? 
-        'form-control  is-invalid' : 'form-control', 'placeholder' => 'Servicio', 'maxlength' => '120', 'autofocus','style'=>'height: 28px']) }}
+        {{ Form::text('servicio', null, ['class' => $errors->first('servicio') ?
+        'form-control  is-invalid' : 'form-control', 'placeholder' => 'Servicio', 'maxlength' => '120', 'autofocus']) }}
         @endif
         @if($errors->has('servicio'))
         <div class="invalid-feedback d-block">
@@ -13,7 +13,7 @@
         </div>
         @endif
     </div>
-    
+
     <div class="form-group col-md-6">
         {{ Form::label('sis_esta_id', 'Estado:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')

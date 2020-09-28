@@ -34,8 +34,9 @@ function filterFloat(evt, input) {
   }
 
   $(function(){
-    $('.select2').select2({
-      language: "es"
+   $('.select2').select2({
+      language: "es",
+      theme: 'bootstrap4'
     });
     $(".numerico").keyup(function () {
       var id = $(this).prop('id').split('_')
