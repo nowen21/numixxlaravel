@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="form-group col-md-6">
-        {{ Form::label('tiempo', 'Tiempo Infisión:', ['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::label('tiempo', 'Tiempo Infusión:', ['class' => 'control-label col-form-label-sm']) }}
 
         <div id="" class="form-control" >
             {{$todoxxxx['modeloxx']->tiempo}}

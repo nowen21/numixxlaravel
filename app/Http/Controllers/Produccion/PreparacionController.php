@@ -80,11 +80,11 @@ class PreparacionController extends Controller
                 'cabecera' =>[
 
                     ['td' => 'LOTE INTERNO'],
-                    ['td' => 'CEDULA'],
+                    ['td' => 'CÉDULA'],
                     ['td' => 'NOMBRES'],
                     ['td' => 'APELLIDOS'],
-                    ['td' => 'CLINICA'],
-                    ['td' => 'PREPARACION'],
+                    ['td' => 'CLÍNICA'],
+                    ['td' => 'PREPARACIÓN'],
                     ['td' => 'ESTADO'],
 
                 ],

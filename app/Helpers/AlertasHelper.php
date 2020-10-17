@@ -27,6 +27,7 @@ class AlertasHelper
                 ->where(function ($queryxxx) use ($acciones) {
                     $queryxxx->where('leidaxxx', 0);
                     $queryxxx->where('tipoaccion_id', $acciones->id);
+                    $queryxxx->where('cformulas.created_at', 'LIKE',date('Y-m-d').'%');
 
                     if (Auth::user()->sis_clinica_id != 1) {
                         $queryxxx->where('sis_clinica_id', 2);

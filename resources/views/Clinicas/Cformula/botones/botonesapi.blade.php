@@ -23,7 +23,7 @@
         @endif
         @endif
         @if(auth()->user()->can( $requestx->routexxx[0].'-copiar'))
-        @if($requestx->padrexxx->sis_esta_id==1))
+        @if($requestx->padrexxx->sis_esta_id==1)
         <div class="dropdown-item">
             <a class="btn btn-sm btn-warning" href="{{ route($requestx->routexxx[0].'.copiar', $queryxxx->id) }}">Copiar Formulación</a>
         </div>

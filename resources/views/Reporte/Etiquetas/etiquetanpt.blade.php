@@ -167,7 +167,7 @@ foreach ($cformula->dformulas as $value) {
         Clínica
       </td>
       <td style=" width: 50%; text-align: left; ">
-        {{$cformula->sis_clinica->clinica}}
+        {{$cformula->sis_clinica->clinica->clinica}}
       </td>
       <td style=" width: 25%; text-align: left; ">
         {{$cformula->paciente->npt->nombre}}
