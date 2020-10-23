@@ -26,7 +26,7 @@
   @foreach($detallex as $alistami)
   <tr>
     <td scope="col" class="letras">{{$alistami['medicamd']}}</td>
-    <td scope="col" class="letras" style="width: 100px">
+    <td scope="col" class="letras" style="width: 100px; text-align: right; padding-right: 10px;">
       @if($alistami['medicamd']!='')
       {{$alistami['value_di']}}
       @endif
@@ -35,7 +35,7 @@
     <td scope="col" class="letras">{{$alistami['reginvid']}}</td>
     <td scope="col" class="letras">{{$alistami['fechvend']}}</td>
     <td scope="col" class="letras">{{$alistami['medicamm']}}</td>
-    <td scope="col" class="letras" style="width: 100px">
+    <td scope="col" class="letras" style="width: 100px; text-align: right; padding-right: 10px;">
       @if($alistami['medicamm']!='')
       {{$alistami['value_me']}}
       @endif

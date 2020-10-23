@@ -22,14 +22,14 @@
         <div style=" padding: 10px 0px 10px 0px;">PRO-FO-12-V0</div>
       </div>
     </div>
-  
+
     <div style=" width: 100%; padding-top: 10px ">
       <div class="flotar" style="width: 30%;text-align: center;">PRODUCTO</div>
       <div class="flotar" style="width: 25%;text-align: center; border-bottom: 1px #000 solid">{{$cabecera->producto}}</div>
       <div class="flotar" style="width: 10%;text-align: center;">FECHA</div>
       <div class="flotar" style="width: 10%;text-align: center; border-bottom: 1px #000 solid">{{explode(' ',$cabecera->created_at)[0]}}</div>
       <div class="flotar" style="width: 5%;text-align: center;">OP</div>
-      <div class="flotar" style="width: 20%;text-align: center; border-bottom: 1px #000 solid">{{$cabecera->ordene->ordeprod}}</div>
+      <div class="flotar" style="width: 20%;text-align: center; border-bottom: 1px #000 solid">{{$cabecera->orden->ordeprod}}</div>
     </div>
     <div style=" width: 100%; padding-top: 40px ">
       <table style=" border: 1px #000 solid" border='1' cellspacing="0" >
