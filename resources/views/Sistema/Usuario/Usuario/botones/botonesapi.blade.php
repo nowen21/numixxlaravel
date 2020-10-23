@@ -1,2 +1,11 @@
-<a class="btn btn-sm btn-primary" href="{{ route('usuarios.editar', $id) }}">Editar</a>
-<a class="btn btn-sm btn-primary" href="{{ route('usuarios.ver', $id) }}">Ver</a>
+
+@if($requestx->pueditar)
+<a class="btn btn-sm btn-warning " href="{{ route($requestx->routexxx[0].'.editar', $queryxxx->id) }}">Editar</a>
+@endif
+@if($requestx->puedever)
+<a class="btn btn-sm btn-primary " href="{{ route($requestx->routexxx[0].'.ver', $queryxxx->id) }}">Ver</a>
+@endif
+@if($requestx->puedinac && $queryxxx->sis_esta_id==1)
+
+<a class="btn btn-sm btn-danger " href="{{ route($requestx->routexxx[0].'.borrar', $queryxxx->id) }}">Inactivar</a>
+@endif

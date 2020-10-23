@@ -25,6 +25,5 @@ include_once('apis/administracion/api_admin.php');
 include_once('apis/paciente/api_paciente.php');
 require_once('apis/formulacion/api_cformula.php');
 include_once('apis/roles/api_rol.php');
-include_once('apis/usuario/api_usuario.php');
 include_once('apis/reporte/api_reporte.php');
 include_once('apis/produccion/api_produccion.php');

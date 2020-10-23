@@ -31,10 +31,11 @@ class MnptController_borrar extends Controller
             'esindexx' => false
         ];
 
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
+        $this->middleware(['permission:' .
+            $this->opciones['permisox'] . '-leer|' .
+            $this->opciones['permisox'] . '-crear|' .
+            $this->opciones['permisox'] . '-editar|' .
+            $this->opciones['permisox'] . '-borrar']);
 
         $this->opciones['readonly'] = '';
         $this->opciones['rutaxxxx'] = 'mnpt';
@@ -118,7 +119,7 @@ class MnptController_borrar extends Controller
                     'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1
                 ]);<br>";
                 //echo $registro->npt_id.'<br>';
-            if (!isset($Urangnpt->id)) { 
+            if (!isset($Urangnpt->id)) {
                 // Urangnpt::create([
                 //     'unidrang_id' => $Unidrang->id, 'npt_id' => $registro->npt_id,
                 //     'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1

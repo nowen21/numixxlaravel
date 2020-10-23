@@ -18,14 +18,17 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('telefono');
+            $table->string('documento')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();            
+            $table->rememberToken();
+            $table->timestamps();
             $table=CamposMagicos::getForeign($table,'sis_clinica');
             $table=CamposMagicos::getForeign($table,'sis_esta');
             $table=CamposMagicos::getForeignN($table, 'user_crea_id', 'users');
             $table=CamposMagicos::getForeignN($table, 'user_edita_id', 'users');
-            $table->timestamps();
+            $table->timestamp('polidato_at')->nullable();
         });
         Schema::create('h_users', function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -35,6 +38,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->integer('sis_clinica_id');
+            $table->string('documento');
+            $table->string('telefono');
+            $table->timestamp('polidato_at')->nullable();
             $table=CamposMagicos::h_magicos($table);
         });
     }

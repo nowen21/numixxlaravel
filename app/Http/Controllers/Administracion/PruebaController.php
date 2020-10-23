@@ -24,11 +24,11 @@ class PruebaController extends Controller
             'indecrea' => false,
             'esindexx' => false
         ];
-
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
+        $this->middleware(['permission:' .
+        $this->opciones['permisox'] . '-leer|' .
+        $this->opciones['permisox'] . '-crear|' .
+        $this->opciones['permisox'] . '-editar|' .
+        $this->opciones['permisox'] . '-borrar']);
 
         $this->opciones['readonly'] = '';
         $this->opciones['rutaxxxx'] = 'eps';
@@ -51,7 +51,7 @@ class PruebaController extends Controller
      */
     public function index()
     {
-               
+
         $this->opciones['tablasxx'][] =
             [
 
@@ -66,7 +66,7 @@ class PruebaController extends Controller
                 'urlxxxxx' => 'api/administracion/eps',
                 'cabecera' => [
                     ['td' => 'ID'],
-                    ['td' => 'EPS'],                   
+                    ['td' => 'EPS'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
@@ -80,7 +80,7 @@ class PruebaController extends Controller
                 'parametr' => [],
                 'routxxxx' => $this->opciones['routxxxx'],
             ];
-        
+
 
         $this->opciones['padrexxx'] = '';
 

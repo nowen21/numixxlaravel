@@ -6,7 +6,11 @@ Route::group(['prefix' => 'usuarios'], function () use ($controll, $routexxx) {
 	Route::get('', [
 		'uses' => $controll . 'Controller@index',
 		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
-	])->name($routexxx);
+    ])->name($routexxx);
+    Route::get('listaxxx', [
+		'uses' => $controll . 'Controller@getListado',
+		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
+	])->name($routexxx.'.listaxxx');
 	Route::get('nuevo', [
 		'uses' => $controll . 'Controller@create',
 		'middleware' => ['permission:' . $routexxx . '-crear']
@@ -22,14 +26,27 @@ Route::group(['prefix' => 'usuarios'], function () use ($controll, $routexxx) {
 	Route::put('editar/{objetoxx}', [
 		'uses' => $controll . 'Controller@update',
 		'middleware' => ['permission:' . $routexxx . '-editar']
-	])->name($routexxx . '.editar');
+    ])->name($routexxx . '.editar');
+
+
+
+	Route::put('polidato/{objetoxx}', [
+		'uses' => $controll . 'Controller@polidatou',
+		'middleware' => ['permission:' . $routexxx . '-polidato']
+	])->name($routexxx . '.polidato');
+
 	Route::get('ver/{objetoxx}', [
 		'uses' => $controll . 'Controller@show',
 		'middleware' => ['permission:' . $routexxx . '-leer']
 	])->name($routexxx . '.ver');
-	Route::delete('borrar/{objetoxx}', [
+	Route::get('borrar/{objetoxx}', [
+	    'uses' => $controll.'Controller@inactivate',
+	    'middleware' => ['permission:'.$routexxx.'-borrar']
+    ])->name($routexxx.'.borrar');
+
+    Route::put('borrar/{objetoxx}', [
 		'uses' => $controll . 'Controller@destroy',
 		'middleware' => ['permission:' . $routexxx . '-borrar']
-	])->name($routexxx . '.borrar');
+    ])->name($routexxx . '.borrar');
 	require_once('web_urol.php');
 });

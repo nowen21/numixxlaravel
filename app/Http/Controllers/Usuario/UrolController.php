@@ -3,35 +3,51 @@
 namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Administracion\Usuario\UsuarioCrearRequest;
+use App\Http\Requests\Administracion\Usuario\UsuarioEditarRequest;
+use App\Models\Clinica\SisClinica;
+
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Sistema\SisEsta;
+use App\Traits\Usuarios\UsuarioTrait;
 use App\User;
+use Spatie\Permission\Models\Role;
 
 class UrolController extends Controller
 {
+    use UsuarioTrait;
+    private $bitacora;
     private $opciones;
 
     public function __construct()
     {
-        $this->opciones = [
-            'permisox' => 'uroles',
-            'parametr' => [],
-            'rutacarp' => 'Sistema.Usuario.',
-            'tituloxx' => 'Crear: Rol',
-            'slotxxxx'=>'uroles',
-            'carpetax'=>'Urol',
-            'indecrea'=>false,
-            'esindexx'=>false
-        ];
+        $this->opciones['permisox'] = 'uroles';
+        $this->middleware(['permission:'
+            . $this->opciones['permisox'] . '-leer|'
+            . $this->opciones['permisox'] . '-crear|'
+            . $this->opciones['permisox'] . '-editar|'
+            . $this->opciones['permisox'] . '-borrar']);
 
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
-
-        $this->opciones['readonly'] = '';
-        $this->opciones['rutaxxxx'] = 'uroles';
-        $this->opciones['routnuev'] = 'uroles';
+        $this->opciones['vocalesx'] = ['Á', 'É', 'Í', 'Ó', 'Ú'];
+        $this->opciones['pestpadr'] = 3; // darle prioridad a las pestañas
+        $this->opciones['tituhead'] = 'ROLES';
         $this->opciones['routxxxx'] = 'uroles';
+        $this->opciones['slotxxxx'] = 'uroles';
+        $this->opciones['perfilxx'] = 'sinperfi';
+        $this->opciones['rutacarp'] = 'Sistema.Usuario.';
+        $this->opciones['parametr'] = [];
+        $this->opciones['carpetax'] = 'Urol';
+        /** botones que se presentan en los formularios */
+        $this->opciones['botonesx'] = $this->opciones['rutacarp'] . 'Acomponentes.Botones.botonesx';
+        /** informacion que se va a mostrar en la vista */
+        $this->opciones['formular'] = $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.formulario.formulario';
+        /** ruta que arma el formulario */
 
+        $this->opciones['estrateg'] = ['' => 'Seleccione'];
+
+        $this->opciones['tituloxx'] = "ROL";
         $this->opciones['botoform'] = [
             [
                 'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'], []],
@@ -40,74 +56,90 @@ class UrolController extends Controller
         ];
     }
 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index($padrexxx)
+    public function index(User $padrexxx)
     {
-        $this->opciones['usuariox']=User::where('id',$padrexxx)->first();
-        $this->opciones['parametr'] = [$padrexxx];
-        $this->opciones['indecrea']=false;
-        $this->opciones['esindexx']=false;
-        $this->opciones['accionxx']='index';
-        $this->opciones['padrexxx'] = $padrexxx;
+        $this->opciones['parametr'] = [$padrexxx->id];
+        $this->opciones['padrexxx'] = $padrexxx->id;
+        $this->opciones['rutarchi'] = $this->opciones['rutacarp'] . 'Acomponentes.Acrud.index';
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'NUEVO ROL',
+                'titunuev' => 'NUEVO USUARIO',
                 'titulist' => 'LISTA DE ROLES ASIGNADOS',
-                'dataxxxx' => [
-                    ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-                    ['campoxxx' => 'padrexxx', 'dataxxxx' => $padrexxx],
-                ],
-                'vercrear' => FALSE,
-                'accitabl' => true,
-                'urlxxxxx' => 'api/usuario/urol',
-                'cabecera' =>[
-                    ['td' => 'ID'],
-                    ['td' => 'ROL'],
-                    ['td' => 'ESTADO'],
+                'archdttb' => $this->opciones['rutacarp'] . 'Acomponentes.Adatatable.index',
+                'vercrear' => false,
+                'urlxxxxx' => route($this->opciones['routxxxx'] . '.listarol', [$padrexxx->id]),
+                'cabecera' => [
+                    [
+                        ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ROL', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ]
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
-                    ['data' => 'id', 'name' => 'uroles.id'],
+                    ['data' => 'id', 'name' => 'roles.id'],
                     ['data' => 'name', 'name' => 'roles.name'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tablauroles',
-                'permisox' => 'uroles',
-                'routxxxx' => 'uroles',
-                'parametr' => [$padrexxx],
+                'permisox' => $this->opciones['permisox'],
+                'routxxxx' => $this->opciones['routxxxx'],
+                'parametr' => [$padrexxx->id],
             ],
             [
-                'titunuev' => 'NUEVO ROL',
+                'titunuev' => 'NUEVO USUARIO',
                 'titulist' => 'SELECCIONE EL PERMISO QUE DESEA ASIGNAR',
-                'dataxxxx' => [
-                    ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
-                    ['campoxxx' => 'padrexxx', 'dataxxxx' => $padrexxx],
-                ],
-                'vercrear' => FALSE,
-                'accitabl' => FALSE,
-                'urlxxxxx' => 'api/usuario/rol',
-                'cabecera' =>[
-                    ['td' => 'ID'],
-                    ['td' => 'ROL'],
+                'archdttb' => $this->opciones['rutacarp'] . 'Acomponentes.Adatatable.index',
+                'vercrear' => false,
+                'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', []),
+                'cabecera' => [
+                    [
+                        ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ROL', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ]
                 ],
                 'columnsx' => [
                     ['data' => 'id', 'name' => 'roles.id'],
                     ['data' => 'name', 'name' => 'roles.name'],
                 ],
                 'tablaxxx' => 'tablaroles',
-                'permisox' => 'uroles',
-                'routxxxx' => 'uroles',
-                'parametr' => [$padrexxx],
+                'permisox' => $this->opciones['permisox'],
+                'routxxxx' => $this->opciones['routxxxx'],
+                'parametr' => [$padrexxx->id],
             ],
 
         ];
+        $this->opciones['ruarchjs'] = [
+            ['jsxxxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.Js.tabla']
+        ];
+
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
-    
+
+    public function getListado(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $request->routexxx = [$this->opciones['routxxxx']];
+            $request->botonesx = $this->opciones['rutacarp'] .
+                $this->opciones['carpetax'] . '.Botones.botonesapi';
+            $request->estadoxx = 'layouts.components.botones.estadosx';
+            return $this->getRoles($request); //Por UPI
+
+        }
+    }
+
+    public function getListadoRoles(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $request->routexxx = [$this->opciones['routxxxx']];
+            $request->botonesx = $this->opciones['rutacarp'] .
+                $this->opciones['carpetax'] . '.Botones.botonesapi';
+            $request->estadoxx = 'layouts.components.botones.estadosx';
+            return $this->getUroles($request); //Por UPI
+
+        }
+    }
 }

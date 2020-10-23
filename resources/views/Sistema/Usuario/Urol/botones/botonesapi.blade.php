@@ -1,1 +1,1 @@
-<button class="btn btn-sm btn-danger"  id="{{$id}}"type="button" >Inctivar</button>
+<button class="btn btn-sm btn-danger"  id="{{$queryxxx->id}}"type="button" >Inctivar</button>

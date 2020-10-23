@@ -24,7 +24,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'user_crea_id', 'user_edita_id', 'sis_esta_id', 'sis_clinica_id'
+        'name', 'email','documento' ,'telefono' ,'password',
+        'user_crea_id', 'user_edita_id', 'sis_esta_id', 'sis_clinica_id','polidato_at'
     ];
 
     /**
@@ -74,7 +75,6 @@ class User extends Authenticatable
 
     public static function transaccion($dataxxxx,  $objetoxx)
     {
-
         $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {
             $dataxxxx['user_edita_id'] = Auth::user()->id;
             if ($objetoxx != '') {

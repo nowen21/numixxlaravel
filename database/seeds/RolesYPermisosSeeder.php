@@ -38,11 +38,12 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => $permiso . '-crear',  'descripc' => 'Crear Código de la condición']);
         Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar Código de la condición']);
         Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar Código de la condición']);
-        $permiso = 'usuario';
+        $permiso = 'usuarios';
         Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar usuarios']);
         Permission::create(['name' => $permiso . '-crear',  'descripc' => 'Crear usuario']);
         Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar usuario']);
         Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar usuario']);
+        Permission::create(['name' => $permiso . '-polidato',  'descripc' => 'Aceptar las políticas de datos']);
         /**
          * permisos para las unidades
          */
@@ -259,11 +260,7 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar permisos del rol']);
         Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar permisos del rol']);
 
-        $permiso = 'usuarios';
-        Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar usuarios']);
-        Permission::create(['name' => $permiso . '-crear',  'descripc' => 'Crear usuario']);
-        Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar usuario']);
-        Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar usuario']);
+
 
 
         $permiso = 'uroles';

@@ -6,38 +6,48 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Administracion\Usuario\UsuarioCrearRequest;
 use App\Http\Requests\Administracion\Usuario\UsuarioEditarRequest;
 use App\Models\Clinica\SisClinica;
-use App\Models\Sistema\SisEsta;
-use App\User;
+
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Sistema\SisEsta;
+use App\Traits\Usuarios\UsuarioTrait;
+use App\User;
 use Spatie\Permission\Models\Role;
 
 class UsuarioController extends Controller
 {
+    use UsuarioTrait;
+    private $bitacora;
     private $opciones;
 
     public function __construct()
     {
-        $this->opciones = [
-            'permisox' => 'usuarios',
-            'parametr' => [],
-            'rutacarp' => 'Sistema.Usuario.',
-            'tituloxx' => 'Crear: Usuario',
-            'slotxxxx'=>'usuarios',
-            'carpetax'=>'Usuario',
-            'indecrea'=>false,
-            'esindexx'=>false
-        ];
+        $this->opciones['permisox'] = 'usuarios';
+        $this->middleware(['permission:'
+            . $this->opciones['permisox'] . '-leer|'
+            . $this->opciones['permisox'] . '-crear|'
+            . $this->opciones['permisox'] . '-editar|'
+            . $this->opciones['permisox'] . '-borrar']);
 
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-leer'], ['only' => ['index', 'show']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-crear'], ['only' => ['index', 'show', 'create', 'store', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-editar'], ['only' => ['index', 'show', 'edit', 'update', 'view', 'grabar']]);
-        $this->middleware(['permission:' . $this->opciones['permisox'] . '-borrar'], ['only' => ['index', 'show', 'destroy']]);
-
-        $this->opciones['readonly'] = '';
-        $this->opciones['rutaxxxx'] = 'usuarios';
-        $this->opciones['routnuev'] = 'usuarios';
+        $this->opciones['vocalesx'] = ['Á', 'É', 'Í', 'Ó', 'Ú'];
+        $this->opciones['pestpadr'] = 1; // darle prioridad a las pestañas
+        $this->opciones['tituhead'] = 'USUARIOS';
         $this->opciones['routxxxx'] = 'usuarios';
+        $this->opciones['slotxxxx'] = 'usuarios';
+        $this->opciones['perfilxx'] = 'sinperfi';
+        $this->opciones['rutacarp'] = 'Sistema.Usuario.';
+        $this->opciones['parametr'] = [];
+        $this->opciones['carpetax'] = 'Usuario';
+        /** botones que se presentan en los formularios */
+        $this->opciones['botonesx'] = $this->opciones['rutacarp'] . 'Acomponentes.Botones.botonesx';
+        /** informacion que se va a mostrar en la vista */
+        $this->opciones['formular'] = $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.formulario.formulario';
+        /** ruta que arma el formulario */
 
+        $this->opciones['estrateg'] = ['' => 'Seleccione'];
+
+        $this->opciones['tituloxx'] = "POL".$this->opciones['vocalesx'][2]."TICA DE DATOS";
         $this->opciones['botoform'] = [
             [
                 'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'], []],
@@ -46,37 +56,26 @@ class UsuarioController extends Controller
         ];
     }
 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $padrexxx='';
-        $this->opciones['indecrea']=true;
-        $this->opciones['esindexx']=true;
-        $this->opciones['accionxx']='index';
-        $this->opciones['padrexxx'] = $padrexxx;
+        $this->opciones['rutarchi'] = $this->opciones['rutacarp'] . 'Acomponentes.Acrud.index';
         $this->opciones['tablasxx'] = [
             [
                 'titunuev' => 'NUEVO USUARIO',
                 'titulist' => 'LISTA DE USUARIOS',
-                'dataxxxx' => [
-                    ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
-
-                ],
+                'archdttb' => $this->opciones['rutacarp'] . 'Acomponentes.Adatatable.index',
                 'vercrear' => true,
-                'accitabl' => true,
-                'urlxxxxx' => 'api/usuario/usuario',
-                'cabecera' =>[
-                    ['td' => 'ID'],
-                    ['td' => 'NOMBRES'],
-                    ['td' => 'E-MAIL'],
-                    ['td' => 'SUCURSAL'],
-                    ['td' => 'ESTADO'],
+                'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', []),
+                'cabecera' => [
+                    [
+                        ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'NOMBRES', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'E-MAIL', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'SUCURSAL', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+
+                        ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ]
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
@@ -86,137 +85,178 @@ class UsuarioController extends Controller
                     ['data' => 'sucursal', 'name' => 'sis_clinicas.sucursal'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
-                'tablaxxx' => 'tablapacientes',
-                'permisox' => 'usuarios',
-                'routxxxx' => 'usuarios',
-                'parametr' => [$padrexxx],
-            ],
-
+                'tablaxxx' => 'datatable',
+                'permisox' => $this->opciones['permisox'],
+                'routxxxx' => $this->opciones['routxxxx'],
+                'parametr' => [],
+            ]
         ];
+        $this->opciones['ruarchjs'] = [
+            ['jsxxxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.Js.tabla']
+        ];
+
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
-    private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
-    {
-        $this->opciones['rolesxxx'] = Role::get();
-        $this->opciones['clinicid'] = SisClinica::combo( true, false);
 
-        $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
-        $this->opciones['accionxx'] = $accionxx;
-        // indica si se esta actualizando o viendo
-        if ($nombobje != '') {
-            $this->opciones[$nombobje] = $objetoxx;
+    public function getListado(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $request->routexxx = [$this->opciones['routxxxx']];
+            $request->botonesx = $this->opciones['rutacarp'] .
+                $this->opciones['carpetax'] . '.Botones.botonesapi';
+            $request->estadoxx = 'layouts.components.botones.estadosx';
+            return $this->getUsuarios($request); //Por UPI
 
         }
-        // Se arma el titulo de acuerdo al array opciones
-        return view($vistaxxx, ['todoxxxx' => $this->opciones]);
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    private function grabar($dataxxxx, $objetoxx, $infoxxxx,$redirect)
     {
-
-        $this->opciones['indecrea']=true;
-        $this->opciones['clinicac']=true;
-        $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
-                'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
-            ];
-        return $this->view(true, '', 'Crear', $this->opciones['rutacarp'] . 'pestanias');
+        return redirect()
+            ->route($this->opciones['routxxxx'] . '.'.$redirect, [User::transaccion($dataxxxx, $objetoxx)->id])
+            ->with('info', $infoxxxx);
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    private function view($dataxxxx)
+    {
+        $this->opciones['rutarchi'] = $this->opciones['rutacarp'] . 'Acomponentes.Acrud.'.$dataxxxx['accionxx'][0];
+        $this->opciones['formular'] = $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.formulario.'.$dataxxxx['accionxx'][1];
+        $this->opciones['ruarchjs'] = [
+            ['jsxxxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.Js.js'],
+        ];
+        $this->opciones['rolesxxx'] = Role::get();
+        $this->opciones['clinicid'] = SisClinica::combo( true, false);
+
+        $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
+       // $this->opciones['accionxx'] = $dataxxxx['accionxx'];
+        // indica si se esta actualizando o viendo
+        $this->opciones['pestpadr'] = 2; // darle prioridad a las pestañas
+
+        if ($dataxxxx['modeloxx'] != '') {
+            $this->opciones['parametr'] = [$dataxxxx['modeloxx']->id];
+            $this->opciones['pestpadr'] = 3; // darle prioridad a las pestañas
+            $this->opciones['modeloxx'] = $dataxxxx['modeloxx'];
+
+        }        // Se arma el titulo de acuerdo al array opciones
+        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
+    }
+
+    public function create()
+    {
+        $this->opciones['slotxxxx'] = 'usuarioc';
+        $this->opciones['botoform'][] =
+            [
+                'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
+                'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+            ];
+
+        return $this->view(['modeloxx' => '', 'accionxx' => ['crear', 'formulario']]);
+    }
     public function store(UsuarioCrearRequest $request)
     {
-        $dataxxxx = $request->all();
-
-        return $this->grabar($dataxxxx, '', 'Registro creado con éxito');
+        return $this->grabar($request->all(), '', 'Usuario creado con exito','editar');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\FiDatosBasico $objetoxx
      * @return \Illuminate\Http\Response
      */
     public function show(User $objetoxx)
     {
-        $this->opciones['usuariox']=$objetoxx;
-        $this->opciones['clinicax'] =$objetoxx->id;
-        $this->opciones['parametr'] = [$objetoxx->id];
-        $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => $objetoxx->sis_esta_id == 1 ? 'INACTIVAR' : 'ACTIVAR', 'routingx' => [$this->opciones['routxxxx'], []], 'formhref' => 1,
-                'tituloxx' => '', 'clasexxx' => $objetoxx->sis_esta_id == 1 ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success'
-            ];
-        $this->opciones['readonly'] = 'readonly';
-        return $this->view($objetoxx,  'modeloxx', 'Ver', $this->opciones['rutacarp'] . 'pestanias');
+        $this->opciones['slotxxxx'] = 'usuarioe';
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => ['ver', 'formulario']]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\FiDatosBasico $objetoxx
      * @return \Illuminate\Http\Response
      */
     public function edit(User $objetoxx)
     {
-        $this->opciones['usuariox']=$objetoxx;
-        $this->opciones['clinicax'] =$objetoxx->id;
-        $this->opciones['parametr'] = [$objetoxx->id];
-        $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
-                'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
-            ];
-        return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
-    }
-
-    private function grabar($dataxxxx, $objectx, $infoxxxx)
-    {
-        return redirect()
-            ->route($this->opciones['routxxxx'] . '.editar', [User::transaccion($dataxxxx, $objectx)->id])
-            ->with('info', $infoxxxx);
+        $this->opciones['slotxxxx'] = 'usuarioe';
+        if (auth()->user()->can($this->opciones['permisox'] . '-editar')) {
+            $this->opciones['botoform'][] =
+                [
+                    'mostrars' => true, 'accionxx' => 'MODIFICAR REGISTRO', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
+                    'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+                ];
+        }
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => ['editar', 'formulario']]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\FiDatosBasico $objetoxx
      * @return \Illuminate\Http\Response
      */
-    public function update(UsuarioEditarRequest  $request, User $objetoxx)
+    public function update(UsuarioEditarRequest $request,  User $objetoxx)
     {
-        $dataxxxx = $request->all();
-        return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
+
+        return $this->grabar($request->all(), $objetoxx, 'Usuario actualizado con exito','editar');
+    }/**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\FiDatosBasico $objetoxx
+     * @return \Illuminate\Http\Response
+     */
+    public function polidatoe(User $objetoxx)
+    {
+        $this->opciones['slotxxxx'] = 'polidato';
+        $this->opciones['botoform']=[];
+        if (auth()->user()->can($this->opciones['permisox'] . '-polidato')) {
+            $this->opciones['botoform'][] =
+                [
+                    'mostrars' => true, 'accionxx' => 'ACEPTAR', 'routingx' => [$this->opciones['routxxxx'] . '.polidato', []],
+                    'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+                ];
+        }
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => ['editar', 'polidatos']]);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\FiDatosBasico $objetoxx
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $objetoxx)
+    public function polidatou(Request $request,  User $objetoxx)
     {
-        $this->opciones['usuariox']=$objetoxx;
-        $this->opciones['parametr'] = [$objetoxx->id];
-
-        $objetoxx->sis_esta_id = ($objetoxx->sis_esta_id == 2) ? 1 : 2;
-        $objetoxx->save();
-        $activado = $objetoxx->sis_esta_id == 2 ? 'inactivado' : 'activado';
-
-        return redirect()->route($this->opciones['routxxxx'])->with('info', 'Registro ' . $activado . ' con éxito');
+       $dataxxxx= $request->all();
+       $dataxxxx['polidato_at']=date('Y-m-d H:m:s',time());
+        return $this->grabar($dataxxxx, $objetoxx, 'Políticas aceptadas con exito','polidato');
     }
 
+    public function inactivate(User $objetoxx)
+    {
+        $this->opciones['parametr'] = [$objetoxx->id];
+        if (auth()->user()->can($this->opciones['permisox'] . '-borrar')) {
+            $this->opciones['botoform'][] =
+                [
+                    'mostrars' => true, 'accionxx' => 'INACTIVAR', 'routingx' => [$this->opciones['routxxxx'] . '.borrar', []],
+                    'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+                ];
+        }
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => ['destroy', 'destroy']]);
+    }
+    public function destroy(Request $request, User $objetoxx)
+    {
 
+        $objetoxx->update(['sis_esta_id' => 2, 'user_edita_id' => Auth::user()->id]);
+        return redirect()
+            ->route($this->opciones['permisox'], [])
+            ->with('info', 'Sucursal inactivada correctamente');
+    }
 }
