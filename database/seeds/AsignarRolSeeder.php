@@ -25,5 +25,7 @@ class AsignarRolSeeder extends Seeder
         $super->assignRole('Control-Proceso');
         $super=User::find(6);
         $super->assignRole('Control-Terminado');
-    }
+        $super=User::find(10);
+        $user->assignRole('super-administrador');
+     }
 }

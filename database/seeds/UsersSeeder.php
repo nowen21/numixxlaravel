@@ -22,6 +22,7 @@ class UsersSeeder extends Seeder
             ['name' => 'ANA CAROLINA SERRANO','telefono'=>'00000000','documento'=>'6789012', 'email' => 'cserrano@numixx.com', 'password' => 'N0w3n2104', 'sis_clinica_id' => 40],
             ['name' => 'JULIO DE LA ROCHE VALENCIA','telefono'=>'00000000','documento'=>'7890123', 'email' => 'informacion@delaroche.cc', 'password' => 'N0w3n2104', 'sis_clinica_id' => 41],
             ['name' => 'ANDERSON CARRILLO','telefono'=>'00000000','documento'=>'8901234', 'email' => 'carrilllo25@gmail.com', 'password' => 'ander123', 'sis_clinica_id' => 42],
+            ['name' => 'JORGE RUEDA','telefono'=>'00000000','documento'=>'1090412429', 'email' => 'antrueda14@gmail.com', 'password' => '12345678', 'sis_clinica_id' => 1],
         ];
         foreach ($usuariox as $key => $value) {
             $super = User::create($value);

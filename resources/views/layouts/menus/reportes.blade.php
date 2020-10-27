@@ -7,7 +7,7 @@
         </p>
     </a>
     <ul class="nav nav-treeview">
-        @canany(['contropf-leer'])
+        @canany(['controlpf-leer'])
             <li class="nav-item">
                 <a href="{{ route('controlpf') }}" class="nav-link">
                     <i class="fas fa-child nav-icon"></i>

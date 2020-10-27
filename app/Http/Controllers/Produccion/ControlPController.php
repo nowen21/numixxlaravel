@@ -74,7 +74,7 @@ class ControlPController extends Controller
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
                     ['campoxxx' => 'medicame', 'dataxxxx' => $padrexxx],
                 ],
-                'vercrear' => false,
+                'vercrear' => true,
                 'accitabl' => true,
                 'urlxxxxx' => 'api/produccion/procesos',
                 'cabecera' =>[
@@ -106,7 +106,7 @@ class ControlPController extends Controller
 
         ];
         $this->opciones['pestania'] = $this->getPestanias([
-            'tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => ''
+            'tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => $padrexxx
         ]);
 
 
@@ -140,7 +140,6 @@ class ControlPController extends Controller
             ->route($this->opciones['routxxxx'] . '.editar', [$padrexxx->proceso_id]);
         }
 
-
         $this->opciones['cformula'] = [$padrexxx->id=>'Formulación: '.$padrexxx->id];
         $this->opciones['indecrea']=false;
         $this->opciones['clinicac']=true;
@@ -149,7 +148,7 @@ class ControlPController extends Controller
                 'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
-        return $this->view(true, '', 'Crear', $this->opciones['rutacarp'] . 'pestanias');
+        return $this->view(true, '', 'Crear', $this->opciones['rutacarp'] . 'pestanias',);
     }
 
     /**

@@ -14,21 +14,24 @@ use App\Models\Pacientes\Paciente;
 use App\Models\Sistema\Departamento;
 use App\Models\Sistema\Municipio;
 use App\Models\Sistema\SisEsta;
+use App\Traits\Reporte\ControlPFTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ControlPFController extends Controller
 {
+    use ControlPFTrait;
     private $opciones;
 
     public function __construct()
     {
         $this->opciones = [
-            'permisox' => 'paciente',
+            'permisox' => 'controlpf',
             'parametr' => [],
-            'rutacarp' => 'Pacientes.',
+            'rutacarp' => 'Reporte.',
             'tituloxx' => 'Crear: Paciente',
-            'slotxxxx'=>'paciente',
-            'carpetax'=>'Paciente',
+            'slotxxxx'=>'controlpf',
+            'carpetax'=>'Orden',
             'indecrea'=>false,
             'esindexx'=>false
         ];
@@ -40,9 +43,9 @@ class ControlPFController extends Controller
             $this->opciones['permisox'] . '-borrar']);
 
         $this->opciones['readonly'] = '';
-        $this->opciones['rutaxxxx'] = 'paciente';
-        $this->opciones['routnuev'] = 'paciente';
-        $this->opciones['routxxxx'] = 'paciente';
+        $this->opciones['rutaxxxx'] = 'controlpf';
+        $this->opciones['routnuev'] = 'controlpf';
+        $this->opciones['routxxxx'] = 'controlpf';
 
         $this->opciones['botoform'] = [
             [
@@ -51,7 +54,16 @@ class ControlPFController extends Controller
             ],
         ];
     }
-
+    public function getListado(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->routexxx = [$this->opciones['routxxxx']];
+            $request->botonesx = $this->opciones['rutacarp'] .
+                $this->opciones['carpetax'] . '.Botones.botonesapi';
+            $request->estadoxx = 'layouts.components.botones.estadosx';
+            return $this->getOrden($request);
+        }
+    }
 
     /**
      * Display a listing of the resource.
@@ -68,7 +80,7 @@ class ControlPFController extends Controller
         $this->opciones['tablasxx'] = [
             [
                 'titunuev' => 'NUEVO PACIENTE',
-                'titulist' => 'LISTA DE PACIENTES',
+                'titulist' => 'Listado de Órdenes de Producción',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
@@ -79,20 +91,20 @@ class ControlPFController extends Controller
                 'urlxxxxx' => 'api/paciente/paciente',
                 'cabecera' =>[
                     ['td' => 'ID'],
-                    ['td' => 'NOMBRES'],
-                    ['td' => 'APELLIDOS'],
+                    ['td' => 'Orden de producción'],
+                    ['td' => 'Observaciónn'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
-                    ['data' => 'id', 'name' => 'pacientes.id'],
-                    ['data' => 'nombres', 'name' => 'pacientes.nombres'],
-                    ['data' => 'apellidos', 'name' => 'pacientes.apellidos'],
-                    ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
+                    ['data' => 'id', 'name' => 'ordens.id'],
+                    ['data' => 'orderprod', 'name' => 'ordens.orderprod'],
+                    ['data' => 'observac', 'name' => 'ordens.observac'],
+                    ['data' => 's_estado', 'name' => 'ordens.s_estado'],
                 ],
-                'tablaxxx' => 'tablapacientes',
-                'permisox' => 'paciente',
-                'routxxxx' => 'paciente',
+                'tablaxxx' => 'tabla',
+                'permisox' => 'controlpf',
+                'routxxxx' => 'controlpf',
                 'parametr' => [$padrexxx],
             ],
 
@@ -127,7 +139,6 @@ class ControlPFController extends Controller
      */
     public function create()
     {
-
         $this->opciones['indecrea']=true;
         $this->opciones['clinicac']=true;
         $this->opciones['botoform'][] =
@@ -157,7 +168,7 @@ class ControlPFController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Paciente $objetoxx)
+    public function show(Orden $objetoxx)
     {
         $this->opciones['clinicax'] =$objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
@@ -176,7 +187,7 @@ class ControlPFController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Paciente $objetoxx)
+    public function edit(Orden $objetoxx)
     {
         $this->opciones['clinicax'] =$objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];

@@ -289,10 +289,10 @@ class RolesYPermisosSeeder extends Seeder
          */
         Permission::create(['name' => 'reportes-modulo',  'descripc' => 'Habilita los permisos para el módulo de reportes']);
 
-        Permission::create(['name' => 'contropf-leer',  'descripc' => 'Listar controles en proceso y productos finalizados']);
-        Permission::create(['name' => 'contropf-crear',  'descripc' => 'Crear control en proceso y finalizado']);
-        Permission::create(['name' => 'contropf-editar',  'descripc' => 'Editar control en proceso y finalizado']);
-        Permission::create(['name' => 'contropf-borrar',  'descripc' => 'Inactivar control en proceso y finalizado']);
+        Permission::create(['name' => 'controlpf-leer',  'descripc' => 'Listar controles en proceso y productos finalizados']);
+        Permission::create(['name' => 'controlpf-crear',  'descripc' => 'Crear control en proceso y finalizado']);
+        Permission::create(['name' => 'controlpf-editar',  'descripc' => 'Editar control en proceso y finalizado']);
+        Permission::create(['name' => 'controlpf-borrar',  'descripc' => 'Inactivar control en proceso y finalizado']);
 
         Permission::create(['name' => 'ordprodu-leer',  'descripc' => 'Listar órdenes de producción']);
         Permission::create(['name' => 'ordprodu-crear',  'descripc' => 'Crear órden de prodicción']);

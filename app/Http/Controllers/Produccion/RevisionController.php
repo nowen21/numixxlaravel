@@ -80,7 +80,7 @@ class RevisionController extends Controller
                     $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.revisado'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
                 ],
-                'vercrear' => false,
+                'vercrear' => true,
                 'accitabl' => true,
                 'urlxxxxx' => 'api/produccion/produccion',
                 'cabecera' => [

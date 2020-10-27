@@ -11,24 +11,28 @@ use App\Models\Administracion\Servicio;
 
 use App\Models\Medicamentos\Npt;
 use App\Models\Pacientes\Paciente;
+use App\Models\Reportes\Orden;
 use App\Models\Sistema\Departamento;
 use App\Models\Sistema\Municipio;
 use App\Models\Sistema\SisEsta;
+use App\Traits\Reporte\OrdenTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrdenController extends Controller
 {
+    use OrdenTrait;
     private $opciones;
 
     public function __construct()
     {
         $this->opciones = [
-            'permisox' => 'paciente',
+            'permisox' => 'ordprodu',
             'parametr' => [],
-            'rutacarp' => 'Pacientes.',
+            'rutacarp' => 'Reporte.',
             'tituloxx' => 'Crear: Paciente',
-            'slotxxxx'=>'paciente',
-            'carpetax'=>'Paciente',
+            'slotxxxx'=>'ordprodu',
+            'carpetax'=>'Orden',
             'indecrea'=>false,
             'esindexx'=>false
         ];
@@ -40,9 +44,9 @@ class OrdenController extends Controller
             $this->opciones['permisox'] . '-borrar']);
 
         $this->opciones['readonly'] = '';
-        $this->opciones['rutaxxxx'] = 'paciente';
-        $this->opciones['routnuev'] = 'paciente';
-        $this->opciones['routxxxx'] = 'paciente';
+        $this->opciones['rutaxxxx'] = 'ordprodu';
+        $this->opciones['routnuev'] = 'ordprodu';
+        $this->opciones['routxxxx'] = 'ordprodu';
 
         $this->opciones['botoform'] = [
             [
@@ -51,7 +55,16 @@ class OrdenController extends Controller
             ],
         ];
     }
-
+    public function getListado(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->routexxx = [$this->opciones['routxxxx']];
+            $request->botonesx = $this->opciones['rutacarp'] .
+                $this->opciones['carpetax'] . '.Botones.botonesapi';
+            $request->estadoxx = 'layouts.components.botones.estadosx';
+            return $this->getOrden($request);
+        }
+    }
 
     /**
      * Display a listing of the resource.
@@ -68,7 +81,7 @@ class OrdenController extends Controller
         $this->opciones['tablasxx'] = [
             [
                 'titunuev' => 'NUEVO PACIENTE',
-                'titulist' => 'LISTA DE PACIENTES',
+                'titulist' => 'Listado de Órdenes de Producción',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadoxx'],
@@ -76,23 +89,23 @@ class OrdenController extends Controller
                 ],
                 'vercrear' => true,
                 'accitabl' => true,
-                'urlxxxxx' => 'api/paciente/paciente',
+                'urlxxxxx' => 'api/reporte/orden',
                 'cabecera' =>[
                     ['td' => 'ID'],
-                    ['td' => 'NOMBRES'],
-                    ['td' => 'APELLIDOS'],
+                    ['td' => 'Orden de producción'],
+                    ['td' => 'Observaciónn'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
-                    ['data' => 'id', 'name' => 'pacientes.id'],
-                    ['data' => 'nombres', 'name' => 'pacientes.nombres'],
-                    ['data' => 'apellidos', 'name' => 'pacientes.apellidos'],
-                    ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
+                    ['data' => 'id', 'name' => 'ordens.id'],
+                    ['data' => 'orderprod', 'name' => 'ordens.orderprod'],
+                    ['data' => 'observac', 'name' => 'ordens.observac'],
+                    ['data' => 's_estado', 'name' => 'ordens.s_estado'],
                 ],
-                'tablaxxx' => 'tablapacientes',
-                'permisox' => 'paciente',
-                'routxxxx' => 'paciente',
+                'tablaxxx' => 'tabla',
+                'permisox' => 'ordprodu',
+                'routxxxx' => 'ordprodu',
                 'parametr' => [$padrexxx],
             ],
 
@@ -127,7 +140,6 @@ class OrdenController extends Controller
      */
     public function create()
     {
-
         $this->opciones['indecrea']=true;
         $this->opciones['clinicac']=true;
         $this->opciones['botoform'][] =
@@ -157,7 +169,7 @@ class OrdenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Paciente $objetoxx)
+    public function show(Orden $objetoxx)
     {
         $this->opciones['clinicax'] =$objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
@@ -176,7 +188,7 @@ class OrdenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Paciente $objetoxx)
+    public function edit(Orden $objetoxx)
     {
         $this->opciones['clinicax'] =$objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];

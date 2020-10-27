@@ -1,31 +1,33 @@
 <?php
-Route::group(['prefix' => 'ordenes'], function () {
-    Route::get('', [
-	    'uses' => 'Reporte\OrdenController@index',
+$controll = 'Reporte\Orden';
+$routexxx = 'ordprodu';
+Route::group(['prefix' => 'ordenes'], function() use($routexxx,$controll) {
+	Route::get('', [
+	    'uses' => $controll.'Controller@index',
 	    'middleware' => ['permission:ordprodu-leer|ordprodu-crear|ordprodu-editar|ordprodu-borrar']
 	])->name('orden');
 	Route::get('nuevo', [
-	    'uses' => 'Reporte\OrdenController@create',
+	    'uses' => $controll.'Controller@create',
 	    'middleware' => ['permission:ordprodu-crear']
-	])->name('orden.nuevo');
+	])->name($routexxx.'.nuevo');
 	Route::post('crear', [
-	    'uses' => 'Reporte\OrdenController@store',
+	    'uses' => $controll.'Controller@store',
 	    'middleware' => ['permission:ordprodu-crear']
-	])->name('orden.crear');
+	])->name($routexxx.'.crear');
 	Route::get('editar/{objetoxx}', [
-	    'uses' => 'Reporte\OrdenController@edit',
+	    'uses' => $controll.'Controller@edit',
 	    'middleware' => ['permission:ordprodu-editar']
-	])->name('orden.editar');
+	])->name($routexxx.'.editar');
 	Route::put('editar/{objetoxx}', [
-	    'uses' => 'Reporte\OrdenController@update',
+	    'uses' => $controll.'Controller@update',
 	    'middleware' => ['permission:ordprodu-editar']
-	])->name('orden.editar');
+	])->name($routexxx.'.editar');
 	Route::get('ver/{objetoxx}', [
-	    'uses' => 'Reporte\OrdenController@show',
+	    'uses' => $controll.'Controller@show',
 	    'middleware' => ['permission:ordprodu-leer']
-	])->name('orden.ver');
+	])->name($routexxx.'.ver');
 	Route::delete('borrar/{objetoxx}', [
-	    'uses' => 'Reporte\OrdenController@destroy',
+	    'uses' => $controll.'Controller@destroy',
 	    'middleware' => ['permission:ordprodu-borrar']
-	])->name('orden.borrar');
+	])->name($routexxx.'.borrar');
 });
