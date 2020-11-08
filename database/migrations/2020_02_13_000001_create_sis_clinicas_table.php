@@ -17,7 +17,7 @@ class CreateSisClinicasTable extends Migration
     {
         Schema::create($this->tablaxxx, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('sucursal', 150)->uniqid();
+            $table->string('sucursal', 150)->unique();
             $table->bigInteger('clinica_id')->unsigned();
             $table->bigInteger('municipio_id')->unsigned();
             $table->bigInteger('user_crea_id')->default(1);

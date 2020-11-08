@@ -58,11 +58,13 @@ class SisClinicasSeeder extends Seeder
             ['clinica_id' => 41, 'municipio_id' => 641, 'sucursal' => 'J2 IPS', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1], //40
             ['clinica_id' => 42, 'municipio_id' => 641, 'sucursal' => 'SEÑORA MERCEDES', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1], //41
             ['clinica_id' => 43, 'municipio_id' => 641, 'sucursal' => 'E.S.E HOSPITAL SAN RAFAEL DE FACATATIVA', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1], //42
+            ['clinica_id' => 7, 'municipio_id' => 641, 'sucursal' => 'CLINICA MEDILASER S.A.1', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1], //42
+            ['clinica_id' => 7, 'municipio_id' => 641, 'sucursal' => 'CLINICA MEDILASER S.A.2', 'user_crea_id' => 1, 'user_edita_id' => 1, 'sis_esta_id' => 1], //42
 
         ];
         foreach ($clinicas as $key => $value) {
 
-            SisClinica::create(['clinica_id' => $value['clinica_id'], 'sucursal' => $value['sucursal'], 'municipio_id' => $value['municipio_id'],  'user_crea_id' => $value['user_crea_id'], 'user_edita_id' => $value['user_edita_id'], 'sis_esta_id' => $value['sis_esta_id']]);
+            SisClinica::create($value);
         }
     }
 }
