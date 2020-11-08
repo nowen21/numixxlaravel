@@ -101,7 +101,7 @@ class ControlPController extends Controller
                 'tablaxxx' => 'tablaordenes',
                 'permisox' => 'controlp',
                 'routxxxx' => 'controlp',
-                'parametr' => [],
+                'parametr' => [1],
             ],
 
         ];
