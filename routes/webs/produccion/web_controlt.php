@@ -7,7 +7,7 @@ Route::group(['prefix' => $routexxx], function () use ($controll, $routexxx) {
 		'uses' => $controll . 'Controller@index',
 		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
 	])->name($routexxx);
-	Route::get('nuevo', [
+	Route::get('{padrexxx}/nuevo', [
 		'uses' => $controll . 'Controller@create',
 		'middleware' => ['permission:' . $routexxx . '-crear']
 	])->name($routexxx . '.nuevo');

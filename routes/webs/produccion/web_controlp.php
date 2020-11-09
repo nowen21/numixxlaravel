@@ -4,7 +4,7 @@ Route::group(['prefix' => 'controlesp'], function () {
 	    'uses' => 'Produccion\ControlPController@index',
 	    'middleware' => ['permission:controlp-leer|controlp-crear|controlp-editar|controlp-borrar']
 	])->name('controlp');
-	Route::get('nuevo', [
+	Route::get('{padrexxx}/nuevo', [
 	    'uses' => 'Produccion\ControlPController@create',
 	    'middleware' => ['permission:controlp-crear']
 	])->name('controlp.nuevo');
