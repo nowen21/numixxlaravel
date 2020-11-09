@@ -2,7 +2,7 @@
 $controll = 'Clinicas\Paciente';
 $routexxx = 'paciente';
 
-Route::group(['prefix' => '{padrexxx}/pacientes'], function () use ($routexxx, $controll) {
+Route::group(['prefix' => 'pacientes'], function () use ($routexxx, $controll) {
     Route::get('', [
 		'uses' => $controll . 'Controller@index',
 		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
@@ -11,7 +11,7 @@ Route::group(['prefix' => '{padrexxx}/pacientes'], function () use ($routexxx, $
 		'uses' => $controll . 'Controller@create',
 		'middleware' => ['permission:' . $routexxx . '-crear']
     ])->name($routexxx . '.nuevo');
-    Route::get('listaxxx', [
+    Route::get('{padrexxx}/listaxxx', [
 		'uses' => $controll . 'Controller@getListado',
 		'middleware' => ['permission:' . $routexxx . '-leer']
 	])->name($routexxx.'.listaxxx');

@@ -62,6 +62,7 @@ class ControlPController extends Controller
         $this->opciones['esindexx']=true;
         $this->opciones['accionxx']='index';
         $this->opciones['padrexxx'] = $padrexxx;
+        
         $this->opciones['tablasxx'] = [
             [
                 'titunuev' => 'NUEVO CONTROL DE PROCESO',
@@ -74,7 +75,7 @@ class ControlPController extends Controller
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
                     ['campoxxx' => 'medicame', 'dataxxxx' => $padrexxx],
                 ],
-                'vercrear' => true,
+                'vercrear' => false,
                 'accitabl' => true,
                 'urlxxxxx' => 'api/produccion/procesos',
                 'cabecera' =>[
@@ -108,7 +109,6 @@ class ControlPController extends Controller
         $this->opciones['pestania'] = $this->getPestanias([
             'tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => $padrexxx
         ]);
-
 
        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }

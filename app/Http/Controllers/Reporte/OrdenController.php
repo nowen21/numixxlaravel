@@ -99,9 +99,9 @@ class OrdenController extends Controller
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'ordens.id'],
-                    ['data' => 'orderprod', 'name' => 'ordens.orderprod'],
+                    ['data' => 'ordeprod', 'name' => 'ordens.ordeprod'],
                     ['data' => 'observac', 'name' => 'ordens.observac'],
-                    ['data' => 's_estado', 'name' => 'ordens.s_estado'],
+                    ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'tabla',
                 'permisox' => 'ordprodu',

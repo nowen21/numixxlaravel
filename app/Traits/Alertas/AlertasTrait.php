@@ -25,13 +25,14 @@ trait AlertasTrait
                 'user_edita_id' => Auth::user()->id,
                 'sis_esta_id' => 1
             ]);
-            if ($dataxxxx['tipoacci']==1) {
-                $dataxxxx['tipoacci'] = 6;
-            }
-            $alertaxx = Alerta::where('tipoaccion_id', $dataxxxx['tipoacci'] - 1)
+            if ($dataxxxx['tipoacci']!=1) {
+                $alertaxx = Alerta::where('tipoaccion_id', $dataxxxx['tipoacci']-1)
                 ->where('cformula_id', $dataxxxx['objetoxx']->id)
                 ->first();
+                
             $alertaxx->update(['user_edita_id' => Auth::user()->id, 'leidaxxx' => true]);
+            }
+        
         }
     }
 }

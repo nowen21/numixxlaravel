@@ -62,13 +62,12 @@ class PacienteController extends Controller
      */
     public function index(SisClinica $padrexxx)
     {
+        $objetoxx=Auth::user();
+        $padrexxx=$objetoxx->sis_clinica;
         $this->opciones['cardheap'] = 'SUCURSAL: ' . $padrexxx->sucursal;
         $this->opciones['cardhead'] = 'CLINICA: ' . $padrexxx->clinica->clinica;
         $this->opciones['botoform'][0]['routingx'][1] = $padrexxx->id;
-
-
-        $this->opciones['parametr'] = [$padrexxx->id];
-
+        $this->opciones['parametr'] = [$padrexxx->clinica_id];
         $this->opciones['accionxx'] = 'index';
         $this->opciones['parapest'][0] = $padrexxx->id;
         $this->opciones['tablasxx'] = [
@@ -77,7 +76,7 @@ class PacienteController extends Controller
                 'titulist' => 'LISTA DE PACIENTES',
                 'dataxxxx' => [],
                 'vercrear' => true,
-                'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', [$padrexxx->id]),
+                'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', [$padrexxx->clinica_id]),
                 'cabecera' => [
                     [
                         ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
@@ -99,17 +98,19 @@ class PacienteController extends Controller
                 'tablaxxx' => 'tablapacientes',
                 'permisox' => 'paciente',
                 'routxxxx' => 'paciente',
-                'parametr' => [$padrexxx],
+                'parametr' => [$padrexxx->clinica_id],
             ],
 
         ];
+        
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
 
-    public function getListado(Request $request,$padrexxx)
+    public function getListado(Request $request,SisClinica $padrexxx)
     {
+     
         if ($request->ajax()) {
-            $request->padrexxx=$padrexxx;
+            $request->padrexxx=$padrexxx->id;
             $request->routexxx = [$this->opciones['routxxxx'],'formular'];
             $request->botonesx = $this->opciones['rutacarp'] .
                 $this->opciones['carpetax'] . '.botones.botonesapi';
@@ -119,10 +120,11 @@ class PacienteController extends Controller
     }
     private function view($dataxxxx)
     {
+        
         $this->opciones['parapest'][0]=$dataxxxx['padrexxx']->id;
-        $this->opciones['clinicai'] =[$dataxxxx['padrexxx']->id=>$dataxxxx['padrexxx']->sucursal];
-        $this->opciones['cardheap'] = 'SUCURSAL: ' . $dataxxxx['padrexxx']->sucursal;
-        $this->opciones['cardhead'] = 'CLINICA: ' . $dataxxxx['padrexxx']->clinica->clinica;
+        $this->opciones['clinicai'] = SisClinica::combo(true, false);
+        $this->opciones['cardheap'] = 'SUCURSAL: ' . $dataxxxx['padrexxx']->sis_clinica;
+        $this->opciones['cardhead'] = 'CLINICA: ' . $dataxxxx['padrexxx']->sis_clinica;
         $this->opciones['parametr'] =$this->opciones['padrexxx'] = $dataxxxx['padrexxx']->id;
         $this->opciones['generoxx'] = Genero::combo(['cabecera' => true, 'ajaxxxxx' => false]);
         $this->opciones['epsxxxxx'] = Ep::combo(['cabecera' => true, 'ajaxxxxx' => false]);

@@ -136,14 +136,14 @@ class Cformula extends Model
     {
         $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {
             $totalxxx = 0;
-
+            
             foreach ($dataxxxx as $key => $value) {
                 $data = explode('_', $key);
                 if (isset($data[1]) && $data[1] == 'volu') {
-                    $totalxxx +=  $dataxxxx[$key];
+                   
+                   $totalxxx +=   str_replace(",","",$dataxxxx[$key]);
                 }
             }
-
             $dataxxxx['user_edita_id'] = Auth::user()->id;
 
             if ($objetoxx != '') {

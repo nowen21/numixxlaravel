@@ -49,13 +49,17 @@ class GrabarFormulacion {
         $formulax = $casaform->calculos($dataxxxx)[$cabecera[$data[0]]];
         $totalxxx = $formulax['reqtotal'];
         $volumenx = $formulax['volumenx'];
+        //str_replace(",","",$dataxxxx[$key]);
         if ($data[0] == 'aguaeste') {
+      
           $volumenx = $cabecera[$data[0] . '_volu'];
           $cabecera[$data[0] . '_cant'] = 1;
           $volutota = $cabecera['tiempo'] * $cabecera['velocidad'];
           $purgaxx = ($volutota + $cabecera['purga']) / $volutota;
-          $formulax['purgaxxx'] = $volumenx * $purgaxx;
-        }
+          
+          $formulax['purgaxxx'] = str_replace(",","",$volumenx) * $purgaxx;
+          
+          }
         // cuando un medicamento no tiene requerimiento diario
         if ($cabecera[$data[0] . '_cant'] == '') {
           $cabecera[$data[0] . '_cant'] = 0;

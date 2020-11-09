@@ -10,7 +10,7 @@ Route::get('reporte/controlpf', function (Request $request) {
   if (!$request->ajax())
     return redirect('/');
 
-  return Controlpf::getPacientes($request);
+  return Controlpf::getOrdenControlPf($request);
 });
 
 Route::get('reporte/orden', function (Request $request) {

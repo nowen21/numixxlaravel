@@ -16,22 +16,11 @@ use Illuminate\Support\Facades\DB;
 class Orden extends Model {
 
   protected $fillable = [
-      'registro',
-      'cedula',
-      'nombres',
-      'apellidos',
-      'peso',
-      'genero_id',
-      'ep_id',
-      'cama',
-      'fechnaci',
-      'municipio_id',
-      'npt_id',
-      'servicio_id',
-      'sis_esta_id',
-      'user_crea_id',
-      'sis_clinica_id',
-      'user_edita_id'
+     'ordeprod',
+     'observac',
+     'sis_esta_id',
+     'user_crea_id',
+     'user_edita_id'
   ];
 
   public static function transaccion($dataxxxx,  $objetoxx)

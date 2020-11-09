@@ -110,13 +110,6 @@ class CformulaCrearRequest extends FormRequest
     $volutota = $dataxxxx['volumen'] + $dataxxxx['purga'];
    
    
-    if ($minimoxx > $volutota) {
-      $this->_mensaje['liminfer.required'] = "La formulación está por debajo del rango contratado, por favor comunicarse con la admnistración de NUMIXX.S.A.S";
-      $this->_reglasx['liminfer'] = 'required';
-    }
-    if ($maximoxx < $volutota) {
-      $this->_mensaje['limisupe.required'] = "La formulación está por encima del rango contratado, por favor comunicarse con la admnistración de NUMIXX.S.A.S";
-      $this->_reglasx['limisupe'] = 'required';
-    }
+
   }
 }

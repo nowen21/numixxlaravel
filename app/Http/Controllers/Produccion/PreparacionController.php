@@ -74,7 +74,7 @@ class PreparacionController extends Controller
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
                     ['campoxxx' => 'medicame', 'dataxxxx' => $padrexxx],
                 ],
-                'vercrear' => true,
+                'vercrear' => false,
                 'accitabl' => true,
                 'urlxxxxx' => 'api/produccion/preparacion',
                 'cabecera' =>[

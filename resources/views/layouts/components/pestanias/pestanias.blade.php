@@ -37,7 +37,7 @@
                     @include('layouts.components.pestanias.editar')
                     @break
                 @case('Ver')
-                    @include('layouts.components.pestanias.verw')
+                    @include('layouts.components.pestanias.ver')
                     @break
                 @case('Modulo')
                     @include('layouts.components.pestanias.modulo')

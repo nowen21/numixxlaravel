@@ -31,9 +31,14 @@
       @can('administracion-modulo')
       @include('layouts.menus.administracion')
       @endcan
-      
       @can('medicamento-modulo')
       @include('layouts.menus.medicamentos')
+      @endcan
+      @can('formular')
+      @include('layouts.menus.formulacion')
+      @endcan
+      @can('paciente-leer')
+      @include('layouts.menus.paciente')
       @endcan
       @can('dispositivo-modulo')
       @include('layouts.menus.dispositivos')

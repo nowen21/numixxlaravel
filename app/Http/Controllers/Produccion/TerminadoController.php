@@ -262,4 +262,5 @@ class TerminadoController extends Controller
             return response()->json($this->validar($request->all()));
         }
     }
+    
 }

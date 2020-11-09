@@ -5,6 +5,7 @@ namespace App\Helpers\Reporte;
 use App\Helpers\DatatableHelper;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Produccion\Calistam;
+use App\Models\Reportes\Orden;
 
 class Controlpf
 {
@@ -14,30 +15,14 @@ class Controlpf
      * @param [type] $request
      * @return void
      */
-    public static function getPacientesCformula($request)
-    {
-        $paciente = Cformula::select([
-            'cformulas.id', 'cformulas.tiempo', 'cformulas.velocidad', 'cformulas.volumen',
-            'cformulas.purga', 'cformulas.peso', 'cformulas.total', 'cformulas.sis_esta_id',
-            'sis_estas.s_estado', 'cformulas.paciente_id', 'cformulas.userevis_id'
-        ])
-            ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
-            ->where('cformulas.created_at', 'LIKE', date('Y-m-d',time()).'%')
-            ->orderBy('cformulas.userevis_id', 'ASC')
-            ->orderBy('cformulas.created_at', 'ASC');
 
-        return DatatableHelper::getDtb($paciente, $request);
-    }
-    public static function getAlistamientos($request)
+    public static function getOrdenControlPf($request)
     {
-        $paciente = Calistam::select([
-            'calistams.id', 'calistams.producto', 'ordens.ordeprod', 'calistams.sis_esta_id',
-            'sis_estas.s_estado', 'calistams.created_at'
-        ])
-            ->join('ordens', 'calistams.orden_id', '=', 'ordens.id')
-            ->join('sis_estas', 'calistams.sis_esta_id', '=', 'sis_estas.id');
-
-        return DatatableHelper::getDt($paciente, $request);
+        $ordenxxx=Orden::select(['ordens.id','ordens.ordeprod','ordens.observac', 
+        'sis_estas.s_estado','ordens.created_at'])
+        ->join('sis_estas', 'ordens.sis_esta_id', '=', 'sis_estas.id');;
+        
+        return DatatableHelper::getDt($ordenxxx, $request);
     }
 
     public static function getPacientesPreparacion($request)
