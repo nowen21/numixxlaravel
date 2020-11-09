@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Reporte;
 
+use App\Helpers\Pdfs\Pdfs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Pacientes\PacienteCrearRequest;
 use App\Http\Requests\Pacientes\PacienteEditarRequest;
@@ -19,10 +20,12 @@ use App\Traits\Reporte\ControlPFTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class ControlPFController extends Controller
 {
     use ControlPFTrait;
     private $opciones;
+    private $bitacora;
 
     public function __construct()
     {
@@ -142,19 +145,62 @@ class ControlPFController extends Controller
      */
     public function show(Orden $objetoxx)
     {
+        
+
         return $this->view(['modeloxx' => $objetoxx, 'accionxx' => ['ver', 'formulario']]);
     }
 
     public function getPdfCalistam(Orden $objetoxx)
     {
         $dataxxxx = [
-            'vistaurl' => 'Produccion.Alistamiento.pdf.alistami',
+            'vistaurl' => 'Reporte.Control.pdf.alistami',
             'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
             'tipoxxxx' => 2,
             'nombarch' => 'ControlPF',
-            'dataxxxx' => ['cabecera' => $objetoxx, 'detallex' => Orden::getMlotesDlotes($objetoxx->id)]
+            'dataxxxx' => [
+                'cabecera' => $objetoxx, 'detallex' => $this->getControlespf(['padrexxx' => $objetoxx])
+            ]
         ];
         return Pdfs::getImprimirPdf($dataxxxx);
+    }
+
+    public function edit(Orden $objetoxx)
+    {
+        if (auth()->user()->can($this->opciones['permisox'] . '-editar')) {
+            $this->opciones['botoform'][] =
+                [
+                    'mostrars' => true, 'accionxx' => 'MODIFICAR REGISTRO', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
+                    'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+                ];
+        }
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => ['editar', 'formulario'], 'padrexxx' => $objetoxx]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\FiDatosBasico $objetoxx
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request,  Orden $objetoxx)
+    {
+
+        return $this->grabar($request->all(), $objetoxx, 'Orden actualizada con exito');
+    }
+    public function store(Request $request)
+    {
+        return $this->grabar($request->all(), '', 'Orden creados con exito');
+    }
+
+    private function grabar($dataxxxx, $objetoxx, $infoxxxx)
+    {
+        $dataxxxx['sis_esta_id'] = 1;
+        $usuariox = Orden::transaccion($dataxxxx, $objetoxx);
+
+        return redirect()
+            ->route($this->opciones['routxxxx'] . '.editar', [$usuariox->id])
+            ->with('info', $infoxxxx);
     }
  
 }

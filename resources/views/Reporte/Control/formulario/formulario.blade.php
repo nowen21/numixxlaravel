@@ -5,7 +5,7 @@
      </div>
     <div class="form-group col-md-4">
         {{ Form::label('observac', 'Observación', ['class' => 'control-label']) }}
-        {{ Form::text('observac',  null, ['class' => $errors->first('observac') ? 'form-control form-control-sm is-invalid' : 'form-control form-control-sm', 'readonly']) }}
+        {{ Form::text('observac',  null, ['class' => $errors->first('observac') ? 'form-control form-control-sm is-invalid' : 'form-control form-control-sm']) }}
     
     </div>
 </div>

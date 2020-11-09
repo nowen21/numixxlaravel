@@ -22,5 +22,13 @@ Route::group(['prefix' => $routexxx], function () use ($controll, $routexxx) {
 		'uses' => $controll.'Controller@getListado',
 		'middleware' => ['permission:'.$routexxx.'-leer']
     ])->name($routexxx.'.listaxxx');
+    Route::get('editar/{objetoxx}', [
+	    'uses' => $controll.'Controller@edit',
+	    'middleware' => ['permission:ordprodu-editar']
+	])->name($routexxx.'.editar');
+	Route::put('editar/{objetoxx}', [
+	    'uses' => $controll.'Controller@update',
+	    'middleware' => ['permission:ordprodu-editar']
+	])->name($routexxx.'.editar');
 
   });
