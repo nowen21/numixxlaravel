@@ -15,7 +15,8 @@ Route::group(['prefix' => '{padrexxx}/cremisiones'], function () use ($routexxx,
     Route::get('listaxxx', [
 		'uses' => $controll . 'Controller@getListado',
 		'middleware' => ['permission:' . $routexxx . '-leer']
-	])->name($routexxx.'.listaxxx');
+    ])->name($routexxx.'.listaxxx');
+
 
 });
 
@@ -46,5 +47,10 @@ Route::group(['prefix' => 'remision'], function () use ($controll, $routexxx) {
     Route::put('borrar/{objetoxx}', [
 		'uses' => $controll . 'Controller@destroy',
 		'middleware' => ['permission:' . $routexxx . '-borrar']
-	])->name($routexxx . '.borrar');
+    ])->name($routexxx . '.borrar');
+
+    Route::get('remision/{objetoxx}', [
+		'uses' => $controll . 'Controller@geRemision',
+		'middleware' => ['permission:' . $routexxx . '-leer']
+	])->name($routexxx.'.remision');
 });

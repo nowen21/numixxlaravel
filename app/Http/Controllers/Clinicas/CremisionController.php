@@ -3,22 +3,22 @@
 namespace App\Http\Controllers\Clinicas;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Clinica\CrangoCrearRequest;
-use App\Http\Requests\Clinica\CrangoEditarRequest;
-use App\Models\Administracion\Rango\Rcodigo;
+use App\Http\Requests\Clinica\RemisionCrearRequest;
+use App\Http\Requests\Clinica\RemisionEditarRequest;
 use App\Models\Clinica\Clinica;
-use App\Models\Clinica\Crango;
-use App\Models\Clinica\SisClinica;
 use App\Models\Remision;
 use App\Models\Sistema\SisEsta;
+use App\Traits\Clinica\RemisionTrait;
 use App\Traits\ClinicaTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class CremisionController extends Controller
 {
     private $opciones;
     use ClinicaTrait;
+    use RemisionTrait;
     public function __construct()
     {
         $this->opciones['pestpadr'] = 2;
@@ -57,7 +57,7 @@ class CremisionController extends Controller
      */
     public function index(Clinica $padrexxx)
     {
-
+        $tienremi=Remision::where('created_at', 'LIKE', date('Y-m-d') . '%')->first();
         $this->opciones['parapest'][0]  = $padrexxx->id;
         $this->opciones['cardhead'] = 'CLÍNICA: ' . $padrexxx->clinica;
         $this->opciones['cardheap'] = 'CLÍNICA: ' . $padrexxx->clinica;
@@ -68,7 +68,7 @@ class CremisionController extends Controller
                 'titulist' => 'LISTA DE REMISIONES',
                 'dataxxxx' => [],
                 'accitabl' => true,
-                'vercrear' => true,
+                'vercrear' => isset($tienremi->id)==true?false:true,
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', [$padrexxx->id]),
                 'cabecera' => [[
                     ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
@@ -109,24 +109,25 @@ class CremisionController extends Controller
     private function view($dataxxxx)
     {
         $this->opciones['tituloxx'] = 'REMISIÓN';
-        $this->opciones['clinicai']  = [$dataxxxx['padrexxx']->id => $dataxxxx['padrexxx']->sucursal];
+        $this->opciones['clinicai']  = [$dataxxxx['padrexxx']->id => $dataxxxx['padrexxx']->clinica];
         $this->opciones['clinicax'] = $dataxxxx['padrexxx']->id;
         $this->opciones['sucursal'] = $dataxxxx['padrexxx']->id;
-        $this->opciones['rangoxxx'] = $this->getOrdenes(['padrexxx'=>$dataxxxx['padrexxx']->id]);
+        $this->opciones['rangoxxx'] = $this->getOrdenes(['padrexxx' => $dataxxxx['padrexxx']->id]);
         $this->opciones['parametr'] = [$dataxxxx['padrexxx']->id];
         $this->opciones['botoform'][0]['routingx'][1] = $this->opciones['parametr'];
-        $this->opciones['padrexxx']  = $dataxxxx['padrexxx']->clinica->id;
+        $this->opciones['padrexxx']  = $dataxxxx['padrexxx']->id;
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $dataxxxx['accionxx'];
-        $this->opciones['cardhead'] = 'CLINICA: ' . $dataxxxx['padrexxx']->clinica->clinica;
-        $this->opciones['cardheap'] = 'SUCURSAL: ' . $dataxxxx['padrexxx']->sucursal;
+        $this->opciones['cardhead'] = 'CLÍNICA: ' . $dataxxxx['padrexxx']->clinica;
+        $this->opciones['cardheap'] = 'CLÍNICA: ' . $dataxxxx['padrexxx']->clinica;
         // indica si se esta actualizando o viendo
         if ($dataxxxx['modeloxx'] != '') {
-            $this->opciones['parametr'] = [$dataxxxx['modeloxx']->id];
-            $this->opciones['clinicai']  = [$dataxxxx['modeloxx']->sis_clinica_id => $dataxxxx['modeloxx']->sis_clinica->sucursal];
+            $this->opciones['rangoxxx']=[$dataxxxx['modeloxx']->orden_id => $dataxxxx['modeloxx']->orden->ordeprod];
+            $this->opciones['parametr'][1] =$dataxxxx['modeloxx']->id;
+            $this->opciones['clinicai']  = [$dataxxxx['modeloxx']->clinica_id => $dataxxxx['modeloxx']->clinica->clinica];
 
             $this->opciones['modeloxx'] = $dataxxxx['modeloxx'];
-            $this->opciones['pestpadr'] = 3;
+
             if (auth()->user()->can($this->opciones['permisox'] . '-crear')) {
                 $this->opciones['botoform'][] =
                     [
@@ -150,6 +151,8 @@ class CremisionController extends Controller
      */
     public function create(Clinica $padrexxx)
     {
+
+
         $this->opciones['indecrea'] = false;
         $this->opciones['botoform'][] =
             [
@@ -165,7 +168,7 @@ class CremisionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RemisionCrearRequest $request)
     {
 
         return $this->grabar(
@@ -183,15 +186,15 @@ class CremisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Crango $objetoxx)
+    public function show(Remision $objetoxx)
     {
         $this->opciones['tituloxx'] = 'Ver: Rango';
         $this->opciones['indecrea'] = false;
         $this->opciones['botoform'][] =  [
-            'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'] . '.nuevo', $this->opciones['parametr']],
+            'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'] . '.nuevo', $objetoxx->clinica_id],
             'formhref' => 2, 'tituloxx' => 'NUEVO RANGO', 'clasexxx' => 'btn btn-sm btn-primary'
         ];
-        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Ver', 'padrexxx' => $objetoxx->sis_clinica]);
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Ver', 'padrexxx' => $objetoxx->clinica]);
     }
 
     /**
@@ -200,21 +203,18 @@ class CremisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Crango $objetoxx)
+    public function edit(Remision $objetoxx)
     {
         $this->opciones['tituloxx'] = 'Editar: Rango';
         $this->opciones['indecrea'] = false;
         $this->opciones['botoform'][] =
             [
-                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', $this->opciones['parametr']],
+                'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', $objetoxx->clinica_id],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
 
-        $this->opciones['botoform'][] =  [
-            'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'] . '.nuevo', $objetoxx->sis_clinica->id],
-            'formhref' => 2, 'tituloxx' => 'NUEVO RANGO', 'clasexxx' => 'btn btn-sm btn-primary'
-        ];
-        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Editar', 'padrexxx' => $objetoxx->sis_clinica]);
+
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Editar', 'padrexxx' => $objetoxx->clinica]);
     }
 
     private function grabar($dataxxxx)
@@ -232,7 +232,7 @@ class CremisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CrangoEditarRequest  $request, Crango $objetoxx)
+    public function update(RemisionEditarRequest  $request, Remision $objetoxx)
     {
         return $this->grabar([
             'requestx' => $request,
@@ -241,7 +241,7 @@ class CremisionController extends Controller
         ]);
     }
 
-    public function inactivate(Crango $objetoxx)
+    public function inactivate(Remision $objetoxx)
     {
         if (auth()->user()->can($this->opciones['permisox'] . '-borrar')) {
             $this->opciones['botoform'][] =
@@ -254,7 +254,7 @@ class CremisionController extends Controller
     }
 
 
-    public function destroy(Request $request, Crango $objetoxx)
+    public function destroy(Request $request, Remision $objetoxx)
     {
         $objetoxx->update(['sis_esta_id' => 2, 'user_edita_id' => Auth::user()->id]);
         return redirect()

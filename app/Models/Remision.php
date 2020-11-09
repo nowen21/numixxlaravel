@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Clinica\Clinica;
+use App\Models\Reportes\Orden;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +14,27 @@ class Remision extends Model {
   protected $fillable = [
       'orden_id', 'clinica_id','usercrea', 'sis_esta_id', 'user_crea_id', 'user_edita_id'
   ];
+  public function creador()
+  {
+      return $this->belongsTo(User::class, 'user_crea_id');
+  }
 
+  public function editor()
+  {
+      return $this->belongsTo(User::class, 'user_edita_id');
+  }
+  public function sis_esta()
+  {
+      return $this->belongsTo(SisEsta::class);
+  }
+  public function clinica()
+  {
+      return $this->belongsTo(Clinica::class);
+  }
+  public function orden()
+  {
+      return $this->belongsTo(Orden::class);
+  }
   public static function transaccion($dataxxxx)
   {
       $objetoxx = DB::transaction(function () use ($dataxxxx) {
