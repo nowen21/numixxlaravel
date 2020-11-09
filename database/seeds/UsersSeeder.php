@@ -13,7 +13,7 @@ class UsersSeeder extends Seeder
     public function run()
     {
         $usuariox = [
-            ['name' => 'Jose Dumar Jimenez Ruiz','telefono'=>'3173809970','documento'=>'17496705', 'email' => 'nowen21@gmail.com', 'password' => '@N0*w3n2^104)$', 'sis_clinica_id' => 1],
+            ['name' => 'Jose Dumar Jimenez Ruiz','telefono'=>'3173809970','documento'=>'17496705', 'email' => 'nowen21@gmail.com', 'password' => 'N0w3n2104$', 'sis_clinica_id' => 1],
             ['name' => 'ADMINISTRADOR NUMIXX','telefono'=>'00000000','documento'=>'1234567', 'email' => 'numixx@numixx.com', 'password' => 'Num1xx123$', 'sis_clinica_id' => 1],
             ['name' => 'USUARIO DE REVISIONES','telefono'=>'00000000','documento'=>'2345678', 'email' => 'revisiones@numixx.com', 'password' => 'N0w3n2104', 'sis_clinica_id' => 1],
             ['name' => 'USUARIO DE PREPARACIONES','telefono'=>'00000000','documento'=>'3456789', 'email' => 'preparaciones@numixx.com', 'password' => 'N0w3n2104', 'sis_clinica_id' => 1],

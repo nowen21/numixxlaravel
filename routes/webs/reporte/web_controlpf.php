@@ -14,7 +14,7 @@ Route::group(['prefix' => $routexxx], function () use ($controll, $routexxx) {
     ])->name($routexxx . '.ver');
 
     Route::get('imprimir/{objetoxx}', [
-	    'uses' => $controll.'Controller@getPdfCalistam',
+	    'uses' => $controll.'Controller@getControlespf',
 	    'middleware' =>  ['permission:' . $routexxx . '-leer']
     ])->name($routexxx . '.imprimir');
     

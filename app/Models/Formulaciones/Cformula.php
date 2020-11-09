@@ -7,6 +7,7 @@ use App\Models\Clinica\SisClinica;
 use App\Models\Medicamentos\Medicame;
 use App\Models\Pacientes\Paciente;
 use App\Models\Produccion\Proceso;
+use App\Models\Produccion\Terminado;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Produccion\InventarioTrait;
 use App\User;
@@ -99,6 +100,11 @@ class Cformula extends Model
     public function proceso()
     {
         return $this->belongsTo(Proceso::class);
+    }
+
+    public function terminado()
+    {
+        return $this->belongsTo(Terminado::class);
     }
 
     public static function combolote($valorxxx = false)

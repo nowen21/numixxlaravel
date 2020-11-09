@@ -16,13 +16,13 @@ class PoliticaDatosMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $usuario = Auth::user();
-        if (isset($request->segments()[1]) &&$request->segments()[1]== 'polidato' ) {
-            return $next($request);
-        } else if ($usuario->polidato_at == null) {
-            return  redirect()->route('usuarios.polidato', Auth::user()->id)
-                ->with('error', 'Para continuar por favor debe aceptar las políticas de datos');
-        }
+        // $usuario = Auth::user();
+        // if (isset($request->segments()[1]) &&$request->segments()[1]== 'polidato' ) {
+        //     return $next($request);
+        // } else if ($usuario->polidato_at == null) {
+        //     return  redirect()->route('usuarios.polidato', Auth::user()->id)
+        //         ->with('error', 'Para continuar por favor debe aceptar las políticas de datos');
+        // }
         return $next($request);
     }
 }

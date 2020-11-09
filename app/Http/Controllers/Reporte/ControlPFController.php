@@ -150,20 +150,7 @@ class ControlPFController extends Controller
         return $this->view(['modeloxx' => $objetoxx, 'accionxx' => ['ver', 'formulario']]);
     }
 
-    public function getPdfCalistam(Orden $objetoxx)
-    {
-        $dataxxxx = [
-            'vistaurl' => 'Reporte.Control.pdf.alistami',
-            'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
-            'tipoxxxx' => 2,
-            'nombarch' => 'ControlPF',
-            'dataxxxx' => [
-                'cabecera' => $objetoxx, 'detallex' => $this->getControlespf(['padrexxx' => $objetoxx])
-            ]
-        ];
-        return Pdfs::getImprimirPdf($dataxxxx);
-    }
-
+   
     public function edit(Orden $objetoxx)
     {
         if (auth()->user()->can($this->opciones['permisox'] . '-editar')) {
