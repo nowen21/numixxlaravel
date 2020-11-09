@@ -106,7 +106,7 @@ trait ClinicaTrait
         $paciente = Orden::select(['ordens.id', 'ordens.ordeprod', 'ordens.observac', 'ordens.sis_esta_id', 'sis_estas.s_estado'])
 
             ->join('cformulas', 'ordens.id', '=', 'cformulas.orden_id')
-            ->join('si', 'ordens.id', '=', 'cformulas.orden_id')
+
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
             ->where('cformulas.sis_clinica_id',$request->padrexxx)
             ->orderBy('ordens.updated_at')
@@ -140,5 +140,19 @@ trait ClinicaTrait
             ->where('cformulas.paciente_id', $request->padrexxx->id);
 
         return $this->getDatatable($paciente, $request);
+    }
+
+    public  function getOrdenes($dataxxxx)
+    {
+        $hoyxxxxx=date('Y-m-d');
+        $paciente = Orden::select(['ordens.id', 'ordens.ordeprod'])
+
+            ->join('cformulas', 'ordens.id', '=', 'cformulas.orden_id')
+            ->join('sis_clinicas', 'cformulas.sis_clinica_id', '=', 'sis_clinicas.id')
+            ->where('cformulas.created_at','LIKE' ,$hoyxxxxx.'%')
+            ->where('sis_clinicas.clinica_id',$dataxxxx['padrexxx'])
+            ->first();
+
+        return [$paciente->id=>$paciente->ordeprod];
     }
 }

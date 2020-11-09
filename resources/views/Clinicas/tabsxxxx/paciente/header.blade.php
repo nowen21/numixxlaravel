@@ -20,6 +20,10 @@
         <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='sisclini') ?' active' : '' }}
         text-sm" href="{{ route('sisclini', $todoxxxx['parametr']) }}">Sucursales</a></li>
         @endcanany
+        @canany(['cremision-leer', 'cremision-crear', 'cremision-editar', 'cremision-borrar'])
+        <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='cremision') ?' active' : '' }}
+        text-sm" href="{{ route('cremision', $todoxxxx['sucursal']) }}">Remisiones</a></li>
+        @endcanany
         @endif
 
 
