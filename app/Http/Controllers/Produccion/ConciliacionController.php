@@ -102,6 +102,54 @@ class ConciliacionController extends Controller
         $this->opciones['pestania'] = $this->getPestanias(['tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => Calistam::find($padrexxx)]);
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
+
+    public function indexreporte($padrexxx)
+    {
+
+        $this->opciones['indecrea'] = false;
+        $this->opciones['esindexx'] = true;
+        $this->opciones['accionxx'] = 'index';
+        // $this->opciones['padrexxx'] = $padrexxx;
+        $this->opciones['tablasxx'] = [
+            [
+                'titunuev' => 'NUEVA CONCILIACION',
+                'titulist' => 'LISTA DE CONCILIACIONES',
+                'dataxxxx' => [
+                    ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapiprint'],
+                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
+                    ['campoxxx' => 'padrexxx', 'dataxxxx' => $padrexxx],
+                ],
+                'vercrear' => false,
+                'accitabl' => true,
+                'urlxxxxx' => 'api/produccion/conciliaciones',
+                'cabecera' => [
+                    ['td' => 'ID'],
+                    ['td' => 'PRODUCTO'],
+                    ['td' => 'FECHA'],
+                    ['td' => 'OP'],
+                    ['td' => 'ESTADO'],
+                ],
+                'columnsx' => [
+                    ['data' => 'botonexx', 'name' => 'botonexx'],
+                    ['data' => 'id', 'name' => 'calistams.id'],
+                    ['data' => 'producto', 'name' => 'calistams.producto'],
+                    ['data' => 'created_at', 'name' => 'calistams.created_at'],
+                    ['data' => 'ordeprod', 'name' => 'ordens.ordeprod'],
+                    ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
+                ],
+                'tablaxxx' => 'tablaordenes',
+                'permisox' => 'concilia',
+                'routxxxx' => 'concilia',
+                'parametr' => [],
+            ],
+
+        ];
+
+        $this->opciones['pestania'] = $this->getPestanias(['tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => Calistam::find($padrexxx)]);
+        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
+    }
+
+
     private function view($dataxxxx)
     {
 

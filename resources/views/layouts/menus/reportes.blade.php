@@ -24,5 +24,32 @@
             </li>
         @endcanany
 
+        @canany(['produccion-modulo'])
+        <li class="nav-item">
+            <a href="{{ route('alistami.reporte') }}" class="nav-link">
+                <i class="fas fa-child nav-icon"></i>
+                <p>Alistamiento</p>
+            </a>
+        </li>
+        @endcanany
+
+        @canany(['produccion-modulo'])
+        <li class="nav-item">
+            <a href="{{ route('controlp.reporte') }}" class="nav-link">
+                <i class="fas fa-child nav-icon"></i>
+                <p>Control en Proceso</p>
+            </a>
+        </li>
+        @endcanany
+
+        @canany(['produccion-modulo'])
+        <li class="nav-item">
+            <a href="{{ route('controlt.reporte') }}" class="nav-link">
+                <i class="fas fa-child nav-icon"></i>
+                <p>Control de Productos Terminado</p>
+            </a>
+        </li>
+        @endcanany
+
     </ul>
 </li>

@@ -104,6 +104,56 @@ class AlistamientoController extends Controller
         }
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
+
+
+    public function indexreporte()
+    {
+        $this->getInactivarMlostesvencidos();
+        $padrexxx = '';
+        $this->opciones['indecrea'] = false;
+        $this->opciones['esindexx'] = false;
+        $this->opciones['accionxx'] = 'index';
+        $this->opciones['padrexxx'] = $padrexxx;
+        $this->opciones['tablasxx'] = [
+            [
+                'titunuev' => 'NUEVO ALISTAMIENTO',
+                'titulist' => 'LISTA DE ALISTAMIENTOS',
+                'dataxxxx' => [
+                    ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapiprint'],
+                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
+                    ['campoxxx' => 'puededit', 'dataxxxx' => auth()->user()->can('clinica-editar') ? true : false],
+                ],
+                'vercrear' => false,
+                'accitabl' => true,
+                'urlxxxxx' => 'api/produccion/alistamiento',
+                'cabecera' => [
+                    ['td' => 'ID'],
+                    ['td' => 'PRODUCTO'],
+                    ['td' => 'ORDEN DE SERVICIO'],
+                    ['td' => 'ESTADO'],
+                ],
+                'columnsx' => [
+                    ['data' => 'botonexx', 'name' => 'botonexx'],
+                    ['data' => 'id', 'name' => 'calistams.id'],
+                    ['data' => 'producto', 'name' => 'calistams.producto'],
+                    ['data' => 'ordeprod', 'name' => 'ordens.ordeprod'],
+                    ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
+                ],
+                'tablaxxx' => 'tablaordenes',
+                'permisox' => 'alistami',
+                'routxxxx' => 'alistami',
+                'parametr' => [],
+            ],
+
+        ];
+        $this->opciones['pestania'] = $this->getPestanias(['tablaxxx' => $this->opciones['routxxxx']]);
+
+        $cabecera = Calistam::where('orden_id', Orden::ordendia())->first();
+        if (isset($cabecera->id)) {
+            $this->opciones['tablasxx'][0]['vercrear'] = false;
+        }
+        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
+    }
     private function view($dataxxxx)
     {
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);

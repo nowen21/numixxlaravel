@@ -7,7 +7,7 @@
             @if($todoxxxx['pestpadr']==1 || $todoxxxx['pestpadr']==2)
             @canany(['controlpf-leer', 'controlpf-crear', 'controlpf-editar', 'controlpf-borrar'])
             <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='controlpf') ?' active' : '' }}
-        text-sm" href="{{ route('controlpf') }}">fffasfsdfdsa</a></li>
+        text-sm" href="{{ route('controlpf') }}"></a></li>
             @endcanany
             @endif
 

@@ -24,7 +24,7 @@ class ControlPController extends Controller
             'permisox' => 'controlp',
             'parametr' => [],
             'rutacarp' => 'Produccion.',
-            'tituloxx' => 'Crear: Control en proceso',
+            'tituloxx' => 'Control en proceso',
             'slotxxxx'=>'controlp',
             'carpetax'=>'Controlp',
             'indecrea'=>false,
@@ -70,6 +70,65 @@ class ControlPController extends Controller
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' =>
                     $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
+                    ['campoxxx' => 'revisado', 'dataxxxx' =>
+                    $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.controlp'],
+                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
+                    ['campoxxx' => 'medicame', 'dataxxxx' => $padrexxx],
+                ],
+                'vercrear' => false,
+                'accitabl' => true,
+                'urlxxxxx' => 'api/produccion/procesos',
+                'cabecera' =>[
+
+                    ['td' => 'LOTE INTERNO'],
+                    ['td' => 'CEDULAddd'],
+                    ['td' => 'NOMBRES'],
+                    ['td' => 'APELLIDOS'],
+                    ['td' => 'CLINICA'],
+                    ['td' => 'CONTROL'],
+                    ['td' => 'ESTADO'],
+
+                ],
+                'columnsx' => [
+                    ['data' => 'botonexx', 'name' => 'botonexx'],
+                    ['data' => 'id', 'name' => 'cformulas.id'],
+                    ['data' => 'cedula', 'name' => 'pacientes.cedula'],
+                    ['data' => 'nombres', 'name' => 'pacientes.nombres'],
+                    ['data' => 'apellidos', 'name' => 'pacientes.apellidos'],
+                    ['data' => 'clinica', 'name' => 'clinicas.clinica'],
+                    ['data' => 'revisado', 'name' => 'revisado'],
+                    ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
+                ],
+                'tablaxxx' => 'tablaordenes',
+                'permisox' => 'controlp',
+                'routxxxx' => 'controlp',
+                'parametr' => [1],
+            ],
+
+        ];
+        $this->opciones['pestania'] = $this->getPestanias([
+            'tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => $padrexxx
+        ]);
+
+       return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
+    }
+
+
+    public function indexreporte()
+    {
+        $padrexxx='';
+        $this->opciones['indecrea']=false;
+        $this->opciones['esindexx']=false;
+        $this->opciones['accionxx']='index';
+        $this->opciones['padrexxx'] = $padrexxx;
+        
+        $this->opciones['tablasxx'] = [
+            [
+                'titunuev' => 'NUEVO CONTROL DE PROCESO',
+                'titulist' => 'LISTA CONTROL DE PROCESOS',
+                'dataxxxx' => [
+                    ['campoxxx' => 'botonesx', 'dataxxxx' =>
+                    $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapiprint'],
                     ['campoxxx' => 'revisado', 'dataxxxx' =>
                     $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.controlp'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],

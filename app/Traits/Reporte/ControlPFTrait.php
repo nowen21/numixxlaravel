@@ -94,6 +94,7 @@ trait ControlPFTrait
                       break;
                     case 2:
                       $valorxxx[$i] = ['valorxxx' => $this->terminados($pintarxx['formular'][$i], $value->campoxxx), 'clasexxx' => ''];
+              
                       break;
                   }
                 }
@@ -144,7 +145,7 @@ trait ControlPFTrait
     //$procesos = Proceso::select($campoxxx)->where('formulacione_id', $formular)->first()[$campoxxx];
     switch ($campoxxx) {
       case 'ausepart':
-      case 'ausefuga':
+      case 'particul':
       case 'ausemise':
       case 'coloraci':
         if ($procesos == 1) {
@@ -160,6 +161,7 @@ trait ControlPFTrait
     
    // $valorxxx = Terminado::where('proceso_id', Proceso::select('id')->where('formulacione_id', $formular)->first()['id'])->first()[$campoxxx];
     $valorxxx = Cformula::find($formular)->terminado[$campoxxx];  
+   
     switch ($campoxxx) {
       case 'completo':
       case 'particul':
@@ -169,9 +171,11 @@ trait ControlPFTrait
       case 'miscelas':
       case 'burbujas':
       case 'document':
-        if ($valorxxx == 1) {
-          $valorxxx = 'SI';
+        if ($valorxxx == 2) {
+          $valorxxx = 'SeeI';
         }
+
+       
         break;
     }
     return $valorxxx;

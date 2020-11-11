@@ -38,7 +38,7 @@ class ControlPFController extends Controller
 
         $this->opciones['vocalesx'] = ['Á', 'É', 'Í', 'Ó', 'Ú'];
         $this->opciones['pestpadr'] = 1; // darle prioridad a las pestañas
-        $this->opciones['tituhead'] = 'dada';
+        $this->opciones['tituhead'] = 'Listado de Controles en Procesos y Productos Terminados';
         $this->opciones['routxxxx'] = 'controlpf';
         $this->opciones['slotxxxx'] = 'controlpf';
         $this->opciones['rutacarp'] = 'Reporte.';
@@ -70,7 +70,7 @@ class ControlPFController extends Controller
         $this->opciones['tablasxx'] = [
             [
                 'titunuev' => 'NUEVO NNAJ',
-                'titulist' => 'LISTA DE NNAJS',
+                'titulist' => 'LISTA DE CONTROL DE PROCESOS Y PRODUCTOS TERMINADOS',
                 'archdttb' => $this->opciones['rutacarp'] . 'Acomponentes.Adatatable.index',
                 'vercrear' => false,
                 'accitabl' => true,

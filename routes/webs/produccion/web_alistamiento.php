@@ -32,4 +32,8 @@ Route::group(['prefix' => 'alistamientos'], function () {
 	    'uses' => 'Produccion\AlistamientoController@getPdfCalistam',
 	    'middleware' => ['permission:alistami-leer']
 	])->name('alistami.imprimir');
+	Route::get('alistami.reporte', [
+	    'uses' => 'Produccion\AlistamientoController@indexreporte',
+	    'middleware' => ['permission:alistami-leer|alistami-crear|alistami-editar|alistami-borrar']
+	])->name('alistami.reporte');
 });

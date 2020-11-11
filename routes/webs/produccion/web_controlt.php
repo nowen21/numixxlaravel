@@ -36,5 +36,10 @@ Route::group(['prefix' => $routexxx], function () use ($controll, $routexxx) {
 		'uses' => $controll . 'Controller@getPesoreal',
 
 	])->name($routexxx . '.pesoreal');
+	
+	Route::get($routexxx . '.reporte', [
+		'uses' => $controll . 'Controller@indexreporte',
+		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
+		])->name($routexxx . '.reporte');
 });
 

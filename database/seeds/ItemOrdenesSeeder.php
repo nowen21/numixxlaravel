@@ -16,7 +16,7 @@ class ItemOrdenesSeeder extends Seeder
         Itemordene::create(['id' => 1,'itemxxxx' => 'CRITERIOS A VERIFICAR', 'rowspanx' => 2, 'colspanx' => 0, 'campoxxx' => '', 'aplicaxx' =>0,'sis_esta_id'=>1,'user_crea_id'=>1,'user_edita_id'=>1]);
         Itemordene::create(['id' => 2,'itemxxxx' => 'EN PROCESO', 'rowspanx' => 0, 'colspanx' => 39, 'campoxxx' => '', 'aplicaxx' =>0,'sis_esta_id'=>1,'user_crea_id'=>1,'user_edita_id'=>1]);
         Itemordene::create(['id' => 3,'itemxxxx' => 'Colarción normal', 'rowspanx' => 0, 'colspanx' => 0, 'campoxxx' => 'coloraci', 'aplicaxx' =>1,'sis_esta_id'=>1,'user_crea_id'=>1,'user_edita_id'=>1]);
-        Itemordene::create(['id' => 4,'itemxxxx' => 'Ausencia de partículas', 'rowspanx' => 0, 'colspanx' => 0, 'campoxxx' => 'ausepart', 'aplicaxx' =>1,'sis_esta_id'=>1,'user_crea_id'=>1,'user_edita_id'=>1]);
+        Itemordene::create(['id' => 4,'itemxxxx' => 'Ausencia de partículas', 'rowspanx' => 0, 'colspanx' => 0, 'campoxxx' => 'particul', 'aplicaxx' =>2,'sis_esta_id'=>1,'user_crea_id'=>1,'user_edita_id'=>1]);
         Itemordene::create(['id' => 5,'itemxxxx' => 'Aucencia de fugas', 'rowspanx' => 0, 'colspanx' => 0, 'campoxxx' => 'ausefuga', 'aplicaxx' =>1,'sis_esta_id'=>1,'user_crea_id'=>1,'user_edita_id'=>1]);
         Itemordene::create(['id' => 6,'itemxxxx' => 'Aucencia de Miscelas/Integridad emulsión', 'rowspanx' => 0, 'colspanx' => 0, 'campoxxx' => 'ausemise', 'aplicaxx' =>1,'sis_esta_id'=>1,'user_crea_id'=>1,'user_edita_id'=>1]);
         Itemordene::create(['id' => 7,'itemxxxx' => 'EN PRODUCTO TERMINADO', 'rowspanx' => 0, 'colspanx' => 39, 'campoxxx' => '', 'aplicaxx' =>1,'sis_esta_id'=>1,'user_crea_id'=>1,'user_edita_id'=>1]);

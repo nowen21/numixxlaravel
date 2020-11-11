@@ -28,4 +28,9 @@ Route::group(['prefix' => 'controlesp'], function () {
 	    'uses' => 'Produccion\ControlPController@destroy',
 	    'middleware' => ['permission:controlp-borrar']
 	])->name('controlp.borrar');
+
+	Route::get('controlp.reporte', [
+	    'uses' => 'Produccion\ControlPController@indexreporte',
+	    'middleware' => ['permission:controlp-leer|controlp-crear|controlp-editar|controlp-borrar']
+	])->name('controlp.reporte');
 });

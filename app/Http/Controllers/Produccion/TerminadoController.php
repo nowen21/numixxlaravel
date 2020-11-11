@@ -110,6 +110,60 @@ class TerminadoController extends Controller
         ]);
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
+
+    public function indexreporte()
+    {
+        $this->opciones['indecrea'] = false;
+        $this->opciones['esindexx'] = true;
+        $this->opciones['accionxx'] = 'index';
+        $this->opciones['tablasxx'] = [
+            [
+                'titunuev' => 'NUEVO PRODUCTO TERMINADO',
+                'titulist' => 'LISTA PRODUCTOS TERMINADOS',
+                'dataxxxx' => [
+                    ['campoxxx' => 'botonesx', 'dataxxxx' =>
+                    $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapiprint'],
+                    ['campoxxx' => 'revisado', 'dataxxxx' =>
+                    $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.terminad'],
+                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
+                ],
+                'vercrear' => false,
+                'accitabl' => true,
+                'urlxxxxx' => 'api/produccion/terminados',
+                'cabecera' => [
+
+                    ['td' => 'LOTE INTERNO'],
+                    ['td' => 'CEDULA'],
+                    ['td' => 'NOMBRES'],
+                    ['td' => 'APELLIDOS'],
+                    ['td' => 'CLINICA'],
+                    ['td' => 'TERMINADO'],
+                    ['td' => 'ESTADO'],
+
+                ],
+                'columnsx' => [
+                    ['data' => 'botonexx', 'name' => 'botonexx'],
+                    ['data' => 'id', 'name' => 'cformulas.id'],
+                    ['data' => 'cedula', 'name' => 'pacientes.cedula'],
+                    ['data' => 'nombres', 'name' => 'pacientes.nombres'],
+                    ['data' => 'apellidos', 'name' => 'pacientes.apellidos'],
+                    ['data' => 'clinica', 'name' => 'clinicas.clinica'],
+                    ['data' => 'revisado', 'name' => 'revisado'],
+                    ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
+                ],
+                'tablaxxx' => 'tablaordenes',
+                'permisox' => 'controlt',
+                'routxxxx' => 'controlt',
+                'parametr' => [],
+            ],
+
+        ];
+
+        $this->opciones['pestania'] = $this->getPestanias([
+            'tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => ''
+        ]);
+        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
+    }
     private function view($dataxxxx)
     {
         $this->opciones['pedelies'] = [];
