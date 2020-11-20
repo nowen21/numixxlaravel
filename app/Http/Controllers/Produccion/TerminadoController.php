@@ -235,6 +235,11 @@ class TerminadoController extends Controller
         $this->opciones['procesox'] = [$objetoxx->cformula->id => 'Formulación: ' . $objetoxx->cformula->id];
         $this->opciones['clinicax'] = $objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
+        $this->opciones['botoform'][] =
+        [
+            'mostrars' => true, 'accionxx' => '', 'routingx' => ['reporpdf.etiquetanpt', [$objetoxx->cformula->id]],
+            'formhref' => 4, 'tituloxx' => 'VER ETIQUTA', 'clasexxx' => 'btn btn-sm btn-primary'
+        ];
         return $this->view(['objetoxx' => $objetoxx, 'accionxx' => 'Ver', 'procesox' => $objetoxx->cformula->id]);
     }
 

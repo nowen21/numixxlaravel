@@ -4,17 +4,34 @@
     </div>
     <div class="card-header p-2">
         <ul class="nav nav-tabs">
-            @if($todoxxxx['pestpadr']==1 || $todoxxxx['pestpadr']==2)
-            @canany(['controlpf-leer', 'controlpf-crear', 'controlpf-editar', 'controlpf-borrar'])
+            @canany(['reportes-modulo'])
             <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='controlpf') ?' active' : '' }}
-        text-sm" href="{{ route('controlpf') }}"></a></li>
+        text-sm" href="{{ route('controlpf') }}">Controles en procesos</a></li>
             @endcanany
-            @endif
+            @canany(['reportes-modulo'])
+            <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='orden') ?' active' : '' }}
+        text-sm" href="{{ route('orden') }}">Orden de producción</a></li>
+            @endcanany
+            @canany(['reportes-modulo'])
+            <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='alistami') ?' active' : '' }}
+        text-sm" href="{{ route('alistami.reporte') }}">Alistamiento de insumos</a></li>
+            @endcanany
+            @canany(['reportes-modulo'])
+            <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='controlt') ?' active' : '' }}
+            text-sm" href="{{ route('controlt.reporte') }}">Etiquetas</a></li>
+            @endcanany
 
-            @if($todoxxxx['pestpadr']==2)
+            @canany(['reportes-modulo'])
+            <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='concilia.reporte') ?' active' : '' }}
+            text-sm" href="{{ route('concilia.reporte') }}">Conciliación de Materiales</a></li>
+            @endcanany
+
+            @canany(['reportes-modulo'])
+            <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='dlote.reporte') ?' active' : '' }}
+            text-sm" href="{{ route('dlote.reporte') }}">Certificado de Liberación de Lote</a></li>
+            @endcanany
             
 
-            @endif
         </ul>
     </div>
     <div class="card-body">

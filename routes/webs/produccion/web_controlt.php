@@ -34,12 +34,17 @@ Route::group(['prefix' => $routexxx], function () use ($controll, $routexxx) {
 
 	Route::get('pesoreal', [
 		'uses' => $controll . 'Controller@getPesoreal',
+		])->name($routexxx . '.pesoreal');
+	});
 
-	])->name($routexxx . '.pesoreal');
-	
-	Route::get($routexxx . '.reporte', [
-		'uses' => $controll . 'Controller@indexreporte',
-		'middleware' => ['permission:' . $routexxx . '-leer|' . $routexxx . '-crear|' . $routexxx . '-editar|' . $routexxx . '-borrar']
+		Route::group(['prefix' => 'controltreporte'], function () use ($controll, $routexxx) {
+		Route::get('', [
+		'uses' => 'Reporte\EtiquetaReporteController@indexreporte',
+		'middleware' => ['permission:' . $routexxx . '-leer']
 		])->name($routexxx . '.reporte');
+		Route::get('listaxxx', [
+			'uses' => 'Reporte\EtiquetaReporteController@getListado',
+			'middleware' => ['permission:' . $routexxx . '-leer']
+		])->name($routexxx.'.listaxxx');
 });
 

@@ -82,7 +82,7 @@ class ControlPFController extends Controller
                     
                     ['td' => 'Orden de producción', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'Observaciónn', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    
                     ]
                  ],
                 'columnsx' => [
@@ -90,7 +90,7 @@ class ControlPFController extends Controller
                     ['data' => 'id', 'name' => 'ordens.id'],
                     ['data' => 'ordeprod', 'name' => 'ordens.ordeprod'],
                     ['data' => 'observac', 'name' => 'ordens.observac'],
-                    ['data' => 's_estado', 'name' => 'ordens.s_estado'],
+                    
                 ],
                 'tablaxxx' => 'datatable',
                 'permisox' => $this->opciones['permisox'],

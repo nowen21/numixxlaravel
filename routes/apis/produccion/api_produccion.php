@@ -40,3 +40,10 @@ Route::get('produccion/conciliaciones', function (Request $request) {
 
   return Produccion::getConciliaciones($request);
 });
+
+Route::get('produccion/conciliacionestotal', function (Request $request) {
+  if (!$request->ajax())
+    return redirect('/');
+
+  return Produccion::getConciliacionesTotal($request);
+});

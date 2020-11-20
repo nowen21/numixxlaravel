@@ -40,7 +40,7 @@ class Calistam extends Model
   {
     return $this->hasMany(Dalistam::class);
   }
-
+//alistamiento, conciliacion, etiqueta, ordenes , control de proceso y producots terminado
   public static function transaccion($dataxxxx,  $objetoxx)
   {
     $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {

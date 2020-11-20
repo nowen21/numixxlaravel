@@ -12,13 +12,16 @@ use App\Models\Produccion\Calistam;
 use App\Models\Produccion\Dalistam;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Pestanias\ProduccionTrait;
+use App\Traits\Produccion\AlistamientoTrait;
 use App\Traits\Produccion\InventarioTrait;
+use Illuminate\Http\Request;
 
 class AlistamientoController extends Controller
 {
     private $opciones;
     use ProduccionTrait;
     use InventarioTrait;
+    use AlistamientoTrait;
     public function __construct()
     {
         $this->opciones = [
@@ -105,54 +108,58 @@ class AlistamientoController extends Controller
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
 
-
+    public function getListado(Request $request)
+    {
+        if ($request->ajax()) {
+            $request->routexxx = [$this->opciones['routxxxx']];
+           
+            $request->botonesx = $this->opciones['rutacarp'] .
+                $this->opciones['carpetax'] . '.Botones.botonesapi';
+            $request->estadoxx = 'layouts.components.botones.estadosx';
+            return $this->getAlistamientos($request);
+        }
+    }
     public function indexreporte()
     {
-        $this->getInactivarMlostesvencidos();
-        $padrexxx = '';
-        $this->opciones['indecrea'] = false;
-        $this->opciones['esindexx'] = false;
+        $this->opciones['perfilxx'] = 'sinperfi';
         $this->opciones['accionxx'] = 'index';
-        $this->opciones['padrexxx'] = $padrexxx;
+        $this->opciones['tituhead'] = 'Listado de Alistamientos';
+        $this->opciones['rutarchi'] = $this->opciones['rutacarp'] . 'Acomponentes.Acrud.index';
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'NUEVO ALISTAMIENTO',
-                'titulist' => 'LISTA DE ALISTAMIENTOS',
-                'dataxxxx' => [
-                    ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapiprint'],
-                    ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
-                    ['campoxxx' => 'puededit', 'dataxxxx' => auth()->user()->can('clinica-editar') ? true : false],
-                ],
+                'titunuev' => 'NUEVO NNAJ',
+                'titulist' => 'LISTA DE CONTROL DE PROCESOS Y PRODUCTOS TERMINADOS',
+                'archdttb' => $this->opciones['rutacarp'] . 'Acomponentes.Adatatable.index',
                 'vercrear' => false,
                 'accitabl' => true,
-                'urlxxxxx' => 'api/produccion/alistamiento',
-                'cabecera' => [
-                    ['td' => 'ID'],
-                    ['td' => 'PRODUCTO'],
-                    ['td' => 'ORDEN DE SERVICIO'],
-                    ['td' => 'ESTADO'],
-                ],
+                'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', []),
+                'cabecera' =>[
+[
+                    ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    
+                    ['td' => 'Orden de producción', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'Observaciónn', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    
+                    ]
+                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
-                    ['data' => 'id', 'name' => 'calistams.id'],
-                    ['data' => 'producto', 'name' => 'calistams.producto'],
+                    ['data' => 'id', 'name' => 'ordens.id'],
                     ['data' => 'ordeprod', 'name' => 'ordens.ordeprod'],
-                    ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
+                    ['data' => 'observac', 'name' => 'ordens.observac'],
+                    
                 ],
-                'tablaxxx' => 'tablaordenes',
-                'permisox' => 'alistami',
-                'routxxxx' => 'alistami',
+                'tablaxxx' => 'datatable',
+                'permisox' => $this->opciones['permisox'],
+                'routxxxx' => $this->opciones['routxxxx'],
                 'parametr' => [],
-            ],
-
+            ]
         ];
-        $this->opciones['pestania'] = $this->getPestanias(['tablaxxx' => $this->opciones['routxxxx']]);
-
-        $cabecera = Calistam::where('orden_id', Orden::ordendia())->first();
-        if (isset($cabecera->id)) {
-            $this->opciones['tablasxx'][0]['vercrear'] = false;
-        }
-        return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
+        $this->opciones['ruarchjs'] = [
+            ['jsxxxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.Js.tabla']
+        ];
+        return view($this->opciones['rutacarp'] . 'pestaniax', ['todoxxxx' => $this->opciones]);
     }
     private function view($dataxxxx)
     {

@@ -19,7 +19,7 @@
       </div>
       <div class="flotar" style="width: 20%;text-align: center;">
         <div style=" padding: 10px 0px 10px 0px; border-bottom: 1px #000 solid">CÓDIGO</div>
-        <div style=" padding: 10px 0px 10px 0px;">PRO-FO-12-V0</div>
+        <div style=" padding: 10px 0px 10px 0px;">PRO-FO-12-V1</div>
       </div>
     </div>
 

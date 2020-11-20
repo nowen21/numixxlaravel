@@ -106,4 +106,19 @@ class Produccion
 
         return DatatableHelper::getDt($paciente, $request);
     }
+
+
+
+    public static function getConciliacionesTotal($request)
+    {
+        $paciente = Calistam::select([
+            'calistams.id', 'calistams.producto', 'ordens.ordeprod', 'calistams.sis_esta_id',
+            'sis_estas.s_estado', 'calistams.created_at'
+        ])
+            ->join('ordens', 'calistams.orden_id', '=', 'ordens.id')
+            ->join('sis_estas', 'calistams.sis_esta_id', '=', 'sis_estas.id')
+            ;
+
+        return DatatableHelper::getDt($paciente, $request);
+    }
 }

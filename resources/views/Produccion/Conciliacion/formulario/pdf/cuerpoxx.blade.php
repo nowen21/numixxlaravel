@@ -11,16 +11,14 @@
 <table class="table table-bordered table-responsiv" style="margin-top: 10px">
   <thead>
     <tr>
-      <th class="cabecera">DISPOSITIVO MÉDICO</th>
-      <th class="cabecera">LOTE</th>
-      <th class="cabecera">CANTIDAD CONSUMIDA</th>
-      <th class="cabecera">CANTIDAD ALISTADA</th>
-      <th class="cabecera">CANTIDAD SOBRANTE</th>
       <th class="cabecera">MEDICAMENTO</th>
-      <th class="cabecera">LOTE</th>
       <th class="cabecera">CANTIDAD CONSUMIDA</th>
       <th class="cabecera">CANTIDAD ALISTADA</th>
-      <th class="cabecera">CANTIDAD SOBRANTE</th>
+      <th class="cabecera">DIFERENCIA</th>
+      <th class="cabecera">MEDICAMENTO</th>
+      <th class="cabecera">CANTIDAD CONSUMIDA</th>
+      <th class="cabecera">CANTIDAD ALISTADA</th>
+      <th class="cabecera">DIFERENCIA</th>
     </tr>
   </thead>
   <tbody id="formulaciontable">
@@ -28,7 +26,7 @@
     <tr>
       <td scope="col" class="letras">
         {{$alistami['medidisp']}}</td>
-      <td scope="col" class="letras">{{$alistami['lotexxxx']}}</td>
+      
       <td scope="col" class="letras">
         {{$alistami['consumid']}}
       </td>
@@ -39,7 +37,7 @@
         {{$alistami['sobrante']}}
       </td>
       <td scope="col" class="letras">{{$detallex['medicxxx'][$key]['medidisp']}}</td>
-      <td scope="col" class="letras">{{$detallex['medicxxx'][$key]['lotexxxx']}}</td>
+      
       <td scope="col" class="letras">
         {{$detallex['medicxxx'][$key]['consumid']}}
       </td>

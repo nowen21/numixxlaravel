@@ -17,6 +17,7 @@ class Dlote extends Model {
   public function dmarca(){
     return $this->belongsTo(Dmarca::class);
   }
+  
 
   public static function transaccion($dataxxxx,  $objetoxx)
   {
