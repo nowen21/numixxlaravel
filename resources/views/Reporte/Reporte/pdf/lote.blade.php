@@ -40,7 +40,7 @@
     <div style=" text-align: left; text-align: center">
       Queda liberada para la entrega al cliente, puesto que toda la documentación inherente a la elaboración y/o ajuste y análisis fue revisada según el formato 
       de controles en proceso y este indica que el (los) producto(s) fue manufacturado en cumplimiento con los requerimientos de las Buenas Prácticas de 
-      Elaboración según la normativa vigente. 
+      Elaboración según la normativa vigente. test test test
     </div>
       <br>
       <div style=" text-align: left; text-align: center">Revisión realizada por: <u> {{$userx}} </u> en fecha:  <u> {{$hoyxx}} </u> </div>
