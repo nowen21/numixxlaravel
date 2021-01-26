@@ -1,6 +1,6 @@
 <?php
 
-namespace App\CamposMagicos;
+namespace App\CamposMagicos;               
 
 class CamposMagicos
 {
