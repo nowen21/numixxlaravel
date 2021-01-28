@@ -122,7 +122,7 @@ class PacienteController extends Controller
     {
         
         $this->opciones['parapest'][0]=$dataxxxx['padrexxx']->id;
-        $this->opciones['clinicai'] = SisClinica::combo(true, false);
+        $this->opciones['clinicai'] = SisClinica::getclinica(false, false);
         $this->opciones['cardheap'] = 'SUCURSAL: ' . $dataxxxx['padrexxx']->sis_clinica;
         $this->opciones['cardhead'] = 'CLINICA: ' . $dataxxxx['padrexxx']->sis_clinica;
         $this->opciones['parametr'] =$this->opciones['padrexxx'] = $dataxxxx['padrexxx']->id;

@@ -81,4 +81,25 @@ class SisClinica extends Model
         }
         return $comboxxx;
     }
+
+    public static function getclinica($cabecera, $ajaxxxxx)
+    {
+        $comboxxx = [];
+        if ($cabecera) {
+            if ($ajaxxxxx) {
+                $comboxxx[] = ['valuexxx' => '', 'optionxx' => 'Seleccione'];
+            } else {
+                $comboxxx = ['' => 'Seleccione'];
+            }
+        }
+        $activida = SisClinica::where('id',Auth::user()->sis_clinica_id)->get();;
+        foreach ($activida as $key=> $registro) {
+            if ($ajaxxxxx) {
+                $comboxxx[] = ['valuexxx' => $registro->id, 'optionxx' => $registro->sucursal];
+            } else {
+                $comboxxx[$registro->id] = $registro->sucursal;
+            }
+        }
+        return $comboxxx;
+    }
 }
