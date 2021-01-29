@@ -9,6 +9,7 @@ use App\Models\Produccion\Calistam;
 use App\Models\Produccion\Dalistam;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Conciliacion\ConciliacionTrait;
+use App\Traits\Pdfs\PdfTrait;
 use App\Traits\Pestanias\ProduccionTrait;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,7 @@ class ConciliacionController extends Controller
     private $opciones;
     use ProduccionTrait;
     use ConciliacionTrait;
+    use PdfTrait;
     public function __construct()
     {
         $this->opciones = [
@@ -214,18 +216,5 @@ class ConciliacionController extends Controller
         }
     }
 
-    public function getPdfConciliacion(Calistam $objetoxx)
-    {
 
-        $dataxxxx = [
-            'vistaurl' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.formulario.pdf.cabecera',
-            'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
-            'tipoxxxx' => 2,
-            'nombarch' => 'conciliacion',
-            'dataxxxx' => [
-                'cabecera' => $objetoxx, 'detallex' => $this->getConsiliacion(['padrexxx' => $objetoxx])
-            ]
-        ];
-        return Pdfs::getImprimirPdf($dataxxxx);
-    }
 }

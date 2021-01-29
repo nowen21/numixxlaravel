@@ -312,7 +312,7 @@ class TerminadoController extends Controller
 
         $dataform = new Dataformulario();
         $formulac = Cformula::where('id', $procesox)->first();
-        $calculos = $dataform->calculos($formulac);
+        $calculos = $dataform->calculos($formulac);  ddd($calculos);
         return $calculos['pesoteor'];
     }
     public function getPesoreal(Request $request)

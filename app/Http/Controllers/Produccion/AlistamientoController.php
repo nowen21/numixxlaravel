@@ -11,6 +11,7 @@ use App\Models\Formulaciones\Orden;
 use App\Models\Produccion\Calistam;
 use App\Models\Produccion\Dalistam;
 use App\Models\Sistema\SisEsta;
+use App\Traits\Pdfs\PdfTrait;
 use App\Traits\Pestanias\ProduccionTrait;
 use App\Traits\Produccion\AlistamientoTrait;
 use App\Traits\Produccion\InventarioTrait;
@@ -22,6 +23,7 @@ class AlistamientoController extends Controller
     use ProduccionTrait;
     use InventarioTrait;
     use AlistamientoTrait;
+    use PdfTrait;
     public function __construct()
     {
         $this->opciones = [
@@ -112,7 +114,7 @@ class AlistamientoController extends Controller
     {
         if ($request->ajax()) {
             $request->routexxx = [$this->opciones['routxxxx']];
-           
+
             $request->botonesx = $this->opciones['rutacarp'] .
                 $this->opciones['carpetax'] . '.Botones.botonesapi';
             $request->estadoxx = 'layouts.components.botones.estadosx';
@@ -137,10 +139,10 @@ class AlistamientoController extends Controller
 [
                     ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    
+
                     ['td' => 'Orden de producción', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'Observaciónn', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    
+
                     ]
                  ],
                 'columnsx' => [
@@ -148,7 +150,7 @@ class AlistamientoController extends Controller
                     ['data' => 'id', 'name' => 'ordens.id'],
                     ['data' => 'ordeprod', 'name' => 'ordens.ordeprod'],
                     ['data' => 'observac', 'name' => 'ordens.observac'],
-                    
+
                 ],
                 'tablaxxx' => 'datatable',
                 'permisox' => $this->opciones['permisox'],
@@ -284,15 +286,5 @@ class AlistamientoController extends Controller
         return redirect()->route($this->opciones['routxxxx'])->with('info', 'Registro ' . $activado . ' con éxito');
     }
 
-    public function getPdfCalistam(Calistam $objetoxx)
-    {
-        $dataxxxx = [
-            'vistaurl' => 'Produccion.Alistamiento.pdf.alistami',
-            'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
-            'tipoxxxx' => 2,
-            'nombarch' => 'alistamiento',
-            'dataxxxx' => ['cabecera' => $objetoxx, 'detallex' => Alistamiento::getMlotesDlotes($objetoxx->id)]
-        ];
-        return Pdfs::getImprimirPdf($dataxxxx);
-    }
+
 }

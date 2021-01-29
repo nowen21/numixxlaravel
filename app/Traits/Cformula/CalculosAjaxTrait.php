@@ -10,37 +10,37 @@ use App\Models\Medicamentos\Mmarca;
 trait CalculosAjaxTrait
 {
     private $_datacat = [
-        "clinicax"=>"",
-        "tiempoxx"=>"",
-        "volutota"=>"",
-        "purgaxxx"=>"",
-        "pesoxxxx"=>"",
-        "nptidxxx"=>"",
-        "velopurg"=>"",
-        "veloinfu"=>"",
-         "concarbo"=>"",
-        "concprot"=>"",
-        "conclipi"=>"",
-        "osmolari"=>"",
-        "gramtota"=>"",
-        "protnitr"=>"",
-        "proteica"=>"",
-        "caloprot"=>"",
-"calolipi"=>"",
-        "calocarb"=>"",
-        "calotota"=>"",
-        "caltotkg"=>"",
-        "calcfosf"=>"",
-        "carbvali"=>"",
-        "concprov"=>"",
-        "conclipv"=>"",
-        "osmolarv"=>"",
-        "calcfosv"=>"",
-        "calototv"=>"",
-        "calocarv"=>"",
-        "calolipv"=>"",
-        "caloprov"=>"",
-        "pesoteor"=>"",
+        "clinicax" => "",
+        "tiempoxx" => "",
+        "volutota" => "",
+        "purgaxxx" => "",
+        "pesoxxxx" => "",
+        "nptidxxx" => "",
+        "velopurg" => "",
+        "veloinfu" => "",
+        "concarbo" => "",
+        "concprot" => "",
+        "conclipi" => "",
+        "osmolari" => "",
+        "gramtota" => "",
+        "protnitr" => "",
+        "proteica" => "",
+        "caloprot" => "",
+        "calolipi" => "",
+        "calocarb" => "",
+        "calotota" => "",
+        "caltotkg" => "",
+        "calcfosf" => "",
+        "carbvali" => "",
+        "concprov" => "",
+        "conclipv" => "",
+        "osmolarv" => "",
+        "calcfosv" => "",
+        "calototv" => "",
+        "calocarv" => "",
+        "calolipv" => "",
+        "caloprov" => "",
+        "pesoteor" => "",
 
     ];
     /**
@@ -117,47 +117,6 @@ trait CalculosAjaxTrait
         //
         if ($dataxxxx) {
         }
-    }
-
-
-    /**
-     * Calcular osmolaridad y peso especifico por lote
-     *
-     * @access private
-     * @param $formlote lotes que tiene la formulacion medica
-     */
-    private function osmolaridadypesoespecifico($dataxxxx)
-    {
-
-        $osmolari = 0;
-        $pesoespe = 0;
-        $mmarcasx = Mmarca::where('medicame_id', $dataxxxx['medicame']->id)
-            ->join('minvimas', 'mmarcas.id', '=', 'minvimas.mmarca_id')
-            ->join('mlotes', 'minvimas.id', '=', 'mlotes.minvima_id')
-            ->where('mlotes.sis_esta_id', 1)
-            ->where('mlotes.inventar','>', 0)
-            ->get();
-        // recorrer cada uno de los lotes los que se le desconto el volumen de la formulacion medica
-        foreach ($mmarcasx as $key => $lotexxxx) {
-            // echo $lotexxxx->osmorali.'<br>';
-            // volumen consumido por cada lote
-            $osmolari +=  $lotexxxx->osmorali; // osmolaridad por cada una de las marcas del medicamento
-            $pesoespe +=  $lotexxxx->pesoespe; // peso especifico por cada una de las marcas del medicamento
-        }
-        /**
-         * hallar el promedio de la osmolaridad y el peso específico de los medicamentos asignados
-         * a la clínica
-         */
-        if ($osmolari > 0) {
-            $registro = count($mmarcasx);
-            $osmolari = $osmolari / $registro;
-            $pesoespe = $pesoespe / $registro;
-        }
-
-
-        // echo $dataxxxx['medicame']->id.'<br>';
-        $respuest = ['osmolari' => $osmolari, 'pesoespe' => $pesoespe];
-        return $respuest;
     }
 
 
@@ -250,7 +209,6 @@ trait CalculosAjaxTrait
         foreach ($dataxxxx as $key => $registro) {
             $campoxxx = explode('_', $key);
             if (count($campoxxx) == 2 && $campoxxx[1] == 'cant') {
-
                 $medicame = Medicame::find($dataxxxx[$campoxxx[0]]);
                 $purgaxxx = $formulacion[$medicame->casa_id] = $this->getDataCasa(
                     [
@@ -264,25 +222,14 @@ trait CalculosAjaxTrait
 
                 $dataxxxx['volupurg'] = $dataxxxx['volupurg'] * $purgaxxx['volumenx'];
                 $purgaxxx = $purgaxxx['formulax'];
-                $osmopeso = $this->osmolaridadypesoespecifico(
-                    [
-                        'medicame' => $medicame,
-                        'purgaxxx' => $purgaxxx,
-                        'dataxxxx' => $dataxxxx
-                    ]
-                );
-
-
+                $mmarcasx = Mmarca::where('medicame_id', $medicame->id)->first();
                 if ($dataxxxx[$key] > 0) {
                     // echo $key.' => ';
-                    $osmolari=$osmopeso['osmolari'] * $purgaxxx['purgaxxx'];
+                    $osmolari = $mmarcasx->osmorali * $purgaxxx['purgaxxx'];
                     // echo  $osmolari .'<br>';
-                   $formulacion['osmolari'] += $osmolari; // calcular la osmolarida
-$pesoespe=$osmopeso['pesoespe'] * $purgaxxx['purgaxxx'];
-
+                    $formulacion['osmolari'] += $osmolari; // calcular la osmolarida
+                    $pesoespe = $mmarcasx->pesoespe * $purgaxxx['purgaxxx'];
                     $formulacion['pesoespe'] += $pesoespe; // calcular el peso específico
-
-
                 }
             }
         }
@@ -386,7 +333,7 @@ $pesoespe=$osmopeso['pesoespe'] * $purgaxxx['purgaxxx'];
 
         $lipidosx = $this->casa(16, $datasxxx)['requerim'];
 
-       $calculos['conclipi'] = (($lipidosx + $volumult / 5) / $calculos['volutota']) * 100;
+        $calculos['conclipi'] = (($lipidosx + $volumult / 5) / $calculos['volutota']) * 100;
         //GRAMOS TOTALES DE NITROGENO
         $calculos['gramtota'] = $aminoaci / 6.25;
         //CALORIAS PROTEICAS 						2%
