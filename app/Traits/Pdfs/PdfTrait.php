@@ -100,14 +100,56 @@ trait PdfTrait
 
     public function getPdfConciliacion(Calistam $objetoxx)
     {
+        $concilia = $this->getConsiliacion(['padrexxx' => $objetoxx]);
+        $detallex=['dispoxxx' => [],'medicxxx' => []];
 
-        $alistami = Alistamiento::getMlotesDlotes($objetoxx->id);
+
+        foreach ($concilia['dispoxxx'] as $key => $value) {
+            if($concilia['dispoxxx'][$key]['alistada']>0){
+                $detallex['dispoxxx'][]=$concilia['dispoxxx'][$key];
+            }
+            if($concilia['medicxxx'][$key]['alistada']>0){
+                $detallex['medicxxx'][]=$concilia['medicxxx'][$key];
+            }
+        }
+
+        $medicoun = count($detallex['medicxxx']);
+        $dispcoun = count($detallex['dispoxxx']);
+        $mayorxxx = [];
+        if ($medicoun >= $dispcoun) {
+            $mayorxxx = $detallex['medicxxx'];
+        } else {
+            $mayorxxx = $detallex['dispoxxx'];
+        }
+
+        $detalley=['dispoxxx' => [],'medicxxx' => []];
+        foreach ($mayorxxx as $key => $value) {
+            $detalley['dispoxxx'][]=[
+                "medidisp" => isset($detallex['dispoxxx'][$key]['medidisp'])?$detallex['dispoxxx'][$key]['medidisp']:'',
+                "lotexxxx" => isset($detallex['dispoxxx'][$key]['lotexxxx'])?$detallex['dispoxxx'][$key]['lotexxxx']:'',
+                "consumid" => isset($detallex['dispoxxx'][$key]['consumid'])?$detallex['dispoxxx'][$key]['consumid']:'',
+                "alistada" => isset($detallex['dispoxxx'][$key]['alistada'])?$detallex['dispoxxx'][$key]['alistada']:'',
+                "sobrante" => isset($detallex['dispoxxx'][$key]['sobrante'])?$detallex['dispoxxx'][$key]['sobrante']:'',
+                "identifi" => isset($detallex['dispoxxx'][$key]['identifi'])?$detallex['dispoxxx'][$key]['identifi']:'',
+            ];
+            $detalley['medicxxx'][]=[
+                "medidisp" => isset($detallex['medicxxx'][$key]['medidisp'])?$detallex['medicxxx'][$key]['medidisp']:'',
+                "lotexxxx" => isset($detallex['medicxxx'][$key]['lotexxxx'])?$detallex['medicxxx'][$key]['lotexxxx']:'',
+                "consumid" => isset($detallex['medicxxx'][$key]['consumid'])?$detallex['medicxxx'][$key]['consumid']:'',
+                "alistada" => isset($detallex['medicxxx'][$key]['alistada'])?$detallex['medicxxx'][$key]['alistada']:'',
+                "sobrante" => isset($detallex['medicxxx'][$key]['sobrante'])?$detallex['medicxxx'][$key]['sobrante']:'',
+                "identifi" => isset($detallex['medicxxx'][$key]['identifi'])?$detallex['medicxxx'][$key]['identifi']:'',
+            ];
+        }
+        // ddd($detalley);
         $dataxxxx = [
-            'vistaurl' => 'Produccion.Alistamiento.pdf.alistami',
+            'vistaurl' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.formulario.pdf.cabecera',
             'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
             'tipoxxxx' => 2,
             'nombarch' => 'conciliacion',
-            'dataxxxx' => ['cabecera' => $objetoxx, 'detallex' => $alistami]
+            'dataxxxx' => [
+                'cabecera' => $objetoxx, 'detallex' => $detalley
+            ]
         ];
         return Pdfs::getImprimirPdf($dataxxxx);
     }
@@ -144,12 +186,10 @@ trait PdfTrait
         }
     }
 
-
-    public function getPdfCalistam(Calistam $objetoxx)
+    public function getRearmarArray($alistami)
     {
         $disposix = [];
         $medicamx = [];
-        $alistami = Alistamiento::getMlotesDlotes($objetoxx->id);
         foreach ($alistami as $key => $value) {
             if ($value['value_di'] > 0) {
                 $disposix[] =  [
@@ -180,29 +220,33 @@ trait PdfTrait
         } else {
             $mayorxxx = $disposix;
         }
-        $alistami=[];
+        $alistami = [];
         foreach ($mayorxxx as $key => $value) {
-            $alistami[]=[
-                "medicamd" => isset($disposix[$key]['medicamd'])?$disposix[$key]['medicamd']:'',
-                "value_di" => isset($disposix[$key]['value_di'])?$disposix[$key]['value_di']:'',
-                "lotexxxd" => isset($disposix[$key]['lotexxxd'])?$disposix[$key]['lotexxxd']:'',
-                "reginvid" => isset($disposix[$key]['reginvid'])?$disposix[$key]['reginvid']:'',
-                "fechvend" => isset($disposix[$key]['fechvend'])?$disposix[$key]['fechvend']:'',
-                "dispo_id" => isset($disposix[$key]['dispo_id'])?$disposix[$key]['dispo_id']:'',
-                "medicamm" => isset($medicamx[$key]['medicamm'])?$medicamx[$key]['medicamm']:'',
-                "value_me" => isset($medicamx[$key]['value_me'])?$medicamx[$key]['value_me']:'',
-                "lotexxxm" => isset($medicamx[$key]['lotexxxm'])?$medicamx[$key]['lotexxxm']:'',
-                "reginvim" => isset($medicamx[$key]['reginvim'])?$medicamx[$key]['reginvim']:'',
-                "fechvenm" => isset($medicamx[$key]['fechvenm'])?$medicamx[$key]['fechvenm']:'',
-                "medic_id" => isset($medicamx[$key]['medic_id'])?$medicamx[$key]['medic_id']:'',
+            $alistami[] = [
+                "medicamd" => isset($disposix[$key]['medicamd']) ? $disposix[$key]['medicamd'] : '',
+                "value_di" => isset($disposix[$key]['value_di']) ? $disposix[$key]['value_di'] : '',
+                "lotexxxd" => isset($disposix[$key]['lotexxxd']) ? $disposix[$key]['lotexxxd'] : '',
+                "reginvid" => isset($disposix[$key]['reginvid']) ? $disposix[$key]['reginvid'] : '',
+                "fechvend" => isset($disposix[$key]['fechvend']) ? $disposix[$key]['fechvend'] : '',
+                "dispo_id" => isset($disposix[$key]['dispo_id']) ? $disposix[$key]['dispo_id'] : '',
+                "medicamm" => isset($medicamx[$key]['medicamm']) ? $medicamx[$key]['medicamm'] : '',
+                "value_me" => isset($medicamx[$key]['value_me']) ? $medicamx[$key]['value_me'] : '',
+                "lotexxxm" => isset($medicamx[$key]['lotexxxm']) ? $medicamx[$key]['lotexxxm'] : '',
+                "reginvim" => isset($medicamx[$key]['reginvim']) ? $medicamx[$key]['reginvim'] : '',
+                "fechvenm" => isset($medicamx[$key]['fechvenm']) ? $medicamx[$key]['fechvenm'] : '',
+                "medic_id" => isset($medicamx[$key]['medic_id']) ? $medicamx[$key]['medic_id'] : '',
             ];
         }
+        return $alistami;
+    }
+    public function getPdfCalistam(Calistam $objetoxx)
+    {
         $dataxxxx = [
             'vistaurl' => 'Produccion.Alistamiento.pdf.alistami',
             'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
             'tipoxxxx' => 2,
             'nombarch' => 'alistamientod',
-            'dataxxxx' => ['cabecera' => $objetoxx, 'detallex' => $alistami]
+            'dataxxxx' => ['cabecera' => $objetoxx, 'detallex' => $this->getRearmarArray(Alistamiento::getMlotesDlotes($objetoxx->id))]
         ];
         return Pdfs::getImprimirPdf($dataxxxx);
     }

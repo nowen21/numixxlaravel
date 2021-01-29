@@ -21,7 +21,7 @@ class CreatePacientesTable extends Migration
             $table->string('nombres',50);
             $table->string('apellidos',50);
             $table->double('peso', 9, 2);
-            $table->integer('cama');
+            $table->string('cama');
             $table->date('fechnaci');
             $table=CamposMagicos::getForeign($table, 'genero');
             $table=CamposMagicos::getForeign($table, 'ep');
@@ -42,7 +42,7 @@ class CreatePacientesTable extends Migration
             $table->double('peso', 9, 2);
             $table->integer('genero_id');
             $table->integer('ep_id');
-            $table->integer('servicio_id'); 
+            $table->integer('servicio_id');
             $table->integer('cama');
             $table->date('fechnaci');
             $table->integer('municipio_id');
