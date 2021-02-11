@@ -218,9 +218,6 @@ class TerminadoController extends Controller
     public function store(TerminadoCrearRequest $request)
     {
         $dataxxxx = $request->all();
-
-        //ddd($dataxxxx);
-
         return $this->grabar($dataxxxx, '', 'Alistamiento creado con éxito!!');
     }
 
@@ -312,7 +309,7 @@ class TerminadoController extends Controller
 
         $dataform = new Dataformulario();
         $formulac = Cformula::where('id', $procesox)->first();
-        $calculos = $dataform->calculos($formulac);  ddd($calculos);
+        $calculos = $dataform->calculos($formulac);
         return $calculos['pesoteor'];
     }
     public function getPesoreal(Request $request)

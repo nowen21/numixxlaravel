@@ -61,7 +61,6 @@ class MultivitaminasHidrosolubles {
         $formulax[30] = $this->dataxxxx['requdiar']/ $this->factor30;
         break;
     }
-    //ddd($formulax[20]);
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
   }
 

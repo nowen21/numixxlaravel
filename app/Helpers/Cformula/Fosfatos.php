@@ -78,7 +78,7 @@ class Fosfatos
         $formulax[7] = $this->dataxxxx['requdiar'];  //FOSFATO  PARENTERAL  (FOSFATO DE POTASIO PISA POTASIO 2 MEQ/ML - FÓSFORO 1 MM/ML)
         break;
     }
-   //ddd($this->dataxxxx['requdiar']);
+
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
   }
 
@@ -124,10 +124,10 @@ class Fosfatos
         $formulax[5] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']; //FOSFATO -  /PARENTERAL (GLICEROFOSFATO DE SODIO SODIO 2 MEQ ML  FÓSFORO 1 MM ML
         $formulax[6] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] /2.6; //FOSFATO  PARENTERAL  (FOSFATO DE POTASIO CORPAUL POTASIO 3,8 MEQ/ML - FÓFORO 2,6 MM/ML)
         $formulax[7] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']; //FOSFATO  PARENTERAL  (FOSFATO DE POTASIO PISA POTASIO 2 MEQ/ML - FÓSFORO 1 MM/ML)
-        // ddd($formulax[5]);
+
         break;
     }
-    //ddd($this->estructu[$this->casaxxxx][$this->medicame]);
+
     $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] = $formulax[$this->medicame];
   }
 

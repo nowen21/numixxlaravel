@@ -6,13 +6,12 @@
             <i class="fas fa-angle-left right"></i>
         </p>
     </a>
-
     <ul class="nav nav-treeview">
         @can('rangonpt-leer')
         <li class="nav-item">
             <a href="{{ route('rangonpt') }}" class="nav-link">
                 <i class="fas fa-door-open nav-icon"></i>
-                <p>Rangos NPT</p>
+                <p>Rangos Medicamentos</p>
             </a>
         </li>
         @endcan
@@ -24,7 +23,6 @@
             </a>
         </li>
         @endcan
-
         @canany(['casa-leer'])
         <li class="nav-item">
             <a href="{{ route('casa') }}" class="nav-link">
@@ -41,6 +39,5 @@
             </a>
         </li>
         @endcanany
-
     </ul>
 </li>

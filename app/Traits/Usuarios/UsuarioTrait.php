@@ -15,13 +15,13 @@ trait UsuarioTrait
 
     public function getUsuarios($request)
     {
-        $dataxxxx = User::select(
+        $dataxxxx = User::select([
             'users.id',
             'users.name',
             'users.email',
             'sis_clinicas.sucursal',
             's_estado',
-            'users.sis_esta_id',
+            'users.sis_esta_id']
         )
             ->join('sis_clinicas', 'users.sis_clinica_id', '=', 'sis_clinicas.id')
             ->join('sis_estas', 'users.sis_esta_id', '=', 'sis_estas.id');

@@ -35,6 +35,7 @@ class Dataformulario
       ->where('urangnpts.npt_id', $dataxxxx['paciente']->npt_id)
       ->where('medicame_sis_clinica.sis_clinica_id', $dataxxxx['paciente']->sis_clinica->id)
       ->where('medicames.casa_id', $dataxxxx['casaidxx'])
+      ->where('medicames.sis_esta_id',1)
       ->get();
 
     $comboxxx = [];

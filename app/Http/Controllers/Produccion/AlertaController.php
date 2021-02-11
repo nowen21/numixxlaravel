@@ -51,7 +51,7 @@ class AlertaController extends Controller
 
     private function view($dataxxxx)
     {
-        $this->opciones['alertasx']=AlertasHelper::alertas() ;  //ddd($this->opciones['alertasx']);
+        $this->opciones['alertasx']=AlertasHelper::alertas() ;
 
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }

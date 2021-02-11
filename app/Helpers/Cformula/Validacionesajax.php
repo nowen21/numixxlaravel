@@ -117,7 +117,7 @@ class Validacionesajax
         if ($dataxxxx['cantvolu'] == 'volu') {
             $valocant = $formulax['rediario'];
         }
-        //ddd($valocant);
+
 
         // consular el rango
         $medicame = Mnpt::join('urangnpts', 'mnpts.urangnpt_id', '=', 'urangnpts.id')
@@ -202,7 +202,6 @@ class Validacionesajax
                     return $queryxxx;
                 })
                     ->first()->requerim;
-                //ddd($requerim);
                 break;
             case 'multiuno': //liposoluble
                 $requerim = Lipopedi::where(function ($queryxxx) use ($dataxxxx) {

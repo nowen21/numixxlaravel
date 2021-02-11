@@ -47,7 +47,7 @@
             <thead>
                 <tr>
                     <th>MEDICAMENTO</th>
-                    <th>SELEdddCCIÓN</th>
+                    <th>SELECCIÓN</th>
                     <th>UNIDAD</th>
                     <th>REQUERIMIENTO</th>
                     <th>VOLUMEN</th>
@@ -67,4 +67,11 @@
             </tbody>
         </table>
     </div>
+    <div class="form-group col-md-4">
+    <h1>Profesional que formula: </h1>
+    </div>
+    <div class="form-group col-md-8">
+   <h3>{{$todoxxxx['modeloxx']->creador->name}}</h3>
+    </div>
+
 </div>

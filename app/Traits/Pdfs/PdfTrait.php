@@ -57,7 +57,6 @@ trait PdfTrait
 
         $dataxxxx['preparad'] = isset($dataxxxx['cformula']->userprep);
         $dataxxxx['liberado'] = 'w';
-        // ddd($dataxxxx['cformula']->paciente);
         $dataxxxx = [
             'vistaurl' => 'Reporte.Etiquetas.etiquetanpt',
             'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
@@ -141,7 +140,6 @@ trait PdfTrait
                 "identifi" => isset($detallex['medicxxx'][$key]['identifi'])?$detallex['medicxxx'][$key]['identifi']:'',
             ];
         }
-        // ddd($detalley);
         $dataxxxx = [
             'vistaurl' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.formulario.pdf.cabecera',
             'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],

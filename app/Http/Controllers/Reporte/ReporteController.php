@@ -33,7 +33,7 @@ class ReporteController extends Controller
         $this->opciones['botoform'] = [
             [
                 'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'], []],
-                'formhref' => 2, 'tituloxx' => 'VOLVER A NNAJS', 'clasexxx' => 'btn btn-sm btn-primary'
+                'formhref' => 2, 'tituloxx' => 'VOLVER A S', 'clasexxx' => 'btn btn-sm btn-primary'
             ],
         ];
     }
@@ -41,9 +41,9 @@ class ReporteController extends Controller
     public function index()
     {
 
-     
+
         $this->opciones['ruarchjs'] = [
-            
+
         ];
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }

@@ -63,13 +63,13 @@ class Aguas {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[29] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[29] = $this->purgaxxx * $this->dataxxxx['volumenx'];
         break;
       case 2:// neonatos
-        $formulax[29] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[29] = $this->purgaxxx * $this->dataxxxx['volumenx'];
         break;
       case 3:
-        $formulax[29] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+        $formulax[29] = $this->purgaxxx * $this->dataxxxx['volumenx'];
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['purgaxxx'] = $formulax[$this->medicame];

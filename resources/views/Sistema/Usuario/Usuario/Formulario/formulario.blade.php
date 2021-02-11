@@ -25,6 +25,17 @@
         @endif
     </div>
     <div class="form-group col-md-6">
+        {{ Form::label('documento', 'Cédula:', ['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::text('documento', null, ['class' => $errors->first('documento') ?
+         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Cédula', 'maxlength' => '120', 'autofocus']) }}
+        @if($errors->has('documento'))
+        <div class="invalid-feedback d-block">
+            {{ $errors->first('documento') }}
+        </div>
+        @endif
+    </div>
+
+    <div class="form-group col-md-6">
         {{ Form::label('email', 'E-mail:', ['class' => 'control-label col-form-label-sm']) }}
 
         {{ Form::text('email', null, ['class' => $errors->first('email') ?
@@ -52,7 +63,7 @@
 
 
 
-    <div class="form-group col-md-12">
+    <div class="form-group col-md-6">
         {{ Form::label('sis_esta_id', 'Estado:', ['class' => 'control-label col-form-label-sm']) }}
 
         {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ?

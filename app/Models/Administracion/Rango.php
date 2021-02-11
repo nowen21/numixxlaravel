@@ -74,7 +74,6 @@ class Rango extends Model
     }
 
 
-    //ddd(1);
     /**
      * econtrar las condiciones faltantes
      */

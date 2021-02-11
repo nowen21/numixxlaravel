@@ -89,7 +89,6 @@ class Potasios
       )[$this->dataxxxx['fosfa_id']]['reqtotal'];
     }
 
-    //ddd($retolfos);
     switch ($this->dataxxxx['fosfa_id']) {
       case 6:
         if ($this->npt_idxx == 3) {
@@ -120,7 +119,7 @@ class Potasios
         $formulax[11] = $this->pesoxxxx * $this->dataxxxx['requdiar'] - $restasxx; //POTASIO CLORURO
         break;
     }
-    //ddd($formulax[$this->medicame]);
+
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
   }
 

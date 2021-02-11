@@ -16,7 +16,7 @@ class CreateUnidadsTable extends Migration
      */
     public function up()
     {
-        
+
         Schema::create($this->tablaxxx, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('s_unidad', 50)->unique();
@@ -33,7 +33,6 @@ class CreateUnidadsTable extends Migration
             $table->string('metodoxx', 50);
             $table = CamposMagicos::h_magicos($table);
             $table->softDeletes();
-         
         });
         DB::statement("ALTER TABLE " . $this->tablaxxx . " comment 'TABLA QUE ALMACENARA LAS UNIDADADES DE LOS RANGOS NPT'");
         DB::statement("ALTER TABLE h_" . $this->tablaxxx . " comment 'TABLA QUE ALMACENARA LOS LOGS DE LA TABLA {$this->tablaxxx}'");

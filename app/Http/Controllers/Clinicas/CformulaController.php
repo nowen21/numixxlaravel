@@ -29,7 +29,7 @@ class CformulaController extends Controller
     {
         $this->dataform = new Dataformulario();
         $this->opciones['pestpadr'] = 4;
-        $this->opciones['parapest'] = [0,0,0,0];// paramentros para las pestañas
+        $this->opciones['parapest'] = [0, 0, 0, 0]; // paramentros para las pestañas
         $this->opciones['permisox'] = 'formular';
         $this->opciones['routxxxx'] = 'formular';
         $this->opciones['rutacarp'] = 'Clinicas.';
@@ -80,7 +80,7 @@ class CformulaController extends Controller
                 'titunuev' => 'NUEVA FORMULACIÓN',
                 'titulist' => 'LISTA DE FORMULACIONES',
                 'dataxxxx' => [],
-                'vercrear' => $padrexxx->sis_esta_id==1?true:false,
+                'vercrear' => $padrexxx->sis_esta_id == 1 ? true : false,
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', [$padrexxx->id]),
                 'cabecera' => [
                     [
@@ -347,13 +347,13 @@ class CformulaController extends Controller
             if ($request->requedia > 0) {
                 $dataxxxx['formulax'] = Validacionesajax::formulaciones($request->all());
                 $dataxxxx['finalxxx'] = $this->getCalculos($request->all());
-                // $arrayxxx='[';
-// foreach ($request->dataxxxx as $key => $value) {
-//     $arrayxxx.='["name"=>"'.$value['name'].'","value"=>"'.$value['value'].'"],';
-// }
-//                 $arrayxxx.='];<br>';
-//                 echo '<pre>';
-//                 print_r($arrayxxx);
+                // $arrayxxx = '[';
+                // foreach ($request->dataxxxx as $key => $value) {
+                //     $arrayxxx .= '["name"=>"' . $value['name'] . '","value"=>"' . $value['value'] . '"],';
+                // }
+                // $arrayxxx .= '];';
+                // print_r($arrayxxx);
+                // exit;
             }
 
             return response()->json($dataxxxx);
@@ -378,9 +378,8 @@ class CformulaController extends Controller
     public function getRequerimientoVolumenq()
     {
         foreach ($this->getCalculos($this->getData()) as $key => $value) {
-           echo $value['campoxxx'].'=>'.$value['valuexxx'].',<br>';
+            echo $value['campoxxx'] . '=>' . $value['valuexxx'] . ',<br>';
         }
-    //    ddd($this->getCalculos($this->getData()));
     }
 
     public function getRequerimientoVolumen(Request $request)
@@ -389,5 +388,4 @@ class CformulaController extends Controller
             return Validacionesajax::getRango($request);
         }
     }
-
 }

@@ -20,6 +20,8 @@ class UsuarioCrearRequest extends FormRequest {
         'name.required' => 'El nombre del usuario es requerido',
         'email.required' => 'El E-mail es requerido',
         'email.unique' => 'El E-mail ya se encuentra en uso',
+        'documento.required' => 'El documento es requerido',
+        'documento.unique'=>'El documento ya se encuentra en uso',
         'password.required' => 'El password debe ser obligatorio',
         'password.min' => 'El password mínimo debe ser de 6 caracteres',
         'sis_clinica_id.required' => 'La Clínica es requerida',
@@ -35,6 +37,7 @@ class UsuarioCrearRequest extends FormRequest {
     return [
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',
+        'documento' => 'required|unique:users',
         'password' => 'required|string|min:6',
         'sis_clinica_id' => 'required',
     ];

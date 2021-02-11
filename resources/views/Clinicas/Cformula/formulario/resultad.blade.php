@@ -70,7 +70,7 @@
             <td id="caltotkg">{{$todoxxxx['calculos']['caltotkg']}}</td>
         </tr>
         <tr>
-            <td colspan="2">RELACIÓNss CALCIO/FÓSFORO (<2)</td> <td id="calcfosf">{{$todoxxxx['calculos']['calcfosf']}}</td>
+            <td colspan="2">RELACIÓN CALCIO/FÓSFORO (<2)</td> <td id="calcfosf">{{$todoxxxx['calculos']['calcfosf']}}</td>
             <td id="calcfosv" colspan="2">{{$todoxxxx['calculos']['calcfosv']}}</td>
         </tr>
         <tr>

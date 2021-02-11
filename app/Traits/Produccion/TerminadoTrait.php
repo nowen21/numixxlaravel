@@ -13,6 +13,7 @@ trait TerminadoTrait
             $respuest['limitesx']['opcionxx'] = 'NO';
             $respuest['concepto']['valuexxx'] = 1;
             $respuest['concepto']['opcionxx'] = 'RECHAZADO';
+            $dataxxxx['valuexxx']=1;
         }
         $respuest['limitesx']['messagex'] = "El lpeso real: {$dataxxxx['pesoreal']} es superior al peso teórico : {$dataxxxx['pesoteor']}";
         return $respuest;
@@ -25,10 +26,12 @@ trait TerminadoTrait
             ],
             'concepto' => [
                 'valuexxx' => 2, 'opcionxx' => 'APROBADO', 'campoxxx' => '#concepto'
-            ]
+            ],
+            'valuexxx'=>2
         ];
 
         if ($dataxxxx['pesoreal'] < $dataxxxx['pesoteor']) {
+            $dataxxxx['valuexxx']=1;
             $respuest['limitesx']['valuexxx'] = 1;
             $respuest['limitesx']['opcionxx'] = 'NO';
             $respuest['concepto']['valuexxx'] = 1;

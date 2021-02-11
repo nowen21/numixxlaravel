@@ -20,7 +20,6 @@ class GrabarFormulacion {
 
   public static function setDformula($cabecera) {
     $cabecera['npt_id']=$cabecera['cformula']->paciente->npt_id;
-//  ddd($cabecera['npt_id']);
     $casaform = new CasasFormulacion($cabecera);
 
     if (count($cabecera['cformula']->dformulas)) {
@@ -51,14 +50,14 @@ class GrabarFormulacion {
         $volumenx = $formulax['volumenx'];
         //str_replace(",","",$dataxxxx[$key]);
         if ($data[0] == 'aguaeste') {
-      
+
           $volumenx = $cabecera[$data[0] . '_volu'];
           $cabecera[$data[0] . '_cant'] = 1;
           $volutota = $cabecera['tiempo'] * $cabecera['velocidad'];
           $purgaxx = ($volutota + $cabecera['purga']) / $volutota;
-          
+
           $formulax['purgaxxx'] = str_replace(",","",$volumenx) * $purgaxx;
-          
+
           }
         // cuando un medicamento no tiene requerimiento diario
         if ($cabecera[$data[0] . '_cant'] == '') {

@@ -64,6 +64,7 @@ class CasasFormulacion {
       }
       $this->estructu[$casa->id] = $medicame;
     }
+
     $this->aminoaci = new Aminoacidos($this->estructu, $this->pesoxxxx, $this->npt_idxx);
     $this->fosfatos = new Fosfatos($this->estructu, $this->pesoxxxx, $this->npt_idxx);
     $this->carbohid = new Carbohidratos($this->estructu, $this->pesoxxxx, $this->npt_idxx);
@@ -81,6 +82,7 @@ class CasasFormulacion {
     $this->acidosxx = new Acidos($this->estructu, $this->pesoxxxx, $this->npt_idxx);
     $this->vitamink = new VitaminasK($this->estructu, $this->pesoxxxx, $this->npt_idxx);
     $this->lipidosx = new Lipidos($this->estructu, $this->pesoxxxx, $this->npt_idxx);
+
     $this->aguasxxx = new Aguas($this->estructu, $this->pesoxxxx, $this->npt_idxx);
   }
 
@@ -92,6 +94,8 @@ class CasasFormulacion {
     return $estructu;
   }
   public function calculos($dataxxxx) {
+
+
     $medicame = Medicame::where('id', $dataxxxx['medisele'])->first();
     $calculox=[];
     switch ($medicame->casa->id) {
@@ -147,6 +151,7 @@ class CasasFormulacion {
         $calculox=$this->liposolu->liposoluble($dataxxxx, $medicame, $this->purgaxxx);
         break;
       case 18:
+
         $calculox=$this->aguasxxx->agua($dataxxxx, $medicame, $this->purgaxxx);
         break;
     }

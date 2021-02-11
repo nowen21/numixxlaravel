@@ -54,56 +54,8 @@ trait CalculosAjaxTrait
             [
                 'dataxxxx' =>
                 [
-                    ["name" => "_token", "value" => "sslVrNuKigxiJF07LJgLpCHFQSmuE4hi00qvoZIJ"],
-                    ["name" => "sis_clinica_id", "value" => "1"],
-                    ["name" => "tiempo", "value" => "24"],
-                    ["name" => "velocidad", "value" => "3.5"],
-                    ["name" => "volumen", "value" => "83.4"],
-                    ["name" => "purga", "value" => "30"],
-                    ["name" => "peso", "value" => "1.39"],
-                    ["name" => "aminoaci", "value" => "3"],
-                    ["name" => "aminoaci_cant", "value" => "2.2"],
-                    ["name" => "aminoaci_volu", "value" => "30.58"],
-                    ["name" => "fosfatox", "value" => "5"],
-                    ["name" => "fosfatox_cant", "value" => "1"],
-                    ["name" => "fosfatox_volu", "value" => "1.39"],
-                    ["name" => "carbohid", "value" => "8"],
-                    ["name" => "carbohid_cant", "value" => "6"],
-                    ["name" => "carbohid_volu", "value" => "24.02"],
-                    ["name" => "sodioxxx", "value" => "10"],
-                    ["name" => "sodioxxx_cant", "value" => "4"],
-                    ["name" => "sodioxxx_volu", "value" => "1.39"],
-                    ["name" => "potasiox", "value" => "11"],
-                    ["name" => "potasiox_cant", "value" => "2"],
-                    ["name" => "potasiox_volu", "value" => "1.39"],
-                    ["name" => "calcioxxx", "value" => "12"],
-                    ["name" => "calcioxxx_cant", "value" => "50"],
-                    ["name" => "calcioxxx_volu", "value" => "0.70"],
-                    ["name" => "magnesio", "value" => "13"],
-                    ["name" => "magnesio_cant", "value" => "10"],
-                    ["name" => "magnesio_volu", "value" => "0.07"],
-                    ["name" => "elemtraz", "value" => "17"],
-                    ["name" => "elemtraz_cant", "value" => "400"],
-                    ["name" => "elemtraz_volu", "value" => "2.22"],
-                    ["name" => "multivit", "value" => "20"],
-                    ["name" => "multivit_cant", "value" => "1.96"],
-                    ["name" => "multivit_volu", "value" => "1.96"],
-                    ["name" => "acidfoli", "value" => "24"],
-                    ["name" => "acidfoli_cant", "value" => ""],
-                    ["name" => "acidfoli_volu", "value" => ""],
-                    ["name" => "vitamink", "value" => "25"],
-                    ["name" => "vitamink_cant", "value" => ""],
-                    ["name" => "vitamink_volu", "value" => ""],
-                    ["name" => "lipidosx", "value" => "26"],
-                    ["name" => "lipidosx_cant", "value" => "10"],
-                    ["name" => "lipidosx_volu", "value" => "69.50"],
-                    ["name" => "multiuno", "value" => "19"],
-                    ["name" => "multiuno_cant", "value" => "5.6"],
-                    ["name" => "multiuno_volu", "value" => "5.60"],
-                    ["name" => "aguaeste", "value" => "29"],
-                    ["name" => "aguaeste_cant", "value" => ""],
-                    ["name" => "aguaeste_volu", "value" => "-55.42"],
-                    ["name" => "npt_id", "value" => "2"],
+                    ["name" => "_method", "value" => "PUT"],
+                    ["name" => "_token", "value" => "GS1UbGEVlyKDky7TtveLgfM21UpNA0sVZUyM88Ei"], ["name" => "sis_clinica_id", "value" => "1"], ["name" => "tiempo", "value" => "24"], ["name" => "velocidad", "value" => "75"], ["name" => "volumen", "value" => "1800"], ["name" => "purga", "value" => "30"], ["name" => "peso", "value" => "80"], ["name" => "aminoaci", "value" => "1"], ["name" => "aminoaci_cant", "value" => "1"], ["name" => "aminoaci_volu", "value" => "800.00"], ["name" => "fosfatox", "value" => "5"], ["name" => "fosfatox_cant", "value" => "10"], ["name" => "fosfatox_volu", "value" => "10.00"], ["name" => "carbohid", "value" => "8"], ["name" => "carbohid_cant", "value" => "1"], ["name" => "carbohid_volu", "value" => "230.40"], ["name" => "sodioxxx", "value" => "10"], ["name" => "sodioxxx_cant", "value" => "1"], ["name" => "sodioxxx_volu", "value" => "30.00"], ["name" => "potasiox", "value" => "11"], ["name" => "potasiox_cant", "value" => "1"], ["name" => "potasiox_volu", "value" => "40.00"], ["name" => "calcioxxx", "value" => "12"], ["name" => "calcioxxx_cant", "value" => "400"], ["name" => "calcioxxx_volu", "value" => "43.48"], ["name" => "magnesio", "value" => "13"], ["name" => "magnesio_cant", "value" => "400"], ["name" => "magnesio_volu", "value" => "20.00"], ["name" => "elemtraz", "value" => "14"], ["name" => "elemtraz_cant", "value" => "3.3"], ["name" => "elemtraz_volu", "value" => "10.00"], ["name" => "multivit", "value" => "20"], ["name" => "multivit_cant", "value" => "1"], ["name" => "multivit_volu", "value" => "25.00"], ["name" => "glutamin", "value" => "4"], ["name" => "glutamin_cant", "value" => "0.1"], ["name" => "glutamin_volu", "value" => "40.00"], ["name" => "vitaminc", "value" => "21"], ["name" => "vitaminc_cant", "value" => "500"], ["name" => "vitaminc_volu", "value" => "5.00"], ["name" => "complejb", "value" => "22"], ["name" => "complejb_cant", "value" => "3"], ["name" => "complejb_volu", "value" => "3.00"], ["name" => "tiaminax", "value" => "23"], ["name" => "tiaminax_cant", "value" => "500"], ["name" => "tiaminax_volu", "value" => "5.00"], ["name" => "acidfoli", "value" => "24"], ["name" => "acidfoli_cant", "value" => "1"], ["name" => "acidfoli_volu", "value" => "1.00"], ["name" => "vitamink", "value" => "25"], ["name" => "vitamink_cant", "value" => "1"], ["name" => "vitamink_volu", "value" => "0.10"], ["name" => "lipidosx", "value" => "26"], ["name" => "lipidosx_cant", "value" => "1"], ["name" => "lipidosx_volu", "value" => "400.00"], ["name" => "multiuno", "value" => "18"], ["name" => "multiuno_cant", "value" => "0.99"], ["name" => "multiuno_volu", "value" => "0.99"], ["name" => "aguaeste", "value" => "29"], ["name" => "aguaeste_cant", "value" => "1"], ["name" => "aguaeste_volu", "value" => "136.03"], ["name" => "npt_id", "value" => "3"],
                 ],
 
                 'campo_id' => 'aminoaci_volu',
@@ -137,8 +89,12 @@ trait CalculosAjaxTrait
             $dataxxxx['medisele'] == $dataxxxx['campoxxx'][0] . '_volu' &&
             $dataxxxx['dataxxxx'][$dataxxxx['campoxxx'][0] . '_volu'] > 0
         ) {
+
+
             $requdiar = $dataxxxx['dataxxxx'][$dataxxxx['campoxxx'][0] . '_volu'];
         }
+
+
         $dataxxxy = [
             'medisele' => $dataxxxx['medicame']->id, // mediamento seleccionado
             'requdiar' => $requdiar, // requerimineto diario por el mendicamento seleccionado
@@ -204,6 +160,7 @@ trait CalculosAjaxTrait
         ];
 
         $casaform = new CasasFormulacion($formulacion['cabecera']);
+
         $dataxxxx['volupurg'] = ($dataxxxx['volumen'] + $dataxxxx['purga']) / $dataxxxx['volumen'];
 
         foreach ($dataxxxx as $key => $registro) {
@@ -226,13 +183,17 @@ trait CalculosAjaxTrait
                 if ($dataxxxx[$key] > 0) {
                     // echo $key.' => ';
                     $osmolari = $mmarcasx->osmorali * $purgaxxx['purgaxxx'];
-                    // echo  $osmolari .'<br>';
+                    // echo  $osmolari .'';
                     $formulacion['osmolari'] += $osmolari; // calcular la osmolarida
+
                     $pesoespe = $mmarcasx->pesoespe * $purgaxxx['purgaxxx'];
+                    // echo $medicame->id.' ==> '.$pesoespe.' => '.$purgaxxx['purgaxxx'].'<br>';
                     $formulacion['pesoespe'] += $pesoespe; // calcular el peso específico
                 }
             }
+
         }
+
         return $formulacion;
     }
     private function casa($idcasaxx, $datasxxx)
@@ -280,7 +241,8 @@ trait CalculosAjaxTrait
         }
         //CONCENTRACIÓN DE L�?PIDOS (%)       (>1%)
         $lipidosx = $this->casa(16, $datasxxx)['requerim'];
-        $calculos['conclipi'] = (($lipidosx + $volumult / 5) / $calculos['volutota']) * 100;
+        // $calculos['conclipi'] = (($lipidosx + $volumult / 5) / $calculos['volutota']) * 100;
+        $calculos['conclipi'] = (($lipidosx) / $calculos['volutota']) * 100;
         //GRAMOS TOTALES DE NITROGENO
         $calculos['gramtota'] = $aminoaci / 6.25;
         //CALORIAS PROTEICAS 						2%
@@ -309,7 +271,7 @@ trait CalculosAjaxTrait
         $calculos['caltotkg'] = $calculos['calotota'] / $calculos['pesoxxxx'];
         //RELACIÓN CALCIO/FOSFÓRO                 (<2)
 
-        $calculos['calcfosf'] = ($datasxxx[6]['requtota'] * 9.3 / 1 / $calculos['volutota'] * 1000 / 40) * ($this->casa(2, $datasxxx)['volumenx'] * 31 / 1 / $calculos['volutota'] * 1000 / 31) / 100;
+        $calculos['calcfosf'] = ($datasxxx[6]['volumenx'] * 9.3 / 1 / $calculos['volutota'] * 1000 / 40) * ($this->casa(2, $datasxxx)['volumenx'] * 31 / 1 / $calculos['volutota'] * 1000 / 31) / 100;
 
         return $calculos;
     }

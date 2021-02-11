@@ -74,10 +74,6 @@ trait InventarioTrait
       Dfmlote::create($dataxxxx);
     }
 
-    // echo '<pre>';
-    // print_r($dataxxxx);
-    // ddd($dataxxxx);
-
     return $cantidad + $volumenx;
   }
 

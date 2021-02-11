@@ -106,8 +106,6 @@ trait ControlPFTrait
                 }
             }
         }
-
-        // ddd($pintarxy);
         if ($valorxxy > 0) {
             $dataxxxx = ['vistaurl' => 'Reporte.Control.pdf.alistami', 'dataxxxx' => ['ordenxxx' => $objetoxx, 'formular' => $pintarxy], 'orientac' => 0, 'tipoxxxx' => 1, 'margenes' => array(0, 0, 9.5 * 72, 14.9 * 72)];
             return $this->imprimir($dataxxxx);

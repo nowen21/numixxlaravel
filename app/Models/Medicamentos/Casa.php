@@ -76,7 +76,6 @@ class Casa extends Model
     public static function asignaorden($ordecasa, $pcasaxxx, $newoldxx)
     {
         $casasxxx = Casa::all();
-        //ddd($pcasaxxx->ordecasa .' => '.$ordecasa);
         foreach ($casasxxx as $value) {
             $casaxxxx = Casa::where('id', $value->id)->first();
             if ($newoldxx) { // se esta editando

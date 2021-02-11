@@ -140,7 +140,7 @@ class ControlPController extends Controller
                 'cabecera' =>[
 
                     ['td' => 'LOTE INTERNO'],
-                    ['td' => 'CEDULAddd'],
+                    ['td' => 'CEDULA'],
                     ['td' => 'NOMBRES'],
                     ['td' => 'APELLIDOS'],
                     ['td' => 'CLINICA'],

@@ -52,17 +52,17 @@ class RangoEditarRequest extends FormRequest
       'rangfina' => ['required', 'numeric', 'min:1', 'max:9999'],
     ];
     $this->validar();
-   
+
     return $this->_reglasx;
   }
 
   public function validar()
   {
-    // ddd($this->segments());
-    $rangoold = Rango::find($this->segments()[2]); 
+
+    $rangoold = Rango::find($this->segments()[2]);
     $rangonew = Rango::where('ranginic', $this->ranginic)
     ->where('rangfina', $this->rangfina)
-  
+
     ->first();
     if (isset($rangonew->id)) {
       if ($rangoold->id != $rangonew->id) {
@@ -70,8 +70,7 @@ class RangoEditarRequest extends FormRequest
         $this->_reglasx['rangoxxx'] = 'required';
       }
     }
-    //ddd($this->ranginic.' ==> '.$this->rangfina);
-    if ((int)$this->ranginic>= (int)$this->rangfina) { 
+    if ((int)$this->ranginic>= (int)$this->rangfina) {
       $this->_mensaje['rangoxx1.required'] = "El rango de finalicación debe ser mayor al de inicio";
       $this->_reglasx['rangoxx1'] = 'required';
     }

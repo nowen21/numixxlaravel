@@ -58,7 +58,8 @@ class MultivitaminasLiposolubles {
         $formulax[19] = $this->dataxxxx['requdiar'];
         break;
       case 3:// adultos
-        $formulax[18] = $this->dataxxxx['requdiar'] / self::FACTORXX;
+        $formulax[18] = $this->dataxxxx['requdiar'] ;
+        // $formulax[18] = $this->dataxxxx['requdiar'] / self::FACTORXX;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];

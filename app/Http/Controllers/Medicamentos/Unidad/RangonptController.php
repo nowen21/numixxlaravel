@@ -64,7 +64,7 @@ class RangonptController extends Controller
         $this->opciones['tablasxx'] = [
             [
                 'titunuev' => 'CREAR',
-                'titulist' => 'LISTA DE RANGOS NPT',
+                'titulist' => 'LISTA DE RANGOS PARA LOS MEDICAMENTOS',
                 'dataxxxx' => [
                     ['campoxxx' => 'botonesx', 'dataxxxx' => $this->opciones['rutacarp'] . $this->opciones['carpetax'] . '.botones.botonesapi'],
                     ['campoxxx' => 'estadoxx', 'dataxxxx' => 'layouts.components.botones.estadosx'],
@@ -92,7 +92,6 @@ class RangonptController extends Controller
                 'routxxxx' => 'rangonpt',
                 'parametr' => [$padrexxx],
             ],
-
         ];
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
@@ -214,7 +213,7 @@ class RangonptController extends Controller
         return redirect()->route($this->opciones['routxxxx'])->with('info', 'Registro ' . $activado . ' con éxito');
     }
 
-    
 
-    
+
+
 }

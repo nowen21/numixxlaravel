@@ -23,7 +23,6 @@ trait AsignaRangoTrait
     foreach ($rangosxx as $key => $value) {
 
     }
-   // ddd($dataxxxx['modeloxx']->dformulas[0]->medicame); //->rnpt
 
   }
 

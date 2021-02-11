@@ -62,7 +62,7 @@ class LoteReporteController extends Controller
     {
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'NUEVO NNAJ',
+                'titunuev' => 'NUEVO ',
                 'titulist' => 'Listado de Lotes',
                 'archdttb' => $this->opciones['rutacarp'] . 'Acomponentes.Adatatable.index',
                 'vercrear' => false,
@@ -104,7 +104,7 @@ class LoteReporteController extends Controller
             return $this->getOrdens($request);
         }
     }
-    
+
         /**
      * Store a newly created resource in storage.
      *
@@ -135,11 +135,11 @@ class LoteReporteController extends Controller
      */
     public function show(Orden $objetoxx)
     {
-        
+
         return $this->view(['modeloxx' => $objetoxx, 'accionxx' => ['ver', 'formulario']]);
     }
 
-   
+
     public function edit(Orden $objetoxx)
     {
         if (auth()->user()->can($this->opciones['permisox'] . '-editar')) {
@@ -169,5 +169,5 @@ class LoteReporteController extends Controller
         return $this->grabar($request->all(), '', 'Orden creados con exito');
     }
 
- 
+
 }

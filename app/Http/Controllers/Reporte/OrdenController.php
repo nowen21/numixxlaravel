@@ -53,7 +53,7 @@ class OrdenController extends Controller
     {
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'NUEVO NNAJ',
+                'titunuev' => 'NUEVO ',
                 'titulist' => 'Listado de Órdenes de Producción',
                 'archdttb' => $this->opciones['rutacarp'] . 'Acomponentes.Adatatable.index',
                 'vercrear' => false,
@@ -64,7 +64,7 @@ class OrdenController extends Controller
                         ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
                         ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                         ['td' => 'Orden de producción', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'Observaciónn', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'Observación', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                         ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
 
                     ]

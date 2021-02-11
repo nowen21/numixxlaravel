@@ -45,7 +45,7 @@ class ControlPFController extends Controller
         $this->opciones['botoform'] = [
             [
                 'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'], []],
-                'formhref' => 2, 'tituloxx' => 'VOLVER A NNAJS', 'clasexxx' => 'btn btn-sm btn-primary'
+                'formhref' => 2, 'tituloxx' => 'VOLVER A S', 'clasexxx' => 'btn btn-sm btn-primary'
             ],
         ];
     }
@@ -56,7 +56,7 @@ class ControlPFController extends Controller
 
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'NUEVO NNAJ',
+                'titunuev' => 'NUEVO ',
                 'titulist' => 'LISTA DE CONTROL DE PROCESOS Y PRODUCTOS TERMINADOS',
                 'archdttb' => $this->opciones['rutacarp'] . 'Acomponentes.Adatatable.index',
                 'vercrear' => false,
@@ -68,8 +68,7 @@ class ControlPFController extends Controller
                     ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
 
                     ['td' => 'Orden de producción', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'Observaciónn', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-
+                    ['td' => 'Observación', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ]
                  ],
                 'columnsx' => [

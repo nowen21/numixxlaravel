@@ -62,7 +62,7 @@ class AlistamientoReporteController extends Controller
 
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'NUEVO NNAJ',
+                'titunuev' => 'NUEVO ',
                 'titulist' => 'Listado de Alistamientos',
                 'archdttb' => $this->opciones['rutacarp'] . 'Acomponentes.Adatatable.index',
                 'vercrear' => false,
@@ -101,7 +101,7 @@ class AlistamientoReporteController extends Controller
 
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'NUEVO NNAJ',
+                'titunuev' => 'NUEVO ',
                 'titulist' => 'Listado de Alistamientos',
                 'archdttb' => $this->opciones['rutacarp'] . 'Acomponentes.Adatatable.index',
                 'vercrear' => false,

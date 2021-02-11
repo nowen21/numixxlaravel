@@ -19,7 +19,7 @@ trait Pestanias
     } else {
       $padrexxx = DB::table($dataxxxx['tablaxxx'])->where('id', $dataxxxx['idxxxxxx'])->first();
       switch ($dataxxxx['tablaxxx']) {
-        case 'unidads': 
+        case 'unidads':
           $unidadxx = [
             'unidadxx' => ['', true, route('unidad'), ''],
             'urangosx' => ['', true, route('urango',[$padrexxx->id]), 'active'],
@@ -35,7 +35,6 @@ trait Pestanias
           break;
       }
     }
-// ddd( $unidadxx);
     return  $unidadxx;
   }
 }

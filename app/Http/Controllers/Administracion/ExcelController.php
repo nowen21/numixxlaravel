@@ -1284,7 +1284,6 @@ class ExcelController extends Controller
     {
         $excelxxx = $request->file('excelxxx');
 
-        // ddd($excelxxx);
         Excel::import(new RcodigosImport, $excelxxx);
 
         // Excel::import(new RcondicisImport, $excelxxx);

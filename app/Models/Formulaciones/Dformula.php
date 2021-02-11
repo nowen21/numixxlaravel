@@ -69,7 +69,6 @@ class Dformula extends Model
       } else {
         $dataxxxx['sis_esta_id'] = 1;
         $dataxxxx['user_crea_id'] = Auth::user()->id;
-        //ddd( $dataxxxx);
         $objetoxx = Cformula::create($dataxxxx);
       }
 

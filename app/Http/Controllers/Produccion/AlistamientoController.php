@@ -129,7 +129,7 @@ class AlistamientoController extends Controller
         $this->opciones['rutarchi'] = $this->opciones['rutacarp'] . 'Acomponentes.Acrud.index';
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'NUEVO NNAJ',
+                'titunuev' => 'NUEVO ',
                 'titulist' => 'LISTA DE CONTROL DE PROCESOS Y PRODUCTOS TERMINADOS',
                 'archdttb' => $this->opciones['rutacarp'] . 'Acomponentes.Adatatable.index',
                 'vercrear' => false,

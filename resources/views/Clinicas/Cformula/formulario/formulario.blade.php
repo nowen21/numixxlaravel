@@ -15,7 +15,7 @@
         @endif
     </div>
     <div class="form-group col-md-4">
-        {{ Form::label('tiempo', 'Tiempo Infusión:', ['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::label('tiempo', 'Tiempo Infusión (H) :', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::text('tiempo', $todoxxxx['modeloxx']->tiempo, ['class' => 'form-control-plaintext']) }}
         @else
@@ -31,7 +31,7 @@
     </div>
 
     <div class="form-group col-md-4">
-        {{ Form::label('velocidad', 'Velocidad Infusión:', ['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::label('velocidad', 'Velocidad Infusión (ml/h):', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::text('velocidad', $todoxxxx['modeloxx']->velocidad, ['class' => 'form-control-plaintext',
         'style'=>'height: 28px']) }}
@@ -47,7 +47,7 @@
         @endif
     </div>
     <div class="form-group col-md-4">
-        {{ Form::label('volumen', 'Volumen Total:', ['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::label('volumen', 'Volumen Total (ml):', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::text('volumen', $todoxxxx['modeloxx']->volumen, ['class' => 'form-control-plaintext']) }}
         @else
@@ -63,7 +63,7 @@
     </div>
 
     <div class="form-group col-md-4">
-        {{ Form::label('purga', 'Purga:', ['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::label('purga', 'Purga (ml):', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::text('purga', $todoxxxx['modeloxx']->purga, ['class' => 'form-control-plaintext']) }}
         @else
@@ -79,7 +79,7 @@
     </div>
 
     <div class="form-group col-md-4">
-        {{ Form::label('peso', 'Peso:', ['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::label('peso', 'Peso (Kg):', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::text('peso', $todoxxxx['modeloxx']->peso, ['class' => 'form-control-plaintext']) }}
         @else

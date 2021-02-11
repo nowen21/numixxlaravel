@@ -74,7 +74,7 @@ class ConciliaReporteController extends Controller
 
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'NUEVO NNAJ',
+                'titunuev' => 'NUEVO ',
                 'titulist' => 'Listado de Alistamientos',
                 'archdttb' => $this->opciones['rutacarp'] . 'Acomponentes.Adatatable.index',
                 'vercrear' => false,
@@ -86,7 +86,7 @@ class ConciliaReporteController extends Controller
                     ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'PRODUCTO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ORDEN DE SERVICIO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    
+
                     ]
                  ],
                  'columnsx' => [
@@ -112,7 +112,7 @@ class ConciliaReporteController extends Controller
 
         $this->opciones['tablasxx'] = [
             [
-                'titunuev' => 'NUEVO NNAJ',
+                'titunuev' => 'NUEVO ',
                 'titulist' => 'Listado de Conciliaciones',
                 'archdttb' => $this->opciones['rutacarp'] . 'Acomponentes.Adatatable.index',
                 'vercrear' => false,
@@ -124,7 +124,7 @@ class ConciliaReporteController extends Controller
                     ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'PRODUCTO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ORDEN DE SERVICIO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    
+
                     ]
                  ],
                  'columnsx' => [
@@ -149,14 +149,14 @@ class ConciliaReporteController extends Controller
     {
         if ($request->ajax()) {
             $request->routexxx = [$this->opciones['routxxxx']];
-           
+
             $request->botonesx = $this->opciones['rutacarp'] .
                 $this->opciones['carpetax'] . '.Botones.botonesapi';
             $request->estadoxx = 'layouts.components.botones.estadosx';
             return $this->getAlistamientos($request);
         }
     }
-    
+
         /**
      * Store a newly created resource in storage.
      *
@@ -187,11 +187,11 @@ class ConciliaReporteController extends Controller
      */
     public function show(Orden $objetoxx)
     {
-        
+
         return $this->view(['modeloxx' => $objetoxx, 'accionxx' => ['ver', 'formulario']]);
     }
 
-   
+
     public function edit(Orden $objetoxx)
     {
         if (auth()->user()->can($this->opciones['permisox'] . '-editar')) {
@@ -230,5 +230,5 @@ class ConciliaReporteController extends Controller
             ->route($this->opciones['routxxxx'] . '.editar', [$usuariox->id])
             ->with('info', $infoxxxx);
     }
- 
+
 }
