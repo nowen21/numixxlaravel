@@ -67,6 +67,7 @@
             </tbody>
         </table>
     </div>
+    @include('Produccion.Revision.formulario.resultad')
     <div class="form-group col-md-4">
     <h1>Profesional que formula: </h1>
     </div>

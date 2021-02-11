@@ -70,8 +70,8 @@ class RevisionEditarRequest extends FormRequest
     }
     if ($validarx > 0) {
       $this->_reglasx['validarx'] = 'required';
-      $this->_mensaje['validarx.required'] = $validarx == 1 ? 'El siguete medicamento: ' .
-        $medicame . ' no cuenta con inventario suficiente' : 'Los siguetes medicamentos: ' .
+      $this->_mensaje['validarx.required'] = $validarx == 1 ? 'El siguiente medicamento: ' .
+        $medicame . ' no cuenta con inventario suficiente' : 'Los siguiente medicamentos: ' .
         $medicame . ' no cuenta conn inventario suficiente';
     }
   }

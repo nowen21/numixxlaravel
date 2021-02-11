@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\Produccion;
 
 use App\Helpers\Cformula\Dataformulario;
+use App\Helpers\Cformula\Validacionesajax;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produccion\RevisionEditarRequest;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Alertas\AlertasTrait;
+use App\Traits\Cformula\CalculosAjaxTrait;
+use App\Traits\Cformula\CalculosFormulacion;
 use App\Traits\Pestanias\ProduccionTrait;
 use App\Traits\Produccion\AsignaRangoTrait;
 use App\Traits\Produccion\InventarioTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RevisionController extends Controller
@@ -20,9 +24,14 @@ class RevisionController extends Controller
     use InventarioTrait;
     use AlertasTrait;
     use AsignaRangoTrait;
+    use CalculosFormulacion;
+    use CalculosAjaxTrait;
+    private $dataform;
     public function __construct()
     {
+        $this->dataform = new Dataformulario();
         $this->opciones = [
+            
             'cardhead' => 'Revisión Formulación',
             'permisox' => 'revision',
             'parametr' => [],
@@ -90,6 +99,7 @@ class RevisionController extends Controller
                     ['td' => 'VOLUMEN'],
                     ['td' => 'PURGA'],
                     ['td' => 'PESO'],
+                    ['td' => 'CLINICA'],
                     ['td' => 'REVISADO'],
                     ['td' => 'ESTADO'],
                 ],
@@ -101,6 +111,7 @@ class RevisionController extends Controller
                     ['data' => 'volumen', 'name' => 'cformulas.volumen'],
                     ['data' => 'purga', 'name' => 'cformulas.purga'],
                     ['data' => 'peso', 'name' => 'cformulas.peso'],
+                    ['data' => 'clinica', 'name' => 'clinicas.clinica'],
                     ['data' => 'revisado', 'name' => 'revisado'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
@@ -121,7 +132,9 @@ class RevisionController extends Controller
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
+        $this->opciones['calculos'] = $this->_dataxxx;
         if ($nombobje != '') {
+            $this->opciones['calculos'] = $this->dataform->calculos($objetoxx);
             $this->opciones[$nombobje] = $objetoxx;
         }
         $this->opciones['pestania'] = $this->getPestanias([
@@ -192,5 +205,19 @@ class RevisionController extends Controller
         $this->getAlerta(['objetoxx'=>$objetoxx,'tipoacci'=>3]);
         $dataxxxx = ['userevis_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id];
         return $this->grabar(['dataxxxx' => $dataxxxx, 'modeloxx' => $objetoxx, 'infoxxxx' => 'Se ha realizado la revisión con éxito']);
+    }
+
+    public function getRequerimientoVolumenq()
+    {
+        foreach ($this->getCalculos($this->getData()) as $key => $value) {
+            echo $value['campoxxx'] . '=>' . $value['valuexxx'] . ',<br>';
+        }
+    }
+
+    public function getRequerimientoVolumen(Request $request)
+    {
+        if ($request->ajax()) {
+            return Validacionesajax::getRango($request);
+        }
     }
 }

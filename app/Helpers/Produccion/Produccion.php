@@ -19,9 +19,11 @@ class Produccion
         $paciente = Cformula::select([
             'cformulas.id', 'cformulas.tiempo', 'cformulas.velocidad', 'cformulas.volumen',
             'cformulas.purga', 'cformulas.peso', 'cformulas.total', 'cformulas.sis_esta_id',
-            'sis_estas.s_estado', 'cformulas.paciente_id', 'cformulas.userevis_id'
+            'sis_estas.s_estado', 'cformulas.paciente_id', 'cformulas.userevis_id','clinicas.clinica'
         ])
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
+            ->join('sis_clinicas', 'cformulas.sis_clinica_id', '=', 'sis_clinicas.id')
+            ->join('clinicas', 'sis_clinicas.clinica_id', '=', 'clinicas.id')
             ->where('cformulas.created_at', 'LIKE', date('Y-m-d',time()).'%')
             ->orderBy('cformulas.userevis_id', 'ASC')
             ->orderBy('cformulas.created_at', 'ASC');

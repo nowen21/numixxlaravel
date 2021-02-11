@@ -58,9 +58,6 @@ foreach ($cformula->dformulas as $value) {
         $htmlxxxx .= $value->medicame->nombgene;
         $htmlxxxx .= '</td>';
         $htmlxxxx .= '<td style="  text-align: right;">';
-        $htmlxxxx .= $value->cantidad;
-        $htmlxxxx .= '</td>';
-        $htmlxxxx .= '<td style="  text-align: right;">';
         $htmlxxxx .= number_format($value->volumen, 2);
         $htmlxxxx .= '</td>';
         $htmlxxxx .= '<td style=" text-align: right;">';
@@ -180,9 +177,7 @@ foreach ($cformula->dformulas as $value) {
                 <th style=" width: 60%; text-align: left; border-top: 2px #000 solid;border-bottom: 2px #000 solid;">
                     NUTRIENTE:
                 </th>
-                <th style=" width: 10%; text-align: left; border-top: 2px #000 solid;border-bottom: 2px #000 solid;">
-                    REQ
-                </th>
+          
                 <th style=" width: 15%; text-align: left;border-top: 2px #000 solid;border-bottom: 2px #000 solid;">
                     VOLUMEN
                 </th>

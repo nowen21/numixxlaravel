@@ -73,6 +73,15 @@ class TerminadoCrearRequest extends FormRequest
       $this->_reglasx['limitexx'] = 'required';
       $this->_mensaje['limitexx.required'] = $dataxxxx['messagex'];
     }
+
+    if($this->completo==1||$this->particul==1||$this->integrid==1||$this->contenid==1||$this->fugasxxx==1
+    ||$this->miscelas==1||$this->burbujas==1||$this->document==1){
+      $this->_reglasx['permitir']='required';
+      $this->_mensaje['permitir.required'] = 'Ningun campo debe estar en NO';
+      }
+
+
+      
     return $this->_reglasx;
   }
 }
