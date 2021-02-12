@@ -60,7 +60,6 @@ class Aguas {
   }
 
   private function purganpt() {
-    $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
         $formulax[29] = $this->purgaxxx * $this->dataxxxx['volumenx'];

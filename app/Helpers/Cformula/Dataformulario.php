@@ -265,7 +265,7 @@ class Dataformulario
     }
     //CONCENTRACIÓN DE L�?PIDOS (%)       (>1%)
     $lipidosx = $this->casa(16, $datasxxx)['requerim'];
-    $calculos['conclipi'] = (($lipidosx + $volumult / 5) / $calculos['volutota']) * 100;
+    $calculos['conclipi'] = (($lipidosx) / $calculos['volutota']) * 100;
     //GRAMOS TOTALES DE NITROGENO
     $calculos['gramtota'] = $aminoaci / 6.25;
     //CALORIAS PROTEICAS 						2%
@@ -293,7 +293,8 @@ class Dataformulario
     //Calorías totales/Kg./día
     $calculos['caltotkg'] = $calculos['calotota'] / $calculos['pesoxxxx'];
     //RELACIÓN CALCIO/FOSFÓRO                 (<2)
-    $calculos['calcfosf'] = ($datasxxx[6]['requtota'] * 9.3 / 1 / $calculos['volutota'] * 1000 / 40) * ($this->casa(2, $datasxxx)['volumenx'] * 31 / 1 / $calculos['volutota'] * 1000 / 31) / 100;
+
+    $calculos['calcfosf'] = ($datasxxx[6]['volumenx'] * 9.3 / 1 / $calculos['volutota'] * 1000 / 40) * ($this->casa(2, $datasxxx)['volumenx'] * 31 / 1 / $calculos['volutota'] * 1000 / 31) / 100;
 
     return $calculos;
   }

@@ -147,7 +147,8 @@ class CformulaController extends Controller
         // indica si se esta actualizando o viendo
         $this->opciones['calculos'] = $this->_dataxxx;
         if ($dataxxxx['modeloxx'] != '') {
-            $this->opciones['calculos'] = $this->dataform->calculos($dataxxxx['modeloxx']);
+            $this->opciones['calculos'] = $this->getArmarDataObjeto($dataxxxx['modeloxx']);
+
             $this->opciones['modeloxx'] = $dataxxxx['modeloxx'];
             if (auth()->user()->can($this->opciones['permisox'] . '-crear')) {
                 if ($dataxxxx['padrexxx']->sis_esta_id == 1) {
@@ -342,19 +343,27 @@ class CformulaController extends Controller
                 ], 'finalxxx' => []
             ];
 
+            $formulax=$request->all();
+            $dataxxxx['formulax'] = Validacionesajax::formulaciones($formulax);
+            foreach ($formulax['dataxxxx'] as $key => $value) {
+                if($value['name']=='aguaeste_cant'){
+                    $formulax['dataxxxx'][$key]['value']=1;
+                }
+              if($value['name']=='aguaeste_volu'){
+                $formulax['dataxxxx'][$key]['value']=str_replace(',','',$dataxxxx['formulax']['aguaxxxx']);
+              }
+            }
+            $dataxxxx['finalxxx'] = $this->getCalculos($formulax);
 
 
-            if ($request->requedia > 0) {
-                $dataxxxx['formulax'] = Validacionesajax::formulaciones($request->all());
-                $dataxxxx['finalxxx'] = $this->getCalculos($request->all());
                 // $arrayxxx = '[';
                 // foreach ($request->dataxxxx as $key => $value) {
                 //     $arrayxxx .= '["name"=>"' . $value['name'] . '","value"=>"' . $value['value'] . '"],';
                 // }
-                // $arrayxxx .= '];';
+                // $arrayxxx .= '],';
                 // print_r($arrayxxx);
                 // exit;
-            }
+
 
             return response()->json($dataxxxx);
         }
@@ -377,7 +386,16 @@ class CformulaController extends Controller
     }
     public function getRequerimientoVolumenq()
     {
-        foreach ($this->getCalculos($this->getData()) as $key => $value) {
+        $formulax=$this->getData();
+
+        $dataxxxx['formulax'] = Validacionesajax::formulaciones($formulax);
+        foreach ($formulax['dataxxxx'] as $key => $value) {
+          if($value['name']=='aguaeste_volu'){
+            $formulax['dataxxxx'][$key]['value']=$dataxxxx['formulax']['aguaxxxx'];
+          }
+        }
+
+        foreach ($this->getCalculos($formulax) as $key => $value) {
             echo $value['campoxxx'] . '=>' . $value['valuexxx'] . ',<br>';
         }
     }

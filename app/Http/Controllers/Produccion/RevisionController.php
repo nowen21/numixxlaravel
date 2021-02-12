@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Produccion;
 
+use App\Helpers\Cformula\Casas;
 use App\Helpers\Cformula\Dataformulario;
 use App\Helpers\Cformula\Validacionesajax;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produccion\RevisionEditarRequest;
 use App\Models\Formulaciones\Cformula;
+use App\Models\Medicamentos\Casa;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Alertas\AlertasTrait;
 use App\Traits\Cformula\CalculosAjaxTrait;
@@ -31,7 +33,7 @@ class RevisionController extends Controller
     {
         $this->dataform = new Dataformulario();
         $this->opciones = [
-            
+
             'cardhead' => 'Revisión Formulación',
             'permisox' => 'revision',
             'parametr' => [],
@@ -134,7 +136,9 @@ class RevisionController extends Controller
         // indica si se esta actualizando o viendo
         $this->opciones['calculos'] = $this->_dataxxx;
         if ($nombobje != '') {
-            $this->opciones['calculos'] = $this->dataform->calculos($objetoxx);
+            $this->opciones['calculos'] = $this->getArmarDataObjeto($objetoxx);
+
+            // $this->opciones['calculos'] = $this->dataform->calculos($objetoxx);
             $this->opciones[$nombobje] = $objetoxx;
         }
         $this->opciones['pestania'] = $this->getPestanias([
@@ -202,7 +206,7 @@ class RevisionController extends Controller
      */
     public function update(RevisionEditarRequest  $request, Cformula $objetoxx)
     {
-        $this->getAlerta(['objetoxx'=>$objetoxx,'tipoacci'=>3]);
+        $this->getAlerta(['objetoxx' => $objetoxx, 'tipoacci' => 3]);
         $dataxxxx = ['userevis_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id];
         return $this->grabar(['dataxxxx' => $dataxxxx, 'modeloxx' => $objetoxx, 'infoxxxx' => 'Se ha realizado la revisión con éxito']);
     }

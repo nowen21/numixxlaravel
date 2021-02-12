@@ -4,6 +4,7 @@ namespace App\Traits\Cformula;
 
 use App\Helpers\Cformula\Casas;
 use App\Helpers\Cformula\CasasFormulacion;
+use App\Models\Medicamentos\Casa;
 use App\Models\Medicamentos\Medicame;
 use App\Models\Medicamentos\Mmarca;
 
@@ -46,30 +47,25 @@ trait CalculosAjaxTrait
     /**
      * Este metodo se utiliza como ejemplo para ver y armar la estructura del array con el que se van a ralizar los cálculos
      *
-     * @return void
+     * @return  $dataxxxx
      */
     public function getData()
     {
-        return
+        $dataxxxx =
+
             [
                 'dataxxxx' =>
-                [
-                    ["name" => "_method", "value" => "PUT"],
-                    ["name" => "_token", "value" => "GS1UbGEVlyKDky7TtveLgfM21UpNA0sVZUyM88Ei"], ["name" => "sis_clinica_id", "value" => "1"], ["name" => "tiempo", "value" => "24"], ["name" => "velocidad", "value" => "75"], ["name" => "volumen", "value" => "1800"], ["name" => "purga", "value" => "30"], ["name" => "peso", "value" => "80"], ["name" => "aminoaci", "value" => "1"], ["name" => "aminoaci_cant", "value" => "1"], ["name" => "aminoaci_volu", "value" => "800.00"], ["name" => "fosfatox", "value" => "5"], ["name" => "fosfatox_cant", "value" => "10"], ["name" => "fosfatox_volu", "value" => "10.00"], ["name" => "carbohid", "value" => "8"], ["name" => "carbohid_cant", "value" => "1"], ["name" => "carbohid_volu", "value" => "230.40"], ["name" => "sodioxxx", "value" => "10"], ["name" => "sodioxxx_cant", "value" => "1"], ["name" => "sodioxxx_volu", "value" => "30.00"], ["name" => "potasiox", "value" => "11"], ["name" => "potasiox_cant", "value" => "1"], ["name" => "potasiox_volu", "value" => "40.00"], ["name" => "calcioxxx", "value" => "12"], ["name" => "calcioxxx_cant", "value" => "400"], ["name" => "calcioxxx_volu", "value" => "43.48"], ["name" => "magnesio", "value" => "13"], ["name" => "magnesio_cant", "value" => "400"], ["name" => "magnesio_volu", "value" => "20.00"], ["name" => "elemtraz", "value" => "14"], ["name" => "elemtraz_cant", "value" => "3.3"], ["name" => "elemtraz_volu", "value" => "10.00"], ["name" => "multivit", "value" => "20"], ["name" => "multivit_cant", "value" => "1"], ["name" => "multivit_volu", "value" => "25.00"], ["name" => "glutamin", "value" => "4"], ["name" => "glutamin_cant", "value" => "0.1"], ["name" => "glutamin_volu", "value" => "40.00"], ["name" => "vitaminc", "value" => "21"], ["name" => "vitaminc_cant", "value" => "500"], ["name" => "vitaminc_volu", "value" => "5.00"], ["name" => "complejb", "value" => "22"], ["name" => "complejb_cant", "value" => "3"], ["name" => "complejb_volu", "value" => "3.00"], ["name" => "tiaminax", "value" => "23"], ["name" => "tiaminax_cant", "value" => "500"], ["name" => "tiaminax_volu", "value" => "5.00"], ["name" => "acidfoli", "value" => "24"], ["name" => "acidfoli_cant", "value" => "1"], ["name" => "acidfoli_volu", "value" => "1.00"], ["name" => "vitamink", "value" => "25"], ["name" => "vitamink_cant", "value" => "1"], ["name" => "vitamink_volu", "value" => "0.10"], ["name" => "lipidosx", "value" => "26"], ["name" => "lipidosx_cant", "value" => "1"], ["name" => "lipidosx_volu", "value" => "400.00"], ["name" => "multiuno", "value" => "18"], ["name" => "multiuno_cant", "value" => "0.99"], ["name" => "multiuno_volu", "value" => "0.99"], ["name" => "aguaeste", "value" => "29"], ["name" => "aguaeste_cant", "value" => "1"], ["name" => "aguaeste_volu", "value" => "136.03"], ["name" => "npt_id", "value" => "3"],
-                ],
+
+                [["name" => "_method", "value" => "PUT"], ["name" => "_token", "value" => "GS1UbGEVlyKDky7TtveLgfM21UpNA0sVZUyM88Ei"], ["name" => "sis_clinica_id", "value" => "1"], ["name" => "tiempo", "value" => "24"], ["name" => "velocidad", "value" => "75"], ["name" => "volumen", "value" => "1800"], ["name" => "purga", "value" => "30"], ["name" => "peso", "value" => "80"], ["name" => "aminoaci", "value" => "1"], ["name" => "aminoaci_cant", "value" => "0"], ["name" => "aminoaci_volu", "value" => "0.00"], ["name" => "fosfatox", "value" => "5"], ["name" => "fosfatox_cant", "value" => "10"], ["name" => "fosfatox_volu", "value" => "10.00"], ["name" => "carbohid", "value" => "8"], ["name" => "carbohid_cant", "value" => "1"], ["name" => "carbohid_volu", "value" => "230.40"], ["name" => "sodioxxx", "value" => "10"], ["name" => "sodioxxx_cant", "value" => "1"], ["name" => "sodioxxx_volu", "value" => "30.00"], ["name" => "potasiox", "value" => "11"], ["name" => "potasiox_cant", "value" => "1"], ["name" => "potasiox_volu", "value" => "40.00"], ["name" => "calcioxxx", "value" => "12"], ["name" => "calcioxxx_cant", "value" => "400"], ["name" => "calcioxxx_volu", "value" => "43.48"], ["name" => "magnesio", "value" => "13"], ["name" => "magnesio_cant", "value" => "400"], ["name" => "magnesio_volu", "value" => "20.00"], ["name" => "elemtraz", "value" => "14"], ["name" => "elemtraz_cant", "value" => "3.3"], ["name" => "elemtraz_volu", "value" => "10.00"], ["name" => "multivit", "value" => "20"], ["name" => "multivit_cant", "value" => "1"], ["name" => "multivit_volu", "value" => "25.00"], ["name" => "glutamin", "value" => "4"], ["name" => "glutamin_cant", "value" => "0.1"], ["name" => "glutamin_volu", "value" => "40.00"], ["name" => "vitaminc", "value" => "21"], ["name" => "vitaminc_cant", "value" => "500"], ["name" => "vitaminc_volu", "value" => "5.00"], ["name" => "complejb", "value" => "22"], ["name" => "complejb_cant", "value" => "3"], ["name" => "complejb_volu", "value" => "3.00"], ["name" => "tiaminax", "value" => "23"], ["name" => "tiaminax_cant", "value" => "500"], ["name" => "tiaminax_volu", "value" => "5.00"], ["name" => "acidfoli", "value" => "24"], ["name" => "acidfoli_cant", "value" => "1"], ["name" => "acidfoli_volu", "value" => "1.00"], ["name" => "vitamink", "value" => "25"], ["name" => "vitamink_cant", "value" => "1"], ["name" => "vitamink_volu", "value" => "0.10"], ["name" => "lipidosx", "value" => "26"], ["name" => "lipidosx_cant", "value" => "1"], ["name" => "lipidosx_volu", "value" => "400.00"], ["name" => "multiuno", "value" => "18"], ["name" => "multiuno_cant", "value" => "0.99"], ["name" => "multiuno_volu", "value" => "0.99"], ["name" => "aguaeste", "value" => "29"], ["name" => "aguaeste_cant", "value" => "1"], ["name" => "aguaeste_volu", "value" => "936.03"], ["name" => "npt_id", "value" => "3"],],
 
                 'campo_id' => 'aminoaci_volu',
                 '_token' => '3fiupRYqdP44f6f2udhmVBjhgNHCsRXXu2BZFaZP',
                 2 => ''
             ];
+        return $dataxxxx;
     }
     use PintarFormularioTrait;
-    public function getOsmPesoEspe($dataxxxx)
-    {
-        //
-        if ($dataxxxx) {
-        }
-    }
+
 
 
     /**
@@ -161,8 +157,6 @@ trait CalculosAjaxTrait
 
         $casaform = new CasasFormulacion($formulacion['cabecera']);
 
-        $dataxxxx['volupurg'] = ($dataxxxx['volumen'] + $dataxxxx['purga']) / $dataxxxx['volumen'];
-
         foreach ($dataxxxx as $key => $registro) {
             $campoxxx = explode('_', $key);
             if (count($campoxxx) == 2 && $campoxxx[1] == 'cant') {
@@ -177,21 +171,23 @@ trait CalculosAjaxTrait
                     ]
                 );
 
-                $dataxxxx['volupurg'] = $dataxxxx['volupurg'] * $purgaxxx['volumenx'];
+                // $dataxxxx['volupurg'] = $dataxxxx['volupurg'] * $purgaxxx['volumenx'];
                 $purgaxxx = $purgaxxx['formulax'];
+
+
                 $mmarcasx = Mmarca::where('medicame_id', $medicame->id)->first();
+
                 if ($dataxxxx[$key] > 0) {
-                    // echo $key.' => ';
                     $osmolari = $mmarcasx->osmorali * $purgaxxx['purgaxxx'];
-                    // echo  $osmolari .'';
                     $formulacion['osmolari'] += $osmolari; // calcular la osmolarida
 
                     $pesoespe = $mmarcasx->pesoespe * $purgaxxx['purgaxxx'];
-                    // echo $medicame->id.' ==> '.$pesoespe.' => '.$purgaxxx['purgaxxx'].'<br>';
+
+
                     $formulacion['pesoespe'] += $pesoespe; // calcular el peso específico
+
                 }
             }
-
         }
 
         return $formulacion;
@@ -313,8 +309,6 @@ trait CalculosAjaxTrait
         //Calorías totales/Kg./día
         $calculos['caltotkg'] = $calculos['calotota'] / $calculos['pesoxxxx'];
         //RELACIÓN CALCIO/FOSFÓRO                 (<2)
-        // print_r($datasxxx[6]) ; //50
-        //  echo $calculos['volutota']; //83.4
         $variablx = ($datasxxx[6]['volumenx'] * 9.3 / 1 / $calculos['volutota'] * 1000 / 40);
 
         $variablz = 31 / 1 / $calculos['volutota'] * 1000 / 31;
@@ -324,7 +318,40 @@ trait CalculosAjaxTrait
 
         return $calculos;
     }
+public function getArmarDataObjeto($objetoxx)
+{
+    $casasxxx = Casa::select(['id', 'nameidxx'])->get();
+    $casasxxy = [
 
+        ['name' => "npt_id", 'value' => $objetoxx->paciente->npt_id],
+        ['name' => "tiempo", 'value' => $objetoxx->tiempo],
+        ['name' => "velocidad", 'value' => $objetoxx->velocidad],
+        ['name' => "volumen", 'value' => $objetoxx->volumen],
+        ['name' => "purga", 'value' => $objetoxx->purga],
+        ['name' => "peso", 'value' => $objetoxx->peso],
+        ['name' => "total", 'value' => $objetoxx->total],
+        ['name' => "sis_clinica_id", 'value' => $objetoxx->sis_clinica_id],
+
+
+    ];
+    $casasxxm = [];
+    foreach ($casasxxx as $key => $value) {
+        $casasxxm[$value->id] = ["{$value->nameidxx}", "{$value->nameidxx}_cant", "{$value->nameidxx}_volu"];
+    }
+    foreach ($objetoxx->dformulas as $key => $value) {
+        $casaxxxx = $casasxxm[$value->medicame->casa_id];
+        $casasxxy[] = ['name' => "{$casaxxxx[0]}", 'value' => $value->medicame_id];
+        $casasxxy[] = ['name' => "{$casaxxxx[1]}", 'value' => $value->cantidad];
+        $casasxxy[] = ['name' => "{$casaxxxx[2]}", 'value' => $value->volumen];
+    }
+
+    $calculos = $this->getCalculos(['dataxxxx' => $casasxxy, 'campo_id' => 'aminoaci_volu']);
+    $calculox = [];
+    foreach ($calculos as $key => $value) {
+        $calculox[$value['campoxxx']] = $value['valuexxx'];
+    }
+    return $calculox;
+}
     public function getCalculos($cabecera)
     {
         $datasxxx = $this->getArmarData($cabecera);
@@ -344,11 +371,14 @@ trait CalculosAjaxTrait
         $this->_datacat['calocarv'] = $this->_datacat['calocarb'] / $this->_datacat['calotota'] * 100;
         $this->_datacat['calolipv'] = $this->_datacat['calolipi'] / $this->_datacat['calotota'] * 100;
         $this->_datacat['caloprov'] = $this->_datacat['caloprot'] / $this->_datacat['calotota'] * 100;
+
         $this->_datacat['pesoteor'] = $datasxxx['pesoespe']; //PESO TEORICO  (GRAMOS)
+
         $dataxxxx = [];
         foreach ($this->_datacat as $key => $value) {
-            $dataxxxx[] = ['campoxxx' => $key, 'valuexxx' => is_numeric($value) ? number_format($value, 2, ",", ".") : $value];
+            $dataxxxx[] = ['campoxxx' => $key, 'valuexxx' => $value];
         }
+        // ddd( $dataxxxx);
         return $dataxxxx;
     }
 }
