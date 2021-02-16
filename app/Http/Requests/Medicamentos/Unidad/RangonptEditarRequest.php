@@ -51,10 +51,14 @@ class RangonptEditarRequest extends FormRequest
 
     public function validar()
     {
-        $rangonpt = Rangonpt::where('id','!=', $this->segments()[2])->first();
+        $rangonpt = Rangonpt::where('randesde',  $this->randesde)
+            ->where('ranhasta',  $this->ranhasta)
+            ->whereNotIn('id', [$this->segments()[2]])
+            ->first();
+
         if (isset($rangonpt->id)) {
             $this->_mensaje['rangoxxx.required'] = "El rango ya existe";
-                $this->_reglasx['rangoxxx'] = 'required';
+            $this->_reglasx['rangoxxx'] = 'required';
         }
     }
 }

@@ -376,7 +376,7 @@ public function getArmarDataObjeto($objetoxx)
 
         $dataxxxx = [];
         foreach ($this->_datacat as $key => $value) {
-            $dataxxxx[] = ['campoxxx' => $key, 'valuexxx' => $value];
+            $dataxxxx[] = ['campoxxx' => $key, 'valuexxx' => is_numeric($value) ? number_format($value, 2, ",", ".") : $value];
         }
         // ddd( $dataxxxx);
         return $dataxxxx;

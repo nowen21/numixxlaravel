@@ -192,6 +192,7 @@ class MnptController extends Controller
      */
     public function edit($medicame, Mnpt $objetoxx)
     {
+
         $this->opciones['tituloxx'] = 'Editar: Lote';
         $this->opciones['botoform'][0]['routingx'][1] = [$medicame];
         $this->opciones['botoform'][1]['routingx'][1] = [$medicame];
