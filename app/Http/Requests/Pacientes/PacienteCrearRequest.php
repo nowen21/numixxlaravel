@@ -16,7 +16,7 @@ class PacienteCrearRequest extends FormRequest
     $this->_mensaje = [
       'registro.required' => 'Seleccines una fecha para el registro del paciente',
       'cedula.required' => 'Ingrese el número de documento',
-      'cedula.unique' => 'El número de documento  ya existe, debe comunicarse con el equipo de numixx',
+      'cedula.unique' => 'El número de documento  ya existe para la clínica',
       'nombres.required' => 'Ingrese el nombre',
       'npt_id.required' => 'Seleccione un NPT',
       'peso.required' => 'Ingreso el peso',
@@ -70,7 +70,7 @@ class PacienteCrearRequest extends FormRequest
 
   public function validar()
   {
-    $otroregi = Paciente::where('sis_clinica_id', $this->segments()[1])->where('cedula', $this->cedula)->first();
+    $otroregi = Paciente::where('sis_clinica_id', $this->sis_clinica_id)->where('cedula', $this->cedula)->first();
     if (isset($otroregi->id)) {
       $this->_reglasx['cedula'][1] = 'unique:pacientes';
     }
