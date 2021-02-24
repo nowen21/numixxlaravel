@@ -14,7 +14,7 @@ class MnptCrearRequest extends FormRequest
   public function __construct()
   {
     $this->_mensaje = [
-      'urangnpt_id.required' => 'Seleccione un npt',
+      'urangnpt_id.required' => 'Seleccione un rango',
 
     ];
     $this->_reglasx = [

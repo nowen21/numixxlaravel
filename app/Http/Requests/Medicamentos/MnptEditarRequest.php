@@ -12,16 +12,10 @@ class MnptEditarRequest extends FormRequest
 
     public function __construct() {
         $this->_mensaje = [
-            'npt_id.required' => 'Seleccione un npt',
-            'randesde.required' => 'Ingrese un rango desde',
-            'ranhasta.required' => 'Ingrese un rango hasta',
-            'rangunid.required' => 'Ingrese un rango unidad',
+            'urangnpt_id.required' => 'Seleccione un rango',
         ];
         $this->_reglasx = [
-            'npt_id' => 'required',
-            'randesde' => 'required',
-            'ranhasta' => 'required',
-            'rangunid' => 'required',
+            'urangnpt_id' => 'required',
         ];
       }
   /**
@@ -48,23 +42,13 @@ class MnptEditarRequest extends FormRequest
         return $this->_reglasx;
   }
   public function validar() {
-
-      $mnptxxx=Mnpt::where("randesde", $this->randesde)->where("ranhasta", $this->ranhasta)->
+      $mnptxxx=Mnpt::where("urangnpt_id", $this->urangnpt_id)->
       where("medicame_id", $this->segments()[1])->whereNotIn("id", [$this->segments()[3]])->
       first();
 
     if (isset($mnptxxx->id)) {
       $this->_mensaje['existexx.required'] = "Este rango ya existe";
       $this->_reglasx['existexx'] = 'required';
-    }
-    if ($this->randesde<1){
-        $this->_mensaje['mayoruno.required'] = "Se requiere un 'rango desde' mayor a uno";
-        $this->_reglasx['mayoruno'] = 'required';
-    }
-
-    if ($this->randesde>=$this->ranhasta){
-        $this->_mensaje['menorxxx.required'] = "Se requiere que el 'rango desde' sea menor al 'rango hasta'";
-        $this->_reglasx['menorxxx'] = 'required';
     }
   }
 }
