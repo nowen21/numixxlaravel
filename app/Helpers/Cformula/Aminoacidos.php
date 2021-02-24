@@ -47,6 +47,7 @@ class Aminoacidos {
         $formulax[2] = $this->dataxxxx['requdiar'] / (100 / 15) / $this->pesoxxxx; //f1 amino 10 amino
         break;
     }
+    // echo $this->medicame;
     $this->estructu[$this->casaxxxx][$this->medicame]['rediario'] = $formulax[$this->medicame];
   }
 

@@ -68,6 +68,9 @@ trait CalculosTrait
             case 1: // casa de los aminoacidos
                 $requtota = $casasxxx->aminoacidos($medicame, $datasxxx);
                 break;
+            case 2: // casa de los fosfatos
+                $requtota = $casasxxx->fosfatos($medicame, $datasxxx);
+                break;
             case 3: // casa carbohidratos
                 $requtota = $casasxxx->carbohidratos($medicame, $datasxxx);
                 break;

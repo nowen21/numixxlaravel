@@ -168,7 +168,7 @@ class TerminadoController extends Controller
     {
         $this->opciones['pedelies'] = [];
         $this->opciones['sinoxxxx'] = ['' => '..::Seleccione::..', 1 => 'NO', 2 => 'SI'];
-        $this->opciones['concepto'] = ['' => '..::Seleccione::..', 1 => 'RECHAZADO', 2 => 'APROBADO'];
+        $this->opciones['concepto'] = [];
         $this->opciones['pesoteor'] = number_format($this->peso($dataxxxx['procesox']), 2, ".", "");
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $dataxxxx['accionxx'];

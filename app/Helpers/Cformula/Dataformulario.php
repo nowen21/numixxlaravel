@@ -105,7 +105,6 @@ class Dataformulario
         $selelist = Dataformulario::getMedicamentosCasa($dataxxxx);
         $dataxxxx['tipocomb'] = false;
         $combo_id = Dataformulario::getMedicamentosCasa($dataxxxx);
-        //$combo_id = Medicame::combo1($value->id, false, $dataxxxx['paciente'], []);
         // cuando se pinta el formulario con datos
         if (isset($dataxxxx['furmulac']->id)) {
           // todos los medicames formulados
@@ -132,7 +131,7 @@ class Dataformulario
           'requerim' => $requerim,
           'requtota' => $requtota,
           'volumenx' => $volumenx,
-          'readonly' =>  $pedineon ? 'readonly' : $aguaeste ? 'readonly' : '',
+          'readonly' =>  $pedineon ? 'readonly' : ($aguaeste ? 'readonly' : ''),
           ///'valorxxx' => 4,
           'unidmedi' => $value->unidmedi,
         ];
@@ -210,7 +209,7 @@ class Dataformulario
     } else { // neonato y pediatrico
       $this->_dataxxx = $this->calculosneopediatrico($this->_dataxxx, $datasxxx);
     }
-    $this->_dataxxx['carbvali'] = $this->_dataxxx['concarbo'] > 24.5 ? 'ADVER/R.H�?GADO GRASO' : $this->_dataxxx['concarbo'] < 24.4 ? 'SEGURA' : '';
+    $this->_dataxxx['carbvali'] = $this->_dataxxx['concarbo'] > 24.5 ? 'ADVER/R.H�?GADO GRASO' : ($this->_dataxxx['concarbo'] < 24.4 ? 'SEGURA' : '');
     $this->_dataxxx['concprov'] = $this->_dataxxx['concprot'] < 1 ? 'NO ESTABLE' : 'ESTABLE';
     $this->_dataxxx['conclipv'] = ($this->_dataxxx['conclipi'] < 1 && $this->_dataxxx['conclipi'] != 0) ? 'NO ESTABLE' : 'ESTABLE';
     $this->_dataxxx['osmolari'] = $datasxxx['osmolari'] / $this->_dataxxx['velopurg']; //OSMOLARIDAD (mOsm / L)
@@ -235,6 +234,9 @@ class Dataformulario
       case 1: // casa de los aminoacidos
         $requtota = $casasxxx->aminoacidos($medicame, $datasxxx);
         break;
+        case 2: // casa de los fosfatos
+            $requtota = $casasxxx->fosfatos($medicame, $datasxxx);
+            break;
       case 3: // casa carbohidratos
         $requtota = $casasxxx->carbohidratos($medicame, $datasxxx);
         break;
@@ -294,7 +296,10 @@ class Dataformulario
     $calculos['caltotkg'] = $calculos['calotota'] / $calculos['pesoxxxx'];
     //RELACIÓN CALCIO/FOSFÓRO                 (<2)
 
-    $calculos['calcfosf'] = ($datasxxx[6]['volumenx'] * 9.3 / 1 / $calculos['volutota'] * 1000 / 40) * ($this->casa(2, $datasxxx)['volumenx'] * 31 / 1 / $calculos['volutota'] * 1000 / 31) / 100;
+    $casaxxxy=$this->casa(2, $datasxxx)['volumenx'];
+    $casaxxxy=($casaxxxy * 31 / 1 / $calculos['volutota'] * 1000 / 31);
+    $calculos['calcfosf'] = ($datasxxx[6]['volumenx'] * 9.3 / 1 / $calculos['volutota'] * 1000 / 40) *
+    $casaxxxy / 100;
 
     return $calculos;
   }

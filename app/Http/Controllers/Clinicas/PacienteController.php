@@ -62,12 +62,13 @@ class PacienteController extends Controller
      */
     public function index(SisClinica $padrexxx)
     {
+
         $objetoxx=Auth::user();
         $padrexxx=$objetoxx->sis_clinica;
         $this->opciones['cardheap'] = 'SUCURSAL: ' . $padrexxx->sucursal;
         $this->opciones['cardhead'] = 'CLINICA: ' . $padrexxx->clinica->clinica;
         $this->opciones['botoform'][0]['routingx'][1] = $padrexxx->id;
-        $this->opciones['parametr'] = [$padrexxx->clinica_id];
+        $this->opciones['parametr'] = [$padrexxx->id];
         $this->opciones['accionxx'] = 'index';
         $this->opciones['parapest'][0] = $padrexxx->id;
         $this->opciones['tablasxx'] = [
@@ -76,7 +77,7 @@ class PacienteController extends Controller
                 'titulist' => 'LISTA DE PACIENTES',
                 'dataxxxx' => [],
                 'vercrear' => true,
-                'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', [$padrexxx->clinica_id]),
+                'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', [$padrexxx->id]),
                 'cabecera' => [
                     [
                         ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
@@ -98,17 +99,17 @@ class PacienteController extends Controller
                 'tablaxxx' => 'tablapacientes',
                 'permisox' => 'paciente',
                 'routxxxx' => 'paciente',
-                'parametr' => [$padrexxx->clinica_id],
+                'parametr' => [$padrexxx->id],
             ],
 
         ];
-        
+
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
 
     public function getListado(Request $request,SisClinica $padrexxx)
     {
-     
+
         if ($request->ajax()) {
             $request->padrexxx=$padrexxx->id;
             $request->routexxx = [$this->opciones['routxxxx'],'formular'];
@@ -120,7 +121,7 @@ class PacienteController extends Controller
     }
     private function view($dataxxxx)
     {
-        
+
         $this->opciones['parapest'][0]=$dataxxxx['padrexxx']->id;
         $this->opciones['clinicai'] = SisClinica::getclinica(false, false);
         $this->opciones['cardheap'] = 'SUCURSAL: ' . $dataxxxx['padrexxx']->sis_clinica;

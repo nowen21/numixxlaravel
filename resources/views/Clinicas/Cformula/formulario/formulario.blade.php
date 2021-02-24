@@ -1,6 +1,6 @@
 <div class="form-group row">
     @include('layouts.registro')
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-12">
         {{ Form::label('sis_clinica_id', 'Clínica:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('sis_clinica_id', $todoxxxx['clinicax'], $todoxxxx['modeloxx']->sis_clinica_id, ['class' => 'form-control-plaintext','id'=>'sis_clinica_id']) }}
@@ -14,7 +14,7 @@
         </div>
         @endif
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
         {{ Form::label('tiempo', 'Tiempo Infusión (H) :', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::text('tiempo', $todoxxxx['modeloxx']->tiempo, ['class' => 'form-control-plaintext']) }}
@@ -30,7 +30,7 @@
         @endif
     </div>
 
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
         {{ Form::label('velocidad', 'Velocidad Infusión (ml/h):', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::text('velocidad', $todoxxxx['modeloxx']->velocidad, ['class' => 'form-control-plaintext',

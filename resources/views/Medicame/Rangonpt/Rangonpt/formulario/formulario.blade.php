@@ -6,7 +6,7 @@
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::number('randesde', $todoxxxx['modeloxx']->randesde, ['class' => 'form-control-plaintext']) }}
         @else
-        {{ Form::number('randesde', null, ['class' => $errors->first('randesde') ? 'form-control  is-invalid' : 'form-control', 'placeholder' => 'Rango Incia','step'=>"0.1", 'min'=>0, 'maxlength' => '120', 'autofocus']) }}
+        {{ Form::text('randesde', null, ['class' => $errors->first('randesde') ? 'form-control  is-invalid' : 'form-control', 'placeholder' => 'Rango Incia','step'=>"0.11", 'min'=>0, 'maxlength' => '120', 'autofocus','onkeypress'=>'return filterFloat(event,this);']) }}
         @endif
         @if($errors->has('randesde'))
         <div class="invalid-feedback d-block">
@@ -19,7 +19,7 @@
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::number('ranhasta', $todoxxxx['modeloxx']->ranhasta, ['class' => 'form-control-plaintext']) }}
         @else
-        {{ Form::number('ranhasta', null, ['class' => $errors->first('ranhasta') ? 'form-control  is-invalid' : 'form-control', 'placeholder' => 'Rango Finaliza','step'=>"0.1",  'min'=>0.1,'autofocus']) }}
+        {{ Form::text('ranhasta', null, ['class' => $errors->first('ranhasta') ? 'form-control  is-invalid' : 'form-control', 'placeholder' => 'Rango Finaliza','step'=>"0.1",  'min'=>0.1,'autofocus','onkeypress'=>'return filterFloat(event,this);']) }}
         @endif
         @if($errors->has('ranhasta'))
         <div class="invalid-feedback d-block">

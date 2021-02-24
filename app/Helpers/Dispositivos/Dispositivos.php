@@ -38,7 +38,7 @@ class Dispositivos
     {
         $paciente = Dlote::select(
             'dlotes.id',
-            'dmarcas.marcaxxx', 
+            'dmarcas.marcaxxx',
             'dlotes.lotexxxx',
             'dmarcas.dmedico_id',
             's_estado',
@@ -46,7 +46,7 @@ class Dispositivos
         )
             ->join('dmarcas', 'dlotes.dmarca_id', '=', 'dmarcas.id')
             ->join('sis_estas', 'dlotes.sis_esta_id', '=', 'sis_estas.id')
-            ->where('dlotes.dmarca_id', $request->padrexxx);
+            ->where('dmarcas.dmedico_id', $request->padrexxx);
         return DatatableHelper::getDatatable($paciente, $request);
     }
 }

@@ -295,9 +295,9 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => 'controlpf-borrar',  'descripc' => 'Inactivar control en proceso y finalizado']);
 
         Permission::create(['name' => 'ordprodu-leer',  'descripc' => 'Listar órdenes de producción']);
-        Permission::create(['name' => 'ordprodu-crear',  'descripc' => 'Crear órden de prodicción']);
-        Permission::create(['name' => 'ordprodu-editar',  'descripc' => 'Editar órden de prodicción']);
-        Permission::create(['name' => 'ordprodu-borrar',  'descripc' => 'Inactivar órden de prodicción']);
+        Permission::create(['name' => 'ordprodu-crear',  'descripc' => 'Crear órden de producción']);
+        Permission::create(['name' => 'ordprodu-editar',  'descripc' => 'Editar órden de producción']);
+        Permission::create(['name' => 'ordprodu-borrar',  'descripc' => 'Inactivar órden de producción']);
 
         $permiso = 'etiqueta';
         Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar las etiquetas']);

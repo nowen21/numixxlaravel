@@ -41,17 +41,26 @@ class Alistamiento
     }
     public static function getMlotes()
     {
-        $mlotexxx = Mlote::where('fechvenc', '>', date('Y-m-d', time()))
+        $mlotexxx = Mlote::
+        join('minvimas','mlotes.minvima_id','=','minvimas.id')
+        ->join('mmarcas','minvimas.mmarca_id','=','mmarcas.id')
+        ->join('medicames','mmarcas.medicame_id','=','medicames.id')
+        ->where('fechvenc', '>', date('Y-m-d', time()))
             ->where('inventar', '>', 0)
-            ->where('sis_esta_id',  1)
+            ->where('mlotes.sis_esta_id',  1)
+            ->orderBy('medicames.nombgene','ASC')
             ->get();
         return $mlotexxx;
     }
     public static function getDlotes()
     {
-        $dispmedi = Dlote::where('fechvenc', '>', date('Y-m-d', time()))
+        $dispmedi = Dlote::
+        join('dmarcas','dlotes.dmarca_id','=','dmarcas.id')
+        ->join('dmedicos','dmarcas.dmedico_id','=','dmedicos.id')
+        ->where('fechvenc', '>', date('Y-m-d', time()))
             ->where('inventar', '>', 0)
-            ->where('sis_esta_id',  1)
+            ->where('dlotes.sis_esta_id',  1)
+            ->orderBy('dmedicos.nombrexx','ASC')
             ->get();
         return $dispmedi;
     }

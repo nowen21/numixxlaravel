@@ -66,6 +66,9 @@ class Validacionesajax
                  */
                 $campoxxx = explode('_', $value['name']);
                 if (count($campoxxx) > 1 && $campoxxx[1] == 'volu' && $campoxxx[0] != 'aguaeste' && $campo_id[0] != $campoxxx[0]) {
+                    if ($value['value'] == '') {
+                        $value['value'] = 0;
+                    }
                     $aguaxxxx += $value['value'];
                 }
                 /**

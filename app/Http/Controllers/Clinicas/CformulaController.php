@@ -13,7 +13,6 @@ use App\Models\Formulaciones\Cformula;
 use App\Models\Pacientes\Paciente;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Cformula\CalculosAjaxTrait;
-use App\Traits\Cformula\CalculosFormulacion;
 use App\Traits\ClinicaTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +20,6 @@ use Illuminate\Support\Facades\Auth;
 class CformulaController extends Controller
 {
     use ClinicaTrait;
-    use CalculosFormulacion;
     use CalculosAjaxTrait;
     private $opciones;
     private $dataform;
@@ -129,7 +127,66 @@ class CformulaController extends Controller
             return $this->getPacientesCformula($request);
         }
     }
+    public function getDataxxxxCFT()
+    {
+        return [
 
+            'volutota' => 0, //volumen total
+
+            'veloinfu' => 0,  //velocidad de infusion
+
+            'pesoxxxx' => 0, //velocidad de infusion
+
+            'velopurg' => 0,  //velocidad de infusion
+
+            'carbvali' => 0,
+
+            'concprov' => 0,
+
+            'conclipv' => 0,
+
+            'osmolari' => 0,  //OSMOLARIDAD (mOsm / L)
+
+            'osmolarv' => 0,
+
+            'calcfosv' => 0,
+
+            'calototv' => 0,
+
+            'calocarv' => 0,
+
+            'calolipv' => 0,
+
+            'caloprov' => 0,
+
+            'pesoteor' => 0,  //PESO TEORICO  (GRAMOS)
+
+            'concarbo' => 0,
+
+            'concprot' => 0,
+
+            'conclipi' => 0,
+
+            'gramtota' => 0,
+
+            'protnitr' => 0,
+
+            'proteica' => 0,
+
+            'caloprot' => 0,
+
+            'calolipi' => 0,
+
+            'calocarb' => 0,
+
+            'calotota' => 0,
+
+            'caltotkg' => 0,
+
+            'calcfosf' => 0
+
+        ];
+    }
     private function view($dataxxxx)
     {
         $this->opciones['paciente'] = $dataxxxx['padrexxx'];
@@ -145,7 +202,7 @@ class CformulaController extends Controller
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $dataxxxx['accionxx'];
         // indica si se esta actualizando o viendo
-        $this->opciones['calculos'] = $this->_dataxxx;
+        $this->opciones['calculos'] = $this->getDataxxxxCFT();
         if ($dataxxxx['modeloxx'] != '') {
             $this->opciones['calculos'] = $this->getArmarDataObjeto($dataxxxx['modeloxx']);
 
@@ -183,6 +240,7 @@ class CformulaController extends Controller
                 'furmulac' => '',
             ]
         );
+
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', []],
@@ -343,26 +401,26 @@ class CformulaController extends Controller
                 ], 'finalxxx' => []
             ];
 
-            $formulax=$request->all();
+            $formulax = $request->all();
             $dataxxxx['formulax'] = Validacionesajax::formulaciones($formulax);
             foreach ($formulax['dataxxxx'] as $key => $value) {
-                if($value['name']=='aguaeste_cant'){
-                    $formulax['dataxxxx'][$key]['value']=1;
+                if ($value['name'] == 'aguaeste_cant') {
+                    $formulax['dataxxxx'][$key]['value'] = 1;
                 }
-              if($value['name']=='aguaeste_volu'){
-                $formulax['dataxxxx'][$key]['value']=str_replace(',','',$dataxxxx['formulax']['aguaxxxx']);
-              }
+                if ($value['name'] == 'aguaeste_volu') {
+                    $formulax['dataxxxx'][$key]['value'] = str_replace(',', '', $dataxxxx['formulax']['aguaxxxx']);
+                }
             }
             $dataxxxx['finalxxx'] = $this->getCalculos($formulax);
 
 
-                // $arrayxxx = '[';
-                // foreach ($request->dataxxxx as $key => $value) {
-                //     $arrayxxx .= '["name"=>"' . $value['name'] . '","value"=>"' . $value['value'] . '"],';
-                // }
-                // $arrayxxx .= '],';
-                // print_r($arrayxxx);
-                // exit;
+            // $arrayxxx = '[';
+            // foreach ($request->dataxxxx as $key => $value) {
+            //     $arrayxxx .= '["name"=>"' . $value['name'] . '","value"=>"' . $value['value'] . '"],';
+            // }
+            // $arrayxxx .= '],';
+            // print_r($arrayxxx);
+            // exit;
 
 
             return response()->json($dataxxxx);
@@ -386,15 +444,26 @@ class CformulaController extends Controller
     }
     public function getRequerimientoVolumenq()
     {
-        $formulax=$this->getData();
+        $formulax = $this->getData();
+        $campo_id = explode('_', $formulax['campo_id']);
+
+        $respuest['cantvolu'] = ($campo_id[1] == 'cant') ?
+            [$campo_id[0] . '_volu', ''] : // si se digitó requerimiento diario
+            [$campo_id[0] . '_cant', '']; // si se digito volumen
+
+
+
+        $dataxxxx = [
+            'formulax' => [
+                'cantvolu' => $respuest['cantvolu'],
+                'unidadxx' => [$campo_id[0] . '_cant', ''],
+                'menssage' => [$campo_id[0] . '_cant', 'hide', '']
+            ], 'finalxxx' => []
+        ];
+
 
         $dataxxxx['formulax'] = Validacionesajax::formulaciones($formulax);
-        foreach ($formulax['dataxxxx'] as $key => $value) {
-          if($value['name']=='aguaeste_volu'){
-            $formulax['dataxxxx'][$key]['value']=$dataxxxx['formulax']['aguaxxxx'];
-          }
-        }
-
+ddd($dataxxxx['formulax']);
         foreach ($this->getCalculos($formulax) as $key => $value) {
             echo $value['campoxxx'] . '=>' . $value['valuexxx'] . ',<br>';
         }

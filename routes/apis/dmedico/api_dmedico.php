@@ -1,9 +1,6 @@
 <?php
 
 use App\Helpers\Dispositivos\Dispositivos;
-use App\Models\Dispositivos\Dinvima;
-use App\Models\Dispositivos\Dlote;
-use App\Models\Dispositivos\Dmarca;
 use Illuminate\Http\Request;
 
 Route::get('dmedico/dmedico', function (Request $request) {

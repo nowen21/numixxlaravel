@@ -1,5 +1,5 @@
 <div class="form-group row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-12">
         {{ Form::label('sis_clinica_id', 'Clínica:', ['class' => 'control-label col-form-label-sm']) }}
         <div id="" class="form-control" >
             {{$todoxxxx['modeloxx']->sis_clinica->clinica->clinica}}

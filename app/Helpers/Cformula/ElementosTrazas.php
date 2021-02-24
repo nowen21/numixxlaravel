@@ -113,15 +113,14 @@ class ElementosTrazas
         $this->medicame = $medicame->id;
         $this->casaxxxx = $medicame->casa->id;
         $this->purgaxxx = $purgaxxx;
-        if ($this->npt_idxx == 3) {
+        // if ($this->npt_idxx == 3) {
             $this->requemientodiarionpt();
-        }
+        // }
 
 
         $this->requemientototalnpt();
         $this->volumennpt();
         $this->purganpt();
-
         return $this->estructu[$this->casaxxxx];
     }
 }

@@ -19,21 +19,26 @@ Route::group(['prefix' => 'usuarios'], function () use ($controll, $routexxx) {
 		'uses' => $controll . 'Controller@store',
 		'middleware' => ['permission:' . $routexxx . '-crear']
 	])->name($routexxx . '.crear');
+
 	Route::get('editar/{objetoxx}', [
 		'uses' => $controll . 'Controller@edit',
 		'middleware' => ['permission:' . $routexxx . '-editar']
 	])->name($routexxx . '.editar');
+
 	Route::put('editar/{objetoxx}', [
 		'uses' => $controll . 'Controller@update',
 		'middleware' => ['permission:' . $routexxx . '-editar']
     ])->name($routexxx . '.editar');
 
-
+    Route::get('polidato/{objetoxx}', [
+		'uses' => $controll . 'Controller@polidatoe',
+		'middleware' => ['permission:' . $routexxx . '-polidato']
+	])->name($routexxx . '.polidato');
 
 	Route::put('polidato/{objetoxx}', [
 		'uses' => $controll . 'Controller@polidatou',
 		'middleware' => ['permission:' . $routexxx . '-polidato']
-	])->name($routexxx . '.polidato');
+	])->name($routexxx . '.polidatx');
 
 	Route::get('ver/{objetoxx}', [
 		'uses' => $controll . 'Controller@show',
