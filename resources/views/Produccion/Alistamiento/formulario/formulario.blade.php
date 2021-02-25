@@ -68,7 +68,7 @@
             <thead>
                 <tr>
                     <th>DISPOSITIVO MÉDICO</th>
-                    <th style="text-align: center;">UND</th>
+                    <th style="text-align: center; width: 100px;">ldldldlUND</th>
                     <th>LOTE</th>
                     <th>REGISTRO INVIMA</th>
                     <th>F VENC</th>

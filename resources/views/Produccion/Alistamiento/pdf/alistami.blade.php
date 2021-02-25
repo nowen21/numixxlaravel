@@ -33,7 +33,7 @@
     <div class="flotar" style="width: 20%;text-align: center; border-bottom: 1px #000 solid">{{$cabecera->orden->ordeprod}}</div>
   </div>
   <div style=" width: 100%; padding-top: 40px ">
-    <table style=" border: 1px #000 solid" border='1' cellspacing="0">
+    <table style=" border: 1px #000 solid; width: 100%;" border='1' cellspacing="0">
       @include('Produccion.Alistamiento.pdf.cuerpo')
     </table>
   </div>

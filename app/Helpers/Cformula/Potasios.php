@@ -17,7 +17,6 @@ use App\Models\Medicamentos\Medicame;
  */
 class Potasios
 {
-
   private $estructu;
   private $pesoxxxx;
   private $npt_idxx;
@@ -26,8 +25,6 @@ class Potasios
   private $dataxxxx;
   private $purgaxxx;
   private $fosfatos;
-  private $volutota;
-
   public function __construct($estructu, $pesoxxxx, $npt_idxx)
   {
     $this->estructu = $estructu;
@@ -86,15 +83,19 @@ class Potasios
         ['volumenx' => 0, 'requdiar' => $this->dataxxxx['fosfcant']],
         $medicame,
         $this->purgaxxx
-      )[$this->dataxxxx['fosfa_id']]['reqtotal'];
+      )[$this->dataxxxx['fosfa_id']];
+      if ($this->npt_idxx == 3) {
+        $retolfos=$retolfos['reqtotal'];
+      }else{
+        $retolfos=$retolfos['volumenx'];
+      }
     }
-
     switch ($this->dataxxxx['fosfa_id']) {
       case 6:
         if ($this->npt_idxx == 3) {
           $restasxx = $retolfos * 3.6; //f9  potasio
         } else {
-          $restasxx = $retolfos * $this->pesoxxxx * 3.8;
+          $restasxx = $retolfos * 3.8;
         }
         break;
       case 7:
@@ -106,7 +107,6 @@ class Potasios
         }
         break;
     }
-
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
@@ -119,13 +119,11 @@ class Potasios
         $formulax[11] = $this->pesoxxxx * $this->dataxxxx['requdiar'] - $restasxx; //POTASIO CLORURO
         break;
     }
-
     $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] = $formulax[$this->medicame];
   }
 
   private function purganpt()
   {
-
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
