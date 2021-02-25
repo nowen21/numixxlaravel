@@ -45,7 +45,7 @@ class ControlPFController extends Controller
         $this->opciones['botoform'] = [
             [
                 'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'], []],
-                'formhref' => 2, 'tituloxx' => 'VOLVER A S', 'clasexxx' => 'btn btn-sm btn-primary'
+                'formhref' => 2, 'tituloxx' => 'VOLVER A REPORTES CONTROL EN PROCESO', 'clasexxx' => 'btn btn-sm btn-primary'
             ],
         ];
     }
