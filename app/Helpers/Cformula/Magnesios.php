@@ -86,7 +86,7 @@ class Magnesios {
         $formulax[13] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 200;
         break;
       case 3:// adultos
-        $formulax[13] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 20;
+        $formulax[13] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 19;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] = $formulax[$this->medicame];
