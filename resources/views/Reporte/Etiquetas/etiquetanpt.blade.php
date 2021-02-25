@@ -70,8 +70,8 @@ foreach ($cformula->dformulas as $value) {
 
 
 
-<div style="font-size: {{isset($tamaniox)==true?$tamaniox:9}}px">
-    <table style=" width: 90%;">
+<div style="font-size: {{isset($tamaniox)==true?$tamaniox:6}}px; border: 1px black;">
+    <table style=" width: 90%; ">
         <tr>
             <td style="width: 40%; text-align: left; height: 75px; " rowspan="3">
                 <img src="{{ url('img/Numixx_Nuevo_Logo.png') }}" style="width: 135px; height: 76px;" alt="logo">
@@ -177,7 +177,7 @@ foreach ($cformula->dformulas as $value) {
                 <th style=" width: 60%; text-align: left; border-top: 2px #000 solid;border-bottom: 2px #000 solid;">
                     NUTRIENTE:
                 </th>
-          
+
                 <th style=" width: 15%; text-align: left;border-top: 2px #000 solid;border-bottom: 2px #000 solid;">
                     VOLUMEN
                 </th>
@@ -191,7 +191,7 @@ foreach ($cformula->dformulas as $value) {
 
         </tbody>
     </table>
-    <table style=" width: 100%; font-size: 10px">
+    <table style=" width: 100%;">
         <tr>
             <td style=" width:30%;">
                 CONTENIDO
