@@ -3,19 +3,6 @@
 namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Pacientes\PacienteCrearRequest;
-use App\Http\Requests\Pacientes\PacienteEditarRequest;
-use App\Models\Administracion\Ep;
-use App\Models\Administracion\Genero;
-use App\Models\Administracion\Servicio;
-
-use App\Models\Medicamentos\Npt;
-use App\Models\Pacientes\Paciente;
-use App\Models\Sistema\Departamento;
-use App\Models\Sistema\Municipio;
-use App\Models\Sistema\SisEsta;
-use App\User;
-use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class RpermisoController extends Controller

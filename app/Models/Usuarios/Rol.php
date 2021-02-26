@@ -10,7 +10,7 @@ class Rol extends Role
 {
 
     protected $fillable = [
-        'name', 'user_edita_id', 'user_crea_id'
+        'name', 'user_edita_id', 'user_crea_id','guard_name'
     ];
 
     public static function transaccion($dataxxxx,  $objetoxx)
@@ -21,6 +21,7 @@ class Rol extends Role
             if ($objetoxx != '') {
                 $objetoxx->update($dataxxxx);
             } else {
+                $dataxxxx['user_crea_id'] = Auth::user()->id;
                 $dataxxxx['user_crea_id'] = Auth::user()->id;
                 $objetoxx = Rol::create($dataxxxx);
             }
