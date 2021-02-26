@@ -3,15 +3,9 @@
 namespace App\Traits\Reporte;
 
 use App\Helpers\DatatableHelper;
-use App\Models\Clinica\Crango;
-use App\Models\Dispositivos\Dlote;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Itemordene;
-use App\Models\Medicamentos\Mlote;
-use App\Models\Produccion\Proceso;
-use App\Models\Produccion\Terminado;
-use App\Models\Remision;
-use App\Models\Reportes\ControlPF;
+
 use App\Models\Reportes\Orden;
 use App\User;
 
@@ -36,7 +30,7 @@ trait ControlPFTrait
             'ordens.id', 'ordens.ordeprod', 'ordens.observac',
             'sis_estas.s_estado', 'ordens.created_at'
         ])
-            ->join('sis_estas', 'ordens.sis_esta_id', '=', 'sis_estas.id')->orderBy('ordens.ordeprod','desc');
+            ->join('sis_estas', 'ordens.sis_esta_id', '=', 'sis_estas.id')->orderBy('ordens.ordeprod', 'desc');
         return DatatableHelper::getDt($ordenxxx, $request);
     }
 
@@ -55,7 +49,6 @@ trait ControlPFTrait
         $formulac = Cformula::where('orden_id', $objetoxx->id)->where('terminado_id', '!=', null)->get()->toArray();
         $valorxxy = count($formulac);
         // hay formulaciones
-
         foreach ($formulac as $key => $value) {
             if (!in_array($value['userevis_id'], $liberado)) {
                 $liberado[] = $value['userevis_id'];
@@ -66,12 +59,12 @@ trait ControlPFTrait
                 $preparax .= User::where('id', $value['userprep_id'])->first()->name;
             }
             $formular[$key] = $value['id'];
-            if ($valorxxy <= 38) {
+            if ($valorxxy <= 37) {
                 if ($valorxxy == $key + 1) {
                     $pintarxy[] = ['pintarxx' => '', 'formular' => $formular, 'otrapagi' => 0, 'userprep' => $preparax, 'userlibe' => $liberadx];
                 }
             } else {
-                if (38 == $key + 1) {
+                if (37 == $key + 1) {
                     $pintarxy[] = ['pintarxx' => '', 'formular' => $formular, 'otrapagi' => 1, 'userprep' => $preparax, 'userlibe' => $liberadx];
                     $formular = [];
                     $preparax = '';
@@ -84,30 +77,25 @@ trait ControlPFTrait
             foreach (Itemordene::all() as $keypintar => $value) {
                 $valorxxx = [];
                 if ($value->colspanx == 0) {
-                    for ($i = 0; $i < 38; $i++) {
-                        if ($i < count($pintarxx['formular'])) {
-                            if ($keypintar == 0) { // lotes
-                                $valorxxx[$i] = ['valorxxx' => $pintarxx['formular'][$i], 'clasexxx' => 'verticalText'];
-                            } else { // las otras opciones (procesos y treminados)
-                                switch ($value->aplicaxx) {
-                                    case 1:
-                                        $valorxxx[$i] = ['valorxxx' => $this->procesos($formular, $value->campoxxx), 'clasexxx' => ''];
-                                        break;
-                                    case 2:
-                                        $valorxxx[$i] = ['valorxxx' => $this->terminados($pintarxx['formular'][$i], $value->campoxxx), 'clasexxx' => ''];
-
-                                        break;
-                                }
-                            }
-                        } else
-                            $valorxxx[$i] = ['valorxxx' => 'X', 'clasexxx' => ''];
+                    for ($i = 0; $i < 37; $i++) {
+                        $valorxxx[$i] =$this->getValidaRellenoPT($i,$pintarxx,$keypintar,$formular,$value);
                     }
+
                     $todosxxx[$keypintar]['validado'] = $valorxxx;
                 }
             }
         }
         if ($valorxxy > 0) {
-            $dataxxxx = ['vistaurl' => 'Reporte.Control.pdf.alistami', 'dataxxxx' => ['ordenxxx' => $objetoxx, 'formular' => $pintarxy], 'orientac' => 0, 'tipoxxxx' => 1, 'margenes' => array(0, 0, 9.5 * 72, 14.9 * 72)];
+            $dataxxxx = [
+                'vistaurl' => 'Reporte.Control.pdf.alistami',
+                'dataxxxx' => [
+                    'ordenxxx' => $objetoxx,
+                    'formular' => $pintarxy
+                ],
+                'orientac' => 0,
+                'tipoxxxx' => 1,
+                'margenes' => array(0, 0, 9.5 * 72, 14.9 * 72)
+            ];
             return $this->imprimir($dataxxxx);
         } else {
             return redirect()->route('controlpf')
@@ -133,7 +121,60 @@ trait ControlPFTrait
             return view($dataxxxx['vistaurl'], compact('datosxxx'));
         }
     }
+    /**
+     * validar los valores para saber si pinta SI o NO
+     *
+     * @param array $formular
+     * @param object $value
+     * @param array $pintarxx
+     * @param int $i
+     * @return void
+     */
+    public function getControlPT($formular, $value, $pintarxx, $i)
+    {
+        $respuest='';
+        switch ($value->aplicaxx) {
+            case 1:
+                $respuest= ['valorxxx' => $this->procesos($formular, $value->campoxxx), 'clasexxx' => '','altoxxxx'=>15];
+                break;
+            case 2:
+                $respuest= ['valorxxx' => $this->terminados($pintarxx['formular'][$i], $value->campoxxx), 'clasexxx' => '','altoxxxx'=>15];
+                if($value->campoxxx=='teorico_' || $value->campoxxx=='realxxx_'){
+                    $respuest['altoxxxx']=50;
+                    $respuest['clasexxx']='verticalText';
+                }
+                break;
+        }
+        return $respuest;
+    }
+    /**
+     * validar los datos que se van a pintar
+     *
+     * @param int $i
+     * @param array $pintarxx
+     * @param int $keypintar
+     * @param array $formular
+     * @param object $value
+     * @return void
+     */
+    public function getValidaRellenoPT($i,$pintarxx,$keypintar,$formular,$value)
+    {
+        $respuest='';
+        if ($i < count($pintarxx['formular'])) {
+            if ($keypintar == 0) { // lotes
+                $respuest= ['valorxxx' => $pintarxx['formular'][$i], 'clasexxx' => 'verticalText','altoxxxx'=>0];
+            } else { // las otras opciones (procesos y treminados)
+                $respuest=$this->getControlPT($formular, $value, $pintarxx, $i);
+            }
 
+        //     echo '<pre>';
+        // print_r($respuest);
+        } else {
+            $respuest= ['valorxxx' => '-', 'clasexxx' => '','altoxxxx'=>20];
+        }
+
+        return $respuest;
+    }
     private function procesos($formular, $campoxxx)
     {
 
@@ -165,7 +206,7 @@ trait ControlPFTrait
 
         // $valorxxx = Terminado::where('proceso_id', Proceso::select('id')->where('formulacione_id', $formular)->first()['id'])->first()[$campoxxx];
         $valorxxx = Cformula::find($formular)->terminado[$campoxxx];
-
+// echo $campoxxx.'<br>';
         switch ($campoxxx) {
             case 'completo':
             case 'particul':

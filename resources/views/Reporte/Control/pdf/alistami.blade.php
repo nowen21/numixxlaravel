@@ -1,3 +1,4 @@
+<div style="font-size: 10px;">
 @foreach($datosxxx['formular'] as $formulax)
 <table style=" width: 100%;" cellspacing='0' >
   <tr>
@@ -49,11 +50,11 @@
   @if($datoxxxx->rowspanx==2)
   <tr>
     <td rowspan="2" style="width: 24%;border: 1px #000 solid"  >{{$datoxxxx->itemxxxx}}</td>
-    <td colspan="38" style="border: 1px #000 solid; text-align: center">LOTES:</td>
+    <td colspan="37" style="border: 1px #000 solid; text-align: center">LOTES:</td>
   </tr>
   <tr>
     @foreach($datoxxxx->validado as $validadx)
-    <td style="width: 2%;border: 1px #000 solid; height: 50px" ><p class="{{$validadx['clasexxx']}}" >{{$validadx['valorxxx']}}</p></td>
+    <td style="width: 2%;border: 1px #000 solid; height: 50px;text-align: center" ><div class="{{$validadx['clasexxx']}}" >{{$validadx['valorxxx']}}</div></td>
     @endforeach
   </tr>
   @else
@@ -61,7 +62,7 @@
     <td colspan="{{$datoxxxx->colspanx}}" style="border: 1px #000 solid">{{$datoxxxx->itemxxxx}}</td>
     @if($datoxxxx->colspanx==0)
     @foreach($datoxxxx->validado as $validadx)
-    <td style="width: 2%;border: 1px #000 solid;text-align: center"  >{{$validadx['valorxxx']}}</td>
+    <td style="border: 1px #000 solid;text-align: center;height: {{$validadx['altoxxxx']}}px;"  ><div class="{{$validadx['clasexxx']}}" >{{$validadx['valorxxx']}}</div></td>
     @endforeach
     @endif
   </tr>
@@ -111,7 +112,7 @@
 @endforeach
 
 
-
+</div>
 
 
 
