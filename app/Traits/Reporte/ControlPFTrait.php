@@ -221,8 +221,14 @@ trait ControlPFTrait
 
                 if ($valorxxx == 2) {
                     $valorxxx = 'SI';
+                    if($campoxxx=='concepto'){
+                        $valorxxx = 'A';
+                    }
                 } else {
                     $valorxxx = 'NO';
+                    if($campoxxx=='concepto'){
+                        $valorxxx = 'R';
+                    }
                 }
 
 
