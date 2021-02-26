@@ -29,10 +29,10 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar npt del rango']);
         Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar npt del rango']);
         $permiso = 'rcondici';
-        Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar Conciones del rango']);
-        Permission::create(['name' => $permiso . '-crear',  'descripc' => 'Crear Concione del rango']);
-        Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar Concione del rango']);
-        Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar Concione del rango']);
+        Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar Condiciones del rango']);
+        Permission::create(['name' => $permiso . '-crear',  'descripc' => 'Crear Condiciones del rango']);
+        Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar Condiciones del rango']);
+        Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar Condiciones del rango']);
         $permiso = 'rcodigo';
         Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar Códigos de la condición']);
         Permission::create(['name' => $permiso . '-crear',  'descripc' => 'Crear Código de la condición']);
