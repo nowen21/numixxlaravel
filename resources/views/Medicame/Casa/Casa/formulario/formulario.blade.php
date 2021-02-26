@@ -27,6 +27,7 @@
 
 <div class="form-group row">
     <div class="form-group col-md-6">
+    {{ Form::label('casa', 'Casa:', ['class' => 'control-label col-form-label-sm']) }}
         {{ Form::text('casa', null, ['class' => $errors->first('casa') ? 'form-control  is-invalid' : 'form-control', 'placeholder' => 'Casa', 'maxlength' => '120', 'autofocus']) }}
         @if($errors->has('casa'))
         <div class="invalid-feedback d-block">
