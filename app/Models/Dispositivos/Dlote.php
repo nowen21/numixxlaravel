@@ -2,6 +2,7 @@
 
 namespace App\Models\Dispositivos;
 
+use App\Models\Produccion\Calistam;
 use App\Models\Sistema\SisEsta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +18,11 @@ class Dlote extends Model {
   public function dmarca(){
     return $this->belongsTo(Dmarca::class);
   }
-  
 
+public function calistams()
+{
+    $this->morphMany(Calistam::class,'calistamgable');
+}
   public static function transaccion($dataxxxx,  $objetoxx)
   {
     $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Produccion;
 
-use App\Helpers\Pdfs\Pdfs;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produccion\ConciliacionEditarRequest;
 use App\Models\Produccion\Calistam;
@@ -11,10 +11,12 @@ use App\Models\Sistema\SisEsta;
 use App\Traits\Conciliacion\ConciliacionTrait;
 use App\Traits\Pdfs\PdfTrait;
 use App\Traits\Pestanias\ProduccionTrait;
+use App\Traits\Produccion\AlisConciTrait;
 use Illuminate\Http\Request;
 
 class ConciliacionController extends Controller
 {
+    use AlisConciTrait;
     private $opciones;
     use ProduccionTrait;
     use ConciliacionTrait;
@@ -26,7 +28,7 @@ class ConciliacionController extends Controller
             'permisox' => 'concilia',
             'parametr' => [],
             'rutacarp' => 'Produccion.',
-            'tituloxx' => 'Crear: Conciliación',
+            'tituloxx' => 'CONCILIACIÓN',
             'slotxxxx' => 'concilia',
             'carpetax' => 'Conciliacion',
             'indecrea' => false,
@@ -144,8 +146,7 @@ class ConciliacionController extends Controller
      */
     public function edit(Calistam $objetoxx)
     {
-        $this->opciones['alistami'] = $this->getConsiliacion(['padrexxx' => $objetoxx]);
-
+        $this->opciones['alistami'] = $this->getMlotesDlotesACT(['alisconc' => true, 'padrexxx' => $objetoxx]);
         $this->opciones['clinicax'] = $objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
         $this->opciones['botoform'][] =
@@ -158,9 +159,8 @@ class ConciliacionController extends Controller
 
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
-        $cabecera = Calistam::transaccion($dataxxxx, $objectx);
-        $dataxxxx['dalistax'] = false;
-        Dalistam::transaccion($dataxxxx,  $cabecera);
+        $dataxxxx->request->add(['alisconc'=>true]);
+        $cabecera =$this->setTransaccionACT($dataxxxx,  $objectx);
         return redirect()
             ->route($this->opciones['routxxxx'] . '.editar', [$cabecera->id])
             ->with('info', $infoxxxx);
@@ -175,8 +175,7 @@ class ConciliacionController extends Controller
      */
     public function update(ConciliacionEditarRequest  $request, Calistam $objetoxx)
     {
-        $dataxxxx = $request->all();
-        return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
+        return $this->grabar($request, $objetoxx, 'Registro actualizado con éxito');
     }
 
     /**
@@ -203,18 +202,15 @@ class ConciliacionController extends Controller
             if ($request->cantsobr > $request->cantalis) {
                 $cantmayo = true;
             }
-            $idelemen = $request->idcancon[0] . '_' . $request->idcancon[1];
             $diferenc = $request->cantalis - $request->cantsobr;
             return response()->json([
                 'numeroxx' => $request->cantsobr,
                 'diferenc' => is_int($diferenc) ? $diferenc : number_format($diferenc, '2', '.', ''),
                 'cantalis' => $request->cantalis,
-                'idcancon' => $idelemen . '_con',
-                'idiferen' => $idelemen . '_dif',
+                'idcancon' => str_replace('_dif', '', $request->idcancon) . '_con',
+                'idiferen' => $request->idcancon,
                 'cantmayo' => $cantmayo
             ]);
         }
     }
-
-
 }

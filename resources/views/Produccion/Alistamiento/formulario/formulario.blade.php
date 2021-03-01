@@ -68,12 +68,16 @@
             <thead>
                 <tr>
                     <th>DISPOSITIVO MÉDICO</th>
+                    <th>INVENTARIO</th>
                     <th style="text-align: center; width: 100px;">UND</th>
+
                     <th>LOTE</th>
                     <th>REGISTRO INVIMA</th>
                     <th>F VENC</th>
                     <th>MEDICAMENTO</th>
+                    <th>INVENTARIO</th>
                     <th>UND</th>
+
                     <th>LOTE</th>
                     <th>REGISTRO INVIMA</th>
                     <th>F VENC</th>
@@ -85,30 +89,36 @@
                         font-size: 10px;
                     }
                 </style>
-                @foreach($todoxxxx['alistami'] as $alistami)
+                @foreach($todoxxxx['alistami']['lotesyyy'] as $key=> $alistami)
                 <tr>
-                    <td scope="col" class="letras">{{$alistami['medicamd']}}</td>
+                    <td scope="col" class="letras">{{$alistami['nombrexx']}}</td>
+                    <td scope="col" class="letras">{{$alistami['inventar']}}</td>
                     <td scope="col" class="letras" style="width: 100px">
-                        @if($alistami['medicamd']!='')
-                        {{ Form::text($alistami['dispo_id'], $alistami['value_di'],
-                            ['class'=>'form-control numerico','id'=>$alistami['dispo_id'],
+                        @if($alistami['mostrarx'])
+                        {{ Form::text($alistami['idxxxxxx'], $alistami['unidadxx'],
+                            ['class'=>'form-control numerico','id'=>$alistami['idxxxxxx'],
                             'onkeypress'=>'return filterFloat(event,this);','style'=>'width: 80px']) }}
                         @endif
                     </td>
-                    <td scope="col" class="letras">{{$alistami['lotexxxd']}}</td>
-                    <td scope="col" class="letras">{{$alistami['reginvid']}}</td>
-                    <td scope="col" class="letras">{{$alistami['fechvend']}}</td>
-                    <td scope="col" class="letras">{{$alistami['medicamm']}}</td>
-                    <td scope="col" class="letras">
-                        @if($alistami['medicamm']!='')
-                        {{ Form::text($alistami['medic_id'], $alistami['value_me'],
-                            ['class'=>'form-control numerico','id'=>$alistami['medic_id'],
-                            'onkeypress'=>'return filterFloat(event,this);','style'=>'width: 80px']) }}
-                        @endif
-                    </td>
-                    <td scope="col" class="letras">{{$alistami['lotexxxm']}}</td>
+                    <td scope="col" class="letras">{{$alistami['lotexxxx']}}</td>
                     <td scope="col" class="letras">{{$alistami['reginvim']}}</td>
-                    <td scope="col" class="letras">{{$alistami['fechvenm']}}</td>
+                    <td scope="col" class="letras">{{$alistami['fechvenc']}}</td>
+                    <?php
+                    $lotesxxx = $todoxxxx['alistami']['lotesxxx'][$key];
+                    ?>
+                    <td scope="col" class="letras">{{$lotesxxx['nombrexx']}}</td>
+                    <td scope="col" class="letras">{{$alistami['inventar']}}</td>
+                    <td scope="col" class="letras">
+
+                        @if($lotesxxx['mostrarx'])
+                        {{ Form::text($lotesxxx['idxxxxxx'], $lotesxxx['unidadxx'],
+                            ['class'=>'form-control numerico','id'=>$lotesxxx['idxxxxxx'],
+                            'onkeypress'=>'return filterFloat(event,this);','style'=>'width: 80px']) }}
+                        @endif
+                    </td>
+                    <td scope="col" class="letras">{{$lotesxxx['lotexxxx']}}</td>
+                    <td scope="col" class="letras">{{$lotesxxx['reginvim']}}</td>
+                    <td scope="col" class="letras">{{$lotesxxx['fechvenc']}}</td>
                 </tr>
                 @endforeach
             </tbody>

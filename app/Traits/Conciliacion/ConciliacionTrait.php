@@ -60,8 +60,11 @@ trait ConciliacionTrait
   private function getArmarData($dataxxxx)
   {
     foreach ($dataxxxx['padrexxx']->dalistams as $registro) {
-      $campoxxx = explode('_', $registro->campo_id);
-      $this->getData(['campoxxx' => $campoxxx[0], 'registro' => $registro]);
+       if($registro->unidad>0){
+        $campoxxx = explode('_', $registro->campo_id);
+        $this->getData(['campoxxx' => $campoxxx[0], 'registro' => $registro]);
+       }
+
     }
   }
   public function getConsiliacion($dataxxxx)
@@ -74,8 +77,6 @@ trait ConciliacionTrait
         $this->concilia['dispoxxx'][] = $this->registro;
       }
     }
-   
     return $this->concilia;
   }
-  
 }

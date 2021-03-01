@@ -39,14 +39,14 @@ function filterFloat(evt, input) {
       theme: 'bootstrap4'
     });
     $(".numerico").keyup(function () {
-      var id = $(this).prop('id').split('_')
+      var id = $(this).prop('id');
       $.ajax({
         url: "{{route('concilia.esnumerico')}}",
         type: 'POST',
         data: {_token: $("input[name='_token']").val(),
           cantsobr: $(this).val(),
           idcancon: id,
-          cantalis: $('#' + id[0] + '_' + id[1]).text()
+          cantalis: $('#' + id.replace("_dif", "")).text()
         },
         dataType: 'json',
         success: function (json) {
@@ -56,7 +56,6 @@ function filterFloat(evt, input) {
             $('#' + json.idcancon).text(0);
           } else {
             $('#' + json.idcancon).text(json.diferenc);
-
           }
         },
 

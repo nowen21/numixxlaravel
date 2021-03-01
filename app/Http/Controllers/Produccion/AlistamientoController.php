@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers\Produccion;
 
-use App\Helpers\Pdfs\Pdfs;
-use App\Helpers\Produccion\Alistamiento;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produccion\CalistamCrearRequest;
 use App\Http\Requests\Produccion\CalistamEditarRequest;
 use App\Models\Formulaciones\Orden;
 use App\Models\Produccion\Calistam;
-use App\Models\Produccion\Dalistam;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Pdfs\PdfTrait;
 use App\Traits\Pestanias\ProduccionTrait;
+use App\Traits\Produccion\AlisConciTrait;
 use App\Traits\Produccion\AlistamientoTrait;
 use App\Traits\Produccion\InventarioTrait;
 use Illuminate\Http\Request;
 
 class AlistamientoController extends Controller
 {
+    use AlisConciTrait;
+
+
+
     private $opciones;
     use ProduccionTrait;
     use InventarioTrait;
@@ -135,16 +137,16 @@ class AlistamientoController extends Controller
                 'vercrear' => false,
                 'accitabl' => true,
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', []),
-                'cabecera' =>[
-[
-                    ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                'cabecera' => [
+                    [
+                        ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
 
-                    ['td' => 'Orden de producción', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'Observaciónn', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'Orden de producción', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'Observaciónn', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
 
                     ]
-                 ],
+                ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'ordens.id'],
@@ -184,7 +186,8 @@ class AlistamientoController extends Controller
     public function create()
     {
         $this->opciones['ordenxxx'] = Orden::ordendia();
-        $this->opciones['alistami'] = Alistamiento::getMlotesDlotes(0);
+        $this->opciones['alistami'] = $this->getMlotesDlotesACT(['alisconc' => false, 'padrexxx' => 0]);
+        // ddd($this->opciones['alistami']);
         $this->opciones['indecrea'] = false;
         $this->opciones['clinicac'] = true;
         $this->opciones['botoform'][] =
@@ -203,8 +206,7 @@ class AlistamientoController extends Controller
      */
     public function store(CalistamCrearRequest $request)
     {
-        $dataxxxx = $request->all();
-        return $this->grabar($dataxxxx, '', 'Alistamiento creado con éxito!!');
+        return $this->grabar($request, '', 'Alistamiento creado con éxito!!');
     }
 
     /**
@@ -215,7 +217,7 @@ class AlistamientoController extends Controller
      */
     public function show(Calistam $objetoxx)
     {
-        $this->opciones['alistami'] = Alistamiento::getMlotesDlotes($objetoxx->id);
+        $this->opciones['alistami'] = $this->getMlotesDlotesACT(['alisconc' => false, 'padrexxx' => $objetoxx]);
         $this->opciones['clinicax'] = $objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
         // $this->opciones['botoform'][] =
@@ -235,7 +237,7 @@ class AlistamientoController extends Controller
      */
     public function edit(Calistam $objetoxx)
     {
-        $this->opciones['alistami'] = Alistamiento::getMlotesDlotes($objetoxx->id);
+        $this->opciones['alistami'] = $this->getMlotesDlotesACT(['alisconc' => false, 'padrexxx' => $objetoxx]);
         $this->opciones['clinicax'] = $objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
         $this->opciones['botoform'][] =
@@ -248,9 +250,10 @@ class AlistamientoController extends Controller
 
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
-        $cabecera = Calistam::transaccion($dataxxxx, $objectx);
+        $dataxxxx->request->add(['alisconc'=>false]);
+        $cabecera =$this->setTransaccionACT($dataxxxx,  $objectx);
         $dataxxxx['dalistax'] = true;
-        Dalistam::transaccion($dataxxxx,  $cabecera);
+        // Dalistam::transaccion($dataxxxx,  $cabecera);
         return redirect()
             ->route($this->opciones['routxxxx'] . '.editar', [$cabecera->id])
             ->with('info', $infoxxxx);
@@ -265,8 +268,7 @@ class AlistamientoController extends Controller
      */
     public function update(CalistamEditarRequest  $request, Calistam $objetoxx)
     {
-        $dataxxxx = $request->all();
-        return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
+        return $this->grabar($request, $objetoxx, 'Registro actualizado con éxito');
     }
 
     /**
@@ -285,6 +287,4 @@ class AlistamientoController extends Controller
 
         return redirect()->route($this->opciones['routxxxx'])->with('info', 'Registro ' . $activado . ' con éxito');
     }
-
-
 }

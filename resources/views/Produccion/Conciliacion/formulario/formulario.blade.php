@@ -85,69 +85,62 @@
                         font-size: 10px;
                     }
                 </style>
-                @foreach($todoxxxx['alistami']['dispoxxx'] as $key=> $alistami)
+                @foreach($todoxxxx['alistami']['lotesyyy'] as $key=> $alistami)
                 <tr>
                     <td scope="col" class="letras">
-                        @if($alistami['identifi']!='')
-                        {{$alistami['medidisp']}}
-                        @endif
+                        {{$alistami['nombrexx']}}
                     </td>
                     <td scope="col" class="letras">
-                        @if($alistami['identifi']!='')
                         {{$alistami['lotexxxx']}}
-                        @endif
                     </td>
-
-
                     <td scope="col" class="letras">
-                        @if($alistami['identifi']!='')
-                        <div class="form-control" id="{{$alistami['identifi']}}_con">
-                            {{$alistami['consumid']}}
+                        @if($alistami['mostrarx'])
+                        <div class="form-control" id="{{$alistami['idxxxxxx']}}_con">
+                            {{$alistami['unidadxx']}}
                         </div>
                         @endif
                     </td>
                     <td scope="col" class="letras" style="width: 100px">
-                        @if($alistami['identifi']!='')
-                        <div class="form-control" id="{{$alistami['identifi']}}">
-                            {{$alistami['alistada']}}
+                        @if($alistami['mostrarx'])
+                        <div class="form-control" id="{{$alistami['idxxxxxx']}}">
+                            {{$alistami['unidadxx']}}
                         </div>
                         @endif
                     </td>
                     <td scope="col" class="letras">
-                        @if($alistami['identifi']!='')
-                        {{ Form::text($alistami['identifi'].'_dif', $alistami['consumid'],
-                            ['class'=>'form-control numerico','id'=>$alistami['identifi'].'_dif',
+                        @if($alistami['mostrarx'])
+                        {{ Form::text($alistami['idxxxxxx'].'_dif', $alistami['diferenc'],
+                            ['class'=>'form-control numerico','id'=>$alistami['idxxxxxx'].'_dif',
                             'onkeypress'=>'return filterFloat(event,this);','style'=>'width: 80px']) }}
                         @endif
                     </td>
+                    <?php
+                    $lotesxxx = $todoxxxx['alistami']['lotesxxx'][$key];
+                    ?>
                     <td scope="col" class="letras">
-                        @if($todoxxxx['alistami']['medicxxx'][$key]['identifi']!='')
-                        {{$todoxxxx['alistami']['medicxxx'][$key]['medidisp']}}
-                        @endif
+                        {{$lotesxxx['nombrexx']}}
                     </td>
                     <td scope="col" class="letras">
-                        @if($todoxxxx['alistami']['medicxxx'][$key]['identifi']!='')
-                        {{$todoxxxx['alistami']['medicxxx'][$key]['lotexxxx']}}
-                        @endif
+                        {{$lotesxxx['lotexxxx']}}
                     </td>
                     <td scope="col" class="letras">
-                        @if($todoxxxx['alistami']['medicxxx'][$key]['identifi']!='')
-                        <div class="form-control" id="{{$todoxxxx['alistami']['medicxxx'][$key]['identifi']}}_con">
-                            {{$todoxxxx['alistami']['medicxxx'][$key]['consumid']}}
+                        @if($lotesxxx['mostrarx'])
+                        <div class="form-control" id="{{$lotesxxx['idxxxxxx']}}_con">
+                            {{$lotesxxx['cantcons']}}
                         </div>
                         @endif
                     </td>
                     <td scope="col" class="letras" style="width: 100px">
-                        @if($todoxxxx['alistami']['medicxxx'][$key]['identifi']!='')
-                        <div class="form-control" id="{{$todoxxxx['alistami']['medicxxx'][$key]['identifi']}}">
-                            {{$todoxxxx['alistami']['medicxxx'][$key]['alistada']}}
+                        @if($lotesxxx['mostrarx'])
+                        <div class="form-control" id="{{$lotesxxx['idxxxxxx']}}">
+                            {{$lotesxxx['unidadxx']}}
                         </div>
                         @endif
                     </td>
                     <td scope="col" class="letras">
-                        @if($todoxxxx['alistami']['medicxxx'][$key]['identifi']!='')
-                        {{ Form::text($todoxxxx['alistami']['medicxxx'][$key]['identifi'].'_dif', $todoxxxx['alistami']['medicxxx'][$key]['sobrante'],
-                            ['class'=>'form-control numerico','id'=>$todoxxxx['alistami']['medicxxx'][$key]['identifi'].'_dif',
+                        @if($lotesxxx['mostrarx'])
+                        {{ Form::text($lotesxxx['idxxxxxx'].'_dif', $lotesxxx['diferenc'],
+                            ['class'=>'form-control numerico','id'=>$lotesxxx['idxxxxxx'].'_dif',
                             'onkeypress'=>'return filterFloat(event,this);','style'=>'width: 80px']) }}
                         @endif
                     </td>
