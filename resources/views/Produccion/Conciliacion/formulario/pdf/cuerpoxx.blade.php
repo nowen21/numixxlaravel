@@ -36,7 +36,7 @@
                 {{$alistami['lotexxxx']}}
             </td>
             <td scope="col" class="letras">
-                {{$alistami['unidadxx']}}
+                {{$alistami['cantcons']}}
             </td>
             <td scope="col" class="letras" style="width: 100px">
                 {{$alistami['unidadxx']}}

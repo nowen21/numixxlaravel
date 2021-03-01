@@ -63,6 +63,8 @@ trait AlisConciTrait
                 $lotexxxx = $opcionxx['padrexxx']->dlotes()->where('calistamgable_id', $opcionxx['lotexxxx'])->first();
                 if (isset($lotexxxx->id)) {
                     $dataxxxy['unidadxx'] = $lotexxxx->pivot->unidad;
+                    $dataxxxy['cantcons'] = $lotexxxx->pivot->cantcons;
+                    $dataxxxy['diferenc'] = $lotexxxx->pivot->diferenc;
                 }
             }
         }

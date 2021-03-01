@@ -96,7 +96,7 @@
                     <td scope="col" class="letras">
                         @if($alistami['mostrarx'])
                         <div class="form-control" id="{{$alistami['idxxxxxx']}}_con">
-                            {{$alistami['unidadxx']}}
+                            {{$alistami['cantcons']}}
                         </div>
                         @endif
                     </td>
