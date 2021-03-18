@@ -21,7 +21,7 @@ class ControlpEditarRequest extends FormRequest {
       'ausepart.required' => 'Indique Ausencia de Partículas',
       'ausefuga.required' => 'Indique Ausencia de Fugas',
       'ausemise.required' => 'Indique Ausencia de Miscelas/Integridad en Emulsión',
-
+      'pesobols.required' => 'Ingrese el peso de la bolsa',
   ];
   $this->_reglasx = [
     'cformula_id' => 'required',
@@ -29,7 +29,7 @@ class ControlpEditarRequest extends FormRequest {
     'ausepart' => 'required',
     'ausefuga' => 'required',
     'ausemise' => 'required',
-
+    'pesobols' => 'required',
   ];
 }
 
@@ -40,7 +40,7 @@ class ControlpEditarRequest extends FormRequest {
 
   public function messages() {
     return $this->_mensaje;
-       
+
      }
 
   /**
@@ -57,7 +57,7 @@ class ControlpEditarRequest extends FormRequest {
 
   public function validar()
   {
-    
+
     if($this->coloraci==2||$this->ausepart==2||$this->ausefuga==2||$this->ausemise==2){
           $this->_reglasx['permitir']='required';
           $this->_mensaje['permitir.required'] = 'Ningun campo debe estar en NO';

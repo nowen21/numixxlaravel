@@ -4,7 +4,7 @@
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('cformula_id', $todoxxxx['cformula'], $todoxxxx['modeloxx']->cformula_id, ['class' => 'form-control-plaintext','id'=>'cformula_id']) }}
         @else
-        {{ Form::select('cformula_id', $todoxxxx['cformula'], null, ['class' => $errors->first('cformula_id') ? 
+        {{ Form::select('cformula_id', $todoxxxx['cformula'], null, ['class' => $errors->first('cformula_id') ?
         'form-control is-invalid select2' : 'form-control select2','id'=>'cformula_id']) }}
         @endif
         @if($errors->has('cformula_id'))
@@ -17,13 +17,13 @@
         {{ Form::label('','Coloración Normal') }}
         <div class="form-check">
             <label class="form-check-label">
-                <input type="radio" class="form-check-input" 
+                <input type="radio" class="form-check-input"
                 name="coloraci" <?php echo (isset($todoxxxx['modeloxx']) && $todoxxxx['modeloxx']->coloraci == 1) ? 'checked' : ''; ?> value="1">SI
             </label>
         </div>
         <div class="form-check disabled">
             <label class="form-check-label">
-                <input type="radio" class="form-check-input {{$errors->first('coloraci') ? ' is-invalid' : ''}}" 
+                <input type="radio" class="form-check-input {{$errors->first('coloraci') ? ' is-invalid' : ''}}"
                 name="coloraci" <?php echo (isset($todoxxxx['modeloxx']) && $todoxxxx['modeloxx']->coloraci == 2) ? 'checked' : ''; ?> value="2">NO
             </label>
         </div>
@@ -42,7 +42,7 @@
         </div>
         <div class="form-check disabled">
             <label class="form-check-label">
-                <input type="radio" class="form-check-input {{$errors->first('ausepart') ? ' is-invalid' : ''}}" 
+                <input type="radio" class="form-check-input {{$errors->first('ausepart') ? ' is-invalid' : ''}}"
                 name="ausepart" <?php echo (isset($todoxxxx['modeloxx']) && $todoxxxx['modeloxx']->ausepart == 2) ? 'checked' : ''; ?> value="2">NO
             </label>
         </div>
@@ -61,7 +61,7 @@
         </div>
         <div class="form-check disabled">
             <label class="form-check-label">
-                <input type="radio" class="form-check-input {{$errors->first('ausefuga') ? ' is-invalid' : ''}}" 
+                <input type="radio" class="form-check-input {{$errors->first('ausefuga') ? ' is-invalid' : ''}}"
                 name="ausefuga" <?php echo (isset($todoxxxx['modeloxx']) && $todoxxxx['modeloxx']->ausefuga == 2) ? 'checked' : ''; ?> value="2">NO
             </label>
         </div>
@@ -80,7 +80,7 @@
         </div>
         <div class="form-check disabled">
             <label class="form-check-label">
-                <input type="radio" class="form-check-input {{$errors->first('ausemise') ? ' is-invalid' : ''}}" 
+                <input type="radio" class="form-check-input {{$errors->first('ausemise') ? ' is-invalid' : ''}}"
                 name="ausemise" <?php echo (isset($todoxxxx['modeloxx']) && $todoxxxx['modeloxx']->ausemise == 2) ? 'checked' : ''; ?> value="2">NO
             </label>
         </div>
@@ -90,14 +90,20 @@
         </div>
         @endif
     </div>
-    <div class="form-group col-md-12">
-        {{ Form::label('sis_esta_id', 'Estado:', ['class' => 'control-label col-form-label-sm']) }}
-        @if($todoxxxx['accionxx'] == 'Ver')
-        {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], $todoxxxx['modeloxx']->sis_esta_id, ['class' => 'form-control-plaintext','id'=>'sis_esta_id']) }}
-        @else
-        {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ? 
-        'form-control is-invalid select2' : 'form-control select2','id'=>'sis_esta_id']) }}
+    <div class="form-group col-md-6">
+        {{ Form::label('pesobols', 'Peso Bolsa:',['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::text('pesobols', null, ['class' => $errors->first('pesobols') ?
+         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Peso Bolsa', 'maxlength' => '8','onkeypress'=>'return filterFloat(event,this);']) }}
+        @if($errors->has('pesobols'))
+        <div class="invalid-feedback d-block">
+            {{ $errors->first('pesobols') }}
+        </div>
         @endif
+    </div>
+    <div class="form-group col-md-6">
+        {{ Form::label('sis_esta_id', 'Estado:', ['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ?
+        'form-control is-invalid select2' : 'form-control select2','id'=>'sis_esta_id']) }}
         @if($errors->has('sis_esta_id'))
         <div class="invalid-feedback d-block">
             {{ $errors->first('sis_esta_id') }}

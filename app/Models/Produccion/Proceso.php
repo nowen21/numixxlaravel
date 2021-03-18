@@ -21,6 +21,7 @@ class Proceso extends Model
     'user_edita_id',
     'nopasaxx',
     'listermi',
+    'pesobols',
   ];
 
   public static function comboterminado()
@@ -62,7 +63,7 @@ class Proceso extends Model
         $dataxxxx['user_crea_id'] = Auth::user()->id;
         $objetoxx = Proceso::create($dataxxxx);
       }
-    
+
       $cformula = Cformula::find($dataxxxx['cformula_id']);
       $cformula->update(['proceso_id' => $objetoxx->id, 'user_edita_id' => Auth::user()->id]);
       return $objetoxx;

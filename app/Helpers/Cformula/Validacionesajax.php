@@ -128,7 +128,9 @@ class Validacionesajax
             ->join('unidads', 'unidrangs.unidad_id', '=', 'unidads.id')
             ->join('rangonpts', 'unidrangs.rangonpt_id', '=', 'rangonpts.id')
             ->where('medicame_id', $dataxxxx['medisele'])
-            ->where('urangnpts.npt_id', $dataxxxx['npt_id'])->first();
+            ->where('rangonpts.sis_esta_id',1)
+            ->where('urangnpts.npt_id', $dataxxxx['npt_id'])
+            ->first();
         $menssage = '';
         $mostmess = false;
         //echo $valocant .' < '. $medicame->randesde.' &&  '. $valocant .'> 0';
