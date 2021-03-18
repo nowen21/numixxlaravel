@@ -37,9 +37,11 @@ class Aminoacidos {
     $formulax=[];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
+        $formulax[1] = $this->dataxxxx['requdiar'] / 10 / $this->pesoxxxx; //f1 amino 10 aminino
         $formulax[3] = $this->dataxxxx['requdiar'] / 10 / $this->pesoxxxx; //pediatrico aminoacido
         break;
       case 2: // neonatos
+        $formulax[1] = $this->dataxxxx['requdiar'] / 10 / $this->pesoxxxx; //f1 amino 10 aminino
         $formulax[3] = $this->dataxxxx['requdiar'] / 10 / $this->pesoxxxx; //pediatrico aminoacido
         break;
       case 3: // adultos
@@ -55,10 +57,11 @@ class Aminoacidos {
     $formulax=[];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
+        $formulax[1] = $this->pesoxxxx * $this->dataxxxx['requdiar']; //f1 amino 10
         $formulax[3] = $this->pesoxxxx * $this->dataxxxx['requdiar']; //f2 amino 15
         break;
       case 2:// neonatos
-
+        $formulax[1] = $this->pesoxxxx * $this->dataxxxx['requdiar']; //f1 amino 10
         $formulax[3] = $this->pesoxxxx * $this->dataxxxx['requdiar']; //f2 amino 15
         break;
       case 3:// adultos
@@ -74,10 +77,11 @@ class Aminoacidos {
     $formulax=[];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
+        $formulax[1] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx']; //f1 amino 10
         $formulax[3] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx']; //f2 amino 15
         break;
       case 2:// neonatos
-
+        $formulax[1] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx']; //f1 amino 10
       $formulax[3] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx']; //f2 amino 15
         break;
       case 3:
@@ -92,10 +96,13 @@ class Aminoacidos {
     $formulax=[];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
+        $formulax[1] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 10; //AMINOÁCIDOS ADULTOS 10% S/E
+        $formulax[2] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 6.7; //AMINOÁCIDOS ADULTOS 15% S/E
         $formulax[3] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 10; //AMINOÁCIDO PEDIÁTRICO
         break;
       case 2:// neonatos
-
+        $formulax[1] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 10; //AMINOÁCIDOS ADULTOS 10% S/E
+        $formulax[2] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 6.7; //AMINOÁCIDOS ADULTOS 15% S/E
         $formulax[3] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] * 10; //AMINOÁCIDO PEDIÁTRICO
         break;
       case 3:// adultos
