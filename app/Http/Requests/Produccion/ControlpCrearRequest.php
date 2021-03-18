@@ -21,8 +21,6 @@ class ControlpCrearRequest extends FormRequest {
       'ausepart.required' => 'Indique Ausencia de Partículas',
       'ausefuga.required' => 'Indique Ausencia de Fugas',
       'ausemise.required' => 'Indique Ausencia de Miscelas/Integridad en Emulsión',
-      'pesobols.required' => 'Ingrese el peso de la bolsa',
-
   ];
   $this->_reglasx = [
     'cformula_id' => 'required',
@@ -30,7 +28,6 @@ class ControlpCrearRequest extends FormRequest {
     'ausepart' => 'required',
     'ausefuga' => 'required',
     'ausemise' => 'required',
-    'pesobols' => 'required',
   ];
 }
 

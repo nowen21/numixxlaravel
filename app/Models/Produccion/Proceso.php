@@ -21,7 +21,7 @@ class Proceso extends Model
     'user_edita_id',
     'nopasaxx',
     'listermi',
-    'pesobols',
+
   ];
 
   public static function comboterminado()

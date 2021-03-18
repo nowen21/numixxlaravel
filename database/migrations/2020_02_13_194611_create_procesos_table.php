@@ -23,7 +23,6 @@ class CreateProcesosTable extends Migration
             $table->boolean('nopasaxx');//indica si el control en proceso es exitoso o no
             $table->boolean('estaproc');//Estado del proceso
             $table->boolean('listermi');//indica si ya esta terminado
-            $table->double('pesobols',8,2);
             $table=CamposMagicos::magicos($table); //usuario responsable del proceso
         });
 
@@ -36,7 +35,6 @@ class CreateProcesosTable extends Migration
             $table->boolean('nopasaxx');//indica si el control en proceso es exitoso o no
             $table->boolean('estaproc');//Estado del proceso
             $table->boolean('listermi');//indica si ya esta terminado
-            $table->double('pesobols',8,2);
             $table=CamposMagicos::h_magicos($table);
         });
     }

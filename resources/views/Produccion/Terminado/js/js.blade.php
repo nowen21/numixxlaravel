@@ -59,7 +59,18 @@
       });
     }
     $('#realxxx_').keyup(function() {
-      f_peso_establecido({dataxxxx:{pesoreal:$(this).val(),pesoteor:$("#teorico_").val()}});
+        if($('#pesobols').val()>0){
+            f_peso_establecido({dataxxxx:{
+                pesoreal:$(this).val(),
+                pesoteor:$("#teorico_").val(),
+                pesobols:$("#pesobols").val(),
+            }});
+        }else{
+            $('#pesobols').focus();
+            $('#realxxx_').val('');
+            alert('Por favor ingrese el peso de la bolsa')
+        }
+
     });
 
   });

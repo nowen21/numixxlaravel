@@ -27,6 +27,7 @@ class TerminadoCrearRequest extends FormRequest
       'limitesx.required' => 'Peso dentro límites establecidos es requerido',
       'concepto.required' => 'El Concepto es requerido',
       'cformula_id.required' => 'Seleccione una formulación',
+      'pesobols.required' => 'Ingrese el peso de la bolsa',
     ];
     $this->_reglasx = [
       'completo' => 'required',
@@ -42,6 +43,7 @@ class TerminadoCrearRequest extends FormRequest
       'limitesx' => 'required',
       'concepto' => 'required',
       'cformula_id' => 'required',
+      'pesobols' => 'required',
     ];
   }
 
@@ -68,7 +70,7 @@ class TerminadoCrearRequest extends FormRequest
    */
   public function rules()
   {
-    $dataxxxx = $this->validar(['pesoteor'=>$this->toArray()['teorico_'],'pesoreal'=>$this->toArray()['realxxx_']]);
+    $dataxxxx = $this->validar(['pesoteor'=>$this->teorico_,'pesoreal'=>$this->realxxx,'pesobols'=>$this->pesobols]);
     if ($dataxxxx['valuexxx'] == 1) {
       $this->_reglasx['limitexx'] = 'required';
       $this->_mensaje['limitexx.required'] = $dataxxxx['messagex'];
@@ -81,7 +83,7 @@ class TerminadoCrearRequest extends FormRequest
       }
 
 
-      
+
     return $this->_reglasx;
   }
 }

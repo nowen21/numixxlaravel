@@ -90,17 +90,8 @@
         </div>
         @endif
     </div>
-    <div class="form-group col-md-6">
-        {{ Form::label('pesobols', 'Peso Bolsa:',['class' => 'control-label col-form-label-sm']) }}
-        {{ Form::text('pesobols', null, ['class' => $errors->first('pesobols') ?
-         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Peso Bolsa', 'maxlength' => '8','onkeypress'=>'return filterFloat(event,this);']) }}
-        @if($errors->has('pesobols'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('pesobols') }}
-        </div>
-        @endif
-    </div>
-    <div class="form-group col-md-6">
+
+    <div class="form-group col-md-12">
         {{ Form::label('sis_esta_id', 'Estado:', ['class' => 'control-label col-form-label-sm']) }}
         {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ?
         'form-control is-invalid select2' : 'form-control select2','id'=>'sis_esta_id']) }}

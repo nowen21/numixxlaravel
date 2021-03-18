@@ -22,6 +22,7 @@ class Terminado extends Model
     'document',
     'teorico_',
     'realxxx_',
+    'pesobols',
     'limitesx',
     'concepto',
     'user_crea_id',
@@ -111,7 +112,7 @@ class Terminado extends Model
   }
 
   public static function transaccion($dataxxxx,  $objetoxx)
-  { 
+  {
     $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {
       $nopasaxx = 1;
       foreach ($dataxxxx as $key => $radiosxx) {
@@ -120,7 +121,7 @@ class Terminado extends Model
           $nopasaxx = 0;
         }
       }
-      
+
       $dataxxxx['nopasaxx'] = $nopasaxx;
       $dataxxxx['user_edita_id'] = Auth::user()->id;
       if ($objetoxx != '') {

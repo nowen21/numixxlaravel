@@ -1,6 +1,6 @@
 <div class="form-group row">
 
-<!-- <img src="{{ url('qrcodes/qrcode.svg') }}" style="width: 100px; height: 100px;" alt="logo"> -->
+    <!-- <img src="{{ url('qrcodes/qrcode.svg') }}" style="width: 100px; height: 100px;" alt="logo"> -->
     <div class="form-group col-md-12">
         {{ Form::label('cformula_id', 'Formulación:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
@@ -130,10 +130,19 @@
         @endif
     </div>
 
-
+    <div class="form-group col-md-4">
+        {{ Form::label('pesobols', 'Peso Bolsa:',['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::text('pesobols', null, ['class' => $errors->first('pesobols') ?
+         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Peso Bolsa', 'maxlength' => '8','onkeypress'=>'return filterFloat(event,this);']) }}
+        @if($errors->has('pesobols'))
+        <div class="invalid-feedback d-block">
+            {{ $errors->first('pesobols') }}
+        </div>
+        @endif
+    </div>
 
     <div class="form-group col-md-4">
-        {{ Form::label('teorico_', 'Peso teórico:') }}
+        {{ Form::label('teorico_', 'Peso teórico:',['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::text('teorico_', $todoxxxx['modeloxx']->teorico_, ['class' => 'form-control-plaintext']) }}
         @else
@@ -175,7 +184,7 @@
         </div>
         @endif
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
         {{ Form::label('concepto', 'Concepto:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('concepto', $todoxxxx['concepto'], $todoxxxx['modeloxx']->concepto, ['class' => 'form-control-plaintext','id'=>'concepto']) }}
@@ -190,7 +199,7 @@
         @endif
     </div>
 
-    <div class="form-group col-md-12">
+    <div class="form-group col-md-6">
         {{ Form::label('sis_esta_id', 'Estado:', ['class' => 'control-label col-form-label-sm']) }}
         @if($todoxxxx['accionxx'] == 'Ver')
         {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], $todoxxxx['modeloxx']->sis_esta_id, ['class' => 'form-control-plaintext','id'=>'sis_esta_id']) }}
