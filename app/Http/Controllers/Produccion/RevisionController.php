@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Produccion;
 
-use App\Helpers\Cformula\Casas;
 use App\Helpers\Cformula\Dataformulario;
 use App\Helpers\Cformula\Validacionesajax;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produccion\RevisionEditarRequest;
 use App\Models\Formulaciones\Cformula;
-use App\Models\Medicamentos\Casa;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Alertas\AlertasTrait;
 use App\Traits\Cformula\CalculosAjaxTrait;
@@ -93,26 +91,22 @@ class RevisionController extends Controller
                 ],
                 'vercrear' => false,
                 'accitabl' => true,
-                'urlxxxxx' => 'api/produccion/produccion',
+                'urlxxxxx' => 'api/produccion/revision',
                 'cabecera' => [
                     ['td' => 'ID'],
-                    ['td' => 'TIEMPO INFUSION'],
-                    ['td' => 'VELOCIDAD INFUSION'],
-                    ['td' => 'VOLUMEN'],
-                    ['td' => 'PURGA'],
-                    ['td' => 'PESO'],
-                    ['td' => 'CLINICA'],
+                    ['td' => 'CÉDULA'],
+                    ['td' => 'NOMBRES'],
+                    ['td' => 'APELLIDOS'],
+                    ['td' => 'CLÍNICA'],
                     ['td' => 'REVISADO'],
                     ['td' => 'ESTADO'],
                 ],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'cformulas.id'],
-                    ['data' => 'tiempo', 'name' => 'cformulas.tiempo'],
-                    ['data' => 'velocidad', 'name' => 'cformulas.velocidad'],
-                    ['data' => 'volumen', 'name' => 'cformulas.volumen'],
-                    ['data' => 'purga', 'name' => 'cformulas.purga'],
-                    ['data' => 'peso', 'name' => 'cformulas.peso'],
+                    ['data' => 'cedula', 'name' => 'pacientes.cedula'],
+                    ['data' => 'nombres', 'name' => 'pacientes.nombres'],
+                    ['data' => 'apellidos', 'name' => 'pacientes.apellidos'],
                     ['data' => 'clinica', 'name' => 'clinicas.clinica'],
                     ['data' => 'revisado', 'name' => 'revisado'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],

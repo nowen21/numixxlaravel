@@ -41,7 +41,23 @@ class Produccion
 
         return DatatableHelper::getDt($paciente, $request);
     }
-
+    public static function getPacientesRevision($request)
+    {
+        $paciente = Cformula::select([
+            'cformulas.id', 'cformulas.sis_esta_id',
+            'sis_estas.s_estado',
+            'clinicas.clinica', 'pacientes.nombres', 'pacientes.apellidos', 'pacientes.cedula',
+            'cformulas.userevis_id'
+        ])
+            ->join('pacientes', 'cformulas.paciente_id', '=', 'pacientes.id')
+            ->join('sis_clinicas', 'cformulas.sis_clinica_id', '=', 'sis_clinicas.id')
+            ->join('clinicas', 'sis_clinicas.clinica_id', '=', 'clinicas.id')
+            ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
+            ->where('cformulas.userevis_id', '!=', null)
+            ->where('cformulas.created_at', 'LIKE', date('Y-m-d',time()).'%')
+            ->orderBy('cformulas.created_at', 'ASC');
+        return DatatableHelper::getDtb($paciente, $request);
+    }
     public static function getPacientesPreparacion($request)
     {
         $paciente = Cformula::select([

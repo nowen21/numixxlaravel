@@ -9,6 +9,13 @@ Route::get('produccion/produccion', function (Request $request) {
 
   return Produccion::getPacientesCformula($request);
 });
+
+Route::get('produccion/revision', function (Request $request) {
+    if (!$request->ajax())
+      return redirect('/');
+
+    return Produccion::getPacientesRevision($request);
+  });
 Route::get('produccion/alistamiento', function (Request $request) {
   if (!$request->ajax())
     return redirect('/');
