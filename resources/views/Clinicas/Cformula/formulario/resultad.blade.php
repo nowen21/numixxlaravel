@@ -47,22 +47,32 @@
         </tr>
         <tr>
             <td>CALORÍAS PROTEICAS</td>
-            <td id="caloprov" style="text-align: right;">{{$todoxxxx['calculos']['caloprov']}}%</td>
+            <td  style="text-align: right;">
+            <div style="float: right;">%</div>
+            <div id="caloprov" style="float: right;">{{$todoxxxx['calculos']['caloprov']}}</div>
+            </td>
             <td id="caloprot" style="text-align: right;">{{$todoxxxx['calculos']['caloprot']}}</td>
         </tr>
         <tr>
             <td>CALORÍAS LÍPIDOS</td>
-            <td id="calolipv" style="text-align: right;">{{$todoxxxx['calculos']['calolipv']}}%</td>
+            <td  style="text-align: right;">
+            <div style="float: right;">%</div>
+            <div id="calolipv" style="float: right;">{{$todoxxxx['calculos']['calolipv']}}</div></td>
             <td id="calolipi" style="text-align: right;">{{$todoxxxx['calculos']['calolipi']}}</td>
         </tr>
         <tr>
             <td>CALORÍAS CARBOHIDRATOS</td>
-            <td id="calocarv" style="text-align: right;">{{$todoxxxx['calculos']['calocarv']}}%</td>
+            <td  style="text-align: right;">
+            <div style="float: right;">%</div>
+            <div id="calocarv" style="float: right;">{{$todoxxxx['calculos']['calocarv']}}</div>
+            </td>
             <td id="calocarb" style="text-align: right;">{{$todoxxxx['calculos']['calocarb']}}</td>
         </tr>
         <tr>
             <td>CALORÍAS TOTALES</td>
-            <td id="calototv" style="text-align: right;">{{$todoxxxx['calculos']['calototv']}}%</td>
+            <td  style="text-align: right;">
+            <div style="float: right;">%</div>
+            <div id="calototv" style="float: right;">{{$todoxxxx['calculos']['calototv']}}</div></td>
             <td id="calotota" style="text-align: right;">{{$todoxxxx['calculos']['calotota']}}</td>
         </tr>
         <tr>
