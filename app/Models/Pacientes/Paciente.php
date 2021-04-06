@@ -39,11 +39,11 @@ class Paciente extends Model
 
     public function creador()
     {
-        return $this->belongsTo(User::class,'user_crea_id');
+        return $this->belongsTo(User::class, 'user_crea_id');
     }
     public function editor()
     {
-        return $this->belongsTo(User::class,'user_edita_id');
+        return $this->belongsTo(User::class, 'user_edita_id');
     }
     public function genero()
     {
@@ -111,5 +111,26 @@ class Paciente extends Model
     {
         $paciente = Paciente::where('id', $dataxxxx['padrexxx'])->first();
         return $paciente;
+    }
+
+    public static function combo($dataxxxx)
+    {
+        $comboxxx = [];
+        if ($dataxxxx['cabecera']) {
+            if ($dataxxxx['ajaxxxxx']) {
+                $comboxxx[] = ['valuexxx' => '', 'optionxx' => 'Seleccione'];
+            } else {
+                $comboxxx = ['' => 'Seleccione'];
+            }
+        }
+        $activida = Paciente::get();
+        foreach ($activida as $registro) {
+            if ($dataxxxx['ajaxxxxx']) {
+                $comboxxx[] = ['valuexxx' => $registro->id, 'optionxx' => $registro->nombres . ' ' . $registro->apellidos];
+            } else {
+                $comboxxx[$registro->id] = $registro->nombres . ' ' . $registro->apellidos;
+            }
+        }
+        return $comboxxx;
     }
 }

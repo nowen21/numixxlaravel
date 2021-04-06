@@ -1,6 +1,6 @@
 <?php
 $controll = 'Reporte\LoteReporte';
-$routexxx = 'dlote';
+$routexxx = 'cerliblo';
 Route::group(['prefix' => $routexxx], function () use ($controll, $routexxx) {
 
     Route::get('', [
@@ -12,7 +12,7 @@ Route::group(['prefix' => $routexxx], function () use ($controll, $routexxx) {
 	    'uses' => $controll.'Controller@getControlespf',
 	    'middleware' =>  ['permission:' . $routexxx . '-leer']
     ])->name($routexxx . '.imprimir');
-    
+
     Route::get('listaxxx', [
 		'uses' => $controll.'Controller@getListado',
 		'middleware' => ['permission:' . $routexxx . '-leer']

@@ -68,53 +68,54 @@ foreach ($cformula->dformulas as $value) {
 }
 ?>
 
-
-
-<div style="font-size: {{isset($tamaniox)==true?$tamaniox:6}}px; border: 1px black;">
-    <table style=" width: 90%; ">
+<!-- background-color: red ;  -->
+<style>
+    .negrita {
+        font-weight: 900;
+    }
+</style>
+<div style=" font-size: {{isset($tamaniox)==true?$tamaniox:6}}px; ">
+    <table style=" width: 100%; ">
         <tr>
             <td style="width: 40%; text-align: left; height: 75px; " rowspan="3">
                 <img src="{{ url('img/Numixx_Nuevo_Logo.png') }}" style="width: 135px; height: 76px;" alt="logo">
             </td>
-            <td style=" width: 40%; text-align: left;  " colspan="2" rowspan="2"></td>
-
-            <td style=" width: 20%; text-align: left; ">CÓDIGO</td>
+            <td style=" width: 15%; text-align: center; " class="negrita">CÓDIGO</td>
         </tr>
         <tr>
-            <td style=" width: 20%; text-align: left; ">PRO-FO-37-V0</td>
+            <td style=" text-align: center; " class="negrita">PRO-FO-37-V0</td>
         </tr>
         <tr>
-            <td style=" width: 20%; text-align: left; "></td>
-            <td style=" width: 20%; text-align: left; "></td>
-            <td style=" width: 20%; text-align: left; "></td>
+            <td style="  text-align: left; ">
+            </td>
         </tr>
     </table>
     <table style=" width: 100%; ">
         <tr>
-            <td style=" width: 60%; text-align: left; ">
+            <td style=" width: 60%; text-align: left;" class="negrita">
                 NUTRICIÓN PARENTERAL
             </td>
-            <td style=" width: 20%; text-align: left; ">
+            <td style=" width: 20%; text-align: left; " class="negrita">
                 LOTE No.
             </td>
-            <td style=" width: 20%; text-align: left; ">
+            <td style=" width: 20%; text-align: left; " class="negrita">
                 {{$cformula->id}}
             </td>
         </tr>
     </table>
     <table style=" width: 100%; ">
         <tr>
-            <td style=" width: 25%; text-align: left; ">
-                N° Afiliación
+            <td style=" width: 25%; text-align: left; " class="negrita">
+                N° AFILIACIÓN
             </td>
-            <td style=" width: 25%; text-align: left; ">
-                N° Cama
+            <td style=" width: 25%; text-align: left; " class="negrita">
+                N° CAMA
             </td>
-            <td style=" width: 25%; text-align: left; ">
-                Servicio
+            <td style=" width: 25%; text-align: left; " class="negrita">
+                SERVICIO
             </td>
-            <td style=" width: 25%; text-align: left; ">
-                Fecha Vencimiento
+            <td style=" width: 25%; text-align: left; " class="negrita">
+                FECHA VENCIMIENTO
             </td>
         </tr>
         <tr>
@@ -136,13 +137,13 @@ foreach ($cformula->dformulas as $value) {
     </table>
     <table style=" width: 100%; ">
         <tr>
-            <td style=" width: 50%; text-align: left;">
-                Nombres y Apellidos
+            <td style=" width: 50%; text-align: left;" class="negrita">
+                NOMBRES Y APELLIDOS
             </td>
-            <td style=" width: 25%; text-align: left; ">
+            <td style=" width: 25%; text-align: left; " class="negrita">
                 PESO
             </td>
-            <td style=" width: 25%; text-align: left; ">
+            <td style=" width: 25%; text-align: left; " class="negrita">
                 VIA
             </td>
         </tr>
@@ -160,8 +161,8 @@ foreach ($cformula->dformulas as $value) {
     </table>
     <table style=" width: 100%; ">
         <tr>
-            <td style=" width: 25%; text-align: left; ">
-                Clínica
+            <td style=" width: 25%; text-align: left; " class="negrita">
+                CL&Iacute;NICA
             </td>
             <td style=" width: 50%; text-align: left; ">
                 {{$cformula->sis_clinica->clinica->clinica}}
@@ -182,112 +183,104 @@ foreach ($cformula->dformulas as $value) {
                     VOLUMEN
                 </th>
                 <th style=" width: 15%; text-align: left;border-top: 2px #000 solid;border-bottom: 2px #000 solid;">
-                    VOLUMEN PURGA
+                    VOLUMEN CON PURGA
                 </th>
             </tr>
         </thead>
         <tbody>
             <?= $htmlxxxx ?>
+            <tr>
+                <td style="  text-align: left; background: #d2d6dc">
+                    VOLUMEN DÍA
+                </td>
+                <td style=" text-align: right;">
+                    {{number_format($volumdia+$cformula->aguax_id,2)}}
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td style="  text-align: left; background: #d2d6dc">
+                    VOLUMEN TOTAL
+                </td>
+                <td>
+                </td>
+                <td style=" text-align: right;">
+                    {{$cformula->volumen + $cformula->purga}}
+                </td>
+
+            </tr>
 
         </tbody>
     </table>
     <table style=" width: 100%;">
         <tr>
-            <td style=" width:30%;">
-                CONTENIDO
-            </td>
-            <td style=" width:15%;">
-                {{$cformula->volumen + $cformula->purga}}
-            </td>
-            <td style=" width:30%;">
-                VOLUMEN DÍA
-            </td>
-            <td style=" width:25%;">
-                {{number_format($volumdia+$cformula->aguax_id,2)}}
-            </td>
-        </tr>
-        <tr>
-            <td style=" width:30%;">
+            <td style=" width:20%;" class="negrita">
                 DURACIÓN
             </td>
             <td style=" width:15%;">
                 {{$cformula->tiempo}}
             </td>
-            <td style=" width:30%;">
+            <td style=" width:20%;" class="negrita">
                 VELOCIDAD
             </td>
             <td style=" width:25%;">
                 {{number_format($cformula->velocidad,2)}}
             </td>
-        </tr>
-        <tr>
-            <td style=" width:30%;">
-                FECHA PREP
+            <td style=" width:30%;" class="negrita">
+                FECHA PREPARACI&Oacute;N
             </td>
-            <td style=" width:15%;">
-                Cal NP/g P
-            </td>
-
-            <td style=" width:30%;">
-                OSMOLARIDAD
-            </td>
-            <td style=" width:25%;">
-
-            </td>
-        </tr>
-        <tr>
-            <td>
+            <td style=" width:20%;">
                 {{explode(' ',$cformula->created_at)[0]}}
             </td>
-            <td>
-                {{number_format(($carbohid*3.4 + $lipidoxx*9 +$vitalipx*1.12)/(($aminoaci+$glutamin)/6.25),2)}}
-            </td>
+        </tr>
+    </table>
+    <table style=" width: 100%;">
+        <tr>
 
+            <td style=" width:40%;" class="negrita">
+                RELACIÓN: Caloría No proteícas/g Nitrógeno
+            </td>
+            <td>
+                {{number_format($calculos['protnitr'],2)}}
+            </td>
+            <td style=" width:30%;" class="negrita">
+                OSMOLARIDAD
+            </td>
             <td>
                 {{number_format($calculos['osmolari'],2)}}
             </td>
-            <td>
-
-            </td>
         </tr>
-
+    </table>
+    <table style=" width: 100%;">
         <tr>
-
-            <td>
-                CALORÍAS TOTALES
+            <td style=" width:22%;" class="negrita">
+                CALOR&Iacute;AS TOTALES
             </td>
-            <td>
-                CAL TOTAL/Kg/DÍA
-            </td>
-            <td>
-                RELACIÓN Ca/FÓSFORO (<2) </td> <td>
-
-            </td>
-        </tr>
-        <tr>
-
-            <td>
+            <td style=" width:7%;">
                 {{number_format(($lipidoxx*9 +$vitalipx*1.12)+($carbohid*3.4)+($aminoaci+$glutamin)*4,2)}}
             </td>
-            <td>
+            <td class="negrita">
+                CALOR&Iacute;A TOTAL/Kg/D&Iacute;A
+            </td>
+            <td style=" width:7%;">
                 {{number_format((($lipidoxx*9 +$vitalipx*1.12)+($carbohid*3.4)+($aminoaci+$glutamin)*4)/$cformula->peso,2)}}
+            </td>
+            <td class="negrita" style=" width:28%;">
+                RELACIÓN CALOR&Iacute;AS/FÓSFORO (&lt;2 )
             </td>
             <td>
                 {{$calculos['calcfosv']}}
             </td>
-            <td>
-            </td>
         </tr>
-
-
     </table>
     <table style="width: 100%">
         <tr>
-            <td style=" width:50%;">
-                Preparado Por:
+            <td style=" width:50%;" class="negrita">
+                PREPARADO POR:
             </td>
-            <td style=" width:50%;">
-                Liberado Por:
+            <td style=" width:50%;" class="negrita">
+                LIBERADO POR:
             </td>
         </tr>
         <tr>

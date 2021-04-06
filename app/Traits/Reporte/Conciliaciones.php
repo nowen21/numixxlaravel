@@ -1,18 +1,11 @@
 <?php
 
-namespace App\Traits\Reporte;
+namespace app\Traits\Reporte;
 
 use App\Helpers\DatatableHelper;
-use App\Models\Clinica\Crango;
-use App\Models\Dispositivos\Dlote;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Itemordene;
-use App\Models\Medicamentos\Mlote;
 use App\Models\Produccion\Calistam;
-use App\Models\Produccion\Proceso;
-use App\Models\Produccion\Terminado;
-use App\Models\Remision;
-use App\Models\Reportes\ControlPF;
 use App\Models\Reportes\Orden;
 use App\User;
 

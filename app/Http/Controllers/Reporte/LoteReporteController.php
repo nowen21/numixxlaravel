@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\Reporte;
 
-use App\Helpers\Pdfs\Pdfs;
-use App\Helpers\Produccion\Alistamiento;
 use App\Http\Controllers\Controller;
-use App\Models\Dispositivos\Dlote;
+
 use App\Models\Reportes\Orden;
 use App\Traits\Produccion\AlistamientoTrait;
 use App\Traits\Produccion\InventarioTrait;
 use App\Traits\Produccion\LoteTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 
 class LoteReporteController extends Controller
@@ -24,7 +22,7 @@ class LoteReporteController extends Controller
 
     public function __construct()
     {
-        $this->opciones['permisox'] = 'dlote';
+        $this->opciones['permisox'] = 'cerliblo';
         $this->middleware(['permission:'
             . $this->opciones['permisox'] . '-leer|'
             . $this->opciones['permisox'] . '-crear|'
@@ -34,8 +32,8 @@ class LoteReporteController extends Controller
         $this->opciones['vocalesx'] = ['Á', 'É', 'Í', 'Ó', 'Ú'];
         $this->opciones['pestpadr'] = 1; // darle prioridad a las pestañas
         $this->opciones['tituhead'] = 'LOTES';
-        $this->opciones['routxxxx'] = 'dlote';
-        $this->opciones['slotxxxx'] = 'dlote';
+        $this->opciones['routxxxx'] = 'cerliblo';
+        $this->opciones['slotxxxx'] = 'cerliblo';
         $this->opciones['rutacarp'] = 'Reporte.';
         $this->opciones['perfilxx'] = 'sinperfi';
         $this->opciones['parametr'] = [];

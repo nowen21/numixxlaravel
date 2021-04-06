@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Traits\Reportes\Excelxxx\Infoclin;
+
+use App\Exports\InformeClinicaExport;
+use App\Http\Requests\Reportes\Excelxxx\InformeClinicaCreateRequest;
+use App\Models\Clinica\Clinica;
+use App\Models\Formulaciones\Dfmlote;
+use Maatwebsite\Excel\Facades\Excel;
+
+/**
+ * Este trait permite armar las consultas para ubicacion que arman las datatable
+ */
+trait InformeClinicaTrait
+{
+
+    use DataTrait;
+    public function create()
+    {
+        $this->getBotones(['leerxxxx', [], 1, "{$this->opciones['titucont']}", 'btn btn-sm btn-primary']);
+        return $this->view(['modeloxx' => '', 'accionxx' => ['crear', 'formulario'],]);
+    }
+
+    public function store(InformeClinicaCreateRequest $request)
+    {
+        $this->getExcel(['requestx' => $request]);
+        ob_end_clean();
+        ob_start();
+        $this->opciones['clinicay'] = Clinica::find($request->clinica_id);
+        $this->opciones['periodox'] = 'DEL ' . $request->fechdesd . ' AL ' . $request->fechasta;
+        $this->opciones['modeloxx'] = $this->getExcel(['requestx'=>$request]);
+        return Excel::download(new InformeClinicaExport($this->opciones), 'infomre_clinica de '.$request->fechdesd.' hasta '.$request->fechasta.'.xlsx');
+
+        // $this->getBotones(['imprimir', [], 1, "GUARDAR {$this->opciones['titucont']}", 'btn btn-sm btn-primary']);
+        // return $this->view(['accionxx' => ['imprimir', 'imprimir'],]);
+    }
+}

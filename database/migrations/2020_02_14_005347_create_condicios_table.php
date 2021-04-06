@@ -16,11 +16,13 @@ class CreateCondiciosTable extends Migration
     {
         Schema::create('condicios', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('consinli');
             $table->string('condicio')->uniqued();
            $table=CamposMagicos::magicos($table);
         });
         Schema::create('h_condicios', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('consinli');
             $table->string('condicio')->uniqued();
            $table=CamposMagicos::h_magicos($table);
         });

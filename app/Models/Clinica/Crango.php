@@ -4,6 +4,7 @@ namespace App\Models\Clinica;
 
 use App\Models\Administracion\Rango;
 use App\Models\Administracion\Rango\Rcodigo;
+use App\Models\Formulaciones\Cformula;
 use App\Models\Sistema\SisEsta;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -56,5 +57,37 @@ class Crango extends Model
             return $dataxxxx['modeloxx'];
         }, 5);
         return $objetoxx;
+    }
+
+    /**
+     * identificar el rango que se le asigna a la clinia
+     *
+     * @return void
+     */
+    public static function getRangoclinica($dataxxxx)
+    {
+        $lipidoxx = [];
+        foreach ($dataxxxx['cformula']->dformulas as $key => $dformula) {
+            $lipidoxy = $dformula->medicame->casa->where('id', 16)->first();
+            if (isset($lipidoxy->id)) {
+                $lipidoxx = $lipidoxy;
+            }
+        }
+        $consinli = [3];
+        if (isset($lipidoxx->id)) {
+            $consinli = [1, 2];
+        }
+        $registro = Crango::select('crangos.id')
+            ->join('rcodigos', 'crangos.rcodigo_id', '=', 'rcodigos.id')
+            ->join('rcondicis', 'rcodigos.rcondici_id', '=', 'rcondicis.id')
+            ->join('condicios', 'rcondicis.condicio_id', '=', 'condicios.id')
+            ->join('rnpts', 'rcondicis.rnpt_id', '=', 'rnpts.id')
+            ->join('rangos', 'rnpts.rango_id', '=', 'rangos.id')
+            ->where('crangos.sis_clinica_id', $dataxxxx['cformula']->sis_clinica_id)
+            ->where('rnpts.npt_id', $dataxxxx['cformula']->paciente->npt_id)
+            ->where('crangos.sis_esta_id', 1)
+            ->whereIn('condicios.consinli', $consinli)
+            ->first()->id;
+        return $registro;
     }
 }

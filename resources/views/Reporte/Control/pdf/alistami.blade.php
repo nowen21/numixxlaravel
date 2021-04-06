@@ -17,7 +17,7 @@
 <table style=" width: 100%;"  cellspacing='0'>
   <tr >
     <td style="text-align: left;height: 30px;border: 1px #000 solid" >
-      PRUDUCTO
+      PRODUCTO
     </td>
     <td style=" text-align: left; text-align: center;border: 1px #000 solid" >
       NUTRICIÓN PARENTAL

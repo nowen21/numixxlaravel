@@ -34,6 +34,8 @@ class Cformula extends Model
         'userproc_id',
         'userlibe_id',
         'orden_id',
+        'crango_id',
+        'terminado_id',
         'sis_esta_id',
         'user_crea_id',
         'user_edita_id',

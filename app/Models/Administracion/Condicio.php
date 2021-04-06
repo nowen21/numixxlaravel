@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Condicio extends Model
 {
     protected $fillable = [
-        'condicio', 'sis_esta_id', 'user_crea_id', 'user_edita_id'
+        'condicio', 'consinli', 'sis_esta_id', 'user_crea_id', 'user_edita_id'
     ];
 
 
@@ -30,7 +30,7 @@ class Condicio extends Model
                 $notinxxx[] = $condicio->condicio_id;
             }
         }
-      
+
         return $notinxxx;
     }
     public static function combo($dataxxxx)
@@ -43,7 +43,7 @@ class Condicio extends Model
                 $notinxxx[] = $crangoxx->condicio_id;
             }
         }
-       
+
         $comboxxx = [];
         if ($dataxxxx['cabecera']) {
             if ($dataxxxx['ajaxxxxx']) {
@@ -73,9 +73,9 @@ class Condicio extends Model
         /**
          * buscar las condicones que hacen falta por asignar
          */
-      
+
         $activida = Condicio::whereNotIn('id', Condicio::getNotIn($dataxxxx))->get();
-       
+
         /**
          * recorrer las condiciones encontradas
          */

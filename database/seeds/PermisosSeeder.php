@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class RolesYPermisosSeeder extends Seeder
+class PermisosSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -77,7 +76,7 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => 'clinicax-crear',  'descripc' => 'Crear clínica']);
         Permission::create(['name' => 'clinicax-editar',  'descripc' => 'Editar clínica']);
         Permission::create(['name' => 'clinicax-borrar',  'descripc' => 'Inactivar clínica']);
-/**
+        /**
          * permisos para sucurdales
          */
         Permission::create(['name' => 'sisclini-leer',  'descripc' => 'Listar Sucursales']);
@@ -299,48 +298,14 @@ class RolesYPermisosSeeder extends Seeder
         Permission::create(['name' => 'ordprodu-editar',  'descripc' => 'Editar órden de producción']);
         Permission::create(['name' => 'ordprodu-borrar',  'descripc' => 'Inactivar órden de producción']);
 
+
+        $permiso = 'cerliblo';
+        Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar certificado de liberación de lote']);
+        // Permission::create(['name' => $permiso . '-crear',  'descripc' => 'Asignar servicio']);
+        // Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar servicio']);
+        // Permission::create(['name' => $permiso . '-borrar',  'descripc' => 'Inactivar servicio']);
         $permiso = 'etiqueta';
         Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar las etiquetas']);
         Permission::create(['name' => $permiso . '-imprimir',  'descripc' => 'Permiso para imprimir la etiqueta seleccionada']);
-        Role::create(['name' => 'super-administrador',])->givePermissionTo(Permission::all());
-
-        Role::create(['name' => 'profesional-salud',])
-            ->givePermissionTo(
-                [
-                    'administracion-modulo',
-                    'clinicax-leer',
-                    'paciente-leer', 'paciente-crear', 'paciente-editar', 'paciente-borrar',
-                    'formular-leer', 'formular-crear', 'formular-editar', 'formular-borrar',
-                    'cmedicame-leer','formular-copiar','usuarios-polidato'
-                ]
-            );
-        Role::create(['name' => 'Revisiones',])
-            ->givePermissionTo(
-                [
-                    'produccion-modulo','usuarios-polidato',
-                    'revision-leer', 'revision-crear', 'revision-editar', 'revision-borrar',
-                ]
-            );
-
-            Role::create(['name' => 'Preparaciones',])
-            ->givePermissionTo(
-                ['produccion-modulo','usuarios-polidato',
-                    'preparac-leer', 'preparac-crear', 'preparac-editar', 'preparac-borrar',
-                ]
-            );
-
-            Role::create(['name' => 'Control-Proceso',])
-            ->givePermissionTo(
-                ['produccion-modulo','usuarios-polidato',
-                    'controlp-leer', 'controlp-crear', 'controlp-editar', 'controlp-borrar',
-                ]
-            );
-
-            Role::create(['name' => 'Control-Terminado',])
-            ->givePermissionTo(
-                ['produccion-modulo','usuarios-polidato',
-                    'controlt-leer', 'controlt-crear', 'controlt-editar', 'controlt-borrar',
-                ]
-            );
     }
 }

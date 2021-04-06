@@ -23,13 +23,18 @@
             @endcanany
 
             @canany(['reportes-modulo'])
-            <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='dlote.reporte') ?' active' : '' }}
-            text-sm" href="{{ route('dlote.reporte') }}">Certificado de Liberación de Lote</a></li>
+            <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='cerliblo') ?' active' : '' }}
+            text-sm" href="{{ route('cerliblo.reporte') }}">Certificado de Liberación de Lote</a></li>
             @endcanany
             @canany(['reportes-modulo'])
-            <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='concilia.reporte') ?' active' : '' }}
+            <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='concilia') ?' active' : '' }}
             text-sm" href="{{ route('concilia.reporte') }}">Conciliación de Materiales</a></li>
             @endcanany
+            @canany(['reportes-modulo'])
+            <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='concilia') ?' active' : '' }}
+            text-sm" href="{{ route('concilia.reporte') }}">Informe Nutriciones Elaboradas</a></li>
+            @endcanany
+
 
         </ul>
 

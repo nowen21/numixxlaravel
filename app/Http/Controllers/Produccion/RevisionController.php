@@ -6,6 +6,8 @@ use App\Helpers\Cformula\Dataformulario;
 use App\Helpers\Cformula\Validacionesajax;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produccion\RevisionEditarRequest;
+use App\Models\Administracion\Rango\Rcondici;
+use App\Models\Clinica\Crango;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Alertas\AlertasTrait;
@@ -181,8 +183,7 @@ class RevisionController extends Controller
 
     private function grabar($dataxxxx)
     {
-        //$this->getRangos($dataxxxx);
-
+        // $this->getRangos($dataxxxx);
         $cformula = $dataxxxx['modeloxx']->update($dataxxxx['dataxxxx']);
 
         $this->getDescontarInventario(['cformula' => $dataxxxx['modeloxx']]);
@@ -201,7 +202,8 @@ class RevisionController extends Controller
     public function update(RevisionEditarRequest  $request, Cformula $objetoxx)
     {
         $this->getAlerta(['objetoxx' => $objetoxx, 'tipoacci' => 3]);
-        $dataxxxx = ['userevis_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id];
+        $crangoxx = Crango::getRangoclinica(['cformula' => $objetoxx]);
+        $dataxxxx = ['userevis_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id, 'crango_id' => $crangoxx];
         return $this->grabar(['dataxxxx' => $dataxxxx, 'modeloxx' => $objetoxx, 'infoxxxx' => 'Se ha realizado la revisión con éxito']);
     }
 

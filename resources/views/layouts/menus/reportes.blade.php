@@ -15,7 +15,14 @@
                 </a>
             </li>
         @endcanany
-    
+        @canany(['excelxxx-moduloxx'])
+            <li class="nav-item">
+                <a href="{{ route('excelxxx') }}" class="nav-link">
+                    <i class="fas fa-child nav-icon"></i>
+                    <p>Excel</p>
+                </a>
+            </li>
+        @endcanany
 
     </ul>
 </li>

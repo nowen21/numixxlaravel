@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Administracion\Usuario\UsuarioCrearRequest;
 use App\Http\Requests\Administracion\Usuario\UsuarioEditarRequest;
 use App\Models\Clinica\SisClinica;
-
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Sistema\SisEsta;
@@ -59,6 +57,7 @@ class UsuarioController extends Controller
 
     public function index()
     {
+
         $this->opciones['rutarchi'] = $this->opciones['rutacarp'] . 'Acomponentes.Acrud.index';
         $this->opciones['tablasxx'] = [
             [

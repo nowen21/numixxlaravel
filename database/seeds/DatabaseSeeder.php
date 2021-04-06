@@ -18,10 +18,19 @@ class DatabaseSeeder extends Seeder
         $this->call(MunicipiosSeeder::class);
         $this->call(ClinicasSeeder::class);
         $this->call(SisClinicasSeeder::class);
-        
+
 
         $this->call(UsersSeeder::class);
-        $this->call(RolesYPermisosSeeder::class);
+        $this->call(RolesSeeder::class);
+        $this->call(PermisosSeeder::class);
+        $this->call(PermisosExcelSeeder::class);
+        $this->call(PermisosRolAdminSeeder::class);
+        $this->call(PermisosRolProfesionalSaludSeeder::class);
+        $this->call(PermisosRolRevisionesSeeder::class);
+        $this->call(PermisosRolPreparacionesSeeder::class);
+        $this->call(PermisosRolControlProcesoSeeder::class);
+        $this->call(PermisosRolControTerminadoSeeder::class);
+
         $this->call(AsignarRolSeeder::class);
 
         $this->call(UnidadsSeeder::class);
@@ -38,7 +47,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EpsSeeder::class);
         $this->call(MnptsSeeder::class);
         $this->call(GenerosSeeder::class);
-        
+
 
         $this->call(ServiciosSeeder::class);
         $this->call(CondiciosSeeder::class);
