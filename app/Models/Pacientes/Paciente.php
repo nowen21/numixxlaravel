@@ -131,6 +131,7 @@ class Paciente extends Model
                 $comboxxx[$registro->id] = $registro->nombres . ' ' . $registro->apellidos;
             }
         }
+
         return $comboxxx;
     }
 }

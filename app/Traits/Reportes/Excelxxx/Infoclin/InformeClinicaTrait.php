@@ -23,12 +23,17 @@ trait InformeClinicaTrait
 
     public function store(InformeClinicaCreateRequest $request)
     {
-        $this->getExcel(['requestx' => $request]);
-        ob_end_clean();
+
+        if (ob_get_contents()) ob_end_clean();
         ob_start();
         $this->opciones['clinicay'] = Clinica::find($request->clinica_id);
         $this->opciones['periodox'] = 'DEL ' . $request->fechdesd . ' AL ' . $request->fechasta;
         $this->opciones['modeloxx'] = $this->getExcel(['requestx'=>$request]);
+        if (count($this->opciones['modeloxx'])==0) {
+            return redirect()
+            ->route('infoclin', [])
+            ->with('info', 'El rango seleccionado no tiene información para exportar');
+        }
         return Excel::download(new InformeClinicaExport($this->opciones), 'infomre_clinica de '.$request->fechdesd.' hasta '.$request->fechasta.'.xlsx');
 
         // $this->getBotones(['imprimir', [], 1, "GUARDAR {$this->opciones['titucont']}", 'btn btn-sm btn-primary']);

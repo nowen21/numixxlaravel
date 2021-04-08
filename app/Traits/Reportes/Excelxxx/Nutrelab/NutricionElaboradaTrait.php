@@ -4,6 +4,7 @@ namespace App\Traits\Reportes\Excelxxx\Nutrelab;
 
 use App\Exports\NutricionesElaboradasExport;
 use App\Http\Requests\Reportes\Excelxxx\ReporteExcelCreateRequest;
+use App\Models\Pacientes\Paciente;
 use Maatwebsite\Excel\Facades\Excel;
 
 /**
@@ -20,10 +21,14 @@ trait NutricionElaboradaTrait
 
     public function store(ReporteExcelCreateRequest $request)
     {
-        ob_end_clean();
+        if (ob_get_contents()) ob_end_clean();
         ob_start();
         $this->opciones['modeloxx'] = $this->getExcel(['requestx'=>$request]);
-
+        if (count($this->opciones['modeloxx'])==0) {
+            return redirect()
+            ->route('nutrelab', [])
+            ->with('info', 'El rango seleccionado no tiene información para exportar');
+        }
         return Excel::download(new NutricionesElaboradasExport($this->opciones), 'informe_nutriciones_elaboradas de '.$request->fechdesd.' hasta '.$request->fechasta.'.xlsx');
         // return $this->view(['accionxx' => ['imprimir', 'imprimir'],]);
     }
