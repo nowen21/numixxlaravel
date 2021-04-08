@@ -16,7 +16,7 @@ class InformePacienteExport implements FromView
     }
     public function view(): View
     {
-        return view('Reportes.Excelxxx.Nutrelab.Formulario.imprimir',
+        return view('Reportes.Excelxxx.Infopaci.Formulario.imprimir',
         ['todoxxxx' => $this->opciones]);
     }
 }
