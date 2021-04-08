@@ -137,7 +137,7 @@ trait ClinicaTrait
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
             ->where('cformulas.paciente_id', $request->padrexxx->id);
 
-        return $this->getDatatable($paciente, $request);
+        return $this->getDatatableFecha($paciente, $request);
     }
 
     public  function getOrdenes($dataxxxx)
