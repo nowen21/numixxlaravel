@@ -209,7 +209,7 @@ trait PdfTrait
             'vistaurl' => 'Produccion.Alistamiento.pdf.alistami',
             'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
             'tipoxxxx' => 2,
-            'nombarch' => 'alistamientod',
+            'nombarch' => 'alistamiento',
             'dataxxxx' => ['cabecera' => $objetoxx, 'detallex' =>  $this->opciones['alistami'] = $this->getMlotesDlotesACT(['alisconc' => true, 'padrexxx' => $objetoxx])]
         ];
 

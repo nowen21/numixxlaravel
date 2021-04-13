@@ -6,13 +6,13 @@
 <thead>
   <tr>
   <th class="letras1">DISPOSITIVO MÉDICO</th>
-    <th>INVENTARIO</th>
+    <th class="letras1">INVENTARIO</th>
     <th class="letras1">UND</th>
     <th class="letras1">LOTE</th>
     <th class="letras1">REGISTRO INVIMA</th>
     <th class="letras1">F.VENC</th>
     <th class="letras1">MEDICAMENTO</th>
-    <th>INVENTARIO</th>
+    <th class="letras1">INVENTARIO</th>
     <th class="letras1">UND</th>
     <th class="letras1">LOTE</th>
     <th class="letras1">REGISTRO INVIMA</th>
