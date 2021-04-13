@@ -2,11 +2,12 @@
 
 namespace App\Exports;
 
-use App\Models\Formulaciones\Dfmlote;
+
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class InformeClinicaExport implements FromView
+class InformeClinicaExport implements FromView,ShouldAutoSize
 {
     private $opciones;
 

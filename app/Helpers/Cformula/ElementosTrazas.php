@@ -35,9 +35,15 @@ class ElementosTrazas
         switch ($this->npt_idxx) {
             case 1: // pediatricos
                 $formulax[17] = $this->dataxxxx['volumenx'] * 250 / $this->pesoxxxx;
+                $formulax[14] = $this->dataxxxx['volumenx'] * 0.33;
+                $formulax[15] = $this->dataxxxx['volumenx'] * 0.077;
+                $formulax[16] = $this->dataxxxx['volumenx'];
                 break;
             case 2: // neonatos
                 $formulax[17] = $this->dataxxxx['volumenx'] * 250 / $this->pesoxxxx;
+                $formulax[14] = $this->dataxxxx['volumenx'] * 0.33;
+                $formulax[15] = $this->dataxxxx['volumenx'] * 0.077;
+                $formulax[16] = $this->dataxxxx['volumenx'];
                 break;
             case 3: // adultos
                 $formulax[14] = $this->dataxxxx['volumenx'] * 0.33;
@@ -53,9 +59,15 @@ class ElementosTrazas
         $formulax = [];
         switch ($this->npt_idxx) {
             case 1: // pediatricos
+                $formulax[14] = $this->dataxxxx['requdiar'];
+                $formulax[15] = $this->dataxxxx['requdiar'];
+                $formulax[16] = $this->dataxxxx['requdiar'];
                 $formulax[17] = $this->pesoxxxx * $this->dataxxxx['requdiar'];
                 break;
             case 2: // neonatos
+                $formulax[14] = $this->dataxxxx['requdiar'];
+                $formulax[15] = $this->dataxxxx['requdiar'];
+                $formulax[16] = $this->dataxxxx['requdiar'];
                 $formulax[17] = $this->pesoxxxx * $this->dataxxxx['requdiar'];
                 break;
             case 3: // adultos
@@ -72,9 +84,15 @@ class ElementosTrazas
         $formulax = [];
         switch ($this->npt_idxx) {
             case 1: // pediatricos
+                $formulax[14] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+                $formulax[15] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+                $formulax[16] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
                 $formulax[17] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
                 break;
             case 2: // neonatos
+                $formulax[14] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+                $formulax[15] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
+                $formulax[16] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
                 $formulax[17] = $this->purgaxxx * $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'];
                 break;
             case 3:
@@ -91,9 +109,15 @@ class ElementosTrazas
         $formulax = [];
         switch ($this->npt_idxx) {
             case 1: // pediatricos
+                $formulax[14] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 0.33;
+                $formulax[15] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 0.077;
+                $formulax[16] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
                 $formulax[17] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 250;
                 break;
             case 2: // neonatos
+                $formulax[14] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 0.33;
+                $formulax[15] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 0.077;
+                $formulax[16] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
                 $formulax[17] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'] / 250;
                 break;
             case 3: // adultos
@@ -116,8 +140,6 @@ class ElementosTrazas
         // if ($this->npt_idxx == 3) {
             $this->requemientodiarionpt();
         // }
-
-
         $this->requemientototalnpt();
         $this->volumennpt();
         $this->purganpt();
