@@ -4,13 +4,14 @@ namespace App\Traits\Reportes\Excelxxx\Infopaci;
 
 use App\Models\Clinica\Crango;
 use App\Models\Formulaciones\Cformula;
+use App\Traits\Reportes\Excelxxx\RangoDescripcionTrait;
 
 /**
  * Este trait permite armar las consultas para ubicacion que arman las datatable
  */
 trait DataTrait
 {
-
+    use RangoDescripcionTrait;
     public function getExcel($dataxxxx)
     {
         $excelxxx = [];
@@ -45,7 +46,7 @@ trait DataTrait
                 'fechanpt' => explode(' ' ,$valuexxx->created_at)[0],
                 'paciente' => $valuexxx->id,
                 'histclin' => $valuexxx->cedula,
-                'tiponutr' => $crangoxx->condicio,
+                'tiponutr' => $this->getDescripcion($crangoxx),
                 'volumenx' => $valuexxx->volumen,
             ];
             $totalxxx++;

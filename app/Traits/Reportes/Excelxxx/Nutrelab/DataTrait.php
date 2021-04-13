@@ -4,13 +4,14 @@ namespace App\Traits\Reportes\Excelxxx\Nutrelab;
 
 use App\Models\Clinica\Crango;
 use App\Models\Formulaciones\Cformula;
+use App\Traits\Reportes\Excelxxx\RangoDescripcionTrait;
 
 /**
  * Este trait permite armar las consultas para ubicacion que arman las datatable
  */
 trait DataTrait
 {
-
+    use RangoDescripcionTrait;
     public function getExcel($dataxxxx)
     {
         $excelxxx = [];
@@ -51,9 +52,9 @@ trait DataTrait
                 'paciente' => $valuexxx->nombres . ' ' . $valuexxx->apellidos,
                 'histclin' => $valuexxx->cedula,
                 'clinicax' => $valuexxx->nitxxxxx,
-                'tiponutr' => $crangoxx->rcondici->condicio->condicio,
+                'tiponutr' => $this->getDescripcion($crangoxx),
                 'codigoxx' => $crangoxx->codiprod,
-                'fechaven' =>date("Y-m-d",strtotime($valuexxx->createda."+ 2 days")),
+                'fechaven' => date("Y-m-d", strtotime($valuexxx->createda . "+ 2 days")),
             ];
         }
         return  $excelxxx;

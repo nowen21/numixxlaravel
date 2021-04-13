@@ -4,12 +4,14 @@ namespace App\Traits\Reportes\Excelxxx\Infoclin;
 
 use App\Models\Clinica\Crango;
 use App\Models\Formulaciones\Cformula;
+use App\Traits\Reportes\Excelxxx\RangoDescripcionTrait;
 
 /**
  * Este trait permite armar las consultas para ubicacion que arman las datatable
  */
 trait DataTrait
 {
+    use RangoDescripcionTrait;
     private $diferenc;
     public function getArmarData($dataxxxx)
     {
@@ -33,23 +35,17 @@ trait DataTrait
                 'like',
                 $dataxxxx['fechaxxx'] . "%"
             )
-            ->where('cformulas.crango_id','!=',null)
+            ->where('cformulas.crango_id', '!=', null)
             ->where('clinica_id', $dataxxxx['clinicax'])
             ->get();
         $totalxxx = 0;
         foreach ($formulac as $key => $valuexxx) {
-            // $rangoxxx = Crango::getRangoclinica([
-            //     'clinicax' => $valuexxx->sis_clinica_id,
-            //     'nptxxxxx' => $valuexxx->npt_id
-            // ]);
-            // ddd( $rangoxxx);
             $crangoxx = Crango::find($valuexxx->crango_id)->rcodigo->rcondici->condicio;
-
             $excelxxx[] = [
                 'fechanpt' => $dataxxxx['fechaxxx'],
                 'paciente' => $valuexxx->nombres . ' ' . $valuexxx->apellidos,
                 'histclin' => $valuexxx->cedula,
-                'tiponutr' => $crangoxx->condicio,
+                'tiponutr' => $this->getDescripcion($crangoxx),
                 'volulipi' => ($crangoxx->consinli == 1 || $crangoxx->consinli == 2) ? $valuexxx->volumen : '',
                 'volsinli' => $crangoxx->consinli == 3 ? $valuexxx->volumen : '',
                 'cantinpt' => 1,
@@ -78,7 +74,7 @@ trait DataTrait
                     "{$dataxxxx['requestx']->fechasta} 23:59:59"
                 ]
             )
-            ->where('cformulas.crango_id','!=',null)
+            ->where('cformulas.crango_id', '!=', null)
             ->where('clinica_id', $dataxxxx['requestx']->clinica_id)
             ->get();
 

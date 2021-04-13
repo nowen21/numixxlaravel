@@ -2,9 +2,7 @@
 
 namespace App\Models\Clinica;
 
-use App\Models\Administracion\Rango;
 use App\Models\Administracion\Rango\Rcodigo;
-use App\Models\Formulaciones\Cformula;
 use App\Models\Sistema\SisEsta;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
