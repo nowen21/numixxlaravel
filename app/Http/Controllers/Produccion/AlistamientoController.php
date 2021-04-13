@@ -220,11 +220,6 @@ class AlistamientoController extends Controller
         $this->opciones['alistami'] = $this->getMlotesDlotesACT(['alisconc' => false, 'padrexxx' => $objetoxx]);
         $this->opciones['clinicax'] = $objetoxx->id;
         $this->opciones['parametr'] = [$objetoxx->id];
-        // $this->opciones['botoform'][] =
-        //     [
-        //         'mostrars' => true, 'accionxx' => $objetoxx->sis_esta_id == 1 ? 'INACTIVAR' : 'ACTIVAR', 'routingx' => [$this->opciones['routxxxx'], []], 'formhref' => 1,
-        //         'tituloxx' => '', 'clasexxx' => $objetoxx->sis_esta_id == 1 ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success'
-        //     ];
         $this->opciones['readonly'] = 'readonly';
         return $this->view(['objetoxx' => $objetoxx, 'accionxx' => 'Ver']);
     }

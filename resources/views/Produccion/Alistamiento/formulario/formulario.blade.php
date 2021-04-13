@@ -70,14 +70,12 @@
                     <th>DISPOSITIVO MÉDICO</th>
                     <th>INVENTARIO</th>
                     <th style="text-align: center; width: 100px;">UND</th>
-
                     <th>LOTE</th>
                     <th>REGISTRO INVIMA</th>
                     <th>F VENC</th>
                     <th>MEDICAMENTO</th>
                     <th>INVENTARIO</th>
                     <th>UND</th>
-
                     <th>LOTE</th>
                     <th>REGISTRO INVIMA</th>
                     <th>F VENC</th>

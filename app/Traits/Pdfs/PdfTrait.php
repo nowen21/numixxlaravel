@@ -211,8 +211,9 @@ trait PdfTrait
             'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
             'tipoxxxx' => 2,
             'nombarch' => 'alistamientod',
-            'dataxxxx' => ['cabecera' => $objetoxx, 'detallex' => $this->getRearmarArray(Alistamiento::getMlotesDlotes($objetoxx->id))]
+            'dataxxxx' => ['cabecera' => $objetoxx, 'detallex' =>  $this->opciones['alistami'] = $this->getMlotesDlotesACT(['alisconc' => true, 'padrexxx' => $objetoxx])]
         ];
+
         return Pdfs::getImprimirPdf($dataxxxx);
     }
 }
