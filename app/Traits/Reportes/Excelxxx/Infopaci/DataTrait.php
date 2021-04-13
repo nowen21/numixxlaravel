@@ -41,7 +41,7 @@ trait DataTrait
               ->get();
         $totalxxx = 0;
         foreach ($formulac as $key => $valuexxx) {
-            $crangoxx = Crango::find($valuexxx->crango_id)->rcodigo->rcondici->condicio;
+            $crangoxx = Crango::find($valuexxx->crango_id)->rcodigo;
             $excelxxx[] = [
                 'fechanpt' => explode(' ' ,$valuexxx->created_at)[0],
                 'paciente' => $valuexxx->id,

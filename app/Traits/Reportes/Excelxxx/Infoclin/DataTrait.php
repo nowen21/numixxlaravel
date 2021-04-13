@@ -40,12 +40,13 @@ trait DataTrait
             ->get();
         $totalxxx = 0;
         foreach ($formulac as $key => $valuexxx) {
-            $crangoxx = Crango::find($valuexxx->crango_id)->rcodigo->rcondici->condicio;
+            $crangoxy = Crango::find($valuexxx->crango_id)->rcodigo;
+            $crangoxx = $crangoxy->rcondici->condicio;
             $excelxxx[] = [
                 'fechanpt' => $dataxxxx['fechaxxx'],
                 'paciente' => $valuexxx->nombres . ' ' . $valuexxx->apellidos,
                 'histclin' => $valuexxx->cedula,
-                'tiponutr' => $this->getDescripcion($crangoxx),
+                'tiponutr' => $this->getDescripcion($crangoxy),
                 'volulipi' => ($crangoxx->consinli == 1 || $crangoxx->consinli == 2) ? $valuexxx->volumen : '',
                 'volsinli' => $crangoxx->consinli == 3 ? $valuexxx->volumen : '',
                 'cantinpt' => 1,
