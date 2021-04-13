@@ -4,7 +4,6 @@ namespace App\Traits\Pdfs;
 
 use App\Helpers\Cformula\Dataformulario;
 use App\Helpers\Pdfs\Pdfs;
-use App\Helpers\Produccion\Alistamiento;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Formulaciones\Orden;
 use App\Models\Produccion\Calistam;
