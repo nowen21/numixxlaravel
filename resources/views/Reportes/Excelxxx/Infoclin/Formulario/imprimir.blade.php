@@ -36,7 +36,7 @@
             <th scope="col">NOMBRE DEL </th>
             <th scope="col"></th>
             <th scope="col">TIPO DE</th>
-            <th scope="col" colspan="2">VOLUMENT TOTAL</th>
+            <th scope="col" colspan="2">VOLUMEN TOTAL</th>
             <th scope="col">CANTIDAD</th>
             <th scope="col">VALOR</th>
         </tr>

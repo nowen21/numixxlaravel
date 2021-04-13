@@ -34,7 +34,7 @@ trait InformeClinicaTrait
             ->route('infoclin', [])
             ->with('info', 'El rango seleccionado no tiene información para exportar');
         }
-        return Excel::download(new InformeClinicaExport($this->opciones), 'infomre_clinica de '.$request->fechdesd.' hasta '.$request->fechasta.'.xlsx');
+        return Excel::download(new InformeClinicaExport($this->opciones), 'informe_clinica de '.$request->fechdesd.' hasta '.$request->fechasta.'.xlsx');
 
         // $this->getBotones(['imprimir', [], 1, "GUARDAR {$this->opciones['titucont']}", 'btn btn-sm btn-primary']);
         // return $this->view(['accionxx' => ['imprimir', 'imprimir'],]);
