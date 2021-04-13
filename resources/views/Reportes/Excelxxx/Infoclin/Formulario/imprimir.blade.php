@@ -8,7 +8,7 @@
         </tr>
         <tr>
             <th scope="col" colspan="{{$colspanx}}" style="text-align: center;">
-                RELACI&Oacute;N DE NUTRICIONES PARENTALES
+                RELACI&Oacute;N DE NUTRICIONES PARENTERALES
             </th>
         </tr>
         <tr>
@@ -45,10 +45,10 @@
             <th scope="col">PACIENTE</th>
             <th scope="col">HISTORIA CL&Iacute;NICA</th>
             <th scope="col">NUTRICI&Oacute;N</th>
-            <th scope="col">CON L&Iacute;DOS</th>
-            <th scope="col">SIN L&Iacute;DOS</th>
+            <th scope="col">CON L&Iacute;PIDOS</th>
+            <th scope="col">SIN L&Iacute;PIDOS</th>
             <th scope="col">NPTS</th>
-            <th scope="col">UNIAD NPT</th>
+            <th scope="col">UNIDAD NPT</th>
         </tr>
     </thead>
     <tbody>

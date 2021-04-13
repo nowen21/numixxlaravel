@@ -1,13 +1,13 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Fecha del medicamentos consumidos</th>
-            <th scope="col">Nombre de la cl&iacute;nica</th>
-            <th scope="col">Nombre del paciente</th>
-            <th scope="col">C&oacute;digo del medicamento</th>
-            <th scope="col">Nombre del medicamentos</th>
-            <th scope="col">Unidad de m&eacute;dica</th>
-            <th scope="col">Cantidad de ML consumidos</th>
+            <th scope="col">FECHA DEL MEDICAMENTO CONSUMIDO</th>
+            <th scope="col">NOMBRE DE LA CL&Iacute;NICA</th>
+            <th scope="col">NOMBRE DEL PACIENTE</th>
+            <th scope="col">C&Oacute;DIGO DEL MEDICAMENTO</th>
+            <th scope="col">NOMBRE DEL MEDICAMENTO</th>
+            <th scope="col">UNIDAD DE MEDIDA</th>
+            <th scope="col">CANTIDAD DE ML CONSUMIDOS</th>
         </tr>
     </thead>
     <tbody>

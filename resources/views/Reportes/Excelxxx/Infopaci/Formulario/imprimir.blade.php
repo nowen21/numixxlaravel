@@ -1,10 +1,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Fecha de elaboraci&oacute;n Nutrici&oacute;n</th>
-            <th scope="col">N&uacute;mero de remisi&oacute;n</th>
-            <th scope="col">Descripci&oacute;n del rango</th>
-            <th scope="col">Volumen de la nutrici&oacute;n</th>
+            <th scope="col">FECHA DE ELABORACI&Oacute;N NUTRICI&Oacute;N</th>
+            <th scope="col">N&Uacute;MERO DE REMISI&Oacute;N</th>
+            <th scope="col">DESCRIPCI&Oacute;N DEL RANGO</th>
+            <th scope="col">VOLUMEN DE LA NUTRICI&Oacute;N</th>
         </tr>
     </thead>
     <tbody>
