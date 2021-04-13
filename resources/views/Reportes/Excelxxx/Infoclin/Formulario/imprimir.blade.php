@@ -43,7 +43,7 @@
         <tr style="text-align: center;">
             <th scope="col">Npt</th>
             <th scope="col">PACIENTE</th>
-            <th scope="col">HISTORIA CL&Oacute;NICA</th>
+            <th scope="col">HISTORIA CL&Iacute;NICA</th>
             <th scope="col">NUTRICI&Oacute;N</th>
             <th scope="col">CON L&Iacute;DOS</th>
             <th scope="col">SIN L&Iacute;DOS</th>
