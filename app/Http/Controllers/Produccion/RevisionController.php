@@ -13,6 +13,7 @@ use App\Models\Sistema\SisEsta;
 use App\Traits\Alertas\AlertasTrait;
 use App\Traits\Cformula\CalculosAjaxTrait;
 use App\Traits\Cformula\CalculosFormulacion;
+use App\Traits\Pdfs\PdfTrait;
 use App\Traits\Pestanias\ProduccionTrait;
 use App\Traits\Produccion\AsignaRangoTrait;
 use App\Traits\Produccion\InventarioTrait;
@@ -28,6 +29,7 @@ class RevisionController extends Controller
     use AsignaRangoTrait;
     use CalculosFormulacion;
     use CalculosAjaxTrait;
+    use PdfTrait;
     private $dataform;
     public function __construct()
     {
@@ -72,7 +74,6 @@ class RevisionController extends Controller
      */
     public function index()
     {
-
         $this->opciones['paciente'] = '';
         // $this->opciones['botoform'][0]['routingx'][1] = $padrexxx;
         $this->opciones['indecrea'] = false;
@@ -118,7 +119,6 @@ class RevisionController extends Controller
                 'routxxxx' => 'revision',
                 'parametr' => [],
             ],
-
         ];
         $this->opciones['pestania'] = $this->getPestanias([
             'tablaxxx' => $this->opciones['routxxxx'], 'padrexxx' => ''
@@ -147,15 +147,9 @@ class RevisionController extends Controller
 
     public function edit(Cformula $objetoxx)
     {
-
-
         $this->opciones['tituloxx'] = 'Revisar: Formulación';
-
-
         $paciente = $objetoxx->paciente;
-
         $this->opciones['cardhead'] = $this->opciones['cardhead'] . ' Paciente: ' . $paciente->nombres . ' ' . $paciente->apellidos;
-
         $this->opciones['formular'] = Dataformulario::getPintarFormulario(
             [
                 'paciente' => $paciente,
@@ -164,19 +158,17 @@ class RevisionController extends Controller
             ]
         );
         $this->opciones['paciente'] = $paciente;
-
         $this->opciones['parametr'] = [$objetoxx->id];
         /**
          * solo se puede modificar la revision si la conciliacion no se ha realizado
          */
-
-        // if ($objetoxx->userevis_id == 0) {
-        $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => 'LISTO', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$objetoxx->id]],
-                'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
-            ];
-        // }
+        if ($objetoxx->userevis_id == 0) {
+            $this->opciones['botoform'][] =
+                [
+                    'mostrars' => true, 'accionxx' => 'LISTO', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$objetoxx->id]],
+                    'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
+                ];
+        }
 
         return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
     }
@@ -185,10 +177,9 @@ class RevisionController extends Controller
     {
         // $this->getRangos($dataxxxx);
         $cformula = $dataxxxx['modeloxx']->update($dataxxxx['dataxxxx']);
-
         $this->getDescontarInventario(['cformula' => $dataxxxx['modeloxx']]);
         return redirect()
-            ->route($this->opciones['routxxxx'] . '.editar', [$dataxxxx['modeloxx']->id])
+            ->route( 'reporpdf.etiquetanpt', [$dataxxxx['modeloxx']->id])
             ->with('info', $dataxxxx['infoxxxx']);
     }
 

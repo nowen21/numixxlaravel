@@ -218,7 +218,7 @@ class TerminadoController extends Controller
     public function store(TerminadoCrearRequest $request)
     {
         $dataxxxx = $request->all();
-        return $this->grabar($dataxxxx, '', 'Alistamiento creado con éxito!!');
+        return $this->grabar($dataxxxx, '', 'Producto teminado creado con éxito!!');
     }
 
     /**
@@ -285,7 +285,7 @@ class TerminadoController extends Controller
     public function update(TerminadoEditarRequest  $request, Terminado $objetoxx)
     {
         $dataxxxx = $request->all();
-        return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
+        return $this->grabar($dataxxxx, $objetoxx, 'Producto terminado actualizado con éxito');
     }
 
     /**

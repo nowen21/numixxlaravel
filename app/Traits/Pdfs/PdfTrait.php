@@ -43,6 +43,7 @@ trait PdfTrait
 
     public function imprimirEtiquetaNpt($padrexxx)
     {
+
         $dataxxxx['cformula'] = Cformula::find($padrexxx);
         $dataxxxx['formular']  = Dataformulario::getPintarFormulario(
             [
@@ -51,7 +52,7 @@ trait PdfTrait
             ]
         );
 
-        $dataxxxx['calculos'] = $this->getCalculos($dataxxxx['cformula']);
+        $dataxxxx['calculos'] = $this->getCalculosCT($dataxxxx['cformula']);
         $dataxxxx['dnpxxxxx'] = $this->getCalcularDnp($dataxxxx['cformula']);
 
         $dataxxxx['preparad'] = isset($dataxxxx['cformula']->userprep);
@@ -60,7 +61,7 @@ trait PdfTrait
             'vistaurl' => 'Reporte.Etiquetas.etiquetanpt',
             // 'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
             'dimensio' => [0, 0, 4.4 * 72, 6.4 * 72],
-            'tipoxxxx' => 1,
+            'tipoxxxx' => 2,
             'nombarch' => 'etiqueta',
             'dataxxxx' => $dataxxxx
         ];

@@ -220,7 +220,7 @@ class ControlPController extends Controller
     {
         $dataxxxx = $request->all();
         $dataxxxx['ordepres']=Orden::ordendia();
-        return $this->grabar($dataxxxx, '', 'Alistamiento creado con éxito!!');
+        return $this->grabar($dataxxxx, '', 'Control en proceso creado con éxito!!');
     }
 
     /**
@@ -278,7 +278,7 @@ class ControlPController extends Controller
     public function update(ControlpEditarRequest  $request, Proceso $objetoxx)
     {
         $dataxxxx = $request->all();
-        return $this->grabar($dataxxxx, $objetoxx, 'Registro actualizado con éxito');
+        return $this->grabar($dataxxxx, $objetoxx, 'Control en proceso actualizado con éxito');
     }
 
     /**
