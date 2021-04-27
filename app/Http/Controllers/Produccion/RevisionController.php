@@ -13,7 +13,6 @@ use App\Models\Sistema\SisEsta;
 use App\Traits\Alertas\AlertasTrait;
 use App\Traits\Cformula\CalculosAjaxTrait;
 use App\Traits\Cformula\CalculosFormulacion;
-use App\Traits\Pdfs\PdfTrait;
 use App\Traits\Pestanias\ProduccionTrait;
 use App\Traits\Produccion\AsignaRangoTrait;
 use App\Traits\Produccion\InventarioTrait;
@@ -29,7 +28,6 @@ class RevisionController extends Controller
     use AsignaRangoTrait;
     use CalculosFormulacion;
     use CalculosAjaxTrait;
-    use PdfTrait;
     private $dataform;
     public function __construct()
     {
@@ -168,6 +166,13 @@ class RevisionController extends Controller
                     'mostrars' => true, 'accionxx' => 'LISTO', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$objetoxx->id]],
                     'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
                 ];
+
+        }else{
+            $this->opciones['botoform'][] =
+            [
+                'mostrars' => true, 'accionxx' => 'IMPRIMIR ETIQUITA', 'routingx' => ['reporpdf.etiquetanpt', [$objetoxx->id]],
+                'formhref' => 2, 'tituloxx' => 'IMPRIMIR ETIQUITA', 'clasexxx' => 'btn btn-sm btn-primary'
+            ];
         }
 
         return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
@@ -177,9 +182,8 @@ class RevisionController extends Controller
     {
         // $this->getRangos($dataxxxx);
         $cformula = $dataxxxx['modeloxx']->update($dataxxxx['dataxxxx']);
-        $this->getDescontarInventario(['cformula' => $dataxxxx['modeloxx']]);
         return redirect()
-            ->route( 'reporpdf.etiquetanpt', [$dataxxxx['modeloxx']->id])
+            ->route($this->opciones['routxxxx'] . '.editar', [$dataxxxx['modeloxx']->id])
             ->with('info', $dataxxxx['infoxxxx']);
     }
 
