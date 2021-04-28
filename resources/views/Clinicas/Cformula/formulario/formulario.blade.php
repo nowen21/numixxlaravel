@@ -97,37 +97,31 @@
     <div class="form-group col-md-12">
         <hr style="border:  #000000 solid 2px" />
     </div>
-    <div class="form-group col-md-12">
-        <table class="table table-bordered" style="margin-top: 10px">
-            <thead>
-                <tr>
-                    <th>MEDICAMENTO</th>
-                    <th>SELECCIÓN</th>
-                    <th>UNIDAD</th>
-                    <th>REQUERIMIENTO</th>
-                    <th>VOLUMEN</th>
-                </tr>
-            </thead>
-            <tbody id="formulaciontable">
+</div>
+<h4>
+    <div class="row table-bordered">
+        <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered">MEDICAMENTO</div>
+        <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered">SELECCIÓN</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered">UNIDAD</div>
+        <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered">REQUERIMIENTO</div>
+        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered">VOLUMEN</div>
 
-                @foreach($todoxxxx['formular'] as $formulax)
-                <?php
-                $idxxxxxx = '';
-                $ocultarx = '';
-                if ($formulax['campo_id'] == 'multiuno' && $todoxxxx['paciente']->npt_id == 3) {
-                    $idxxxxxx = 'ocultarx';
-                    $ocultarx = 'display: none';
-                }
-
-                ?>
-
-                <tr id="{{$idxxxxxx}}">
-                    <td>{{$formulax['casaxxxx']}}</td>
-                    <td>{{ Form::select($formulax['campo_id'], $formulax['selelist'], $formulax['selevalu'],
+    </div>
+</h4>
+@foreach($todoxxxx['formular'] as $formulax)
+<div class="row table table-bordered">
+    <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered">
+        {{$formulax['casaxxxx']}}
+    </div>
+    <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered">
+        {{ Form::select($formulax['campo_id'], $formulax['selelist'], $formulax['selevalu'],
                         ['class'=>'form-control medicamento calcularagua select2bs4','id'=>$formulax['campo_id'],'style'=>'width: 100%;']) }}
-                    </td>
-                    <td id="{{$formulax['campo_id'].'_unid'}}">{{$formulax['unidmedi']}}</td>
-                    <td> {{ Form::text($formulax['campo_id'].'_cant',
+    </div>
+    <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered" id="{{$formulax['campo_id'].'_unid'}}">
+        {{$formulax['unidmedi']}}
+    </div>
+    <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered">
+        {{ Form::text($formulax['campo_id'].'_cant',
         $formulax['requerim'],
 
         ['class'=>'form-control input-number test calcularagua',
@@ -138,21 +132,24 @@
         $formulax['readonly'],
 
 
-        ]) }} </td>
-                    <td>{{ Form::text($formulax['campo_id'].'_volu',
+        ]) }}
+    </div>
+    <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered">
+        {{ Form::text($formulax['campo_id'].'_volu',
         $formulax['volumenx'],
         ['class'=>'form-control input-number test calcularagua','style'=>'width: 100px',
         'id'=>$formulax['campo_id'].'_volu',
         'onkeypress'=>'return filterFloat(event,this);',
         $formulax['readonly'],'autocomplete'=>"off"
 
-        ]) }} </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        @include('Clinicas.Cformula.formulario.resultad')
-
+        ]) }}
     </div>
+</div>
+@endforeach
+
+    @include('Clinicas.Cformula.formulario.resultax')
+
+<div class="row">
+
     @include('layouts.registro')
 </div>
