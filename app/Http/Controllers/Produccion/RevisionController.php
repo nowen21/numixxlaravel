@@ -170,8 +170,8 @@ class RevisionController extends Controller
         }else{
             $this->opciones['botoform'][] =
             [
-                'mostrars' => true, 'accionxx' => 'IMPRIMIR ETIQUITA', 'routingx' => ['reporpdf.etiquetanpt', [$objetoxx->id]],
-                'formhref' => 2, 'tituloxx' => 'IMPRIMIR ETIQUITA', 'clasexxx' => 'btn btn-sm btn-primary'
+                'mostrars' => true, 'accionxx' => 'IMPRIMIR ETIQUETA', 'routingx' => ['reporpdf.etiquetanpt', [$objetoxx->id]],
+                'formhref' => 2, 'tituloxx' => 'IMPRIMIR ETIQUETA', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
         }
 

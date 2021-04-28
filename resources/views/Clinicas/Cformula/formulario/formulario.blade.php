@@ -53,6 +53,7 @@
         @else
         {{ Form::text('volumen', null, ['class' => $errors->first('volumen') ?
          'form-control  is-invalid calcularvolumen calcularagua' : 'form-control calcularvolumen calcularagua',
+         'onkeypress'=>'return filterFloat(event,this);',
          'placeholder' => 'Volumen Total', 'maxlength' => '120', 'autofocus','autocomplete'=>"off"]) }}
         @endif
         @if($errors->has('volumen'))
@@ -69,6 +70,7 @@
         @else
         {{ Form::text('purga', null, ['class' => $errors->first('purga') ?
          'form-control  is-invalid' : 'form-control', 'placeholder' => 'Purga', 'maxlength' => '120',
+         'onkeypress'=>'return filterFloat(event,this);',
          'autofocus','autocomplete'=>"off"]) }}
         @endif
         @if($errors->has('purga'))
