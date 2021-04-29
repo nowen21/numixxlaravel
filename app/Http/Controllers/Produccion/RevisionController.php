@@ -194,7 +194,7 @@ class RevisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RevisionEditarRequest  $request, Cformula $objetoxx)
+    public function update(RevisionEditarRequest  $request, Cformula $objetoxx) ///
     {
         $this->getAlerta(['objetoxx' => $objetoxx, 'tipoacci' => 3]);
         $crangoxx = Crango::getRangoclinica(['cformula' => $objetoxx]);
