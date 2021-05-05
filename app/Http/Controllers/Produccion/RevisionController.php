@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Produccion;
 
+use App\Exceptions\GeneralException;
 use App\Helpers\Cformula\Dataformulario;
 use App\Helpers\Cformula\Validacionesajax;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produccion\RevisionEditarRequest;
-use App\Models\Administracion\Rango\Rcondici;
-use App\Models\Clinica\Crango;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Alertas\AlertasTrait;
@@ -28,6 +27,7 @@ class RevisionController extends Controller
     use AsignaRangoTrait;
     use CalculosFormulacion;
     use CalculosAjaxTrait;
+    use AsignaRangoTrait;
     private $dataform;
     public function __construct()
     {
@@ -157,6 +157,13 @@ class RevisionController extends Controller
                 ->route($this->opciones['routxxxx'], [])
                 ->with('info', 'La formulación que intenta revisar es de una fecha diferente');
         }
+        $crangoxx = $this->getRangosART(['cformula' => $objetoxx]);
+        if ($crangoxx == null) {
+            return redirect()
+            ->route($this->opciones['routxxxx'], [])
+            ->with('info', "La clínica: {$objetoxx->sis_clinica->clinica->clinica} no tiene rango asignado para un volumen de {$objetoxx->total}");
+        }
+
 
         $this->opciones['tituloxx'] = 'Revisar: Formulación';
         $paciente = $objetoxx->paciente;
@@ -222,8 +229,8 @@ class RevisionController extends Controller
     public function update(RevisionEditarRequest  $request, Cformula $objetoxx) ///
     {
         $this->getAlerta(['objetoxx' => $objetoxx, 'tipoacci' => 3]);
-        $crangoxx = Crango::getRangoclinica(['cformula' => $objetoxx]);
-        $dataxxxx = ['userevis_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id, 'crango_id' => $crangoxx];
+        $crangoxx = $this->getRangosART(['cformula' => $objetoxx]);
+        $dataxxxx = ['userevis_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id, 'crango_id' => $crangoxx->id];
         return $this->grabar(['dataxxxx' => $dataxxxx, 'modeloxx' => $objetoxx, 'infoxxxx' => 'Se ha realizado la revisión con éxito']);
     }
 
