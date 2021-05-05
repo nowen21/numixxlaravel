@@ -53,7 +53,8 @@ class Produccion
             ->join('sis_clinicas', 'cformulas.sis_clinica_id', '=', 'sis_clinicas.id')
             ->join('clinicas', 'sis_clinicas.clinica_id', '=', 'clinicas.id')
             ->join('sis_estas', 'cformulas.sis_esta_id', '=', 'sis_estas.id')
-            ->where('cformulas.userevis_id', '!=', null)
+            // ->where('cformulas.userevis_id', '!=', null)
+            ->where('cformulas.sis_esta_id',  1)
             ->where('cformulas.created_at', 'LIKE', date('Y-m-d',time()).'%')
             ->orderBy('cformulas.created_at', 'ASC');
         return DatatableHelper::getDtb($paciente, $request);

@@ -356,6 +356,12 @@ class CformulaController extends Controller
     }
     public function copyu(CformulaCrearRequest  $request, Cformula $objetoxx)
     {
+        $objetoxx->crango_id=null;
+        $objetoxx->userevis_id=null;
+        $objetoxx->userprep_id=null;
+        $objetoxx->proceso_id=null;
+        $objetoxx->terminado_id=null;
+        $objetoxx->orden_id=null;
         $dataxxxx = $request->all();
         $dataxxxx['desdexxx'] = 10;
         $dataxxxx['paciente_id'] = $objetoxx->paciente_id;

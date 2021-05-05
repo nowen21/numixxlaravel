@@ -145,6 +145,19 @@ class RevisionController extends Controller
 
     public function edit(Cformula $objetoxx)
     {
+        if ($objetoxx->sis_esta_id == 2) {
+            return redirect()
+                ->route($this->opciones['routxxxx'], [])
+                ->with('info', 'La formulación se encuentra inactiva');
+        }
+        $dataxxxx = explode(' ', $objetoxx->created_at)[0];
+
+        if ($dataxxxx != date('Y-m-d')) {
+            return redirect()
+                ->route($this->opciones['routxxxx'], [])
+                ->with('info', 'La formulación que intenta revisar es de una fecha diferente');
+        }
+
         $this->opciones['tituloxx'] = 'Revisar: Formulación';
         $paciente = $objetoxx->paciente;
         $this->opciones['cardhead'] = $this->opciones['cardhead'] . ' Paciente: ' . $paciente->nombres . ' ' . $paciente->apellidos;
@@ -166,17 +179,29 @@ class RevisionController extends Controller
                     'mostrars' => true, 'accionxx' => 'LISTO', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$objetoxx->id]],
                     'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
                 ];
-
-        }else{
+        } else {
             $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => 'IMPRIMIR ETIQUETA', 'routingx' => ['reporpdf.etiquetanpt', [$objetoxx->id]],
-                'formhref' => 2, 'tituloxx' => 'IMPRIMIR ETIQUETA', 'clasexxx' => 'btn btn-sm btn-primary'
-            ];
+                [
+                    'mostrars' => true, 'accionxx' => 'IMPRIMIR ETIQUETA', 'routingx' => ['reporpdf.etiquetanpt', [$objetoxx->id]],
+                    'formhref' => 2, 'tituloxx' => 'IMPRIMIR ETIQUETA', 'clasexxx' => 'btn btn-sm btn-primary'
+                ];
         }
-
+        $this->opciones['botoform'][] =
+            [
+                'mostrars' => true, 'accionxx' => 'CANCELAR FORMULACION', 'routingx' => [$this->opciones['routxxxx'] . '.cancelar', [$objetoxx->id]],
+                'formhref' => 2, 'tituloxx' => 'CANCELAR FORMULACION', 'clasexxx' => 'btn btn-sm btn-danger'
+            ];
         return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
     }
+
+    public function cancelar(Cformula $objetoxx)
+    {
+        $cformula = $objetoxx->update(['sis_esta_id' => 2, 'user_edita_id' => Auth::user()->id]);
+        return redirect()
+            ->route($this->opciones['routxxxx'], [])
+            ->with('info', 'Formulación cancelada con éxito');
+    }
+
 
     private function grabar($dataxxxx)
     {

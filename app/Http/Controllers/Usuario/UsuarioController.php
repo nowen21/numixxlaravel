@@ -80,8 +80,8 @@ class UsuarioController extends Controller
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'users.id'],
-                    ['data' => 'name', 'name' => 'users.nombres'],
-                    ['data' => 'email', 'name' => 'users.apellidos'],
+                    ['data' => 'name', 'name' => 'users.name'],
+                    ['data' => 'email', 'name' => 'users.email'],
                     ['data' => 'sucursal', 'name' => 'sis_clinicas.sucursal'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],

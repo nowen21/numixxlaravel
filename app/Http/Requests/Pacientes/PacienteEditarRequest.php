@@ -74,9 +74,10 @@ class PacienteEditarRequest extends FormRequest
 
   public function validar()
   {
-    $otroregi = Paciente::whereNotIn('sis_clinica_id', [$this->sis_clinica_id])->where('cedula', $this->cedula)->first();
-    if (isset($otroregi->id)) {
-        $this->_reglasx['cedula'][1] = 'unique:pacientes,cedula,' . $this->segments()[2];
-    }
+    // $otroregi = Paciente::whereNotIn('sis_clinica_id', [$this->sis_clinica_id])->where('cedula', $this->cedula)->first();
+    // ddd($otroregi);
+    // if (isset($otroregi->id)) {
+    //     $this->_reglasx['cedula'][1] = 'unique:pacientes,cedula,' . $this->segments()[2];
+    // }
   }
 }

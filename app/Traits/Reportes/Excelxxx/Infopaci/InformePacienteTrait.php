@@ -31,6 +31,7 @@ trait InformePacienteTrait
                 ->route('infopaci', [])
                 ->with('info', 'El rango seleccionado no tiene información para exportar');
         }
+        $this->opciones['paciente']=Paciente::find($request->paciente_id);
         return Excel::download(new InformePacienteExport($this->opciones), 'informe_paciente de ' . $request->fechdesd . ' hasta ' . $request->fechasta . '.xlsx');
 
         // $this->getBotones(['imprimir', [], 1, "GUARDAR {$this->opciones['titucont']}", 'btn btn-sm btn-primary']);

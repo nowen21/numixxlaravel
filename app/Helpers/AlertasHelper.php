@@ -33,6 +33,7 @@ class AlertasHelper
                         $queryxxx->where('sis_clinica_id', 2);
                     }
                 })
+                ->where('cformulas.sis_esta_id',1)
                 ->get();
             foreach ($alertaxx as $key => $value) {
                 $cuerpoxx = $acciones->cuerpoxx;

@@ -65,16 +65,19 @@ class Crango extends Model
     public static function getRangoclinica($dataxxxx)
     {
         $lipidoxx = [];
+        // identificar si la formulación tiene lípidos
         foreach ($dataxxxx['cformula']->dformulas as $key => $dformula) {
             $lipidoxy = $dformula->medicame->casa->where('id', 16)->first();
             if (isset($lipidoxy->id)) {
                 $lipidoxx = $lipidoxy;
             }
         }
+        // armar los parametros de consulta para el rango
         $consinli = [3];
         if (isset($lipidoxx->id)) {
             $consinli = [1, 2];
         }
+        // Consulta del rango para la formulación
         $registro = Crango::select('crangos.id')
             ->join('rcodigos', 'crangos.rcodigo_id', '=', 'rcodigos.id')
             ->join('rcondicis', 'rcodigos.rcondici_id', '=', 'rcondicis.id')

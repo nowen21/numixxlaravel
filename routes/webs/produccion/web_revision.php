@@ -27,6 +27,10 @@ Route::group(['prefix' => $routexxx], function () use ($controll, $routexxx) {
 		'uses' => $controll . 'Controller@show',
 		'middleware' => ['permission:' . $routexxx . '-leer']
 	])->name($routexxx . '.ver');
+    Route::get('cancelar/{objetoxx}', [
+		'uses' => $controll . 'Controller@cancelar',
+		'middleware' => ['permission:' . $routexxx . '-leer']
+	])->name($routexxx . '.cancelar');
 	Route::delete('borrar/{objetoxx}', [
 		'uses' => $controll . 'Controller@destroy',
 		'middleware' => ['permission:' . $routexxx . '-borrar']
