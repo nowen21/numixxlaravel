@@ -61,7 +61,7 @@ trait PdfTrait
             'vistaurl' => 'Reporte.Etiquetas.etiquetanpt',
             // 'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
             'dimensio' => [0, 0, 4.4 * 72, 6.4 * 72],
-            'tipoxxxx' => 2,
+            'tipoxxxx' => 1,
             'nombarch' => 'etiqueta',
             'dataxxxx' => $dataxxxx
         ];

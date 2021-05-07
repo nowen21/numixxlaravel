@@ -7,6 +7,8 @@ use App\Helpers\Cformula\Casas;
 trait CalculosTrait
 {
     use PintarFormularioTrait;
+    use CalculosPediatricosTrait;
+    use CalculosAdultosTrait;
     /**
      * Calcular osmolaridad y peso especifico por lote
      *
@@ -15,17 +17,18 @@ trait CalculosTrait
      */
     private function osmolaridadypesoespecifico($formlote)
     {
-
         $osmolari = 0;
         $pesoespe = 0;
         $purgaxxx = $formlote->purga;
+        $volumenx = $formlote->volumen; // volumen consumido por cada lote
+
+
         // recorrer cada uno de los lotes los que se le desconto el volumen de la formulacion medica
-        foreach ($formlote->dfmlotes as $key => $lotexxxx) {
-            $volumenx = $lotexxxx->volumenx; // volumen consumido por cada lote
-            $osmolari += $volumenx / $purgaxxx * $lotexxxx->mlote->minvima->mmarca->osmorali; //osmolaridad por cada uno de los lotes
-            $pesoespe += $volumenx / $purgaxxx * $lotexxxx->mlote->minvima->mmarca->pesoespe; // peso especifico por cada uno de los lotes
+        foreach ($formlote->medicame->mmarcas as $key => $lotexxxx) {
+            $osmolari += $volumenx / $purgaxxx * $lotexxxx->osmorali; //osmolaridad por cada uno de los lotes
+            $pesoespe += $volumenx / $purgaxxx * $lotexxxx->pesoespe; // peso especifico por cada uno de los lotes
         }
-        return ['osmolari' => $osmolari, 'pesoespe' => $pesoespe];
+        return ['osmolari' => $formlote->medicame->mmarcas->first(), 'pesoespe' => $pesoespe];
     }
     /**
      * Armar datasxxx con con cada una de las formulaciones medicas de la fomulacion
@@ -48,14 +51,16 @@ trait CalculosTrait
     {
         $formulacion = ['osmolari' => 0, 'pesoespe' => 0];
         // recorrer cada una de las formulaciones medicas
-        foreach ($cabecera->dformulas as $key => $formulacionmed) {
-
-            $formulacion[$formulacionmed->medicame->casa_id] = $this->getDataCasaCT(['dformula' => $formulacionmed]);
-            if ($cabecera->userevis_id) {
-                $osmopeso = $this->osmolaridadypesoespecifico($formulacionmed);
-                $formulacion['osmolari'] += $osmopeso['osmolari'] * $formulacionmed->purga; // calcular la osmolarida
-                $formulacion['pesoespe'] += $osmopeso['pesoespe'] * $formulacionmed->purga; // calcular el peso específico
-            }
+        foreach ($cabecera->dformulas as $key => $dformula) {
+            $marcaxxx = $dformula->medicame
+                ->mmarcas()->select(['osmorali', 'pesoespe'])
+                ->first();
+            $formulacion[$dformula->medicame->casa_id] = $this->getDataCasaCT(['dformula' => $dformula]);
+            // if ($cabecera->userevis_id) {
+            // $osmopeso = $this->osmolaridadypesoespecifico($dformula);
+            $formulacion['osmolari'] += $marcaxxx->osmorali * $dformula->purga; // calcular la osmolarida
+            $formulacion['pesoespe'] += $marcaxxx->pesoespe * $dformula->purga; // calcular el peso específico
+            // }
         }
         return $formulacion;
     }
@@ -80,99 +85,6 @@ trait CalculosTrait
         }
         return $requtota;
     }
-
-    private function calculosadultosCT($calculos, $datasxxx)
-    {
-        //VOLUMEN DE LA MULTIVITAMIANA
-        $volumult = isset($datasxxx[17]['volumenx']) ? $datasxxx[17]['volumenx'] : 0;
-
-        $glutamin = isset($datasxxx[10]) ? $datasxxx[10]['requerim'] : 0;
-
-        // CONCENTRACION DE PROTEINAS (%)
-        $aminoaci = $this->casaCT(1, $datasxxx)['requerim'] + $glutamin;
-        $calculos['concprot'] = (($aminoaci) / $calculos['volutota']) * 100;
-        // CONCENTRACION DE CARBOHIDRATO (%)
-        if (isset($datasxxx[3])) {
-            $carbohid = $this->casaCT(3, $datasxxx);
-            $calculos['concarbo'] = ($carbohid['requerim'] / $calculos['volutota']) * 100;
-        } else {
-            $calculos['concarbo'] = 0;
-            $carbohid['requerim'] = 0;
-        }
-        //CONCENTRACIÓN DE L�?PIDOS (%)       (>1%)
-        $lipidosx = $this->casaCT(16, $datasxxx)['requerim'];
-        $calculos['conclipi'] = (($lipidosx + $volumult / 5) / $calculos['volutota']) * 100;
-        //GRAMOS TOTALES DE NITROGENO
-        $calculos['gramtota'] = $aminoaci / 6.25;
-        //CALORIAS PROTEICAS 						2%
-        $calculos['caloprot'] = $aminoaci * 4;
-        //CALORIAS CARBOHIDRATOS 						9%
-        $calculos['calocarb'] = $carbohid['requerim'] * 3.4;
-        //CALORIAS LIPIDOS 89%
-        $calculos['calolipi'] = $lipidosx * 9 + $volumult * 1.12;
-        //CALORIAS TOTALES 						100%
-        $calculos['calotota'] = $calculos['caloprot'] + $calculos['calocarb'] + $calculos['calolipi'];
-        //relación: Cal No proteícas/g Nitrogeno
-        if ($calculos['gramtota'] == 0) {
-            $calculos['protnitr'] = 0;
-        } else {
-            $calculos['protnitr'] = ($calculos['calolipi'] + $calculos['calocarb']) / $calculos['gramtota'];
-        }
-
-        //Relación: Cal No proteícas/g A.A
-        if ($aminoaci == 0) {
-            $calculos['proteica'] = 0;
-        } else {
-            $calculos['proteica'] = ($calculos['calolipi'] + $calculos['calocarb']) / $aminoaci;
-        }
-
-        //Calorías totales/Kg./día
-        $calculos['caltotkg'] = $calculos['calotota'] / $calculos['pesoxxxx'];
-        //RELACIÓN CALCIO/FOSFÓRO                 (<2)
-        $calculos['calcfosf'] = ($datasxxx[6]['requtota'] * 9.3 / 1 / $calculos['volutota'] * 1000 / 40) * ($this->casaCT(2, $datasxxx)['volumenx'] * 31 / 1 / $calculos['volutota'] * 1000 / 31) / 100;
-        return $calculos;
-    }
-
-    private function calculosneopediatricoCT($calculos, $datasxxx)
-    {
-        //VOLUMEN DE LA MULTIVITAMIANA
-        $volumult = $datasxxx[17]['volumenx'];
-        // CONCENTRACION DE PROTEINAS (%)
-        $aminoaci = $this->casaCT(1, $datasxxx)['requerim'];
-        $calculos['concprot'] = (($aminoaci) / $calculos['volutota']) * 100;
-        // CONCENTRACION DE CARBOHIDRATO (%)
-        if (isset($datasxxx[3])) {
-            $carbohid = $this->casaCT(3, $datasxxx);
-            $calculos['concarbo'] = ($carbohid['requerim'] / $calculos['volutota']) * 100;
-        } else {
-            $calculos['concarbo'] = 0;
-            $carbohid['requerim'] = 0;
-        }
-        //CONCENTRACIÓN DE L�?PIDOS (%)       (>1%)
-        $lipidosx = $this->casaCT(16, $datasxxx)['requerim'];
-        $calculos['conclipi'] = (($lipidosx + $volumult / 5) / $calculos['volutota']) * 100;
-        //GRAMOS TOTALES DE NITROGENO
-        $calculos['gramtota'] = $aminoaci / 6.25;
-        //CALORIAS PROTEICAS 						2%
-        $calculos['caloprot'] = $aminoaci * 4;
-        //CALORIAS CARBOHIDRATOS 						9%
-        $calculos['calocarb'] = $carbohid['requerim'] * 3.4;
-        //CALORIAS LIPIDOS 89%
-        $calculos['calolipi'] = $lipidosx * 9 + $volumult * 1.12;
-        //CALORIAS TOTALES 						100%
-        $calculos['calotota'] = $calculos['caloprot'] + $calculos['calocarb'] + $calculos['calolipi'];
-        //relación: Cal No proteícas/g Nitrogeno
-        $calculos['protnitr'] = ($calculos['calolipi'] + $calculos['calocarb']) / $calculos['gramtota'];
-        //Relación: Cal No proteícas/g A.A
-        $calculos['proteica'] = ($calculos['calolipi'] + $calculos['calocarb']) / $aminoaci;
-        //Calorías totales/Kg./día
-        $calculos['caltotkg'] = $calculos['calotota'] / $calculos['pesoxxxx'];
-        //RELACIÓN CALCIO/FOSFÓRO                 (<2)
-        $calculos['calcfosf'] = ($datasxxx[6]['requtota'] * 9.3 / 1 / $calculos['volutota'] * 1000 / 40) * ($this->casaCT(2, $datasxxx)['volumenx'] * 31 / 1 / $calculos['volutota'] * 1000 / 31) / 100;
-
-        return $calculos;
-    }
-
     public function getCalculosCT($cabecera)
     {
         $datasxxx = $this->armardata($cabecera);
@@ -181,9 +93,9 @@ trait CalculosTrait
         $this->_dataxxx['pesoxxxx'] = $cabecera->peso; //velocidad de infusion
         $this->_dataxxx['velopurg'] = $cabecera->volumen + $cabecera->purga; //velocidad de infusion
         if ($cabecera->paciente->npt_id == 3) { // adultos
-            $this->_dataxxx = $this->calculosadultosCT($this->_dataxxx, $datasxxx);
+            $this->_dataxxx = $this->calculosadultosCAT($this->_dataxxx, $datasxxx);
         } else { // neonato y pediatrico
-            $this->_dataxxx = $this->calculosneopediatricoCT($this->_dataxxx, $datasxxx);
+            $this->_dataxxx = $this->calculosneopediatricoCPT($this->_dataxxx, $datasxxx);
         }
         $this->_dataxxx['carbvali'] = $this->_dataxxx['concarbo'] > 24.5 ? 'ADVER/R.H�?GADO GRASO' : ($this->_dataxxx['concarbo'] < 24.4 ? 'SEGURA' : '');
         $this->_dataxxx['concprov'] = $this->_dataxxx['concprot'] < 1 ? 'NO ESTABLE' : 'ESTABLE';
