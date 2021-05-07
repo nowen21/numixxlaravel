@@ -267,7 +267,7 @@ foreach ($cformula->dformulas as $value) {
                 {{number_format((($lipidoxx*9 +$vitalipx*1.12)+($carbohid*3.4)+($aminoaci+$glutamin)*4)/$cformula->peso,2)}}
             </td>
             <td class="negrita" style=" width:28%;">
-                RELACIÓN CALOR&Iacute;AS/FÓSFORO (&lt;2 )
+                RELACIÓN CALCIO/FÓSFORO (&lt;2 )
             </td>
             <td>
                 {{$calculos['calcfosv']}}

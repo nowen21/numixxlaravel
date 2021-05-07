@@ -40,7 +40,7 @@ trait AsignaRangoTrait
             ->where('crangos.sis_esta_id', 1)
             ->whereIn('condicios.consinli', $this->getLipidosART($dataxxxx))
             ->orderBy('rangos.ranginic', 'DESC')
-            ->get();
+            ->first();
         return $registro;
     }
     public function getRangosART($dataxxxx)
