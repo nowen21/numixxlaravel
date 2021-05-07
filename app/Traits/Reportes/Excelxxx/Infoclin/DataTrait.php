@@ -16,20 +16,20 @@ trait DataTrait
 
     public function getResumenDT($dataxxxx)
     {
-        $resumeny = ['cantidad' => 1, 'codigoxx' => $dataxxxx['rangoxxx']->id, 'codiword' => $dataxxxx['rangoxxx']->rcodigo->codiprod,'rangoxxx'=>$this->getDescripcion($dataxxxx['rangoxxx']->rcodigo)];
+        $resumeny = ['cantidad' => 1, 'codigoxx' => $dataxxxx['rangoxxx']->id, 'codiword' => $dataxxxx['rangoxxx']->rcodigo->codiprod, 'rangoxxx' => $this->getDescripcion($dataxxxx['rangoxxx']->rcodigo)];
         // si es el primer registro
-        if (count( $this->opciones['resumenx']) == 0) {
-             $this->opciones['resumenx'][] = $resumeny;
+        if (count($this->opciones['resumenx']) == 0) {
+            $this->opciones['resumenx'][] = $resumeny;
         } else {
             // recorrer todos lo rangos existentes
-            foreach ( $this->opciones['resumenx'] as $key => $resumenx) {
+            foreach ($this->opciones['resumenx'] as $key => $resumenx) {
                 // sumar los rangos
                 if ($resumenx['codigoxx'] == $dataxxxx['rangoxxx']->id) {
                     $resumeny = $resumenx;
                     $resumeny['cantidad'] = $resumeny['cantidad'] + 1;
-                     $this->opciones['resumenx'][$key] = $resumeny;
+                    $this->opciones['resumenx'][$key] = $resumeny;
                 } else { // asignar uno nuevo
-                     $this->opciones['resumenx'][] = $resumeny;
+                    $this->opciones['resumenx'][] = $resumeny;
                 }
             }
         }
@@ -40,6 +40,7 @@ trait DataTrait
         $excelxxx = $dataxxxx['excelxxx'];
         $formulac = Cformula::select(
             [
+                'cformulas.id',
                 'cformulas.sis_clinica_id',
                 'cformulas.volumen',
                 'cformulas.crango_id',
@@ -70,6 +71,7 @@ trait DataTrait
                 'fechanpt' => $dataxxxx['fechaxxx'],
                 'paciente' => $valuexxx->nombres . ' ' . $valuexxx->apellidos,
                 'histclin' => $valuexxx->cedula,
+                'cobrsepa' => $this->getCobrarMCT(['cformula' => Cformula::find($valuexxx->id)]),
                 'tiponutr' => $this->getDescripcion($crangoxy),
                 'volulipi' => ($crangoxx->consinli == 1 || $crangoxx->consinli == 2) ? $valuexxx->volumen : '',
                 'volsinli' => $crangoxx->consinli == 3 ? $valuexxx->volumen : '',
@@ -89,6 +91,7 @@ trait DataTrait
     }
     public function getExcel($dataxxxx)
     {
+
         $excelxxx = [];
         $formulac = Cformula::select(['cformulas.created_at'])
             ->join('sis_clinicas', 'cformulas.sis_clinica_id', '=', 'sis_clinicas.id')

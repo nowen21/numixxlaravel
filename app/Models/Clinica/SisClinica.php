@@ -38,7 +38,7 @@ class SisClinica extends Model
     }
     public function medicames()
     {
-        return $this->belongsToMany(Medicame::class)->withTimestamps();
+        return $this->belongsToMany(Medicame::class)->withTimestamps()->withPivot(['sis_esta_id','cobrsepa',]);
     }
     public function rangos()
     {
