@@ -42,11 +42,11 @@ trait ClinicaTrait
 
     public function getAsignados($request)
     {
-        $paciente = Medicame::select(['medicame_sis_clinica.id', 'medicames.nombgene', 's_estado', 'medicame_sis_clinica.sis_esta_id'])
+        $paciente = Medicame::select(['medicame_sis_clinica.id', 'medicames.nombgene', 's_estado', 'medicame_sis_clinica.sis_esta_id', 'medicame_sis_clinica.cobrsepa'])
             ->join('medicame_sis_clinica', 'medicames.id', '=', 'medicame_sis_clinica.medicame_id')
             ->join('sis_estas', 'medicame_sis_clinica.sis_esta_id', '=', 'sis_estas.id')
             ->where('medicame_sis_clinica.sis_clinica_id', $request->padrexxx);
-        return $this->getDatatable($paciente, $request);
+        return $this->getCobrsepas($paciente, $request);
     }
 
     public  function getMedicametos($request)

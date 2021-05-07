@@ -6,6 +6,6 @@ if($queryxxx->sis_esta_id==2){
     $textoxxx='Activar';
 }
 ?>
-@if($requestx->pueditar)
-<a class="btn btn-sm btn-{{$clasexxx}} estadoxx" href="javascript:void(0)" id="{{$queryxxx->id}}">{{$textoxxx}}</a>
+@if(Auth()->user()->can($requestx->routexxx[0] . '-editar'))
+<a class="btn btn-sm btn-{{$clasexxx}} estadoxx" href="javascript:void(0)" id="estadoxx_{{$queryxxx->id}}">{{$textoxxx}}</a>
 @endif

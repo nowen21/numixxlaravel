@@ -18,6 +18,7 @@ class CreateMedicameSisClinicaTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('sis_clinica_id')->unsigned();
             $table->bigInteger('medicame_id')->unsigned();
+            $table->integer('cobrsepa')->default(2);
 
             $table->foreign('sis_clinica_id')->references('id')->on('sis_clinicas');
             $table->foreign('medicame_id')->references('id')->on('medicames');
@@ -26,6 +27,7 @@ class CreateMedicameSisClinicaTable extends Migration
         Schema::create('h_medicame_sis_clinica', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('sis_clinica_id');
+            $table->integer('cobrsepa')->default(2);
             $table->integer('medicame_id');
             $table=CamposMagicos::h_magicos($table);
         });

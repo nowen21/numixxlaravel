@@ -82,6 +82,7 @@ class CmedicameController extends Controller
                     ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'MEDICAMENTO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => '¿COBRAR SEPARADO?', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
                     ]
                 ],
@@ -89,6 +90,7 @@ class CmedicameController extends Controller
                     ['data' => 'botonexx', 'name' => 'botonexx'],
                     ['data' => 'id', 'name' => 'medicames.id'],
                     ['data' => 'nombgene', 'name' => 'medicames.nombgene'],
+                    ['data' => 'cobrsepa', 'name' => 'cobrsepa'],
                     ['data' => 's_estado', 'name' => 'sis_estas.s_estado'],
                 ],
                 'tablaxxx' => 'cmedicamentos',
@@ -134,6 +136,9 @@ class CmedicameController extends Controller
             $request->routexxx = [$this->opciones['routxxxx']];
             $request->botonesx = $this->opciones['rutacarp'] .
                 $this->opciones['carpetax'] . '.botones.botonesapi';
+
+                $request->cobrsepa = $this->opciones['rutacarp'] .
+                $this->opciones['carpetax'] . '.botones.cobrsepa';
             $request->estadoxx = 'layouts.components.botones.estadosx';
             return $this->getAsignados($request);
         }

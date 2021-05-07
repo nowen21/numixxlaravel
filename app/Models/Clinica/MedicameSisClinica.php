@@ -8,6 +8,7 @@ class MedicameSisClinica extends Pivot
 {
     protected $fillable = [
         'sis_esta_id',
+        'cobrsepa',
         'user_crea_id',
         'user_edita_id'
     ];

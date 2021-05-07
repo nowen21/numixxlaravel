@@ -164,8 +164,19 @@ class Clinicas
 
     public static function getInactivarMedicam($request)
     {
-        $registro = MedicameSisClinica::where('id', $request->registro)->first();
-        $registro->update(['sis_esta_id' => ($registro->sis_esta_id == 1) ? 2 : 1, 'user_edita_id' => Auth::user()->id]);
+        $registrx = explode('_', $request->registro);
+        $dataxxxx = [];
+        $registro = MedicameSisClinica::where('id', $registrx[1])->first();
+        switch ($registrx[0]) {
+            case 'estadoxx':
+                $dataxxxx = ['sis_esta_id' => ($registro->sis_esta_id == 1) ? 2 : 1, 'user_edita_id' => Auth::user()->id];
+                break;
+            case 'cobrsepa':
+
+                $dataxxxx = ['cobrsepa' => ($registro->cobrsepa == 1) ? 2 : 1, 'user_edita_id' => Auth::user()->id];
+                break;
+        }
+        $registro->update($dataxxxx);
         return [];
     }
 }
