@@ -13,6 +13,27 @@ trait DataTrait
 {
     use RangoDescripcionTrait;
     private $diferenc;
+
+    public function getResumenDT($dataxxxx)
+    {
+        $resumeny = ['cantidad' => 1, 'codigoxx' => $dataxxxx['rangoxxx']->id, 'codiword' => $dataxxxx['rangoxxx']->rcodigo->codiprod,'rangoxxx'=>$this->getDescripcion($dataxxxx['rangoxxx']->rcodigo)];
+        // si es el primer registro
+        if (count( $this->opciones['resumenx']) == 0) {
+             $this->opciones['resumenx'][] = $resumeny;
+        } else {
+            // recorrer todos lo rangos existentes
+            foreach ( $this->opciones['resumenx'] as $key => $resumenx) {
+                // sumar los rangos
+                if ($resumenx['codigoxx'] == $dataxxxx['rangoxxx']->id) {
+                    $resumeny = $resumenx;
+                    $resumeny['cantidad'] = $resumeny['cantidad'] + 1;
+                     $this->opciones['resumenx'][$key] = $resumeny;
+                } else { // asignar uno nuevo
+                     $this->opciones['resumenx'][] = $resumeny;
+                }
+            }
+        }
+    }
     public function getArmarData($dataxxxx)
     {
 
@@ -39,8 +60,11 @@ trait DataTrait
             ->where('clinica_id', $dataxxxx['clinicax'])
             ->get();
         $totalxxx = 0;
+
         foreach ($formulac as $key => $valuexxx) {
-            $crangoxy = Crango::find($valuexxx->crango_id)->rcodigo;
+            $crangoxy = Crango::find($valuexxx->crango_id);
+            $this->getResumenDT(['rangoxxx' => $crangoxy]);
+            $crangoxy =  $crangoxy->rcodigo;
             $crangoxx = $crangoxy->rcondici->condicio;
             $excelxxx[] = [
                 'fechanpt' => $dataxxxx['fechaxxx'],

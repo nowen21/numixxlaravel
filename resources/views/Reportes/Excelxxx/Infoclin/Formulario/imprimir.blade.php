@@ -13,12 +13,12 @@
         </tr>
         <tr>
             <th scope="col" colspan="{{$colspanx}}" style="text-align: center;">
-               {{$todoxxxx['clinicay']->clinica}}
+                {{$todoxxxx['clinicay']->clinica}}
             </th>
         </tr>
         <tr>
             <th scope="col" colspan="{{$colspanx}}" style="text-align: center;">
-            {{$todoxxxx['clinicay']->nitxxxxx}}
+                {{$todoxxxx['clinicay']->nitxxxxx}}
             </th>
         </tr>
         <tr>
@@ -75,5 +75,43 @@
         @endif
         @endforeach
 
+    </tbody>
+</table>
+<table class="table">
+    <thead>
+        <tr>
+            <th colspan="5">RESUMEN</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Nro. NPT</td>
+            <td>TIPO DE NUTRICI&Oacute;N</td>
+            <td>VALOR UNIDAD</td>
+            <td>VALOR TOTAL</td>
+            <td>COD WO</td>
+        </tr>
+        <?php
+        $totalxxx = 0;
+        foreach ($todoxxxx['resumenx'] as $key => $value) {
+            $totalxxx=$value['cantidad']+$totalxxx;
+        ?>
+            <tr>
+                <td>{{$value['cantidad']}}</td>
+                <td>{{$value['rangoxxx']}}</td>
+                <td></td>
+                <td></td>
+                <td>{{$value['codiword']}}</td>
+            </tr>
+        <?php
+        }
+        ?>
+        <tr>
+            <td>{{$totalxxx}}</td>
+            <td colspan="2">TOTAL</td>
+
+            <td></td>
+            <td></td>
+        </tr>
     </tbody>
 </table>
