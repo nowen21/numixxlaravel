@@ -10,6 +10,7 @@ use App\Models\Remision;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Clinica\RemisionTrait;
 use App\Traits\ClinicaTrait;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -57,7 +58,7 @@ class CremisionController extends Controller
      */
     public function index(Clinica $padrexxx)
     {
-        $tienremi=Remision::where('created_at', 'LIKE', date('Y-m-d') . '%')->first();
+        $tienremi = Remision::where('created_at', 'LIKE', date('Y-m-d') . '%')->first();
         $this->opciones['parapest'][0]  = $padrexxx->id;
         $this->opciones['cardhead'] = 'CLÍNICA: ' . $padrexxx->clinica;
         $this->opciones['cardheap'] = 'CLÍNICA: ' . $padrexxx->clinica;
@@ -68,7 +69,7 @@ class CremisionController extends Controller
                 'titulist' => 'LISTA DE REMISIONES',
                 'dataxxxx' => [],
                 'accitabl' => true,
-                'vercrear' => isset($tienremi->id)==true?false:true,
+                'vercrear' => isset($tienremi->id) == true ? false : true,
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', [$padrexxx->id]),
                 'cabecera' => [[
                     ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
@@ -108,6 +109,7 @@ class CremisionController extends Controller
     }
     private function view($dataxxxx)
     {
+
         $this->opciones['tituloxx'] = 'REMISIÓN';
         $this->opciones['clinicai']  = [$dataxxxx['padrexxx']->id => $dataxxxx['padrexxx']->clinica];
         $this->opciones['clinicax'] = $dataxxxx['padrexxx']->id;
@@ -122,10 +124,11 @@ class CremisionController extends Controller
         $this->opciones['cardheap'] = 'CLÍNICA: ' . $dataxxxx['padrexxx']->clinica;
         // indica si se esta actualizando o viendo
         if ($dataxxxx['modeloxx'] != '') {
-            $this->opciones['rangoxxx']=[$dataxxxx['modeloxx']->orden_id => $dataxxxx['modeloxx']->orden->ordeprod];
-            $this->opciones['parametr'][1] =$dataxxxx['modeloxx']->id;
+            $quimfarm = $dataxxxx['modeloxx']->quimfarm;
+            $this->opciones['quimfarm'] = [$quimfarm->id => $quimfarm->name];
+            $this->opciones['rangoxxx'] = [$dataxxxx['modeloxx']->orden_id => $dataxxxx['modeloxx']->orden->ordeprod];
+            $this->opciones['parametr'][1] = $dataxxxx['modeloxx']->id;
             $this->opciones['clinicai']  = [$dataxxxx['modeloxx']->clinica_id => $dataxxxx['modeloxx']->clinica->clinica];
-
             $this->opciones['modeloxx'] = $dataxxxx['modeloxx'];
 
             if (auth()->user()->can($this->opciones['permisox'] . '-crear')) {
@@ -151,7 +154,13 @@ class CremisionController extends Controller
      */
     public function create(Clinica $padrexxx)
     {
-
+        $quimfarm = User::select()->where('quimfarm', 1)->first();
+        if ($quimfarm == null) {
+            return redirect()
+                ->route($this->opciones['permisox'], [$padrexxx->id])
+                ->with('info', 'No se tiene un químico farmacéutico asignado');
+        }
+        $this->opciones['quimfarm'] = [$quimfarm->id => $quimfarm->name];
 
         $this->opciones['indecrea'] = false;
         $this->opciones['botoform'][] =

@@ -12,13 +12,16 @@ use Illuminate\Support\Facades\DB;
 class Remision extends Model {
 
   protected $fillable = [
-      'orden_id', 'clinica_id','usercrea', 'sis_esta_id', 'user_crea_id', 'user_edita_id'
+      'orden_id', 'clinica_id','quimfarm_id', 'sis_esta_id', 'user_crea_id', 'user_edita_id'
   ];
+  public function quimfarm()
+  {
+      return $this->belongsTo(User::class, 'quimfarm_id');
+  }
   public function creador()
   {
       return $this->belongsTo(User::class, 'user_crea_id');
   }
-
   public function editor()
   {
       return $this->belongsTo(User::class, 'user_edita_id');

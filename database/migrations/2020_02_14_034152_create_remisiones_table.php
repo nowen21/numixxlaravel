@@ -16,17 +16,20 @@ class CreateRemisionesTable extends Migration
     {
         Schema::create('remisions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('clinica_id')->unsigned();// clinica dueña de la remisión
-            $table->bigInteger('orden_id')->unsigned();//orden de produccion con la que se genera la remision
+            $table->bigInteger('clinica_id')->unsigned(); // clinica dueña de la remisión
+            $table->bigInteger('orden_id')->unsigned(); //orden de produccion con la que se genera la remision
+            $table->bigInteger('quimfarm_id')->unsigned(); //químico farmacéutico que realiza la remisión
             $table->foreign('clinica_id')->references('id')->on('clinicas');
-             $table->foreign('orden_id')->references('id')->on('ordens');
-            $table=CamposMagicos::magicos($table);
+            $table->foreign('quimfarm_id')->references('id')->on('users');
+            $table->foreign('orden_id')->references('id')->on('ordens');
+            $table = CamposMagicos::magicos($table);
         });
         Schema::create('h_remisions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('orden_id')->unsigned();//orden de produccion con la que se genera la remision
-            $table->integer('clinica_id');// clinica dueña de la remisión
-            $table=CamposMagicos::h_magicos($table);
+            $table->integer('orden_id')->unsigned(); //orden de produccion con la que se genera la remision
+            $table->integer('clinica_id'); // clinica dueña de la remisión
+            $table->integer('quimfarm_id')->unsigned(); //químico farmacéutico que realiza la remisión
+            $table = CamposMagicos::h_magicos($table);
         });
     }
 
