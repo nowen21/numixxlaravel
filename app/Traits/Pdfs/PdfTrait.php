@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\View;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Traits\Cformula\CalculosTrait;
 use App\Traits\Cformula\CalcularEdadTrait;
+use App\User;
 
 trait PdfTrait
 {
@@ -54,9 +55,14 @@ trait PdfTrait
 
         $dataxxxx['calculos'] = $this->getCalculosCT($dataxxxx['cformula']);
         $dataxxxx['dnpxxxxx'] = $this->getCalcularDnp($dataxxxx['cformula']);
-
-        $dataxxxx['preparad'] = isset($dataxxxx['cformula']->userprep);
-        $dataxxxx['liberado'] = 'w';
+        $quimfarm = User::select()->where('quimfarm', 1)->first();
+        if( $dataxxxx['cformula']->userevis_id!=null){
+            $quimfarm=$dataxxxx['cformula']->userevis->name;
+        }else {
+            $quimfarm=$quimfarm->name;
+        }
+        $dataxxxx['preparad'] = $quimfarm;
+        $dataxxxx['liberado'] = $quimfarm;
         $dataxxxx = [
             'vistaurl' => 'Reporte.Etiquetas.etiquetanpt',
             // 'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],

@@ -18,27 +18,35 @@
          {{$todoxxxx['modeloxx']->velocidad}}
        </div>
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
         {{ Form::label('volumen', 'Volumen Total:', ['class' => 'control-label col-form-label-sm']) }}
         <div id="tiempo" class="form-control" >
          {{$todoxxxx['modeloxx']->volumen}}
        </div>
     </div>
 
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
         {{ Form::label('purga', 'Purga:', ['class' => 'control-label col-form-label-sm']) }}
         <div id="tiempo" class="form-control" >
          {{$todoxxxx['modeloxx']->purga}}
        </div>
     </div>
 
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
         {{ Form::label('peso', 'Peso:', ['class' => 'control-label col-form-label-sm']) }}
         <div id="tiempo" class="form-control" >
          {{$todoxxxx['modeloxx']->tiempo}}
        </div>
     </div>
-
+    <div class="form-group col-md-6">
+        {{ Form::label('userevis_id', 'Químico Farmacéutico:', ['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::select('userevis_id', $todoxxxx['quimfarm'], null, ['class' => $errors->first('userevis_id') ? 'form-control is-invalid select2' : 'form-control select2','id'=>'userevis_id']) }}
+        @if($errors->has('userevis_id'))
+        <div class="invalid-feedback d-block">
+            {{ $errors->first('userevis_id') }}
+        </div>
+        @endif
+    </div>
     <div class="form-group col-md-12">
         <hr style="border:  #000000 solid 2px" />
     </div>

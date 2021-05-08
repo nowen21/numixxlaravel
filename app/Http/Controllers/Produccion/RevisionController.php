@@ -15,6 +15,7 @@ use App\Traits\Cformula\CalculosFormulacion;
 use App\Traits\Pestanias\ProduccionTrait;
 use App\Traits\Produccion\AsignaRangoTrait;
 use App\Traits\Produccion\InventarioTrait;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -125,6 +126,19 @@ class RevisionController extends Controller
     }
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
     {
+        $quimfarm = User::select()->where('quimfarm', 1)->first();
+        if ($quimfarm == null && $objetoxx->userevis_id==null) {
+            return redirect()
+                ->route($this->opciones['routxxxx'], [])
+                ->with('info', 'No se tiene un químico farmacéutico asignado');
+        }
+        $quimfarx = $objetoxx->userevis;
+        if($quimfarx==null){
+            $this->opciones['quimfarm'] = [$quimfarm->id => $quimfarm->name];
+        }else {
+            $this->opciones['quimfarm'] = [$quimfarx->id => $quimfarx->name];
+        }
+
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
@@ -144,6 +158,7 @@ class RevisionController extends Controller
 
     public function edit(Cformula $objetoxx)
     {
+
         if ($objetoxx->sis_esta_id == 2) {
             return redirect()
                 ->route($this->opciones['routxxxx'], [])
