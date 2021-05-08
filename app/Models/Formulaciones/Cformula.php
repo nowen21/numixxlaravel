@@ -3,6 +3,7 @@
 namespace App\Models\Formulaciones;
 
 use App\Models\Alerta;
+use App\Models\Clinica\Crango;
 use App\Models\Clinica\SisClinica;
 use App\Models\Medicamentos\Medicame;
 use App\Models\Pacientes\Paciente;
@@ -48,6 +49,11 @@ class Cformula extends Model
     public function editor()
     {
         return $this->belongsTo(User::class, 'user_edita_id');
+    }
+
+    public function userevis()
+    {
+        return $this->belongsTo(User::class, 'userevis_id');
     }
     public function sis_esta()
     {
@@ -135,6 +141,10 @@ class Cformula extends Model
     public function orden()
     {
         return $this->belongsTo(Orden::class);
+    }
+    public function crango()
+    {
+        return $this->belongsTo(Crango::class);
     }
     public function alrtas()
     {

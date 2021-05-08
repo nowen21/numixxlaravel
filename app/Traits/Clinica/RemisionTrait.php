@@ -4,9 +4,13 @@ namespace App\Traits\Clinica;
 
 use App\Models\Formulaciones\Cformula;
 use App\Models\Remision;
+use App\Traits\Reportes\Excelxxx\Infoclin\MedicamentosCobrarTrait;
+use App\Traits\Reportes\Excelxxx\RangoDescripcionTrait;
 
 trait RemisionTrait
 {
+    use MedicamentosCobrarTrait;
+    use RangoDescripcionTrait;
     public function imprimir($dataxxxx)
     {
         $orientac = ['landscape', 'portrait']; // orientaciones del pdf
@@ -62,13 +66,12 @@ trait RemisionTrait
          $medicame = ['lipidoxx'=>'Sin Lípidos','glutamin'=>'Sin Glutamina'];
           foreach ($value->dformulas as $formedic) {
             if($formedic->medicame->casa_id==16){
-              $medicame['lipidoxx']='Con Lípido '.$formedic->purga;
+              $medicame['lipidoxx']='Con Lípido '.number_format($formedic->purga,2);
             }
             if($formedic->medicame->casa_id==10){
-              $medicame['glutamin']='Con Glutamina '.$formedic->purga;
+              $medicame['glutamin']='Con Glutamina '.number_format($formedic->purga,2);
             }
           }
-
           $formulac[] = [
               'paciente' => [
                   'nombrexx' => $value->paciente->nombres . ' ' . $value->paciente->apellidos,
@@ -76,9 +79,10 @@ trait RemisionTrait
                   'nptxxxxx' => $value->paciente->npt->nombre,
               ],
               'volumenx' => $value->total,
-              'medicame' => $medicame,
+              'rangoxxx'=>$this->getDescripcion($value->crango->rcodigo),
+              'cobrsepa' => $this->getCobrarMCT(['cformula'=>$value]),
               'lotexxxx' => $value->total,
-              'quimicox' => $value->id,
+              'quimicox' => $value->userevis->name,
           ];
         }
         $dataxxxx = [
