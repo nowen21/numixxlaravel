@@ -132,7 +132,7 @@ class UsuarioController extends Controller
         ];
         $this->opciones['rolesxxx'] = Role::get();
         $this->opciones['clinicid'] = SisClinica::combo( true, false);
-
+        $this->opciones['quimfarm'] = [2=>'NO',1=>'SI'];
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
        // $this->opciones['accionxx'] = $dataxxxx['accionxx'];
         // indica si se esta actualizando o viendo

@@ -62,8 +62,19 @@
     </div>
 
 
-
     <div class="form-group col-md-6">
+        {{ Form::label('quimfarm', '¿Es químico farmacéutico?:', ['class' => 'control-label col-form-label-sm']) }}
+
+        {{ Form::select('quimfarm', $todoxxxx['quimfarm'], null, ['class' => $errors->first('quimfarm') ?
+        'form-control is-invalid' : 'form-control','id'=>'quimfarm']) }}
+
+        @if($errors->has('quimfarm'))
+        <div class="invalid-feedback d-block">
+            {{ $errors->first('quimfarm') }}
+        </div>
+        @endif
+    </div>
+    <div class="form-group col-md-12">
         {{ Form::label('sis_esta_id', 'Estado:', ['class' => 'control-label col-form-label-sm']) }}
 
         {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ?

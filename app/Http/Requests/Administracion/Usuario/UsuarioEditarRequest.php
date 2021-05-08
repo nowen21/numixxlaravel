@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Administracion\Usuario;
 
+use App\Rules\QuimicoFamaceuticoRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UsuarioEditarRequest extends FormRequest
@@ -47,6 +48,7 @@ class UsuarioEditarRequest extends FormRequest
                 'unique:users,documento,' . $this->segments()[2]
             ],
             'sis_clinica_id' => 'required',
+            'quimfarm' => [new QuimicoFamaceuticoRule($this)],
         ];
     }
 }

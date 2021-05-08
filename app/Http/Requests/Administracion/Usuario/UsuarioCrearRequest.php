@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Administracion\Usuario;
 
+use App\Rules\QuimicoFamaceuticoRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UsuarioCrearRequest extends FormRequest {
@@ -40,6 +41,7 @@ class UsuarioCrearRequest extends FormRequest {
         'documento' => 'required|unique:users',
         'password' => 'required|string|min:6',
         'sis_clinica_id' => 'required',
+        'quimfarm' => [new QuimicoFamaceuticoRule($this)],
     ];
   }
 
