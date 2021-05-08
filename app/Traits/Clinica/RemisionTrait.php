@@ -69,7 +69,7 @@ trait RemisionTrait
               'rangoxxx'=>$this->getDescripcion($value->crango->rcodigo),
               'cobrsepa' => $this->getCobrarMCT(['cformula'=>$value]),
               'lotexxxx' => $value->id,
-              'quimicox' => $value->userevis->name,
+              'quimicox' => $objetoxx->quimfarm->name,
           ];
         }
         $dataxxxx = [
