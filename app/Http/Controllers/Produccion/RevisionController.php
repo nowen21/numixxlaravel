@@ -131,7 +131,6 @@ class RevisionController extends Controller
         $this->opciones['calculos'] = $this->_dataxxx;
         if ($nombobje != '') {
             $this->opciones['calculos'] = $this->getArmarDataObjeto($objetoxx);
-
             // $this->opciones['calculos'] = $this->dataform->calculos($objetoxx);
             $this->opciones[$nombobje] = $objetoxx;
         }
@@ -158,10 +157,11 @@ class RevisionController extends Controller
                 ->with('info', 'La formulación que intenta revisar es de una fecha diferente');
         }
         $crangoxx = $this->getRangosART(['cformula' => $objetoxx]);
-        if ($crangoxx == null) {
+
+        if ($crangoxx[0] == null) {
             return redirect()
             ->route($this->opciones['routxxxx'], [])
-            ->with('info', "La clínica: {$objetoxx->sis_clinica->clinica->clinica} no tiene rango asignado para un volumen de {$objetoxx->total}");
+            ->with('info', "La clínica: {$objetoxx->sis_clinica->clinica->clinica} no tiene rango asignado para un volumen de {$crangoxx[1]}");
         }
 
 
@@ -186,6 +186,11 @@ class RevisionController extends Controller
                     'mostrars' => true, 'accionxx' => 'LISTO', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$objetoxx->id]],
                     'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
                 ];
+                $this->opciones['botoform'][] =
+                [
+                    'mostrars' => true, 'accionxx' => 'CANCELAR FORMULACION', 'routingx' => [$this->opciones['routxxxx'] . '.cancelar', [$objetoxx->id]],
+                    'formhref' => 2, 'tituloxx' => 'CANCELAR FORMULACION', 'clasexxx' => 'btn btn-sm btn-danger'
+                ];
         } else {
             $this->opciones['botoform'][] =
                 [
@@ -193,11 +198,7 @@ class RevisionController extends Controller
                     'formhref' => 2, 'tituloxx' => 'IMPRIMIR ETIQUETA', 'clasexxx' => 'btn btn-sm btn-primary'
                 ];
         }
-        $this->opciones['botoform'][] =
-            [
-                'mostrars' => true, 'accionxx' => 'CANCELAR FORMULACION', 'routingx' => [$this->opciones['routxxxx'] . '.cancelar', [$objetoxx->id]],
-                'formhref' => 2, 'tituloxx' => 'CANCELAR FORMULACION', 'clasexxx' => 'btn btn-sm btn-danger'
-            ];
+
         return $this->view($objetoxx,  'modeloxx', 'Editar', $this->opciones['rutacarp'] . 'pestanias');
     }
 
@@ -230,7 +231,7 @@ class RevisionController extends Controller
     {
         $this->getAlerta(['objetoxx' => $objetoxx, 'tipoacci' => 3]);
         $crangoxx = $this->getRangosART(['cformula' => $objetoxx]);
-        $dataxxxx = ['userevis_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id, 'crango_id' => $crangoxx->id];
+        $dataxxxx = ['userevis_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id, 'crango_id' => $crangoxx[0]->id];
         return $this->grabar(['dataxxxx' => $dataxxxx, 'modeloxx' => $objetoxx, 'infoxxxx' => 'Se ha realizado la revisión con éxito']);
     }
 

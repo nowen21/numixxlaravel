@@ -58,30 +58,17 @@ trait RemisionTrait
         }
     }
 
-
-
     public function geRemision(Remision $objetoxx) {
-
-        foreach (Cformula::where('orden_id', $objetoxx->orden_id)->get() as $value) {
-         $medicame = ['lipidoxx'=>'Sin Lípidos','glutamin'=>'Sin Glutamina'];
-          foreach ($value->dformulas as $formedic) {
-            if($formedic->medicame->casa_id==16){
-              $medicame['lipidoxx']='Con Lípido '.number_format($formedic->purga,2);
-            }
-            if($formedic->medicame->casa_id==10){
-              $medicame['glutamin']='Con Glutamina '.number_format($formedic->purga,2);
-            }
-          }
+        foreach (Cformula::where('orden_id', $objetoxx->orden_id)->where('terminado_id','!=',null)->get() as $value) {
           $formulac[] = [
               'paciente' => [
                   'nombrexx' => $value->paciente->nombres . ' ' . $value->paciente->apellidos,
                   'document' => $value->paciente->cedula,
                   'nptxxxxx' => $value->paciente->npt->nombre,
               ],
-              'volumenx' => $value->total,
               'rangoxxx'=>$this->getDescripcion($value->crango->rcodigo),
               'cobrsepa' => $this->getCobrarMCT(['cformula'=>$value]),
-              'lotexxxx' => $value->total,
+              'lotexxxx' => $value->id,
               'quimicox' => $value->userevis->name,
           ];
         }
@@ -99,8 +86,6 @@ trait RemisionTrait
             'orientac' => 1,
             'tipoxxxx' => 1,
             'margenes' => array(0, 0, 9.5 * 72, 14.9 * 72)];
-    //    echo '<pre>';
-    //    print_r($dataxxxx);
         return $this->imprimir($dataxxxx);
       }
 }

@@ -9,21 +9,22 @@ trait MedicamentosCobrarTrait
         $cobrarxx = [];
         $contarxx=0;
         $cformula = $dataxxxx['cformula'];
+        $volumenx=$cformula->total;
         $medicame = $cformula->sis_clinica->medicames;
         foreach ($medicame as $key => $medicamx) {
             if ($medicamx->pivot->cobrsepa == 1) {
                 $cobrarxx[] = $medicamx->id;
             }
         }
-
+        $dformula=[];
         foreach ($cformula->dformulas as $key => $value) {
-            if (!in_array($value->medicame_id, $cobrarxx)) {
-                unset($cformula->dformulas[$key]);
-            }else {
+            if (in_array($value->medicame_id, $cobrarxx)) {
+                 $volumenx-=$value->volumen;
                 $contarxx++;
+                $dformula[]=$value;
             }
         }
-        return [$cformula->dformulas, $contarxx == 0 ? 1 : $contarxx];
+        return [$dformula, $contarxx == 0 ? 1 : $contarxx,$volumenx];
     }
     public function getCobrarMCT($dataxxxx)
     {

@@ -38,10 +38,10 @@
     }
     ?>
     <tr>
-        <td style="  text-align: left;border-top: 1px #000 solid;border-right: 1px #000 solid;" rowspan="{{ $cobrsepx}}" colspan="2">{{$formulac['lotexxxx']}}</td>
+        <td style="  text-align: right;border-top: 1px #000 solid;border-right: 1px #000 solid;" rowspan="{{ $cobrsepx}}" colspan="2">{{$formulac['lotexxxx']}}</td>
         <td style="  text-align: left;border-top: 1px #000 solid;border-right: 1px #000 solid;" rowspan="{{ $cobrsepx}}" colspan="5">{{$formulac['paciente']['nombrexx']}} </td>
         <td style="  text-align: left;border-top: 1px #000 solid;border-right: 1px #000 solid;" rowspan="{{ $cobrsepx}}" colspan="2">{{$formulac['paciente']['document']}} </td>
-        <td style="  text-align: left;border-top: 1px #000 solid;border-right: 1px #000 solid;" rowspan="{{ $cobrsepx}}" colspan="3">{{$formulac['lotexxxx']}}</td>
+        <td style="  text-align: left;border-top: 1px #000 solid;border-right: 1px #000 solid;" rowspan="{{ $cobrsepx}}" colspan="3">{{$cobrsepa[2]}}</td>
         <td style="  text-align: left;border-top: 1px #000 solid;" colspan="8">{{$formulac['rangoxxx']}}</td>
     </tr>
     @if($cobrsepx>1)
