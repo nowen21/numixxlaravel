@@ -106,7 +106,6 @@ trait PdfTrait
             'dataxxxx' => $dataxxxx,
         ];
 
-        // ddd(date('Y-m-d H:m:s',time()));
         QrCode::size(200)->generate($this->getQrCode($dataxxxx), '../public/qrcodes/qrcode.svg');
         return $this->getImprimirPdf($dataxxxx);
     }
