@@ -111,7 +111,7 @@ trait PintarFormularioTrait
                     'requerim' => $requerim,
                     'requtota' => $requtota,
                     'volumenx' => $volumenx,
-                    'readonly' =>  $pedineon ? 'readonly' : $aguaeste ? 'readonly' : '',
+                    'readonly' =>  $pedineon ? 'readonly' : ($aguaeste ? 'readonly' : ''),
                     ///'valorxxx' => 4,
                     'unidmedi' => $value->unidmedi,
                 ];

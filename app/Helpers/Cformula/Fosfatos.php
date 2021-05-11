@@ -40,14 +40,14 @@ class Fosfatos
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        $formulax[5] = $this->dataxxxx['volumenx'] / $this->pesoxxxx; // fosfato
-        $formulax[6] = $this->dataxxxx['volumenx'] / $this->pesoxxxx * 2.6; // fosfato
-        $formulax[7] = $this->dataxxxx['volumenx'] / $this->pesoxxxx; //fosfato
+        $formulax[5] = $this->dataxxxx['volumenx']; // fosfato
+        $formulax[6] = $this->dataxxxx['volumenx']  * 2.6; // fosfato
+        $formulax[7] = $this->dataxxxx['volumenx'] ; //fosfato
         break;
       case 2: // neonatos
-        $formulax[5] = $this->dataxxxx['volumenx'] / $this->pesoxxxx; // fosfato
-        $formulax[6] = $this->dataxxxx['volumenx'] / $this->pesoxxxx * 2.6; // fosfato
-        $formulax[7] = $this->dataxxxx['volumenx'] / $this->pesoxxxx; //fosfato
+        $formulax[5] = $this->dataxxxx['volumenx'] ; // fosfato
+        $formulax[6] = $this->dataxxxx['volumenx']  * 2.6; // fosfato
+        $formulax[7] = $this->dataxxxx['volumenx'] ; //fosfato
         break;
       case 3: // adultos
         $formulax[5] = $this->dataxxxx['volumenx']; // fosfato

@@ -36,10 +36,10 @@ class MultivitaminasLiposolubles {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        $formulax[19] = $this->dataxxxx['volumenx'];
+        $formulax[19] = $this->dataxxxx['volumenx']*230;
         break;
       case 2: // neonatos
-        $formulax[19] = $this->dataxxxx['volumenx'];
+        $formulax[19] = $this->dataxxxx['volumenx']*230;
         break;
       case 3: // adultos
         $formulax[18] = $this->dataxxxx['volumenx'] * self::FACTORXX;

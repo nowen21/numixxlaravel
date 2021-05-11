@@ -1,58 +1,7 @@
 <?php
-$osmo = 0;
-$fosfato = 0;
 $htmlxxxx = '';
-$calcio = 0;
-$carbohid = 0;
-$glutamin = 0;
-$aminoaci = 0;
-$lipidoxx = 0;
-$vitalipx = 0;
-$volumdia = 0;
-$npt_idxx = $cformula->paciente->npt_id;
 foreach ($cformula->dformulas as $value) {
-    $volumdia += $value->volumen;
-    switch ($value->medicame_id) {
-        case 1:
-        case 2:
-        case 3:
-            $aminoaci = $value->rtotal;
-            break;
-        case 4:
-        case 5:
-        case 6:
-            $fosfato += $value->volumen;
-            break;
-        case 7:
-        case 8:
-            $carbohid = $value->rtotal;
-            break;
-        case 11:
-            $calcio = $value->volumen;
-            break;
-        case 18:
-            $vitalipx = $value->rtotal;
-            break;
-        case 20:
-            $glutamin = $value->rtotal;
-            break;
-        case 26: //LIPIDOS MCT/LCT 20%
-        case 27: //LIPIDOS MCT/LCT/ Ω3 20%
-        case 28: //OMEGAVEN Ω3 10%
-            $lipidoxx = $value->rtotal;
-            break;
-        case 29:
-            $vitalipx = $value->rtotal;
-            break;
-    }
     if ($value->cantidad > 0) {
-        if ($npt_idxx == 3) {
-            $osmo += $value->medicame->osmoralidad * $value->purga;
-        } else {
-            $osmo += $value->medicame->osmoralidad * $value->purga;
-        }
-
-
         $htmlxxxx .= '<tr>';
         $htmlxxxx .= ' <td style="  text-align: left; background: #d2d6dc" >';
         $htmlxxxx .= $value->medicame->nombgene;
@@ -164,8 +113,11 @@ foreach ($cformula->dformulas as $value) {
             <td style=" width: 25%; text-align: left; " class="negrita">
                 CL&Iacute;NICA
             </td>
-            <td style=" width: 50%; text-align: left; ">
+            <td style=" width: 35%; text-align: left; ">
                 {{$cformula->sis_clinica->clinica->clinica}}
+            </td>
+            <td style=" width: 15%; text-align: left; " class="negrita">
+                NPT
             </td>
             <td style=" width: 25%; text-align: left; ">
                 {{$cformula->paciente->npt->nombre}}
@@ -194,7 +146,7 @@ foreach ($cformula->dformulas as $value) {
                     VOLUMEN DÍA
                 </td>
                 <td style=" text-align: right;">
-                    {{number_format($volumdia+$cformula->aguax_id,2)}}
+                    {{number_format($calculos['volutota'],2)}}
                 </td>
                 <td>
                 </td>
@@ -206,7 +158,8 @@ foreach ($cformula->dformulas as $value) {
                 <td>
                 </td>
                 <td style=" text-align: right;">
-                    {{$cformula->volumen + $cformula->purga}}
+
+                {{number_format($calculos['velopurg'],2)}}
                 </td>
 
             </tr>
@@ -258,13 +211,13 @@ foreach ($cformula->dformulas as $value) {
                 CALOR&Iacute;AS TOTALES
             </td>
             <td style=" width:7%;">
-                {{number_format(($lipidoxx*9 +$vitalipx*1.12)+($carbohid*3.4)+($aminoaci+$glutamin)*4,2)}}
+                {{number_format($calculos['calotota'],2)}}
             </td>
             <td class="negrita">
                 CALOR&Iacute;A TOTAL/Kg/D&Iacute;A
             </td>
             <td style=" width:7%;">
-                {{number_format((($lipidoxx*9 +$vitalipx*1.12)+($carbohid*3.4)+($aminoaci+$glutamin)*4)/$cformula->peso,2)}}
+                {{number_format($calculos['caltotkg'],2)}}
             </td>
             <td class="negrita" style=" width:28%;">
                 RELACIÓN CALCIO/FÓSFORO (&lt;2 )
@@ -292,13 +245,8 @@ foreach ($cformula->dformulas as $value) {
             </td>
         </tr>
     </table>
+    <br>
+    <img src="{{ url('qrcodes/qrcode.svg') }}">
 
-    <!-- <table style="width: 100%">
-        <tr>
-            <td style=" width:50%;">
-                <img src="{{ url('qrcodes/qrcode.svg') }}" style="width: 100px; height: 100px;" alt="logo">
-            </td>
-        </tr>
-    </table> -->
 
 </div>

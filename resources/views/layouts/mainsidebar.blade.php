@@ -53,7 +53,7 @@
       @include('layouts.menus.sistema')
       @endcan
 
-      
+
 
       <!-- FIN INDICADORES -->
     </ul>

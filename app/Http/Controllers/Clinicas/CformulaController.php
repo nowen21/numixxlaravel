@@ -319,11 +319,6 @@ class CformulaController extends Controller
                 'mostrars' => true, 'accionxx' => 'CREAR', 'routingx' => [$this->opciones['routxxxx'] . '.copiar', [$objetoxx->id]],
                 'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
             ];
-
-        $this->opciones['botoform'][] = [
-            'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'] . '.nuevo', [$objetoxx->paciente->id]],
-            'formhref' => 2, 'tituloxx' => 'CREAR NUEVO', 'clasexxx' => 'btn btn-sm btn-primary'
-        ];
         return $this->view(['accionxx' => 'Editar', 'modeloxx' => $objetoxx, 'padrexxx' => $objetoxx->paciente]);
     }
 

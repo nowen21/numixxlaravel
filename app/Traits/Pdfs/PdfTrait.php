@@ -18,6 +18,7 @@ use App\User;
 
 trait PdfTrait
 {
+
     use CalculosTrait;
     use CalcularEdadTrait;
     public function getImprimirPdf($dataxxxx)
@@ -41,7 +42,39 @@ trait PdfTrait
             return view($dataxxxx['vistaurl'], $dataxxxx['dataxxxx']);
         }
     }
+    public function getQrCode($dataxxxx)
+    {
+        $cformula = $dataxxxx['dataxxxx']['cformula'];
+        // $qrcodexx = 'NUTRICIÓN PARENTERAL ';
+        $qrcodexx = 'LOTE No.: ' . $cformula->id.' NUTIENTES: ';
+        // $paciente = $cformula->paciente;
+        // $qrcodexx .= " N° AFILIACIÓN: {$paciente->cedula} , ";
+        // $qrcodexx .= "N° CAMA: {$paciente->cama}, ";
+        // $qrcodexx .= "SERVICIO: {$paciente->servicio->servicio}, ";
+        // $qrcodexx .= "NOMBRES Y APELLIDOS: {$paciente->nombres} {$paciente->apellidos}, ";
+        // $qrcodexx .= "PESO: {$paciente->peso}, ";
+        // $calculos = $dataxxxx['dataxxxx']['calculos'];
+        // $qrcodexx .= "VIA: {$calculos['osmolarv']}, ";
+        // $qrcodexx .= "FECHA VENCIMIENTO: " . date("Y-m-d", strtotime(explode(' ', $cformula->created_at)[0] . "+ 2 days")) . ", ";
+        // $qrcodexx .= "CLÍNICA: {$cformula->sis_clinica->clinica->clinica}, ";
+        // $qrcodexx .= "NPT: {$paciente->npt->nombre}, ";
 
+        foreach ($cformula->dformulas as $key => $value) {
+            $qrcodexx .= "{$value->medicame->nombgene} - "
+            . number_format($value->volumen, 2) . " - " . number_format($value->purga, 2) . ", ";
+        }
+        // $qrcodexx .= "DURACIÓN {$cformula->tiempo}, ";
+        // $qrcodexx .= "VELOCIDAD {$cformula->velocidad}, ";
+        // $qrcodexx .= "FECHA PREPARACIÓN " . explode(' ', $cformula->created_at)[0] . ", ";
+        // $qrcodexx .= "RELACIÓN: Caloría No proteícas/g Nitrógeno " . number_format($calculos['protnitr'], 2) . ", ";
+        // $qrcodexx .= "OSMOLARIDAD " . number_format($calculos['osmolari'], 2) . ", ";
+        // $qrcodexx .= "CALORÍAS TOTALES " . number_format($calculos['calotota'], 2) . ", ";
+        // $qrcodexx .= "CALORÍA TOTAL/Kg/DÍA " . number_format($calculos['caltotkg'], 2) . ", ";
+        // $qrcodexx .= "RELACIÓN CALCIO/FÓSFORO (<2 ) {$calculos['calcfosv']}, ";
+        // $qrcodexx .= "PREPARADO POR: {$dataxxxx['dataxxxx']['preparad']}, ";
+        // $qrcodexx .= "LIBERADO POR: {$dataxxxx['dataxxxx']['liberado']}";
+        return $qrcodexx;
+    }
     public function imprimirEtiquetaNpt($padrexxx)
     {
 
@@ -56,22 +89,25 @@ trait PdfTrait
         $dataxxxx['calculos'] = $this->getCalculosCT($dataxxxx['cformula']);
         $dataxxxx['dnpxxxxx'] = $this->getCalcularDnp($dataxxxx['cformula']);
         $quimfarm = User::select()->where('quimfarm', 1)->first();
-        if( $dataxxxx['cformula']->userevis_id!=null){
-            $quimfarm=$dataxxxx['cformula']->userevis->name;
-        }else {
-            $quimfarm=$quimfarm->name;
+        if ($dataxxxx['cformula']->userevis_id != null) {
+            $quimfarm = $dataxxxx['cformula']->userevis->name;
+        } else {
+            $quimfarm = $quimfarm->name;
         }
         $dataxxxx['preparad'] = $quimfarm;
         $dataxxxx['liberado'] = $quimfarm;
+
         $dataxxxx = [
             'vistaurl' => 'Reporte.Etiquetas.etiquetanpt',
             // 'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
-            'dimensio' => [0, 0, 4.4 * 72, 6.4 * 72],
+            'dimensio' => [0, 0, 4.4 * 72, 8.4 * 72],
             'tipoxxxx' => 1,
             'nombarch' => 'etiqueta',
-            'dataxxxx' => $dataxxxx
+            'dataxxxx' => $dataxxxx,
         ];
-        //   QrCode::backgroundColor(255, 255, 0)->generate('Make me into a QrCode!', '../public/qrcodes/qrcode.svg');
+
+        // ddd(date('Y-m-d H:m:s',time()));
+        QrCode::size(200)->generate($this->getQrCode($dataxxxx), '../public/qrcodes/qrcode.svg');
         return $this->getImprimirPdf($dataxxxx);
     }
     public function imprimirLote($padrexxx)
@@ -119,7 +155,7 @@ trait PdfTrait
             'tipoxxxx' => 1,
             'nombarch' => 'conciliacion',
             'dataxxxx' => [
-                'cabecera' => $objetoxx, 'todoxxxx' => ['alistami'=>$concilia]
+                'cabecera' => $objetoxx, 'todoxxxx' => ['alistami' => $concilia]
             ]
         ];
         return Pdfs::getImprimirPdf($dataxxxx);
