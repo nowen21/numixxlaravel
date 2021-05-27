@@ -94,7 +94,7 @@ class Dataformulario
             if (Dataformulario::getCasaMedicamentos($dataxxxx, $value->id)) {
                 $selevalu = '';
                 $requerim = '';
-                //$selvalfi = '';
+                $volupurg = '';
                 $volumenx = '';
                 $requtota = '';
                 // saber cuales son los medicames que aplican para la lista
@@ -115,6 +115,7 @@ class Dataformulario
                                 $requerim = $valor->cantidad;
                                 $requtota = $valor->rtotal;
                                 $volumenx = number_format($valor->volumen, 2);
+                                $volupurg = number_format($valor->purga, 2);
                             }
                         }
                     }
@@ -131,6 +132,7 @@ class Dataformulario
                     'requerim' => $requerim,
                     'requtota' => $requtota,
                     'volumenx' => $volumenx,
+                    'volupurg' => $volupurg,
                     'readonly' =>  $pedineon ? 'readonly' : ($aguaeste ? 'readonly' : ''),
                     ///'valorxxx' => 4,
                     'unidmedi' => $value->unidmedi,

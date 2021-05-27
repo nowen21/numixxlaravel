@@ -88,8 +88,8 @@ class Validacionesajax
         $dataxxxx['fosfcant'] = $newdatax['fosfatox_cant']; // requerimiento diario del fosfato del fosfato seleccionado
         $dataxxxx['campo_id'] = $dataxxxx['campo_id']; // campo en que se esta digitando
         $dataxxxx['rediafos'] = $newdatax["fosfatox_" . $dataxxxx['cantvolu']]; // requerimiento diario o volumen del fosfato seleccionado
-        $dataxxxx['multivi2'] = $newdatax["multiuno_cant"]; // multivitamina liposoluble seleccionada requerimiento diario
-        $dataxxxx['lipovolu'] = $newdatax["multiuno_volu"]; // multivitamina liposoluble seleccionada volumen
+        $dataxxxx['multivi2'] = $newdatax["vitalipo_cant"]; // multivitamina liposoluble seleccionada requerimiento diario
+        $dataxxxx['lipovolu'] = $newdatax["vitalipo_volu"]; // multivitamina liposoluble seleccionada volumen
         $dataxxxx['peso'] = $newdatax["peso"]; // multivitamina liposoluble seleccionada
         $dataxxxx['npt_id'] = $newdatax["npt_id"]; // multivitamina liposoluble seleccionada
         $dataxxxx['purga'] = $newdatax["purga"]; // multivitamina liposoluble seleccionada
@@ -208,7 +208,7 @@ class Validacionesajax
                 })
                     ->first()->requerim;
                 break;
-            case 'multiuno': //liposoluble
+            case 'vitalipo': //liposoluble
                 $requerim = Lipopedi::where(function ($queryxxx) use ($dataxxxx) {
                     $pesoxxxx = $dataxxxx["peso"];
                     $finalxxx = $pesoxxxx;

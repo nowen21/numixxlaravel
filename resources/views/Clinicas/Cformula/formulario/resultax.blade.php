@@ -1,104 +1,267 @@
-<div id="formulaciontable">
+<div id="formulaciontable" style="padding-top: 15px;">
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-lg-6 table-bordered form-control">VOLUMEN TOTAL (ml)</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="volutota" style="text-align: right;"> {{$todoxxxx['calculos']['volutota']}} </div>
-        <div class="col-xs-4 col-sm-4 col-lg-4 table-bordered form-control"> VOLUMEN CON PURGA (ml)</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="velopurg" style="text-align: right;"> {{$todoxxxx['calculos']['velopurg']}} </div>
+        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control form-control-sm altoxxxx negritax">VOLUMEN TOTAL (ml)</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('volutota',
+            isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->volumen,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right;',
+        'id'=>'volutota','readonly'
+        ]) }}
+        </div>
+        <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered form-control form-control-sm altoxxxx negritax"> VOLUMEN CON PURGA (ml)</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+
+            {{ Form::text('velopurg',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->volumen+$todoxxxx['modeloxx']->purga,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right',
+        'id'=>'velopurg','readonly'
+        ]) }}
+        </div>
     </div>
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-lg-6 table-bordered form-control">VELOCIDAD DE INFUSIÓN (ml/hora)</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="veloinfu" style="text-align: right;">{{$todoxxxx['calculos']['veloinfu']}} </div>
+        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control form-control-sm altoxxxx negritax">VELOCIDAD DE INFUSIÓN (ml/hora)</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('veloinfu',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->velocidad,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right;',
+        'id'=>'veloinfu','readonly'
+        ]) }}
+        </div>
         <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
     </div>
     <div class="row">
-        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control">CONCENTRACIÓN DE CARBOHIDRATOS (%)</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="carbvali">{{$todoxxxx['calculos']['carbvali']}}</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="concarbo" style="text-align: right;">{{$todoxxxx['calculos']['concarbo']}}</div>
+        <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered form-control form-control-sm altoxxxx negritax">CONCENTRACIÓN DE CARBOHIDRATOS (%)</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx">
+            {{ Form::text('carbvali',
+            $todoxxxx['calculos']['carbvali'],
+        ['class'=>'textinpu','style'=>'text-align: right;',
+        'id'=>'carbvali','readonly'
+        ]) }}
+
+        </div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('concarbo',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->concarbo,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right;',
+        'id'=>'concarbo','readonly'
+        ]) }}
+        </div>
         <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
     </div>
     <div class="row">
-        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control">CONCENTRACIÓN DE PROTEÍNA (%) (>1%)</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="concprov">{{$todoxxxx['calculos']['concprov']}}</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="concprot" style="text-align: right;">{{$todoxxxx['calculos']['concprot']}}</div>
-        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control" class="align-bottom"> VÍA DE ADMINISTRACIÓN</div>
+        <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered form-control form-control-sm altoxxxx negritax">CONCENTRACIÓN DE PROTEÍNA (%) (>1%)</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx">
+            {{ Form::text('concprov',
+            $todoxxxx['calculos']['concprov'],
+        ['class'=>'textinpu','style'=>'text-align: right;',
+        'id'=>'concprov','readonly'
+        ]) }}
+        </div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('concprot',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->concprot,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right;',
+        'id'=>'concprot','readonly'
+        ]) }}
+        </div>
+        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control form-control-sm altoxxxx align-bottom negritax"> VÍA DE ADMINISTRACIÓN</div>
     </div>
     <div class="row">
-        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control">CONCENTRACIÓN DE LÍPIDOS (%) (>1%)</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="conclipv">{{$todoxxxx['calculos']['conclipv']}}</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="conclipi" style="text-align: right;">{{$todoxxxx['calculos']['conclipi']}}</div>
+        <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered form-control form-control-sm altoxxxx negritax">CONCENTRACIÓN DE LÍPIDOS (%) (>1%)</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx">
+            {{ Form::text('conclipv',
+            $todoxxxx['calculos']['conclipv'],
+        ['class'=>'textinpu','style'=>'text-align: right;',
+        'id'=>'conclipv','readonly'
+        ]) }}
+        </div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('conclipi',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->conclipi,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right;',
+        'id'=>'conclipi','readonly'
+        ]) }}
+        </div>
         <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
     </div>
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-lg-6 table-bordered form-control">OSMOLARIDAD (mOsm/L)</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="osmolari" style="text-align: right;">{{$todoxxxx['calculos']['osmolari']}}</div>
-        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control" id="osmolarv">{{$todoxxxx['calculos']['osmolarv']}}</div>
+        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control form-control-sm altoxxxx negritax">OSMOLARIDAD (mOsm/L)</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('osmolari',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->osmolari,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right;',
+        'id'=>'osmolari','readonly'
+        ]) }}
+        </div>
+        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control form-control-sm altoxxxx" style="text-align: left;">
+            {{ Form::text('osmolarv',
+            $todoxxxx['calculos']['osmolarv'],
+        ['class'=>'textinpu','style'=>'text-align: left;',
+        'id'=>'osmolarv','readonly'
+        ]) }}
+        </div>
     </div>
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-lg-6 table-bordered form-control">GRAMOS TOTALES DE NITRÓGENO</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="gramtota" style="text-align: right;">{{$todoxxxx['calculos']['gramtota']}}</div>
+        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control form-control-sm altoxxxx negritax">GRAMOS TOTALES DE NITRÓGENO</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('gramtota',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->gramtota,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right; ',
+        'id'=>'gramtota','readonly'
+        ]) }}
+        </div>
         <div class="col-xs-5 col-sm-5 col-lg-5  "></div>
     </div>
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-lg-6 table-bordered form-control">RELACIÓN: Caloría No proteícas/g Nitrógeno</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="protnitr" style="text-align: right;">{{$todoxxxx['calculos']['protnitr']}}</div>
-        <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6 col-sm-6 col-lg-6 table-bordered form-control">RELACIÓN: Caloría No proteícas/g A.A</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="proteica" style="text-align: right;">{{$todoxxxx['calculos']['proteica']}}</div>
-        <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
-    </div>
-    <div class="row">
-        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control">CALORÍAS PROTEICAS</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" style="text-align: right;">
-            <div style="float: right;">%</div>
-            <div id="caloprov" style="float: right;">{{$todoxxxx['calculos']['caloprov']}}</div>
+        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control form-control-sm altoxxxx negritax">RELACIÓN: Caloría No proteícas/g Nitrógeno</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('protnitr',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->protnitr,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right; ',
+        'id'=>'protnitr','readonly'
+        ]) }}
         </div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="caloprot" style="text-align: right;">{{$todoxxxx['calculos']['caloprot']}}</div>
         <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
     </div>
     <div class="row">
-        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control">CALORÍAS LÍPIDOS</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" style="text-align: right;">
-            <div style="float: right;">%</div>
-            <div id="calolipv" style="float: right;">{{$todoxxxx['calculos']['calolipv']}}</div>
+        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control form-control-sm altoxxxx negritax">RELACIÓN: Caloría No proteícas/g A.A</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('proteica',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->proteica,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right; ',
+        'id'=>'proteica','readonly'
+        ]) }}
         </div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="calolipi" style="text-align: right;">{{$todoxxxx['calculos']['calolipi']}}</div>
         <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
     </div>
     <div class="row">
-        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control">CALORÍAS CARBOHIDRATOS</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" style="text-align: right;">
-            <div style="float: right;">%</div>
-            <div id="calocarv" style="float: right;">{{$todoxxxx['calculos']['calocarv']}}</div>
+        <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered form-control form-control-sm altoxxxx negritax">CALORÍAS PROTEICAS</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            <div class="negritax" style="float: right;">%</div>
+            <div style="float: right;">
+                {{ Form::text('caloprov',
+                    isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->caloprov,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right; width: 50%;',
+        'id'=>'caloprov','readonly'
+        ]) }}
+            </div>
         </div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="calocarb" style="text-align: right;">{{$todoxxxx['calculos']['calocarb']}}</div>
-        <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
-    </div>
-    <div class="row">
-        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control">CALORÍAS TOTALES</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" style="text-align: right;">
-            <div style="float: right;">%</div>
-            <div id="calototv" style="float: right;">{{$todoxxxx['calculos']['calototv']}}</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('caloprot',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->caloprot,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right; ',
+        'id'=>'caloprot','readonly'
+        ]) }}
+
         </div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="calotota" style="text-align: right;">{{$todoxxxx['calculos']['calotota']}}</div>
         <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
     </div>
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-lg-6 table-bordered form-control">CALORÍAS TOTALES/Kg//Día</div>
-        <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="caltotkg" style="text-align: right;">{{$todoxxxx['calculos']['caltotkg']}}</div>
+        <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered form-control form-control-sm altoxxxx negritax">CALORÍAS LÍPIDOS</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            <div class="negritax" style="float: right;">%</div>
+            <div style="float: right;">
+                {{ Form::text('calolipv',
+                    isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->calolipv,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right; ',
+        'id'=>'calolipv','readonly'
+        ]) }}
+
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('calolipi',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->calolipi,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right; ',
+        'id'=>'calolipi','readonly'
+        ]) }}
+        </div>
         <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
     </div>
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-lg-6 table-bordered form-control">RELACIÓN CALCIO/FÓSFORO (< 2)</div>
-                <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="calcfosf" style="text-align: right;">{{$todoxxxx['calculos']['calcfosf']}}</div>
-                <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control" id="calcfosv">{{$todoxxxx['calculos']['calcfosv']}}</div>
+        <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered form-control form-control-sm altoxxxx negritax">CALORÍAS CARBOHIDRATOS</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            <div class="negritax" style="float: right;">%</div>
+            <div style="float: right;">
+                {{ Form::text('calocarv',
+                    isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->calocarv,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right; ',
+        'id'=>'calocarv','readonly'
+        ]) }}
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('calocarb',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->calocarb,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right; ',
+        'id'=>'calocarb','readonly'
+        ]) }}
+
+        </div>
+        <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered form-control form-control-sm altoxxxx negritax">CALORÍAS TOTALES</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            <div class="negritax" style="float: right;">%</div>
+            <div style="float: right;">
+                {{ Form::text('calototv',
+                    isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->calototv,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right; ',
+        'id'=>'calototv','readonly'
+        ]) }}
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('calotota',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->calotota,2,",", "."):null,
+        ['class'=>'textinpu','style'=>'text-align: right; ',
+        'id'=>'calotota','readonly'
+        ]) }}
+        </div>
+        <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control form-control-sm altoxxxx negritax">CALORÍAS TOTALES/Kg//Día</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('caltotkg',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->caltotkg,2,",", "."):null,
+            ['class'=>'textinpu','style'=>'text-align: right; ',
+            'id'=>'caltotkg','readonly'
+            ]) }}
+        </div>
+        <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control form-control-sm altoxxxx negritax">RELACIÓN CALCIO/FÓSFORO (< 2)</div>
+                <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+                    {{ Form::text('calcfosf',
+                        isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->calcfosf,2,",", "."):null,
+                    ['class'=>'textinpu','style'=>'text-align: right; ',
+                    'id'=>'calcfosf','readonly'
+                    ]) }}
 
                 </div>
-        </div>
+                <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control form-control-sm altoxxxx">
+                    {{ Form::text('calcfosv',
+                        $todoxxxx['calculos']['calcfosv'],
+                    ['class'=>'textinpu','style'=>'text-align: right; text-align: left; ',
+                    'id'=>'calcfosv','readonly'
+                    ]) }}
 
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-lg-6 table-bordered form-control">PESO TEÓRICO</div>
-            <div class="col-xs-1 col-sm-1 col-lg-1 table-bordered form-control" id="pesoteor" style="text-align: right;">{{$todoxxxx['calculos']['pesoteor']}}</div>
-            <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
+                </div>
+
         </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control form-control-sm altoxxxx negritax">PESO TEÓRICO</div>
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control form-control-sm altoxxxx" style="text-align: right;">
+            {{ Form::text('pesoteor',
+                isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->pesoteor,2,",", "."):null,
+                    ['class'=>'textinpu','style'=>'text-align: right; ',
+                    'id'=>'pesoteor','readonly'
+                    ]) }}
+        </div>
+        <div class="col-xs-5 col-sm-5 col-lg-5 "></div>
+    </div>

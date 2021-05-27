@@ -34,14 +34,14 @@ class MultivitaminasHidrosolubles {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        $formulax[20] = $this->dataxxxx['volumenx']*40;
+        $formulax[20] = (double)$this->dataxxxx['volumenx']*40;
         break;
       case 2: // neonatos
-        $formulax[20] = $this->dataxxxx['volumenx']*40;
+        $formulax[20] = (double)$this->dataxxxx['volumenx']*40;
         break;
       case 3: // adultos
-        $formulax[20] = $this->dataxxxx['volumenx'] * $this->factor20;
-        $formulax[30] = $this->dataxxxx['volumenx'] * $this->factor30;
+        $formulax[20] = (double)$this->dataxxxx['volumenx'] * $this->factor20;
+        $formulax[30] = (double)$this->dataxxxx['volumenx'] * $this->factor30;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['rediario'] = $formulax[$this->medicame];
@@ -68,14 +68,14 @@ class MultivitaminasHidrosolubles {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[20] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
+        $formulax[20] = (double)$this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
         break;
       case 2:// neonatos
-        $formulax[20] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
+        $formulax[20] = (double)$this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
         break;
       case 3:
-        $formulax[20] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
-        $formulax[30] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
+        $formulax[20] = (double)$this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
+        $formulax[30] = (double)$this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] * $this->purgaxxx;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['purgaxxx'] = $formulax[$this->medicame];
@@ -85,10 +85,10 @@ class MultivitaminasHidrosolubles {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[20] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
+        $formulax[20] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']/40;
         break;
       case 2:// neonatos
-        $formulax[20] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
+        $formulax[20] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']/40;
         break;
       case 3:// adultos
         $formulax[20] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];

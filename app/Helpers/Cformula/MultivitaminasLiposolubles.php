@@ -36,13 +36,13 @@ class MultivitaminasLiposolubles {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1: // pediatricos
-        $formulax[19] = $this->dataxxxx['volumenx']*230;
+        $formulax[19] = (double)$this->dataxxxx['volumenx']*230;
         break;
       case 2: // neonatos
-        $formulax[19] = $this->dataxxxx['volumenx']*230;
+        $formulax[19] = (double)$this->dataxxxx['volumenx']*230;
         break;
       case 3: // adultos
-        $formulax[18] = $this->dataxxxx['volumenx'] * self::FACTORXX;
+        $formulax[18] = (double)$this->dataxxxx['volumenx'] * self::FACTORXX;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['rediario'] = $formulax[$this->medicame];
@@ -69,13 +69,13 @@ class MultivitaminasLiposolubles {
     $formulax = [];
     switch ($this->npt_idxx) {
       case 1:// pediatricos
-        $formulax[19] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] *  $this->purgaxxx;
+        $formulax[19] = (double)$this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] *  $this->purgaxxx;
         break;
       case 2:// neonatos
-        $formulax[19] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] *  $this->purgaxxx;
+        $formulax[19] = (double)$this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] *  $this->purgaxxx;
         break;
       case 3:
-        $formulax[18] = $this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] *  $this->purgaxxx;
+        $formulax[18] = (double)$this->estructu[$this->casaxxxx][$this->medicame]['volumenx'] *  $this->purgaxxx;
         break;
     }
     $this->estructu[$this->casaxxxx][$this->medicame]['purgaxxx'] = $formulax[$this->medicame];
@@ -86,11 +86,11 @@ class MultivitaminasLiposolubles {
     switch ($this->npt_idxx) {
       case 1:// pediatricos
 
-        $formulax[19] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
+        $formulax[19] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']/230;
         break;
       case 2:// neonatos
 
-        $formulax[19] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];
+        $formulax[19] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal']/230;
         break;
       case 3:// adultos
         $formulax[18] = $this->estructu[$this->casaxxxx][$this->medicame]['reqtotal'];

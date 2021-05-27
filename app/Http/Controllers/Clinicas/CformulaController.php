@@ -14,12 +14,14 @@ use App\Models\Pacientes\Paciente;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Cformula\CalculosAjaxTrait;
 use App\Traits\ClinicaTrait;
+use App\Traits\Formulacion\FormulacionTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CformulaController extends Controller
 {
     use ClinicaTrait;
+    use FormulacionTrait;
     use CalculosAjaxTrait;
     private $opciones;
     private $dataform;
@@ -223,6 +225,7 @@ class CformulaController extends Controller
             $this->opciones['useredit'] = $dataxxxx['modeloxx']->editor->name;
             $this->opciones['parametr'] = [$dataxxxx['modeloxx']->id];
         }
+
         // Se arma el titulo de acuerdo al array opciones
         return view($this->opciones['rutacarp'] . 'pestanias', ['todoxxxx' => $this->opciones]);
     }
@@ -297,6 +300,7 @@ class CformulaController extends Controller
 
             ]
         );
+
         $this->opciones['botoform'][] =
             [
                 'mostrars' => true, 'accionxx' => 'EDITAR', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$objetoxx->id]],
@@ -324,9 +328,33 @@ class CformulaController extends Controller
 
     private function grabar($dataxxxx, $objectx, $infoxxxx)
     {
+        $quitcoma = [
+            'concarbo',
+            'concprot',
+            'conclipi',
+            'osmolari',
+            'gramtota',
+            'protnitr',
+            'proteica',
+            'caloprov',
+            'caloprot',
+            'calolipv',
+            'calolipi',
+            'calocarv',
+            'calocarb',
+            'calototv',
+            'calotota',
+            'caltotkg',
+            'calcfosf',
+            'pesoteor',
+        ];
+        foreach ($dataxxxx as $key => $value) {
+            if (in_array($key,$quitcoma)) {
+                $dataxxxx[$key]=str_replace(',','.',str_replace('.','',$dataxxxx[$key]));
+            }
+        }
         $cformula = Cformula::transaccion($dataxxxx, $objectx);
         $dataxxxx['cformula'] = $cformula;
-
         GrabarFormulacion::setDformula($dataxxxx);
         $redirect = '.ver';
         if (auth()->user()->can($this->opciones['routxxxx'] . '-editar')) {
@@ -351,12 +379,12 @@ class CformulaController extends Controller
     }
     public function copyu(CformulaCrearRequest  $request, Cformula $objetoxx)
     {
-        $objetoxx->crango_id=null;
-        $objetoxx->userevis_id=null;
-        $objetoxx->userprep_id=null;
-        $objetoxx->proceso_id=null;
-        $objetoxx->terminado_id=null;
-        $objetoxx->orden_id=null;
+        $objetoxx->crango_id = null;
+        $objetoxx->userevis_id = null;
+        $objetoxx->userprep_id = null;
+        $objetoxx->proceso_id = null;
+        $objetoxx->terminado_id = null;
+        $objetoxx->orden_id = null;
         $dataxxxx = $request->all();
         $dataxxxx['desdexxx'] = 10;
         $dataxxxx['paciente_id'] = $objetoxx->paciente_id;
@@ -387,13 +415,9 @@ class CformulaController extends Controller
     {
         if ($request->ajax()) {
             $campo_id = explode('_', $request->campo_id);
-
             $respuest['cantvolu'] = ($campo_id[1] == 'cant') ?
                 [$campo_id[0] . '_volu', ''] : // si se digitó requerimiento diario
                 [$campo_id[0] . '_cant', '']; // si se digito volumen
-
-
-
             $dataxxxx = [
                 'formulax' => [
                     'cantvolu' => $respuest['cantvolu'],
@@ -401,9 +425,10 @@ class CformulaController extends Controller
                     'menssage' => [$campo_id[0] . '_cant', 'hide', '']
                 ], 'finalxxx' => []
             ];
-
             $formulax = $request->all();
-            $dataxxxx['formulax'] = Validacionesajax::formulaciones($formulax);
+            $respuesx=$this->getCalculosFomula($formulax);
+            $dataxxxx['formulax'] =  $respuesx[0];
+            // $dataxxxx['formulax'] = Validacionesajax::formulaciones($formulax);
             foreach ($formulax['dataxxxx'] as $key => $value) {
                 if ($value['name'] == 'aguaeste_cant') {
                     $formulax['dataxxxx'][$key]['value'] = 1;
@@ -412,18 +437,8 @@ class CformulaController extends Controller
                     $formulax['dataxxxx'][$key]['value'] = str_replace(',', '', $dataxxxx['formulax']['aguaxxxx']);
                 }
             }
-            $dataxxxx['finalxxx'] = $this->getCalculos($formulax);
 
-
-            // $arrayxxx = '[';
-            // foreach ($request->dataxxxx as $key => $value) {
-            //     $arrayxxx .= '["name"=>"' . $value['name'] . '","value"=>"' . $value['value'] . '"],';
-            // }
-            // $arrayxxx .= '],';
-            // print_r($arrayxxx);
-            // exit;
-
-
+            $dataxxxx['finalxxx'] = $respuesx[1];
             return response()->json($dataxxxx);
         }
     }
@@ -432,10 +447,11 @@ class CformulaController extends Controller
         if ($request->ajax()) {
             $respuest = [];
             $dataxxxx = $request->all();
-            $existexx = ['elemtraz', 'multivit', 'multiuno'];
+            $existexx = ['elemtraz', 'vitahidr', 'vitalipi'];
             foreach ($dataxxxx['dataxxxx'] as $key => $value) {
                 if (in_array($value['name'], $existexx)) {
                     $dataxxxx['campo_id'] = $value['name'] . '_cant';
+                    // $respuest[]=$this->getCalculosFomula($dataxxxx);
                     $respuest[] = Validacionesajax::getFormulaciones($dataxxxx, $value['name']);
                 }
             }
@@ -462,12 +478,15 @@ class CformulaController extends Controller
             ], 'finalxxx' => []
         ];
 
+        $formulay = $this->getCalculosFomula($formulax);
 
-        $dataxxxx['formulax'] = Validacionesajax::formulaciones($formulax);
-ddd($dataxxxx['formulax']);
+        $dataxxxx['finalxxx'] = $this->getCalculos($formulax);
+        // $dataxxxx['formulax'] = Validacionesajax::formulaciones($formulax);
+        ddd($formulay);
         foreach ($this->getCalculos($formulax) as $key => $value) {
             echo $value['campoxxx'] . '=>' . $value['valuexxx'] . ',<br>';
         }
+
     }
 
     public function getRequerimientoVolumen(Request $request)

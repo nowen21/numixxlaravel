@@ -34,6 +34,29 @@ class Cformula extends Model
         'userprep_id',
         'userproc_id',
         'userlibe_id',
+        'carbvali',
+        'concarbo',
+        'concprov',
+        'concprot',
+        'conclipv',
+        'conclipi',
+        'osmolari',
+        'osmolarv',
+        'gramtota',
+        'protnitr',
+        'proteica',
+        'caloprov',
+        'caloprot',
+        'calolipv',
+        'calolipi',
+        'calocarv',
+        'calocarb',
+        'calototv',
+        'calotota',
+        'caltotkg',
+        'calcfosf',
+        'calcfosv',
+        'pesoteor',
         'orden_id',
         'crango_id',
         'terminado_id',
@@ -153,22 +176,12 @@ class Cformula extends Model
     public static function transaccion($dataxxxx,  $objetoxx)
     {
         $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {
-            $totalxxx = 0;
-
-            foreach ($dataxxxx as $key => $value) {
-                $data = explode('_', $key);
-                if (isset($data[1]) && $data[1] == 'volu') {
-                    $totalxxx +=   $dataxxxx[$key] == '' ? 0 : str_replace(",", "", $dataxxxx[$key]);
-                }
-            }
             $dataxxxx['user_edita_id'] = Auth::user()->id;
-
             if ($objetoxx != '') {
                 $objetoxx->update($dataxxxx);
             } else {
-
                 $dataxxxx['sis_esta_id'] = 1;
-                $dataxxxx['total'] = $totalxxx;
+                $dataxxxx['total'] = $dataxxxx['volumen'] + $dataxxxx['purga'];
                 $dataxxxx['orden_id'] = Orden::getOrdenDia();
                 $dataxxxx['user_crea_id'] = Auth::user()->id;
                 $objetoxx = Cformula::create($dataxxxx);

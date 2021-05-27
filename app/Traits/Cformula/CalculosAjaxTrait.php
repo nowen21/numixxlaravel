@@ -10,6 +10,7 @@ use App\Models\Medicamentos\Mmarca;
 
 trait CalculosAjaxTrait
 {
+    use PintarFormularioTrait;
     private $_datacat = [
         "clinicax" => "",
         "tiempoxx" => "",
@@ -56,14 +57,87 @@ trait CalculosAjaxTrait
             [
                 'dataxxxx' =>
 
-                [["name"=>"_token","value"=>"V9T68NKKMN1dYqVA0uxEqJN1wjf99Racmtlrloqv"],["name"=>"sis_clinica_id","value"=>"42"],["name"=>"tiempo","value"=>"24"],["name"=>"velocidad","value"=>"10.2"],["name"=>"volumen","value"=>"243.8"],["name"=>"purga","value"=>"30"],["name"=>"peso","value"=>"1.625"],["name"=>"aminoaci","value"=>"3"],["name"=>"aminoaci_cant","value"=>"4"],["name"=>"aminoaci_volu","value"=>"65.00"],["name"=>"fosfatox","value"=>"5"],["name"=>"fosfatox_cant","value"=>"1"],["name"=>"fosfatox_volu","value"=>"1.63"],["name"=>"carbohid","value"=>"8"],["name"=>"carbohid_cant","value"=>"12"],["name"=>"carbohid_volu","value"=>"56.16"],["name"=>"sodioxxx","value"=>"10"],["name"=>"sodioxxx_cant","value"=>"2"],["name"=>"sodioxxx_volu","value"=>"0.00"],["name"=>"potasiox","value"=>"11"],["name"=>"potasiox_cant","value"=>"1"],["name"=>"potasiox_volu","value"=>"0.81"],["name"=>"calcioxxx","value"=>"12"],["name"=>"calcioxxx_cant","value"=>"200"],["name"=>"calcioxxx_volu","value"=>"3.25"],["name"=>"magnesio","value"=>"13"],["name"=>"magnesio_cant","value"=>"20"],["name"=>"magnesio_volu","value"=>"0.16"],["name"=>"elemtraz","value"=>"17"],["name"=>"elemtraz_cant","value"=>"400"],["name"=>"elemtraz_volu","value"=>"2.60"],["name"=>"multivit","value"=>"20"],["name"=>"multivit_cant","value"=>"2.4"],["name"=>"multivit_volu","value"=>"2.40"],["name"=>"acidfoli","value"=>"24"],["name"=>"acidfoli_cant","value"=>""],["name"=>"acidfoli_volu","value"=>""],["name"=>"vitamink","value"=>"25"],["name"=>"vitamink_cant","value"=>""],["name"=>"vitamink_volu","value"=>""],["name"=>"lipidosx","value"=>"26"],["name"=>"lipidosx_cant","value"=>"3"],["name"=>"lipidosx_volu","value"=>"24.38"],["name"=>"multiuno","value"=>"19"],["name"=>"multiuno_cant","value"=>"6.8"],["name"=>"multiuno_volu","value"=>"6.80"],["name"=>"aguaeste","value"=>"29"],["name"=>"aguaeste_cant","value"=>""],["name"=>"aguaeste_volu","value"=>"80.61"],["name"=>"npt_id","value"=>"2"],],
-                'campo_id' => 'magnesio_volu',
+                [
+                    ["name" => "_token", "value" => "V9T68NKKMN1dYqVA0uxEqJN1wjf99Racmtlrloqv"],
+                    ["name" => "sis_clinica_id", "value" => "42"],
+                    ["name" => "tiempo", "value" => "24"],
+                    ["name" => "velocidad", "value" => "55.5"],
+                    ["name" => "volumen", "value" => "243.8"],
+                    ["name" => "purga", "value" => "40"],
+                    ["name" => "peso", "value" => "18"],
+                    ["name" => "aminoaci", "value" => "1"],
+                    ["name" => "aminoaci_cant", "value" => "2"],
+                    ["name" => "aminoaci_volu", "value" => "360"],
+                    ["name" => "aminoaci_vopu", "value" => "370.8"],
+                    ["name" => "fosfatox", "value" => "5"],
+                    ["name" => "fosfatox_cant", "value" => "3.6"],
+                    ["name" => "fosfatox_volu", "value" => "3.6"],
+                    ["name" => "fosfatox_vopu", "value" => "3.7"],
+                    ["name" => "carbohid", "value" => "8"],
+                    ["name" => "carbohid_cant", "value" => "5.8"],
+                    ["name" => "carbohid_volu", "value" => "300.67"],
+                    ["name" => "carbohid_vopu", "value" => "309.7"],
+                    ["name" => "sodioxxx", "value" => "10"],
+                    ["name" => "sodioxxx_cant", "value" => "3"],
+                    ["name" => "sodioxxx_volu", "value" => "23.4"],
+                    ["name" => "sodioxxx_vopu", "value" => "24.1"],
+                    ["name" => "potasiox", "value" => "11"],
+                    ["name" => "potasiox_cant", "value" => "2"],
+                    ["name" => "potasiox_volu", "value" => "18"],
+                    ["name" => "potasiox_vopu", "value" => "18.5"],
+                    ["name" => "calcioxx", "value" => "12"],
+                    ["name" => "calcioxx_cant", "value" => "16"],
+                    ["name" => "calcioxx_volu", "value" => "2.88"],
+                    ["name" => "calcioxx_vopu", "value" => "3"],
+                    ["name" => "magnesio", "value" => "13"],
+                    ["name" => "magnesio_cant", "value" => "2.44"],
+                    ["name" => "magnesio_volu", "value" => "0.22"],
+                    ["name" => "magnesio_vopu", "value" => "0.2"],
+                    ["name" => "elemtraz", "value" => "17"],
+                    ["name" => "elemtraz_cant", "value" => "69.44"],
+                    ["name" => "elemtraz_volu", "value" => "5"],
+                    ["name" => "elemtraz_vopu", "value" => "5.2"],
+                    ["name" => "vitahidr", "value" => "20"],
+                    ["name" => "vitahidr_cant", "value" => "400"],
+                    ["name" => "vitahidr_volu", "value" => "10"],
+                    ["name" => "vitahidr_vopu", "value" => "10.3"],
+                    ["name" => "acidfoli", "value" => "24"],
+                    ["name" => "acidfoli_cant", "value" => ""],
+                    ["name" => "acidfoli_volu", "value" => ""],
+                    ["name" => "acidfoli_vopu", "value" => ""],
+                    ["name" => "vitamink", "value" => "25"],
+                    ["name" => "vitamink_cant", "value" => ""],
+                    ["name" => "vitamink_volu", "value" => ""],
+                    ["name" => "vitamink_vopu", "value" => ""],
+                    ["name" => "lipidosx", "value" => "26"],
+                    ["name" => "lipidosx_cant", "value" => "2"],
+                    ["name" => "lipidosx_volu", "value" => "180"],
+                    ["name" => "lipidosx_vopu", "value" => "185.4"],
+                    ["name" => "vitalipo", "value" => "19"],
+                    ["name" => "vitalipo_cant", "value" => "2300"],
+                    ["name" => "vitalipo_volu", "value" => "10"],
+                    ["name" => "vitalipo_vopu", "value" => "10.3"],
+                    ["name" => "aguaeste", "value" => "29"],
+                    ["name" => "aguaeste_cant", "value" => ""],
+                    ["name" => "aguaeste_volu", "value" => "418.22"],
+                    ["name" => "aguaeste_vopu", "value" => ""],
+                    ["name" => "npt_id", "value" => "2"],
+                    ["name" => "compejob", "value" => "22"],
+                    ["name" => "compejob_cant", "value" => ""],
+                    ["name" => "compejob_volu", "value" => ""],
+                    ["name" => "compejob_vopu", "value" => ""],
+                    ["name" => "vitaminc", "value" => "21"],
+                    ["name" => "vitaminc_cant", "value" => ""],
+                    ["name" => "vitaminc_volu", "value" => ""],
+                    ["name" => "vitaminc_vopu", "value" => ""],
+                ],
+                'campo_id' => 'aminoaci_cant',
                 '_token' => '3fiupRYqdP44f6f2udhmVBjhgNHCsRXXu2BZFaZP',
                 2 => ''
             ];
         return $dataxxxx;
     }
-    use PintarFormularioTrait;
+
 
 
 
@@ -95,14 +169,13 @@ trait CalculosAjaxTrait
             'requdiar' => $requdiar, // requerimineto diario por el mendicamento seleccionado
             'fosfa_id' => $dataxxxx['dataxxxx']['fosfatox'], // fosfato seleccionado
             'fosfcant' => $dataxxxx['dataxxxx']['fosfatox_cant'], // requerimiento diario del fosfato del fosfato seleccionado
-            'multivi2' => $dataxxxx['dataxxxx']['multiuno_cant'], // multivitamina liposoluble seleccionada
-            'lipovolu' => $dataxxxx['dataxxxx']['multiuno_volu'], // multivitamina liposoluble seleccionada
+            'multivi2' => $dataxxxx['dataxxxx']['vitalipo_cant'], // multivitamina liposoluble seleccionada
+            'lipovolu' => $dataxxxx['dataxxxx']['vitalipo_volu'], // multivitamina liposoluble seleccionada
             'volumenx' => $dataxxxx['dataxxxx'][$dataxxxx['campoxxx'][0] . '_volu'],
         ];
 
 
         $formulax = $dataxxxx['casaform']->calculos($dataxxxy)[$dataxxxx['medicame']->id];
-
 
         if (
             $dataxxxx['medisele'] == $dataxxxx['campoxxx'][0] . '_volu' &&
@@ -110,7 +183,7 @@ trait CalculosAjaxTrait
         ) {
             $dataxxxy['requdiar'] = $formulax['rediario'];
         }
-        $formulax = $dataxxxx['casaform']->calculos($dataxxxy)[$dataxxxx['medicame']->id];
+        // $formulax = $dataxxxx['casaform']->calculos($dataxxxy)[$dataxxxx['medicame']->id];
 
         return [
             'casaxxxx' => $dataxxxx['medicame']->casa->casa, // nombre de la casa
@@ -155,12 +228,11 @@ trait CalculosAjaxTrait
         ];
 
         $casaform = new CasasFormulacion($formulacion['cabecera']);
-
         foreach ($dataxxxx as $key => $registro) {
             $campoxxx = explode('_', $key);
             if (count($campoxxx) == 2 && $campoxxx[1] == 'cant') {
                 $medicame = Medicame::find($dataxxxx[$campoxxx[0]]);
-                $purgaxxx = $formulacion[$medicame->casa_id] = $this->getDataCasa(
+                $formulacion[$medicame->casa_id] = $this->getDataCasa(
                     [
                         'dataxxxx' => $dataxxxx,
                         'medicame' => $medicame,
@@ -169,26 +241,15 @@ trait CalculosAjaxTrait
                         'medisele' => $cabecera['campo_id']
                     ]
                 );
-
-                // $dataxxxx['volupurg'] = $dataxxxx['volupurg'] * $purgaxxx['volumenx'];
-                $purgaxxx = $purgaxxx['formulax'];
-
-
-                $mmarcasx = Mmarca::where('medicame_id', $medicame->id)->first();
-
-                if ($dataxxxx[$key] > 0) {
-                    $osmolari = $mmarcasx->osmorali * $purgaxxx['purgaxxx'];
+                if ($dataxxxx[$key] > 0 && $campoxxx[0]!='aguaeste') {
+                    $osmolari = $medicame->mmarcas->first()->osmorali * (double)$dataxxxx[$campoxxx[0] . '_vopu'];
                     $formulacion['osmolari'] += $osmolari; // calcular la osmolarida
-
-                    $pesoespe = $mmarcasx->pesoespe * $purgaxxx['purgaxxx'];
-
-
+                    $pesoespe = $medicame->mmarcas->first()->pesoespe * (double)$dataxxxx[$campoxxx[0] . '_vopu'];
                     $formulacion['pesoespe'] += $pesoespe; // calcular el peso específico
-
                 }
             }
         }
-
+// ddd($formulacion);
         return $formulacion;
     }
     private function casa($idcasaxx, $datasxxx)
@@ -273,8 +334,10 @@ trait CalculosAjaxTrait
 
     private function calculosneopediatrico($calculos, $datasxxx)
     {
+
         //VOLUMEN DE LA MULTIVITAMIANA
-        $volumult = $datasxxx[17]['volumenx'];
+        $vitahidr = $datasxxx[17]['volumenx'];
+
         // CONCENTRACION DE PROTEINAS (%)
         $aminoaci = $this->casa(1, $datasxxx)['requerim'];
         $calculos['concprot'] = (($aminoaci) / $calculos['volutota']) * 100;
@@ -290,7 +353,7 @@ trait CalculosAjaxTrait
 
         $lipidosx = $this->casa(16, $datasxxx)['requerim'];
 
-        $calculos['conclipi'] = (($lipidosx + $volumult / 5) / $calculos['volutota']) * 100;
+        $calculos['conclipi'] = (($lipidosx + $vitahidr / 5) / $calculos['volutota']) * 100;
         //GRAMOS TOTALES DE NITROGENO
         $calculos['gramtota'] = $aminoaci / 6.25;
         //CALORIAS PROTEICAS 						2%
@@ -298,7 +361,7 @@ trait CalculosAjaxTrait
         //CALORIAS CARBOHIDRATOS 						9%
         $calculos['calocarb'] = $carbohid['requerim'] * 3.4;
         //CALORIAS LIPIDOS 89%
-        $calculos['calolipi'] = $lipidosx * 9 + $volumult * 1.12;
+        $calculos['calolipi'] = $lipidosx * 9 + $vitahidr * 1.12;
         //CALORIAS TOTALES 						100%
         $calculos['calotota'] = $calculos['caloprot'] + $calculos['calocarb'] + $calculos['calolipi'];
         //relación: Cal No proteícas/g Nitrogeno
@@ -317,40 +380,71 @@ trait CalculosAjaxTrait
 
         return $calculos;
     }
-public function getArmarDataObjeto($objetoxx)
-{
-    $casasxxx = Casa::select(['id', 'nameidxx'])->get();
-    $casasxxy = [
+    public function getCformulaCAT($objetoxx)
+    {
+        $casasxxy = [
 
-        ['name' => "npt_id", 'value' => $objetoxx->paciente->npt_id],
-        ['name' => "tiempo", 'value' => $objetoxx->tiempo],
-        ['name' => "velocidad", 'value' => $objetoxx->velocidad],
-        ['name' => "volumen", 'value' => $objetoxx->volumen],
-        ['name' => "purga", 'value' => $objetoxx->purga],
-        ['name' => "peso", 'value' => $objetoxx->peso],
-        ['name' => "total", 'value' => $objetoxx->total],
-        ['name' => "sis_clinica_id", 'value' => $objetoxx->sis_clinica_id],
+            ['name' => "npt_id", 'value' => $objetoxx->paciente->npt_id],
+            ['name' => "tiempo", 'value' => $objetoxx->tiempo],
+            ['name' => "velocidad", 'value' => $objetoxx->velocidad],
+            ['name' => "volumen", 'value' => $objetoxx->volumen],
+            ['name' => "purga", 'value' => $objetoxx->purga],
+            ['name' => "peso", 'value' => $objetoxx->peso],
+            ['name' => "total", 'value' => $objetoxx->total],
+            ['name' => "sis_clinica_id", 'value' => $objetoxx->sis_clinica_id],
 
 
-    ];
-    $casasxxm = [];
-    foreach ($casasxxx as $key => $value) {
-        $casasxxm[$value->id] = ["{$value->nameidxx}", "{$value->nameidxx}_cant", "{$value->nameidxx}_volu"];
+        ];
+        return $casasxxy;
     }
-    foreach ($objetoxx->dformulas as $key => $value) {
-        $casaxxxx = $casasxxm[$value->medicame->casa_id];
-        $casasxxy[] = ['name' => "{$casaxxxx[0]}", 'value' => $value->medicame_id];
-        $casasxxy[] = ['name' => "{$casaxxxx[1]}", 'value' => $value->cantidad];
-        $casasxxy[] = ['name' => "{$casaxxxx[2]}", 'value' => $value->volumen];
+    public function getCasasCAT()
+    {
+        $casasxxx = Casa::select(['id', 'nameidxx'])->get();
+        $casasxxm = [];
+        foreach ($casasxxx as $key => $value) {
+            $casasxxm[$value->id] = ["{$value->nameidxx}", "{$value->nameidxx}_cant", "{$value->nameidxx}_volu"];
+        }
+        return  $casasxxm;
     }
+    public function getDformulaCAT($dataxxxx)
+    {
+        foreach ($dataxxxx['objetoxx']->dformulas as $key => $value) {
+            $casaxxxx = $dataxxxx['casasxxm'][$value->medicame->casa_id];
+            $dataxxxx['casasxxx'][] = ['name' => "{$casaxxxx[0]}", 'value' => $value->medicame_id];
+            $dataxxxx['casasxxx'][] = ['name' => "{$casaxxxx[1]}", 'value' => $value->cantidad];
+            $dataxxxx['casasxxx'][] = ['name' => "{$casaxxxx[2]}", 'value' => $value->volumen];
+        }
+        return $dataxxxx['casasxxx'];
+    }
+    public function getArmarDataObjeto($objetoxx)
+    {
+        // $casasxxx = $this->getCformulaCAT($objetoxx);
+        // $casasxxm =  $this->getCasasCAT();
+        // $casasxxx = $this->getDformulaCAT(['objetoxx' => $objetoxx, 'casasxxm' => $casasxxm, 'casasxxx' => $casasxxx]);
 
-    $calculos = $this->getCalculos(['dataxxxx' => $casasxxy, 'campo_id' => 'aminoaci_volu']);
-    $calculox = [];
-    foreach ($calculos as $key => $value) {
-        $calculox[$value['campoxxx']] = $value['valuexxx'];
+        // $calculos = $this->getCalculos(['dataxxxx' => $casasxxx, 'campo_id' => 'aminoaci_volu']);
+        foreach ($objetoxx->dformulas as $key => $value) {
+            $nameidxx = $value->medicame->casa->nameidxx;
+            $nameidxa = $nameidxx . '_cant';
+            $nameidxb = $nameidxx . '_reto';
+            $nameidxc = $nameidxx . '_volu';
+            $nameidxd = $nameidxx . '_vopu';
+            $objetoxx->$nameidxx = $value->medicame_id;
+            $objetoxx->$nameidxa = $value->cantidad;
+            $objetoxx->$nameidxb = $value->rtotal;
+            $objetoxx->$nameidxc = $value->volumen;
+            $objetoxx->$nameidxd = $value->purga;
+
+            //    echo $value->medicame->casa->nameidxx.'<br>';
+        }
+
+        // ddd($objetoxx->toArray());
+        //         $calculox = [];
+        // foreach ($calculos as $key => $value) {
+        //     $calculox[$value['campoxxx']] = $value['valuexxx'];
+        // }
+        return $objetoxx;
     }
-    return $calculox;
-}
     public function getCalculos($cabecera)
     {
         $datasxxx = $this->getArmarData($cabecera);
@@ -360,6 +454,7 @@ public function getArmarDataObjeto($objetoxx)
         } else { // neonato y pediatrico
             $this->_datacat = $this->calculosneopediatrico($this->_datacat, $datasxxx);
         }
+
         $this->_datacat['carbvali'] = $this->_datacat['concarbo'] > 24.5 ? 'ADVER/R.H�?GADO GRASO' : ($this->_datacat['concarbo'] < 24.4 ? 'SEGURA' : '');
         $this->_datacat['concprov'] = $this->_datacat['concprot'] < 1 ? 'NO ESTABLE' : 'ESTABLE';
         $this->_datacat['conclipv'] = ($this->_datacat['conclipi'] < 1 && $this->_datacat['conclipi'] != 0) ? 'NO ESTABLE' : 'ESTABLE';

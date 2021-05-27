@@ -70,14 +70,45 @@
         }
         var f_dataxxxx = function() {
             var dataxxxx = $('#formulario').serializeArray()
-            dataxxxx.push({
+            var dataxxxy = [];
+
+            $.each(dataxxxx,function(i, d) {
+                var campoxxx = d.name.split('_');
+                if (campoxxx.length > 1) {
+                    if (campoxxx[1]=='cant') {
+                        dataxxxy.push(dataxxxx[i-1]);
+                    }
+                    dataxxxy.push(d);
+                }
+            });
+            dataxxxy.push({
+                name: "tiempo",
+                value: $('#tiempo').val()
+            });
+            dataxxxy.push({
+                name: "velocidad",
+                value: $('#velocidad').val()
+            });
+            dataxxxy.push({
+                name: "volumen",
+                value: $('#volumen').val()
+            });
+            dataxxxy.push({
+                name: "purga",
+                value: $('#purga').val()
+            });
+            dataxxxy.push({
+                name: "peso",
+                value: $('#peso').val()
+            });
+            dataxxxy.push({
                 name: "npt_id",
                 value: '{{$todoxxxx["paciente"]->npt_id}}'
             });
-            return dataxxxx;
+            return dataxxxy;
         }
         var f_ajax = function(campo_id) {
-
+            f_dataxxxx()
             $("#" + campo_id.split('_')[0] + '_cant').prop('title', '');
             $.ajax({
                 url: "{{route('formular.formular',$todoxxxx['parametr'])}}",
@@ -85,17 +116,22 @@
                 data: {
                     dataxxxx: f_dataxxxx(),
                     campo_id: campo_id,
-                    requedia:$('#'+campo_id).val(),
+                    requedia: $('#' + campo_id).val(),
                 },
                 dataType: 'json',
                 success: function(json) {
                     var finalxxx = json.finalxxx; //$('#todotdxx').text(finalxxx);
                     $.each(finalxxx, function(i, d) {
-                        $("#" + d.campoxxx).text(d.valuexxx);
+                        $("#" + d.campoxxx).val(d.valuexxx);
                     });
                     var json = json.formulax;
                     $("#" + json.unidadxx[0]).text(json.unidadxx[1]) // mostrar la unidad
                     $("#" + json.cantvolu[0]).val(json.cantvolu[1]); // mostrar requerimiento diario o volumen
+
+                    $("#" + json.cantvolu[2]).val(json.cantvolu[3]); // mostrar requerimiento total
+                    $("#" + json.cantvolu[4]).val(json.cantvolu[5]); // mostrar volumen con purga
+
+                    console.log(json.cantvolu)
                     $("#" + json.menssage[0]).popover('dispose');
                     if (json.menssage[2] != '') {
                         $("#" + json.menssage[0]).popover(template(json));
@@ -126,11 +162,17 @@
                 }
             });
         }
+        /**
+         * realizar calculos del volumen o el requerimiento diario
+         */
         $('.medicamento').on('change', function(e) {
             if ($(this).prop('id') != 'aguaeste') {
                 recalcular();
             }
         })
+        /**
+         * calcular velocidad de infusión
+         */
         $('.calcularvolumen').on('keyup', function() {
             $.ajax({
                 url: "{{url('api/cformula/calcular')}}",
@@ -188,7 +230,10 @@
                     $("#peso").focus();
                     return false;
                 }
+
                 f_ajax($(this).attr('id'));
+
+
             }
         });
 
