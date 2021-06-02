@@ -50,10 +50,8 @@
 
     <div class="form-group col-md-6">
         {{ Form::label('password', 'Contraseña:', ['class' => 'control-label col-form-label-sm']) }}
-
         {{ Form::password('password', ['class' => $errors->first('password') ?
          'form-control  is-invalid' : 'form-control', 'placeholder' => 'Contraseña', 'maxlength' => '120', 'autofocus']) }}
-
         @if($errors->has('password'))
         <div class="invalid-feedback d-block">
             {{ $errors->first('password') }}
@@ -61,25 +59,10 @@
         @endif
     </div>
 
-
     <div class="form-group col-md-6">
-        {{ Form::label('quimfarm', '¿Es químico farmacéutico?:', ['class' => 'control-label col-form-label-sm']) }}
-
-        {{ Form::select('quimfarm', $todoxxxx['quimfarm'], null, ['class' => $errors->first('quimfarm') ?
-        'form-control is-invalid' : 'form-control','id'=>'quimfarm']) }}
-
-        @if($errors->has('quimfarm'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('quimfarm') }}
-        </div>
-        @endif
-    </div>
-    <div class="form-group col-md-12">
         {{ Form::label('sis_esta_id', 'Estado:', ['class' => 'control-label col-form-label-sm']) }}
-
         {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ?
         'form-control is-invalid select2' : 'form-control select2','id'=>'sis_esta_id']) }}
-
         @if($errors->has('sis_esta_id'))
         <div class="invalid-feedback d-block">
             {{ $errors->first('sis_esta_id') }}

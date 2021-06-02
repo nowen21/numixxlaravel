@@ -8,6 +8,7 @@ use App\Helpers\Cformula\Validacionesajax;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produccion\RevisionEditarRequest;
 use App\Models\Formulaciones\Cformula;
+use App\Models\Produccion\ProPreplibe;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Alertas\AlertasTrait;
 use App\Traits\Cformula\CalculosAjaxTrait;
@@ -126,18 +127,18 @@ class RevisionController extends Controller
     }
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
     {
-        $quimfarm = User::select()->where('quimfarm', 1)->first();
+        $quimfarm = ProPreplibe::select()->orderBy('created_at','asc')->first();
         if ($quimfarm == null && $objetoxx->userevis_id==null) {
             return redirect()
                 ->route($this->opciones['routxxxx'], [])
                 ->with('info', 'No se tiene un químico farmacéutico asignado');
         }
-        $quimfarx = $objetoxx->userevis;
-        if($quimfarx==null){
-            $this->opciones['quimfarm'] = [$quimfarm->id => $quimfarm->name];
-        }else {
-            $this->opciones['quimfarm'] = [$quimfarx->id => $quimfarx->name];
-        }
+        // $quimfarx = $objetoxx->userevis;
+        // if($quimfarx==null){
+        //     $this->opciones['quimfarm'] = [$quimfarm->id => $quimfarm->name];
+        // }else {
+        //     $this->opciones['quimfarm'] = [$quimfarx->id => $quimfarx->name];
+        // }
 
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;

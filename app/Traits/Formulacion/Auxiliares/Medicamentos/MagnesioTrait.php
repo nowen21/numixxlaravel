@@ -21,7 +21,7 @@ trait MagnesioTrait
                 $formulax[13] = ((float)$dataxxxx['cantidad'] * 200) / $dataxxxx['pesoxxxx'];
                 break;
             case 3: // adultos
-                $formulax[13] = (float)$dataxxxx['cantidad'] * 20;
+                $formulax[13] = (float)$dataxxxx['cantidad'] * 19;
                 break;
         }
         return $formulax;

@@ -19,7 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('telefono');
-            $table->integer('quimfarm')->default(2);
             $table->string('documento')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -38,7 +37,6 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->timestamp('email_verified_at');
             $table->string('password');
-            $table->integer('quimfarm')->default(2);
             $table->rememberToken();
             $table->integer('sis_clinica_id');
             $table->string('documento');

@@ -7,19 +7,20 @@ use App\Helpers\Pdfs\Pdfs;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Formulaciones\Orden;
 use App\Models\Produccion\Calistam;
+use App\Models\Produccion\ProPreplibe;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use App\Traits\Cformula\CalculosTrait;
+
 use App\Traits\Cformula\CalcularEdadTrait;
 use App\User;
 
 trait PdfTrait
 {
 
-    use CalculosTrait;
+
     use CalcularEdadTrait;
     public function getImprimirPdf($dataxxxx)
     {
@@ -46,23 +47,24 @@ trait PdfTrait
     {
         $cformula = $dataxxxx['dataxxxx']['cformula'];
         // $qrcodexx = 'NUTRICIÓN PARENTERAL ';
-        $qrcodexx = 'LOTE No.: ' . $cformula->id.' NUTIENTES: ';
-        // $paciente = $cformula->paciente;
-        // $qrcodexx .= " N° AFILIACIÓN: {$paciente->cedula} , ";
-        // $qrcodexx .= "N° CAMA: {$paciente->cama}, ";
-        // $qrcodexx .= "SERVICIO: {$paciente->servicio->servicio}, ";
-        // $qrcodexx .= "NOMBRES Y APELLIDOS: {$paciente->nombres} {$paciente->apellidos}, ";
-        // $qrcodexx .= "PESO: {$paciente->peso}, ";
-        // $calculos = $dataxxxx['dataxxxx']['calculos'];
-        // $qrcodexx .= "VIA: {$calculos['osmolarv']}, ";
-        // $qrcodexx .= "FECHA VENCIMIENTO: " . date("Y-m-d", strtotime(explode(' ', $cformula->created_at)[0] . "+ 2 days")) . ", ";
-        // $qrcodexx .= "CLÍNICA: {$cformula->sis_clinica->clinica->clinica}, ";
-        // $qrcodexx .= "NPT: {$paciente->npt->nombre}, ";
+        $qrcodexx = 'LOTE No.: ' . $cformula->id ;
+        $paciente = $cformula->paciente;
+        $qrcodexx .= " N° AFILIACIÓN: {$paciente->cedula} , ";
+        $qrcodexx .= "N° CAMA: {$paciente->cama}, ";
+        $qrcodexx .= "SERVICIO: {$paciente->servicio->servicio}, ";
+        $qrcodexx .= "NOMBRES Y APELLIDOS: {$paciente->nombres} {$paciente->apellidos}, ";
+        $qrcodexx .= "PESO: {$paciente->peso}, ";
 
-        foreach ($cformula->dformulas as $key => $value) {
-            $qrcodexx .= "{$value->medicame->nombgene} - "
-            . number_format($value->volumen, 2) . " - " . number_format($value->purga, 2) . ", ";
-        }
+        $qrcodexx .= "VIA: $cformula->osmolarv, ";
+        $qrcodexx .= "FECHA VENCIMIENTO: " . date("Y-m-d", strtotime(explode(' ', $cformula->created_at)[0] . "+ 2 days")) . ", ";
+        $qrcodexx .= "CLÍNICA: {$cformula->sis_clinica->clinica->clinica}, ";
+        $qrcodexx .= "NPT: {$paciente->npt->nombre}, ";
+        $volutota = (float)$cformula->volumen + (float)$cformula->purga;
+        $qrcodexx .= "VOLUMEN: {$volutota}, ";
+        // foreach ($cformula->dformulas as $key => $value) {
+        //     $qrcodexx .= "{$value->medicame->nombgene} - "
+        //     . number_format($value->volumen, 2) . " - " . number_format($value->purga, 2) . ", ";
+        // }
         // $qrcodexx .= "DURACIÓN {$cformula->tiempo}, ";
         // $qrcodexx .= "VELOCIDAD {$cformula->velocidad}, ";
         // $qrcodexx .= "FECHA PREPARACIÓN " . explode(' ', $cformula->created_at)[0] . ", ";
@@ -86,27 +88,35 @@ trait PdfTrait
             ]
         );
 
-        $dataxxxx['calculos'] = $this->getCalculosCT($dataxxxx['cformula']);
         $dataxxxx['dnpxxxxx'] = $this->getCalcularDnp($dataxxxx['cformula']);
-        $quimfarm = User::select()->where('quimfarm', 1)->first();
-        if ($dataxxxx['cformula']->userevis_id != null) {
-            $quimfarm = $dataxxxx['cformula']->userevis->name;
-        } else {
-            $quimfarm = $quimfarm->name;
-        }
-        $dataxxxx['preparad'] = $quimfarm;
-        $dataxxxx['liberado'] = $quimfarm;
+        $quimfarm = ProPreplibe::orderBy('created_at','asc')
+        ->with([
+            'userprep'=>function ($query) {
+                // return $query->select('name','');
+            },
+            'userevis'=>function ($query) {
+                // $query->select('name',);
+            }
+        ])
+        ->first();
 
+        if ($quimfarm == null && $dataxxxx['cformula']->userevis_id==null) {
+            return redirect()
+                ->route('revision', [])
+                ->with('info', 'No se tiene un químico farmacéutico asignado');
+        }
+
+        $dataxxxx['preparad'] = $quimfarm->userprep->name;
+        $dataxxxx['liberado'] = $quimfarm->userevis->name;
         $dataxxxx = [
             'vistaurl' => 'Reporte.Etiquetas.etiquetanpt',
             // 'dimensio' => [0, 0, 9.5 * 72, 14.9 * 72],
-            'dimensio' => [0, 0, 4.4 * 72, 8.4 * 72],
+            'dimensio' => [0, 0, 4.4 * 72, 6.4 * 72],
             'tipoxxxx' => 1,
             'nombarch' => 'etiqueta',
             'dataxxxx' => $dataxxxx,
         ];
-
-        QrCode::size(200)->generate($this->getQrCode($dataxxxx), '../public/qrcodes/qrcode.svg');
+        QrCode::size(80)->generate($this->getQrCode($dataxxxx), '../public/qrcodes/qrcode.svg');
         return $this->getImprimirPdf($dataxxxx);
     }
     public function imprimirLote($padrexxx)

@@ -41,7 +41,6 @@ class UsuarioCrearRequest extends FormRequest {
         'documento' => 'required|unique:users',
         'password' => 'required|string|min:6',
         'sis_clinica_id' => 'required',
-        'quimfarm' => [new QuimicoFamaceuticoRule($this)],
     ];
   }
 

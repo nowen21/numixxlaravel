@@ -198,6 +198,12 @@ class PermisosSeeder extends Seeder
          * Producción
          */
         Permission::create(['name' => 'produccion-modulo',  'descripc' => 'Habilita los permisos para el módulo de producciòn']);
+        $permiso = 'preplibe';
+        Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar de preparadores y revisores']);
+        Permission::create(['name' => $permiso . '-crear',  'descripc' => 'Crear revisor y preparador']);
+        Permission::create(['name' => $permiso . '-editar',  'descripc' => 'Editar revisor y preparador']);
+        Permission::create(['name' => $permiso . '-borrarxx',  'descripc' => 'Inactivar revisor y preparador']);
+        Permission::create(['name' => $permiso . '-activarx',  'descripc' => 'Activar revisor y preparador']);
 
         $permiso = 'revision';
         Permission::create(['name' => $permiso . '-leer',  'descripc' => 'Listar revisiones']);

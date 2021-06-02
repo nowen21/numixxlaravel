@@ -104,7 +104,7 @@ foreach ($cformula->dformulas as $value) {
                 {{$cformula->peso}}
             </td>
             <td style=" width: 25%; text-align: left; ">
-                {{$calculos['osmolarv']}}
+                {{$cformula->osmolarv}}
             </td>
         </tr>
     </table>
@@ -146,7 +146,7 @@ foreach ($cformula->dformulas as $value) {
                     VOLUMEN DÍA
                 </td>
                 <td style=" text-align: right;">
-                    {{number_format($calculos['volutota'],2)}}
+               {{$cformula->volumen}}
                 </td>
                 <td>
                 </td>
@@ -158,8 +158,7 @@ foreach ($cformula->dformulas as $value) {
                 <td>
                 </td>
                 <td style=" text-align: right;">
-
-                {{number_format($calculos['velopurg'],2)}}
+                {{$cformula->volumen+$cformula->purga}}
                 </td>
 
             </tr>
@@ -195,13 +194,15 @@ foreach ($cformula->dformulas as $value) {
                 RELACIÓN: Caloría No proteícas/g Nitrógeno
             </td>
             <td>
-                {{number_format($calculos['protnitr'],2)}}
+                {{$cformula->protnitr}}
+
             </td>
             <td style=" width:30%;" class="negrita">
                 OSMOLARIDAD
             </td>
             <td>
-                {{number_format($calculos['osmolari'],2)}}
+            {{$cformula->osmolari}}
+                {{-- number_format($calculos['osmolari'],2) --}}
             </td>
         </tr>
     </table>
@@ -211,19 +212,21 @@ foreach ($cformula->dformulas as $value) {
                 CALOR&Iacute;AS TOTALES
             </td>
             <td style=" width:7%;">
-                {{number_format($calculos['calotota'],2)}}
+            {{$cformula->calotota}}
             </td>
             <td class="negrita">
                 CALOR&Iacute;A TOTAL/Kg/D&Iacute;A
             </td>
             <td style=" width:7%;">
-                {{number_format($calculos['caltotkg'],2)}}
+            {{$cformula->caltotkg}}
+
             </td>
             <td class="negrita" style=" width:28%;">
                 RELACIÓN CALCIO/FÓSFORO (&lt;2 )
             </td>
             <td>
-                {{$calculos['calcfosv']}}
+            {{$cformula->calcfosv}}
+
             </td>
         </tr>
     </table>

@@ -24,8 +24,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email','documento' ,'telefono' ,'password','quimfarm',
-        'user_crea_id', 'user_edita_id', 'sis_esta_id', 'sis_clinica_id','polidato_at'
+        'name', 'email', 'documento', 'telefono', 'password',
+        'user_crea_id', 'user_edita_id', 'sis_esta_id', 'sis_clinica_id', 'polidato_at'
     ];
 
     /**
@@ -90,5 +90,29 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new RestablecerContrasenia($token));
+    }
+
+
+    public static function getCombo($dataxxxx)
+    {
+        $comboxxx = [];
+        if ($dataxxxx['cabecera']) {
+            if ($dataxxxx['esajaxxx']) {
+                $comboxxx = ['valuexxx' => '', 'optionxx' => 'Seleccione'];
+            } else {
+                $comboxxx = ['' => 'Seleccione'];
+            }
+        }
+        $dependen = User::select(['id', 'name'])
+            ->get();
+
+        foreach ($dependen as $areasxxx) {
+            if ($dataxxxx['esajaxxx']) {
+                $comboxxx[] = ['valuexxx' => $areasxxx->id, 'optionxx' => $areasxxx->name];
+            } else {
+                $comboxxx[$areasxxx->id] = $areasxxx->name;
+            }
+        }
+        return $comboxxx;
     }
 }

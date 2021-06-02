@@ -38,15 +38,7 @@
          {{$todoxxxx['modeloxx']->tiempo}}
        </div>
     </div>
-    <div class="form-group col-md-6">
-        {{ Form::label('userevis_id', 'Químico Farmacéutico:', ['class' => 'control-label col-form-label-sm']) }}
-        {{ Form::select('userevis_id', $todoxxxx['quimfarm'], null, ['class' => $errors->first('userevis_id') ? 'form-control is-invalid select2' : 'form-control select2','id'=>'userevis_id']) }}
-        @if($errors->has('userevis_id'))
-        <div class="invalid-feedback d-block">
-            {{ $errors->first('userevis_id') }}
-        </div>
-        @endif
-    </div>
+
     <div class="form-group col-md-12">
         <hr style="border:  #000000 solid 2px" />
     </div>

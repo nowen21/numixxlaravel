@@ -4,6 +4,16 @@
   </div>
   <div class="card-header p-2">
     <ul class="nav nav-tabs">
+    @canany(['preplibe-leer', 'preplibe-crear', 'preplibe-editar', 'preplibe-borrar'])
+      <li class="nav-item">
+        <a class="nav-link {{$todoxxxx['pestania']['preplibe'][0]}}
+        {{ $todoxxxx['pestania']['preplibe'][3]}} text-sm" href="
+        {{ $todoxxxx['pestania']['preplibe'][1] }}">
+          PREPARADOR/LIBERADOR
+        </a>
+      </li>
+      @endcanany
+
       @canany(['revision-leer', 'revision-crear', 'revision-editar', 'revision-borrar'])
       <li class="nav-item">
         <a class="nav-link {{$todoxxxx['pestania']['revision'][0]}}
@@ -46,6 +56,9 @@
   <div class="card-body">
     <div class="tab-content">
       <div class="tab-pane active" id="{{ $todoxxxx['slotxxxx'] }}">
+      @if(isset($preplibe))
+        {{ $preplibe }}
+        @endif
         @if(isset($revision))
         {{ $revision }}
         @endif

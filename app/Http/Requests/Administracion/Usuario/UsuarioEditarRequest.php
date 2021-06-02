@@ -48,7 +48,6 @@ class UsuarioEditarRequest extends FormRequest
                 'unique:users,documento,' . $this->segments()[2]
             ],
             'sis_clinica_id' => 'required',
-            'quimfarm' => [new QuimicoFamaceuticoRule($this)],
         ];
     }
 }

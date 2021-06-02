@@ -3,7 +3,7 @@
     <tbody id="formulaciontable">
         <tr >
             <td colspan="2">VOLUMEN TOTAL (ml)</td>
-            <td id="volutota" style="text-align: right;"> {{$todoxxxx['calculos']['volutota']}} </td>
+            <td id="volutota" style="text-align: right;"> {{$todoxxxx['modeloxx']}} {{$todoxxxx['calculos']['volutota']}} </td>
             <td> VOLUMEN CON PURGA (ml)</td>
             <td id="velopurg" style="text-align: right;"> {{$todoxxxx['calculos']['velopurg']}} </td>
         </tr>

@@ -232,9 +232,7 @@ trait FormulacionTrait
             $this->_dataxxx['campoxxx'] . '_cant',
             $medicame->rangunid
         ];
-        $respuest['aguaxxxx'] = $this->_dataxxx['aguaxxxx'];
-
-        // number_format($this->_dataxxx['aguaxxxx'] - $cantvolu, 2);
+        $respuest['aguaxxxx'] = number_format($this->_dataxxx['aguaxxxx'], 2);
         return $respuest;
     }
 

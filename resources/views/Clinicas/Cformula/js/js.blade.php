@@ -35,14 +35,19 @@
 
     }
     $(document).ready(function() {
+
+
+
+
+
         $('.select2bs4').select2({
             language: "es",
             theme: 'bootstrap4'
         });
         var template = function(json) {
             var mensaje = {
-                title: '<div class="alert alert-danger text-center popover-title"><strong>' + json.menssage[3] + '</strong></div>',
-                content: '<div class="alert alert-info">' + json.menssage[2] + '</div>',
+                title: '<div class="alert alert-danger text-center popover-title"><strong>' + json.menssage.messagex[3] + '</strong></div>',
+                content: '<div class="alert alert-info">' + json.menssage.messagex[2] + '</div>',
                 placement: "left",
                 html: true
             };
@@ -72,11 +77,11 @@
             var dataxxxx = $('#formulario').serializeArray()
             var dataxxxy = [];
 
-            $.each(dataxxxx,function(i, d) {
+            $.each(dataxxxx, function(i, d) {
                 var campoxxx = d.name.split('_');
                 if (campoxxx.length > 1) {
-                    if (campoxxx[1]=='cant') {
-                        dataxxxy.push(dataxxxx[i-1]);
+                    if (campoxxx[1] == 'cant') {
+                        dataxxxy.push(dataxxxx[i - 1]);
                     }
                     dataxxxy.push(d);
                 }
@@ -109,10 +114,12 @@
         }
         var f_ajax = function(campo_id) {
             f_dataxxxx()
+            var respuest = '';
             $("#" + campo_id.split('_')[0] + '_cant').prop('title', '');
             $.ajax({
                 url: "{{route('formular.formular',$todoxxxx['parametr'])}}",
                 type: 'get',
+                async: false,
                 data: {
                     dataxxxx: f_dataxxxx(),
                     campo_id: campo_id,
@@ -131,12 +138,9 @@
                     $("#" + json.cantvolu[2]).val(json.cantvolu[3]); // mostrar requerimiento total
                     $("#" + json.cantvolu[4]).val(json.cantvolu[5]); // mostrar volumen con purga
 
-                    console.log(json.cantvolu)
-                    $("#" + json.menssage[0]).popover('dispose');
-                    if (json.menssage[2] != '') {
-                        $("#" + json.menssage[0]).popover(template(json));
-                        $("#" + json.menssage[0]).popover(json.menssage[1]);
-                    }
+                    respuest = json;
+                    // $("#" + json.menssage[0]).popover('dispose');
+
 
                     $("#aguaeste_volu").val(json.aguaxxxx);
                 },
@@ -144,8 +148,10 @@
                     alert('Disculpe, existió un problema al realizar el cálculo');
                 }
             });
+            return respuest;
 
         }
+
         $('#multivit').on('change', function(e) {
             if ($(this).val() == 30) {
                 $('#ocultarx').hide("fast");
@@ -166,6 +172,7 @@
          * realizar calculos del volumen o el requerimiento diario
          */
         $('.medicamento').on('change', function(e) {
+
             if ($(this).prop('id') != 'aguaeste') {
                 recalcular();
             }
@@ -183,7 +190,7 @@
                 },
                 dataType: 'json',
                 success: function(json) {
-                    $("#velocidad").val(json.calculox);
+                    $(".veloinfu").val(json.calculox);
                 },
                 error: function(xhr, status) {
                     alert('Disculpe, existió un problema al calcular el volumen');
@@ -202,6 +209,13 @@
 
 
         $('.input-number').on('keyup', function(event) {
+
+
+            // $("#" + json.menssage[0]).bind('keyup', function() {
+
+
+            // });
+
             var aguaeste = $(this).attr('id').split('_');
             var codigo = event.keyCode;
             if ((((codigo >= 96 && codigo <= 105) || (codigo >= 48 && codigo <= 57)) && aguaeste[0] != 'aguaeste') || codigo == 8 && aguaeste[0] != 'aguaeste') {
@@ -230,9 +244,18 @@
                     $("#peso").focus();
                     return false;
                 }
+var elemento=$(this).attr('id');
+                json = f_ajax($(this).attr('id'));
 
-                f_ajax($(this).attr('id'));
+                // if (json.menssage.messagex[2] != '') {
+                //     // $(this). popover({title: json.menssage.messagex[3], content: json.menssage.messagex[2],trigger: "hover"});
 
+                    // $(this).popover({title: json.menssage.messagex[3], content: json.menssage.messagex[2],  placement: "right",});
+                    elemento=elemento.split('_')[0];
+
+                    $('#'+elemento+'_tool').popover(template(json));
+                    $('#'+elemento+'_tool').popover(json.menssage.messagex[1]);
+                // }
 
             }
         });
@@ -309,5 +332,13 @@
         //     });
 
         // });
+
+
+
+
+
+
+
+
     });
 </script>

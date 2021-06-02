@@ -34,9 +34,19 @@ trait CalculosPediatricosTrait
         //CALORIAS TOTALES 						100%
         $calculos['calotota'] = $calculos['caloprot'] + $calculos['calocarb'] + $calculos['calolipi'];
         //relación: Cal No proteícas/g Nitrogeno
-        $calculos['protnitr'] = ($calculos['calolipi'] + $calculos['calocarb']) / $calculos['gramtota'];
+        if($calculos['gramtota']==0){
+            $calculos['protnitr'] =0;
+        }else{
+            $calculos['protnitr'] = ($calculos['calolipi'] + $calculos['calocarb']) / $calculos['gramtota'];
+        }
+
         //Relación: Cal No proteícas/g A.A
-        $calculos['proteica'] = ($calculos['calolipi'] + $calculos['calocarb']) / $aminoaci;
+        if($aminoaci==0){
+            $calculos['proteica'] = 0;
+        }else {
+            $calculos['proteica'] = ($calculos['calolipi'] + $calculos['calocarb']) / $aminoaci;
+        }
+
         //Calorías totales/Kg./día
         $calculos['caltotkg'] = $calculos['calotota'] / $calculos['pesoxxxx'];
         //RELACIÓN CALCIO/FOSFÓRO                 (<2)

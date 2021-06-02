@@ -19,7 +19,7 @@ trait AdultoTrait
         }
         $glutamin = 0;
         if (isset($this->formulac['glutamin'])) {
-            $glutamin = $this->formulac['vitalipo']['reqtotal'];
+            $glutamin = $this->formulac['glutamin']['reqtotal'];
         }
 
         // CONCENTRACION DE PROTEINAS (%)

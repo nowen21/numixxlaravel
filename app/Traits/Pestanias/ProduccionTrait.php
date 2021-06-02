@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 trait ProduccionTrait
 {
   /**
-   * array estructural de las pestañas 
+   * array estructural de las pestañas
    */
   private $pestania = [
     /**
@@ -21,6 +21,7 @@ trait ProduccionTrait
      * arrays para las pestañas de producción
      */
     'producci' => ['', '', '', '', false], // pestaña PRODUCCION
+    'preplibe' => ['', '', '', '', false], // petanña REVISION
     'revision' => ['', '', '', '', false], // petanña REVISION
     'preparac' => ['', '', '', '', false], // petanña PREPARACIONES
     'controlp' => ['', '', '', '', false], // petanña CONTROL EN PROCESO
@@ -31,15 +32,7 @@ trait ProduccionTrait
     return isset(DB::table($dataxxxx['tablaxxx'])->first()->id) ? 'success' : 'danger';
   }
 
-  public function getHay()
-  {
-    $this->pestania['alistami'][2] = $this->getSD(['tablaxxx' => 'areas']);
-    $this->pestania['concilia'][2] = $this->getSD(['tablaxxx' => 'in_indicadors']);
-    $this->pestania['revision'][2] = $this->getSD(['tablaxxx' => 'in_indicadors']);
-    $this->pestania['preparac'][2] = $this->getSD(['tablaxxx' => 'in_fuentes']);
-    $this->pestania['contproc'][2] = $this->getSD(['tablaxxx' => 'in_base_fuentes']);
-    $this->pestania['coproter'][2] = $this->getSD(['tablaxxx' => 'in_ligrus']);
-  }
+
 
   /**
    * se crea lo lógica de la funcionalidad de las pestañas
@@ -48,6 +41,12 @@ trait ProduccionTrait
   {
     $succdang = '';
     switch ($dataxxxx['tablaxxx']) {
+        case 'preplibe':
+            $this->pestania['producci'][4] = true;
+        $this->pestania['producci'][3] = 'active';
+        $this->pestania['producci'][2] = 'success';
+
+            break;
       case 'alistami':
         $this->pestania[$dataxxxx['tablaxxx']][1] = route($dataxxxx['tablaxxx'], []);
         $this->pestania['alisconc'][4] = true;
@@ -120,6 +119,7 @@ trait ProduccionTrait
     /**
      * pestaña hija
      */
+    $this->pestania['preplibe'][1] =  route('preplibe', []);
     $this->pestania['revision'][1] =  route('revision', []);
     $this->pestania['preparac'][1] =  route('preparac', []);
     $this->pestania['controlp'][1] =  route('controlp', []);
