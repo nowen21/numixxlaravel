@@ -32,8 +32,6 @@ class Cformula extends Model
         'peso',
         'userevis_id',
         'userprep_id',
-        'userproc_id',
-        'userlibe_id',
         'carbvali',
         'concarbo',
         'concprov',

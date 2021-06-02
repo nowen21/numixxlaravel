@@ -25,8 +25,6 @@ class CformulaObserver
         $log['peso'] = $modeloxx->peso;
         $log['userevis_id'] = $modeloxx->userevis_id;
         $log['userprep_id'] = $modeloxx->userprep_id;
-        $log['userproc_id'] = $modeloxx->userproc_id;
-        $log['userlibe_id'] = $modeloxx->userlibe_id;
         $log['carbvali'] = $modeloxx->carbvali;
         $log['concarbo'] = $modeloxx->concarbo;
         $log['concprov'] = $modeloxx->concprov;
@@ -58,8 +56,8 @@ class CformulaObserver
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['user_edita_id'] = $modeloxx->user_edita_id;
         return $log;
-         } 
-    
+         }
+
     public function created(Cformula $modeloxx)
     {
         HCformula::create($this->getLog($modeloxx));

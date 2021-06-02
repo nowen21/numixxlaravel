@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class HUnidrang extends Model
 {
     protected $fillable = [
-        'unidad_id', 
-        'rangonpt_id', 
+        'unidad_id',
+        'rangonpt_id',
         'id_old',
-        'sis_esta_id', 
-        'user_crea_id', 
+        'sis_esta_id',
+        'user_crea_id',
         'user_edita_id',
-        'deleted_at',
+
         'rutaxxxx',
         'metodoxx',
         'ipxxxxxx',

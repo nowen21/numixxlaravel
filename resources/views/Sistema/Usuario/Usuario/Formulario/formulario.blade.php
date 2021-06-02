@@ -58,7 +58,6 @@
         </div>
         @endif
     </div>
-
     <div class="form-group col-md-6">
         {{ Form::label('sis_esta_id', 'Estado:', ['class' => 'control-label col-form-label-sm']) }}
         {{ Form::select('sis_esta_id', $todoxxxx['estadoxx'], null, ['class' => $errors->first('sis_esta_id') ?

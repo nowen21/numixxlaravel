@@ -18,7 +18,7 @@ class CreateDformulasTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('cformula_id')->unsigned();
             $table->bigInteger('medicame_id')->unsigned();
-            $table->boolean('preparar')->default(0);//'indica que fue preparado'
+            $table->boolean('preparar')->nullable()->default(0);//'indica que fue preparado'
             $table->double('cantidad');
             $table->double('rtotal');
             $table->double('volumen');
@@ -30,7 +30,7 @@ class CreateDformulasTable extends Migration
             $table->integer('id_old');
             $table->bigInteger('cformula_id')->unsigned();
             $table->bigInteger('medicame_id')->unsigned();
-            $table->boolean('preparar');//'indica que fue preparado'
+            $table->boolean('preparar')->nullable()->default(0);//'indica que fue preparado'
             $table->double('cantidad');
             $table->double('rtotal');
             $table->double('volumen');

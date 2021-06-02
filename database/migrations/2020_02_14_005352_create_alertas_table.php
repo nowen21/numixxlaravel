@@ -29,7 +29,7 @@ class CreateAlertasTable extends Migration
        Schema::create('h_alertas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('id_old');
-            $table->integer('tipoaccione_id');
+            $table->integer('tipoaccion_id');
             $table->integer('cformula_id');
             $table->boolean('leidaxxx');
             $table->string('routexxx',50);
@@ -44,7 +44,7 @@ class CreateAlertasTable extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('h_alertas');
+        Schema::dropIfExists('h_alertas');
         Schema::dropIfExists('alertas');
     }
 }

@@ -11,12 +11,12 @@ class HMmarca extends Model {
 
   protected $fillable = [
       'nombcome', 'osmorali', 'pesoespe', 'formfarm', 'sis_esta_id', 'marcaxxx', 'medicame_id','user_edita_id', 'user_crea_id',  'id_old',
-      'deleted_at',
+
       'rutaxxxx',
       'metodoxx',
       'ipxxxxxx',
   ];
 
 
- 
+
 }

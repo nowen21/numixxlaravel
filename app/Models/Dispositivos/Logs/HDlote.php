@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class HDlote extends Model {
    protected $fillable = [
-      'fechvenc','dmarca_id','inventar','lotexxxx', 
+      'fechvenc','dmarca_id','inventar','lotexxxx',
       'user_edita_id', 'user_crea_id',  'id_old',
-      'sis_esta_id',    'deleted_at',
+      'sis_esta_id',
       'rutaxxxx',
       'metodoxx',
       'ipxxxxxx',
   ];
-  
+
 }

@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class HRangonpt extends Model
 {
     protected $fillable = [
-        'randesde', 
+        'randesde',
         'ranhasta',
-        
+
         'id_old',
-        'sis_esta_id', 
-        'user_crea_id', 
+        'sis_esta_id',
+        'user_crea_id',
         'user_edita_id',
-        'deleted_at',
+
         'rutaxxxx',
         'metodoxx',
         'ipxxxxxx',
