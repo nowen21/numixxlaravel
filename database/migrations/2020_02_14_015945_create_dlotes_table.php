@@ -24,6 +24,8 @@ class CreateDlotesTable extends Migration
         });
         Schema::create('h_dlotes', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
+            $table->string('metodoxx', 50);
             $table->date('fechvenc');
             $table->integer('dmarca_id');
             $table->double('inventar',6,2);

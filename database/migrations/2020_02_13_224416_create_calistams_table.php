@@ -23,6 +23,7 @@ class CreateCalistamsTable extends Migration
         });
         Schema::create('h_calistams', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->bigInteger('orden_id');
             $table->string('ordepres',50);
             $table=CamposMagicos::h_magicos($table);

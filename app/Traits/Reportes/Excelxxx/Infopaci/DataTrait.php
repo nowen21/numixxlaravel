@@ -40,11 +40,13 @@ trait DataTrait
               ->where('paciente_id', $dataxxxx['requestx']->paciente_id)
               ->get();
         $totalxxx = 0;
+        
         foreach ($formulac as $key => $valuexxx) {
             $crangoxx = Crango::find($valuexxx->crango_id)->rcodigo;
             $excelxxx[] = [
                 'fechanpt' => explode(' ' ,$valuexxx->created_at)[0],
-                'paciente' => $valuexxx->id,
+                //'paciente' => $valuexxx->id,
+                'paciente' => $valuexxx->nombres . ' ' . $valuexxx->apellidos,
                 'histclin' => $valuexxx->cedula,
                 'tiponutr' => $this->getDescripcion($crangoxx),
                 'volumenx' => $valuexxx->volumen,

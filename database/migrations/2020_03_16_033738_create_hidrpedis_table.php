@@ -23,6 +23,7 @@ class CreateHidrpedisTable extends Migration
         });
         Schema::create('h_hidrpedis', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->double('inicioxx',4,2);
             $table->double('finalxxx',4,2);
             $table->double('requerim',4,2);

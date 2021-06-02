@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
         });
         Schema::create('h_users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->string('name');
             $table->string('email');
             $table->timestamp('email_verified_at');

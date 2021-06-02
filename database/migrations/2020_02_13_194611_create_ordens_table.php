@@ -22,6 +22,7 @@ class CreateOrdensTable extends Migration
         });
         Schema::create('h_ordens', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->string('ordeprod');
             $table->string('observac')->nullable();
             $table=CamposMagicos::h_magicos($table);

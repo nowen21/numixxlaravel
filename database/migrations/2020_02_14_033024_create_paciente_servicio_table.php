@@ -25,6 +25,7 @@ class CreatePacienteServicioTable extends Migration
         });
         Schema::create('h_paciente_servicio', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->integer('paciente_id');
             $table->integer('servicio_id');
             $table=CamposMagicos::h_magicos($table);

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Models\Clinica;
+namespace App\Models\Clinica;
 
 use App\Models\Paciente;
 use Illuminate\Database\Eloquent\Relations\Pivot;

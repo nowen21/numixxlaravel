@@ -24,7 +24,20 @@ class CreateCalistamgablesTable extends Migration
             $table->string('calistamgable_type');
             $table=CamposMagicos::magicos($table);
         });
+
+        Schema::create('h_calistamgables', function (Blueprint $table) {
+            $table->id();
+            $table->integer('calistam_id')->unsigned();
+            $table->double('unidad',6,2);
+            $table->double('cantcons',6,2)->nullable();
+            $table->double('diferenc',6,2)->nullable();
+            $table->integer('calistamgable_id')->unsigned();
+            $table->string('calistamgable_type');
+            $table=CamposMagicos::h_magicos($table);
+        });
     }
+
+
 
     /**
      * Reverse the migrations.

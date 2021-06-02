@@ -26,8 +26,12 @@ class CreateMedicameSisClinicaTable extends Migration
         });
         Schema::create('h_medicame_sis_clinica', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->integer('sis_clinica_id');
-            $table->integer('cobrsepa')->default(2);
+            $table->integer('cobrsepa');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table->integer('medicame_id');
             $table=CamposMagicos::h_magicos($table);
         });

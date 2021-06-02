@@ -24,6 +24,7 @@ class CreateRangosTable extends Migration
         });
         Schema::create('h_rangos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->integer('ranginic');
             $table->integer('rangfina');
             $table=CamposMagicos::h_magicos($table);

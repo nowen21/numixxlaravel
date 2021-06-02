@@ -24,6 +24,7 @@ class CreateMinvimasTable extends Migration
         });
         Schema::create('h_minvimas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->string('reginvim',25);
             $table->integer('mmarca_id');
 

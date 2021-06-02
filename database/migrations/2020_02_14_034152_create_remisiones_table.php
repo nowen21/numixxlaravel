@@ -26,6 +26,7 @@ class CreateRemisionesTable extends Migration
         });
         Schema::create('h_remisions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->integer('orden_id')->unsigned(); //orden de produccion con la que se genera la remision
             $table->integer('clinica_id'); // clinica dueña de la remisión
             $table->integer('quimfarm_id')->unsigned(); //químico farmacéutico que realiza la remisión

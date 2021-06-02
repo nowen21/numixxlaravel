@@ -23,6 +23,7 @@ class CreateDispensacionesTable extends Migration
         });
         Schema::create('h_dispensaciones', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->date('fechaxxx');
             $table->integer('opxxxxxx');
             $table->string('producto');

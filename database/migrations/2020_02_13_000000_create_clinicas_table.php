@@ -32,8 +32,10 @@ class CreateClinicasTable extends Migration
         Schema::create('h_'.$this->tablaxxx, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('id_old');
-            $table->string('nit', 50);
-            $table->string('nombre', 50);
+            $table->string('nitxxxxx', 50);
+            $table->string('clinica', 50)->unique();
+            //$table->string('nit', 50);
+           // $table->string('nombre', 50);
             $table->string('telefono', 50);
             $table->integer('digiveri');
             $table->bigInteger('user_crea_id');

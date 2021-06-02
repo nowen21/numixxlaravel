@@ -23,6 +23,7 @@ class CreateRnptsTable extends Migration
         });
         Schema::create('h_rnpts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table=CamposMagicos::getForeign($table, 'rango');
             $table=CamposMagicos::getForeign($table, 'npt');
             $table=CamposMagicos::magicos($table);

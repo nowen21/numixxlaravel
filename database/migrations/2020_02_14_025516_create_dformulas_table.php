@@ -27,6 +27,7 @@ class CreateDformulasTable extends Migration
         });
         Schema::create('h_dformulas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->bigInteger('cformula_id')->unsigned();
             $table->bigInteger('medicame_id')->unsigned();
             $table->boolean('preparar');//'indica que fue preparado'

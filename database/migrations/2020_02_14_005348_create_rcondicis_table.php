@@ -23,6 +23,7 @@ class CreateRcondicisTable extends Migration
         });
         Schema::create('h_rcondicis', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->integer('condicio_id');
             $table->integer('rnpt_id');
             $table=CamposMagicos::h_magicos($table);

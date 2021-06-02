@@ -21,6 +21,7 @@ class CreateServiciosTable extends Migration
         });
         Schema::create('h_servicios', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->string('servicio',30);
             $table=CamposMagicos::h_magicos($table);
         });

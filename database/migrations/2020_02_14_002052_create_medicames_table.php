@@ -29,6 +29,7 @@ class CreateMedicamesTable extends Migration
         });
         Schema::create('h_medicames', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->integer('sis_clinica_id');
             $table->integer('casa_id');
             $table->string('nombgene',100);

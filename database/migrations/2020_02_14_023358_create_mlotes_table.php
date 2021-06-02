@@ -28,6 +28,7 @@ class CreateMlotesTable extends Migration
         });
         Schema::create('h_mlotes', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->date('fechvenc');
             $table->integer('minvima_id');
             $table->double('inventar',6,2);

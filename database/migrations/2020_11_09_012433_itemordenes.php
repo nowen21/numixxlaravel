@@ -24,6 +24,18 @@ class ItemOrdenes extends Migration
             $table=CamposMagicos::magicos($table);
 
             });
+
+            Schema::create('h_itemordenes', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->integer('id_old');
+                $table->string('itemxxxx');
+                $table->bigInteger('rowspanx')->default(0);
+                $table->bigInteger('colspanx')->default(0);
+                $table->string('campoxxx')->default(0);
+                $table->string('aplicaxx')->default(0);
+                $table=CamposMagicos::h_magicos($table);
+    
+                });
     }
 
 

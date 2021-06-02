@@ -29,6 +29,7 @@ class CreateMmarcasTable extends Migration
         });
         Schema::create('h_mmarcas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->string('nombcome',150);
             $table->double('osmorali',10,2);
             $table->double('pesoespe',4,2);

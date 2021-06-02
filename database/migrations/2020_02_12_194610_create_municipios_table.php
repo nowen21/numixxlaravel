@@ -25,6 +25,17 @@ class CreateMunicipiosTable extends Migration
             $table->timestamps();
         });
 
+        Schema::create('h_municipios', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->Integer('id_old');
+            $table->bigInteger('departamento_id')->unsigned();
+            $table->string('nombre',50);
+            $table->bigInteger('user_crea_id')->default(1);
+            $table->bigInteger('user_edita_id')->default(1);
+            $table->bigInteger('sis_esta_id')->unsigned();
+            $table->timestamps();
+        });
+
     }
 
     /**

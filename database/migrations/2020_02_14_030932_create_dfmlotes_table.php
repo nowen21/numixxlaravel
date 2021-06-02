@@ -25,6 +25,7 @@ class CreateDfmlotesTable extends Migration
         });
         Schema::create('h_dfmlotes', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->double('volumenx',2); 
             $table->integer('dformula_id');
             $table->integer('mlote_id');

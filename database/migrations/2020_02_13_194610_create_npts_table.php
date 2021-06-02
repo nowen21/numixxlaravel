@@ -19,6 +19,12 @@ class CreateNptsTable extends Migration
             $table->string('nombre',30);
             $table=CamposMagicos::magicos($table);
         });
+        Schema::create('h_npts', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('id_old');
+            $table->string('nombre',30);
+            $table=CamposMagicos::magicos($table);
+        });
     }
 
     /**

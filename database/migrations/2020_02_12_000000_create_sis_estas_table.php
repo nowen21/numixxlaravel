@@ -23,6 +23,7 @@ class CreateSisEstasTable extends Migration
         });
         Schema::create('h_sis_estas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->Integer('id_old');
             $table->string('s_estado');
             $table->Integer('i_estado');
             $table->Integer('user_crea_id'); 

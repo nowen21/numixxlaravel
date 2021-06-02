@@ -28,7 +28,7 @@ class CreateAlertasTable extends Migration
         });
        Schema::create('h_alertas', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->integer('id_old');
             $table->integer('tipoaccione_id');
             $table->integer('cformula_id');
             $table->boolean('leidaxxx');

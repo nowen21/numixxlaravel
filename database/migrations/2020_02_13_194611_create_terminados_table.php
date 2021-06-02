@@ -35,6 +35,7 @@ class CreateTerminadosTable extends Migration
         });
         Schema::create('h_terminados', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->boolean('completo'); //datos completos y correctos en la etiqueta
             $table->boolean('particul'); //ausencia de partículas
             $table->boolean('integrid'); //integridad de la bolsa o empaque primario

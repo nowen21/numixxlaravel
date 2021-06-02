@@ -24,6 +24,15 @@ class CreateDepartamentosTable extends Migration
             $table->foreign('sis_esta_id')->references('id')->on('sis_estas');
             $table->timestamps();
         });
+        Schema::create('h_departamentos', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->Integer('id_old');
+            $table->string('nombre',30);
+            $table->bigInteger('user_crea_id')->default(1);
+            $table->bigInteger('user_edita_id')->default(1);
+            $table->bigInteger('sis_esta_id')->unsigned();
+            $table->timestamps();
+        });
     }
 
     /**

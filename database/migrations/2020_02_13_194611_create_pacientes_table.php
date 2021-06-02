@@ -35,6 +35,7 @@ class CreatePacientesTable extends Migration
         });
         Schema::create('h_pacientes', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->date('registro');
             $table->string('cedula',15);
             $table->string('nombres',50);
@@ -45,6 +46,7 @@ class CreatePacientesTable extends Migration
             $table->integer('servicio_id');
             $table->integer('cama');
             $table->date('fechnaci');
+            $table->integer('departamento_id');
             $table->integer('municipio_id');
             $table->integer('npt_id');
             $table->integer('sis_clinica_id');

@@ -21,6 +21,8 @@ class CreateDmedicosTable extends Migration
         });
         Schema::create('h_dmedicos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
+            $table->string('metodoxx', 50);
             $table->string('nombrexx',100);
             $table=CamposMagicos::h_magicos($table);
         });

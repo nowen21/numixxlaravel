@@ -22,6 +22,7 @@ class CreateGenerosTable extends Migration
         });
         Schema::create('h_generos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('id_old');
             $table->string('nombre',30);
 
             $table=CamposMagicos::h_magicos($table);
