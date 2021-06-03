@@ -127,6 +127,7 @@ class RevisionController extends Controller
     }
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
     {
+
         $quimfarm = ProPreplibe::select()->orderBy('created_at','asc')->first();
         if ($quimfarm == null && $objetoxx->userevis_id==null) {
             return redirect()
@@ -143,9 +144,9 @@ class RevisionController extends Controller
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
-        $this->opciones['calculos'] = $this->_dataxxx;
+        $this->opciones['calculos'] = $this->_dataxxx; //ddd($objetoxx->toArray());
         if ($nombobje != '') {
-            $this->opciones['calculos'] = $this->getArmarDataObjeto($objetoxx);
+            // $this->opciones['calculos'] = $this->getArmarDataObjeto($objetoxx);
             // $this->opciones['calculos'] = $this->dataform->calculos($objetoxx);
             $this->opciones[$nombobje] = $objetoxx;
         }
@@ -159,6 +160,7 @@ class RevisionController extends Controller
 
     public function edit(Cformula $objetoxx)
     {
+        // ddd($objetoxx->toArray());
 
         if ($objetoxx->sis_esta_id == 2) {
             return redirect()
@@ -245,6 +247,7 @@ class RevisionController extends Controller
      */
     public function update(RevisionEditarRequest  $request, Cformula $objetoxx) ///
     {
+
         $this->getAlerta(['objetoxx' => $objetoxx, 'tipoacci' => 3]);
         $crangoxx = $this->getRangosART(['cformula' => $objetoxx]);
         $dataxxxx = ['userevis_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id, 'crango_id' => $crangoxx[0]->id];

@@ -29,7 +29,7 @@ class CreateTerminadosTable extends Migration
             $table->double('pesobols', 8, 2); //peso de la bolsa
             $table->boolean('limitesx'); //peso dentro de los limites establecidos
             $table->boolean('concepto'); //Concepto (A) Aprobado (R) Rechazado
-            $table->boolean('estaterm'); //estado del terminado
+            $table->boolean('estaterm')->nullable(); //estado del terminado
             $table->boolean('nopasaxx'); //indica si el control producto terminado es exitoso o no
             $table = CamposMagicos::magicos($table);
         });
@@ -49,7 +49,7 @@ class CreateTerminadosTable extends Migration
             $table->double('pesobols', 8, 2); //peso de la bolsa
             $table->boolean('limitesx'); //peso dentro de los limites establecidos
             $table->boolean('concepto'); //Concepto (A) Aprobado (R) Rechazado
-            $table->boolean('estaterm'); //estado del terminado
+            $table->boolean('estaterm')->nullable(); //estado del terminado
             $table->boolean('nopasaxx'); //indica si el control producto terminado es exitoso o no
             $table = CamposMagicos::h_magicos($table);
         });

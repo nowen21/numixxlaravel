@@ -22,7 +22,7 @@ class CreateProcesosTable extends Migration
             $table->boolean('ausemise');//ausencia de miselas/integridad emulsión
             $table->boolean('nopasaxx');//indica si el control en proceso es exitoso o no
             $table->boolean('estaproc');//Estado del proceso
-            $table->boolean('listermi');//indica si ya esta terminado
+            $table->boolean('listermi')->nullable();//indica si ya esta terminado
             $table=CamposMagicos::magicos($table); //usuario responsable del proceso
         });
 
@@ -35,7 +35,7 @@ class CreateProcesosTable extends Migration
             $table->boolean('ausemise');//ausencia de miselas/integridad emulsión
             $table->boolean('nopasaxx');//indica si el control en proceso es exitoso o no
             $table->boolean('estaproc');//Estado del proceso
-            $table->boolean('listermi');//indica si ya esta terminado
+            $table->boolean('listermi')->nullable();//indica si ya esta terminado
             $table=CamposMagicos::h_magicos($table);
         });
     }
