@@ -16,12 +16,10 @@
             <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='ordprodu') ?' active' : '' }}
         text-sm" href="{{ route('ordprodu') }}">Orden de producción</a></li>
             @endcanany
-
             @canany(['etiqueta-leer','etiqueta-imprimir'])
             <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='etiqueta') ?' active' : '' }}
             text-sm" href="{{ route('controlt.reporte') }}">Etiquetas</a></li>
             @endcanany
-
             @canany(['reportes-modulo'])
             <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='cerliblo') ?' active' : '' }}
             text-sm" href="{{ route('cerliblo.reporte') }}">Certificado de Liberación de Lote</a></li>
@@ -30,12 +28,6 @@
             <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='concilia') ?' active' : '' }}
             text-sm" href="{{ route('concilia.reporte') }}">Conciliación de Materiales</a></li>
             @endcanany
-            @canany(['reportes-modulo'])
-            <li class="nav-item"><a class="nav-link{{ ($todoxxxx['slotxxxx']=='concilia') ?' active' : '' }}
-            text-sm" href="{{ route('concilia.reporte') }}">Informe Nutriciones Elaboradas</a></li>
-            @endcanany
-
-
         </ul>
 
     </div>

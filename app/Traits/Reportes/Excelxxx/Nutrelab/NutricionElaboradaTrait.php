@@ -15,6 +15,7 @@ trait NutricionElaboradaTrait
     use DataTrait;
     public function create()
     {
+        ddd(4);
         $this->getBotones(['leerxxxx', [], 1, "{$this->opciones['titucont']}", 'btn btn-sm btn-primary']);
         return $this->view(['modeloxx' => '', 'accionxx' => ['crear', 'formulario'],]);
     }

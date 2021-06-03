@@ -4,24 +4,13 @@ namespace App\Http\Controllers\Reporte;
 
 use App\Helpers\Pdfs\Pdfs;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Pacientes\PacienteCrearRequest;
-use App\Http\Requests\Pacientes\PacienteEditarRequest;
-use App\Models\Administracion\Ep;
-use App\Models\Administracion\Genero;
-use App\Models\Administracion\Servicio;
 
-use App\Models\Medicamentos\Npt;
-use App\Models\Pacientes\Paciente;
 use App\Models\Reportes\Orden;
-use App\Models\Sistema\Departamento;
-use App\Models\Sistema\Municipio;
-use App\Models\Sistema\SisEsta;
 use App\Traits\Pestanias\ProduccionTrait;
 use App\Traits\Produccion\AlistamientoTrait;
 use App\Traits\Produccion\InventarioTrait;
-use App\Traits\Reporte\ControlPFTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 
 
 class ConciliaReporteController extends Controller
@@ -71,7 +60,6 @@ class ConciliaReporteController extends Controller
     public function indexreporteali()
     {
 
-
         $this->opciones['tablasxx'] = [
             [
                 'titunuev' => 'NUEVO ',
@@ -109,7 +97,6 @@ class ConciliaReporteController extends Controller
 
     public function indexreporte ()
     {
-
         $this->opciones['tablasxx'] = [
             [
                 'titunuev' => 'NUEVO ',
