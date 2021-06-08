@@ -290,7 +290,7 @@ trait FormulacionTrait
         $respuest['cantvolu'][3] = $dataxxxx[0]['estructu']['reqtotal'];
         $respuest['cantvolu'][4] = $this->_dataxxx['campoxxx'] . '_vopu';
         $respuest['cantvolu'][5] = number_format($dataxxxx[0]['estructu']['purgaxxx'], 2);
-        $respuest['menssage'] = $this->getMostrarOcultarMensaje($dataxxxx[0]['estructu']['volumenx'], $medicame);
+        $respuest['menssage'] = $this->getMostrarOcultarMensaje($this->_dataxxx['requdiar'], $medicame);
         return $respuest;
     }
 

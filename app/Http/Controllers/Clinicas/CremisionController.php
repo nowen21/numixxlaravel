@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Clinica\RemisionCrearRequest;
 use App\Http\Requests\Clinica\RemisionEditarRequest;
 use App\Models\Clinica\Clinica;
+use App\Models\Produccion\ProPreplibe;
 use App\Models\Remision;
 use App\Models\Sistema\SisEsta;
 use App\Traits\Clinica\RemisionTrait;
@@ -154,7 +155,7 @@ class CremisionController extends Controller
      */
     public function create(Clinica $padrexxx)
     {
-        $quimfarm = User::select()->where('quimfarm', 1)->first();
+        $quimfarm = ProPreplibe::select()->orderBy('created_at','asc')->first();
         if ($quimfarm == null) {
             return redirect()
                 ->route($this->opciones['permisox'], [$padrexxx->id])

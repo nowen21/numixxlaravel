@@ -4,6 +4,7 @@ namespace App\Models\Formulaciones;
 
 use App\Models\Medicamentos\Medicame;
 use App\Models\Medicamentos\Mlote;
+use App\Models\Produccion\ProPreplibe;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -80,8 +81,15 @@ class Dformula extends Model
   public static function getTransaccionPreparacion($dataxxxx,  $objetoxx)
   {
     $usuariox = DB::transaction(function () use ($dataxxxx, $objetoxx) {
+        $quimfarm = ProPreplibe::orderBy('created_at', 'desc')
+        ->with([
+            'userprep' => function ($queryxxx) {
+                $queryxxx->select(['id']);
+            }
+        ])
+        ->first();
       $objetoxx->dformulas()->update(['preparar' => 1, 'user_edita_id' => Auth::user()->id]);
-      $objetoxx->update(['userprep_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id]);
+      $objetoxx->update(['userprep_id' => $quimfarm->userprep->id, 'user_edita_id' => Auth::user()->id]);
       return $objetoxx;
     }, 5);
     return $usuariox;

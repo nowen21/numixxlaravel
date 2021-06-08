@@ -128,19 +128,19 @@ class RevisionController extends Controller
     private function view($objetoxx, $nombobje, $accionxx, $vistaxxx)
     {
 
-        $quimfarm = ProPreplibe::select()->orderBy('created_at','asc')->first();
-        if ($quimfarm == null && $objetoxx->userevis_id==null) {
+        $quimfarm = ProPreplibe::orderBy('created_at', 'desc')
+        ->with([
+            'userevis' => function ($queryxxx) {
+                $queryxxx->select(['id']);
+            }
+        ])
+        ->first();
+        if ($quimfarm == null && $objetoxx->userevis_id == null) {
             return redirect()
                 ->route($this->opciones['routxxxx'], [])
                 ->with('info', 'No se tiene un químico farmacéutico asignado');
         }
-        // $quimfarx = $objetoxx->userevis;
-        // if($quimfarx==null){
-        //     $this->opciones['quimfarm'] = [$quimfarm->id => $quimfarm->name];
-        // }else {
-        //     $this->opciones['quimfarm'] = [$quimfarx->id => $quimfarx->name];
-        // }
-
+        $this->opciones['quimfarm'] = [$quimfarm->userevis->id => $quimfarm->userevis->name];
         $this->opciones['estadoxx'] = SisEsta::combo(['cabecera' => false, 'esajaxxx' => false]);
         $this->opciones['accionxx'] = $accionxx;
         // indica si se esta actualizando o viendo
@@ -178,8 +178,8 @@ class RevisionController extends Controller
 
         if ($crangoxx[0] == null) {
             return redirect()
-            ->route($this->opciones['routxxxx'], [])
-            ->with('info', "La clínica: {$objetoxx->sis_clinica->clinica->clinica} no tiene rango asignado para un volumen de {$crangoxx[1]}");
+                ->route($this->opciones['routxxxx'], [])
+                ->with('info', "La clínica: {$objetoxx->sis_clinica->clinica->clinica} no tiene rango asignado para un volumen de {$crangoxx[1]}");
         }
 
 
@@ -204,7 +204,7 @@ class RevisionController extends Controller
                     'mostrars' => true, 'accionxx' => 'LISTO', 'routingx' => [$this->opciones['routxxxx'] . '.editar', [$objetoxx->id]],
                     'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
                 ];
-                $this->opciones['botoform'][] =
+            $this->opciones['botoform'][] =
                 [
                     'mostrars' => true, 'accionxx' => 'CANCELAR FORMULACION', 'routingx' => [$this->opciones['routxxxx'] . '.cancelar', [$objetoxx->id]],
                     'formhref' => 2, 'tituloxx' => 'CANCELAR FORMULACION', 'clasexxx' => 'btn btn-sm btn-danger'
@@ -250,7 +250,14 @@ class RevisionController extends Controller
 
         $this->getAlerta(['objetoxx' => $objetoxx, 'tipoacci' => 3]);
         $crangoxx = $this->getRangosART(['cformula' => $objetoxx]);
-        $dataxxxx = ['userevis_id' => Auth::user()->id, 'user_edita_id' => Auth::user()->id, 'crango_id' => $crangoxx[0]->id];
+        $quimfarm = ProPreplibe::orderBy('created_at', 'desc')
+            ->with([
+                'userevis' => function ($queryxxx) {
+                    $queryxxx->select(['id']);
+                }
+            ])
+            ->first();
+        $dataxxxx = ['userevis_id' => $quimfarm->userevis->id, 'user_edita_id' => Auth::user()->id, 'crango_id' => $crangoxx[0]->id];
         return $this->grabar(['dataxxxx' => $dataxxxx, 'modeloxx' => $objetoxx, 'infoxxxx' => 'Se ha realizado la revisión con éxito']);
     }
 

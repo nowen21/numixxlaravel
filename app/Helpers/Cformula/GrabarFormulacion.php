@@ -91,7 +91,7 @@ class GrabarFormulacion
             if (isset($data[1]) && $data[1] == 'volu') {
                 if ($data[0] == 'aguaeste') {
                     $cabecera[$data[0] . '_cant'] = 1;
-                    $cabecera[$data[0] . '_vopu'] = $cabecera['cformula']->total / $cabecera['cformula']->volumen * $cabecera[$data[0] . '_volu'];
+                    $cabecera[$data[0] . '_vopu'] = (float)$cabecera['cformula']->total / (float)$cabecera['cformula']->volumen * (float)$cabecera[$data[0] . '_volu'];
                     $cabecera[$data[0] . '_reto'] = 1;
                 }
 

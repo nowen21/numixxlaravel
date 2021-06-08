@@ -89,7 +89,7 @@ trait PdfTrait
         );
 
         $dataxxxx['dnpxxxxx'] = $this->getCalcularDnp($dataxxxx['cformula']);
-        $quimfarm = ProPreplibe::orderBy('created_at','asc')
+        $quimfarm = ProPreplibe::orderBy('created_at','desc')
         ->with([
             'userprep'=>function ($query) {
                 // return $query->select('name','');

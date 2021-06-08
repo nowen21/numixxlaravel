@@ -75,8 +75,8 @@ class ProPreplibeController extends Controller
                 'urlxxxxx' => route($this->opciones['routxxxx'].'.listaxxx'),
                 'cabecera' => [
                     ['td' => 'ID'],
-                    ['td' => 'REVISOR'],
                     ['td' => 'PREPARADOR'],
+                    ['td' => 'REVISOR'],
                     ['td' => 'FECHA'],
                     ['td' => 'ESTADO'],
                 ],
