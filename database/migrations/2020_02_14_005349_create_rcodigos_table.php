@@ -24,7 +24,10 @@ class CreateRcodigosTable extends Migration
         Schema::create('h_rcodigos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('codiprod');
-            $table->integer('id_old');
+            $table->Integer('id_old');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             // $table->string('descripc',150);
             $table->integer('rcondici_id');
             $table=CamposMagicos::h_magicos($table);

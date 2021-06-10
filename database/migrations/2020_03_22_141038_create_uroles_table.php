@@ -22,6 +22,10 @@ class CreateUrolesTable extends Migration
         });
         Schema::create('h_uroles', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->Integer('id_old');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table=CamposMagicos::getForeign($table,'role');
             $table=CamposMagicos::getForeign($table,'user');
             $table=CamposMagicos::h_magicos($table);

@@ -22,7 +22,10 @@ class CreateCondiciosTable extends Migration
         });
         Schema::create('h_condicios', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_old');
+            $table->Integer('id_old');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table->integer('consinli');
             $table->string('condicio')->uniqued();
            $table=CamposMagicos::h_magicos($table);

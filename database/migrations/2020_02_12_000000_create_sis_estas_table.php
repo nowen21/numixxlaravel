@@ -28,6 +28,9 @@ class CreateSisEstasTable extends Migration
             $table->Integer('i_estado');
             $table->Integer('user_crea_id'); 
             $table->Integer('user_edita_id');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table->timestamps();
         });
     }

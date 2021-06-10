@@ -23,6 +23,10 @@ class CreateFailedJobsTable extends Migration
         });
         Schema::create('h_failed_jobs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->Integer('id_old');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table->text('connection');
             $table->text('queue');
             $table->longText('payload');

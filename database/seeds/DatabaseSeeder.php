@@ -64,5 +64,25 @@ class DatabaseSeeder extends Seeder
         $this->call(CrangosSeeder::class);
         $this->call(TipoaccionsSeeder::class);
         $this->call(ItemOrdenesSeeder::class);
+        //Iseed test
+        $this->call(IOrdensTableSeeder::class);
+        $this->call(ICformulasTableSeeder::class);
+ 
+        $this->call(IDformulasTableSeeder::class);
+        $this->call(IAlertasTableSeeder::class);
+        $this->call(ICalistamsTableSeeder::class);
+        $this->call(ICalistamgablesTableSeeder::class);
+        
+        $this->call(IDfmlotesTableSeeder::class);
+        $this->call(IDispensacionesTableSeeder::class);
+    
+        $this->call(IPacienteServicioTableSeeder::class);
+        $this->call(IPacienteSisClinicaTableSeeder::class);
+        $this->call(IProcesosTableSeeder::class);
+        $this->call(IProPreplibesTableSeeder::class);
+        $this->call(IRemisionsTableSeeder::class);
+        $this->call(ITerminadosTableSeeder::class);
+        $this->call(IUnidadesTableSeeder::class);
+
     }
 }

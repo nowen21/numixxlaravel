@@ -14,6 +14,8 @@ class DmedicoObserver
         $log['id_old'] = $modeloxx->id;
         $log['nombrexx'] = $modeloxx->nombrexx;
         $log['metodoxx'] = request()->method();
+        $log['rutaxxxx'] = request()->fullUrl();
+        $log['ipxxxxxx'] = request()->ip();
         $log['sis_esta_id'] = $modeloxx->sis_esta_id;
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['user_edita_id'] = $modeloxx->user_edita_id;

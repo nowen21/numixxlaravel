@@ -31,6 +31,9 @@ class CreateDepartamentosTable extends Migration
             $table->bigInteger('user_crea_id')->default(1);
             $table->bigInteger('user_edita_id')->default(1);
             $table->bigInteger('sis_esta_id')->unsigned();
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table->timestamps();
         });
     }

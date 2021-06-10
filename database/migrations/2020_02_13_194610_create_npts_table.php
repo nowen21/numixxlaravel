@@ -21,7 +21,10 @@ class CreateNptsTable extends Migration
         });
         Schema::create('h_npts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_old');
+            $table->Integer('id_old');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table->string('nombre',30);
             $table=CamposMagicos::magicos($table);
         });

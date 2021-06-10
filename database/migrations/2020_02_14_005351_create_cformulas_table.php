@@ -72,7 +72,10 @@ class CreateCformulasTable extends Migration
         });
         Schema::create('h_cformulas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_old');
+            $table->Integer('id_old');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table->bigInteger('paciente_id')->unsigned();
             $table->double('tiempo', 15, 2);
             $table->double('velocidad', 15, 2);

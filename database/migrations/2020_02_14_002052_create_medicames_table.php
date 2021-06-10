@@ -29,12 +29,15 @@ class CreateMedicamesTable extends Migration
         });
         Schema::create('h_medicames', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_old');
+            $table->Integer('id_old');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table->integer('sis_clinica_id');
             $table->integer('casa_id');
             $table->string('nombgene',100);
             $table->double('concentr', 20, 2);
-            $table->string('unidconc',20);
+            $table->string('unidconc',20)->nullable();
             $table->string('unidmedi',20);
 
             $table=CamposMagicos::h_magicos($table);

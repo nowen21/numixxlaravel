@@ -26,7 +26,10 @@ class CreateCalistamgablesTable extends Migration
         });
 
         Schema::create('h_calistamgables', function (Blueprint $table) {
-            $table->id();
+            $table->Integer('id_old');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table->integer('calistam_id')->unsigned();
             $table->double('unidad',6,2);
             $table->double('cantcons',6,2)->nullable();

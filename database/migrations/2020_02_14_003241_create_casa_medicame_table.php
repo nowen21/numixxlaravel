@@ -25,7 +25,10 @@ class CreateCasaMedicameTable extends Migration
         });
         Schema::create('h_casa_medicame', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_old');
+            $table->Integer('id_old');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table->integer('medicame_id');
             $table->integer('casa_id');
 

@@ -28,6 +28,9 @@ class CreateMunicipiosTable extends Migration
         Schema::create('h_municipios', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->Integer('id_old');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table->bigInteger('departamento_id')->unsigned();
             $table->string('nombre',50);
             $table->bigInteger('user_crea_id')->default(1);

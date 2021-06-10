@@ -28,7 +28,10 @@ class CreateProcesosTable extends Migration
 
         Schema::create('h_procesos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_old');
+            $table->Integer('id_old');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table->boolean('coloraci');//coloración normal
             $table->boolean('ausepart');//ausencia de partículas
             $table->boolean('ausefuga');//ausencia de fugas

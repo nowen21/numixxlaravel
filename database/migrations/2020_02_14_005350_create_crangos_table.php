@@ -24,7 +24,10 @@ class CreateCrangosTable extends Migration
         });
         Schema::create('h_crangos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_old');
+            $table->Integer('id_old');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table->integer('sis_clinica_id');
             $table->integer('rcodigo_id');
             $table=CamposMagicos::h_magicos($table);

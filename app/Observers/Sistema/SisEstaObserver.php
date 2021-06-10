@@ -16,6 +16,9 @@ class SisEstaObserver
         $log['i_estado'] = $modeloxx->i_estado;
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['user_edita_id'] = $modeloxx->user_edita_id;
+        $log['metodoxx'] = request()->method();
+        $log['rutaxxxx'] = request()->fullUrl();
+        $log['ipxxxxxx'] = request()->ip();
         return $log;
          } 
     

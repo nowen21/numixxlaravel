@@ -27,7 +27,10 @@ class CreateTipoaccionsTable extends Migration
         });
         Schema::create('h_tipoaccions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('id_old');
+            $table->Integer('id_old');
+            $table->string('rutaxxxx', 50);
+            $table->string('ipxxxxxx', 50);
+            $table->string('metodoxx', 50);
             $table->string('tituloxx',50);
             $table->string('permisox',50);
             $table->string('iconoxxx',50);
