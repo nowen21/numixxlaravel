@@ -151,23 +151,23 @@ class AppServiceProvider extends ServiceProvider
         Dfmlote::observe(DfmloteObserver::class);
         Dlote::observe(DloteObserver::class);
         Dformula::observe(DformulaObserver::class);
-        Orden::observe(OrdenObserver::class);        
-        ReportesOrden::observe(ReportesOrdenObserver::class);     
-        ReportesControlPF::observe(ControlPFObserver::class);    
-        Rol::observe(RolObserver::class);  
-        Departamento::observe(DepartamentoObserver::class);  
-        Municipio::observe(MunicipioObserver::class); 
-        SisEsta::observe(SisEstaObserver::class); 
-        SisPermiso::observe(SisPermisoObserver::class); 
-        Paciente::observe(PacienteObserver::class);   
-        Pacientec::observe(PacientecObserver::class);   
-        PacienteServicio::observe(PacienteServicioObserver::class);   
-        ControlP::observe(ControlPObserver::class);   
-        ControlT::observe(ControlTObserver::class);   
-        Calistam::observe(CalistamObserver::class);   
-        Terminado::observe(TerminadoObserver::class);   
-        Preparacion::observe(PreparacionObserver::class);   
-        Proceso::observe(ProcesoObserver::class);   
+        Orden::observe(OrdenObserver::class);
+        ReportesOrden::observe(ReportesOrdenObserver::class);
+        ReportesControlPF::observe(ControlPFObserver::class);
+        Rol::observe(RolObserver::class);
+        Departamento::observe(DepartamentoObserver::class);
+        Municipio::observe(MunicipioObserver::class);
+        SisEsta::observe(SisEstaObserver::class);
+        SisPermiso::observe(SisPermisoObserver::class);
+        Paciente::observe(PacienteObserver::class);
+        Pacientec::observe(PacientecObserver::class);
+        PacienteServicio::observe(PacienteServicioObserver::class);
+        ControlP::observe(ControlPObserver::class);
+        ControlT::observe(ControlTObserver::class);
+        Calistam::observe(CalistamObserver::class);
+        Terminado::observe(TerminadoObserver::class);
+        Preparacion::observe(PreparacionObserver::class);
+        Proceso::observe(ProcesoObserver::class);
         Dmarca::observe(DmarcaObserver::class);
         Dmedico::observe(DmedicoObserver::class);
         Unidad::observe(UnidadObserver::class);
@@ -194,5 +194,5 @@ class AppServiceProvider extends ServiceProvider
         Remision::observe(RemisionObserver::class);
         Roleext::observe(RoleextObserver::class);
     }
-    
+
 }

@@ -30,8 +30,8 @@ class ControlTObserver
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['user_edita_id'] = $modeloxx->user_edita_id;
         return $log;
-         } 
-    
+    }
+
     public function created(ControlT $modeloxx)
     {
         HControlT::create($this->getLog($modeloxx));
