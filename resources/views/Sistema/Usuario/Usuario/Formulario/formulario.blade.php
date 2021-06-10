@@ -34,6 +34,17 @@
         </div>
         @endif
     </div>
+    <div class="form-group col-md-6">
+        {{ Form::label('telefono', 'Teléfono:', ['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::text('telefono', null, ['class' => $errors->first('telefono') ?
+         'form-control  is-invalid' : 'form-control', 'placeholder' => 'Teléfono', 'maxlength' => '120', 'autofocus']) }}
+        @if($errors->has('telefono'))
+        <div class="invalid-feedback d-block">
+            {{ $errors->first('telefono') }}
+        </div>
+        @endif
+    </div>
+
 
     <div class="form-group col-md-6">
         {{ Form::label('email', 'E-mail:', ['class' => 'control-label col-form-label-sm']) }}

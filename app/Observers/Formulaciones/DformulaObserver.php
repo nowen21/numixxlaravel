@@ -19,6 +19,7 @@ class DformulaObserver
         $log['rtotal'] = $modeloxx->rtotal;
         $log['volumen'] = $modeloxx->volumen;
         $log['purga'] = $modeloxx->purga;
+        $log['sis_esta_id'] = $modeloxx->sis_esta_id;
         $log['deleted_at'] = $modeloxx->deleted_at;
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['user_edita_id'] = $modeloxx->user_edita_id;

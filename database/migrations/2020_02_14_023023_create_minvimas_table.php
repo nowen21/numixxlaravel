@@ -30,6 +30,7 @@ class CreateMinvimasTable extends Migration
             $table->string('metodoxx', 50);
             $table->string('reginvim',25);
             $table->integer('mmarca_id');
+            $table->softDeletes();
 
             $table=CamposMagicos::h_magicos($table);
         });

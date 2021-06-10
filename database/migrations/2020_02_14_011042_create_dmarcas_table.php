@@ -31,6 +31,7 @@ class CreateDmarcasTable extends Migration
             $table->integer('dmedico_id');
             $table->string('marcaxxx',50);
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

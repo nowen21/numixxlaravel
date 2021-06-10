@@ -30,6 +30,7 @@ class CreateRcondicisTable extends Migration
             $table->integer('condicio_id');
             $table->integer('rnpt_id');
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

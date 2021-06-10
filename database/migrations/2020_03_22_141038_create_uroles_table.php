@@ -29,6 +29,7 @@ class CreateUrolesTable extends Migration
             $table=CamposMagicos::getForeign($table,'role');
             $table=CamposMagicos::getForeign($table,'user');
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

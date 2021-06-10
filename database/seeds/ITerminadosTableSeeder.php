@@ -1,7 +1,6 @@
 <?php
 
-
-
+use App\Models\Produccion\Terminado;
 use Illuminate\Database\Seeder;
 
 class ITerminadosTableSeeder extends Seeder
@@ -16,11 +15,8 @@ class ITerminadosTableSeeder extends Seeder
     {
         
 
-        \DB::table('terminados')->delete();
-        
-        \DB::table('terminados')->insert(array (
-            0 => 
-            array (
+        Terminado::create([
+       
                 'id' => 1,
                 'completo' => 1,
                 'particul' => 1,
@@ -42,8 +38,7 @@ class ITerminadosTableSeeder extends Seeder
                 'sis_esta_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
-            ),
-        ));
+                ]);
         
         
     }

@@ -26,6 +26,7 @@ class CreateServiciosTable extends Migration
             $table->string('ipxxxxxx', 50);
             $table->string('metodoxx', 50);
             $table->string('servicio',30);
+            $table->softDeletes();
             $table=CamposMagicos::h_magicos($table);
         });
     }

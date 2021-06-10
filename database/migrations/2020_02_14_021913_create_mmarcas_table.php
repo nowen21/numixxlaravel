@@ -39,6 +39,7 @@ class CreateMmarcasTable extends Migration
             $table->string('formfarm',50);
             $table->integer('medicame_id');
             $table->string('marcaxxx',50);
+            $table->softDeletes();
 
 
             $table=CamposMagicos::h_magicos($table);

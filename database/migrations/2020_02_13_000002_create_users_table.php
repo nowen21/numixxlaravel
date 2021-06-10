@@ -46,6 +46,7 @@ class CreateUsersTable extends Migration
             $table->string('telefono');
             $table->timestamp('polidato_at')->nullable();
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

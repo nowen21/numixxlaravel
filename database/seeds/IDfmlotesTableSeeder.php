@@ -1,7 +1,6 @@
 <?php
 
-
-
+use App\Models\Formulaciones\Dfmlote;
 use Illuminate\Database\Seeder;
 
 class IDfmlotesTableSeeder extends Seeder
@@ -16,11 +15,8 @@ class IDfmlotesTableSeeder extends Seeder
     {
         
 
-        \DB::table('dfmlotes')->delete();
-        
-        \DB::table('dfmlotes')->insert(array (
-            0 => 
-            array (
+
+           Dfmlote::create([
                 'id' => 1,
                 'dformula_id' => 1,
                 'mlote_id' => 14,
@@ -30,9 +26,7 @@ class IDfmlotesTableSeeder extends Seeder
                 'sis_esta_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
-            ),
-        ));
-        
+                ]);
         
     }
 }

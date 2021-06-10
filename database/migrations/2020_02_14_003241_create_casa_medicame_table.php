@@ -31,6 +31,7 @@ class CreateCasaMedicameTable extends Migration
             $table->string('metodoxx', 50);
             $table->integer('medicame_id');
             $table->integer('casa_id');
+            $table->softDeletes();
 
 
             $table=CamposMagicos::h_magicos($table);

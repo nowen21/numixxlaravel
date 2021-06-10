@@ -38,6 +38,7 @@ class CreateTipoaccionsTable extends Migration
             $table->string('routexxx',50);
             $table->string('titulink',50);
             $table->text('cuerpoxx');
+            $table->softDeletes();
             $table=CamposMagicos::h_magicos($table);
         });
     }

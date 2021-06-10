@@ -37,6 +37,7 @@ class CreateAlertasTable extends Migration
             $table->boolean('leidaxxx');
             $table->string('routexxx',50);
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

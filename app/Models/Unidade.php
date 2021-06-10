@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
 class Unidade extends Model {
 
   protected $fillable = [
-      'nombre'
+      'unidad'
   ];
 
   public static function combo() {

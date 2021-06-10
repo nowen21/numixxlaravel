@@ -29,6 +29,7 @@ class CreateCondiciosTable extends Migration
             $table->integer('consinli');
             $table->string('condicio')->uniqued();
            $table=CamposMagicos::h_magicos($table);
+           $table->softDeletes();
         });
     }
 

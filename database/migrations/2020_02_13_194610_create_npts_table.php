@@ -26,6 +26,7 @@ class CreateNptsTable extends Migration
             $table->string('ipxxxxxx', 50);
             $table->string('metodoxx', 50);
             $table->string('nombre',30);
+            $table->softDeletes();
             $table=CamposMagicos::magicos($table);
         });
     }

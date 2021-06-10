@@ -15,6 +15,7 @@ class SisClinicaObserver
         $log['sucursal'] = $modeloxx->sucursal;
         $log['clinica_id'] = $modeloxx->clinica_id;
         $log['municipio_id'] = $modeloxx->municipio_id;
+        $log['sis_esta_id'] = $modeloxx->sis_esta_id;
         $log['deleted_at'] = $modeloxx->deleted_at;
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['metodoxx'] = request()->method();

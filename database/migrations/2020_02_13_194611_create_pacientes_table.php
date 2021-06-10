@@ -54,6 +54,7 @@ class CreatePacientesTable extends Migration
             $table->integer('npt_id');
             $table->integer('sis_clinica_id');
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

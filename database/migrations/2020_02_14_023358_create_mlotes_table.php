@@ -39,6 +39,7 @@ class CreateMlotesTable extends Migration
 
 
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
 
 
         });

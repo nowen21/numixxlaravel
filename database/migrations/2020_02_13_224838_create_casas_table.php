@@ -33,6 +33,7 @@ class CreateCasasTable extends Migration
             $table->string('unidmedi',15);
             $table->integer('ordecasa');
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

@@ -31,6 +31,7 @@ class CreateRnptsTable extends Migration
             $table=CamposMagicos::getForeign($table, 'npt');
             $table=CamposMagicos::magicos($table);
             $table->unique(['npt_id','rango_id']);
+            $table->softDeletes();
         });
     }
 

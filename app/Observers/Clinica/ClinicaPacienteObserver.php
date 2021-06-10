@@ -12,9 +12,9 @@ class ClinicaPacienteObserver
     {
         $log = [];
         $log['id_old'] = $modeloxx->id;
-        $log['clinica_id'] = $modeloxx->clinica_id;
+        $log['sis_clinica_id'] = $modeloxx->sis_clinica_id;
         $log['paciente_id'] = $modeloxx->paciente_id;
-        $log['estado_id'] = $modeloxx->estado_id;
+        $log['sis_esta_id'] = $modeloxx->sis_esta_id;
         $log['deleted_at'] = $modeloxx->deleted_at;
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['metodoxx'] = request()->method();

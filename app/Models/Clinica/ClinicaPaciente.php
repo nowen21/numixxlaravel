@@ -6,8 +6,11 @@ use App\Models\Paciente;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class ClinicaPaciente extends Pivot {
+
+  protected $table = 'paciente_sis_clinica';
 protected $fillable = [
-      'clinica_id', 'paciente_id', 'estado_id'
+      'sis_clinica_id', 'paciente_id','user_edita_id', 'user_crea_id',
+      'sis_esta_id',
   ];
   public function clinica() {
     return $this->belongsTo(Clinica::class);

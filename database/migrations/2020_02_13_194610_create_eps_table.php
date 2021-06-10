@@ -27,6 +27,7 @@ class CreateEpsTable extends Migration
             $table->string('ipxxxxxx', 50);
             $table->string('metodoxx', 50);
             $table->string('nombre',250);
+            $table->softDeletes();
 
             $table=CamposMagicos::h_magicos($table);
         });

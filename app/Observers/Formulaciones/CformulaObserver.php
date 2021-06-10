@@ -52,6 +52,7 @@ class CformulaObserver
         $log['orden_id'] = $modeloxx->orden_id;
         $log['crango_id'] = $modeloxx->crango_id;
         $log['terminado_id'] = $modeloxx->terminado_id;
+        $log['sis_esta_id'] = $modeloxx->sis_esta_id;
         $log['deleted_at'] = $modeloxx->deleted_at;
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['user_edita_id'] = $modeloxx->user_edita_id;

@@ -39,6 +39,7 @@ class CreateMedicamesTable extends Migration
             $table->double('concentr', 20, 2);
             $table->string('unidconc',20)->nullable();
             $table->string('unidmedi',20);
+            $table->softDeletes();
 
             $table=CamposMagicos::h_magicos($table);
         });

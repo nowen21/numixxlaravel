@@ -29,6 +29,7 @@ class CreateSisClinicaPacienteTable extends Migration
             $table->integer('sis_clinica_id');
             $table->integer('paciente_id');
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

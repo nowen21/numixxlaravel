@@ -1,7 +1,6 @@
 <?php
 
-
-
+use App\Models\Clinica\ClinicaPaciente;
 use Illuminate\Database\Seeder;
 
 class IPacienteSisClinicaTableSeeder extends Seeder
@@ -16,11 +15,8 @@ class IPacienteSisClinicaTableSeeder extends Seeder
     {
         
 
-        \DB::table('paciente_sis_clinica')->delete();
-        
-        \DB::table('paciente_sis_clinica')->insert(array (
-            0 => 
-            array (
+    ClinicaPaciente::create([
+   
                 'id' => 1,
                 'sis_clinica_id' => 1,
                 'paciente_id' => 4287,
@@ -29,8 +25,8 @@ class IPacienteSisClinicaTableSeeder extends Seeder
                 'sis_esta_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
-            ),
-        ));
+                ]);
+              
         
         
     }

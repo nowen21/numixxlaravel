@@ -33,6 +33,7 @@ class CreateDfmlotesTable extends Migration
             $table->integer('dformula_id');
             $table->integer('mlote_id');
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

@@ -37,6 +37,7 @@ class CreateMunicipiosTable extends Migration
             $table->bigInteger('user_edita_id')->default(1);
             $table->bigInteger('sis_esta_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
 
     }

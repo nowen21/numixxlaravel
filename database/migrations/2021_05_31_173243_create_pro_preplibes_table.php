@@ -21,6 +21,7 @@ class CreateProPreplibesTable extends Migration
             $table->foreign('userevis_id')->references('id')->on('users');
             $table->foreign('userprep_id')->references('id')->on('users');
             $table=CamposMagicos::magicos($table);
+            $table->softDeletes();
         });
     }
 

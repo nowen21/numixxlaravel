@@ -38,6 +38,7 @@ class CreateDformulasTable extends Migration
             $table->double('rtotal');
             $table->double('volumen');
             $table->double('purga');
+            $table->softDeletes();
             $table=CamposMagicos::h_magicos($table);
         });
     }

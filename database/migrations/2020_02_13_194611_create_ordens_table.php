@@ -28,6 +28,7 @@ class CreateOrdensTable extends Migration
             $table->string('metodoxx', 50);
             $table->string('ordeprod');
             $table->string('observac')->nullable();
+            $table->softDeletes();
             $table=CamposMagicos::h_magicos($table);
         });
     }

@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Models\Formulaciones\Dformula;
 use Illuminate\Database\Seeder;
 
 class IDformulasTableSeeder extends Seeder
@@ -15,11 +15,8 @@ class IDformulasTableSeeder extends Seeder
     {
         
 
-        \DB::table('dformulas')->delete();
-        
-        \DB::table('dformulas')->insert(array (
-            0 => 
-            array (
+     Dformula::create([
+      
                 'id' => 1,
                 'cformula_id' => 1,
                 'medicame_id' => 1,
@@ -33,8 +30,7 @@ class IDformulasTableSeeder extends Seeder
                 'sis_esta_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
-            ),
-        ));
+                ]);
         
         
     }

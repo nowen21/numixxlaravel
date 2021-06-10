@@ -1,7 +1,6 @@
 <?php
 
-
-
+use App\Models\Remision;
 use Illuminate\Database\Seeder;
 
 class IRemisionsTableSeeder extends Seeder
@@ -16,11 +15,8 @@ class IRemisionsTableSeeder extends Seeder
     {
         
 
-        \DB::table('remisions')->delete();
-        
-        \DB::table('remisions')->insert(array (
-            0 => 
-            array (
+        Remision::create([
+ 
                 'id' => 1,
                 'clinica_id' => 1,
                 'orden_id' => 1,
@@ -30,8 +26,7 @@ class IRemisionsTableSeeder extends Seeder
                 'sis_esta_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
-            ),
-        ));
+                ]);
         
         
     }

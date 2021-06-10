@@ -9,7 +9,7 @@ class Dispensacione extends Model {
   protected $fillable = [
       'fechaxxx',
       'opxxxxxx',
-      'estado_id',
+      'sis_esta_id',
       'producto',
   ];
 

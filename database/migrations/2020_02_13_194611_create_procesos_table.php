@@ -40,6 +40,7 @@ class CreateProcesosTable extends Migration
             $table->boolean('estaproc');//Estado del proceso
             $table->boolean('listermi')->nullable();//indica si ya esta terminado
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

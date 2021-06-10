@@ -15,7 +15,8 @@ class DispensacioneObserver
         $log['fechaxxx'] = $modeloxx->fechaxxx;
         $log['opxxxxxx'] = $modeloxx->opxxxxxx;
         $log['producto'] = $modeloxx->producto;
-        $log['estado_id'] = $modeloxx->estado_id;
+        $log['deleted_at'] = $modeloxx->deleted_at;
+        $log['sis_esta_id'] = $modeloxx->sis_esta_id;
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['user_edita_id'] = $modeloxx->user_edita_id;
         $log['metodoxx'] = request()->method();

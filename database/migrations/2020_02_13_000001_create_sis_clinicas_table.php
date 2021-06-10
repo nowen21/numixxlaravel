@@ -42,6 +42,7 @@ class CreateSisClinicasTable extends Migration
             $table->string('rutaxxxx', 50);
             $table->string('ipxxxxxx', 50);
             $table->string('metodoxx', 50);
+            $table->bigInteger('sis_esta_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -19,6 +19,8 @@ class ItemordeneObserver
         $log['aplicaxx'] = $modeloxx->aplicaxx;
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['user_edita_id'] = $modeloxx->user_edita_id;
+        $log['sis_esta_id'] = $modeloxx->sis_esta_id;
+        $log['deleted_at'] = $modeloxx->deleted_at;
         $log['metodoxx'] = request()->method();
         $log['rutaxxxx'] = request()->fullUrl();
         $log['ipxxxxxx'] = request()->ip();

@@ -1,7 +1,6 @@
 <?php
 
-
-
+use App\Models\Produccion\Calistamgables;
 use Illuminate\Database\Seeder;
 
 class ICalistamgablesTableSeeder extends Seeder
@@ -16,11 +15,8 @@ class ICalistamgablesTableSeeder extends Seeder
     {
         
 
-        \DB::table('calistamgables')->delete();
-        
-        \DB::table('calistamgables')->insert(array (
-            0 => 
-            array (
+
+           Calistamgables::create([
                 'id' => 1,
                 'calistam_id' => 1,
                 'unidad' => 1.0,
@@ -33,9 +29,9 @@ class ICalistamgablesTableSeeder extends Seeder
                 'sis_esta_id' => 1,
                 'created_at' => '2021-06-10 08:59:28',
                 'updated_at' => '2021-06-10 08:59:46',
-            ),
-            1 => 
-            array (
+                ]);
+      
+           Calistamgables::create([
                 'id' => 2,
                 'calistam_id' => 1,
                 'unidad' => 1.0,
@@ -48,8 +44,7 @@ class ICalistamgablesTableSeeder extends Seeder
                 'sis_esta_id' => 1,
                 'created_at' => '2021-06-10 08:59:28',
                 'updated_at' => '2021-06-10 08:59:46',
-            ),
-        ));
+                ]);
         
         
     }

@@ -35,6 +35,7 @@ class CreateDepartamentosTable extends Migration
             $table->string('ipxxxxxx', 50);
             $table->string('metodoxx', 50);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

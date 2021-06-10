@@ -31,6 +31,7 @@ class CreateRcodigosTable extends Migration
             // $table->string('descripc',150);
             $table->integer('rcondici_id');
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

@@ -3,8 +3,10 @@
 namespace App\Observers\Pacientes;
 
 
-use App\Models\Pacientes\Logs\HPacientec;
-use App\Models\Pacientes\Pacientec;
+use App\Models\Pacientes\Logs\HPacienteServicio;
+
+
+use App\Models\Pacientes\PacienteServicio;
 use Illuminate\Support\Facades\Auth;
 
 class PacienteServicioObserver
@@ -15,7 +17,7 @@ class PacienteServicioObserver
         $log['id_old'] = $modeloxx->id;
         $log['paciente_id'] = $modeloxx->paciente_id;
         $log['servicio_id'] = $modeloxx->servicio_id;
-        $log['estado_id'] = $modeloxx->estado_id;
+        $log['sis_esta_id'] = $modeloxx->sis_esta_id;
         $log['deleted_at'] = $modeloxx->deleted_at;
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['user_edita_id'] = $modeloxx->user_edita_id;
@@ -25,9 +27,9 @@ class PacienteServicioObserver
         return $log;
          } 
     
-    public function created(Pacientec $modeloxx)
+    public function created(PacienteServicio $modeloxx)
     {
-        HPacientec::create($this->getLog($modeloxx));
+        HPacienteServicio::create($this->getLog($modeloxx));
     }
 
     /**
@@ -36,41 +38,41 @@ class PacienteServicioObserver
      * @param  \App\Models\Administracion\Clinica  $modeloxx
      * @return void
      */
-    public function updated(Pacientec $modeloxx)
+    public function updated(PacienteServicio $modeloxx)
     {
-        HPacientec::create($this->getLog($modeloxx));
+        HPacienteServicio::create($this->getLog($modeloxx));
     }
 
     /**
-     * Handle the Pacientec "deleted" event.
+     * Handle the PacienteServicio "deleted" event.
      *
-     * @param  \App\Models\Medicamentos\Unidad\Pacientec  $modeloxx
+     * @param  \App\Models\Medicamentos\Unidad\PacienteServicio  $modeloxx
      * @return void
      */
-    public function deleted(Pacientec $modeloxx)
+    public function deleted(PacienteServicio $modeloxx)
     {
-        HPacientec::create($this->getLog($modeloxx));
+        HPacienteServicio::create($this->getLog($modeloxx));
     }
 
     /**
-     * Handle the Pacientec "restored" event.
+     * Handle the PacienteServicio "restored" event.
      *
-     * @param  \App\Models\Medicamentos\Unidad\Pacientec  $modeloxx
+     * @param  \App\Models\Medicamentos\Unidad\PacienteServicio  $modeloxx
      * @return void
      */
-    public function restored(Pacientec $modeloxx)
+    public function restored(PacienteServicio $modeloxx)
     {
-        HPacientec::create($this->getLog($modeloxx));
+        HPacienteServicio::create($this->getLog($modeloxx));
     }
 
     /**
-     * Handle the Pacientec "force deleted" event.
+     * Handle the PacienteServicio "force deleted" event.
      *
-     * @param  \App\Models\Medicamentos\Unidad\Pacientec  $modeloxx
+     * @param  \App\Models\Medicamentos\Unidad\PacienteServicio  $modeloxx
      * @return void
      */
-    public function forceDeleted(Pacientec $modeloxx)
+    public function forceDeleted(PacienteServicio $modeloxx)
     {
-        HPacientec::create($this->getLog($modeloxx));
+        HPacienteServicio::create($this->getLog($modeloxx));
     }
 }

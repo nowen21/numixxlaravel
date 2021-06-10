@@ -16,6 +16,7 @@ class ClinicaObserver
         $log['clinica'] = $modeloxx->clinica;
         $log['telefono'] = $modeloxx->telefono;
         $log['digiveri'] = $modeloxx->digiveri;
+        $log['sis_esta_id'] = $modeloxx->sis_esta_id;
         $log['deleted_at'] = $modeloxx->deleted_at;
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['metodoxx'] = request()->method();

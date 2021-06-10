@@ -15,6 +15,7 @@ class DfmloteObserver
         $log['dformula_id'] = $modeloxx->dformula_id;
         $log['mlote_id'] = $modeloxx->mlote_id;
         $log['volumenx'] = $modeloxx->volumenx;
+        $log['sis_esta_id'] = $modeloxx->sis_esta_id;
         $log['deleted_at'] = $modeloxx->deleted_at;
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['user_edita_id'] = $modeloxx->user_edita_id;

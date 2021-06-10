@@ -1,7 +1,6 @@
 <?php
 
-
-
+use App\Models\Formulaciones\Cformula;
 use Illuminate\Database\Seeder;
 
 class ICformulasTableSeeder extends Seeder
@@ -16,11 +15,7 @@ class ICformulasTableSeeder extends Seeder
     {
         
 
-        \DB::table('cformulas')->delete();
-        
-        \DB::table('cformulas')->insert(array (
-            0 => 
-            array (
+  Cformula::create([
                 'id' => 1,
                 'paciente_id' => 4287,
                 'tiempo' => 24.0,
@@ -64,9 +59,8 @@ class ICformulasTableSeeder extends Seeder
                 'sis_esta_id' => 1,
                 'created_at' => '2021-06-10 08:57:50',
                 'updated_at' => '2021-06-10 08:57:50',
-            ),
-            1 => 
-            array (
+                ]);
+                Cformula::create([
                 'id' => 2,
                 'paciente_id' => 4287,
                 'tiempo' => 24.0,
@@ -110,8 +104,8 @@ class ICformulasTableSeeder extends Seeder
                 'sis_esta_id' => 1,
                 'created_at' => '2021-06-10 08:58:44',
                 'updated_at' => '2021-06-10 08:58:44',
-            ),
-        ));
+            
+            ]);
         
         
     }

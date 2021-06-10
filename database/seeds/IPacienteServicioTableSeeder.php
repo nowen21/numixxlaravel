@@ -1,7 +1,6 @@
 <?php
 
-
-
+use App\Models\Pacientes\PacienteServicio;
 use Illuminate\Database\Seeder;
 
 class IPacienteServicioTableSeeder extends Seeder
@@ -15,12 +14,8 @@ class IPacienteServicioTableSeeder extends Seeder
     public function run()
     {
         
-
-        \DB::table('paciente_servicio')->delete();
-        
-        \DB::table('paciente_servicio')->insert(array (
-            0 => 
-            array (
+        PacienteServicio::create([
+      
                 'id' => 1,
                 'paciente_id' => 4287,
                 'servicio_id' => 6,
@@ -29,8 +24,7 @@ class IPacienteServicioTableSeeder extends Seeder
                 'sis_esta_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
-            ),
-        ));
+                ]);
         
         
     }

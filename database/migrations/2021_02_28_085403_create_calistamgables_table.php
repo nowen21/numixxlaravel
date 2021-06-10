@@ -37,6 +37,7 @@ class CreateCalistamgablesTable extends Migration
             $table->integer('calistamgable_id')->unsigned();
             $table->string('calistamgable_type');
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

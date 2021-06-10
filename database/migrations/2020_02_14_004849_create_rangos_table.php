@@ -31,6 +31,7 @@ class CreateRangosTable extends Migration
             $table->integer('ranginic');
             $table->integer('rangfina');
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

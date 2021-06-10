@@ -31,6 +31,7 @@ class CreateDispensacionesTable extends Migration
             $table->integer('opxxxxxx');
             $table->string('producto');
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

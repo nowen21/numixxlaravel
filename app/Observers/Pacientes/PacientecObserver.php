@@ -27,6 +27,7 @@ class PacientecObserver
         $log['npt_id'] = $modeloxx->npt_id;
         $log['servicio_id'] = $modeloxx->servicio_id;
         $log['sis_clinica_id'] = $modeloxx->sis_clinica_id;
+        $log['sis_esta_id'] = $modeloxx->sis_esta_id;
         $log['deleted_at'] = $modeloxx->deleted_at;
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['user_edita_id'] = $modeloxx->user_edita_id;

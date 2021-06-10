@@ -31,6 +31,7 @@ class CreateHidrpedisTable extends Migration
             $table->double('finalxxx',4,2);
             $table->double('requerim',4,2);
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

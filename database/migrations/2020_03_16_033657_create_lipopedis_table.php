@@ -31,6 +31,7 @@ class CreateLipopedisTable extends Migration
             $table->double('finalxxx',4,2);
             $table->double('requerim',4,2);
             $table=CamposMagicos::magicos($table);
+            $table->softDeletes();
         });
     }
 

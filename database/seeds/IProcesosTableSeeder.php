@@ -1,7 +1,6 @@
 <?php
 
-
-
+use App\Models\Produccion\Proceso;
 use Illuminate\Database\Seeder;
 
 class IProcesosTableSeeder extends Seeder
@@ -15,12 +14,8 @@ class IProcesosTableSeeder extends Seeder
     public function run()
     {
         
-
-        \DB::table('procesos')->delete();
-        
-        \DB::table('procesos')->insert(array (
-            0 => 
-            array (
+Proceso::create([
+  
                 'id' => 1,
                 'coloraci' => 1,
                 'ausepart' => 1,
@@ -34,8 +29,7 @@ class IProcesosTableSeeder extends Seeder
                 'sis_esta_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
-            ),
-        ));
+                ]);
         
         
     }

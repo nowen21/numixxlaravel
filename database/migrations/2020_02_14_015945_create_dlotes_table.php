@@ -33,6 +33,7 @@ class CreateDlotesTable extends Migration
             $table->double('inventar',6,2);
             $table->string('lotexxxx',15);
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

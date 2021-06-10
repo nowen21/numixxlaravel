@@ -1,7 +1,6 @@
 <?php
 
-
-
+use App\Models\Dispensacione;
 use Illuminate\Database\Seeder;
 
 class IDispensacionesTableSeeder extends Seeder
@@ -15,12 +14,8 @@ class IDispensacionesTableSeeder extends Seeder
     public function run()
     {
         
+        Dispensacione::create([
 
-        \DB::table('dispensaciones')->delete();
-        
-        \DB::table('dispensaciones')->insert(array (
-            0 => 
-            array (
                 'id' => 1,
                 'fechaxxx' => '2021-06-10',
                 'opxxxxxx' => 1,
@@ -30,8 +25,7 @@ class IDispensacionesTableSeeder extends Seeder
                 'sis_esta_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
-            ),
-        ));
+                ]);
         
         
     }

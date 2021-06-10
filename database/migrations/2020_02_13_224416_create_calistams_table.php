@@ -31,6 +31,7 @@ class CreateCalistamsTable extends Migration
             $table->string('ipxxxxxx', 50);
             $table->string('metodoxx', 50);
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

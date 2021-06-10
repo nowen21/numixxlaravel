@@ -34,6 +34,7 @@ class CreateMedicameSisClinicaTable extends Migration
             $table->string('metodoxx', 50);
             $table->integer('medicame_id');
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

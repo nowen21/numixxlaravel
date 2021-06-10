@@ -115,6 +115,7 @@ class CreateCformulasTable extends Migration
             $table->double('pesoteor', 15, 2)->default(0)->comment('PESO TEÓRICO cantidad');
 
             $table->integer('orden_id');
+            $table->softDeletes();
             $table=CamposMagicos::h_magicos($table);
         });
     }

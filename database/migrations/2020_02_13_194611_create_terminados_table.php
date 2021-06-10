@@ -55,6 +55,7 @@ class CreateTerminadosTable extends Migration
             $table->boolean('estaterm')->nullable(); //estado del terminado
             $table->boolean('nopasaxx'); //indica si el control producto terminado es exitoso o no
             $table = CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

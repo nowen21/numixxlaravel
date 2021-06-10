@@ -1,7 +1,7 @@
 <?php
 
 
-
+use App\Models\Unidade;
 use Illuminate\Database\Seeder;
 
 class IUnidadesTableSeeder extends Seeder
@@ -16,11 +16,7 @@ class IUnidadesTableSeeder extends Seeder
     {
         
 
-        \DB::table('unidades')->delete();
-        
-        \DB::table('unidades')->insert(array (
-            0 => 
-            array (
+        Unidade::create([
                 'id' => 1,
                 'unidad' => 'test',
                 'user_crea_id' => 2,
@@ -28,9 +24,7 @@ class IUnidadesTableSeeder extends Seeder
                 'sis_esta_id' => 1,
                 'created_at' => NULL,
                 'updated_at' => NULL,
-            ),
-        ));
-        
+                ]);
         
     }
 }

@@ -34,6 +34,7 @@ class CreateRemisionesTable extends Migration
             $table->integer('clinica_id'); // clinica dueña de la remisión
             $table->integer('quimfarm_id')->unsigned(); //químico farmacéutico que realiza la remisión
             $table = CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

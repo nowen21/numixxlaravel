@@ -27,6 +27,7 @@ class CreateUnidadesTable extends Migration
             $table->string('metodoxx', 50);
             $table->string('unidad')->unique();
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

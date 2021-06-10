@@ -32,6 +32,7 @@ class CreatePacienteServicioTable extends Migration
             $table->integer('paciente_id');
             $table->integer('servicio_id');
             $table=CamposMagicos::h_magicos($table);
+            $table->softDeletes();
         });
     }
 

@@ -44,6 +44,7 @@ use App\Models\Pacientes\Pacientec;
 use App\Models\Pacientes\PacienteServicio;
 use App\Models\Permissionext;
 use App\Models\Produccion\Calistam;
+use App\Models\Produccion\Calistamgables;
 use App\Models\Produccion\ControlP;
 use App\Models\Produccion\ControlT;
 use App\Models\Produccion\Preparacion;
@@ -58,6 +59,7 @@ use App\Models\Sistema\Municipio;
 use App\Models\Sistema\SisEsta;
 use App\Models\Sistema\SisPermiso;
 use App\Models\Tipoaccion;
+use App\Models\Unidade;
 use App\Models\Usuarios\Rol;
 use App\Observers\Administracion\CondicioObserver;
 use App\Observers\Dispositivos\DloteObserver;
@@ -92,12 +94,14 @@ use App\Observers\Medicame\MnptObserver;
 use App\Observers\Pacientes\PacientecObserver;
 use App\Observers\Pacientes\PacienteObserver;
 use App\Observers\Medicame\Unidades\RangonptObserver;
+use App\Observers\UnidadeObserver;
 use App\Observers\Medicame\Unidades\UnidadObserver;
 use App\Observers\Medicame\Unidades\UnidrangObserver;
 use App\Observers\Medicame\Unidades\UrangnptObserver;
 use App\Observers\MedipinObserver;
 use App\Observers\Pacientes\PacienteServicioObserver;
 use App\Observers\PermissionextObserver;
+use App\Observers\Produccion\CalistamgablesObserver;
 use App\Observers\Produccion\CalistamObserver;
 use App\Observers\Produccion\ControlPObserver;
 use App\Observers\Produccion\ControlTObserver;
@@ -114,6 +118,8 @@ use App\Observers\Sistema\SisEstaObserver;
 use App\Observers\Sistema\SisPermisoObserver;
 use App\Observers\TipoaccionObserver;
 use App\Observers\Usuarios\RolObserver;
+use App\Observers\Usuarios\UsersObserver;
+use App\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -193,6 +199,9 @@ class AppServiceProvider extends ServiceProvider
         Permissionext::observe(PermissionextObserver::class);
         Remision::observe(RemisionObserver::class);
         Roleext::observe(RoleextObserver::class);
+        Unidade::observe(UnidadeObserver::class);
+        Calistamgables::observe(CalistamgablesObserver::class);
+        User::observe(UsersObserver::class);
     }
 
 }

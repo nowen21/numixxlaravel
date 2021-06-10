@@ -149,6 +149,7 @@ class UsuarioController extends Controller
 
     public function create()
     {
+        $this->opciones['tituloxx'] = "USUARIO";
         $this->opciones['slotxxxx'] = 'usuarioc';
         $this->opciones['botoform'][] =
             [
@@ -183,6 +184,7 @@ class UsuarioController extends Controller
      */
     public function edit(User $objetoxx)
     {
+        $this->opciones['tituloxx'] = "USUARIO";
         $this->opciones['slotxxxx'] = 'usuarioe';
         if (auth()->user()->can($this->opciones['permisox'] . '-editar')) {
             $this->opciones['botoform'][] =

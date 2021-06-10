@@ -1,7 +1,6 @@
 <?php
 
-
-
+use App\Models\Produccion\Calistam;
 use Illuminate\Database\Seeder;
 
 class ICalistamsTableSeeder extends Seeder
@@ -15,12 +14,7 @@ class ICalistamsTableSeeder extends Seeder
     public function run()
     {
         
-
-        \DB::table('calistams')->delete();
-        
-        \DB::table('calistams')->insert(array (
-            0 => 
-            array (
+        Calistam::create([
                 'id' => 1,
                 'producto' => 'NUTRICIÓN PARENTERAL',
                 'orden_id' => 1,
@@ -30,8 +24,7 @@ class ICalistamsTableSeeder extends Seeder
                 'sis_esta_id' => 1,
                 'created_at' => '2021-06-10 08:59:28',
                 'updated_at' => '2021-06-10 08:59:28',
-            ),
-        ));
+                ]);
         
         
     }
