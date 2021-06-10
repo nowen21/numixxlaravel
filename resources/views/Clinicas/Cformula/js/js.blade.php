@@ -139,9 +139,14 @@
                     $("#" + json.cantvolu[4]).val(json.cantvolu[5]); // mostrar volumen con purga
 
                     respuest = json;
-                    // $("#" + json.menssage[0]).popover('dispose');
-
-
+                    var elemento=json.menssage.messagex[0].split('_');
+                    $('#'+elemento[0]+'_tool').popover('dispose');
+                    if (json.menssage.messagex[2] != '') {
+                        $('#'+elemento[0]+'_tool').popover(template(json));
+                        $('#'+elemento[0]+'_tool').popover(json.menssage.messagex[1]);
+                    }
+                    var sumaxxxx=parseInt($("#volumen").val())+parseInt($("#purga").val());
+                    $("#velopurg").val(sumaxxxx);
                     $("#aguaeste_volu").val(json.aguaxxxx);
                 },
                 error: function(xhr, status) {
@@ -244,17 +249,16 @@
                     $("#peso").focus();
                     return false;
                 }
-var elemento=$(this).attr('id');
+                var elemento=$(this).attr('id');
                 json = f_ajax($(this).attr('id'));
-
+                // $('#'+elemento+'_tool').popover('dispose');
                 // if (json.menssage.messagex[2] != '') {
-                //     // $(this). popover({title: json.menssage.messagex[3], content: json.menssage.messagex[2],trigger: "hover"});
-
-                    // $(this).popover({title: json.menssage.messagex[3], content: json.menssage.messagex[2],  placement: "right",});
-                    elemento=elemento.split('_')[0];
-
-                    $('#'+elemento+'_tool').popover(template(json));
-                    $('#'+elemento+'_tool').popover(json.menssage.messagex[1]);
+                //     elemento=elemento.split('_')[0];
+                //     $('#'+elemento+'_tool').popover(template(json));
+                //     $('#'+elemento+'_tool').popover(json.menssage.messagex[1]);
+                // }else{
+                //     console.log(json.menssage.messagex[1]);
+                //     $('#'+elemento+'_tool').popover(json.menssage.messagex[1]);
                 // }
 
             }

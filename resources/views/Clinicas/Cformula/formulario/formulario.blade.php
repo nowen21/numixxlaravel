@@ -135,7 +135,7 @@
     <div class="col-xs-3 col-sm-3 col-lg-3 table-bordered  estilo-x" id="{{$formulax['campo_id'].'_tool'}}">
         {{$formulax['casaxxxx']}}
     </div>
-    <div class="col-xs-3 col-sm-3 col-lg-3 estilo-x">
+    <div class="col-xs-3 col-sm-3 col-lg-3 estilo-x" >
         {{ Form::select($formulax['campo_id'], $formulax['selelist'], $formulax['selevalu'],
                         ['class'=>'form-control  medicamento calcularagua select2bs4 estilo-x','id'=>$formulax['campo_id'],'style'=>'width: 100%;']) }}
     </div>
