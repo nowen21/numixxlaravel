@@ -115,13 +115,13 @@ trait FormulacionTrait
             $campoidx = explode('_', $key);
             if (count($campoidx) > 1 && $campoidx[1] == 'cant') {
                 $medisele = $this->newdatax[$campoidx[0]] = (int)$this->newdatax[$campoidx[0]];
-                if ($campoidx[0] != 'aguaeste') {
+                // if ($campoidx[0] != 'aguaeste') {
                     $medicame = Medicame::find($medisele);
-                    $osmolari = $medicame->mmarcas->first()->osmorali * $this->newdatax[$campoidx[0] . '_vopu'];
-                    $this->formulac['osmolari'] += $osmolari; // calcular la osmolarida
-                    $pesoespe = $medicame->mmarcas->first()->pesoespe * $this->newdatax[$campoidx[0] . '_vopu'];
-                    $this->formulac['pesoespe'] += $pesoespe; // calcular el peso específico
                     if ($this->newdatax[$key] > 0) {
+                        $osmolari = $medicame->mmarcas->first()->osmorali * $this->newdatax[$campoidx[0] . '_vopu'];
+                        $this->formulac['osmolari'] += $osmolari; // calcular la osmolarida
+                        $pesoespe = $medicame->mmarcas->first()->pesoespe * $this->newdatax[$campoidx[0] . '_vopu'];
+                        $this->formulac['pesoespe'] += $pesoespe; // calcular el peso específico
                         $respuest = [
                             [
                                 'fosfcant' => $this->_dataxxx['fosfcant'],
@@ -142,7 +142,7 @@ trait FormulacionTrait
                     if ($key = 'npt_id') {
                         $this->newdatax[$key] = (int)$this->newdatax[$key];
                     }
-                }
+                // }
             }
         }
     }
@@ -362,9 +362,10 @@ trait FormulacionTrait
         $this->convertirdata($dataxxxx);
         // $respuest = $this->getDatosRespuesta();
         // $this->getCalculosFT();
-        $respuest = [$this->getDatosRespuesta(),
-        $this->getCalculosFT()
-    ];
+        $respuest = [
+            $this->getDatosRespuesta(),
+            $this->getCalculosFT()
+        ];
         return $respuest;
     }
     public function getCalculosFT()

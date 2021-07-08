@@ -206,10 +206,6 @@ class CrangoController extends Controller
     {
         $this->opciones['tituloxx'] = 'Ver: Rango';
         $this->opciones['indecrea'] = false;
-        $this->opciones['botoform'][] =  [
-            'mostrars' => true, 'accionxx' => '', 'routingx' => [$this->opciones['routxxxx'] . '.nuevo', $this->opciones['parametr']],
-            'formhref' => 2, 'tituloxx' => 'NUEVO RANGO', 'clasexxx' => 'btn btn-sm btn-primary'
-        ];
         return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Ver','padrexxx'=>$objetoxx->sis_clinica]);
     }
 
