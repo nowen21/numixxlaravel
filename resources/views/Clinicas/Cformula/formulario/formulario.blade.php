@@ -36,7 +36,7 @@
     height: 5px !important;
 }
 
-.estilo-x { font-size: 1vw }
+.estilo-x { font-size: 0.8vw }
 
   /* Popover Header */
 </style>
@@ -174,8 +174,8 @@
 
 @endforeach
 </div>
-    @include('Clinicas.Cformula.formulario.resultax')
 
+    @include('Clinicas.Cformula.formulario.resultax')
 <div class="row">
 
     @include('layouts.registro')

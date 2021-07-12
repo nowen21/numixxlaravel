@@ -15,6 +15,7 @@ class CrangoObserver
         $log['id_old'] = $modeloxx->id;
         $log['sis_clinica_id'] = $modeloxx->sis_clinica_id;
         $log['rcodigo_id'] = $modeloxx->rcodigo_id;
+        $log['precioxx'] = $modeloxx->precioxx;
         $log['user_crea_id'] = $modeloxx->user_crea_id;
         $log['user_edita_id'] = $modeloxx->user_edita_id;
         $log['sis_esta_id'] = $modeloxx->sis_esta_id;
@@ -23,8 +24,8 @@ class CrangoObserver
         $log['rutaxxxx'] = request()->fullUrl();
         $log['ipxxxxxx'] = request()->ip();
         return $log;
-    } 
-    
+    }
+
     public function created(Crango $modeloxx)
     {
         HCrango::create($this->getLog($modeloxx));

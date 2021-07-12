@@ -11,6 +11,7 @@ class HCrango extends Model
     protected $fillable = [
         'sis_clinica_id',
         'rcodigo_id',
+        'precioxx',
         'user_edita_id', 'user_crea_id',  'id_old',
         'sis_esta_id',
         'rutaxxxx',

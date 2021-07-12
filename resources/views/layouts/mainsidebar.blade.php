@@ -2,9 +2,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-12">
   <!-- Brand Logo -->
   <a href="{{ route('/') }}" class="brand-link">
-    <img src="{{ asset('img/favicon.png') }}" alt="NUMIXX" class="brand-image img-circle elevation-3"
+    <img src="{{ asset('img/favicon.png') }}" alt="NUMIXX S.A.S" class="brand-image img-circle elevation-3"
       style="opacity: .8">
-    <span class="brand-text font-weight-light">NUMIXX</span>
+    <span class="brand-text font-weight-light">NUMIXX S.A.S</span>
   </a>
   <!-- Brand Logo -->
 

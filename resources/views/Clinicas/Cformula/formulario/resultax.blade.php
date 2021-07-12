@@ -1,13 +1,13 @@
 
 <style>
 .responsi{
-   font-size:1vw
+   font-size:0.8vw
 }
 </style>
 <div id="formulaciontable" style="padding-top: 15px;">
     <div class="row">
         <div class="col-xs-5 col-sm-5 col-lg-5 table-bordered form-control  responsi ">VOLUMEN TOTAL (ml)</div>
-        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control  altoxxxx" style="text-align: right;">
+        <div class="col-xs-2 col-sm-2 col-lg-2 table-bordered form-control  altoxxxx " style="text-align: right;">
             {{ Form::text('volutota',
             isset($todoxxxx['modeloxx'])?number_format($todoxxxx['modeloxx']->volumen,2,",", "."):null,
         ['class'=>'textinpu','style'=>'text-align: right;',
