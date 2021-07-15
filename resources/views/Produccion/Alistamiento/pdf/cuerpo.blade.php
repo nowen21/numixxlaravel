@@ -29,8 +29,8 @@
 @foreach($detallex['lotesyyy'] as $key=> $alistami)
     <tr>
         <td class="letras">{{$alistami['nombrexx']}}</td>
-        <td class="letras">{{$alistami['inventar']}}</td>
-        <td class="letras" style="width: 100px">
+        <td class="letras" style="text-align: right;">{{$alistami['inventar']}}</td>
+        <td class="letras" style="text-align: right;">
             @if($alistami['mostrarx'])
             {{$alistami['unidadxx']}}
 
@@ -43,8 +43,8 @@
         $lotesxxx = $detallex['lotesxxx'][$key];
         ?>
         <td class="letras">{{$lotesxxx['nombrexx']}}</td>
-        <td class="letras">{{$alistami['inventar']}}</td>
-        <td class="letras">
+        <td class="letras" style="text-align: right;">{{$alistami['inventar']}}</td>
+        <td class="letras" style="text-align: right;">
 
             @if($lotesxxx['mostrarx'])
             {{$lotesxxx['unidadxx']}}
