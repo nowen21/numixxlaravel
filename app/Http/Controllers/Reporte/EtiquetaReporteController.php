@@ -68,14 +68,13 @@ class EtiquetaReporteController extends Controller
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', []),
                 'cabecera' => [
                     [
-                        ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'CEDULA', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'NOMBRES', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'APELLIDOS', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'CLINICA', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-
-                        ['td' => 'ORDEN DE SERVICIO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ACCIONES', 'widthxxx' => 20, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ID', 'widthxxx' => 5, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'CEDULA', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'NOMBRES', 'widthxxx' => 20, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'APELLIDOS', 'widthxxx' => 20, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'CLINICA', 'widthxxx' => 15, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ORDEN DE SERVICIO', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
 
                     ]
                 ],

@@ -92,7 +92,7 @@
     </div>
 
     <div class="form-group col-md-4">
-        {{ Form::label('purga', 'Purga (ml):', ['class' => 'control-label col-form-label-sm']) }}
+        {{ Form::label('purga', 'Purga (mL):', ['class' => 'control-label col-form-label-sm']) }}
         {{ Form::text('purga', null, ['class' => $errors->first('purga') ?
          'form-control  is-invalid' : 'form-control ', 'placeholder' => 'Purga', 'maxlength' => '120',
          'onkeypress'=>'return filterFloat(event,this);',

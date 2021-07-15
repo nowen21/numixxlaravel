@@ -84,16 +84,16 @@ class CformulaController extends Controller
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', [$padrexxx->id]),
                 'cabecera' => [
                     [
-                        ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'TIEMPO INFUSIÓN', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'VELOCIDAD INFUSIÓN', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'VOLUMEN', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'PURGA', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'PESO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'TOTAL', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'FECHA', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                        ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ACCIONES', 'widthxxx' => 20, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ID', 'widthxxx' => 5, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'TIEMPO INFUSIÓN', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'VELOCIDAD INFUSIÓN', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'VOLUMEN', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'PURGA', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'PESO', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'TOTAL', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'FECHA', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ESTADO', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
                     ]
                 ],
                 'columnsx' => [

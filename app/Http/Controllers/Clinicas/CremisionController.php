@@ -73,10 +73,10 @@ class CremisionController extends Controller
                 'vercrear' => isset($tienremi->id) == true ? false : true,
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', [$padrexxx->id]),
                 'cabecera' => [[
-                    ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'ORDEN', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ACCIONES', 'widthxxx' => 20, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ID', 'widthxxx' => 5, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ORDEN', 'widthxxx' => 65, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ESTADO', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
                 ]],
                 'columnsx' => [
                     ['data' => 'botonexx', 'name' => 'botonexx'],

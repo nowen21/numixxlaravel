@@ -175,11 +175,10 @@ class RevisionController extends Controller
                 ->with('info', 'La formulación que intenta revisar es de una fecha diferente');
         }
         $crangoxx = $this->getRangosART(['cformula' => $objetoxx]);
-
         if ($crangoxx[0] == null) {
             return redirect()
                 ->route($this->opciones['routxxxx'], [])
-                ->with('info', "La clínica: {$objetoxx->sis_clinica->clinica->clinica} no tiene rango asignado para un volumen de {$crangoxx[1]}");
+                ->with('info', "La clínica: {$objetoxx->sis_clinica->clinica->clinica} no tiene rango asignado para un volumen de {$crangoxx[1]} y NPT: {$objetoxx->paciente->npt->nombre}");
         }
 
 

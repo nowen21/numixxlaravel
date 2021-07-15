@@ -79,11 +79,11 @@ class CmedicameController extends Controller
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.asignado', $this->opciones['parametr']),
                 'cabecera' => [
                     [
-                    ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'MEDICAMENTO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => '¿COBRAR SEPARADO?', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'ESTADO', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ACCIONES', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ID', 'widthxxx' => 5, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'MEDICAMENTO', 'widthxxx' => 65, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => '¿COBRAR SEPARADO?', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ESTADO', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
                     ]
                 ],
                 'columnsx' => [

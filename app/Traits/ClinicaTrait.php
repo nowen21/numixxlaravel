@@ -10,6 +10,7 @@ use App\Models\Clinica\SisClinica;
 use App\Models\Formulaciones\Cformula;
 use App\Models\Formulaciones\Orden;
 use App\Models\Medicamentos\Medicame;
+use App\Models\Medicamentos\Npt;
 use App\Models\Pacientes\Paciente;
 use App\Models\Remision;
 
@@ -71,6 +72,7 @@ trait ClinicaTrait
             'rangos.rangfina',
             'condicios.condicio',
             'rcodigos.codiprod',
+            'npts.nombre',
             'crangos.sis_clinica_id',
             's_estado',
             'crangos.sis_esta_id'
@@ -79,6 +81,7 @@ trait ClinicaTrait
             ->join('rcondicis', 'rcodigos.rcondici_id', '=', 'rcondicis.id')
             ->join('condicios', 'rcondicis.condicio_id', '=', 'condicios.id')
             ->join('rnpts', 'rcondicis.rnpt_id', '=', 'rnpts.id')
+            ->join('npts', 'rnpts.npt_id', '=', 'npts.id')
             ->join('rangos', 'rnpts.rango_id', '=', 'rangos.id')
             ->join('sis_estas', 'crangos.sis_esta_id', '=', 'sis_estas.id')
             ->where('crangos.sis_clinica_id', $request->padrexxx);

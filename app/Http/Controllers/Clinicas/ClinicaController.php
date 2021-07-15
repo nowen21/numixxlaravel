@@ -25,7 +25,7 @@ class ClinicaController extends Controller
             'parametr' => [],
             'cardhead' => '',
             'cardheap' => '',
-            'tabsxxxx'=>'Clinicas.tabsxxxx.clinica.header',
+            'tabsxxxx' => 'Clinicas.tabsxxxx.clinica.header',
             'rutacarp' => 'Clinicas.',
             'tituloxx' => 'CLÍNICA',
             'carpetax' => 'Clinica',
@@ -88,10 +88,10 @@ class ClinicaController extends Controller
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', $this->opciones['parametr']),
                 'cabecera' => [
                     [
-                    ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'ID', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'CLÍNICA', 'widthxxx' => '0', 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'ESTADO', 'widthxxx' => '0', 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ACCIONES', 'widthxxx' => 20, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ID', 'widthxxx' => 5, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'CLÍNICA', 'widthxxx' => 65, 'rowspanx' => 1, 'colspanx' => 1],
+                        ['td' => 'ESTADO', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
                     ]
                 ],
                 'columnsx' => [
@@ -185,7 +185,7 @@ class ClinicaController extends Controller
     public function show(Clinica $objetoxx)
     {
         $this->opciones['parametr'] = [$objetoxx->id];
-        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Ver','padrexxx'=>$objetoxx]);
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Ver', 'padrexxx' => $objetoxx]);
     }
 
     /**
@@ -205,7 +205,7 @@ class ClinicaController extends Controller
                     'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
                 ];
         }
-        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Editar','padrexxx'=>$objetoxx]);
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Editar', 'padrexxx' => $objetoxx]);
     }
 
     private function grabar($dataxxxx)
@@ -241,7 +241,7 @@ class ClinicaController extends Controller
                     'formhref' => 1, 'tituloxx' => '', 'clasexxx' => 'btn btn-sm btn-primary'
                 ];
         }
-        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Destroy','padrexxx'=>$objetoxx]);
+        return $this->view(['modeloxx' => $objetoxx, 'accionxx' => 'Destroy', 'padrexxx' => $objetoxx]);
     }
 
 

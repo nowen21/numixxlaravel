@@ -116,8 +116,12 @@ trait FormulacionTrait
             if (count($campoidx) > 1 && $campoidx[1] == 'cant') {
                 $medisele = $this->newdatax[$campoidx[0]] = (int)$this->newdatax[$campoidx[0]];
                 // if ($campoidx[0] != 'aguaeste') {
+
                     $medicame = Medicame::find($medisele);
-                    if ($this->newdatax[$key] > 0) {
+                    if ($this->newdatax[$campoidx[0] . '_volu'] > 0) {
+                        if($campoidx[0]=='aguaeste'){
+                            $this->newdatax[$campoidx[0] . '_vopu']=$this->_dataxxx['volupurg'] / $this->_dataxxx['volutota'] * $this->newdatax[$campoidx[0] . '_volu'];
+                        }
                         $osmolari = $medicame->mmarcas->first()->osmorali * $this->newdatax[$campoidx[0] . '_vopu'];
                         $this->formulac['osmolari'] += $osmolari; // calcular la osmolarida
                         $pesoespe = $medicame->mmarcas->first()->pesoespe * $this->newdatax[$campoidx[0] . '_vopu'];
@@ -380,7 +384,11 @@ trait FormulacionTrait
         $this->_dataxxx['concprov'] = $this->_dataxxx['concprot'] < 1 ? 'NO ESTABLE' : 'ESTABLE';
         $this->_dataxxx['conclipv'] = ($this->_dataxxx['conclipi'] < 1 && $this->_dataxxx['conclipi'] != 0) ? 'NO ESTABLE' : 'ESTABLE';
         $this->_dataxxx['osmolari'] = $this->formulac['osmolari'] / $this->_dataxxx['volupurg']; //OSMOLARIDAD (mOsm / L)
+
         $this->_dataxxx['osmolarv'] = $this->_dataxxx['osmolari'] > 700 ? 'VIA CENTRAL' : 'VIA PERIFÉRICA';
+        if($this->_dataxxx['nptidxxx']==2){
+            $this->_dataxxx['osmolarv'] ='VIA CENTRAL';
+        }
         $this->_dataxxx['calcfosv'] = $this->_dataxxx['calcfosf'] < 2 ? 'SEGURA' : 'NO SEGURA';
 
         $this->_dataxxx['calototv'] = 0;

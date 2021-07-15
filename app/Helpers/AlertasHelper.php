@@ -37,7 +37,7 @@ class AlertasHelper
                 ->get();
             foreach ($alertaxx as $key => $value) {
                 $cuerpoxx = $acciones->cuerpoxx;
-                if ($dataxxxx['tipoacci'] == 1) { // se ha creado una formulacion
+                if ($dataxxxx['tipoacci'] == 1 || $dataxxxx['tipoacci']==5) { // se ha creado una formulacion
                     $cuerpoxx = str_replace("xxxxxxxx", $value->cformula->sis_clinica->sucursal, $cuerpoxx);
                 }
                 $clinicax = $value->cformula->sis_clinica;

@@ -68,10 +68,10 @@ class LoteReporteController extends Controller
                 'urlxxxxx' => route($this->opciones['routxxxx'] . '.listaxxx', []),
                 'cabecera' =>[
                     [
-                    ['td' => 'ACCIONES', 'widthxxx' => 200, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'LOTE', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'ORDEN DE PRODUCCIÓN', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
-                    ['td' => 'FECHA', 'widthxxx' => 0, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ACCIONES', 'widthxxx' => 20, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'LOTE', 'widthxxx' => 5, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'ORDEN DE PRODUCCIÓN', 'widthxxx' => 65, 'rowspanx' => 1, 'colspanx' => 1],
+                    ['td' => 'FECHA', 'widthxxx' => 10, 'rowspanx' => 1, 'colspanx' => 1],
                     ]
                  ],
                  'columnsx' => [

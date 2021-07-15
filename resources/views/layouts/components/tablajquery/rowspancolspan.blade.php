@@ -9,7 +9,7 @@
             {{ $todoxxxx['titulist'] }}
             @if($todoxxxx['vercrear'])
             @can($todoxxxx['permisox'].'-crear')
-            <a class="btn btn-sm btn-primary ml-2" title="$todoxxxx['titunuev']}}" href="{{ route($todoxxxx['routxxxx'].'.nuevo',$todoxxxx['parametr']) }}">
+            <a class="btn btn-sm btn-primary ml-2" title="{{$todoxxxx['titunuev']}}" href="{{ route($todoxxxx['routxxxx'].'.nuevo',$todoxxxx['parametr']) }}">
                 {{ $todoxxxx['titunuev'] }}
             </a>
             @endcan
@@ -24,7 +24,7 @@
                     @foreach( $todoxxxx['cabecera'] as $cabecera )
                     <tr class="text-center">
                         @foreach( $cabecera as $cabecerx)
-                        <th width="{{$cabecerx['widthxxx']}}" rowspan="{{$cabecerx['rowspanx']}}" colspan="{{$cabecerx['colspanx']}}"> {{ $cabecerx['td']   }}</th>
+                        <th style="width: <?=$cabecerx['widthxxx']?>%;"   colspan="{{$cabecerx['colspanx']}}"> {{ $cabecerx['td']   }}</th>
                         @endforeach
                     </tr>
                     @endforeach
